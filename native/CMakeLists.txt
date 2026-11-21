@@ -13,6 +13,7 @@ set(PAE_CORE_SOURCES
     procedural/MeshValidator.cpp
     procedural/primitives/Primitives.cpp
     procedural/surfaces/ParametricSurfaces.cpp
+    procedural/fusion/SdfFusion.cpp
     procedural/humanoid/Humanoid.cpp
     skeleton/Skeleton.cpp
     skeleton/Skinning.cpp

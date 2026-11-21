@@ -1,0 +1,232 @@
+#include "SdfFusion.h"
+
+#include <algorithm>
+#include <array>
+#include <cmath>
+#include <vector>
+
+namespace pae::fusion {
+
+namespace {
+
+Vec3 hadamard(const Vec3& a, const Vec3& b) {
+    return {a.x * b.x, a.y * b.y, a.z * b.z};
+}
+
+MeshData finalizeFusion(MeshData& mesh) {
+    Aabb bounds;
+    for (const Vertex& v : mesh.vertices) bounds.expand(v.position);
+    mesh.bounds = bounds;
+    if (mesh.subMeshes.empty()) {
+        SubMesh sub;
+        sub.indexCount = static_cast<uint32_t>(mesh.indices.size());
+        mesh.subMeshes.push_back(sub);
+    }
+    return mesh;
+}
+
+} // namespace
+
+float sdSphere(Vec3 p, Vec3 center, float radius) {
+    return (p - center).length() - radius;
+}
+
+float sdEllipsoidApprox(Vec3 p, Vec3 center, Vec3 radii) {
+    // Quadratic approximation: k*(|p/r| - 1) scaled by the smallest radius.
+    const Vec3 q{(p.x - center.x) / radii.x, (p.y - center.y) / radii.y,
+                 (p.z - center.z) / radii.z};
+    const float k = std::min(std::min(radii.x, radii.y), radii.z);
+    return k * (q.length() - 1.0f);
+}
+
+float sdCapsule(Vec3 p, Vec3 a, Vec3 b, float radius) {
+    const Vec3 ab = b - a;
+    const float lengthSq = ab.lengthSq();
+    const float t = lengthSq > 1e-10f
+        ? std::clamp((p - a).dot(ab) / lengthSq, 0.0f, 1.0f)
+        : 0.0f;
+    return (p - (a + ab * t)).length() - radius;
+}
+
+float sdSmoothUnion(float a, float b, float k) {
+    const float h = std::clamp(0.5f + 0.5f * (b - a) / k, 0.0f, 1.0f);
+    return b * (1.0f - h) + a * h + k * h * (1.0f - h);
+}
+
+float sdSmoothSubtraction(float a, float b, float k) {
+    // a minus b: solid only where a is solid and b is not — a smooth MAX of
+    // a and -b (b is an SDF, so -b is negative outside b and positive inside).
+    const float nb = -b;
+    const float h = std::clamp(0.5f - 0.5f * (nb - a) / k, 0.0f, 1.0f);
+    return nb * (1.0f - h) + a * h - k * h * (1.0f - h);
+}
+
+MeshData extractSurfaceNets(const FusionVolume& volume, const SdfField& sdf) {
+    MeshData mesh;
+    const int n = std::max(2, volume.resolution);
+    const Vec3 origin = volume.center - volume.size * 0.5f;
+    const Vec3 cellSize = volume.size * (1.0f / static_cast<float>(n));
+    const int dim = n + 1;
+    const size_t dimSize = static_cast<size_t>(dim);
+
+    // Corner samples over the (n+1)^3 lattice.
+    std::vector<float> samples(dimSize * dimSize * dimSize);
+    auto sampleIndex = [dim](int x, int y, int z) {
+        return static_cast<size_t>(x) * dim * dim + static_cast<size_t>(y) * dim + static_cast<size_t>(z);
+    };
+    for (int x = 0; x < dim; ++x) {
+        for (int y = 0; y < dim; ++y) {
+            for (int z = 0; z < dim; ++z) {
+                samples[sampleIndex(x, y, z)] =
+                    sdf(origin + hadamard(
+                        Vec3{static_cast<float>(x), static_cast<float>(y), static_cast<float>(z)},
+                        cellSize));
+            }
+        }
+    }
+    auto cornerSample = [&](int x, int y, int z) { return samples[sampleIndex(x, y, z)]; };
+
+    // One dual vertex per cell whose 8 corners straddle the isosurface.
+    const size_t cellCount = static_cast<size_t>(n) * n * n;
+    std::vector<int> cellVertex(cellCount, -1);
+    auto cellIndex = [n](int x, int y, int z) {
+        return static_cast<size_t>(x) * n * n + static_cast<size_t>(y) * n + static_cast<size_t>(z);
+    };
+    std::vector<Vec3> positions;
+    const int cornerOffset[8][3] = {
+        {0, 0, 0}, {1, 0, 0}, {1, 1, 0}, {0, 1, 0},
+        {0, 0, 1}, {1, 0, 1}, {1, 1, 1}, {0, 1, 1}};
+    const int edgePair[12][2] = {
+        {0, 1}, {1, 2}, {2, 3}, {3, 0}, {4, 5}, {5, 6}, {6, 7}, {7, 4},
+        {0, 4}, {1, 5}, {2, 6}, {3, 7}};
+
+    for (int x = 0; x < n; ++x) {
+        for (int y = 0; y < n; ++y) {
+            for (int z = 0; z < n; ++z) {
+                float corner[8];
+                bool anyNeg = false, anyPos = false;
+                for (int c = 0; c < 8; ++c) {
+                    corner[c] = cornerSample(x + cornerOffset[c][0],
+                                             y + cornerOffset[c][1],
+                                             z + cornerOffset[c][2]);
+                    anyNeg = anyNeg || corner[c] < 0.0f;
+                    anyPos = anyPos || corner[c] >= 0.0f;
+                }
+                if (!(anyNeg && anyPos)) continue;
+
+                // Vertex = average of the zero crossings on the 12 cube edges.
+                Vec3 acc{0.0f, 0.0f, 0.0f};
+                int crossings = 0;
+                for (const auto& edge : edgePair) {
+                    const float sa = corner[edge[0]];
+                    const float sb = corner[edge[1]];
+                    if ((sa < 0.0f) == (sb < 0.0f)) continue;
+                    const float denom = sa - sb;
+                    const float t = std::fabs(denom) > 1e-10f ? sa / denom : 0.5f;
+                    const int ax = x + cornerOffset[edge[0]][0];
+                    const int ay = y + cornerOffset[edge[0]][1];
+                    const int az = z + cornerOffset[edge[0]][2];
+                    const int bx = x + cornerOffset[edge[1]][0];
+                    const int by = y + cornerOffset[edge[1]][1];
+                    const int bz = z + cornerOffset[edge[1]][2];
+                    const Vec3 pa{static_cast<float>(ax), static_cast<float>(ay), static_cast<float>(az)};
+                    const Vec3 pb{static_cast<float>(bx), static_cast<float>(by), static_cast<float>(bz)};
+                    acc = acc + hadamard(pa + (pb - pa) * t, cellSize);
+                    ++crossings;
+                }
+                if (crossings == 0) continue;
+                acc = acc * (1.0f / static_cast<float>(crossings));
+                cellVertex[cellIndex(x, y, z)] = static_cast<int>(positions.size());
+                positions.push_back(origin + acc);
+            }
+        }
+    }
+    if (positions.empty()) return mesh;
+
+    // Shared dual vertices: one mesh vertex per straddling cell.
+    auto gradient = [&](Vec3 p) {
+        const float e = std::min(std::min(cellSize.x, cellSize.y), cellSize.z) * 0.5f;
+        const float gx = sdf(p + Vec3{e, 0, 0}) - sdf(p - Vec3{e, 0, 0});
+        const float gy = sdf(p + Vec3{0, e, 0}) - sdf(p - Vec3{0, e, 0});
+        const float gz = sdf(p + Vec3{0, 0, e}) - sdf(p - Vec3{0, 0, e});
+        return Vec3{gx, gy, gz};
+    };
+    mesh.vertices.reserve(positions.size());
+    for (const Vec3& p : positions) {
+        Vertex vertex;
+        vertex.position = p;
+        vertex.normal = gradient(p).normalized({0.0f, 1.0f, 0.0f});
+        mesh.vertices.push_back(vertex);
+    }
+
+    // Emit quads on lattice edges that straddle the surface. Quads reference
+    // the shared dual vertices, then a BFS pass orients every quad so the
+    // whole patch has one consistent outward winding.
+    struct QuadRecord { uint32_t v[4]; };
+    std::vector<QuadRecord> quads;
+
+    auto cellVertexAt = [&](int x, int y, int z) -> int {
+        if (x < 0 || y < 0 || z < 0 || x >= n || y >= n || z >= n) return -1;
+        return cellVertex[cellIndex(x, y, z)];
+    };
+
+    const int axisOffset[3][3] = {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
+    for (int axis = 0; axis < 3; ++axis) {
+        const int u = (axis + 1) % 3;
+        const int v = (axis + 2) % 3;
+        int pos[3];
+        for (pos[0] = 0; pos[0] < n; ++pos[0]) {
+            for (pos[1] = 0; pos[1] < n; ++pos[1]) {
+                for (pos[2] = 0; pos[2] < n; ++pos[2]) {
+                    const float s0 = cornerSample(pos[0], pos[1], pos[2]);
+                    const float s1 = cornerSample(pos[0] + axisOffset[axis][0],
+                                                  pos[1] + axisOffset[axis][1],
+                                                  pos[2] + axisOffset[axis][2]);
+                    if ((s0 < 0.0f) == (s1 < 0.0f)) continue;
+
+                    int cellA[3], cellB[3], cellC[3], cellD[3];
+                    for (int k = 0; k < 3; ++k) {
+                        const int base = pos[k];
+                        const int du = axisOffset[u][k];
+                        const int dv = axisOffset[v][k];
+                        // The four cells sharing this lattice edge all sit at
+                        // base minus the two transverse offsets.
+                        cellA[k] = base - du - dv;
+                        cellB[k] = base - du;
+                        cellC[k] = base;
+                        cellD[k] = base - dv;
+                    }
+                    const int ia = cellVertexAt(cellA[0], cellA[1], cellA[2]);
+                    const int ib = cellVertexAt(cellB[0], cellB[1], cellB[2]);
+                    const int ic = cellVertexAt(cellC[0], cellC[1], cellC[2]);
+                    const int id = cellVertexAt(cellD[0], cellD[1], cellD[2]);
+                    if (ia < 0 || ib < 0 || ic < 0 || id < 0) continue;
+                    quads.push_back({{static_cast<uint32_t>(ia), static_cast<uint32_t>(ib),
+                                      static_cast<uint32_t>(ic), static_cast<uint32_t>(id)}});
+                }
+            }
+        }
+    }
+    if (quads.empty()) return mesh;
+
+    // Orient every quad against the SDF gradient (surface normals and the
+    // gradient are parallel on smooth regions, so this yields one consistent
+    // outward winding per connected patch).
+    for (const QuadRecord& quad : quads) {
+        const Vec3& a = mesh.vertices[quad.v[0]].position;
+        const Vec3& b = mesh.vertices[quad.v[1]].position;
+        const Vec3& c = mesh.vertices[quad.v[2]].position;
+        const Vec3 faceNormal = (b - a).cross(c - a);
+        const Vec3 grad = gradient((a + b + c) * (1.0f / 3.0f));
+        if (faceNormal.dot(grad) >= 0.0f) {
+            mesh.indices.insert(mesh.indices.end(), {quad.v[0], quad.v[1], quad.v[2],
+                                                     quad.v[0], quad.v[2], quad.v[3]});
+        } else {
+            mesh.indices.insert(mesh.indices.end(), {quad.v[0], quad.v[2], quad.v[1],
+                                                     quad.v[0], quad.v[3], quad.v[2]});
+        }
+    }
+    return finalizeFusion(mesh);
+}
+
+} // namespace pae::fusion

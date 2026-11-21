@@ -96,6 +96,86 @@ PAE_TEST_CASE(validator_rejects_invalid_mesh) {
     EXPECT_FALSE(validateMesh(weightsMesh).valid);
 }
 
+// M11: spline sweep with elliptical sections, taper normals, caps, UV seam.
+PAE_TEST_CASE(spline_sweep_passes_through_rings_and_supports_ellipse) {
+    std::vector<SweepRing> rings;
+    rings.push_back({{0.0f, 0.0f, 0.0f}, 0.06f, {1.0f, 1.0f}, 0.0f});
+    rings.push_back({{0.0f, 0.25f, 0.0f}, 0.09f, {1.0f, 1.0f}, 0.0f});
+    rings.push_back({{0.0f, 0.55f, 0.0f}, 0.05f, {1.0f, 1.0f}, 0.0f});
+    const MeshData mesh = generateSplineSweep(rings, 12, 6, true, true, false);
+    const ValidationReport report = validateMesh(mesh);
+    EXPECT_TRUE(report.valid);
+    if (!report.valid) {
+        for (const std::string& error : report.errors) std::fprintf(stderr, "%s\n", error.c_str());
+    }
+    // Spline passes through every control ring: vertices exist in each
+    // control ring's plane at roughly the control radius (horizontal distance).
+    bool foundBottom = false, foundMiddle = false, foundTop = false;
+    for (const Vertex& v : mesh.vertices) {
+        const float radial = std::sqrt(v.position.x * v.position.x + v.position.z * v.position.z);
+        if (std::fabs(v.position.y - 0.0f) < 0.02f &&
+            std::fabs(radial - 0.06f) < 0.02f) foundBottom = true;
+        if (std::fabs(v.position.y - 0.25f) < 0.02f &&
+            std::fabs(radial - 0.09f) < 0.02f) foundMiddle = true;
+        if (std::fabs(v.position.y - 0.55f) < 0.02f &&
+            std::fabs(radial - 0.05f) < 0.02f) foundTop = true;
+    }
+    EXPECT_TRUE(foundBottom && foundMiddle && foundTop);
+    // UV seam: duplicated column reaches u = 1.0.
+    bool uReachedOne = false;
+    for (const Vertex& v : mesh.vertices) {
+        if (v.uv.x > 0.999f) uReachedOne = true;
+    }
+    EXPECT_TRUE(uReachedOne);
+}
+
+PAE_TEST_CASE(spline_sweep_taper_normals_tilt_against_growth) {
+    std::vector<SweepRing> rings;
+    rings.push_back({{0.0f, 0.0f, 0.0f}, 0.04f, {1.0f, 1.0f}, 0.0f});
+    rings.push_back({{0.0f, 0.3f, 0.0f}, 0.16f, {1.0f, 1.0f}, 0.0f});
+    rings.push_back({{0.0f, 0.6f, 0.0f}, 0.16f, {1.0f, 1.0f}, 0.0f});
+    const MeshData mesh = generateSplineSweep(rings, 12, 8, false, false, false);
+    EXPECT_TRUE(validateMesh(mesh).valid);
+    // On the strongly widening lower half, normals must lean toward -Y.
+    bool foundTilted = false;
+    for (const Vertex& v : mesh.vertices) {
+        if (v.position.y > 0.05f && v.position.y < 0.25f && v.position.z > 0.0f) {
+            if (v.normal.y < -0.05f) foundTilted = true;
+        }
+    }
+    EXPECT_TRUE(foundTilted);
+}
+
+PAE_TEST_CASE(spline_sweep_ellipse_section_scales_axes) {
+    std::vector<SweepRing> rings;
+    rings.push_back({{0.0f, 0.0f, 0.0f}, 0.10f, {2.0f, 1.0f}, 0.0f});
+    rings.push_back({{0.0f, 0.4f, 0.0f}, 0.10f, {2.0f, 1.0f}, 0.0f});
+    const MeshData mesh = generateSplineSweep(rings, 12, 6, true, true, false);
+    const float extentX = mesh.bounds.size().x;
+    const float extentZ = mesh.bounds.size().z;
+    EXPECT_NEAR(extentX / extentZ, 2.0f, 0.05f);
+}
+
+PAE_TEST_CASE(spline_loft_normalizes_winding_for_downward_sections) {
+    std::vector<LoftSection> down;
+    down.push_back({{0.0f, 0.5f, 0.0f}, 0.12f, 0.10f});
+    down.push_back({{0.0f, 0.2f, 0.0f}, 0.16f, 0.12f});
+    const MeshData meshDown = generateSplineLoft(down, 12, 4);
+    EXPECT_TRUE(validateMesh(meshDown).valid);
+    // Outward-facing: face normal must agree with the radial direction.
+    size_t checked = 0, outward = 0;
+    for (size_t i = 0; i + 2 < meshDown.indices.size() && checked < 64; i += 3, ++checked) {
+        const Vec3& a = meshDown.vertices[meshDown.indices[i]].position;
+        const Vec3& b = meshDown.vertices[meshDown.indices[i + 1]].position;
+        const Vec3& c = meshDown.vertices[meshDown.indices[i + 2]].position;
+        const Vec3 faceNormal = (b - a).cross(c - a);
+        const Vec3 radial{a.x, 0.0f, a.z};
+        if (radial.lengthSq() < 1e-8f) continue;
+        if (faceNormal.dot(radial) > 0.0f) ++outward;
+    }
+    EXPECT_TRUE(outward == checked);
+}
+
 int main() {
     return test::runAllTests();
 }
