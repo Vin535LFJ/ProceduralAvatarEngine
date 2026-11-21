@@ -16,7 +16,7 @@ public:
     void surfaceCreated(ANativeWindow* window, int width, int height);
     void surfaceChanged(int width, int height);
     void surfaceDestroyed();
-    void setAppearance(const std::array<Vec3, 4>& palette);
+    void setAppearance(const std::array<Vec3, 5>& palette);
     void setBackground(int mode, const Vec3& colorA, const Vec3& colorB);
     void setPoseMode(int mode);
     void pushPose(const PoseFrame& pose);

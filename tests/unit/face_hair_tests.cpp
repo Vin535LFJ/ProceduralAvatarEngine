@@ -3,6 +3,7 @@
 #include "procedural/MeshValidator.h"
 #include "procedural/humanoid/FaceGenerator.h"
 #include "procedural/humanoid/HairGenerator.h"
+#include "procedural/humanoid/Humanoid.h"
 
 #include <cmath>
 #include <cstring>
@@ -102,6 +103,45 @@ PAE_TEST_CASE(hair_styles_differ_and_validate) {
     }
     EXPECT_TRUE(counts[0] != counts[1] || counts[1] != counts[2]);
     EXPECT_TRUE(counts[2] > counts[0]); // long hair has more geometry than short
+}
+
+// M11-F: clothing shells exist, cover the body, and respond to params.
+PAE_TEST_CASE(clothing_shells_cover_body_and_respond_to_params) {
+    const HumanoidResult withClothes = generateHumanoid(BodyParameters{});
+    int shirtSubMeshes = 0, pantsSubMeshes = 0;
+    size_t pantsVerts = 0;
+    for (const SubMesh& sub : withClothes.mesh.subMeshes) {
+        if (sub.materialId == 2) ++shirtSubMeshes;
+        if (sub.materialId == 5) {
+            ++pantsSubMeshes;
+            pantsVerts += sub.indexCount / 3;
+        }
+    }
+    EXPECT_TRUE(shirtSubMeshes >= 3); // body + collar + 2 sleeves
+    EXPECT_TRUE(pantsSubMeshes >= 3); // pelvis + 2 leg tubes
+    EXPECT_TRUE(pantsVerts > 150);
+
+    // shirtHem below the pelvis adds shirt vertices under the hip line.
+    BodyParameters longShirt{};
+    longShirt.clothing.shirtHem = -0.15f;
+    BodyParameters shortShirt{};
+    shortShirt.clothing.shirtHem = 0.45f;
+    auto shirtVertsBelowHips = [](const HumanoidResult& r) {
+        int count = 0;
+        for (size_t s = 0; s < r.mesh.subMeshes.size(); ++s) {
+            if (r.mesh.subMeshes[s].materialId != 2) continue;
+            for (uint32_t i = r.mesh.subMeshes[s].firstIndex;
+                 i < r.mesh.subMeshes[s].firstIndex + r.mesh.subMeshes[s].indexCount; ++i) {
+                if (r.mesh.vertices[r.mesh.indices[i]].position.y < r.joints.hips.y) ++count;
+            }
+        }
+        return count;
+    };
+    const int longCount = shirtVertsBelowHips(generateHumanoid(longShirt));
+    const int shortCount = shirtVertsBelowHips(generateHumanoid(shortShirt));
+    std::fprintf(stderr, "[DBG] below-hips shirt verts: long=%d short=%d\n",
+                 longCount, shortCount);
+    EXPECT_TRUE(longCount > shortCount + 20);
 }
 
 int main() {

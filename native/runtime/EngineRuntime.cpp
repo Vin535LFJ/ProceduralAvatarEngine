@@ -26,7 +26,7 @@ void EngineRuntime::surfaceDestroyed() {
     if (renderThread_) renderThread_->postSurfaceDestroyed();
 }
 
-void EngineRuntime::setAppearance(const std::array<Vec3, 4>& palette) {
+void EngineRuntime::setAppearance(const std::array<Vec3, 5>& palette) {
     if (renderThread_) renderThread_->postAppearance(palette);
 }
 

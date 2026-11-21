@@ -5,6 +5,7 @@
 #include "skeleton/weights/WeightGenerator.h"
 #include "procedural/humanoid/FaceGenerator.h"
 #include "procedural/humanoid/HairGenerator.h"
+#include "procedural/humanoid/ClothingGenerator.h"
 #include "procedural/primitives/Primitives.h"
 #include "procedural/surfaces/ParametricSurfaces.h"
 
@@ -168,26 +169,32 @@ BodyParameters clampBodyParameters(const BodyParameters& params) {
     return p;
 }
 
-HumanoidResult generateHumanoid(const BodyParameters& params, bool weightHeatmap) {
-    const auto genStart = std::chrono::steady_clock::now();
-    const BodyParameters p = clampBodyParameters(params);
-    HumanoidResult result;
-    const float estimatedHeight = p.upperLegLength + p.lowerLegLength + kFootHeight +
-                                  p.torsoLength + p.neckLength + p.headHeight;
-    const float scale = clampParam(p.height / std::fmax(estimatedHeight, 0.1f), 0.5f, 1.8f);
-    const BodyJoints joints = deriveJoints(p, scale);
-    result.joints = joints;
-    result.skeleton = buildHumanoidSkeleton(joints);
+std::vector<SweepRing> computeArmRings(const BodyParameters& params,
+                                       const BodyJoints& joints, float scale, bool left) {
+    const ArmShape& as = params.armShape;
+    const int side = left ? 1 : -1;
+    const Vec3 shoulder = left ? joints.leftShoulder : joints.rightShoulder;
+    const Vec3 elbow = left ? joints.leftElbow : joints.rightElbow;
+    const Vec3 wrist = left ? joints.leftWrist : joints.rightWrist;
+    const Vec3 inward = Vec3{-side * 0.05f * scale, 0.015f * scale, 0.01f * scale};
+    const Vec3 biceps = (shoulder + elbow) * 0.5f + Vec3{0.0f, 0.0f, -0.004f * scale};
+    const Vec3 forearmMid = (elbow + wrist) * 0.5f + Vec3{0.0f, 0.0f, as.forearmCurve * side};
+    const float armR = params.armRadius * scale;
+    return {
+        {shoulder + inward, armR * as.deltoidVolume * 0.92f, {1.0f, 0.95f}, 0.0f},
+        {shoulder + Vec3{side * 0.008f * scale, 0.004f * scale, 0.0f},
+         armR * as.deltoidVolume, {1.05f, 0.95f}, 0.0f},
+        {biceps, armR * as.upperArmWidth, {1.0f, 0.92f}, 0.0f},
+        {elbow, armR * as.elbowShape, {0.98f, 0.94f}, 0.0f},
+        {forearmMid, armR * 1.06f, {1.0f, as.forearmEllipse}, 0.0f},
+        {wrist, armR * as.wristPinch, {1.0f, 0.95f}, 0.0f},
+    };
+}
 
-    const uint32_t radial = 12u + p.detailLevel * 6u;
-    const uint32_t rings = radial;
-    const int splineSamples = 3 + static_cast<int>(p.detailLevel);
-    std::vector<Part> parts;
+std::vector<LoftSection> computeTorsoSections(const BodyParameters& params,
+                                              const BodyJoints& joints, float scale) {
+    const BodyParameters p = params;
 
-    // ---- Torso: smooth S-curve spline loft, 9 anatomy stations (M11). ----
-    {
-        Part part;
-        part.materialId = 2;
         const TorsoShape& ts = p.torsoShape;
         const PelvisShape& ps = p.pelvisShape;
         const float hipW = p.hipWidth * scale;
@@ -218,6 +225,52 @@ HumanoidResult generateHumanoid(const BodyParameters& params, bool weightHeatmap
                             chestW * 0.5f * (0.90f + 0.14f * ts.chestUpperCurve),
                             chestDepth * (0.80f + 0.12f * ts.chestUpperCurve), 0.0f});
         sections.push_back({{0.0f, at(1.00f), 0.0f}, shoulderW * 0.42f, chestDepth * 0.58f, 0.0f});
+        return sections;
+}
+
+
+std::vector<SweepRing> computeLegRings(const BodyParameters& params,
+                                       const BodyJoints& joints, float scale, bool left) {
+    const BodyParameters p = params;
+    const LegShape& ls = p.legShape;
+    const int side = left ? 1 : -1;
+    const Vec3 hip = left ? joints.leftHip : joints.rightHip;
+    const Vec3 knee = left ? joints.leftKnee : joints.rightKnee;
+    const Vec3 ankle = left ? joints.leftAnkle : joints.rightAnkle;
+    const Vec3 thighMid = (hip + knee) * 0.5f + Vec3{0.004f * scale, 0.0f, 0.0f};
+    const Vec3 calfMid = (knee + ankle) * 0.45f + Vec3{0.0f, 0.0f, -ls.calfCurve};
+    const float legR = p.legRadius * scale;
+    return {
+        {hip + Vec3{-side * 0.055f * scale, 0.10f * scale, 0.0f},
+         legR * 1.05f, {0.88f, 0.92f}, 0.0f},
+        {thighMid, legR * ls.thighVolume, {1.0f, ls.legEllipse}, 0.0f},
+        {knee, legR * ls.kneeShape, {0.98f, 0.95f}, 0.0f},
+        {calfMid, legR * ls.calfVolume, {0.95f, 1.02f}, 0.0f},
+        {ankle + Vec3{0.0f, 0.02f * scale, 0.0f}, legR * ls.anklePinch, {0.90f, 0.92f}, 0.0f},
+    };
+}
+
+HumanoidResult generateHumanoid(const BodyParameters& params, bool weightHeatmap) {
+    const auto genStart = std::chrono::steady_clock::now();
+    const BodyParameters p = clampBodyParameters(params);
+    HumanoidResult result;
+    const float estimatedHeight = p.upperLegLength + p.lowerLegLength + kFootHeight +
+                                  p.torsoLength + p.neckLength + p.headHeight;
+    const float scale = clampParam(p.height / std::fmax(estimatedHeight, 0.1f), 0.5f, 1.8f);
+    const BodyJoints joints = deriveJoints(p, scale);
+    result.joints = joints;
+    result.skeleton = buildHumanoidSkeleton(joints);
+
+    const uint32_t radial = 12u + p.detailLevel * 6u;
+    const uint32_t rings = radial;
+    const int splineSamples = 3 + static_cast<int>(p.detailLevel);
+    std::vector<Part> parts;
+
+    // ---- Torso: smooth S-curve spline loft over shared anatomy stations. ----
+    {
+        Part part;
+        part.materialId = 2;
+        const std::vector<LoftSection> sections = computeTorsoSections(p, joints, scale);
         part.mesh = generateSplineLoft(sections, radial, splineSamples);
         part.path = {joints.hips, joints.spine, joints.chest, joints.neck};
         part.pathBones = {BoneHips, BoneSpine, BoneChest, BoneNeck};
@@ -281,23 +334,10 @@ HumanoidResult generateHumanoid(const BodyParameters& params, bool weightHeatmap
     // ---- Arms: 6-ring embedded spline sweeps with anatomy profile (M11). ----
     auto addArm = [&](bool left) {
         const int side = left ? 1 : -1;
-        const ArmShape& as = p.armShape;
         const Vec3 shoulder = left ? joints.leftShoulder : joints.rightShoulder;
         const Vec3 elbow = left ? joints.leftElbow : joints.rightElbow;
         const Vec3 wrist = left ? joints.leftWrist : joints.rightWrist;
-        const Vec3 inward = Vec3{-side * 0.05f * scale, 0.015f * scale, 0.01f * scale};
-        const Vec3 biceps = (shoulder + elbow) * 0.5f + Vec3{0.0f, 0.0f, -0.004f * scale};
-        const Vec3 forearmMid = (elbow + wrist) * 0.5f + Vec3{0.0f, 0.0f, as.forearmCurve * side};
-        const float armR = p.armRadius * scale;
-        const std::vector<SweepRing> rings = {
-            {shoulder + inward, armR * as.deltoidVolume * 0.92f, {1.0f, 0.95f}, 0.0f},
-            {shoulder + Vec3{side * 0.008f * scale, 0.004f * scale, 0.0f},
-             armR * as.deltoidVolume, {1.05f, 0.95f}, 0.0f},
-            {biceps, armR * as.upperArmWidth, {1.0f, 0.92f}, 0.0f},
-            {elbow, armR * as.elbowShape, {0.98f, 0.94f}, 0.0f},
-            {forearmMid, armR * 1.06f, {1.0f, as.forearmEllipse}, 0.0f},
-            {wrist, armR * as.wristPinch, {1.0f, 0.95f}, 0.0f},
-        };
+        const std::vector<SweepRing> rings = computeArmRings(p, joints, scale, left);
         Part part;
         part.materialId = 2;
         part.mesh = generateSplineSweep(rings, radial, splineSamples, false, false, false);
@@ -316,22 +356,10 @@ HumanoidResult generateHumanoid(const BodyParameters& params, bool weightHeatmap
 
     // ---- Legs: 5-ring embedded spline sweeps (thigh/knee/calf/ankle). ----
     auto addLeg = [&](bool left) {
-        const LegShape& ls = p.legShape;
-        const int side = left ? 1 : -1;
+        const std::vector<SweepRing> rings = computeLegRings(p, joints, scale, left);
         const Vec3 hip = left ? joints.leftHip : joints.rightHip;
         const Vec3 knee = left ? joints.leftKnee : joints.rightKnee;
         const Vec3 ankle = left ? joints.leftAnkle : joints.rightAnkle;
-        const Vec3 thighMid = (hip + knee) * 0.5f + Vec3{0.004f * scale, 0.0f, 0.0f};
-        const Vec3 calfMid = (knee + ankle) * 0.45f + Vec3{0.0f, 0.0f, -ls.calfCurve};
-        const float legR = p.legRadius * scale;
-        const std::vector<SweepRing> rings = {
-            {hip + Vec3{-side * 0.055f * scale, 0.10f * scale, 0.0f},
-             legR * 1.05f, {0.88f, 0.92f}, 0.0f},
-            {thighMid, legR * ls.thighVolume, {1.0f, ls.legEllipse}, 0.0f},
-            {knee, legR * ls.kneeShape, {0.98f, 0.95f}, 0.0f},
-            {calfMid, legR * ls.calfVolume, {0.95f, 1.02f}, 0.0f},
-            {ankle + Vec3{0.0f, 0.02f * scale, 0.0f}, legR * ls.anklePinch, {0.90f, 0.92f}, 0.0f},
-        };
         Part part;
         part.materialId = 2;
         part.mesh = generateSplineSweep(rings, radial, splineSamples, false, false, false);
@@ -388,6 +416,20 @@ HumanoidResult generateHumanoid(const BodyParameters& params, bool weightHeatmap
     };
     addFoot(joints.leftAnkle, joints.leftToe, true);
     addFoot(joints.rightAnkle, joints.rightToe, false);
+
+    // ---- Clothing shells (M11-F): shirt + sleeves + collar + pants. ----
+    {
+        ClothingParams cp = p.clothing;
+        auto clothingPieces = clothing::generateClothing(p, joints, scale, cp);
+        for (auto& piece : clothingPieces) {
+            Part part;
+            part.materialId = piece.materialId;
+            part.mesh = std::move(piece.mesh);
+            part.path = std::move(piece.path);
+            part.pathBones = std::move(piece.pathBones);
+            parts.push_back(part);
+        }
+    }
 
     for (Part& part : parts) {
         weights::PartSpec spec;

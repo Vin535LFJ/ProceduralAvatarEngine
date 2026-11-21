@@ -26,8 +26,9 @@ class MainActivity : AppCompatActivity() {
     private val palette = arrayOf(
         floatArrayOf(0.98f, 0.79f, 0.66f),  // skin
         floatArrayOf(0.26f, 0.15f, 0.09f),  // hair
-        floatArrayOf(0.32f, 0.58f, 0.88f),  // cloth
-        floatArrayOf(1.00f, 1.00f, 1.00f)   // eye
+        floatArrayOf(0.32f, 0.58f, 0.88f),  // cloth (shirt)
+        floatArrayOf(1.00f, 1.00f, 1.00f),  // eye
+        floatArrayOf(0.20f, 0.24f, 0.32f)   // pants
     )
     private val skinOptions = listOf(
         floatArrayOf(0.98f, 0.79f, 0.66f), floatArrayOf(0.80f, 0.55f, 0.38f),
@@ -41,6 +42,10 @@ class MainActivity : AppCompatActivity() {
         floatArrayOf(0.32f, 0.58f, 0.88f), floatArrayOf(0.82f, 0.22f, 0.26f),
         floatArrayOf(0.22f, 0.68f, 0.38f)
     )
+    private val pantsOptions = listOf(
+        floatArrayOf(0.20f, 0.24f, 0.32f), floatArrayOf(0.30f, 0.28f, 0.26f),
+        floatArrayOf(0.16f, 0.18f, 0.22f)
+    )
     private val backgrounds = listOf(
         0 to floatArrayOf(0.08f, 0.10f, 0.18f, 0.08f, 0.10f, 0.18f),
         1 to floatArrayOf(0.10f, 0.12f, 0.25f, 0.65f, 0.80f, 0.90f),
@@ -52,6 +57,7 @@ class MainActivity : AppCompatActivity() {
     private var backgroundIndex = 2
     private var poseMode = -1
     private var qualityLevel = 1
+    private var pantsIndex = 0
 
     // One-shot image feed for the M7 pipeline verification: the picked image goes
     // through the same detector -> PoseFrame -> JNI path as live camera frames.
@@ -108,6 +114,11 @@ class MainActivity : AppCompatActivity() {
         buttons.addView(actionButton("Cloth") {
             clothIndex = (clothIndex + 1) % clothOptions.size
             palette[2] = clothOptions[clothIndex]
+            pushAppearance()
+        })
+        buttons.addView(actionButton("Pants") {
+            pantsIndex = (pantsIndex + 1) % pantsOptions.size
+            palette[4] = pantsOptions[pantsIndex]
             pushAppearance()
         })
         buttons.addView(actionButton("BG") {
@@ -322,8 +333,8 @@ class MainActivity : AppCompatActivity() {
         }
 
     private fun pushAppearance() {
-        val packed = FloatArray(12)
-        for (i in 0..3) System.arraycopy(palette[i], 0, packed, i * 3, 3)
+        val packed = FloatArray(palette.size * 3)
+        for (i in palette.indices) System.arraycopy(palette[i], 0, packed, i * 3, 3)
         NativeBridge.setAppearance(packed)
     }
 

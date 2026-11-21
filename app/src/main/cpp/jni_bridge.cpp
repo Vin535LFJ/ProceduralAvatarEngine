@@ -60,10 +60,12 @@ Java_com_pae_host_NativeBridge_nativeSetAppearance(JNIEnv* env, jclass, jlong ha
                                                    jfloatArray colors) {
     auto* runtime = runtimeFromHandle(handle);
     if (!runtime || !colors || env->GetArrayLength(colors) < 12) return;
+    const jsize length = env->GetArrayLength(colors);
     jfloat* values = env->GetFloatArrayElements(colors, nullptr);
     if (!values) return;
-    std::array<pae::Vec3, 4> palette{};
-    for (int i = 0; i < 4; ++i) {
+    std::array<pae::Vec3, 5> palette{};
+    const int colorCount = length >= 15 ? 5 : 4; // backward compatible
+    for (int i = 0; i < colorCount; ++i) {
         palette[i] = {values[i * 3], values[i * 3 + 1], values[i * 3 + 2]};
     }
     runtime->setAppearance(palette);

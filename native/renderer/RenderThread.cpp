@@ -44,6 +44,7 @@ uniform vec3 uSkinColor;
 uniform vec3 uHairColor;
 uniform vec3 uClothColor;
 uniform vec3 uEyeColor;
+uniform vec3 uPantsColor;
 uniform vec3 uLightDir;
 uniform float uAmbient;
 uniform float uToonSteps;
@@ -54,7 +55,8 @@ void main() {
     vec3 base = materialId < 0.5 ? uSkinColor
               : (materialId < 1.5 ? uHairColor
               : (materialId < 2.5 ? uClothColor
-              : (materialId < 3.5 ? uEyeColor : vec3(0.045, 0.04, 0.06))));
+              : (materialId < 3.5 ? uEyeColor
+              : (materialId < 4.5 ? uPantsColor : vec3(0.045, 0.04, 0.06)))));
     base *= 0.85 + 0.15 * clamp(vColor.rgb, 0.0, 1.0);
     vec3 n = normalize(vNormal);
     float ndl = max(dot(n, normalize(uLightDir)), 0.0);
@@ -212,7 +214,7 @@ void RenderThread::postSurfaceDestroyed() {
     queueCv_.notify_one();
 }
 
-void RenderThread::postAppearance(const std::array<Vec3, 4>& palette) {
+void RenderThread::postAppearance(const std::array<Vec3, 5>& palette) {
     RenderCommand command;
     command.type = RenderCommandType::SetAppearance;
     command.palette = palette;
@@ -427,6 +429,7 @@ bool RenderThread::ensureResources(std::string* error) {
     uniformHair_ = skinnedProgram_.uniform("uHairColor");
     uniformCloth_ = skinnedProgram_.uniform("uClothColor");
     uniformEye_ = skinnedProgram_.uniform("uEyeColor");
+    uniformPants_ = skinnedProgram_.uniform("uPantsColor");
     uniformBgMode_ = backgroundProgram_.uniform("uMode");
     uniformBgA_ = backgroundProgram_.uniform("uColorA");
     uniformBgB_ = backgroundProgram_.uniform("uColorB");
@@ -559,6 +562,7 @@ void RenderThread::drawFrame() {
     glUniform3f(uniformHair_, appearance_[1].x, appearance_[1].y, appearance_[1].z);
     glUniform3f(uniformCloth_, appearance_[2].x, appearance_[2].y, appearance_[2].z);
     glUniform3f(uniformEye_, appearance_[3].x, appearance_[3].y, appearance_[3].z);
+    glUniform3f(uniformPants_, appearance_[4].x, appearance_[4].y, appearance_[4].z);
     glUniform3f(skinnedProgram_.uniform("uLightDir"), 0.4f, 0.8f, 0.6f);
     glUniform1f(skinnedProgram_.uniform("uAmbient"), 0.42f);
     glUniform1f(skinnedProgram_.uniform("uToonSteps"), 3.0f);

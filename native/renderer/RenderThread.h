@@ -41,7 +41,7 @@ struct RenderCommand {
     int value = 0;
     Vec3 vecA{};
     Vec3 vecB{};
-    std::array<Vec3, 4> palette{};
+    std::array<Vec3, 5> palette{};
     PoseFrame pose{};
 };
 
@@ -58,7 +58,7 @@ public:
     void postSurfaceCreated(ANativeWindow* window, int width, int height);
     void postSurfaceChanged(int width, int height);
     void postSurfaceDestroyed();
-    void postAppearance(const std::array<Vec3, 4>& palette);
+    void postAppearance(const std::array<Vec3, 5>& palette);
     void postBackground(int mode, const Vec3& colorA, const Vec3& colorB);
     void postPoseMode(int mode); // -1 = automatic test sequence
     void postExternalPose(const PoseFrame& pose);
@@ -91,7 +91,7 @@ private:
     GlCapabilities caps_;
     RenderStats stats_;
 
-    std::array<Vec3, 4> appearance_{
+    std::array<Vec3, 5> appearance_{
         Vec3{0.98f, 0.79f, 0.66f}, Vec3{0.26f, 0.15f, 0.09f},
         Vec3{0.32f, 0.58f, 0.88f}, Vec3{1.00f, 1.00f, 1.00f}
     };
@@ -117,6 +117,7 @@ private:
     GLint uniformHair_ = -1;
     GLint uniformCloth_ = -1;
     GLint uniformEye_ = -1;
+    GLint uniformPants_ = -1;
     GLint uniformBgMode_ = -1;
     GLint uniformBgA_ = -1;
     GLint uniformBgB_ = -1;

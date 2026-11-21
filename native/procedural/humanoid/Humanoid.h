@@ -3,6 +3,8 @@
 #include "procedural/MeshData.h"
 #include "procedural/humanoid/FaceGenerator.h"
 #include "procedural/humanoid/HairGenerator.h"
+#include "procedural/surfaces/ParametricSurfaces.h"
+#include "procedural/surfaces/ParametricSurfaces.h"
 #include "skeleton/Skeleton.h"
 
 namespace pae {
@@ -49,6 +51,14 @@ struct NeckShape {
     float taper = 0.85f;          // top radius / bottom radius
 };
 
+struct ClothingParams {
+    float thickness = 0.012f;   // shell thickness over the body surface (m)
+    float ease = 0.010f;        // extra ease so the cloth floats over skin
+    float shirtHem = 0.92f;     // shirt hem position (fraction of torso)
+    float sleeveLength = 0.55f; // fraction of the upper arm covered
+    float pantsLength = 1.0f;   // fraction of the legs covered (1 = ankles)
+};
+
 struct BodyParameters {
     float height = 1.70f;
     float headScale = 1.12f;      // enlarged cartoon head-to-body ratio (M10)
@@ -81,6 +91,7 @@ struct BodyParameters {
     NeckShape neckShape{};
     face::FaceParams face{};
     hair::HairParams hair{};
+    ClothingParams clothing{};
 };
 
 struct HumanoidResult {
@@ -92,5 +103,21 @@ struct HumanoidResult {
 
 BodyParameters clampBodyParameters(const BodyParameters& params);
 HumanoidResult generateHumanoid(const BodyParameters& params, bool weightHeatmap = false);
+
+// M11-F: shared anatomy profiles (clothing shells reuse these exact rings).
+std::vector<LoftSection> computeTorsoSections(const BodyParameters& params,
+                                              const BodyJoints& joints, float scale);
+std::vector<SweepRing> computeLegRings(const BodyParameters& params,
+                                       const BodyJoints& joints, float scale, bool left);
+std::vector<SweepRing> computeArmRings(const BodyParameters& params,
+                                       const BodyJoints& joints, float scale, bool left);;
+
+// M11-F: shared anatomy profiles (clothing shells reuse these exact rings).
+std::vector<LoftSection> computeTorsoSections(const BodyParameters& params,
+                                              const BodyJoints& joints, float scale);
+std::vector<SweepRing> computeLegRings(const BodyParameters& params,
+                                       const BodyJoints& joints, float scale, bool left);
+std::vector<SweepRing> computeArmRings(const BodyParameters& params,
+                                       const BodyJoints& joints, float scale, bool left);;
 
 } // namespace pae
