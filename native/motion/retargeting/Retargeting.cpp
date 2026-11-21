@@ -64,10 +64,17 @@ PoseFrame convertPoseFrameToLocal(const PoseFrame& frame, const BodyJoints& refe
     result.coordinateSpace = CoordinateSpace::AvatarLocal;
     if (frame.coordinateSpace != CoordinateSpace::NormalizedImage &&
         frame.coordinateSpace != CoordinateSpace::PixelImage) {
+        // M11-H: ProviderWorld has no defined conversion contract yet —
+        // silently relabelling the space was incorrect; the landmarks are
+        // invalidated so the runtime falls back to its hold behaviour.
+        for (uint32_t i = 0; i < result.landmarkCount; ++i) {
+            result.landmarks[i].valid = false;
+        }
         return result;
     }
     const float width = static_cast<float>(std::max(frame.imageWidth, 1u));
     const float height = static_cast<float>(std::max(frame.imageHeight, 1u));
+    const float depth = static_cast<float>(std::max({frame.imageWidth, frame.imageHeight, 1u}));
     const float shoulderSpan = std::fabs(reference.leftShoulder.x - reference.rightShoulder.x);
     const float torso = std::fabs(reference.chest.y - reference.hips.y);
     for (uint32_t i = 0; i < frame.landmarkCount; ++i) {
@@ -81,7 +88,7 @@ PoseFrame convertPoseFrameToLocal(const PoseFrame& frame, const BodyJoints& refe
         landmark.position = {
             (nx - 0.5f) * shoulderSpan * 2.1f,
             (0.5f - ny) * torso * 2.2f + reference.hips.y,
-            landmark.position.z * 0.25f
+            landmark.position.z / depth
         };
     }
     return result;
@@ -90,23 +97,43 @@ PoseFrame convertPoseFrameToLocal(const PoseFrame& frame, const BodyJoints& refe
 std::array<Quat, BoneCount> retargetPose(const PoseFrame& frame,
                                          const Skeleton& skeleton,
                                          LandmarkFilters& filters,
-                                         float dt) {
+                                         float dt, int64_t nowNs,
+                                         RetargetingState& state) {
     std::array<Quat, BoneCount> result{};
     if (!frame.hasPerson || frame.landmarkCount == 0) return result;
 
     const float confidence = clampFloat(frame.poseConfidence, 0.0f, 1.0f);
+    constexpr int64_t kHoldWindowNs = 500000000; // landmarks hold for 0.5 s
     std::array<Vec3, LandmarkCount> positions{};
     std::array<bool, LandmarkCount> valid{};
     for (const PoseLandmark& landmark : frame.landmarks) {
         if (!landmark.valid || landmark.id >= LandmarkCount) continue;
+        // M11-H: the confidence weight now actually gates the observation —
+        // low-confidence landmarks shrink toward the last accepted position
+        // instead of jumping with the same authority as confident ones.
         const float weight = 0.4f + 0.6f * confidence * landmark.visibility;
-        (void)weight;
-        positions[landmark.id] = {
+        Vec3 observed{
             filters[landmark.id * 3 + 0].filter(landmark.position.x, dt),
             filters[landmark.id * 3 + 1].filter(landmark.position.y, dt),
             filters[landmark.id * 3 + 2].filter(landmark.position.z, dt)
         };
+        if (state.everSeen[landmark.id]) {
+            observed = observed * weight + state.lastPositions[landmark.id] * (1.0f - weight);
+        }
+        positions[landmark.id] = observed;
+        state.lastPositions[landmark.id] = observed;
+        state.lastValidNs[landmark.id] = nowNs;
+        state.everSeen[landmark.id] = 1;
         valid[landmark.id] = true;
+    }
+    // Held landmarks: recently seen but absent this frame keep their last
+    // accepted position for the direction solve (short-term hold).
+    for (uint16_t id = 0; id < LandmarkCount; ++id) {
+        if (valid[id] || !state.everSeen[id]) continue;
+        if (nowNs - state.lastValidNs[id] <= kHoldWindowNs) {
+            positions[id] = state.lastPositions[id];
+            valid[id] = true;
+        }
     }
 
     auto direction = [&](uint16_t from, uint16_t to, Vec3& out) {
@@ -126,6 +153,8 @@ std::array<Quat, BoneCount> retargetPose(const PoseFrame& frame,
         const Vec3 bindDirection = (def.tail - def.head).normalized();
         worldTargets[bone] = Quat::fromToRotation(bindDirection, target);
         hasTarget[bone] = true;
+        state.lastTargets[bone] = worldTargets[bone];
+        state.hasTargets[bone] = 1;
     };
 
     addPair(BoneLeftUpperArm, LkLeftShoulder, LkLeftElbow);
@@ -158,6 +187,14 @@ std::array<Quat, BoneCount> retargetPose(const PoseFrame& frame,
         }
     }
 
+    // Bones without a fresh direction hold their last accepted target
+    // (short-term) instead of snapping back to the bind pose.
+    for (uint16_t bone = 0; bone < BoneCount; ++bone) {
+        if (!hasTarget[bone] && state.hasTargets[bone]) {
+            worldTargets[bone] = state.lastTargets[bone];
+            hasTarget[bone] = true;
+        }
+    }
     std::array<Quat, BoneCount> worldAccum{};
     for (uint16_t bone = 0; bone < BoneCount; ++bone) {
         const Quat target = hasTarget[bone] ? worldTargets[bone] : Quat{};

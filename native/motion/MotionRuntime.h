@@ -33,6 +33,7 @@ private:
     ExternalPoseProvider external_;
     bool useExternal_ = false;
     LandmarkFilters filters_{};
+    RetargetingState retargetState_{};
     std::array<Quat, BoneCount> filtered_{};
     PoseFrame latestFrame_{};
     bool hasLatest_ = false;

@@ -188,6 +188,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(root)
         poseAdapter = PoseProviderAdapter(this)
         if (hasCameraPermission()) poseAdapter.start() else requestCameraPermission()
+
+        // Debug autostart: adb shell am start ... --es debug_video /path/file.mp4
+        // launches the video pipeline directly (deterministic test runs).
+        intent?.getStringExtra("debug_video")?.let { debugPath ->
+            Log.i("PAE_UI", "debug video autostart: $debugPath")
+            videoSource.open(java.io.File(debugPath))
+            videoControls.visibility = ViewGroup.VISIBLE
+            playButton.text = "Pause"
+        }
     }
 
     private fun showVideoStoragePicker() {

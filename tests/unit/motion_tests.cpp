@@ -232,6 +232,59 @@ PAE_TEST_CASE(dropout_and_low_confidence_are_controlled) {
     EXPECT_TRUE(lowConfidence.droppedFrames() > 0);
 }
 
+// M11-H: landmarks absent from a frame hold their last accepted direction
+// instead of snapping the bones back to the bind pose.
+PAE_TEST_CASE(missing_landmarks_hold_last_direction) {
+    const HumanoidResult humanoid = generateHumanoid(BodyParameters{});
+    MotionRuntime runtime;
+    EXPECT_TRUE(runtime.initialize(humanoid.skeleton, humanoid.joints));
+    runtime.setExternalEnabled(true);
+    int64_t pts = 0;
+    for (int i = 0; i < 45; ++i) {
+        pts += 33333333;
+        runtime.pushExternalFrame(makeRaisedArmFrame(pts));
+        runtime.update(pts, -1);
+    }
+    const Vec3 raisedWrist = xyz(runtime.update(pts, -1).palette[BoneLeftHand].transform(
+        Vec4{humanoid.skeleton.bones[BoneLeftHand].head, 1.0f}));
+    EXPECT_TRUE(raisedWrist.y > humanoid.joints.leftWrist.y + 0.1f);
+
+    // Next frame carries only the shoulder landmark - the arm landmarks are
+    // missing, and the arm must hold its raised direction.
+    PoseFrame partial = makeRaisedArmFrame(pts + 33333333);
+    partial.landmarkCount = 1;
+    runtime.pushExternalFrame(partial);
+    const PoseResult held = runtime.update(pts + 33333333, -1);
+    const Vec3 heldWrist = xyz(held.palette[BoneLeftHand].transform(
+        Vec4{humanoid.skeleton.bones[BoneLeftHand].head, 1.0f}));
+    EXPECT_TRUE(heldWrist.y > humanoid.joints.leftWrist.y + 0.08f);
+}
+
+// M11-H: confidence actually gates pose authority - the same large landmark
+// jump moves the pose further at confidence 1.0 than at 0.3.
+PAE_TEST_CASE(low_confidence_gates_pose_authority) {
+    const HumanoidResult humanoid = generateHumanoid(BodyParameters{});
+    auto jumpWith = [&](float confidence) {
+        MotionRuntime runtime;
+        runtime.initialize(humanoid.skeleton, humanoid.joints);
+        runtime.setExternalEnabled(true);
+        int64_t pts = 0;
+        for (int i = 0; i < 40; ++i) {
+            pts += 33333333;
+            runtime.update(pts, -1);
+        }
+        PoseFrame jump = makeRaisedArmFrame(pts + 33333333);
+        jump.poseConfidence = confidence;
+        runtime.pushExternalFrame(jump);
+        const PoseResult pose = runtime.update(pts + 33333333, -1);
+        return xyz(pose.palette[BoneLeftHand].transform(
+            Vec4{humanoid.skeleton.bones[BoneLeftHand].head, 1.0f})).y;
+    };
+    const float trusted = jumpWith(1.0f);
+    const float doubted = jumpWith(0.3f);
+    EXPECT_TRUE(trusted > doubted);
+}
+
 int main() {
     return test::runAllTests();
 }

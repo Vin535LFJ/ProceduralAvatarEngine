@@ -29,6 +29,7 @@ void MotionRuntime::resetFilters() {
     hasLatest_ = false;
     lastFrameNs_ = 0;
     lastValidNs_ = 0;
+    retargetState_.reset();
     external_.clear(); // a seek/replay must not re-consume the pre-seek frame
 }
 
@@ -70,7 +71,8 @@ PoseResult MotionRuntime::update(int64_t timestampNs, int actionMode) {
 
     lastValidNs_ = timestampNs;
     const PoseFrame local = convertPoseFrameToLocal(frame, joints_);
-    const std::array<Quat, BoneCount> target = retargetPose(local, skeleton_, filters_, dt);
+    const std::array<Quat, BoneCount> target =
+        retargetPose(local, skeleton_, filters_, dt, timestampNs, retargetState_);
     const float confidence = std::clamp(frame.poseConfidence, 0.0f, 1.0f);
     const float alpha = 1.0f - std::exp(-dt * (2.0f + 8.0f * confidence));
     for (uint16_t bone = 0; bone < BoneCount; ++bone) {
