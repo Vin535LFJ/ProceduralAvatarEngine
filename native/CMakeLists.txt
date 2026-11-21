@@ -18,6 +18,9 @@ set(PAE_CORE_SOURCES
     procedural/humanoid/FaceGenerator.cpp
     procedural/humanoid/HairGenerator.cpp
     procedural/humanoid/ClothingGenerator.cpp
+    procedural/humanoid/anatomy/AnatomyField.cpp
+    procedural/humanoid/anatomy/HumanAnatomyGenerator.cpp
+    procedural/MeshTopology.cpp
     skeleton/Skeleton.cpp
     skeleton/Skinning.cpp
     skeleton/weights/WeightGenerator.cpp

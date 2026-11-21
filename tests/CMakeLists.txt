@@ -18,6 +18,11 @@ target_include_directories(pae_face_hair_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DI
 target_link_libraries(pae_face_hair_tests PRIVATE pae_core)
 add_test(NAME pae_face_hair_tests COMMAND pae_face_hair_tests)
 
+add_executable(pae_anatomy_tests unit/anatomy_tests.cpp)
+target_include_directories(pae_anatomy_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/harness)
+target_link_libraries(pae_anatomy_tests PRIVATE pae_core)
+add_test(NAME pae_anatomy_tests COMMAND pae_anatomy_tests)
+
 add_executable(pae_humanoid_tests unit/humanoid_tests.cpp)
 target_include_directories(pae_humanoid_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/harness)
 target_link_libraries(pae_humanoid_tests PRIVATE pae_core)

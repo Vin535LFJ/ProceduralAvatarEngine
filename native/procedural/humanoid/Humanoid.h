@@ -102,6 +102,7 @@ struct HumanoidResult {
 };
 
 BodyParameters clampBodyParameters(const BodyParameters& params);
+BodyJoints deriveJoints(const BodyParameters& params, float scale);
 HumanoidResult generateHumanoid(const BodyParameters& params, bool weightHeatmap = false);
 
 // M11-F: shared anatomy profiles (clothing shells reuse these exact rings).

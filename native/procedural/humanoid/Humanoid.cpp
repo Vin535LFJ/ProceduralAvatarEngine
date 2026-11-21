@@ -47,7 +47,10 @@ Vec3 materialColor(uint16_t materialId) {
     }
 }
 
+} // namespace
+
 BodyJoints deriveJoints(const BodyParameters& p, float scale) {
+
     BodyJoints j;
     const float footHeight = kFootHeight * scale;
     const float hipY = (p.upperLegLength + p.lowerLegLength) * scale + footHeight;
@@ -92,6 +95,8 @@ BodyJoints deriveJoints(const BodyParameters& p, float scale) {
     j.rightToe = j.rightAnkle + Vec3{0.0f, -footHeight * 0.5f, p.footLength * scale * 0.6f};
     return j;
 }
+
+namespace {
 
 MeshData translated(const MeshData& source, const Vec3& offset) {
     MeshData result = source;
