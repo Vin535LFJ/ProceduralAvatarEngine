@@ -15,6 +15,8 @@ set(PAE_CORE_SOURCES
     procedural/surfaces/ParametricSurfaces.cpp
     procedural/fusion/SdfFusion.cpp
     procedural/humanoid/Humanoid.cpp
+    procedural/humanoid/FaceGenerator.cpp
+    procedural/humanoid/HairGenerator.cpp
     skeleton/Skeleton.cpp
     skeleton/Skinning.cpp
     skeleton/weights/WeightGenerator.cpp

@@ -1,6 +1,8 @@
 #pragma once
 
 #include "procedural/MeshData.h"
+#include "procedural/humanoid/FaceGenerator.h"
+#include "procedural/humanoid/HairGenerator.h"
 #include "skeleton/Skeleton.h"
 
 namespace pae {
@@ -77,6 +79,8 @@ struct BodyParameters {
     ArmShape armShape{};
     LegShape legShape{};
     NeckShape neckShape{};
+    face::FaceParams face{};
+    hair::HairParams hair{};
 };
 
 struct HumanoidResult {

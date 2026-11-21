@@ -78,9 +78,11 @@ layout(location = 0) in vec3 aPosition;
 layout(location = 1) in vec3 aNormal;
 layout(location = 2) in uvec4 aJoints;
 layout(location = 3) in vec4 aWeights;
+layout(location = 4) in vec4 aColor;
 uniform mat4 uViewProj;
 uniform mat4 uModel;
 uniform float uOffset;
+out float vMaterial;
 void main() {
     mat4 skin = uBones[aJoints.x] * aWeights.x
               + uBones[aJoints.y] * aWeights.y
@@ -89,6 +91,7 @@ void main() {
     vec4 world = uModel * skin * vec4(aPosition, 1.0);
     vec3 worldNormal = mat3(uModel) * mat3(skin) * aNormal;
     world.xyz += normalize(worldNormal) * uOffset;
+    vMaterial = aColor.w;
     gl_Position = uViewProj * world;
 }
 )GLSL";
@@ -107,6 +110,18 @@ precision mediump float;
 uniform vec4 uColor;
 out vec4 fragColor;
 void main() { fragColor = uColor; }
+)GLSL";
+
+constexpr const char* kOutlineFragment = R"GLSL(#version 300 es
+precision mediump float;
+uniform vec4 uColor;
+in float vMaterial;
+out vec4 fragColor;
+void main() {
+    // Ink features (eyes/mouth) must not grow outline halos.
+    if (vMaterial >= 3.5) discard;
+    fragColor = uColor;
+}
 )GLSL";
 
 constexpr const char* kBackgroundFragment = R"GLSL(#version 300 es
@@ -389,7 +404,7 @@ bool RenderThread::ensureResources(std::string* error) {
         return false;
     }
     if (!backgroundProgram_.build(kBackgroundVertex, kBackgroundFragment, error)) return false;
-    if (!outlineProgram_.build(kOutlineVertex, kFlatColorFragment, error)) return false;
+    if (!outlineProgram_.build(kOutlineVertex, kOutlineFragment, error)) return false;
     if (!outlineProgram_.bindUniformBlock("BoneBlock", 0)) {
         if (error) *error = "outline BoneBlock binding failed";
         return false;

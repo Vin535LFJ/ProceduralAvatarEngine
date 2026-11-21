@@ -3,6 +3,8 @@
 #include "core/diagnostics/Log.h"
 #include "procedural/geometry/CatmullRom.h"
 #include "skeleton/weights/WeightGenerator.h"
+#include "procedural/humanoid/FaceGenerator.h"
+#include "procedural/humanoid/HairGenerator.h"
 #include "procedural/primitives/Primitives.h"
 #include "procedural/surfaces/ParametricSurfaces.h"
 
@@ -149,6 +151,20 @@ BodyParameters clampBodyParameters(const BodyParameters& params) {
     p.legShape.legEllipse = clampParam(p.legShape.legEllipse, 0.8f, 1.0f);
     p.neckShape.radiusFactor = clampParam(p.neckShape.radiusFactor, 0.3f, 0.6f);
     p.neckShape.taper = clampParam(p.neckShape.taper, 0.7f, 1.0f);
+    p.face.jawWidth = clampParam(p.face.jawWidth, 0.5f, 1.2f);
+    p.face.chinShape = clampParam(p.face.chinShape, 0.0f, 1.0f);
+    p.face.cheekVolume = clampParam(p.face.cheekVolume, 0.0f, 1.5f);
+    p.face.eyeSpacing = clampParam(p.face.eyeSpacing, 0.5f, 1.6f);
+    p.face.eyeSize = clampParam(p.face.eyeSize, 0.5f, 1.6f);
+    p.face.browHeight = clampParam(p.face.browHeight, 0.0f, 1.0f);
+    p.face.noseWidth = clampParam(p.face.noseWidth, 0.3f, 1.3f);
+    p.face.noseBridge = clampParam(p.face.noseBridge, 0.0f, 1.0f);
+    p.face.mouthWidth = clampParam(p.face.mouthWidth, 0.4f, 1.2f);
+    p.hair.style = clampParam(p.hair.style, 0, 2);
+    p.hair.strandCount = clampParam(p.hair.strandCount, 6, 24);
+    p.hair.strandWidth = clampParam(p.hair.strandWidth, 0.008f, 0.030f);
+    p.hair.bend = clampParam(p.hair.bend, 0.0f, 1.0f);
+    p.hair.backLength = clampParam(p.hair.backLength, 0.05f, 0.25f);
     return p;
 }
 
@@ -208,97 +224,39 @@ HumanoidResult generateHumanoid(const BodyParameters& params, bool weightHeatmap
         parts.push_back(part);
     }
 
-    // ---- Head, face and hair (M10 base; M11-E replaces with FaceGenerator). ----
+    // ---- Head + face (M11-E FaceGenerator) and hair (HairGenerator). ----
     {
         Part head;
         head.materialId = 0;
-        const Vec3 headRadii{p.headWidth * scale * 0.5f, p.headHeight * scale * 0.5f,
-                             p.headWidth * scale * 0.42f};
-        head.mesh = translated(generateEllipsoid(headRadii, radial, rings), joints.head);
+        head.mesh = face::generateHeadMesh(p.face, joints.head, p.headWidth,
+                                           p.headHeight, radial, rings);
         head.path = {joints.head};
         head.pathBones = {BoneHead};
         parts.push_back(head);
 
-        Part hair;
-        hair.materialId = 1;
-        hair.mesh = translated(generateEllipsoid(
-            headRadii * 1.09f + Vec3{0.003f, 0.006f, 0.003f}, radial, rings),
-            joints.head + Vec3{0.0f, headRadii.y * 0.24f, -headRadii.z * 0.16f});
-        hair.path = {joints.head};
-        hair.pathBones = {BoneHead};
-        parts.push_back(hair);
-
-        Part fringe;
-        fringe.materialId = 1;
-        fringe.mesh = translated(generateEllipsoid(
-            Vec3{p.headWidth * scale * 0.47f, p.headHeight * scale * 0.12f,
-                 p.headWidth * scale * 0.14f}, radial, rings / 2),
-            joints.head + Vec3{0.0f, headRadii.y * 0.52f, headRadii.z * 0.58f});
-        fringe.path = {joints.head};
-        fringe.pathBones = {BoneHead};
-        parts.push_back(fringe);
-
-        const float headH = p.headHeight * scale;
-        const float eyeRadius = p.headWidth * scale * 0.095f;
-        for (int side = -1; side <= 1; side += 2) {
-            const Vec3 eyeCenter{
-                side * p.headWidth * scale * 0.21f,
-                joints.head.y + headH * 0.02f,
-                headRadii.z * 0.86f
-            };
-            Part eye;
-            eye.materialId = 3;
-            eye.mesh = translated(generateUvSphere(eyeRadius, radial, rings / 2), eyeCenter);
-            eye.path = {eyeCenter};
-            eye.pathBones = {BoneHead};
-            parts.push_back(eye);
-
-            Part iris;
-            iris.materialId = 4;
-            iris.mesh = translated(generateEllipsoid(
-                Vec3{eyeRadius * 0.58f, eyeRadius * 0.58f, eyeRadius * 0.35f}, radial, rings / 2),
-                eyeCenter + Vec3{0.0f, 0.0f, eyeRadius * 0.80f});
-            iris.path = {eyeCenter};
-            iris.pathBones = {BoneHead};
-            parts.push_back(iris);
-
-            Part glint;
-            glint.materialId = 3;
-            glint.mesh = translated(generateUvSphere(eyeRadius * 0.18f, 10, 6),
-                eyeCenter + Vec3{-side * eyeRadius * 0.28f, eyeRadius * 0.38f, eyeRadius * 0.97f});
-            glint.path = {eyeCenter};
-            glint.pathBones = {BoneHead};
-            parts.push_back(glint);
-
-            Part brow;
-            brow.materialId = 1;
-            brow.mesh = translated(generateEllipsoid(
-                Vec3{eyeRadius * 0.90f, eyeRadius * 0.22f, eyeRadius * 0.28f}, radial, rings / 2),
-                eyeCenter + Vec3{0.0f, eyeRadius * 1.55f, -eyeRadius * 0.25f});
-            brow.path = {eyeCenter};
-            brow.pathBones = {BoneHead};
-            parts.push_back(brow);
+        auto facePieces = face::generateFaceFeatures(p.face, joints.head,
+                                                     p.headWidth, p.headHeight,
+                                                     radial);
+        for (auto& piece : facePieces) {
+            Part part;
+            part.materialId = piece.materialId;
+            part.mesh = std::move(piece.mesh);
+            part.path = {piece.center};
+            part.pathBones = {BoneHead};
+            parts.push_back(part);
         }
 
-        Part nose;
-        nose.materialId = 0;
-        nose.mesh = translated(generateEllipsoid(
-            Vec3{p.headWidth * scale * 0.055f, p.headWidth * scale * 0.070f,
-                 p.headWidth * scale * 0.080f}, radial / 2, rings / 2),
-            joints.head + Vec3{0.0f, -headH * 0.10f, headRadii.z * 0.94f});
-        nose.path = {joints.head};
-        nose.pathBones = {BoneHead};
-        parts.push_back(nose);
-
-        Part mouth;
-        mouth.materialId = 4;
-        mouth.mesh = translated(generateEllipsoid(
-            Vec3{p.headWidth * scale * 0.105f, p.headWidth * scale * 0.024f,
-                 p.headWidth * scale * 0.030f}, radial / 2, rings / 2),
-            joints.head + Vec3{0.0f, -headH * 0.30f, headRadii.z * 0.90f});
-        mouth.path = {joints.head};
-        mouth.pathBones = {BoneHead};
-        parts.push_back(mouth);
+        auto hairPieces = hair::generateHair(p.hair, joints.head, p.headWidth,
+                                             p.headHeight,
+                                             p.headWidth * 0.84f, radial);
+        for (auto& piece : hairPieces) {
+            Part part;
+            part.materialId = piece.materialId;
+            part.mesh = std::move(piece.mesh);
+            part.path = {piece.center};
+            part.pathBones = {BoneHead};
+            parts.push_back(part);
+        }
     }
 
     // ---- Neck: embedded spline sweep with taper (M11). ----
