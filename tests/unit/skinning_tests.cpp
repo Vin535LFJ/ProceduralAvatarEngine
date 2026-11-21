@@ -67,6 +67,40 @@ PAE_TEST_CASE(ubo_std140_layout_matches_mat4) {
     EXPECT_TRUE(BonePaletteUboData::kBytes == 1408);
 }
 
+// M11-D: region weights must blend across part boundaries — vertices at the
+// top of the thigh carry both Hips and LeftUpperLeg influences.
+PAE_TEST_CASE(region_weights_blend_across_hip_boundary) {
+    const HumanoidResult humanoid = generateHumanoid(BodyParameters{});
+    const float hipsY = humanoid.joints.hips.y;
+    int blended = 0, checked = 0;
+    for (const Vertex& v : humanoid.mesh.vertices) {
+        if (v.position.x > 0.10f && v.position.x < 0.26f &&
+            v.position.y > hipsY - 0.08f && v.position.y < hipsY + 0.02f) {
+            ++checked;
+            const bool hasHips = (v.joints.x == BoneHips && v.weights.x > 0.05f) ||
+                                 (v.joints.y == BoneHips && v.weights.y > 0.05f);
+            const bool hasThigh = (v.joints.x == BoneLeftUpperLeg && v.weights.x > 0.05f) ||
+                                  (v.joints.y == BoneLeftUpperLeg && v.weights.y > 0.05f);
+            if (hasHips && hasThigh) ++blended;
+        }
+    }
+    EXPECT_TRUE(checked > 0);
+    EXPECT_TRUE(blended > 0);
+}
+
+// M11-D: skull vertices stay dominated by the head bone (the neck->head
+// junction itself legitimately keeps neck influence).
+PAE_TEST_CASE(region_weights_keep_head_dominant) {
+    const HumanoidResult humanoid = generateHumanoid(BodyParameters{});
+    for (const Vertex& v : humanoid.mesh.vertices) {
+        if (v.position.y > humanoid.joints.head.y + 0.10f) {
+            const float headWeight = (v.joints.x == BoneHead ? v.weights.x : 0.0f) +
+                                     (v.joints.y == BoneHead ? v.weights.y : 0.0f);
+            EXPECT_TRUE(headWeight > 0.85f);
+        }
+    }
+}
+
 int main() {
     return test::runAllTests();
 }

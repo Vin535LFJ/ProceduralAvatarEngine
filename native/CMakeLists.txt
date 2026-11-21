@@ -17,6 +17,7 @@ set(PAE_CORE_SOURCES
     procedural/humanoid/Humanoid.cpp
     skeleton/Skeleton.cpp
     skeleton/Skinning.cpp
+    skeleton/weights/WeightGenerator.cpp
     motion/providers/SyntheticPoseProvider.cpp
     motion/providers/ExternalPoseProvider.cpp
     motion/retargeting/Retargeting.cpp

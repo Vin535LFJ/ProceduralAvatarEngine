@@ -2,6 +2,7 @@
 
 #include "core/diagnostics/Log.h"
 #include "procedural/geometry/CatmullRom.h"
+#include "skeleton/weights/WeightGenerator.h"
 #include "procedural/primitives/Primitives.h"
 #include "procedural/surfaces/ParametricSurfaces.h"
 
@@ -32,13 +33,6 @@ struct Part {
     uint16_t materialId = 0;
 };
 
-Vec3 boneColor(uint16_t bone) {
-    const float r = static_cast<float>(bone % 5) / 4.0f;
-    const float g = static_cast<float>((bone / 5) % 5) / 4.0f;
-    const float b = static_cast<float>((bone / 25) % 3) / 2.0f;
-    return {0.25f + 0.75f * r, 0.25f + 0.75f * g, 0.25f + 0.75f * b};
-}
-
 Vec3 materialColor(uint16_t materialId) {
     switch (materialId) {
         case 0: return {0.95f, 0.75f, 0.62f}; // skin
@@ -47,59 +41,6 @@ Vec3 materialColor(uint16_t materialId) {
         case 3: return {0.97f, 0.97f, 0.92f}; // eye
         case 4: return {0.05f, 0.04f, 0.06f}; // ink (M11: iris/pupil/mouth)
         default: return {0.8f, 0.8f, 0.8f};
-    }
-}
-
-void assignWeights(Part& part, bool heatmap) {
-    if (part.path.empty() || part.path.size() != part.pathBones.size()) return;
-    for (Vertex& vertex : part.mesh.vertices) {
-        uint16_t bestBone = part.pathBones[0];
-        float bestT = 0.0f;
-        float bestDistance = std::numeric_limits<float>::max();
-        uint16_t secondBone = bestBone;
-        float secondWeight = 0.0f;
-
-        if (part.path.size() == 1) {
-            bestBone = part.pathBones[0];
-        } else {
-            for (size_t i = 0; i + 1 < part.path.size(); ++i) {
-                const Vec3 ab = part.path[i + 1] - part.path[i];
-                const float abLen2 = ab.lengthSq();
-                const float rawT = abLen2 > 1e-10f
-                    ? (vertex.position - part.path[i]).dot(ab) / abLen2
-                    : 0.0f;
-                const float t = clampParam(rawT, 0.0f, 1.0f);
-                const Vec3 closest = part.path[i] + ab * t;
-                const float distance = (vertex.position - closest).lengthSq();
-                if (distance < bestDistance) {
-                    bestDistance = distance;
-                    bestT = t;
-                    bestBone = part.pathBones[i];
-                    secondBone = part.pathBones[i + 1];
-                }
-            }
-            secondWeight = smoothstep(0.18f, 0.82f, bestT);
-        }
-
-        const float primaryWeight = 1.0f - secondWeight;
-        vertex.joints = {bestBone, secondBone, 0, 0};
-        vertex.weights = {primaryWeight, secondWeight, 0.0f, 0.0f};
-
-        if (heatmap) {
-            const Vec3 a = materialColor(0);
-            const Vec3 c0 = boneColor(bestBone), c1 = boneColor(secondBone);
-            vertex.color = Vec4{
-                (c0.x * primaryWeight + c1.x * secondWeight) * 0.8f + a.x * 0.2f,
-                (c0.y * primaryWeight + c1.y * secondWeight) * 0.8f + a.y * 0.2f,
-                (c0.z * primaryWeight + c1.z * secondWeight) * 0.8f + a.z * 0.2f,
-                static_cast<float>(part.materialId)
-            };
-        } else {
-            const Vec3 tint = materialColor(part.materialId);
-            const float shade = 0.85f + 0.15f * clampParam(vertex.normal.y * 0.5f + 0.5f, 0.0f, 1.0f);
-            vertex.color = {tint.x * shade, tint.y * shade, tint.z * shade,
-                            static_cast<float>(part.materialId)};
-        }
     }
 }
 
@@ -490,7 +431,14 @@ HumanoidResult generateHumanoid(const BodyParameters& params, bool weightHeatmap
     addFoot(joints.leftAnkle, joints.leftToe, true);
     addFoot(joints.rightAnkle, joints.rightToe, false);
 
-    for (Part& part : parts) assignWeights(part, weightHeatmap);
+    for (Part& part : parts) {
+        weights::PartSpec spec;
+        spec.mesh = &part.mesh;
+        spec.path = &part.path;
+        spec.pathBones = &part.pathBones;
+        spec.materialId = part.materialId;
+        weights::assignWeights(spec, result.skeleton, weightHeatmap);
+    }
 
     MeshData combined;
     for (const Part& part : parts) {

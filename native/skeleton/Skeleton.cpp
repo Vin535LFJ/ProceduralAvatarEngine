@@ -32,8 +32,11 @@ Skeleton buildHumanoidSkeleton(const BodyJoints& j) {
     set(BoneHips, BoneRoot, j.hips, j.spine);
     set(BoneSpine, BoneHips, j.spine, j.chest);
     set(BoneChest, BoneSpine, j.chest, j.neck);
-    set(BoneNeck, BoneChest, j.neck, j.head);
-    set(BoneHead, BoneNeck, j.head, j.head + Vec3{0.0f, 0.15f, 0.0f});
+    // M11: the neck ends at the skull base; the head stub covers the whole
+    // skull so skull vertices are dominated by the head bone. Directions are
+    // unchanged (+Y), so retargeting behaviour is identical.
+    set(BoneNeck, BoneChest, j.neck, j.neck + (j.head - j.neck) * 0.75f);
+    set(BoneHead, BoneNeck, j.head, j.head + (j.head - j.neck) * 1.2f);
 
     set(BoneLeftShoulder, BoneChest, j.leftShoulder, j.leftElbow);
     set(BoneLeftUpperArm, BoneLeftShoulder, j.leftShoulder, j.leftElbow);
