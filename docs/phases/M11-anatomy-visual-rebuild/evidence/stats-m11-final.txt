@@ -1,0 +1,4 @@
+11-21 21:48:22.845  5606  5624 I PAE_STATS: frames=2760 fps=53.2 frame_ms=18.79 draw_calls=4 triangles=14065 buffer_bytes=688960 p50_ms=18.73 p95_ms=21.94 p99_ms=22.81
+11-21 21:48:25.131  5606  5624 I PAE_STATS: frames=2880 fps=50.6 frame_ms=19.75 draw_calls=4 triangles=14065 buffer_bytes=688960 p50_ms=18.89 p95_ms=21.48 p99_ms=23.13
+  Native Heap   202726   202648        4       54   260096   237217    22878
+         Native Heap:   202648

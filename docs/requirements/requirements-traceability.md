@@ -27,4 +27,8 @@
 | REL-001 | 线程与资源所有权 | `docs/architecture/threading-and-lifecycle.md` | `native/runtime`, RenderThread | M2 测试 | verified | docs/phases/M2-gles-renderer/04-test-and-acceptance.md |
 | OBS-001 | 日志与 RenderStats | M2 设计 | `native/core/diagnostics`, `native/renderer/stats` | M2 logcat/测试 | verified | docs/phases/M2-gles-renderer/evidence/logcat-recreate.txt |
 | TEST-001 | 单元与集成测试 | 各阶段设计 | `tests/unit` | `ctest` | verified | docs/phases/M1-architecture/evidence/ctest-cygwin.txt |
+| M11-GEOM | 样条几何/SDF融合/解剖参数 | M11 设计；ADR-008 | `procedural/geometry/CatmullRom.h`, `surfaces/ParametricSurfaces.*`, `fusion/SdfFusion.*`, `humanoid/Humanoid.*` | fusion_tests + geometry_tests（样条/椭圆/锥度法线/winding） | verified | docs/phases/M11-anatomy-visual-rebuild/, ADR-008 |
+| M11-SKIN | 区域化蒙皮权重 | M11 设计 | `skeleton/weights/WeightGenerator.*` | skinning_tests（髋部混合/头部主导） | verified | docs/phases/M11-anatomy-visual-rebuild/05 |
+| M11-FACE | 参数化面部/头发/服装 | M11-E/F 设计 | `humanoid/FaceGenerator.*`, `HairGenerator.*`, `ClothingGenerator.*` | face_hair_tests（头形/特征/参数/3发型/服装覆盖） | verified | docs/phases/M11-anatomy-visual-rebuild/05 |
+| M11-RETARGET | 置信度门限/关键点保持 | M11-H 设计 | `motion/retargeting/Retargeting.*`, `MotionRuntime.*` | motion_tests（保持/置信度门限） | verified | docs/phases/M11-anatomy-visual-rebuild/05 |
 | TEST-002 | 视觉/设备验收 | 各阶段 04-test-and-acceptance | `docs/phases/Mx.../evidence` | 截图/日志 | verified | M2–M9 各阶段 evidence 目录（截图/日志/命令输出） |

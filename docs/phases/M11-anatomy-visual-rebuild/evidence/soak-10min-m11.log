@@ -1,0 +1,6 @@
+# M11 10min soak start 21:48:37
+=== t=30s 21:49:08 ===
+5606
+11-21 21:49:07.360  5606  5624 I PAE_STATS: frames=5040 fps=48.7 frame_ms=20.53 draw_calls=4 triangles=14065 buffer_bytes=688960 p50_ms=20.56 p95_ms=20.88 p99_ms=21.04
+         Native Heap:   194976
+  temperature: 26
