@@ -1,0 +1,403 @@
+--------- beginning of main
+11-21 11:47:55.974  1109  1138 D RePlugin.ws001: start plugin process: probe client ok, already running, plugin=TVApp_Biz client=com.qihoo360.loader2.PluginProcessPer@de7e9bd
+11-21 11:47:55.974  1109  1138 D RePlugin.ws001: PStatusC.getStatus(): ps is null. pn=TVApp_Biz
+11-21 11:47:55.974  1109  1138 I RePlugin.ws000: loadLocked(): Initialized, is loaded = true
+11-21 11:47:55.974  1109  1138 D RePlugin.task-affinity: originTaskAffinity is com.mgtv.mgui
+11-21 11:47:55.974  1109  1138 I RePlugin.ws001: PACM: assignState force alloc container=com.mgtv.mgui.ChannelHomeActivity
+11-21 11:47:55.974  1109  1138 D RePlugin.ws001: PACM: save 2 pref: k=com.mgtv.mgui.ChannelHomeActivity v=TVApp_Biz:com.mgtv.tv.launcher.ChannelHomeActivity:1795232875974
+11-21 11:47:55.979 21299 21315 I PAE_STATS: frames=240 fps=56.2 frame_ms=17.81 draw_calls=2 triangles=13 buffer_bytes=420
+11-21 11:47:55.980 21299 21299 I PAE_SURFACE: surfaceDestroyed
+11-21 11:47:55.981  1109  1138 D RePlugin.ws001: PACM: bindActivity: lookup activity container: container=com.mgtv.mgui.ChannelHomeActivity
+11-21 11:47:55.981  1109  1138 D RePlugin.ws001: PACM: eval plugin TVApp_Biz, target=com.mgtv.tv.launcher.ChannelHomeActivity, container=com.mgtv.mgui.ChannelHomeActivity
+11-21 11:47:55.982  1109  1254 D mali_winsys: EGLint new_window_surface(egl_winsys_display *, void *, EGLSurface, EGLConfig, egl_winsys_surface **, egl_color_buffer_format *, EGLBoolean) returns 0x3000
+11-21 11:47:55.985  1109  1138 I RePlugin.ws001: alloc success: container=com.mgtv.mgui.ChannelHomeActivity plugin=TVApp_Biz activity=com.mgtv.tv.launcher.ChannelHomeActivity
+11-21 11:47:55.986  1109  1138 D RePlugin.ws001: start activity: real intent=Intent { cat=[process:-2147483648,plugin:TVApp_Biz,activity:com.mgtv.tv.launcher.ChannelHomeActivity,counter:0,container:com.mgtv.mgui.ChannelHomeActivity] cmp=com.mgtv.mgui/.ChannelHomeActivity (has extras) }
+--------- beginning of system
+11-21 11:47:55.988   462 26905 D mgtv    : com.mgtv.app.state start ActivityStackSupervisor
+11-21 11:47:55.988   462 26905 I ActivityManager: START u0 {cat=[process:-2147483648,plugin:TVApp_Biz,activity:com.mgtv.tv.launcher.ChannelHomeActivity,counter:0,container:com.mgtv.mgui.ChannelHomeActivity] cmp=com.mgtv.mgui/.ChannelHomeActivity (has extras)} from uid 10043
+11-21 11:47:55.993   462 26905 D mgtv    : com.mgtv.app.state start activityStack
+11-21 11:47:55.993   462 26905 E ActivityManager: getPackageFerformanceMode--ComponentInfo{com.mgtv.mgui/com.mgtv.mgui.ChannelHomeActivity}----com.mgtv.mgui
+11-21 11:47:55.994   462 26905 E ActivityManager: getPackageFerformanceMode--ComponentInfo{com.mgtv.mgui/com.mgtv.mgui.ChannelHomeActivity}----com.mgtv.mgui
+11-21 11:47:55.996   309   309 I [Gralloc]: Got fd 16 for handle 1
+11-21 11:47:55.997  1109  1138 D RepluginCoreEvent: eventCode: 04060301 ,type: 0
+11-21 11:47:55.997  1109  1138 I Launcher-TVOSApplication:: notifyBusinessEvent: 04060301 map: {pluginName=TVApp_Biz, toIntent=Intent { cat=[process:-2147483648,plugin:TVApp_Biz,activity:com.mgtv.tv.launcher.ChannelHomeActivity,counter:0,container:com.mgtv.mgui.ChannelHomeActivity] cmp=com.mgtv.mgui/.ChannelHomeActivity (has extras) }, fromIntent=Intent { cmp=TVApp_Biz/com.mgtv.tv.launcher.ChannelHomeActivity }}
+11-21 11:47:55.997  1109  1138 I Launcher-RealHomeActivity:: launch2Target:  ==> true
+11-21 11:47:55.999   309   309 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:55.999   309   309 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-21 11:47:55.999   321   485 I [Gralloc]: Got handle 6 for fd 94
+11-21 11:47:55.999   321   485 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:56.000   321   485 I [Gralloc]: leave: prime_fd=94,share_attr_fd=98
+11-21 11:47:56.008   309  1605 I [Gralloc]: Got fd 16 for handle 1
+11-21 11:47:56.009   309  1605 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:56.009   309  1605 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-21 11:47:56.009   321   485 I [Gralloc]: Got handle 2 for fd 74
+11-21 11:47:56.010   321   485 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:56.010   321   485 I [Gralloc]: leave: prime_fd=74,share_attr_fd=75
+11-21 11:47:56.020   309  1605 I [Gralloc]: Got fd 16 for handle 1
+11-21 11:47:56.020   309  1605 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:56.020   309  1605 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-21 11:47:56.021   321   485 I [Gralloc]: Got handle 8 for fd 87
+11-21 11:47:56.021   321   485 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:56.021   321   485 I [Gralloc]: leave: prime_fd=87,share_attr_fd=88
+11-21 11:47:56.022   321   532 E BufferQueueProducer: [com.pae.host/com.pae.host.MainActivity#0] disconnect: not connected (req=1)
+11-21 11:47:56.022 21299 21326 W libEGL  : EGLNativeWindowType 0x74c88d5010 disconnect failed
+11-21 11:47:56.034   321   532 E BufferQueueProducer: [SurfaceView - com.pae.host/com.pae.host.MainActivity#0] disconnect: not connected (req=1)
+11-21 11:47:56.034 21299 21315 W mali_winsys: native_window_api_disconnect failed: -19
+11-21 11:47:56.038   309   309 I [Gralloc]: Got fd 16 for handle 1
+11-21 11:47:56.040   309   309 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:56.040   309   309 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-21 11:47:56.041   321   485 I [Gralloc]: Got handle 9 for fd 101
+11-21 11:47:56.041   321   485 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:56.041   321   485 I [Gralloc]: leave: prime_fd=101,share_attr_fd=103
+11-21 11:47:56.044  1109  1109 D Network-lifecycle: com.mgtv.tv.ott.pay.activity.OttOpenVipActivity@2d28b9f: onDestroy
+11-21 11:47:56.044  1109  1109 D RePlugin.ws001: activity destroy: com.mgtv.tv.ott.pay.activity.OttOpenVipActivity this=47352735 taskid=499
+11-21 11:47:56.044  1109  1109 D RePlugin.ws001: PACM: activity destroy h=47352735 class=com.mgtv.tv.ott.pay.activity.OttOpenVipActivity container=com.mgtv.mgui.loader.a.ActivityN1STNTS2
+11-21 11:47:56.044  1109  1109 D RePlugin.ws001: found: ActivityState {container=com.mgtv.mgui.loader.a.ActivityN1STNTS2 state=restored plugin=TVApp_Biz activity=com.mgtv.tv.ott.pay.activity.OttOpenVipActivity size=0}
+11-21 11:47:56.044  1109  1109 D RePlugin.ws001: unreg activity: pid=1109 index=-1 plugin=TVApp_Biz activity=com.mgtv.tv.ott.pay.activity.OttOpenVipActivity container=com.mgtv.mgui.loader.a.ActivityN1STNTS2
+11-21 11:47:56.044  1109  1109 D RePlugin.ws001: unreg activity: invalid index=-1
+11-21 11:47:56.045   321   485 E BufferQueueProducer: [SurfaceView - com.pae.host/com.pae.host.MainActivity#0] disconnect: not connected (req=1)
+11-21 11:47:56.047  1109  1109 I PageMeasure: REMOVE:com.mgtv.tv.ott.pay.fragment.OttOpenVipNormalFragment134214449 array remain:5
+11-21 11:47:56.048  1109  1109 I PageMeasure: REMOVE:com.mgtv.tv.ott.pay.activity.OttOpenVipActivity47352735 array remain:4
+11-21 11:47:56.048  1109  1109 I DrawableLeakFix: unbindDrawables done, cost:0ms
+11-21 11:47:56.048 21299 21315 W libEGL  : EGLNativeWindowType 0x74c88d6010 disconnect failed
+11-21 11:47:56.048 21299 21315 I PAE_EGL : EGLSurface destroyed
+11-21 11:47:56.050  1273  1273 D SogouIME API: ==============num:32
+11-21 11:47:56.050  1273  1273 D SogouIME: mFocusedComponent:30   isHkbEnable:false
+11-21 11:47:56.050  1273  1273 D SogouIME: =====configKeyboard=======是否有硬件盘:false     硬件盘是否不再隐藏：false
+11-21 11:47:56.050  1109  1109 I ProxyApp: OttOpenVipActivity onDestroy time = 263995188
+11-21 11:47:56.055  1109  1109 I Launcher-com.mgtv.mui.home.HomeActivity@d98c652:: onPause
+11-21 11:47:56.060   462 26905 E ActivityManager: getPackageFerformanceMode--ComponentInfo{com.mgtv.mgui/com.mgtv.mgui.ChannelHomeActivity}----com.mgtv.mgui
+11-21 11:47:55.994   462 26905 I chatty  : uid=1000(system) Binder:462_12 identical 1 line
+11-21 11:47:56.059   462 26905 D mgtv    : com.mgtv.app.state start activityStack
+11-21 11:47:56.060   462 20169 D mgtv    : com.mgtv.app.state start activityStack
+11-21 11:47:56.060   462 20169 E ActivityManager: getPackageFerformanceMode--ComponentInfo{com.mgtv.mgui/com.mgtv.mgui.ChannelHomeActivity}----com.mgtv.mgui
+11-21 11:47:56.067  1109  1254 I [Gralloc]: Got handle 1 for fd 189
+11-21 11:47:56.067  1109  1254 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:56.067  1109  1254 I [Gralloc]: leave: prime_fd=189,share_attr_fd=190
+11-21 11:47:56.080  1109  1109 I ProxyApp: ChannelHomeActivity onStart time = 263995217
+11-21 11:47:56.080  1109  1109 I YouthModeManager: onActivity start0
+11-21 11:47:56.081  1109  1109 I ProxyApp: ChannelHomeActivity onResume time = 263995218
+11-21 11:47:56.081  1109  1109 I VoiceFloatingViewManager: container not null
+11-21 11:47:56.081  1109  1109 I PopDispatchManager: show,queue is null,mCurPageArea:1,size:0
+11-21 11:47:56.081  1109  1109 I ChannelBaseFragment: onPageSelected:0->0
+11-21 11:47:56.081  1109  1109 I ChannelBaseFragment: onPageSelected:12->12
+11-21 11:47:56.084  1109  1109 I HomeController: updateTaskInfo 
+11-21 11:47:56.084  1109  1109 I ChannelFetcher: checkCacheData! mVClassId:55
+11-21 11:47:56.085  1109  1109 I ChannelFetcher: channel data use cache
+11-21 11:47:56.085  1109  1109 I ChannelFragment: onCacheDataFine!vClassId:55,needUpdate:false
+11-21 11:47:56.085  1109  1109 I HugeAdManager: onActivityResume
+11-21 11:47:56.086  1109 21348 I okhttp  : request: get, requestID: 152537597, requestModule: normal, requestDataType: key-value, requestUrl: https://inottput.api.mgtv.com/v1/inottpay/client/vip/put?mod=NunaiMax&app_type=21&net_id=150912501089879&pver=0%7C0%7C0%7C0%7C0%7C0%7C0%7C0&channel_code=HFOS&uuid=cd3fd7db4ab35456a11fffca6d9d0aee&mac_id=D8-C0-6A-05-31-B7&platform=3&_support=1010010101101010001000100001&mf=rockchip&place=10%2C2%2C1&cpn=A&pre=0&os_ver=8.1.0&device_id=D8C06A0531B700000000000000000000&ticket=A1BA06729F003DA1A70B55814C15CF7C&cpid=0&time_zone=GMT%2B08%3A00&ttid=0_1a1fc37c632_4d6FUj4c&version=7.0.312.395.3.HFOS_TVAPP.0.0_Pre_Release&license=ZgOOgo5MjkyOTIcNDnwgIA0OmQ17DnY7v78ODQYgfHsOmXu0BXyVhw2qfLQGeyBLOwYgjkyOTI5MZgOOgg%3D%3D&abt=&model_code=NunaiMax&buss_id=1000014&business_id=61000040&rom_version=&android_sdk_ver=27
+11-21 11:47:56.086  1109  1109 I ChannelPlayerController: setPlayerEnable enable:true,mSavedPlayInfo:null,mPageInfo:null
+11-21 11:47:56.086  1109  1109 I ImmersivePlayerController: setPlayerEnable enable:true,mSavedPosition:-1
+11-21 11:47:56.086  1109  1109 I BaseSimplerPlayerController: setPlayerEnable enable:true,mSavedVideoModel:null
+11-21 11:47:56.086  1109  1109 I InstantVideoController: openPlayer ! partId:null,mVClassId:null
+11-21 11:47:56.086  1109  1109 I SerialImmersivePlayerController: setPlayerEnable enable:true,mSavedVideoModel:null
+11-21 11:47:56.086  1109  1109 I ImmersiveFlash2PlayerController: setPlayerEnable enable:true,mSavedVideoModel:null
+11-21 11:47:56.086  1109  1109 I QLandPlayerController: setPlayerEnable enable:true,mSavedVideoModel:null
+11-21 11:47:56.086  1109  1109 I SinglePayPlayerController: setPlayerEnable enable:true,mSavedVideoModel:null
+11-21 11:47:56.086  1109  1109 I FeedRecPlayerController: setPlayerEnable enable:true,mSavedVideoModel:null
+11-21 11:47:56.086  1109  1109 I ChildSmallTVPlayerController: setPlayerEnable enable:true,mSavedVideoModel:null
+11-21 11:47:56.086  1109  1109 I BaseSimplerPlayerController: setPlayerEnable enable:true,mSavedVideoModel:null
+11-21 11:47:56.086  1109  1109 I ChannelMoviePickPlayerController: setPlayerEnable enable:true,mSavedVideoModel:null
+11-21 11:47:56.086  1109  1109 I ChannelBriefVodFeedPlayerController: setPlayerEnable enable:true,mSavedVideoModel:null
+11-21 11:47:56.086  1109  1109 I FlashModPlayerController: setPlayerEnable enable:true,mSavedVideoModel:null
+11-21 11:47:56.087  1109 21348 I httpdns : httpdns parse: inottput.api.mgtv.com result: host:inottput.api.mgtv.com, ips:[42.81.254.81, 42.81.255.19, 42.81.255.66], ipv6s:[], extras:{}, expired:true, fromDB:false ttl is 60
+11-21 11:47:56.087  1109 21348 I httpdns : inottput.api.mgtv.com:use ipv4:[42.81.254.81, 42.81.255.19, 42.81.255.66]
+11-21 11:47:56.095  1109  1254 D mali_winsys: EGLint new_window_surface(egl_winsys_display *, void *, EGLSurface, EGLConfig, egl_winsys_surface **, egl_color_buffer_format *, EGLBoolean) returns 0x3000
+11-21 11:47:56.111  1273  1273 D SogouIME API: ==============num:32
+11-21 11:47:56.111  1273  1273 D SogouIME: mFocusedComponent:30   isHkbEnable:false
+11-21 11:47:56.112  1273  1273 D SogouIME: =====configKeyboard=======是否有硬件盘:false     硬件盘是否不再隐藏：false
+11-21 11:47:56.129   309   309 I [Gralloc]: Got fd 16 for handle 1
+11-21 11:47:56.131   309   309 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:56.131   309   309 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-21 11:47:56.131   321   359 I [Gralloc]: Got handle 10 for fd 106
+11-21 11:47:56.131   321   359 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:56.131   321   359 I [Gralloc]: leave: prime_fd=106,share_attr_fd=107
+11-21 11:47:56.132  1109  1254 I [Gralloc]: Got handle 2 for fd 195
+11-21 11:47:56.132  1109  1254 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:56.132  1109  1254 I [Gralloc]: leave: prime_fd=195,share_attr_fd=196
+11-21 11:47:56.199   310   310 D hwcomposer-drm: hwc_set: layers_map size is 0
+11-21 11:47:56.199   310   310 E hwcomposer-drm: hwc_set: not normal frame happen
+11-21 11:47:56.199   310   310 D hwc_debug: layer[0]=
+11-21 11:47:56.199   310   310 D hwc_debug: 	layer=0x7b49e431a8,type=3,hints=3,flags=0,handle=0x7b49e339c0,format=0x1,fd =34,transform=0x0,blend=0x105,sourceCropf{0,0,1920,1080},sourceCrop{0,0,1156579328,1149698048},displayFrame{0,0,1920,1080},rect[0]={0,0,1920,1080},
+11-21 11:47:56.202   321   485 E BufferQueueProducer: [com.mgtv.mgui/com.mgtv.mui.home.HomeActivity#0] disconnect: not connected (req=1)
+11-21 11:47:56.202  1109  1254 W libEGL  : EGLNativeWindowType 0xc19fc008 disconnect failed
+11-21 11:47:56.205  1109  1109 I Launcher-RealHomeActivity:: send homeKeyEvent to plugin
+11-21 11:47:56.205  1109  1109 I Launcher-com.mgtv.mui.home.HomeActivity@d98c652:: onStop
+11-21 11:47:56.209   310   310 I [Gralloc]: Got handle 1 for fd 30
+11-21 11:47:56.209   310   310 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:56.209   310   310 I [Gralloc]: leave: prime_fd=30,share_attr_fd=32
+11-21 11:47:56.229   309   309 I [Gralloc]: Got fd 16 for handle 1
+11-21 11:47:56.229  1273  1273 D SogouIME API: ==============num:32
+11-21 11:47:56.230  1273  1273 D SogouIME: mFocusedComponent:30   isHkbEnable:false
+11-21 11:47:56.230   309   309 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:56.230   309   309 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-21 11:47:56.230  1273  1273 D SogouIME: =====configKeyboard=======是否有硬件盘:false     硬件盘是否不再隐藏：false
+11-21 11:47:56.230   321   359 I [Gralloc]: Got handle 1 for fd 49
+11-21 11:47:56.230   321   359 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:56.231   321   359 I [Gralloc]: leave: prime_fd=49,share_attr_fd=50
+11-21 11:47:56.231  1109  1254 I [Gralloc]: Got handle 1 for fd 193
+11-21 11:47:56.231  1109  1254 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:56.231  1109  1254 I [Gralloc]: leave: prime_fd=193,share_attr_fd=194
+11-21 11:47:56.249   309   309 I [Gralloc]: Got fd 16 for handle 1
+11-21 11:47:56.250   309   309 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:56.250   309   309 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-21 11:47:56.250   321   359 I [Gralloc]: Got handle 2 for fd 76
+11-21 11:47:56.250   321   359 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:56.250   321   359 I [Gralloc]: leave: prime_fd=76,share_attr_fd=77
+11-21 11:47:56.251  1109  1254 I [Gralloc]: Got handle 3 for fd 200
+11-21 11:47:56.251  1109  1254 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:56.251  1109  1254 I [Gralloc]: leave: prime_fd=200,share_attr_fd=201
+11-21 11:47:56.283   310   310 I [Gralloc]: Got handle 3 for fd 39
+11-21 11:47:56.283   310   310 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:56.283   310   310 I [Gralloc]: leave: prime_fd=39,share_attr_fd=53
+11-21 11:47:56.285   309   309 I [Gralloc]: Got fd 16 for handle 1
+11-21 11:47:56.286   309   309 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:56.286   309   309 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-21 11:47:56.286   321   359 I [Gralloc]: Got handle 3 for fd 80
+11-21 11:47:56.286   321   359 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:56.286   321   359 I [Gralloc]: leave: prime_fd=80,share_attr_fd=81
+11-21 11:47:56.287  1109  1254 I [Gralloc]: Got handle 4 for fd 203
+11-21 11:47:56.287  1109  1254 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:56.287  1109  1254 I [Gralloc]: leave: prime_fd=203,share_attr_fd=204
+11-21 11:47:56.316   310   310 I [Gralloc]: Got handle 5 for fd 45
+11-21 11:47:56.316   310   310 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:56.316   310   310 I [Gralloc]: leave: prime_fd=45,share_attr_fd=46
+11-21 11:47:56.333   310   310 I [Gralloc]: Got handle 7 for fd 51
+11-21 11:47:56.333   310   310 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:56.333   310   310 I [Gralloc]: leave: prime_fd=51,share_attr_fd=52
+11-21 11:47:56.340  1109 21348 I thread-Optimize-App: no proxy pool:0 max:1 keep:60 source:​okhttp3.internal.http2.Http2Connection
+11-21 11:47:56.444  1109 21348 I UserCenterBaseRequest: put response = {"errno":"0","msg":"成功","seqid":"4338165d8550126c87be7afccbe53346","serverTime":1795232880,"data":[{"place":"2","showTitle":"","imgUrl1":"","imgUrl2":"","imgBgUrl":"","btnText":"新用户首月15元特惠！","qrcodeType":"0","jumpType":"","jumpPara":"","abt":"","extend":"","putId":3527,"putName":"首充15","matId":1427,"taskId":"3527","strategyId":"17913_exp:000*seqid:4338165d8550126c87be7afccbe53346*res:3527|1427","cashierType":"","cashierFocusTab":"","cashierJumpUrl":"","isInstant":""},{"place":"1","showTitle":"1","imgUrl1":"https://1img.mgtv.com/ottmiddleware/upload/45/fc7184ecaffc336b1934712be22590.png","imgUrl2":"https://0img.mgtv.com/ottmiddleware/upload/4f/1d6ce7c78edf6e89952ac354f24fa0.jpg","imgBgUrl":"","btnText":"","qrcodeType":"0","jumpType":"","jumpPara":"https://pop.mgtv.com/magic/2026/6a3a46f9698d6f0047f543e4/index.html","abt":"","extend":"","putId":4275,"putName":"【顶部banner】轻享卡12元_web","matId":1554,"taskId":"4275","strategyId":"32887_exp:000*seqid:4338165d8550126c87be7afccbe53346*res:4275|1554","cashierType":"","cashierFocusTab":"","cashierJumpUrl":"","isInstant":""}]}
+11-21 11:47:56.450  1109  1109 I Network-OkhttpImpl: response: onResponse requestID:152537597,requestPath:https://inottput.api.mgtv.com/v1/inottpay/client/vip/put,ttid: 0_1a1fc37c632_4d6FUj4c,httpCode: 200,isSuccess：true dns:1 connect:253 parse:1 thread:3 handler:5 total:361 [https://inottput.api.mgtv.com/v1/inottpay/client/vip/put]
+11-21 11:47:56.469  1109  1109 I FFloorRecyclerView: updateUserAdInfo imageUrl = https://1img.mgtv.com/ottmiddleware/upload/45/fc7184ecaffc336b1934712be22590.png,adIndex:5,exitItem:TopStatusItem{mTitle1='null', mTitle2='null', mJumpUrl='https://pop.mgtv.com/magic/2026/6a3a46f9698d6f0047f543e4/index.html', mType='71', mShowTitle='null', mModuleId='null'}
+11-21 11:47:56.472  1109  1109 I base-image-loader: size:[420_52] url:https://1img.mgtv.com/ottmiddleware/upload/45/fc7184ecaffc336b1934712be22590.png?x-oss-process=image/resize,m_lfit,w_420,h_52/format,avif
+11-21 11:47:56.593  1109  1109 I ChannelDataController: fetch page data !vClassId :55
+11-21 11:47:56.593  1109  1109 I ChannelFetcher: channel detail request start vClassId:55
+11-21 11:47:56.596  1109 21348 I okhttp  : request: get, requestID: 46168342, requestModule: normal, requestDataType: key-value, requestUrl: https://inottchlos.api.mgtv.com/odin/c1/channel/index?next_index=0&mod=NunaiMax&app_type=21&net_id=150912501089879&pver=0%7C0%7C0%7C0%7C0%7C0%7C0%7C0&channel_code=HFOS&type=3&uuid=cd3fd7db4ab35456a11fffca6d9d0aee&mac_id=D8-C0-6A-05-31-B7&platform=3&_support=1010010101101010001000100001&vclassId=55&mf=rockchip&pre=0&os_ver=8.1.0&device_id=D8C06A0531B700000000000000000000&ticket=A1BA06729F003DA1A70B55814C15CF7C&time_zone=GMT%2B08%3A00&ttid=0_1a1fc37c831_N7xEBuNH&version=7.0.312.395.3.HFOS_TVAPP.0.0_Pre_Release&license=ZgOOgo5MjkyOTIcNDnwgIA0OmQ17DnY7v78ODQYgfHsOmXu0BXyVhw2qfLQGeyBLOwYgjkyOTI5MZgOOgg%3D%3D&abt=&model_code=NunaiMax&buss_id=1000014&business_id=61000040&rom_version=&android_sdk_ver=27
+11-21 11:47:56.598  1109 21348 I httpdns : http dns close reason：white list:inottchlos.api.mgtv.com
+11-21 11:47:56.598  1109 21348 I httpdns : httpdns parse: inottchlos.api.mgtv.com result: host:, ips:[], ipv6s:[], extras:{}, expired:true, fromDB:false ttl is 60
+11-21 11:47:56.598  1109 21348 I httpdns : httpdns ip is null，use localdns:inottchlos.api.mgtv.com
+11-21 11:47:56.733  1109 21348 I thread-Optimize-App: no proxy pool:0 max:1 keep:60 source:​okhttp3.internal.http2.Http2Connection
+11-21 11:47:56.837  1109 21348 I JsonAbTest: parseJson len=3857 type=0 cost=2
+11-21 11:47:56.838  1109  1109 I Network-OkhttpImpl: response: onResponse requestID:46168342,requestPath:https://inottchlos.api.mgtv.com/odin/c1/channel/index,ttid: 0_1a1fc37c831_N7xEBuNH,httpCode: 200,isSuccess：true dns:34 connect:102 parse:2 thread:1 handler:1 total:240 [https://inottchlos.api.mgtv.com/odin/c1/channel/index]
+11-21 11:47:56.838  1109  1109 I ChannelRequestCenter: request channelPageBean from server success !vClassId:55
+11-21 11:47:56.838  1109  1109 I ChannelFetcher: channel detail request success:>>>245
+11-21 11:47:56.838  1109  1109 I ChannelSyncDataController: syncDataFromSever !vClassId :55
+11-21 11:47:56.841  1109 21348 I okhttp  : request: get, requestID: 232551063, requestModule: normal, requestDataType: key-value, requestUrl: https://inottuni.api.mgtv.com/v1/inott/common/getswitchs?mod=NunaiMax&app_type=21&net_id=150912501089879&pver=0%7C0%7C0%7C0%7C0%7C0%7C0%7C0&channel_code=HFOS&uuid=cd3fd7db4ab35456a11fffca6d9d0aee&mac_id=D8-C0-6A-05-31-B7&platform=3&_support=1010010101101010001000100001&scenes_id=6&mf=rockchip&pre=0&os_ver=8.1.0&device_id=D8C06A0531B700000000000000000000&ticket=A1BA06729F003DA1A70B55814C15CF7C&time_zone=GMT%2B08%3A00&ttid=0_1a1fc37c926_ERmPig9O&version=7.0.312.395.3.HFOS_TVAPP.0.0_Pre_Release&license=ZgOOgo5MjkyOTIcNDnwgIA0OmQ17DnY7v78ODQYgfHsOmXu0BXyVhw2qfLQGeyBLOwYgjkyOTI5MZgOOgg%3D%3D&abt=&model_code=NunaiMax&buss_id=1000014&business_id=61000040&rom_version=&android_sdk_ver=27
+11-21 11:47:56.843  1109  1109 W System.err: java.lang.IllegalArgumentException: unexpected url: api/v1/act/assets/overview
+11-21 11:47:56.843  1109  1109 W System.err: 	at okhttp3.Request$Builder.url(Request.java:301)
+11-21 11:47:56.843  1109  1109 W System.err: 	at com.mgtv.tv.base.network.NetWorkOkhttpImpl.buildGetRequest(NetWorkOkhttpImpl.java:175)
+11-21 11:47:56.843  1109  1109 W System.err: 	at com.mgtv.tv.base.network.NetWorkOkhttpImpl.buildGetRequest(NetWorkOkhttpImpl.java:49)
+11-21 11:47:56.843  1109  1109 W System.err: 	at com.mgtv.tv.base.network.MgtvAbstractNetwork.buildRequest(MgtvAbstractNetwork.java:149)
+11-21 11:47:56.843  1109  1109 W System.err: 	at com.mgtv.tv.base.network.MgtvAbstractNetwork.execute(MgtvAbstractNetwork.java:101)
+11-21 11:47:56.843  1109  1109 W System.err: 	at com.mgtv.tv.base.network.MgtvAbstractRequest.doExecute(MgtvAbstractRequest.java:574)
+11-21 11:47:56.843  1109  1109 W System.err: 	at com.mgtv.tv.base.network.MgtvAbstractRequest.execute(MgtvAbstractRequest.java:564)
+11-21 11:47:56.843  1109  1109 W System.err: 	at com.mgtv.tv.base.network.MgtvAbstractRequest.execute(MgtvAbstractRequest.java:540)
+11-21 11:47:56.843  1109  1109 W System.err: 	at com.mgtv.tv.base.network.MgtvAbstractRequest.execute(MgtvAbstractRequest.java:438)
+11-21 11:47:56.843  1109  1109 W System.err: 	at com.mgtv.tv.proxy.sdkuser.request.UserCenterBaseRequest.run(UserCenterBaseRequest.java:74)
+11-21 11:47:56.843  1109  1109 W System.err: 	at com.mgtv.tv.sdk.usercenter.system.a.a(InfoFetcherImp4System.java:36)
+11-21 11:47:56.844  1109  1109 W System.err: 	at com.mgtv.tv.sdk.usercenter.common.UserCenter.fetchUserRelateInfo(UserCenter.java:86)
+11-21 11:47:56.844  1109  1109 W System.err: 	at com.mgtv.tv.sdk.usercenter.a.fetchUserRelateInfo(UserInfoHelperImpl.java:884)
+11-21 11:47:56.844  1109  1109 W System.err: 	at com.mgtv.tv.loft.channel.data.n.a(UserRelateInfoProvider.java:170)
+11-21 11:47:56.844  1109  1109 W System.err: 	at com.mgtv.tv.loft.channel.data.a.l.c(RecExtraDataController.java:216)
+11-21 11:47:56.844  1109  1109 W System.err: 	at com.mgtv.tv.loft.channel.data.a.l.a(RecExtraDataController.java:106)
+11-21 11:47:56.844  1109  1109 W System.err: 	at com.mgtv.tv.loft.channel.data.a.f.a(DataTaskGroup.java:51)
+11-21 11:47:56.844  1109  1109 W System.err: 	at com.mgtv.tv.loft.channel.data.a.f.a(DataTaskGroup.java:51)
+11-21 11:47:56.844  1109  1109 W System.err: 	at com.mgtv.tv.loft.channel.data.f.a(ChannelSyncDataController.java:127)
+11-21 11:47:56.844  1109  1109 W System.err: 	at com.mgtv.tv.loft.channel.data.d$5.a(ChannelFetcher.java:652)
+11-21 11:47:56.844  1109  1109 W System.err: 	at com.mgtv.tv.loft.channel.data.d$5.getPageData(ChannelFetcher.java:645)
+11-21 11:47:56.844  1109  1109 W System.err: 	at com.mgtv.tv.loft.channel.data.e$1.a(ChannelRequestCenter.java:108)
+11-21 11:47:56.844  1109  1109 W System.err: 	at com.mgtv.tv.loft.channel.data.e$1.a(ChannelRequestCenter.java:90)
+11-21 11:47:56.844  1109  1109 W System.err: 	at com.mgtv.tv.loft.channel.data.b.onSuccess(ChannelBaseTaskCallback.java:66)
+11-21 11:47:56.844  1109  1109 W System.err: 	at com.mgtv.tv.base.network.NetWorkOkhttpImpl$2$1.run(NetWorkOkhttpImpl.java:398)
+11-21 11:47:56.844  1109 21348 I httpdns : httpdns parse: inottuni.api.mgtv.com result: host:inottuni.api.mgtv.com, ips:[42.81.255.19, 42.81.255.66, 42.81.254.81], ipv6s:[], extras:{}, expired:true, fromDB:false ttl is 60
+11-21 11:47:56.844  1109  1109 W System.err: 	at android.os.Handler.handleCallback(Handler.java:790)
+11-21 11:47:56.844  1109  1109 W System.err: 	at android.os.Handler.dispatchMessage(Handler.java:99)
+11-21 11:47:56.844  1109  1109 W System.err: 	at android.os.Looper.loop(Looper.java:164)
+11-21 11:47:56.844  1109 21348 I httpdns : inottuni.api.mgtv.com:use ipv4:[42.81.255.19, 42.81.255.66, 42.81.254.81]
+11-21 11:47:56.844  1109  1109 W System.err: 	at android.app.ActivityThread.main(ActivityThread.java:6498)
+11-21 11:47:56.844  1109  1109 W System.err: 	at java.lang.reflect.Method.invoke(Native Method)
+11-21 11:47:56.845  1109  1109 W System.err: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:438)
+11-21 11:47:56.845  1109  1109 W System.err: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:807)
+11-21 11:47:56.845  1109  1109 I Network-OkhttpImpl: request: onFailure, requestID: 160496772,requestPath:api/v1/act/assets/overview,ttid: ,httpCode: , timeMs: ,error:unexpected url: api/v1/act/assets/overview
+11-21 11:47:56.849  1109 21361 I okhttp  : request: get, requestID: 7053619, requestModule: normal, requestDataType: key-value, requestUrl: https://inottput.api.mgtv.com/v1/inottpay/client/vip/put?mod=NunaiMax&app_type=21&net_id=150912501089879&pver=0%7C0%7C0%7C0%7C0%7C0%7C0%7C0&channel_code=HFOS&uuid=cd3fd7db4ab35456a11fffca6d9d0aee&mac_id=D8-C0-6A-05-31-B7&platform=3&_support=1010010101101010001000100001&mf=rockchip&place=15&cpn=A&pre=0&os_ver=8.1.0&device_id=D8C06A0531B700000000000000000000&ticket=A1BA06729F003DA1A70B55814C15CF7C&cpid=55&time_zone=GMT%2B08%3A00&ttid=0_1a1fc37c92e_9dQsPvyx&version=7.0.312.395.3.HFOS_TVAPP.0.0_Pre_Release&license=ZgOOgo5MjkyOTIcNDnwgIA0OmQ17DnY7v78ODQYgfHsOmXu0BXyVhw2qfLQGeyBLOwYgjkyOTI5MZgOOgg%3D%3D&abt=&model_code=NunaiMax&buss_id=1000014&business_id=61000040&rom_version=&android_sdk_ver=27
+11-21 11:47:56.851  1109  1109 W System.err: java.lang.IllegalArgumentException: unexpected url: client/dynamic_entry
+11-21 11:47:56.852  1109  1109 W System.err: 	at okhttp3.Request$Builder.url(Request.java:301)
+11-21 11:47:56.852  1109  1109 W System.err: 	at com.mgtv.tv.base.network.NetWorkOkhttpImpl.buildGetRequest(NetWorkOkhttpImpl.java:175)
+11-21 11:47:56.852  1109  1109 W System.err: 	at com.mgtv.tv.base.network.NetWorkOkhttpImpl.buildGetRequest(NetWorkOkhttpImpl.java:49)
+11-21 11:47:56.852  1109  1109 W System.err: 	at com.mgtv.tv.base.network.MgtvAbstractNetwork.buildRequest(MgtvAbstractNetwork.java:149)
+11-21 11:47:56.852  1109  1109 W System.err: 	at com.mgtv.tv.base.network.MgtvAbstractNetwork.execute(MgtvAbstractNetwork.java:101)
+11-21 11:47:56.852  1109  1109 W System.err: 	at com.mgtv.tv.base.network.MgtvAbstractRequest.doExecute(MgtvAbstractRequest.java:574)
+11-21 11:47:56.852  1109  1109 W System.err: 	at com.mgtv.tv.base.network.MgtvAbstractRequest.execute(MgtvAbstractRequest.java:564)
+11-21 11:47:56.852  1109  1109 W System.err: 	at com.mgtv.tv.base.network.MgtvAbstractRequest.execute(MgtvAbstractRequest.java:540)
+11-21 11:47:56.852  1109  1109 W System.err: 	at com.mgtv.tv.base.network.MgtvAbstractRequest.execute(MgtvAbstractRequest.java:438)
+11-21 11:47:56.852  1109  1109 W System.err: 	at com.mgtv.tv.proxy.sdkuser.request.UserCenterBaseRequest.run(UserCenterBaseRequest.java:74)
+11-21 11:47:56.852  1109  1109 W System.err: 	at com.mgtv.tv.sdk.usercenter.system.a.a(InfoFetcherImp4System.java:36)
+11-21 11:47:56.852  1109 21362 I okhttp  : request: get, requestID: 121627241, requestModule: normal, requestDataType: key-value, requestUrl: https://inottput.api.mgtv.com/v1/inottpay/client/vip/put?mod=NunaiMax&app_type=21&net_id=150912501089879&pver=0%7C0%7C0%7C0%7C0%7C0%7C0%7C0&channel_code=HFOS&uuid=cd3fd7db4ab35456a11fffca6d9d0aee&mac_id=D8-C0-6A-05-31-B7&platform=3&_support=1010010101101010001000100001&mf=rockchip&place=16&cpn=A&pre=0&os_ver=8.1.0&device_id=D8C06A0531B700000000000000000000&ticket=A1BA06729F003DA1A70B55814C15CF7C&cpid=55&time_zone=GMT%2B08%3A00&ttid=0_1a1fc37c930_rzyILQij&version=7.0.312.395.3.HFOS_TVAPP.0.0_Pre_Release&license=ZgOOgo5MjkyOTIcNDnwgIA0OmQ17DnY7v78ODQYgfHsOmXu0BXyVhw2qfLQGeyBLOwYgjkyOTI5MZgOOgg%3D%3D&abt=&model_code=NunaiMax&buss_id=1000014&business_id=61000040&rom_version=&android_sdk_ver=27
+11-21 11:47:56.852  1109  1109 W System.err: 	at com.mgtv.tv.sdk.usercenter.common.UserCenter.fetchUserRelateInfo(UserCenter.java:86)
+11-21 11:47:56.852  1109  1109 W System.err: 	at com.mgtv.tv.sdk.usercenter.a.fetchUserRelateInfo(UserInfoHelperImpl.java:884)
+11-21 11:47:56.852  1109  1109 W System.err: 	at com.mgtv.tv.loft.channel.data.n.a(UserRelateInfoProvider.java:218)
+11-21 11:47:56.852  1109  1109 W System.err: 	at com.mgtv.tv.loft.channel.data.a.d.b(CommonExtraDataController.java:272)
+11-21 11:47:56.852  1109  1109 W System.err: 	at com.mgtv.tv.loft.channel.data.a.d.a(CommonExtraDataController.java:136)
+11-21 11:47:56.852  1109  1109 W System.err: 	at com.mgtv.tv.loft.channel.data.a.f.a(DataTaskGroup.java:51)
+11-21 11:47:56.852  1109  1109 W System.err: 	at com.mgtv.tv.loft.channel.data.a.f.a(DataTaskGroup.java:51)
+11-21 11:47:56.853  1109  1109 W System.err: 	at com.mgtv.tv.loft.channel.data.f.a(ChannelSyncDataController.java:127)
+11-21 11:47:56.853  1109  1109 W System.err: 	at com.mgtv.tv.loft.channel.data.d$5.a(ChannelFetcher.java:652)
+11-21 11:47:56.853  1109  1109 W System.err: 	at com.mgtv.tv.loft.channel.data.d$5.getPageData(ChannelFetcher.java:645)
+11-21 11:47:56.853  1109  1109 W System.err: 	at com.mgtv.tv.loft.channel.data.e$1.a(ChannelRequestCenter.java:108)
+11-21 11:47:56.853  1109  1109 W System.err: 	at com.mgtv.tv.loft.channel.data.e$1.a(ChannelRequestCenter.java:90)
+11-21 11:47:56.853  1109  1109 W System.err: 	at com.mgtv.tv.loft.channel.data.b.onSuccess(ChannelBaseTaskCallback.java:66)
+11-21 11:47:56.853  1109  1109 W System.err: 	at com.mgtv.tv.base.network.NetWorkOkhttpImpl$2$1.run(NetWorkOkhttpImpl.java:398)
+11-21 11:47:56.853  1109  1109 W System.err: 	at android.os.Handler.handleCallback(Handler.java:790)
+11-21 11:47:56.853  1109  1109 W System.err: 	at android.os.Handler.dispatchMessage(Handler.java:99)
+11-21 11:47:56.853  1109  1109 W System.err: 	at android.os.Looper.loop(Looper.java:164)
+11-21 11:47:56.853  1109  1109 W System.err: 	at android.app.ActivityThread.main(ActivityThread.java:6498)
+11-21 11:47:56.853  1109  1109 W System.err: 	at java.lang.reflect.Method.invoke(Native Method)
+11-21 11:47:56.853  1109  1109 W System.err: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:438)
+11-21 11:47:56.853  1109  1109 W System.err: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:807)
+11-21 11:47:56.853  1109  1109 I Network-OkhttpImpl: request: onFailure, requestID: 62201231,requestPath:client/dynamic_entry,ttid: ,httpCode: , timeMs: ,error:unexpected url: client/dynamic_entry
+11-21 11:47:56.897  1109 21361 I UserCenterBaseRequest: put response = {"errno":"0","msg":"成功","seqid":"04ece15b279f25c9d00ad27bb206e0b1","serverTime":1795232880,"data":[{"place":"15","showTitle":"","imgUrl1":"https://2img.mgtv.com/ottmiddleware/upload/29/efdacc1214de6c99e0bf1d9feb3019.png","imgUrl2":"","imgBgUrl":"https://0img.mgtv.com/ottmiddleware/upload/f3/448b8971bd4622c99f307b80d6e33b.png","btnText":"","qrcodeType":"0","jumpType":"","jumpPara":"http://weixin.qq.com/r/GEzn-wnE7VSSrU2c9xkK","abt":"","extend":"","putId":582,"putName":"【个人主页】我的频道公众号导流入口","matId":335,"taskId":"582","strategyId":"_exp:000*seqid:04ece15b279f25c9d00ad27bb206e0b1*res:582|335","cashierType":"","cashierFocusTab":"","cashierJumpUrl":"","isInstant":""}]}
+11-21 11:47:56.897  1109  1109 I Network-OkhttpImpl: response: onResponse requestID:7053619,requestPath:https://inottput.api.mgtv.com/v1/inottpay/client/vip/put,ttid: 0_1a1fc37c92e_9dQsPvyx,httpCode: 200,isSuccess：true dns:0 connect:0 parse:0 thread:2 handler:0 total:49 [https://inottput.api.mgtv.com/v1/inottpay/client/vip/put]
+11-21 11:47:56.937  1109 21362 I UserCenterBaseRequest: put response = {"errno":"0","msg":"成功","seqid":"bca0aba7e3f0ca471edf8badf176ca59","serverTime":1795232880,"data":[]}
+11-21 11:47:56.937  1109  1109 I Network-OkhttpImpl: response: onResponse requestID:121627241,requestPath:https://inottput.api.mgtv.com/v1/inottpay/client/vip/put,ttid: 0_1a1fc37c930_rzyILQij,httpCode: 200,isSuccess：true dns:0 connect:0 parse:0 thread:2 handler:0 total:86 [https://inottput.api.mgtv.com/v1/inottpay/client/vip/put]
+11-21 11:47:56.939  1109 21348 I thread-Optimize-App: no proxy pool:0 max:1 keep:60 source:​okhttp3.internal.http2.Http2Connection
+11-21 11:47:57.035  1109  1109 I Network-OkhttpImpl: response: onResponse requestID:232551063,requestPath:https://inottuni.api.mgtv.com/v1/inott/common/getswitchs,ttid: 0_1a1fc37c926_ERmPig9O,httpCode: 200,isSuccess：true dns:2 connect:94 parse:0 thread:1 handler:0 total:194 [https://inottuni.api.mgtv.com/v1/inott/common/getswitchs]
+11-21 11:47:57.035  1109  1109 I ChannelModule: loadServerSwitchData success ! mServerSwitchData:[]
+11-21 11:47:57.035  1109  1109 I ChannelSyncDataController:  syncDataFromSever finished !vClassId:55
+11-21 11:47:57.035  1109  1109 I ChannelFetcher: request channelPageBean from server success !vClassId:55
+11-21 11:47:57.036  1109  1109 I ChannelFragment: onServerDataFine!vClassId:55,needUpdate:true
+11-21 11:47:57.036  1109  1109 I WatchHistoryItemPresenter: 0.8169591428730334release
+11-21 11:47:57.042  1109 21348 I okhttp  : request: post, requestID: 6241571, requestModule: normal, requestDataType: key-value, requestUrl: https://nuc.api.mgtv.com/GetUserInfo, params: _support=1010010101101010001000100001&abt=&ticket=A1BA06729F003DA1A70B55814C15CF7C&appversion=7.0.312.395.3.HFOS_TVAPP.0.0_Pre_Release&invoker=itvsdk&ttid=0_1a1fc37c9ef_qcywnbIU&mac=D8-C0-6A-05-31-B7
+11-21 11:47:57.044  1109 21348 I httpdns : httpdns parse: nuc.api.mgtv.com result: host:nuc.api.mgtv.com, ips:[123.151.108.78, 123.151.109.8, 123.151.109.38, 101.201.59.63, 101.201.59.23, 123.151.108.240, 123.151.108.33, 123.151.108.119], ipv6s:[], extras:{}, expired:true, fromDB:false ttl is 60
+11-21 11:47:57.044  1109 21348 I httpdns : nuc.api.mgtv.com:use ipv4:[123.151.108.78, 123.151.109.8, 123.151.109.38, 101.201.59.63, 101.201.59.23, 123.151.108.240, 123.151.108.33, 123.151.108.119]
+11-21 11:47:57.049  1109  1109 I Launcher-HostDataExchangeAdapter:: requestData => event:getUserInfo jsonParams: null
+11-21 11:47:57.056  1109  1109 I chatty  : uid=10043(com.mgtv.mgui) identical 6 lines
+11-21 11:47:57.056  1109  1109 I Launcher-HostDataExchangeAdapter:: requestData => event:getUserInfo jsonParams: null
+11-21 11:47:57.060  1109  1602 D ExifInterface: No image meets the size requirements of a thumbnail image.
+11-21 11:47:57.153  1109 21348 I thread-Optimize-App: no proxy pool:0 max:1 keep:60 source:​okhttp3.internal.http2.Http2Connection
+11-21 11:47:57.154   462 20169 D mgtv    : com.mgtv.app.state start ActivityStackSupervisor
+11-21 11:47:57.154   462 20169 I ActivityManager: START u0 {flg=0x10000000 cmp=com.pae.host/.MainActivity} from uid 0
+11-21 11:47:57.156   462 20169 D mgtv    : com.mgtv.app.state start activityStack
+11-21 11:47:57.156   462 20169 E ActivityManager: getPackageFerformanceMode--ComponentInfo{com.pae.host/com.pae.host.MainActivity}----com.pae.host
+11-21 11:47:57.157  1109  1109 I ProxyApp: ChannelHomeActivity onPause time = 263996294
+11-21 11:47:57.158  1109  1109 I HugeAdManager: onActivityPause
+11-21 11:47:57.158   462 20169 E ActivityManager: getPackageFerformanceMode--ComponentInfo{com.pae.host/com.pae.host.MainActivity}----com.pae.host
+11-21 11:47:57.157   462 20169 D mgtv    : com.mgtv.app.state start activityStack
+11-21 11:47:57.160   462 26905 D mgtv    : com.mgtv.app.state start activityStack
+11-21 11:47:57.161   462 26905 E ActivityManager: getPackageFerformanceMode--ComponentInfo{com.pae.host/com.pae.host.MainActivity}----com.pae.host
+11-21 11:47:57.200   309   309 I [Gralloc]: Got fd 16 for handle 1
+11-21 11:47:57.201   309   309 I [Gralloc]: leave, w : 360, h : 202, format : 0x1,internal_format : 0x1, usage : 0x333. size=297344,pixel_stride=368,byte_stride=1472
+11-21 11:47:57.201   309   309 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-21 11:47:57.201   462 26905 I [Gralloc]: Got handle 1 for fd 227
+11-21 11:47:57.201   462 26905 I [Gralloc]: leave, w : 360, h : 202, format : 0x1,internal_format : 0x1, usage : 0x333. size=297344,pixel_stride=368,byte_stride=1472
+11-21 11:47:57.201   462 26905 I [Gralloc]: leave: prime_fd=227,share_attr_fd=228
+11-21 11:47:57.202   321   359 I [Gralloc]: Got handle 4 for fd 89
+11-21 11:47:57.202   321   359 I [Gralloc]: leave, w : 360, h : 202, format : 0x1,internal_format : 0x1, usage : 0x333. size=297344,pixel_stride=368,byte_stride=1472
+11-21 11:47:57.202   321   359 I [Gralloc]: leave: prime_fd=89,share_attr_fd=90
+11-21 11:47:57.266 21299 21326 D mali_winsys: EGLint new_window_surface(egl_winsys_display *, void *, EGLSurface, EGLConfig, egl_winsys_surface **, egl_color_buffer_format *, EGLBoolean) returns 0x3000
+11-21 11:47:57.274 21299 21299 I PAE_SURFACE: surfaceCreated
+11-21 11:47:57.274 21299 21299 I PAE_SURFACE: surfaceChanged 1920x1080
+11-21 11:47:57.275   321   532 W ServiceManager: Permission failure: android.permission.ACCESS_SURFACE_FLINGER from uid=10033 pid=21299
+11-21 11:47:57.275   321   532 D PermissionCache: checking android.permission.ACCESS_SURFACE_FLINGER for uid=10033 => denied (643 us)
+11-21 11:47:57.275   321   532 E SurfaceFlinger: Permission Denial: can't openGlobalTransaction pid=21299, uid<=10033
+11-21 11:47:57.276 21299 21299 E BpSurfaceComposerClient: Failed to transact (-1)
+11-21 11:47:57.276 21299 21315 D mali_winsys: EGLint new_window_surface(egl_winsys_display *, void *, EGLSurface, EGLConfig, egl_winsys_surface **, egl_color_buffer_format *, EGLBoolean) returns 0x3000
+11-21 11:47:57.276 21299 21315 I PAE_GLCAPS: GL_VERSION=OpenGL ES 3.2 v1.r18p0-01rel0.16f2a2e3305581ae54dd0f9788beb400
+11-21 11:47:57.276 21299 21315 I PAE_GLCAPS: GL_RENDERER=Mali-T860
+11-21 11:47:57.276 21299 21315 I PAE_GLCAPS: GL_VENDOR=ARM
+11-21 11:47:57.276 21299 21315 I PAE_GLCAPS: GLSL_VERSION=OpenGL ES GLSL ES 3.20
+11-21 11:47:57.276 21299 21315 I PAE_GLCAPS: MAX_VERTEX_UNIFORM_BLOCKS=12 MAX_TEXTURE_SIZE=8192 MAX_VERTEX_ATTRIBS=16
+11-21 11:47:57.276   321   362 E SurfaceFlinger: Permission Denial: can't openGlobalTransaction pid=21299, uid<=10033
+11-21 11:47:57.276 21299 21299 E BpSurfaceComposerClient: Failed to transact (-1)
+11-21 11:47:57.277 21299 21315 I PAE_RENDER: surface ready 1920x1080
+11-21 11:47:57.286  1273  1273 D SogouIME API: ==============num:32
+11-21 11:47:57.286  1273  1273 D SogouIME: mFocusedComponent:30   isHkbEnable:false
+11-21 11:47:57.287  1273  1273 D SogouIME: =====configKeyboard=======是否有硬件盘:false     硬件盘是否不再隐藏：false
+11-21 11:47:57.294   309   309 I [Gralloc]: Got fd 16 for handle 1
+11-21 11:47:57.296   309   309 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x2,internal_format : 0x2, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:57.296   309   309 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-21 11:47:57.296   321   362 I [Gralloc]: Got handle 4 for fd 84
+11-21 11:47:57.296   321   362 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x2,internal_format : 0x2, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:57.296   321   362 I [Gralloc]: leave: prime_fd=84,share_attr_fd=86
+11-21 11:47:57.296 21299 21315 I [Gralloc]: Got handle 1 for fd 60
+11-21 11:47:57.297 21299 21315 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x2,internal_format : 0x2, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:57.297 21299 21315 I [Gralloc]: leave: prime_fd=60,share_attr_fd=61
+11-21 11:47:57.312  1109  1109 I Network-OkhttpImpl: response: onResponse requestID:6241571,requestPath:https://nuc.api.mgtv.com/GetUserInfo,ttid: 0_1a1fc37c9ef_qcywnbIU,httpCode: 200,isSuccess：true dns:2 connect:109 parse:1 thread:1 handler:1 total:269 [https://nuc.api.mgtv.com/GetUserInfo]
+11-21 11:47:57.312   309  1605 I [Gralloc]: Got fd 16 for handle 1
+11-21 11:47:57.314   309  1605 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:57.315   309  1605 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-21 11:47:57.315   321   533 I [Gralloc]: Got handle 5 for fd 89
+11-21 11:47:57.315   321   533 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:57.315   321   533 I [Gralloc]: leave: prime_fd=89,share_attr_fd=90
+11-21 11:47:57.316 21299 21326 I [Gralloc]: Got handle 2 for fd 63
+11-21 11:47:57.316 21299 21326 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:57.316 21299 21326 I [Gralloc]: leave: prime_fd=63,share_attr_fd=64
+11-21 11:47:57.319 21299 21315 I PAE_RENDER: surface changed 1920x1080
+11-21 11:47:57.335   309  1605 I [Gralloc]: Got fd 16 for handle 1
+11-21 11:47:57.335   309  1605 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x2,internal_format : 0x2, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:57.335   309  1605 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-21 11:47:57.336   321   359 I [Gralloc]: Got handle 6 for fd 94
+11-21 11:47:57.336   321   359 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x2,internal_format : 0x2, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:57.336   321   359 I [Gralloc]: leave: prime_fd=94,share_attr_fd=95
+11-21 11:47:57.336 21299 21315 I [Gralloc]: Got handle 3 for fd 66
+11-21 11:47:57.336 21299 21315 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x2,internal_format : 0x2, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:57.336 21299 21315 I [Gralloc]: leave: prime_fd=66,share_attr_fd=67
+11-21 11:47:57.348  1109  1109 I ChannelPlayerController: setPlayerEnable enable:false,mSavedPlayInfo:null,mPageInfo:null
+11-21 11:47:57.348  1109  1109 I ImmersivePlayerController: setPlayerEnable enable:false,mSavedPosition:-1
+11-21 11:47:57.348  1109  1109 I BaseSimplerPlayerController: setPlayerEnable enable:false,mSavedVideoModel:null
+11-21 11:47:57.348  1109  1109 I SerialImmersivePlayerController: setPlayerEnable enable:false,mSavedVideoModel:null
+11-21 11:47:57.348  1109  1109 I ImmersiveFlash2PlayerController: setPlayerEnable enable:false,mSavedVideoModel:null
+11-21 11:47:57.348  1109  1109 I QLandPlayerController: setPlayerEnable enable:false,mSavedVideoModel:null
+11-21 11:47:57.348  1109  1109 I SinglePayPlayerController: setPlayerEnable enable:false,mSavedVideoModel:null
+11-21 11:47:57.348  1109  1109 I FeedRecPlayerController: setPlayerEnable enable:false,mSavedVideoModel:null
+11-21 11:47:57.348  1109  1109 I ChildSmallTVPlayerController: setPlayerEnable enable:false,mSavedVideoModel:null
+11-21 11:47:57.348  1109  1109 I BaseSimplerPlayerController: setPlayerEnable enable:false,mSavedVideoModel:null
+11-21 11:47:57.348  1109  1109 I ChannelMoviePickPlayerController: setPlayerEnable enable:false,mSavedVideoModel:null
+11-21 11:47:57.348  1109  1109 I ChannelBriefVodFeedPlayerController: setPlayerEnable enable:false,mSavedVideoModel:null
+11-21 11:47:57.349  1109  1109 I FlashModPlayerController: setPlayerEnable enable:false,mSavedVideoModel:null
+11-21 11:47:57.360   321   362 E BufferQueueProducer: [com.mgtv.mgui/com.mgtv.mgui.ChannelHomeActivity#0] disconnect: not connected (req=1)
+11-21 11:47:57.360  1109  1254 W libEGL  : EGLNativeWindowType 0xc30c8808 disconnect failed
+11-21 11:47:57.384   310   310 I [Gralloc]: Got handle 1 for fd 32
+11-21 11:47:57.384   310   310 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x2,internal_format : 0x2, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:57.384   310   310 I [Gralloc]: leave: prime_fd=32,share_attr_fd=33
+11-21 11:47:57.387   309  1605 I [Gralloc]: Got fd 16 for handle 1
+11-21 11:47:57.388   309  1605 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x2,internal_format : 0x2, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:57.388   309  1605 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-21 11:47:57.388   321   485 I [Gralloc]: Got handle 1 for fd 50
+11-21 11:47:57.388   321   485 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x2,internal_format : 0x2, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:57.388   321   485 I [Gralloc]: leave: prime_fd=50,share_attr_fd=59
+11-21 11:47:57.389 21299 21315 I [Gralloc]: Got handle 4 for fd 69
+11-21 11:47:57.389 21299 21315 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x2,internal_format : 0x2, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:57.389 21299 21315 I [Gralloc]: leave: prime_fd=69,share_attr_fd=70
+11-21 11:47:57.416   310   310 I [Gralloc]: Got handle 3 for fd 39
+11-21 11:47:57.416   310   310 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x2,internal_format : 0x2, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:57.416   310   310 I [Gralloc]: leave: prime_fd=39,share_attr_fd=46
+11-21 11:47:57.432   310   310 I [Gralloc]: Got handle 5 for fd 44
+11-21 11:47:57.432   310   310 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x2,internal_format : 0x2, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:57.432   310   310 I [Gralloc]: leave: prime_fd=44,share_attr_fd=52
+11-21 11:47:57.807   309  1605 I [Gralloc]: Got fd 16 for handle 1
+11-21 11:47:57.808   309  1605 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x2,internal_format : 0x2, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:57.808   309  1605 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-21 11:47:57.808   321   485 I [Gralloc]: Got handle 3 for fd 91
+11-21 11:47:57.808   321   485 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x2,internal_format : 0x2, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:57.808   321   485 I [Gralloc]: leave: prime_fd=91,share_attr_fd=93
+11-21 11:47:57.809 21299 21315 I [Gralloc]: Got handle 5 for fd 72
+11-21 11:47:57.809 21299 21315 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x2,internal_format : 0x2, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:57.809 21299 21315 I [Gralloc]: leave: prime_fd=72,share_attr_fd=73
+11-21 11:47:57.819  1109  1109 I VoiceFloatingViewManager: detach : ChannelHomeActivity
+11-21 11:47:57.820  1109  1109 I ProxyApp: ChannelHomeActivity onStop time = 263996957
+11-21 11:47:57.820  1109  1109 I YouthModeManager: onActivityStopped0
+11-21 11:47:57.820  1109  1109 I YouthModeManager: exit
+11-21 11:47:57.820  1109  1109 I HugeAdManager: isNeedExitAnim, mStartedEnterAnim:false
+11-21 11:47:57.820  1109  1109 I PopDispatchManager: onHidePop,pri:78,rmSuc:false
+11-21 11:47:57.822  1109  1109 D RePlugin.ws001: PAC.callOnLowMemory(): Call onTrimMemory(), cl=com.qihoo360.replugin.PluginDexClassLoader[DexPathList[[zip file "/data/user/0/com.mgtv.mgui/app_p_a/1352567954.jar"],nativeLibraryDirectories=[/data/user/0/com.mgtv.mgui/app_p_n/1352567954/arm, /data/app/com.mgtv.mgui-fNNd5AyGhnQcmndRFg1iQQ==/lib/arm, /system/fake-libs, /data/app/com.mgtv.mgui-fNNd5AyGhnQcmndRFg1iQQ==/base.apk!/lib/armeabi, /system/lib, /vendor/lib]]]; lv=20
+11-21 11:47:57.823  1109  1109 I MyLogImp: onTrimMemory level:20
+11-21 11:47:57.823  1109  1109 D Tinker.DefaultAppLike: onTrimMemory level:20
+11-21 11:47:57.823  1109  1109 I Launcher-Tinker.TVOS:: onTrimMemory
+11-21 11:47:57.833   310   310 I [Gralloc]: Got handle 7 for fd 43
+11-21 11:47:57.833   310   310 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x2,internal_format : 0x2, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:47:57.833   310   310 I [Gralloc]: leave: prime_fd=43,share_attr_fd=60
+11-21 11:47:59.681 21299 21315 I PAE_STATS: frames=360 fps=51.2 frame_ms=19.54 draw_calls=2 triangles=13 buffer_bytes=420
+11-21 11:47:59.869  1109 21359 E NetWorkUtils: exec cmd fail:ping -c 1 -w 3 114.114.114.114
+11-21 11:47:59.873  1109 21346 E NetWorkUtils: exec cmd fail:ping -c 1 -w 3 114.114.114.114
+11-21 11:48:00.028  1109  1109 I Launcher-MguiDataManager:: onReceive: android.intent.action.TIME_TICK

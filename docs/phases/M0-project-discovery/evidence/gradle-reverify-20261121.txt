@@ -1,0 +1,7 @@
+# gradle assembleDebug re-verification 2026-11-21
+# JAVA_HOME=D:/Program Files/Java/jdk-17; sdk.dir=E:/AndroidSdk via local.properties (gitignored)
+> Task :app:assembleDebug UP-TO-DATE
+
+BUILD SUCCESSFUL in 1s
+35 actionable tasks: 3 executed, 32 up-to-date
+-rw-r--r-- 1 Giant 197121 58853821 Nov 21 12:18 app/build/outputs/apk/debug/app-debug.apk

@@ -1,0 +1,95 @@
+--------- beginning of system
+--------- beginning of crash
+--------- beginning of main
+11-21 16:49:14.051 26792 26811 I PAE_STATS: frames=0 fps=0.0 frame_ms=0.00 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:49:16.508 26792 26811 I PAE_STATS: frames=120 fps=49.2 frame_ms=20.33 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:49:16.562 26792 26792 W PAE_POSE: camera selector FRONT failed: Provided camera selector unable to resolve a camera for the given use case
+11-21 16:49:16.563 26792 26792 W PAE_POSE: camera selector BACK failed: Provided camera selector unable to resolve a camera for the given use case
+11-21 16:49:16.563 26792 26792 W PAE_POSE: camera selector ANY failed: Provided camera selector unable to resolve a camera for the given use case
+11-21 16:49:16.563 26792 26792 E PAE_POSE: no camera resolved on this device; synthetic provider stays active
+11-21 16:49:18.984 26792 26811 I PAE_STATS: frames=240 fps=48.2 frame_ms=20.73 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:49:21.485 26792 26811 I PAE_STATS: frames=360 fps=47.8 frame_ms=20.90 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:49:23.434 26792 26792 W PAE_UI  : no system document picker (No Activity found to handle Intent { act=android.intent.action.OPEN_DOCUMENT typ=*/* (has extras) }); using in-app browser
+11-21 16:49:23.885 26792 26792 W PAE_POSE: camera selector FRONT failed: Provided camera selector unable to resolve a camera for the given use case
+11-21 16:49:23.885 26792 26792 W PAE_POSE: camera selector BACK failed: Provided camera selector unable to resolve a camera for the given use case
+11-21 16:49:23.885 26792 26792 W PAE_POSE: camera selector ANY failed: Provided camera selector unable to resolve a camera for the given use case
+11-21 16:49:23.885 26792 26792 E PAE_POSE: no camera resolved on this device; synthetic provider stays active
+11-21 16:49:23.893 26792 26811 I PAE_STATS: frames=480 fps=50.5 frame_ms=19.81 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:49:26.378 26792 26811 I PAE_STATS: frames=600 fps=47.3 frame_ms=21.15 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:49:28.928 26792 26811 I PAE_STATS: frames=720 fps=47.5 frame_ms=21.05 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:49:31.459 26792 26811 I PAE_STATS: frames=840 fps=46.9 frame_ms=21.32 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:49:33.923 26792 26811 I PAE_STATS: frames=960 fps=48.3 frame_ms=20.71 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:49:36.445 26792 26811 I PAE_STATS: frames=1080 fps=48.5 frame_ms=20.63 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:49:38.864 26792 26811 I PAE_STATS: frames=1200 fps=51.3 frame_ms=19.50 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:49:41.385 26792 26811 I PAE_STATS: frames=1320 fps=46.8 frame_ms=21.37 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:49:43.881 26792 26811 I PAE_STATS: frames=1440 fps=46.4 frame_ms=21.56 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:49:46.294 26792 26811 I PAE_STATS: frames=1560 fps=47.6 frame_ms=20.99 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:49:48.806 26792 26811 I PAE_STATS: frames=1680 fps=47.7 frame_ms=20.95 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:49:51.309 26792 26811 I PAE_STATS: frames=1800 fps=48.7 frame_ms=20.53 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:49:51.811 26792 26792 I PAE_UI  : test image picked: 640x480 (/storage/emulated/0/Download/pae_test_pattern.png)
+11-21 16:49:52.073 26792 26792 I PAE_POSE: pose stats: inference_ms=238.79 confidence=0.00 landmarks=0 in_flight=1 pose_fps=0.0
+11-21 16:49:52.074 26792 26792 I PAE_POSE: static-image done (pae_test_pattern.png): 241.74 ms
+11-21 16:49:53.691 26792 26811 I PAE_STATS: frames=1920 fps=49.9 frame_ms=20.06 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:49:56.103 26792 26811 I PAE_STATS: frames=2040 fps=49.6 frame_ms=20.14 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:49:58.518 26792 26811 I PAE_STATS: frames=2160 fps=50.2 frame_ms=19.90 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:50:00.918 26792 26811 I PAE_STATS: frames=2280 fps=49.6 frame_ms=20.17 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:50:03.333 26792 26811 I PAE_STATS: frames=2400 fps=49.4 frame_ms=20.22 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:50:05.741 26792 26811 I PAE_STATS: frames=2520 fps=51.3 frame_ms=19.49 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:50:08.145 26792 26811 I PAE_STATS: frames=2640 fps=49.8 frame_ms=20.09 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:50:10.550 26792 26811 I PAE_STATS: frames=2760 fps=49.7 frame_ms=20.10 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:50:12.943 26792 26811 I PAE_STATS: frames=2880 fps=50.7 frame_ms=19.72 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:50:15.341 26792 26811 I PAE_STATS: frames=3000 fps=50.2 frame_ms=19.93 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:50:17.730 26792 26811 I PAE_STATS: frames=3120 fps=49.7 frame_ms=20.12 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:50:20.121 26792 26811 I PAE_STATS: frames=3240 fps=49.7 frame_ms=20.11 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:50:22.542 26792 26811 I PAE_STATS: frames=3360 fps=49.7 frame_ms=20.12 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:50:24.943 26792 26811 I PAE_STATS: frames=3480 fps=49.7 frame_ms=20.12 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:50:27.361 26792 26811 I PAE_STATS: frames=3600 fps=49.6 frame_ms=20.15 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:50:29.809 26792 26811 I PAE_STATS: frames=3720 fps=48.7 frame_ms=20.54 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:50:32.265 26792 26811 I PAE_STATS: frames=3840 fps=48.8 frame_ms=20.47 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:50:34.732 26792 26811 I PAE_STATS: frames=3960 fps=48.5 frame_ms=20.63 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:50:37.182 26792 26811 I PAE_STATS: frames=4080 fps=49.2 frame_ms=20.35 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:50:39.597 26792 26811 I PAE_STATS: frames=4200 fps=49.8 frame_ms=20.07 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:50:42.011 26792 26811 I PAE_STATS: frames=4320 fps=50.0 frame_ms=20.01 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:50:44.432 26792 26811 I PAE_STATS: frames=4440 fps=49.9 frame_ms=20.04 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:50:46.849 26792 26811 I PAE_STATS: frames=4560 fps=49.6 frame_ms=20.16 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:50:49.259 26792 26811 I PAE_STATS: frames=4680 fps=50.6 frame_ms=19.74 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:50:51.681 26792 26811 I PAE_STATS: frames=4800 fps=49.5 frame_ms=20.19 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:50:54.097 26792 26811 I PAE_STATS: frames=4920 fps=49.6 frame_ms=20.15 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:50:56.510 26792 26811 I PAE_STATS: frames=5040 fps=49.6 frame_ms=20.14 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:50:58.930 26792 26811 I PAE_STATS: frames=5160 fps=49.7 frame_ms=20.13 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:51:01.343 26792 26811 I PAE_STATS: frames=5280 fps=49.0 frame_ms=20.40 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:51:03.599 26792 26811 I PAE_STATS: frames=5400 fps=53.8 frame_ms=18.59 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:51:05.777 26792 26811 I PAE_STATS: frames=5520 fps=55.4 frame_ms=18.04 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:51:08.033 26792 26811 I PAE_STATS: frames=5640 fps=54.8 frame_ms=18.24 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:51:10.065 26978 27000 I PAE_STATS: frames=0 fps=0.0 frame_ms=0.00 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:51:12.533 26978 27000 I PAE_STATS: frames=120 fps=47.8 frame_ms=20.94 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:51:12.544 26978 26978 W PAE_POSE: camera selector FRONT failed: Provided camera selector unable to resolve a camera for the given use case
+11-21 16:51:12.545 26978 26978 W PAE_POSE: camera selector BACK failed: Provided camera selector unable to resolve a camera for the given use case
+11-21 16:51:12.546 26978 26978 W PAE_POSE: camera selector ANY failed: Provided camera selector unable to resolve a camera for the given use case
+11-21 16:51:12.546 26978 26978 E PAE_POSE: no camera resolved on this device; synthetic provider stays active
+11-21 16:51:15.024 26978 27000 I PAE_STATS: frames=240 fps=48.3 frame_ms=20.72 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:51:17.513 26978 27000 I PAE_STATS: frames=360 fps=48.1 frame_ms=20.78 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:51:20.002 26978 27000 I PAE_STATS: frames=480 fps=48.6 frame_ms=20.57 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:51:20.782 26978 26978 W PAE_UI  : no system document picker (No Activity found to handle Intent { act=android.intent.action.OPEN_DOCUMENT typ=*/* (has extras) }); using in-app browser
+11-21 16:51:21.219 26978 26978 W PAE_POSE: camera selector FRONT failed: Provided camera selector unable to resolve a camera for the given use case
+11-21 16:51:21.219 26978 26978 W PAE_POSE: camera selector BACK failed: Provided camera selector unable to resolve a camera for the given use case
+11-21 16:51:21.220 26978 26978 W PAE_POSE: camera selector ANY failed: Provided camera selector unable to resolve a camera for the given use case
+11-21 16:51:21.221 26978 26978 E PAE_POSE: no camera resolved on this device; synthetic provider stays active
+11-21 16:51:22.385 26978 27000 I PAE_STATS: frames=600 fps=46.1 frame_ms=21.69 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:51:24.789 26978 27000 I PAE_STATS: frames=720 fps=50.7 frame_ms=19.73 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:51:27.300 26978 27000 I PAE_STATS: frames=840 fps=47.3 frame_ms=21.14 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:51:28.125 26978 26978 I PAE_UI  : test image picked: 640x480 (/storage/emulated/0/Download/pae_test_pattern.png)
+11-21 16:51:28.382 26978 26978 I PAE_POSE: pose stats: inference_ms=240.38 confidence=0.00 landmarks=0 in_flight=1 pose_fps=0.0
+11-21 16:51:28.383 26978 26978 I PAE_POSE: static-image done (pae_test_pattern.png): 243.23 ms
+11-21 16:51:29.651 26978 27000 I PAE_STATS: frames=960 fps=49.5 frame_ms=20.20 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:51:32.056 26978 27000 I PAE_STATS: frames=1080 fps=49.2 frame_ms=20.31 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:51:34.466 26978 27000 I PAE_STATS: frames=1200 fps=49.7 frame_ms=20.14 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:51:36.872 26978 27000 I PAE_STATS: frames=1320 fps=49.7 frame_ms=20.11 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:51:39.211 26978 27000 I PAE_STATS: frames=1440 fps=51.0 frame_ms=19.60 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:51:41.611 26978 27000 I PAE_STATS: frames=1560 fps=49.9 frame_ms=20.06 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:51:44.022 26978 27000 I PAE_STATS: frames=1680 fps=49.6 frame_ms=20.17 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:51:46.395 26978 27000 I PAE_STATS: frames=1800 fps=48.5 frame_ms=20.60 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:51:48.920 26978 27000 I PAE_STATS: frames=1920 fps=47.4 frame_ms=21.10 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:51:51.411 26978 27000 I PAE_STATS: frames=2040 fps=48.2 frame_ms=20.75 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:51:53.912 26978 27000 I PAE_STATS: frames=2160 fps=47.9 frame_ms=20.89 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 16:51:56.375 26978 27000 I PAE_STATS: frames=2280 fps=52.4 frame_ms=19.07 draw_calls=2 triangles=3053 buffer_bytes=156944

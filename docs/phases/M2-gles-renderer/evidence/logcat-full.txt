@@ -1,0 +1,304 @@
+--------- beginning of main
+11-21 11:46:56.192  1201  1201 I VoiceReceiveService: service callback N: 0
+11-21 11:46:56.192  1201  1201 D VoiceReceiveService: finishBroadcast
+11-21 11:46:56.193  1201  1201 I LiveAppHelper: server config isSupportLive:true packagesName:hdpfans.com
+--------- beginning of system
+11-21 11:46:56.194   462   481 W MGTVInjector: Broadcast intercept app: com.mango.dangbeimarket
+11-21 11:46:56.194   462   481 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_REPLACED dat=package:com.pae.host flg=0x4000010 (has extras) } to com.tencent.qqmusictv/.app.reciver.PackageReplacedReceiver
+11-21 11:46:56.196  1109  1109 I Launcher-PackageChangeReceiver:: onReceive:android.intent.action.PACKAGE_REPLACED,com.pae.host
+11-21 11:46:56.211  1109  1109 I AppDbManager: sendBroadCast:com.mgtv.mgui.action.app.PACKAGE_CHANGED,context=android.app.ReceiverRestrictedContext@e8eac33
+11-21 11:46:56.211  1109  1109 I LocalSpUtlis: setBooleanValue,key:local_app_list value:true
+11-21 11:46:56.212  1109  1109 I AppDbManager: sendBroadCast:com.mgtv.mgui.action.app.RECORD_CHANGED,context=android.app.ReceiverRestrictedContext@e8eac33
+11-21 11:46:56.212  1109  1109 I LocalSpUtlis: setBooleanValue,key:local_app_list value:true
+11-21 11:46:56.256  1201  1201 D VoiceConfigHelper: appItem:{"alias":"芒果TV|TV|爱芒果","extra":"com.mgtv.tv","name":"芒果TV"}
+11-21 11:46:56.257  1201  1201 D VoiceConfigHelper: appItem:{"alias":"少儿","extra":"com.mgtv.tv.character","name":"芒果少儿"}
+11-21 11:46:56.257  1201  1201 D VoiceConfigHelper: appItem:{"alias":"播放器","extra":"com.mgtv.mediaplayer","name":"本地播放器"}
+11-21 11:46:56.257  1201  1201 D VoiceConfigHelper: appItem:{"alias":"文件管理|文件管理器","extra":"com.mgtv.filemanager","name":"本地文件管理"}
+11-21 11:46:56.257  1201  1201 D VoiceConfigHelper: appItem:{"alias":"爱奇艺|奇艺果","extra":"com.gitvvideo.mango","name":"银河奇异果"}
+11-21 11:46:56.257  1201  1201 D VoiceConfigHelper: appItem:{"alias":"优酷|优酷视频|酷喵|CIBN酷喵|CIBN影视|酷喵影视","extra":"com.cibn.tv","name":"CIBN酷喵影视"}
+11-21 11:46:56.257  1201  1201 D VoiceConfigHelper: appItem:{"alias":"PPTV|聚精彩","extra":"com.pplive.atv","name":"CIBN聚精彩"}
+11-21 11:46:56.257  1201  1201 D VoiceConfigHelper: appItem:{"alias":"聚体育","extra":"com.pptv.tvsports.preinstall","name":"CIBN 聚体育"}
+11-21 11:46:56.257  1201  1201 D VoiceConfigHelper: appItem:{"alias":"乐播|投屏","extra":"com.hpplay.happyplay.aw","name":"乐播投屏"}
+11-21 11:46:56.257  1201  1201 D VoiceConfigHelper: appItem:{"alias":"小电视|B站|哔哩哔哩","extra":"com.xiaodianshi.tv.yst","name":"云视听小电视"}
+11-21 11:46:56.257  1201  1201 D VoiceConfigHelper: appItem:{"alias":"电视猫","extra":"com.moretv.android","name":"云视听电视猫"}
+11-21 11:46:56.257  1201  1201 D VoiceConfigHelper: appItem:{"alias":"4K花园","extra":"net.cibntv.ott.sk","name":"CIBN4K花园"}
+11-21 11:46:56.257  1201  1201 D VoiceConfigHelper: appItem:{"alias":"我的应用|应用管理","extra":"com.mgtv.myapp","name":"应用中心"}
+11-21 11:46:56.257  1201  1201 D VoiceConfigHelper: appItem:{"alias":"升级管理","extra":"com.mgtv.ota","name":"系统升级"}
+11-21 11:46:56.257  1201  1201 D VoiceConfigHelper: appItem:{"extra":"com.mgtv.setting","name":"设置"}
+11-21 11:46:56.257  1201  1201 D VoiceConfigHelper: appItem:{"extra":"com.mgtv.mgui","name":"牛奶桌面"}
+11-21 11:46:56.257  1201  1201 D VoiceConfigHelper: appItem:{"extra":"com.cibn.tv","name":"CIBN酷喵"}
+11-21 11:46:56.257  1201  1201 D VoiceConfigHelper: appItem:{"extra":"com.mango.dangbeimarket","name":"芒果TV市场"}
+11-21 11:46:56.257  1201  1201 D VoiceConfigHelper: appItem:{"extra":"com.mgtv.cast","name":"芒果投屏"}
+11-21 11:46:56.257  1201  1201 D VoiceConfigHelper: appItem:{"extra":"com.mgtv.remote","name":"电视助手"}
+11-21 11:46:56.257  1201  1201 D VoiceConfigHelper: appItem:{"extra":"com.pptv.tvsports.preinstall","name":"CIBN聚体育"}
+11-21 11:46:56.257  1201  1201 D VoiceConfigHelper: appItem:{"extra":"com.tencent.qqmusictv","name":"QQ音乐"}
+11-21 11:46:56.257  1201  1201 D VoiceConfigHelper: appItem:{"extra":"com.mgtv.mgui","name":"牛奶桌面"}
+11-21 11:46:56.257  1201  1201 D VoiceConfigHelper: appItem:{"extra":"com.mgtv.playtest","name":"PetPlayTest"}
+11-21 11:46:56.257  1201  1201 D VoiceConfigHelper: appItem:{"extra":"com.mgtv.playtest","name":"陪伴队列测试"}
+11-21 11:46:56.258  1201  1201 D VoiceConfigHelper: appItem:{"extra":"com.mgtv.playtest","name":"模拟宿主频道页"}
+11-21 11:46:56.258  1201  1201 D VoiceConfigHelper: appItem:{"extra":"com.mgtv.tv.pet","name":"MgtvPet"}
+11-21 11:46:56.258  1201  1201 D VoiceConfigHelper: appItem:{"extra":"com.mgtv.tvos.datareportor","name":"TVOS Screenshot Demo"}
+11-21 11:46:56.258  1201  1201 D VoiceConfigHelper: appItem:{"extra":"com.pae.host","name":"Procedural Avatar Engine"}
+11-21 11:46:56.258  1201  1201 D VoiceReceiveService: beginBroadcast notifyScene result:{"appContent":"{\"alias\":\"芒果TV|TV|爱芒果\",\"extra\":\"com.mgtv.tv\",\"name\":\"芒果TV\"}\r\n{\"alias\":\"少儿\",\"extra\":\"com.mgtv.tv.character\",\"name\":\"芒果少儿\"}\r\n{\"alias\":\"播放器\",\"extra\":\"com.mgtv.mediaplayer\",\"name\":\"本地播放器\"}\r\n{\"alias\":\"文件管理|文件管理器\",\"extra\":\"com.mgtv.filemanager\",\"name\":\"本地文件管理\"}\r\n{\"alias\":\"爱奇艺|奇艺果\",\"extra\":\"com.gitvvideo.mango\",\"name\":\"银河奇异果\"}\r\n{\"alias\":\"优酷|优酷视频|酷喵|CIBN酷喵|CIBN影视|酷喵影视\",\"extra\":\"com.cibn.tv\",\"name\":\"CIBN酷喵影视\"}\r\n{\"alias\":\"PPTV|聚精彩\",\"extra\":\"com.pplive.atv\",\"name\":\"CIBN聚精彩\"}\r\n{\"alias\":\"聚体育\",\"extra\":\"com.pptv.tvsports.preinstall\",\"name\":\"CIBN 聚体育\"}\r\n{\"alias\":\"乐播|投屏\",\"extra\":\"com.hpplay.happyplay.aw\",\"name\":\"乐播投屏\"}\r\n{\"alias\":\"小电视|B站|哔哩哔哩\",\"extra\":\"com.xiaodianshi.tv.yst\",\"name\":\"云视听小电视\"}\r\n{\"alias\":\"电视猫\",\"extra\":\"com.moretv.android\",\"name\":\"云视听电视猫\"}\r\n{\"alias\":\"4K花园\",\"extra\":\"net.cibntv.ott.sk\",\"name\":\"CIBN4K花园\"}\r\n{\"alias\":\"我的应用|应用管理\",\"extra\":\"com.mgtv.myapp\",\"name\":\"应用中心\"}\r\n{\"alias\":\"升级管理\",\"extra\":\"com.mgtv.ota\",\"name\":\"系统升级\"}\r\n{\"extra\":\"com.mgtv.setting\",\"name\":\"设置\"}\r\n{\"extra\":\"com.mgtv.mgui\",\"name\":\"牛奶桌面\"}\r\n{\"extra\":\"com.cibn.tv\",\"name\":\"CIBN酷喵\"}\r\n{\"extra\":\"com.mango.dangbeimarket\",\"name\":\"芒果TV市场\"}\r\n{\"extra\":\"com.mgtv.cast\",\"name\":\"芒果投屏\"}\r\n{\"extra\":\"com.mgtv.remote\",\"name\":\"电视助手\"}\r\n{\"extra\":\"com.pptv.tvsports.preinstall\",\"name\":\"CIBN聚体育\"}\r\n{\"extra\":\"com.tencent.qqmusictv\",\"name\":\"QQ音乐\"}\r\n{\"extra\":\"com.mgtv.mgui\",\"name\":\"牛奶桌面\"}\r\n{\"extra\":\"com.mgtv.playtest\",\"name\":\"PetPlayTest\"}\r\n{\"extra\":\"com.mgtv.playtest\",\"name\":\"陪伴队列测试\"}\r\n{\"extra\":\"com.mgtv.playtest\",\"name\":\"模拟宿主频道页\"}\r\n{\"extra\":\"com.mgtv.tv.pet\",\"name\":\"MgtvPet\"}\r\n{\"extra\":\"com.mgtv.tvos.datareportor\",\"name\":\"TVOS Screenshot Demo\"}\r\n{\"extra\":\"com.pae.host\",\"name\":\"Procedural Avatar Engine\"}\r\n","code":0,"sceneType":0,"type":"4"}
+11-21 11:46:56.258  1201  1201 I VoiceReceiveService: service callback N: 0
+11-21 11:46:56.258  1201  1201 D VoiceReceiveService: finishBroadcast
+11-21 11:46:56.258  1201  1201 I LiveAppHelper: server config isSupportLive:true packagesName:hdpfans.com
+11-21 11:46:56.262   462 26905 I ActivityManager: Force stopping com.pae.host appid=10033 user=0: from pid 21200
+11-21 11:46:56.312  1201  1201 D VoiceConfigHelper: appItem:{"alias":"芒果TV|TV|爱芒果","extra":"com.mgtv.tv","name":"芒果TV"}
+11-21 11:46:56.312  1201  1201 D VoiceConfigHelper: appItem:{"alias":"少儿","extra":"com.mgtv.tv.character","name":"芒果少儿"}
+11-21 11:46:56.312  1201  1201 D VoiceConfigHelper: appItem:{"alias":"播放器","extra":"com.mgtv.mediaplayer","name":"本地播放器"}
+11-21 11:46:56.312  1201  1201 D VoiceConfigHelper: appItem:{"alias":"文件管理|文件管理器","extra":"com.mgtv.filemanager","name":"本地文件管理"}
+11-21 11:46:56.312  1201  1201 D VoiceConfigHelper: appItem:{"alias":"爱奇艺|奇艺果","extra":"com.gitvvideo.mango","name":"银河奇异果"}
+11-21 11:46:56.312  1201  1201 D VoiceConfigHelper: appItem:{"alias":"优酷|优酷视频|酷喵|CIBN酷喵|CIBN影视|酷喵影视","extra":"com.cibn.tv","name":"CIBN酷喵影视"}
+11-21 11:46:56.312  1201  1201 D VoiceConfigHelper: appItem:{"alias":"PPTV|聚精彩","extra":"com.pplive.atv","name":"CIBN聚精彩"}
+11-21 11:46:56.312  1201  1201 D VoiceConfigHelper: appItem:{"alias":"聚体育","extra":"com.pptv.tvsports.preinstall","name":"CIBN 聚体育"}
+11-21 11:46:56.313  1201  1201 D VoiceConfigHelper: appItem:{"alias":"乐播|投屏","extra":"com.hpplay.happyplay.aw","name":"乐播投屏"}
+11-21 11:46:56.313  1201  1201 D VoiceConfigHelper: appItem:{"alias":"小电视|B站|哔哩哔哩","extra":"com.xiaodianshi.tv.yst","name":"云视听小电视"}
+11-21 11:46:56.313  1201  1201 D VoiceConfigHelper: appItem:{"alias":"电视猫","extra":"com.moretv.android","name":"云视听电视猫"}
+11-21 11:46:56.313  1201  1201 D VoiceConfigHelper: appItem:{"alias":"4K花园","extra":"net.cibntv.ott.sk","name":"CIBN4K花园"}
+11-21 11:46:56.313  1201  1201 D VoiceConfigHelper: appItem:{"alias":"我的应用|应用管理","extra":"com.mgtv.myapp","name":"应用中心"}
+11-21 11:46:56.313  1201  1201 D VoiceConfigHelper: appItem:{"alias":"升级管理","extra":"com.mgtv.ota","name":"系统升级"}
+11-21 11:46:56.313  1201  1201 D VoiceConfigHelper: appItem:{"extra":"com.mgtv.setting","name":"设置"}
+11-21 11:46:56.313  1201  1201 D VoiceConfigHelper: appItem:{"extra":"com.mgtv.mgui","name":"牛奶桌面"}
+11-21 11:46:56.313  1201  1201 D VoiceConfigHelper: appItem:{"extra":"com.cibn.tv","name":"CIBN酷喵"}
+11-21 11:46:56.313  1201  1201 D VoiceConfigHelper: appItem:{"extra":"com.mango.dangbeimarket","name":"芒果TV市场"}
+11-21 11:46:56.313  1201  1201 D VoiceConfigHelper: appItem:{"extra":"com.mgtv.cast","name":"芒果投屏"}
+11-21 11:46:56.313  1201  1201 D VoiceConfigHelper: appItem:{"extra":"com.mgtv.remote","name":"电视助手"}
+11-21 11:46:56.313  1201  1201 D VoiceConfigHelper: appItem:{"extra":"com.pptv.tvsports.preinstall","name":"CIBN聚体育"}
+11-21 11:46:56.313  1201  1201 D VoiceConfigHelper: appItem:{"extra":"com.tencent.qqmusictv","name":"QQ音乐"}
+11-21 11:46:56.313  1201  1201 D VoiceConfigHelper: appItem:{"extra":"com.mgtv.mgui","name":"牛奶桌面"}
+11-21 11:46:56.313  1201  1201 D VoiceConfigHelper: appItem:{"extra":"com.mgtv.playtest","name":"PetPlayTest"}
+11-21 11:46:56.313  1201  1201 D VoiceConfigHelper: appItem:{"extra":"com.mgtv.playtest","name":"陪伴队列测试"}
+11-21 11:46:56.313  1201  1201 D VoiceConfigHelper: appItem:{"extra":"com.mgtv.playtest","name":"模拟宿主频道页"}
+11-21 11:46:56.313  1201  1201 D VoiceConfigHelper: appItem:{"extra":"com.mgtv.tv.pet","name":"MgtvPet"}
+11-21 11:46:56.313  1201  1201 D VoiceConfigHelper: appItem:{"extra":"com.mgtv.tvos.datareportor","name":"TVOS Screenshot Demo"}
+11-21 11:46:56.313  1201  1201 D VoiceConfigHelper: appItem:{"extra":"com.pae.host","name":"Procedural Avatar Engine"}
+11-21 11:46:56.314  1201  1201 D VoiceReceiveService: beginBroadcast notifyScene result:{"appContent":"{\"alias\":\"芒果TV|TV|爱芒果\",\"extra\":\"com.mgtv.tv\",\"name\":\"芒果TV\"}\r\n{\"alias\":\"少儿\",\"extra\":\"com.mgtv.tv.character\",\"name\":\"芒果少儿\"}\r\n{\"alias\":\"播放器\",\"extra\":\"com.mgtv.mediaplayer\",\"name\":\"本地播放器\"}\r\n{\"alias\":\"文件管理|文件管理器\",\"extra\":\"com.mgtv.filemanager\",\"name\":\"本地文件管理\"}\r\n{\"alias\":\"爱奇艺|奇艺果\",\"extra\":\"com.gitvvideo.mango\",\"name\":\"银河奇异果\"}\r\n{\"alias\":\"优酷|优酷视频|酷喵|CIBN酷喵|CIBN影视|酷喵影视\",\"extra\":\"com.cibn.tv\",\"name\":\"CIBN酷喵影视\"}\r\n{\"alias\":\"PPTV|聚精彩\",\"extra\":\"com.pplive.atv\",\"name\":\"CIBN聚精彩\"}\r\n{\"alias\":\"聚体育\",\"extra\":\"com.pptv.tvsports.preinstall\",\"name\":\"CIBN 聚体育\"}\r\n{\"alias\":\"乐播|投屏\",\"extra\":\"com.hpplay.happyplay.aw\",\"name\":\"乐播投屏\"}\r\n{\"alias\":\"小电视|B站|哔哩哔哩\",\"extra\":\"com.xiaodianshi.tv.yst\",\"name\":\"云视听小电视\"}\r\n{\"alias\":\"电视猫\",\"extra\":\"com.moretv.android\",\"name\":\"云视听电视猫\"}\r\n{\"alias\":\"4K花园\",\"extra\":\"net.cibntv.ott.sk\",\"name\":\"CIBN4K花园\"}\r\n{\"alias\":\"我的应用|应用管理\",\"extra\":\"com.mgtv.myapp\",\"name\":\"应用中心\"}\r\n{\"alias\":\"升级管理\",\"extra\":\"com.mgtv.ota\",\"name\":\"系统升级\"}\r\n{\"extra\":\"com.mgtv.setting\",\"name\":\"设置\"}\r\n{\"extra\":\"com.mgtv.mgui\",\"name\":\"牛奶桌面\"}\r\n{\"extra\":\"com.cibn.tv\",\"name\":\"CIBN酷喵\"}\r\n{\"extra\":\"com.mango.dangbeimarket\",\"name\":\"芒果TV市场\"}\r\n{\"extra\":\"com.mgtv.cast\",\"name\":\"芒果投屏\"}\r\n{\"extra\":\"com.mgtv.remote\",\"name\":\"电视助手\"}\r\n{\"extra\":\"com.pptv.tvsports.preinstall\",\"name\":\"CIBN聚体育\"}\r\n{\"extra\":\"com.tencent.qqmusictv\",\"name\":\"QQ音乐\"}\r\n{\"extra\":\"com.mgtv.mgui\",\"name\":\"牛奶桌面\"}\r\n{\"extra\":\"com.mgtv.playtest\",\"name\":\"PetPlayTest\"}\r\n{\"extra\":\"com.mgtv.playtest\",\"name\":\"陪伴队列测试\"}\r\n{\"extra\":\"com.mgtv.playtest\",\"name\":\"模拟宿主频道页\"}\r\n{\"extra\":\"com.mgtv.tv.pet\",\"name\":\"MgtvPet\"}\r\n{\"extra\":\"com.mgtv.tvos.datareportor\",\"name\":\"TVOS Screenshot Demo\"}\r\n{\"extra\":\"com.pae.host\",\"name\":\"Procedural Avatar Engine\"}\r\n","code":0,"sceneType":0,"type":"4"}
+11-21 11:46:56.314  1201  1201 I VoiceReceiveService: service callback N: 0
+11-21 11:46:56.314  1201  1201 D VoiceReceiveService: finishBroadcast
+11-21 11:46:56.389   462 26905 D mgtv    : com.mgtv.app.state start ActivityStackSupervisor
+11-21 11:46:56.390   462 26905 I ActivityManager: START u0 {flg=0x10000000 cmp=com.pae.host/.MainActivity} from uid 0
+11-21 11:46:56.395   462 26905 D mgtv    : com.mgtv.app.state start activityStack
+11-21 11:46:56.395   462 26905 E ActivityManager: getPackageFerformanceMode--ComponentInfo{com.pae.host/com.pae.host.MainActivity}----com.pae.host
+11-21 11:46:56.397  1109  1109 I ProxyApp: OttOpenVipActivity onPause time = 263935534
+11-21 11:46:56.400   462 20169 D mgtv    : com.mgtv.app.state start activityStack
+11-21 11:46:56.401   462 20169 E ActivityManager: getPackageFerformanceMode--ComponentInfo{com.pae.host/com.pae.host.MainActivity}----com.pae.host
+11-21 11:46:56.417   462 20169 I ActivityManager: Start proc 21206:com.pae.host/u0a33 for activity com.pae.host/.MainActivity
+11-21 11:46:56.418 21206 21206 I zygote64: Late-enabling -Xcheck:jni
+11-21 11:46:56.433   309  1605 I [Gralloc]: Got fd 16 for handle 1
+11-21 11:46:56.433   309  1605 I [Gralloc]: leave, w : 360, h : 202, format : 0x1,internal_format : 0x1, usage : 0x333. size=297344,pixel_stride=368,byte_stride=1472
+11-21 11:46:56.433   309  1605 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-21 11:46:56.433   462 20169 I [Gralloc]: Got handle 1 for fd 239
+11-21 11:46:56.433   462 20169 I [Gralloc]: leave, w : 360, h : 202, format : 0x1,internal_format : 0x1, usage : 0x333. size=297344,pixel_stride=368,byte_stride=1472
+11-21 11:46:56.433   462 20169 I [Gralloc]: leave: prime_fd=239,share_attr_fd=240
+11-21 11:46:56.434   321   532 I [Gralloc]: Got handle 5 for fd 82
+11-21 11:46:56.434   321   532 I [Gralloc]: leave, w : 360, h : 202, format : 0x1,internal_format : 0x1, usage : 0x333. size=297344,pixel_stride=368,byte_stride=1472
+11-21 11:46:56.434   321   532 I [Gralloc]: leave: prime_fd=82,share_attr_fd=83
+11-21 11:46:56.459   309  1605 I [Gralloc]: Got fd 16 for handle 1
+11-21 11:46:56.459   309  1605 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x933. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:46:56.459   309  1605 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-21 11:46:56.460   321   485 I [Gralloc]: Got handle 5 for fd 82
+11-21 11:46:56.460   321   485 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x933. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:46:56.460   321   485 I [Gralloc]: leave: prime_fd=82,share_attr_fd=83
+11-21 11:46:56.460   462   524 I [Gralloc]: Got handle 1 for fd 243
+11-21 11:46:56.460   462   524 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x933. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:46:56.461   462   524 I [Gralloc]: leave: prime_fd=243,share_attr_fd=244
+11-21 11:46:56.521   310   310 I [Gralloc]: Got handle 3 for fd 27
+11-21 11:46:56.521   310   310 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x933. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:46:56.521   310   310 I [Gralloc]: leave: prime_fd=27,share_attr_fd=42
+11-21 11:46:56.523   321   532 E BufferQueueProducer: [com.mgtv.mgui/com.mgtv.mgui.loader.a.ActivityN1STNTS2#0] disconnect: not connected (req=1)
+11-21 11:46:56.523  1109  1254 W libEGL  : EGLNativeWindowType 0xc19fc008 disconnect failed
+11-21 11:46:56.538 21206 21206 I PAE_JNI : runtime created
+11-21 11:46:56.540 21206 21223 I mali_so : [File] : hardware/arm/maliT760/driver/product/base/src/mali_base_kbase.c; [Line] : 876; [Func] : base_context_deal_with_version_affairs_rk_ext;
+11-21 11:46:56.540 21206 21223 I mali_so : arm_release_ver of this mali_so is 'r18p0-01rel0', rk_so_ver is '8@0'.
+11-21 11:46:56.540 21206 21223 D mali_so : [File] : hardware/arm/maliT760/driver/product/base/src/mali_base_kbase.c; [Line] : 881; [Func] : base_context_deal_with_version_affairs_rk_ext;
+11-21 11:46:56.540 21206 21223 D mali_so : current process is NOT sf, to bail out.
+11-21 11:46:56.549 21206 21223 I com.pae.host: android::hardware::configstore::V1_0::ISurfaceFlingerConfigs::hasWideColorDisplay retrieved: 0
+11-21 11:46:56.549 21206 21223 I PAE_EGL : EGL initialized version 1.4
+11-21 11:46:56.552 21206 21223 I PAE_EGL : GLES 3.0 EGL context created
+11-21 11:46:56.574 21206 21234 D OpenGLRenderer: HWUI GL Pipeline
+11-21 11:46:56.596 21206 21234 I OpenGLRenderer: Initialized EGL, version 1.4
+11-21 11:46:56.596 21206 21234 D OpenGLRenderer: Swap behavior 2
+11-21 11:46:56.603 21206 21234 D mali_winsys: EGLint new_window_surface(egl_winsys_display *, void *, EGLSurface, EGLConfig, egl_winsys_surface **, egl_color_buffer_format *, EGLBoolean) returns 0x3000
+11-21 11:46:56.615 21206 21206 I PAE_SURFACE: surfaceCreated
+11-21 11:46:56.617 21206 21206 I PAE_SURFACE: surfaceChanged 1920x1080
+11-21 11:46:56.619 21206 21223 D mali_winsys: EGLint new_window_surface(egl_winsys_display *, void *, EGLSurface, EGLConfig, egl_winsys_surface **, egl_color_buffer_format *, EGLBoolean) returns 0x3000
+11-21 11:46:56.620 21206 21223 I PAE_GLCAPS: GL_VERSION=OpenGL ES 3.2 v1.r18p0-01rel0.16f2a2e3305581ae54dd0f9788beb400
+11-21 11:46:56.620 21206 21223 I PAE_GLCAPS: GL_RENDERER=Mali-T860
+11-21 11:46:56.620 21206 21223 I PAE_GLCAPS: GL_VENDOR=ARM
+11-21 11:46:56.620 21206 21223 I PAE_GLCAPS: GLSL_VERSION=OpenGL ES GLSL ES 3.20
+11-21 11:46:56.620 21206 21223 I PAE_GLCAPS: MAX_VERTEX_UNIFORM_BLOCKS=12 MAX_TEXTURE_SIZE=8192 MAX_VERTEX_ATTRIBS=16
+11-21 11:46:56.642 21206 21223 I PAE_RENDER: surface ready 1920x1080
+11-21 11:46:56.643   309  1605 I [Gralloc]: Got fd 16 for handle 1
+11-21 11:46:56.644   309  1605 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:46:56.644   309  1605 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-21 11:46:56.644   321   532 I [Gralloc]: Got handle 1 for fd 74
+11-21 11:46:56.644   321   532 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:46:56.644   321   532 I [Gralloc]: leave: prime_fd=74,share_attr_fd=75
+11-21 11:46:56.650 21206 21234 I [Gralloc]: Got handle 1 for fd 56
+11-21 11:46:56.650 21206 21234 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:46:56.650 21206 21234 I [Gralloc]: leave: prime_fd=56,share_attr_fd=57
+11-21 11:46:56.663   309   309 I [Gralloc]: Got fd 16 for handle 1
+11-21 11:46:56.668   309   309 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x2,internal_format : 0x2, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:46:56.668   309   309 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-21 11:46:56.668   321   533 I [Gralloc]: Got handle 2 for fd 86
+11-21 11:46:56.668   321   533 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x2,internal_format : 0x2, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:46:56.668   321   533 I [Gralloc]: leave: prime_fd=86,share_attr_fd=87
+11-21 11:46:56.668 21206 21223 I [Gralloc]: Got handle 2 for fd 60
+11-21 11:46:56.668 21206 21223 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x2,internal_format : 0x2, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:46:56.668 21206 21223 I [Gralloc]: leave: prime_fd=60,share_attr_fd=61
+11-21 11:46:56.685   462   489 I ActivityManager: Displayed com.pae.host/.MainActivity: +276ms
+11-21 11:46:56.687  1273  1273 D SogouIME API: ==============num:32
+11-21 11:46:56.687  1273  1273 D SogouIME: mFocusedComponent:30   isHkbEnable:false
+11-21 11:46:56.688  1273  1273 D SogouIME: =====configKeyboard=======是否有硬件盘:false     硬件盘是否不再隐藏：false
+11-21 11:46:56.695 21206 21223 I PAE_RENDER: surface changed 1920x1080
+11-21 11:46:56.700   310   310 I [Gralloc]: Got handle 5 for fd 52
+11-21 11:46:56.700   310   310 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x2,internal_format : 0x2, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:46:56.700   310   310 I [Gralloc]: leave: prime_fd=52,share_attr_fd=53
+11-21 11:46:56.700   310   310 I [Gralloc]: Got handle 7 for fd 60
+11-21 11:46:56.700   310   310 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:46:56.700   310   310 I [Gralloc]: leave: prime_fd=60,share_attr_fd=65
+11-21 11:46:56.704   309   309 I [Gralloc]: Got fd 16 for handle 1
+11-21 11:46:56.706   309   309 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:46:56.706   309   309 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-21 11:46:56.706   321   485 I [Gralloc]: Got handle 3 for fd 59
+11-21 11:46:56.706   321   485 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:46:56.706   321   485 I [Gralloc]: leave: prime_fd=59,share_attr_fd=72
+11-21 11:46:56.706   309  1605 I [Gralloc]: Got fd 16 for handle 2
+11-21 11:46:56.708   309  1605 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x2,internal_format : 0x2, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:46:56.708   309  1605 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-21 11:46:56.708   321   533 I [Gralloc]: Got handle 6 for fd 89
+11-21 11:46:56.708   321   533 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x2,internal_format : 0x2, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:46:56.708   321   533 I [Gralloc]: leave: prime_fd=89,share_attr_fd=91
+11-21 11:46:56.727 21206 21234 I [Gralloc]: Got handle 3 for fd 64
+11-21 11:46:56.727 21206 21234 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:46:56.727 21206 21234 I [Gralloc]: leave: prime_fd=64,share_attr_fd=68
+11-21 11:46:56.727 21206 21223 I [Gralloc]: Got handle 4 for fd 73
+11-21 11:46:56.727 21206 21223 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x2,internal_format : 0x2, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:46:56.727 21206 21223 I [Gralloc]: leave: prime_fd=73,share_attr_fd=74
+11-21 11:46:56.755   310   310 I [Gralloc]: Got handle 1 for fd 37
+11-21 11:46:56.755   310   310 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x2,internal_format : 0x2, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:46:56.755   310   310 I [Gralloc]: leave: prime_fd=37,share_attr_fd=44
+11-21 11:46:56.767   309  1605 I [Gralloc]: Got fd 16 for handle 1
+11-21 11:46:56.768   309  1605 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x2,internal_format : 0x2, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:46:56.768   309  1605 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-21 11:46:56.768   321   532 I [Gralloc]: Got handle 7 for fd 98
+11-21 11:46:56.768   321   532 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x2,internal_format : 0x2, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:46:56.768   321   532 I [Gralloc]: leave: prime_fd=98,share_attr_fd=99
+11-21 11:46:56.768 21206 21223 I [Gralloc]: Got handle 5 for fd 65
+11-21 11:46:56.769 21206 21223 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x2,internal_format : 0x2, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:46:56.769 21206 21223 I [Gralloc]: leave: prime_fd=65,share_attr_fd=66
+11-21 11:46:56.784   310   310 I [Gralloc]: Got handle 7 for fd 54
+11-21 11:46:56.784   310   310 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x2,internal_format : 0x2, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:46:56.784   310   310 I [Gralloc]: leave: prime_fd=54,share_attr_fd=56
+11-21 11:46:56.896   309  1605 I [Gralloc]: Got fd 16 for handle 1
+11-21 11:46:56.898   309  1605 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x2,internal_format : 0x2, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:46:56.898   309  1605 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-21 11:46:56.898   321   533 I [Gralloc]: Got handle 5 for fd 93
+11-21 11:46:56.898   321   533 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x2,internal_format : 0x2, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:46:56.898   321   533 I [Gralloc]: leave: prime_fd=93,share_attr_fd=94
+11-21 11:46:56.899 21206 21223 I [Gralloc]: Got handle 6 for fd 70
+11-21 11:46:56.899 21206 21223 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x2,internal_format : 0x2, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:46:56.899 21206 21223 I [Gralloc]: leave: prime_fd=70,share_attr_fd=71
+11-21 11:46:56.917   310   310 I [Gralloc]: Got handle 3 for fd 33
+11-21 11:46:56.917   310   310 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x2,internal_format : 0x2, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 11:46:56.917   310   310 I [Gralloc]: leave: prime_fd=33,share_attr_fd=38
+11-21 11:46:56.928   329   329 I remoteservice.s: type=1400 audit(0.0:1858): avc: denied { dac_override } for capability=1 scontext=u:r:remoteservice:s0 tcontext=u:r:remoteservice:s0 tclass=capability permissive=1
+11-21 11:46:56.942  1109  1109 I VoiceFloatingViewManager: detach : OttOpenVipActivity
+11-21 11:46:56.942  1109  1109 I ProxyApp: OttOpenVipActivity onStop time = 263936079
+11-21 11:46:56.942  1109  1109 I YouthModeManager: onActivityStopped0
+11-21 11:46:56.942  1109  1109 I YouthModeManager: exit
+11-21 11:46:56.944  1109  1109 D RePlugin.ws001: PAC.callOnLowMemory(): Call onTrimMemory(), cl=com.qihoo360.replugin.PluginDexClassLoader[DexPathList[[zip file "/data/user/0/com.mgtv.mgui/app_p_a/1352567954.jar"],nativeLibraryDirectories=[/data/user/0/com.mgtv.mgui/app_p_n/1352567954/arm, /data/app/com.mgtv.mgui-fNNd5AyGhnQcmndRFg1iQQ==/lib/arm, /system/fake-libs, /data/app/com.mgtv.mgui-fNNd5AyGhnQcmndRFg1iQQ==/base.apk!/lib/armeabi, /system/lib, /vendor/lib]]]; lv=20
+11-21 11:46:56.945  1109  1109 I MyLogImp: onTrimMemory level:20
+11-21 11:46:56.945  1109  1109 D Tinker.DefaultAppLike: onTrimMemory level:20
+11-21 11:46:56.945  1109  1109 I Launcher-Tinker.TVOS:: onTrimMemory
+11-21 11:46:57.206  1109  1109 I Launcher-AppListHelper:: updateRecentlyAppInfo: 
+11-21 11:46:57.207  1109  1109 I chatty  : uid=10043(com.mgtv.mgui) identical 1 line
+11-21 11:46:57.215  1109  1109 I Launcher-AppListHelper:: updateRecentlyAppInfo: 
+11-21 11:46:57.257  1109 21239 I DataManager4App: isMiwaChannel: false
+11-21 11:46:57.272  1109 21240 I DataManager4App: isMiwaChannel: false
+11-21 11:46:57.273  1109 21239 E ActivityThread: Failed to find provider info for com.mgtv.os.configprovider
+11-21 11:46:57.273  1109 21239 E ConfigInfoProviderHelp: IllegalArgumentException:java.lang.IllegalArgumentException: Unknown URI content://com.mgtv.os.configprovider,use cache data:[app_sort:com.mgtv.tvos.datareportor;com.mgtv.tv;com.pplive.atv;com.pptv.tvsports.preinstall;net.cibntv.ott.sk;com.tencent.qqmusictv;com.hpplay.happyplay.aw;com.mgtv.filemanager;com.mgtv.ota;com.mgtv.remote;com.mgtv.cast]
+11-21 11:46:57.273  1109 21239 D DataManager4App: isMiwaChannel: false  packageNamelist: com.mgtv.tvos.datareportor;com.mgtv.tv;com.pplive.atv;com.pptv.tvsports.preinstall;net.cibntv.ott.sk;com.tencent.qqmusictv;com.hpplay.happyplay.aw;com.mgtv.filemanager;com.mgtv.ota;com.mgtv.remote;com.mgtv.cast
+11-21 11:46:57.277  1109 21241 I DataManager4App: isMiwaChannel: false
+11-21 11:46:57.278  1109 21240 E ActivityThread: Failed to find provider info for com.mgtv.os.configprovider
+11-21 11:46:57.279  1109 21240 E ConfigInfoProviderHelp: IllegalArgumentException:java.lang.IllegalArgumentException: Unknown URI content://com.mgtv.os.configprovider,use cache data:[app_sort:com.mgtv.tvos.datareportor;com.mgtv.tv;com.pplive.atv;com.pptv.tvsports.preinstall;net.cibntv.ott.sk;com.tencent.qqmusictv;com.hpplay.happyplay.aw;com.mgtv.filemanager;com.mgtv.ota;com.mgtv.remote;com.mgtv.cast]
+11-21 11:46:57.279  1109 21240 D DataManager4App: isMiwaChannel: false  packageNamelist: com.mgtv.tvos.datareportor;com.mgtv.tv;com.pplive.atv;com.pptv.tvsports.preinstall;net.cibntv.ott.sk;com.tencent.qqmusictv;com.hpplay.happyplay.aw;com.mgtv.filemanager;com.mgtv.ota;com.mgtv.remote;com.mgtv.cast
+11-21 11:46:57.279  1109 21241 E ActivityThread: Failed to find provider info for com.mgtv.os.configprovider
+11-21 11:46:57.280  1109 21241 E ConfigInfoProviderHelp: IllegalArgumentException:java.lang.IllegalArgumentException: Unknown URI content://com.mgtv.os.configprovider,use cache data:[app_sort:com.mgtv.tvos.datareportor;com.mgtv.tv;com.pplive.atv;com.pptv.tvsports.preinstall;net.cibntv.ott.sk;com.tencent.qqmusictv;com.hpplay.happyplay.aw;com.mgtv.filemanager;com.mgtv.ota;com.mgtv.remote;com.mgtv.cast]
+11-21 11:46:57.280  1109 21241 D DataManager4App: isMiwaChannel: false  packageNamelist: com.mgtv.tvos.datareportor;com.mgtv.tv;com.pplive.atv;com.pptv.tvsports.preinstall;net.cibntv.ott.sk;com.tencent.qqmusictv;com.hpplay.happyplay.aw;com.mgtv.filemanager;com.mgtv.ota;com.mgtv.remote;com.mgtv.cast
+11-21 11:46:57.283  1109 21239 D DataManager4App: getRecentAppList pkg:com.mgtv.tvos.datareportor, power:null
+11-21 11:46:57.288  1109 21240 D DataManager4App: getRecentAppList pkg:com.mgtv.tvos.datareportor, power:null
+11-21 11:46:57.292  1109 21241 D DataManager4App: getRecentAppList pkg:com.mgtv.tvos.datareportor, power:null
+11-21 11:46:57.297  1109 21240 D DataManager4App: getRecentAppList pkg:com.mgtv.tv, power:null
+11-21 11:46:57.301  1109 21241 D DataManager4App: getRecentAppList pkg:com.mgtv.tv, power:null
+11-21 11:46:57.303  1109 21239 D DataManager4App: getRecentAppList pkg:com.mgtv.tv, power:null
+11-21 11:46:57.308  1109 21241 D DataManager4App: getRecentAppList pkg:com.pplive.atv, power:null
+11-21 11:46:57.313  1109 21241 D DataManager4App: getRecentAppList pkg:com.pptv.tvsports.preinstall, power:null
+11-21 11:46:57.349  1109 21240 D DataManager4App: getRecentAppList pkg:com.pplive.atv, power:null
+11-21 11:46:57.350  1109 21239 D DataManager4App: getRecentAppList pkg:com.pplive.atv, power:null
+11-21 11:46:57.352  1109 21240 D DataManager4App: getRecentAppList pkg:com.pptv.tvsports.preinstall, power:null
+11-21 11:46:57.353  1109 21240 D DataManager4App: getRecentAppList pkg:net.cibntv.ott.sk, power:null
+11-21 11:46:57.357  1109 21239 D DataManager4App: getRecentAppList pkg:com.pptv.tvsports.preinstall, power:null
+11-21 11:46:57.358  1109 21239 D DataManager4App: getRecentAppList pkg:net.cibntv.ott.sk, power:null
+11-21 11:46:57.359  1109 21241 D DataManager4App: getRecentAppList pkg:net.cibntv.ott.sk, power:null
+11-21 11:46:57.380  1109 21241 D DataManager4App: getRecentAppList pkg:com.tencent.qqmusictv, power:null
+11-21 11:46:57.384  1109 21240 D DataManager4App: getRecentAppList pkg:com.tencent.qqmusictv, power:null
+11-21 11:46:57.388  1109 21241 D DataManager4App: getRecentAppList pkg:com.hpplay.happyplay.aw, power:null
+11-21 11:46:57.392  1109 21241 D DataManager4App: getRecentAppList pkg:com.mgtv.filemanager, power:null
+11-21 11:46:57.393  1109 21240 D DataManager4App: getRecentAppList pkg:com.hpplay.happyplay.aw, power:null
+11-21 11:46:57.394  1109 21240 D DataManager4App: getRecentAppList pkg:com.mgtv.filemanager, power:null
+11-21 11:46:57.398  1109 21239 D DataManager4App: getRecentAppList pkg:com.tencent.qqmusictv, power:null
+11-21 11:46:57.400  1109 21239 D DataManager4App: getRecentAppList pkg:com.hpplay.happyplay.aw, power:null
+11-21 11:46:57.401  1109 21240 D DataManager4App: getRecentAppList pkg:com.mgtv.ota, power:null
+11-21 11:46:57.402  1109 21239 D DataManager4App: getRecentAppList pkg:com.mgtv.filemanager, power:null
+11-21 11:46:57.403  1109 21241 D DataManager4App: getRecentAppList pkg:com.mgtv.ota, power:null
+11-21 11:46:57.406  1109 21239 D DataManager4App: getRecentAppList pkg:com.mgtv.ota, power:null
+11-21 11:46:57.409  1109 21240 D DataManager4App: getRecentAppList pkg:com.mgtv.remote, power:null
+11-21 11:46:57.417  1109 21239 D DataManager4App: getRecentAppList pkg:com.mgtv.remote, power:null
+11-21 11:46:57.419  1109 21241 D DataManager4App: getRecentAppList pkg:com.mgtv.remote, power:null
+11-21 11:46:57.423  1109 21240 D DataManager4App: getRecentAppList pkg:com.mgtv.cast, power:null
+11-21 11:46:57.424  1109 21240 I LocalSpUtlis: getBooleanValue,key:apson_app_show_first
+11-21 11:46:57.424  1109 21240 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.tvos.datareportor', appName='TVOS Screenshot Demo', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{c2e967b com.mgtv.tvos.datareportor}, appDangbei=null, versionCode=1, versionName='com.mgtv.tvos.datareportor', startCount=0, startTime=0, firstInstalltime=1794480075717, position=0, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 11:46:57.424  1109 21240 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.tv', appName='芒果TV', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{fd1bc98 com.mgtv.tv}, appDangbei=null, versionCode=22011118, versionName='com.mgtv.tv', startCount=0, startTime=0, firstInstalltime=1230739200000, position=109, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 11:46:57.424  1109 21240 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.pplive.atv', appName='CIBN聚精彩', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{953ccf1 com.pplive.atv}, appDangbei=null, versionCode=63105, versionName='com.pplive.atv', startCount=0, startTime=0, firstInstalltime=1230739200000, position=105, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 11:46:57.424  1109 21240 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.pptv.tvsports.preinstall', appName='CIBN聚体育', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{485e0d6 com.pptv.tvsports.preinstall}, appDangbei=null, versionCode=394301, versionName='com.pptv.tvsports.preinstall', startCount=0, startTime=0, firstInstalltime=1230739200000, position=104, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 11:46:57.424  1109 21240 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='net.cibntv.ott.sk', appName='CIBN4K花园', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{3061f57 net.cibntv.ott.sk}, appDangbei=null, versionCode=81, versionName='net.cibntv.ott.sk', startCount=0, startTime=0, firstInstalltime=1230739200000, position=103, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 11:46:57.424  1109 21240 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.tencent.qqmusictv', appName='QQ音乐', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{b720a44 com.tencent.qqmusictv}, appDangbei=null, versionCode=407, versionName='com.tencent.qqmusictv', startCount=0, startTime=0, firstInstalltime=1230739200000, position=102, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 11:46:57.425  1109 21240 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.hpplay.happyplay.aw', appName='乐播投屏', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{347472d com.hpplay.happyplay.aw}, appDangbei=null, versionCode=808080432, versionName='com.hpplay.happyplay.aw', startCount=0, startTime=0, firstInstalltime=1230739200000, position=99, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 11:46:57.425  1109 21240 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.filemanager', appName='本地文件管理', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{6d73462 com.mgtv.filemanager}, appDangbei=null, versionCode=2130924842, versionName='com.mgtv.filemanager', startCount=0, startTime=0, firstInstalltime=1230739200000, position=98, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 11:46:57.425  1109 21240 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.ota', appName='系统升级', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{16359f3 com.mgtv.ota}, appDangbei=null, versionCode=2130924744, versionName='com.mgtv.ota', startCount=0, startTime=0, firstInstalltime=1230739200000, position=96, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 11:46:57.425  1109 21240 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.remote', appName='电视助手', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{1a786b0 com.mgtv.remote}, appDangbei=null, versionCode=2103848530, versionName='com.mgtv.remote', startCount=0, startTime=0, firstInstalltime=1230739200000, position=0, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 11:46:57.425  1109 21240 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.cast', appName='芒果投屏', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{b7e2929 com.mgtv.cast}, appDangbei=null, versionCode=2111001144, versionName='com.mgtv.cast', startCount=0, startTime=0, firstInstalltime=1230739200000, position=0, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 11:46:57.428  1109 21239 D DataManager4App: getRecentAppList pkg:com.mgtv.cast, power:null
+11-21 11:46:57.430  1109 21239 I LocalSpUtlis: getBooleanValue,key:apson_app_show_first
+11-21 11:46:57.430  1109 21239 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.tvos.datareportor', appName='TVOS Screenshot Demo', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{d4fa24f com.mgtv.tvos.datareportor}, appDangbei=null, versionCode=1, versionName='com.mgtv.tvos.datareportor', startCount=0, startTime=0, firstInstalltime=1794480075717, position=0, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 11:46:57.430  1109 21239 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.tv', appName='芒果TV', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{6765ddc com.mgtv.tv}, appDangbei=null, versionCode=22011118, versionName='com.mgtv.tv', startCount=0, startTime=0, firstInstalltime=1230739200000, position=109, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 11:46:57.430  1109 21239 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.pplive.atv', appName='CIBN聚精彩', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{5272ee5 com.pplive.atv}, appDangbei=null, versionCode=63105, versionName='com.pplive.atv', startCount=0, startTime=0, firstInstalltime=1230739200000, position=105, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 11:46:57.430  1109 21239 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.pptv.tvsports.preinstall', appName='CIBN聚体育', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{c16edba com.pptv.tvsports.preinstall}, appDangbei=null, versionCode=394301, versionName='com.pptv.tvsports.preinstall', startCount=0, startTime=0, firstInstalltime=1230739200000, position=104, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 11:46:57.430  1109 21239 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='net.cibntv.ott.sk', appName='CIBN4K花园', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{a0e146b net.cibntv.ott.sk}, appDangbei=null, versionCode=81, versionName='net.cibntv.ott.sk', startCount=0, startTime=0, firstInstalltime=1230739200000, position=103, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 11:46:57.430  1109 21239 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.tencent.qqmusictv', appName='QQ音乐', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{7f97bc8 com.tencent.qqmusictv}, appDangbei=null, versionCode=407, versionName='com.tencent.qqmusictv', startCount=0, startTime=0, firstInstalltime=1230739200000, position=102, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 11:46:57.430  1109 21239 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.hpplay.happyplay.aw', appName='乐播投屏', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{da0d461 com.hpplay.happyplay.aw}, appDangbei=null, versionCode=808080432, versionName='com.hpplay.happyplay.aw', startCount=0, startTime=0, firstInstalltime=1230739200000, position=99, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 11:46:57.431  1109 21239 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.filemanager', appName='本地文件管理', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{2362b86 com.mgtv.filemanager}, appDangbei=null, versionCode=2130924842, versionName='com.mgtv.filemanager', startCount=0, startTime=0, firstInstalltime=1230739200000, position=98, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 11:46:57.431  1109 21239 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.ota', appName='系统升级', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{1f78c47 com.mgtv.ota}, appDangbei=null, versionCode=2130924744, versionName='com.mgtv.ota', startCount=0, startTime=0, firstInstalltime=1230739200000, position=96, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 11:46:57.431  1109 21239 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.remote', appName='电视助手', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{90e8c74 com.mgtv.remote}, appDangbei=null, versionCode=2103848530, versionName='com.mgtv.remote', startCount=0, startTime=0, firstInstalltime=1230739200000, position=0, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 11:46:57.431  1109 21239 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.cast', appName='芒果投屏', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{fb5559d com.mgtv.cast}, appDangbei=null, versionCode=2111001144, versionName='com.mgtv.cast', startCount=0, startTime=0, firstInstalltime=1230739200000, position=0, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 11:46:57.433  1109 21241 D DataManager4App: getRecentAppList pkg:com.mgtv.cast, power:null
+11-21 11:46:57.434  1109 21241 I LocalSpUtlis: getBooleanValue,key:apson_app_show_first
+11-21 11:46:57.435  1109 21241 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.tvos.datareportor', appName='TVOS Screenshot Demo', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{216a5e3 com.mgtv.tvos.datareportor}, appDangbei=null, versionCode=1, versionName='com.mgtv.tvos.datareportor', startCount=0, startTime=0, firstInstalltime=1794480075717, position=0, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 11:46:57.435  1109 21241 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.tv', appName='芒果TV', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{ac1fbe0 com.mgtv.tv}, appDangbei=null, versionCode=22011118, versionName='com.mgtv.tv', startCount=0, startTime=0, firstInstalltime=1230739200000, position=109, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 11:46:57.435  1109 21241 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.pplive.atv', appName='CIBN聚精彩', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{e96ae99 com.pplive.atv}, appDangbei=null, versionCode=63105, versionName='com.pplive.atv', startCount=0, startTime=0, firstInstalltime=1230739200000, position=105, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 11:46:57.435  1109 21241 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.pptv.tvsports.preinstall', appName='CIBN聚体育', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{2b1255e com.pptv.tvsports.preinstall}, appDangbei=null, versionCode=394301, versionName='com.pptv.tvsports.preinstall', startCount=0, startTime=0, firstInstalltime=1230739200000, position=104, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 11:46:57.435  1109 21241 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='net.cibntv.ott.sk', appName='CIBN4K花园', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{383bd3f net.cibntv.ott.sk}, appDangbei=null, versionCode=81, versionName='net.cibntv.ott.sk', startCount=0, startTime=0, firstInstalltime=1230739200000, position=103, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 11:46:57.435  1109 21241 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.tencent.qqmusictv', appName='QQ音乐', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{7af60c com.tencent.qqmusictv}, appDangbei=null, versionCode=407, versionName='com.tencent.qqmusictv', startCount=0, startTime=0, firstInstalltime=1230739200000, position=102, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 11:46:57.435  1109 21241 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.hpplay.happyplay.aw', appName='乐播投屏', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{49a9b55 com.hpplay.happyplay.aw}, appDangbei=null, versionCode=808080432, versionName='com.hpplay.happyplay.aw', startCount=0, startTime=0, firstInstalltime=1230739200000, position=99, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 11:46:57.435  1109 21241 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.filemanager', appName='本地文件管理', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{9e6396a com.mgtv.filemanager}, appDangbei=null, versionCode=2130924842, versionName='com.mgtv.filemanager', startCount=0, startTime=0, firstInstalltime=1230739200000, position=98, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 11:46:57.435  1109 21241 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.ota', appName='系统升级', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{e80ee5b com.mgtv.ota}, appDangbei=null, versionCode=2130924744, versionName='com.mgtv.ota', startCount=0, startTime=0, firstInstalltime=1230739200000, position=96, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 11:46:57.435  1109 21241 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.remote', appName='电视助手', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{ae766f8 com.mgtv.remote}, appDangbei=null, versionCode=2103848530, versionName='com.mgtv.remote', startCount=0, startTime=0, firstInstalltime=1230739200000, position=0, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 11:46:57.435  1109 21241 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.cast', appName='芒果投屏', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{1b697d1 com.mgtv.cast}, appDangbei=null, versionCode=2111001144, versionName='com.mgtv.cast', startCount=0, startTime=0, firstInstalltime=1230739200000, position=0, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 11:46:59.042 21206 21223 I PAE_STATS: frames=120 fps=341.3 frame_ms=2.93 draw_calls=2 triangles=13 buffer_bytes=420
+11-21 11:47:00.024  1109  1109 I Launcher-MguiDataManager:: onReceive: android.intent.action.TIME_TICK
+11-21 11:47:00.025   462   480 E memtrack: Couldn't load memtrack module
+11-21 11:47:00.026   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 11:47:00.070   462   480 E memtrack: Couldn't load memtrack module
+11-21 11:47:00.070   462   480 W android.os.Debug: failed to get memory consumption info: -1

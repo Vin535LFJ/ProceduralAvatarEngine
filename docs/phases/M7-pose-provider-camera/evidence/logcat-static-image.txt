@@ -1,0 +1,19 @@
+--------- beginning of system
+--------- beginning of crash
+--------- beginning of main
+11-21 16:46:15.827 26551 26551 W PAE_POSE: camera selector FRONT failed: Provided camera selector unable to resolve a camera for the given use case
+11-21 16:46:15.829 26551 26551 W PAE_POSE: camera selector BACK failed: Provided camera selector unable to resolve a camera for the given use case
+11-21 16:46:15.829 26551 26551 W PAE_POSE: camera selector ANY failed: Provided camera selector unable to resolve a camera for the given use case
+11-21 16:46:15.829 26551 26551 E PAE_POSE: no camera resolved on this device; synthetic provider stays active
+11-21 16:49:16.562 26792 26792 W PAE_POSE: camera selector FRONT failed: Provided camera selector unable to resolve a camera for the given use case
+11-21 16:49:16.563 26792 26792 W PAE_POSE: camera selector BACK failed: Provided camera selector unable to resolve a camera for the given use case
+11-21 16:49:16.563 26792 26792 W PAE_POSE: camera selector ANY failed: Provided camera selector unable to resolve a camera for the given use case
+11-21 16:49:16.563 26792 26792 E PAE_POSE: no camera resolved on this device; synthetic provider stays active
+11-21 16:49:23.434 26792 26792 W PAE_UI  : no system document picker (No Activity found to handle Intent { act=android.intent.action.OPEN_DOCUMENT typ=*/* (has extras) }); using in-app browser
+11-21 16:49:23.885 26792 26792 W PAE_POSE: camera selector FRONT failed: Provided camera selector unable to resolve a camera for the given use case
+11-21 16:49:23.885 26792 26792 W PAE_POSE: camera selector BACK failed: Provided camera selector unable to resolve a camera for the given use case
+11-21 16:49:23.885 26792 26792 W PAE_POSE: camera selector ANY failed: Provided camera selector unable to resolve a camera for the given use case
+11-21 16:49:23.885 26792 26792 E PAE_POSE: no camera resolved on this device; synthetic provider stays active
+11-21 16:49:51.811 26792 26792 I PAE_UI  : test image picked: 640x480 (/storage/emulated/0/Download/pae_test_pattern.png)
+11-21 16:49:52.073 26792 26792 I PAE_POSE: pose stats: inference_ms=238.79 confidence=0.00 landmarks=0 in_flight=1 pose_fps=0.0
+11-21 16:49:52.074 26792 26792 I PAE_POSE: static-image done (pae_test_pattern.png): 241.74 ms

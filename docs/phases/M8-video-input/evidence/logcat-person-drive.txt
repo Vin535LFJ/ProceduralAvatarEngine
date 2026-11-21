@@ -1,0 +1,49 @@
+--------- beginning of system
+--------- beginning of main
+11-21 18:33:27.521 30698 30698 I PAE_VIDEO: video source started: com.pae.host.VideoPoseSource$FileSource@994e6a2
+11-21 18:33:27.540 30698 30843 I PAE_VIDEO: video track: video/avc 600x480 rot=0 duration=60000s
+11-21 18:33:27.907 30698 30843 I PAE_VIDEO: YUV->RGB conversion path: RenderScript 600x480
+11-21 18:33:28.056 30698 30843 I PAE_VIDEO: video stats: decoded=1 skipped=0 inferred=1 pts=0.08s inference_ms=142.4 confidence=0.00
+11-21 18:33:28.639 30698 30843 I PAE_VIDEO: video stats: decoded=8 skipped=1 inferred=7 pts=0.36s
+11-21 18:33:30.482 30698 30843 I PAE_VIDEO: video stats: decoded=54 skipped=31 inferred=23 pts=2.20s
+11-21 18:33:31.286 30698 30843 I PAE_VIDEO: video stats: decoded=73 skipped=42 inferred=31 pts=2.96s inference_ms=68.7 confidence=0.00
+11-21 18:33:32.495 30698 30843 I PAE_VIDEO: video stats: decoded=103 skipped=61 inferred=42 pts=4.16s
+11-21 18:33:34.201 30698 30843 I PAE_VIDEO: video stats: decoded=148 skipped=91 inferred=57 pts=5.96s
+11-21 18:33:34.585 30698 30843 I PAE_VIDEO: video stats: decoded=156 skipped=95 inferred=61 pts=6.28s inference_ms=65.7 confidence=0.00
+11-21 18:33:36.220 30698 30843 I PAE_VIDEO: video stats: decoded=196 skipped=121 inferred=75 pts=7.88s
+11-21 18:33:37.605 30698 30843 I PAE_VIDEO: video stats: decoded=233 skipped=151 inferred=82 pts=9.36s
+11-21 18:33:39.173 30698 30843 I PAE_VIDEO: video stats: decoded=270 skipped=179 inferred=91 pts=10.84s inference_ms=72.8 confidence=0.00
+11-21 18:33:39.180 30698 30843 I PAE_VIDEO: video stats: decoded=272 skipped=181 inferred=91 pts=10.92s
+11-21 18:33:41.016 30698 30843 I PAE_VIDEO: video stats: decoded=318 skipped=211 inferred=107 pts=12.76s
+11-21 18:33:42.809 30698 30843 I PAE_VIDEO: video stats: decoded=361 skipped=241 inferred=120 pts=14.48s
+11-21 18:33:42.985 30698 30843 I PAE_VIDEO: video stats: decoded=364 skipped=243 inferred=121 pts=14.60s inference_ms=144.1 confidence=0.00
+11-21 18:33:44.476 30698 30843 I PAE_VIDEO: video stats: decoded=400 skipped=271 inferred=129 pts=16.04s
+11-21 18:33:45.882 30698 30843 I PAE_VIDEO: video stats: decoded=437 skipped=301 inferred=136 pts=17.52s
+11-21 18:33:47.252 30698 30843 I PAE_VIDEO: video stats: decoded=474 skipped=331 inferred=143 pts=19.00s
+11-21 18:33:48.667 30698 30843 I PAE_VIDEO: video stats: decoded=506 skipped=355 inferred=151 pts=20.28s inference_ms=136.6 confidence=0.77
+11-21 18:33:48.860 30698 30843 I PAE_VIDEO: video stats: decoded=513 skipped=361 inferred=152 pts=20.56s
+11-21 18:33:50.405 30698 30843 I PAE_VIDEO: video stats: decoded=552 skipped=391 inferred=161 pts=22.12s
+11-21 18:33:51.847 30698 30843 I PAE_VIDEO: video stats: decoded=589 skipped=421 inferred=168 pts=23.60s
+11-21 18:33:53.439 30698 30843 I PAE_VIDEO: video stats: decoded=627 skipped=451 inferred=176 pts=25.12s
+11-21 18:33:54.336 30698 30843 I PAE_VIDEO: video stats: decoded=647 skipped=466 inferred=181 pts=25.92s inference_ms=169.1 confidence=0.88
+11-21 18:33:54.855 30698 30843 I PAE_VIDEO: video stats: decoded=664 skipped=481 inferred=183 pts=26.60s
+11-21 18:33:56.391 30698 30843 I PAE_VIDEO: video stats: decoded=702 skipped=511 inferred=191 pts=28.12s
+11-21 18:33:57.996 30698 30843 I PAE_VIDEO: video stats: decoded=740 skipped=541 inferred=199 pts=29.64s
+11-21 18:33:59.627 30698 30843 I PAE_VIDEO: video stats: decoded=779 skipped=571 inferred=208 pts=31.20s
+11-21 18:34:00.275 30698 30843 I PAE_VIDEO: video stats: decoded=796 skipped=585 inferred=211 pts=31.88s inference_ms=136.7 confidence=0.98
+11-21 18:34:00.891 30698 30843 I PAE_VIDEO: video stats: decoded=815 skipped=601 inferred=214 pts=32.64s
+11-21 18:34:02.428 30698 30843 I PAE_VIDEO: video stats: decoded=853 skipped=631 inferred=222 pts=34.16s
+11-21 18:34:03.923 30698 30843 I PAE_VIDEO: video stats: decoded=890 skipped=661 inferred=229 pts=35.64s
+11-21 18:34:05.450 30698 30843 I PAE_VIDEO: video stats: decoded=928 skipped=691 inferred=237 pts=37.16s
+11-21 18:34:06.129 30698 30843 I PAE_VIDEO: video stats: decoded=942 skipped=701 inferred=241 pts=37.72s inference_ms=130.6 confidence=0.42
+11-21 18:34:07.077 30698 30843 I PAE_VIDEO: video stats: decoded=967 skipped=721 inferred=246 pts=38.72s
+11-21 18:34:08.568 30698 30843 I PAE_VIDEO: video stats: decoded=1004 skipped=751 inferred=253 pts=40.20s
+11-21 18:34:10.000 30698 30843 I PAE_VIDEO: video stats: decoded=1042 skipped=781 inferred=261 pts=41.72s
+11-21 18:34:11.624 30698 30843 I PAE_VIDEO: video stats: decoded=1081 skipped=811 inferred=270 pts=43.28s
+11-21 18:34:11.789 30698 30843 I PAE_VIDEO: video stats: decoded=1084 skipped=813 inferred=271 pts=43.40s inference_ms=133.3 confidence=0.42
+11-21 18:34:13.075 30698 30843 I PAE_VIDEO: video stats: decoded=1118 skipped=841 inferred=277 pts=44.76s
+11-21 18:34:14.498 30698 30843 I PAE_VIDEO: video stats: decoded=1155 skipped=871 inferred=284 pts=46.24s
+11-21 18:34:16.109 30698 30843 I PAE_VIDEO: video stats: decoded=1193 skipped=901 inferred=292 pts=47.76s
+11-21 18:34:17.619 30698 30843 I PAE_VIDEO: video stats: decoded=1231 skipped=931 inferred=300 pts=49.28s
+11-21 18:34:17.859 30698 30843 I PAE_VIDEO: video stats: decoded=1234 skipped=933 inferred=301 pts=49.40s inference_ms=168.1 confidence=0.40
+11-21 18:34:19.204 30698 30843 I PAE_VIDEO: video stats: decoded=1269 skipped=961 inferred=308 pts=50.80s

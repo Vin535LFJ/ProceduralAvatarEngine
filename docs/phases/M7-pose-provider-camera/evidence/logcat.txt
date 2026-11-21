@@ -1,0 +1,429 @@
+--------- beginning of main
+11-21 12:18:50.442 22552 22587 F zygote64: runtime.cc:523]   at libcore.io.IoBridge.isConnected(IoBridge.java:254)
+11-21 12:18:50.442 22552 22587 F zygote64: runtime.cc:523]   at libcore.io.IoBridge.connectErrno(IoBridge.java:188)
+11-21 12:18:50.442 22552 22587 F zygote64: runtime.cc:523]   at libcore.io.IoBridge.connect(IoBridge.java:130)
+11-21 12:18:50.442 22552 22587 F zygote64: runtime.cc:523]   at java.net.PlainSocketImpl.socketConnect(PlainSocketImpl.java:129)
+11-21 12:18:50.442 22552 22587 F zygote64: runtime.cc:523]   at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:356)
+11-21 12:18:50.442 22552 22587 F zygote64: runtime.cc:523]   - locked <0x0ba9722f> (a java.net.SocksSocketImpl)
+11-21 12:18:50.442 22552 22587 F zygote64: runtime.cc:523]   at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:200)
+11-21 12:18:50.442 22552 22587 F zygote64: runtime.cc:523]   at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:182)
+11-21 12:18:50.442 22552 22587 F zygote64: runtime.cc:523]   at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:357)
+11-21 12:18:50.442 22552 22587 F zygote64: runtime.cc:523]   at java.net.Socket.connect(Socket.java:616)
+11-21 12:18:50.442 22552 22587 F zygote64: runtime.cc:523]   at okhttp3.internal.Platform$Android.connectSocket(Platform.java:200)
+11-21 12:18:50.442 22552 22587 F zygote64: runtime.cc:523]   at okhttp3.internal.io.RealConnection.connectSocket(RealConnection.java:137)
+11-21 12:18:50.442 22552 22587 F zygote64: runtime.cc:523]   at okhttp3.internal.io.RealConnection.connect(RealConnection.java:108)
+11-21 12:18:50.442 22552 22587 F zygote64: runtime.cc:523]   at okhttp3.internal.http.StreamAllocation.findConnection(StreamAllocation.java:188)
+11-21 12:18:50.442 22552 22587 F zygote64: runtime.cc:523]   at okhttp3.internal.http.StreamAllocation.findHealthyConnection(StreamAllocation.java:127)
+11-21 12:18:50.442 22552 22587 F zygote64: runtime.cc:523]   at okhttp3.internal.http.StreamAllocation.newStream(StreamAllocation.java:97)
+11-21 12:18:50.442 22552 22587 F zygote64: runtime.cc:523]   at okhttp3.internal.http.HttpEngine.connect(HttpEngine.java:289)
+11-21 12:18:50.442 22552 22587 F zygote64: runtime.cc:523]   at okhttp3.internal.http.HttpEngine.sendRequest(HttpEngine.java:241)
+11-21 12:18:50.442 22552 22587 F zygote64: runtime.cc:523]   at okhttp3.RealCall.getResponse(RealCall.java:240)
+11-21 12:18:50.442 22552 22587 F zygote64: runtime.cc:523]   at okhttp3.RealCall$ApplicationInterceptorChain.proceed(RealCall.java:198)
+11-21 12:18:50.442 22552 22587 F zygote64: runtime.cc:523]   at okhttp3.RealCall.getResponseWithInterceptorChain(RealCall.java:160)
+11-21 12:18:50.442 22552 22587 F zygote64: runtime.cc:523]   at okhttp3.RealCall.execute(RealCall.java:57)
+11-21 12:18:50.442 22552 22587 F zygote64: runtime.cc:523]   at com.google.android.gms.internal.mlkit_vision_pose_common.zzvn.zzf(com.google.mlkit:pose-detection-common@@18.0.0-beta5:4)
+11-21 12:18:50.442 22552 22587 F zygote64: runtime.cc:523]   at com.google.android.gms.internal.mlkit_vision_pose_common.zzvn.zzb(com.google.mlkit:pose-detection-common@@18.0.0-beta5:10)
+11-21 12:18:50.442 22552 22587 F zygote64: runtime.cc:523]   at com.google.android.gms.internal.mlkit_vision_pose_common.zzvm.zza(com.google.mlkit:pose-detection-common@@18.0.0-beta5:-1)
+11-21 12:18:50.442 22552 22587 F zygote64: runtime.cc:523]   at com.google.android.gms.internal.mlkit_vision_pose_common.zzxo.zza(com.google.mlkit:pose-detection-common@@18.0.0-beta5:4)
+11-21 12:18:50.442 22552 22587 F zygote64: runtime.cc:523]   at com.google.android.gms.internal.mlkit_vision_pose_common.zzvp.zzd(com.google.mlkit:pose-detection-common@@18.0.0-beta5:9)
+11-21 12:18:50.442 22552 22587 F zygote64: runtime.cc:523]   at com.google.android.gms.internal.mlkit_vision_pose_common.zzxf.zzi(com.google.mlkit:pose-detection-common@@18.0.0-beta5:8)
+11-21 12:18:50.442 22552 22587 F zygote64: runtime.cc:523]   at com.google.android.gms.internal.mlkit_vision_pose_common.zzxd.run(com.google.mlkit:pose-detection-common@@18.0.0-beta5:-1)
+11-21 12:18:50.442 22552 22587 F zygote64: runtime.cc:523]   at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1162)
+11-21 12:18:50.442 22552 22587 F zygote64: runtime.cc:523]   at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+11-21 12:18:50.442 22552 22587 F zygote64: runtime.cc:523]   at java.lang.Thread.run(Thread.java:764)
+11-21 12:18:50.442 22552 22587 F zygote64: runtime.cc:523] 
+11-21 12:18:50.442 22552 22587 F zygote64: runtime.cc:523] "OkHttp ConnectionPool" prio=5 tid=21 TimedWaiting
+11-21 12:18:50.442 22552 22587 F zygote64: runtime.cc:523]   | group="" sCount=1 dsCount=0 flags=1 obj=0x1304ade0 self=0x74ae704000
+11-21 12:18:50.442 22552 22587 F zygote64: runtime.cc:523]   | sysTid=22591 nice=0 cgrp=default sched=0/0 handle=0x74ae5ff4f0
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   | state=S schedstat=( 444208 2950792 3 ) utm=0 stm=0 core=5 HZ=100
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   | stack=0x74ae4fd000-0x74ae4ff000 stackSize=1037KB
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   | held mutexes=
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   kernel: __switch_to+0x8c/0xb4
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   kernel: futex_wait_queue_me+0xc4/0x12c
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   kernel: futex_wait+0xdc/0x1dc
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   kernel: do_futex+0xe0/0xb08
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   kernel: SyS_futex+0x144/0x174
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   kernel: el0_svc_naked+0x24/0x28
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   native: #00 pc 000000000001d4b0  /system/lib64/libc.so (syscall+32)
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   native: #01 pc 00000000000e6a5c  /system/lib64/libart.so (art::ConditionVariable::TimedWait(art::Thread*, long, int)+172)
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   native: #02 pc 00000000003c7de4  /system/lib64/libart.so (art::Monitor::Wait(art::Thread*, long, int, bool, art::ThreadState)+652)
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   native: #03 pc 00000000003c9864  /system/lib64/libart.so (art::Monitor::Wait(art::Thread*, art::mirror::Object*, long, int, bool, art::ThreadState)+376)
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   native: #04 pc 0000000000000aec  /data/dalvik-cache/arm64/system@framework@boot.oat (Java_java_lang_Object_wait__JI+140)
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   at java.lang.Object.wait(Native method)
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   - waiting on <0x074a203c> (a okhttp3.ConnectionPool)
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   at okhttp3.ConnectionPool$1.run(ConnectionPool.java:65)
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   - locked <0x074a203c> (a okhttp3.ConnectionPool)
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1162)
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   at java.lang.Thread.run(Thread.java:764)
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523] 
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523] "pool-5-thread-2" prio=5 tid=23 TimedWaiting
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   | group="" sCount=1 dsCount=0 flags=1 obj=0x12d80258 self=0x74c04f4200
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   | sysTid=22609 nice=0 cgrp=default sched=0/0 handle=0x74a47ff4f0
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   | state=S schedstat=( 4036291 426710 7 ) utm=0 stm=0 core=5 HZ=100
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   | stack=0x74a46fd000-0x74a46ff000 stackSize=1037KB
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   | held mutexes=
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   kernel: __switch_to+0x8c/0xb4
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   kernel: futex_wait_queue_me+0xc4/0x12c
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   kernel: futex_wait+0xdc/0x1dc
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   kernel: do_futex+0xe0/0xb08
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   kernel: SyS_futex+0x144/0x174
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   kernel: el0_svc_naked+0x24/0x28
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   native: #00 pc 000000000001d4b0  /system/lib64/libc.so (syscall+32)
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   native: #01 pc 00000000000e6a5c  /system/lib64/libart.so (art::ConditionVariable::TimedWait(art::Thread*, long, int)+172)
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   native: #02 pc 00000000003c7de4  /system/lib64/libart.so (art::Monitor::Wait(art::Thread*, long, int, bool, art::ThreadState)+652)
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   native: #03 pc 00000000003c9864  /system/lib64/libart.so (art::Monitor::Wait(art::Thread*, art::mirror::Object*, long, int, bool, art::ThreadState)+376)
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   native: #04 pc 0000000000000aec  /data/dalvik-cache/arm64/system@framework@boot.oat (Java_java_lang_Object_wait__JI+140)
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   at java.lang.Object.wait(Native method)
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   - waiting on <0x0aca31c5> (a java.lang.Object)
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   at java.lang.Thread.parkFor$(Thread.java:2137)
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   - locked <0x0aca31c5> (a java.lang.Object)
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   at sun.misc.Unsafe.park(Unsafe.java:358)
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   at java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:230)
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:2101)
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   at java.util.concurrent.LinkedBlockingQueue.poll(LinkedBlockingQueue.java:467)
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   at java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1086)
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1147)
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   at com.google.mlkit.common.sdkinternal.MlKitThreadPool.zzd(com.google.mlkit:common@@18.11.0:2)
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   at com.google.mlkit.common.sdkinternal.zzk.run(com.google.mlkit:common@@18.11.0:-1)
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   at java.lang.Thread.run(Thread.java:764)
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523] 
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523] "pool-5-thread-3" prio=5 tid=25 TimedWaiting
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   | group="" sCount=1 dsCount=0 flags=1 obj=0x12d80738 self=0x74c04f4c00
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   | sysTid=22610 nice=0 cgrp=default sched=0/0 handle=0x74a46fa4f0
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   | state=S schedstat=( 4736166 0 3 ) utm=0 stm=0 core=0 HZ=100
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   | stack=0x74a45f8000-0x74a45fa000 stackSize=1037KB
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   | held mutexes=
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   kernel: __switch_to+0x8c/0xb4
+11-21 12:18:50.443 22552 22587 F zygote64: runtime.cc:523]   kernel: futex_wait_queue_me+0xc4/0x12c
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   kernel: futex_wait+0xdc/0x1dc
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   kernel: do_futex+0xe0/0xb08
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   kernel: SyS_futex+0x144/0x174
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   kernel: el0_svc_naked+0x24/0x28
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   native: #00 pc 000000000001d4b0  /system/lib64/libc.so (syscall+32)
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   native: #01 pc 00000000000e6a5c  /system/lib64/libart.so (art::ConditionVariable::TimedWait(art::Thread*, long, int)+172)
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   native: #02 pc 00000000003c7de4  /system/lib64/libart.so (art::Monitor::Wait(art::Thread*, long, int, bool, art::ThreadState)+652)
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   native: #03 pc 00000000003c9864  /system/lib64/libart.so (art::Monitor::Wait(art::Thread*, art::mirror::Object*, long, int, bool, art::ThreadState)+376)
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   native: #04 pc 0000000000000aec  /data/dalvik-cache/arm64/system@framework@boot.oat (Java_java_lang_Object_wait__JI+140)
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   at java.lang.Object.wait(Native method)
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   - waiting on <0x069f671a> (a java.lang.Object)
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   at java.lang.Thread.parkFor$(Thread.java:2137)
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   - locked <0x069f671a> (a java.lang.Object)
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   at sun.misc.Unsafe.park(Unsafe.java:358)
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   at java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:230)
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:2101)
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   at java.util.concurrent.LinkedBlockingQueue.poll(LinkedBlockingQueue.java:467)
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   at java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1086)
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1147)
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   at com.google.mlkit.common.sdkinternal.MlKitThreadPool.zzd(com.google.mlkit:common@@18.11.0:2)
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   at com.google.mlkit.common.sdkinternal.zzk.run(com.google.mlkit:common@@18.11.0:-1)
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   at java.lang.Thread.run(Thread.java:764)
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523] 
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523] "pool-5-thread-4" prio=5 tid=27 TimedWaiting
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   | group="" sCount=1 dsCount=0 flags=1 obj=0x12d80c18 self=0x74c04f5600
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   | sysTid=22611 nice=0 cgrp=default sched=0/0 handle=0x74a45f54f0
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   | state=S schedstat=( 2406542 217583 6 ) utm=0 stm=0 core=4 HZ=100
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   | stack=0x74a44f3000-0x74a44f5000 stackSize=1037KB
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   | held mutexes=
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   kernel: __switch_to+0x8c/0xb4
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   kernel: futex_wait_queue_me+0xc4/0x12c
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   kernel: futex_wait+0xdc/0x1dc
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   kernel: do_futex+0xe0/0xb08
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   kernel: SyS_futex+0x144/0x174
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   kernel: el0_svc_naked+0x24/0x28
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   native: #00 pc 000000000001d4b0  /system/lib64/libc.so (syscall+32)
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   native: #01 pc 00000000000e6a5c  /system/lib64/libart.so (art::ConditionVariable::TimedWait(art::Thread*, long, int)+172)
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   native: #02 pc 00000000003c7de4  /system/lib64/libart.so (art::Monitor::Wait(art::Thread*, long, int, bool, art::ThreadState)+652)
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   native: #03 pc 00000000003c9864  /system/lib64/libart.so (art::Monitor::Wait(art::Thread*, art::mirror::Object*, long, int, bool, art::ThreadState)+376)
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   native: #04 pc 0000000000000aec  /data/dalvik-cache/arm64/system@framework@boot.oat (Java_java_lang_Object_wait__JI+140)
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   at java.lang.Object.wait(Native method)
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   - waiting on <0x0b65024b> (a java.lang.Object)
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   at java.lang.Thread.parkFor$(Thread.java:2137)
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   - locked <0x0b65024b> (a java.lang.Object)
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   at sun.misc.Unsafe.park(Unsafe.java:358)
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   at java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:230)
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:2101)
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   at java.util.concurrent.LinkedBlockingQueue.poll(LinkedBlockingQueue.java:467)
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   at java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1086)
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1147)
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   at com.google.mlkit.common.sdkinternal.MlKitThreadPool.zzd(com.google.mlkit:common@@18.11.0:2)
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   at com.google.mlkit.common.sdkinternal.zzk.run(com.google.mlkit:common@@18.11.0:-1)
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   at java.lang.Thread.run(Thread.java:764)
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523] 
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523] "pool-5-thread-5" prio=5 tid=28 TimedWaiting
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   | group="" sCount=1 dsCount=0 flags=1 obj=0x12d810f8 self=0x74c054a000
+11-21 12:18:50.444 22552 22587 F zygote64: runtime.cc:523]   | sysTid=22612 nice=0 cgrp=default sched=0/0 handle=0x74a41504f0
+11-21 12:18:50.446 22552 22587 F zygote64: runtime.cc:531] JNI DETECTED ERROR IN APPLICATION: JNI GetObjectField called with pending exception java.lang.NoSuchFieldError: no "[B" field "value" in class "Lcom/google/android/gms/internal/mlkit_vision_mediapipe/zzib;" or its superclasses
+11-21 12:18:50.447 22552 22587 F zygote64: runtime.cc:531] 
+--------- beginning of crash
+11-21 12:18:50.448 22552 22587 F libc    : Fatal signal 6 (SIGABRT), code -6 in tid 22587 (pool-5-thread-1), pid 22552 (_mini_benchmark)
+11-21 12:18:50.518 22618 22618 I crash_dump64: obtaining output fd from tombstoned, type: kDebuggerdTombstone
+11-21 12:18:50.520   350   350 I /system/bin/tombstoned: received crash request for pid 22552
+11-21 12:18:50.521 22618 22618 I crash_dump64: performing dump of process 22552 (target tid = 22587)
+11-21 12:18:50.521 22618 22618 F DEBUG   : *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+11-21 12:18:50.521 22618 22618 F DEBUG   : Build fingerprint: 'nunai/nunai_max/nunai_max:8.1.0/OPM8.181005.003/160523:userdebug/test-keys'
+11-21 12:18:50.521 22618 22618 F DEBUG   : Revision: '0'
+11-21 12:18:50.521 22618 22618 F DEBUG   : ABI: 'arm64'
+11-21 12:18:50.521 22618 22618 F DEBUG   : pid: 22552, tid: 22587, name: pool-5-thread-1  >>> com.pae.host:mlkit_acceleration_mini_benchmark <<<
+11-21 12:18:50.521 22618 22618 F DEBUG   : signal 6 (SIGABRT), code -6 (SI_TKILL), fault addr --------
+11-21 12:18:50.523 22618 22618 F DEBUG   : Abort message: 'java_vm_ext.cc:534] JNI DETECTED ERROR IN APPLICATION: JNI GetObjectField called with pending exception java.lang.NoSuchFieldError: no "[B" field "value" in class "Lcom/google/android/gms/internal/mlkit_vision_mediapipe/zzib;" or its superclasses'
+11-21 12:18:50.523 22618 22618 F DEBUG   :     x0   0000000000000000  x1   000000000000583b  x2   0000000000000006  x3   0000000000000008
+11-21 12:18:50.523 22618 22618 F DEBUG   :     x4   0000000000000000  x5   0000000000000000  x6   0000000000000000  x7   7f7f7f7fffffff7f
+11-21 12:18:50.523 22618 22618 F DEBUG   :     x8   0000000000000083  x9   0000000010000000  x10  00000074aebfb390  x11  0000000000000001
+11-21 12:18:50.523 22618 22618 F DEBUG   :     x12  00000074aebfae88  x13  ffffffffffffffff  x14  ff00000000000000  x15  ffffffffffffffff
+11-21 12:18:50.523 22618 22618 F DEBUG   :     x16  0000006520e70fa8  x17  000000754b97a52c  x18  0000000000000000  x19  0000000000005818
+11-21 12:18:50.523 22618 22618 F DEBUG   :     x20  000000000000583b  x21  0000000000000083  x22  0000000000000002  x23  00000074aebff588
+11-21 12:18:50.523 22618 22618 F DEBUG   :     x24  00000074aebfb429  x25  0000000000001837  x26  00000074ae65b000  x27  0000000000001836
+11-21 12:18:50.523 22618 22618 F DEBUG   :     x28  0000000000000043  x29  00000074aebfb3d0  x30  000000754b92f760
+11-21 12:18:50.523 22618 22618 F DEBUG   :     sp   00000074aebfb390  pc   000000754b92f788  pstate 0000000060000000
+11-21 12:18:50.528 22618 22618 F DEBUG   : 
+11-21 12:18:50.528 22618 22618 F DEBUG   : backtrace:
+11-21 12:18:50.528 22618 22618 F DEBUG   :     #00 pc 000000000001d788  /system/lib64/libc.so (abort+120)
+11-21 12:18:50.528 22618 22618 F DEBUG   :     #01 pc 0000000000475af0  /system/lib64/libart.so (art::Runtime::Abort(char const*)+552)
+11-21 12:18:50.528 22618 22618 F DEBUG   :     #02 pc 000000000056b3ec  /system/lib64/libart.so (android::base::LogMessage::~LogMessage()+1004)
+11-21 12:18:50.528 22618 22618 F DEBUG   :     #03 pc 00000000002fe620  /system/lib64/libart.so (art::JavaVMExt::JniAbort(char const*, char const*)+1712)
+11-21 12:18:50.528 22618 22618 F DEBUG   :     #04 pc 00000000002fe788  /system/lib64/libart.so (art::JavaVMExt::JniAbortV(char const*, char const*, std::__va_list)+108)
+11-21 12:18:50.529 22618 22618 F DEBUG   :     #05 pc 000000000010e02c  /system/lib64/libart.so (art::ScopedCheck::AbortF(char const*, ...)+152)
+11-21 12:18:50.529 22618 22618 F DEBUG   :     #06 pc 000000000010db7c  /system/lib64/libart.so (art::ScopedCheck::CheckThread(_JNIEnv*)+500)
+11-21 12:18:50.529 22618 22618 F DEBUG   :     #07 pc 000000000010c03c  /system/lib64/libart.so (art::ScopedCheck::Check(art::ScopedObjectAccess&, bool, char const*, art::JniValueType*)+644)
+11-21 12:18:50.529 22618 22618 F DEBUG   :     #08 pc 0000000000113444  /system/lib64/libart.so (art::CheckJNI::GetField(char const*, _JNIEnv*, _jobject*, _jfieldID*, bool, art::Primitive::Type)+652)
+11-21 12:18:50.529 22618 22618 F DEBUG   :     #09 pc 0000000000372fc0  /data/app/com.pae.host-sSArD9mLBHdd-C5rwUcwFw==/base.apk (offset 0x58e000)
+11-21 12:18:50.529 22618 22618 F DEBUG   :     #10 pc 0000000000037c00  /data/app/com.pae.host-sSArD9mLBHdd-C5rwUcwFw==/oat/arm64/base.odex (offset 0x36000)
+11-21 12:18:50.651 22489 22508 I PAE_STATS: frames=120 fps=54.7 frame_ms=18.29 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 12:18:50.822 22489 22530 D CameraValidator: Verifying camera lens facing on nunai_max, lensFacingInteger: null
+11-21 12:18:50.823 22489 22530 E CameraValidator: Camera LensFacing verification failed, existing cameras: []
+11-21 12:18:50.823 22489 22530 E CameraX : The device might underreport the amount of the cameras. Finish the initialize task since we are already reaching the maximum number of retries.
+11-21 12:18:50.836 22489 22489 E PAE_POSE: camera bind failed: Provided camera selector unable to resolve a camera for the given use case
+11-21 12:18:50.836 22489 22489 E PAE_POSE: java.lang.IllegalArgumentException: Provided camera selector unable to resolve a camera for the given use case
+11-21 12:18:50.836 22489 22489 E PAE_POSE: 	at androidx.camera.lifecycle.ProcessCameraProvider.bindToLifecycle(ProcessCameraProvider.java:476)
+11-21 12:18:50.836 22489 22489 E PAE_POSE: 	at androidx.camera.lifecycle.ProcessCameraProvider.bindToLifecycle(ProcessCameraProvider.java:363)
+11-21 12:18:50.836 22489 22489 E PAE_POSE: 	at com.pae.host.PoseProviderAdapter.start$lambda$0(PoseProviderAdapter.kt:42)
+11-21 12:18:50.836 22489 22489 E PAE_POSE: 	at com.pae.host.PoseProviderAdapter.$r8$lambda$MRPvJQuFnzbTAZMf3AWGgZq2V8Q(Unknown Source:0)
+11-21 12:18:50.836 22489 22489 E PAE_POSE: 	at com.pae.host.PoseProviderAdapter$$ExternalSyntheticLambda0.run(Unknown Source:4)
+11-21 12:18:50.836 22489 22489 E PAE_POSE: 	at android.os.Handler.handleCallback(Handler.java:790)
+11-21 12:18:50.836 22489 22489 E PAE_POSE: 	at android.os.Handler.dispatchMessage(Handler.java:99)
+11-21 12:18:50.836 22489 22489 E PAE_POSE: 	at android.os.Looper.loop(Looper.java:164)
+11-21 12:18:50.836 22489 22489 E PAE_POSE: 	at android.app.ActivityThread.main(ActivityThread.java:6498)
+11-21 12:18:50.836 22489 22489 E PAE_POSE: 	at java.lang.reflect.Method.invoke(Native Method)
+11-21 12:18:50.836 22489 22489 E PAE_POSE: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:438)
+11-21 12:18:50.836 22489 22489 E PAE_POSE: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:807)
+11-21 12:18:51.061   350   350 E /system/bin/tombstoned: Tombstone written to: /data/tombstones/tombstone_01
+--------- beginning of system
+11-21 12:18:51.068   462   486 I BootReceiver: Copying /data/tombstones/tombstone_01 to DropBox (SYSTEM_TOMBSTONE)
+11-21 12:18:51.171   462   483 W system_server: kill(-22552, 9) failed: No such process
+11-21 12:18:51.172   462 22052 I ActivityManager: Process com.pae.host:mlkit_acceleration_mini_benchmark (pid 22552) has died: vis  TOP 
+11-21 12:18:51.174 22489 22489 W WM-ListenableWorkerImpl: Service disconnected
+11-21 12:18:51.174   279   279 I Zygote  : Process 22552 exited due to signal (6)
+11-21 12:18:51.174   462 22052 W MGTVInjector: killServicesLocked intercept app: com.pae.host
+11-21 12:18:51.175 22489 22489 W WM-ListenableWorkerImpl: Binding died
+11-21 12:18:51.178 22489 22536 E WM-WorkerWrapper: Work [ id=5f77c8c8-d742-4a8a-bf89-b05b9b2039a6, tags={ com.google.mlkit.vision.pose.internal.PoseMiniBenchmarkWorker } ] failed because it threw an exception/error
+11-21 12:18:51.178 22489 22536 E WM-WorkerWrapper: java.util.concurrent.ExecutionException: java.lang.RuntimeException: Binder died
+11-21 12:18:51.178 22489 22536 E WM-WorkerWrapper: 	at androidx.work.impl.utils.futures.AbstractFuture.getDoneValue(AbstractFuture.java:516)
+11-21 12:18:51.178 22489 22536 E WM-WorkerWrapper: 	at androidx.work.impl.utils.futures.AbstractFuture.get(AbstractFuture.java:475)
+11-21 12:18:51.178 22489 22536 E WM-WorkerWrapper: 	at androidx.work.impl.WorkerWrapper$2.run(WorkerWrapper.java:311)
+11-21 12:18:51.178 22489 22536 E WM-WorkerWrapper: 	at androidx.work.impl.utils.SerialExecutor$Task.run(SerialExecutor.java:91)
+11-21 12:18:51.178 22489 22536 E WM-WorkerWrapper: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1162)
+11-21 12:18:51.178 22489 22536 E WM-WorkerWrapper: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+11-21 12:18:51.178 22489 22536 E WM-WorkerWrapper: 	at java.lang.Thread.run(Thread.java:764)
+11-21 12:18:51.178 22489 22536 E WM-WorkerWrapper: Caused by: java.lang.RuntimeException: Binder died
+11-21 12:18:51.178 22489 22536 E WM-WorkerWrapper: 	at androidx.work.multiprocess.RemoteCallback.onFailure(RemoteCallback.java:77)
+11-21 12:18:51.178 22489 22536 E WM-WorkerWrapper: 	at androidx.work.multiprocess.RemoteCallback$DeathRecipient.binderDied(RemoteCallback.java:120)
+11-21 12:18:51.178 22489 22536 E WM-WorkerWrapper: 	at android.os.BinderProxy.sendDeathNotice(Binder.java:844)
+11-21 12:18:51.183  1235  1235 D Tinker.DefaultAppLike: onTrimMemory level:5
+11-21 12:18:51.184   714   714 D Tinker.DefaultAppLike: onTrimMemory level:5
+11-21 12:18:51.185 12045 12045 I MyLogImp: onTrimMemory level:5
+11-21 12:18:51.185 12045 12045 D Tinker.DefaultAppLike: onTrimMemory level:5
+11-21 12:18:51.186  1744  1744 D Tinker.DefaultAppLike: onTrimMemory level:5
+11-21 12:18:51.186  1109  1109 D RePlugin.ws001: PAC.callOnLowMemory(): Call onTrimMemory(), cl=com.qihoo360.replugin.PluginDexClassLoader[DexPathList[[zip file "/data/user/0/com.mgtv.mgui/app_p_a/1352567954.jar"],nativeLibraryDirectories=[/data/user/0/com.mgtv.mgui/app_p_n/1352567954/arm, /data/app/com.mgtv.mgui-fNNd5AyGhnQcmndRFg1iQQ==/lib/arm, /system/fake-libs, /data/app/com.mgtv.mgui-fNNd5AyGhnQcmndRFg1iQQ==/base.apk!/lib/armeabi, /system/lib, /vendor/lib]]]; lv=5
+11-21 12:18:51.187  1109  1109 I MyLogImp: onTrimMemory level:5
+11-21 12:18:51.187  1109  1109 D Tinker.DefaultAppLike: onTrimMemory level:5
+11-21 12:18:51.187  1109  1109 I Launcher-Tinker.TVOS:: onTrimMemory
+11-21 12:18:51.190 22489 22536 I WM-WorkerWrapper: Worker result FAILURE for Work [ id=5f77c8c8-d742-4a8a-bf89-b05b9b2039a6, tags={ com.google.mlkit.vision.pose.internal.PoseMiniBenchmarkWorker } ]
+11-21 12:18:51.190  1686  1686 I BleDongleApplication: onTrimMemory()
+11-21 12:18:51.197  1713  1713 D Tinker.DefaultAppLike: onTrimMemory level:5
+11-21 12:18:51.197  1184  1184 D Tinker.DefaultAppLike: onTrimMemory level:5
+11-21 12:18:51.197  1184  1184 I MyAppApplicationLike:  MyApplicationLike -> onTrimMemory 
+11-21 12:18:51.198  1713  1713 I ApplicationLike:  MyApplicationLike -> onTrimMemory 
+11-21 12:18:51.198   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.198   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.199   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.199   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.200   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.200   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.202   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.202   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.204   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.204   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.206   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.206   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.207   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.208   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.210   462 22052 D PackageManager: Ephemeral installer not found with new action; try old one
+11-21 12:18:51.210   462 22052 D PackageManager: Clear ephemeral installer activity
+11-21 12:18:51.210   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.210   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.214   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.214   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.218   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.218   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.218   462   483 W system_server: kill(-22552, 9) failed: No such process
+11-21 12:18:51.218   462   483 I system_server: Successfully killed process cgroup uid 10033 pid 22552 in 46ms
+11-21 12:18:51.235   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.235   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.252   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.252   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.253   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.253   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.254   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.254   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.256   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.256   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.259   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.259   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.263   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.263   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.269   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.269   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.271   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.271   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.273   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.273   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.276   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.276   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.278   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.278   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.280   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.280   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.286   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.286   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.287   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.288   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.291   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.291   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.293   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.293   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.295   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.295   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.297   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.297   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.298   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.298   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.299   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.299   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.300   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.300   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.308   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.308   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.310   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.310   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.311   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.311   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.312   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.312   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.318   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.318   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.323   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.323   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.327   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.327   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.329   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.329   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.331   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.331   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.334   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.334   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.339   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.339   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.343   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.343   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.350   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.350   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.352   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.352   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.354   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.354   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.361   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.361   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.361   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.361   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.363   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.363   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.364   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.364   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.376   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.376   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.378   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.378   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.379   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.379   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.391   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.391   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.411   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.411   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.431   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.431   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.449   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.449   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.467   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.467   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.486   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.486   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.510   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.510   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.547   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.547   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.567   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.567   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.587   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.587   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.616   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.616   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.639   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.639   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.663   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.663   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.685   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.685   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.703   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.703   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.724   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.724   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.746   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.746   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:51.766   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:18:51.766   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:18:52.957 22489 22508 I PAE_STATS: frames=240 fps=48.0 frame_ms=20.82 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 12:18:53.181 22489 22625 D ProfileInstaller: Installing profile for com.pae.host
+11-21 12:18:53.322  1109 22474 E NetWorkUtils: exec cmd fail:ping -c 1 -w 3 233.5.5.5
+11-21 12:18:53.328  1109 22479 E NetWorkUtils: exec cmd fail:ping -c 1 -w 3 233.5.5.5
+11-21 12:18:53.404  1109 22479 I NetWorkUtils: exec cmd success:ping -c 1 -w 3 180.76.76.76
+11-21 12:18:53.404  1109 22479 I NetCheckerModule: checkNetwork isRouteAvailable = CHECK_SUCCESS
+11-21 12:18:53.404  1109 22479 I NetWorkUtils: isServerAvailable url = client/dynamic_entry
+11-21 12:18:53.404  1109 22479 W System.err: java.net.MalformedURLException: no protocol: client/dynamic_entry
+11-21 12:18:53.404  1109 22479 W System.err: 	at java.net.URL.<init>(URL.java:590)
+11-21 12:18:53.405  1109 22479 W System.err: 	at java.net.URL.<init>(URL.java:487)
+11-21 12:18:53.405  1109 22479 W System.err: 	at java.net.URL.<init>(URL.java:436)
+11-21 12:18:53.405  1109 22479 W System.err: 	at com.mgtv.tv.base.core.NetWorkUtils.checkServerAvailable(NetWorkUtils.java:393)
+11-21 12:18:53.405  1109 22479 W System.err: 	at com.mgtv.tv.lib.reporter.e$1.run(NetworkChecker.java:71)
+11-21 12:18:53.405  1109 22479 W System.err: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1162)
+11-21 12:18:53.405  1109 22479 W System.err: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+11-21 12:18:53.405  1109 22479 W System.err: 	at java.lang.Thread.run(Thread.java:764)
+11-21 12:18:53.406  1109 22479 E NetCheckerModule: checkNetwork: unknown error type
+11-21 12:18:53.409  1109 22474 I NetWorkUtils: exec cmd success:ping -c 1 -w 3 180.76.76.76
+11-21 12:18:53.410  1109 22474 I NetCheckerModule: checkNetwork isRouteAvailable = CHECK_SUCCESS
+11-21 12:18:53.410  1109 22474 I NetWorkUtils: isServerAvailable url = api/v1/act/assets/overview
+11-21 12:18:53.410  1109 22474 W System.err: java.net.MalformedURLException: no protocol: api/v1/act/assets/overview
+11-21 12:18:53.410  1109 22474 W System.err: 	at java.net.URL.<init>(URL.java:590)
+11-21 12:18:53.410  1109 22474 W System.err: 	at java.net.URL.<init>(URL.java:487)
+11-21 12:18:53.411  1109 22474 W System.err: 	at java.net.URL.<init>(URL.java:436)
+11-21 12:18:53.411  1109 22474 W System.err: 	at com.mgtv.tv.base.core.NetWorkUtils.checkServerAvailable(NetWorkUtils.java:393)
+11-21 12:18:53.411  1109 22474 W System.err: 	at com.mgtv.tv.lib.reporter.e$1.run(NetworkChecker.java:71)
+11-21 12:18:53.411  1109 22474 W System.err: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1162)
+11-21 12:18:53.411  1109 22474 W System.err: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+11-21 12:18:53.411  1109 22474 W System.err: 	at java.lang.Thread.run(Thread.java:764)
+11-21 12:18:53.411  1109 22474 E NetCheckerModule: checkNetwork: unknown error type
+11-21 12:18:54.292   329   329 I remoteservice.s: type=1400 audit(0.0:1907): avc: denied { dac_override } for capability=1 scontext=u:r:remoteservice:s0 tcontext=u:r:remoteservice:s0 tclass=capability permissive=1
+11-21 12:18:55.461 22489 22508 I PAE_STATS: frames=360 fps=47.7 frame_ms=20.96 draw_calls=2 triangles=3053 buffer_bytes=156944

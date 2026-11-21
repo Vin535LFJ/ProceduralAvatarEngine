@@ -1,0 +1,146 @@
+# PAE 12min soak start 17:25:55
+=== t=30s 17:26:25 ===
+28999
+11-21 17:26:25.943 28999 29018 I PAE_STATS: frames=2160 fps=47.9 frame_ms=20.89 draw_calls=2 triangles=3053 buffer_bytes=156944 p50_ms=20.83 p95_ms=21.14 p99_ms=21.70
+  Native Heap    87350    87284        0       52   108544   101806     6737
+         Native Heap:    87284
+  temperature: 26
+=== t=60s 17:26:56 ===
+28999
+11-21 17:26:55.835 28999 29018 I PAE_STATS: frames=3600 fps=48.2 frame_ms=20.76 draw_calls=2 triangles=3053 buffer_bytes=156944 p50_ms=20.82 p95_ms=21.12 p99_ms=21.41
+  Native Heap    87366    87300        0       52   108544   101701     6842
+         Native Heap:    87300
+  temperature: 26
+=== t=90s 17:27:27 ===
+28999
+11-21 17:27:28.230 28999 29018 I PAE_STATS: frames=5160 fps=47.7 frame_ms=20.95 draw_calls=2 triangles=3053 buffer_bytes=156944 p50_ms=20.85 p95_ms=21.16 p99_ms=21.52
+  Native Heap    87366    87300        0       52   108544   101747     6796
+         Native Heap:    87300
+  temperature: 26
+=== t=120s 17:27:57 ===
+28999
+11-21 17:27:58.101 28999 29018 I PAE_STATS: frames=6600 fps=47.9 frame_ms=20.88 draw_calls=2 triangles=3053 buffer_bytes=156944 p50_ms=20.82 p95_ms=21.08 p99_ms=21.30
+  Native Heap    87370    87304        0       52   108544   101869     6674
+         Native Heap:    87304
+  temperature: 26
+=== t=150s 17:28:28 ===
+28999
+11-21 17:28:27.962 28999 29018 I PAE_STATS: frames=8040 fps=48.1 frame_ms=20.79 draw_calls=2 triangles=3053 buffer_bytes=156944 p50_ms=20.80 p95_ms=21.12 p99_ms=21.40
+  Native Heap    87370    87304        0       52   108544   101868     6675
+         Native Heap:    87304
+  temperature: 26
+=== t=180s 17:28:59 ===
+28999
+11-21 17:29:00.255 28999 29018 I PAE_STATS: frames=9600 fps=48.9 frame_ms=20.47 draw_calls=2 triangles=3053 buffer_bytes=156944 p50_ms=20.77 p95_ms=21.32 p99_ms=21.57
+  Native Heap    87370    87304        0       52   108544   101869     6674
+         Native Heap:    87304
+  temperature: 26
+=== t=210s 17:29:30 ===
+28999
+11-21 17:29:30.150 28999 29018 I PAE_STATS: frames=11040 fps=48.0 frame_ms=20.85 draw_calls=2 triangles=3053 buffer_bytes=156944 p50_ms=20.84 p95_ms=21.93 p99_ms=23.52
+  Native Heap    87370    87304        0       52   108544   101869     6674
+         Native Heap:    87304
+  temperature: 26
+=== t=240s 17:30:00 ===
+28999
+11-21 17:30:00.176 28999 29018 I PAE_STATS: frames=12480 fps=49.0 frame_ms=20.42 draw_calls=2 triangles=3053 buffer_bytes=156944 p50_ms=20.84 p95_ms=21.10 p99_ms=21.27
+  Native Heap    87370    87304        0       52   108544   101869     6674
+         Native Heap:    87304
+  temperature: 26
+=== t=270s 17:30:31 ===
+28999
+11-21 17:30:32.596 28999 29018 I PAE_STATS: frames=14040 fps=48.0 frame_ms=20.83 draw_calls=2 triangles=3053 buffer_bytes=156944 p50_ms=20.83 p95_ms=21.10 p99_ms=21.34
+  Native Heap    87370    87304        0       52   108544   101870     6673
+         Native Heap:    87304
+  temperature: 26
+=== t=300s 17:31:02 ===
+28999
+11-21 17:31:02.510 28999 29018 I PAE_STATS: frames=15480 fps=48.0 frame_ms=20.84 draw_calls=2 triangles=3053 buffer_bytes=156944 p50_ms=20.83 p95_ms=21.11 p99_ms=21.49
+  Native Heap    87370    87304        0       52   108544   101870     6673
+         Native Heap:    87304
+  temperature: 26
+=== t=330s 17:31:32 ===
+28999
+11-21 17:31:32.360 28999 29018 I PAE_STATS: frames=16920 fps=48.7 frame_ms=20.52 draw_calls=2 triangles=3053 buffer_bytes=156944 p50_ms=20.79 p95_ms=21.13 p99_ms=21.33
+  Native Heap    87370    87304        0       52   108544   101870     6673
+         Native Heap:    87304
+  temperature: 26
+=== t=360s 17:32:03 ===
+28999
+11-21 17:32:04.875 28999 29018 I PAE_STATS: frames=18480 fps=47.9 frame_ms=20.88 draw_calls=2 triangles=3053 buffer_bytes=156944 p50_ms=20.81 p95_ms=21.18 p99_ms=21.42
+  Native Heap    87370    87304        0       52   108544   101870     6673
+         Native Heap:    87304
+  temperature: 26
+=== t=390s 17:32:34 ===
+28999
+11-21 17:32:34.779 28999 29018 I PAE_STATS: frames=19920 fps=47.9 frame_ms=20.86 draw_calls=2 triangles=3053 buffer_bytes=156944 p50_ms=20.85 p95_ms=21.10 p99_ms=21.28
+  Native Heap    87370    87304        0       52   108544   101860     6683
+         Native Heap:    87304
+  temperature: 26
+=== t=420s 17:33:04 ===
+28999
+11-21 17:33:04.766 28999 29018 I PAE_STATS: frames=21360 fps=48.0 frame_ms=20.85 draw_calls=2 triangles=3053 buffer_bytes=156944 p50_ms=20.82 p95_ms=21.19 p99_ms=21.49
+  Native Heap    87370    87304        0       52   108544   101859     6684
+         Native Heap:    87304
+  temperature: 26
+=== t=450s 17:33:35 ===
+28999
+11-21 17:33:34.665 28999 29018 I PAE_STATS: frames=22800 fps=48.0 frame_ms=20.83 draw_calls=2 triangles=3053 buffer_bytes=156944 p50_ms=20.83 p95_ms=21.19 p99_ms=21.39
+  Native Heap    87370    87304        0       52   108544   101858     6685
+         Native Heap:    87304
+  temperature: 26
+=== t=480s 17:34:06 ===
+28999
+11-21 17:34:07.060 28999 29018 I PAE_STATS: frames=24360 fps=48.1 frame_ms=20.80 draw_calls=2 triangles=3053 buffer_bytes=156944 p50_ms=20.83 p95_ms=21.15 p99_ms=21.44
+  Native Heap    87370    87304        0       52   108544   101856     6687
+         Native Heap:    87304
+  temperature: 26
+=== t=510s 17:34:36 ===
+28999
+11-21 17:34:37.155 28999 29018 I PAE_STATS: frames=25800 fps=48.2 frame_ms=20.73 draw_calls=2 triangles=3053 buffer_bytes=156944 p50_ms=20.81 p95_ms=21.20 p99_ms=21.35
+  Native Heap    87370    87304        0       52   108544   101855     6688
+         Native Heap:    87304
+  temperature: 26
+=== t=540s 17:35:07 ===
+28999
+11-21 17:35:07.067 28999 29018 I PAE_STATS: frames=27240 fps=48.0 frame_ms=20.82 draw_calls=2 triangles=3053 buffer_bytes=156944 p50_ms=20.81 p95_ms=21.12 p99_ms=21.33
+  Native Heap    87370    87304        0       52   108544   101850     6693
+         Native Heap:    87304
+  temperature: 26
+=== t=570s 17:35:37 ===
+28999
+11-21 17:35:36.985 28999 29018 I PAE_STATS: frames=28680 fps=48.0 frame_ms=20.82 draw_calls=2 triangles=3053 buffer_bytes=156944 p50_ms=20.82 p95_ms=21.12 p99_ms=21.43
+  Native Heap    87394    87328        0       52   108544   101933     6610
+         Native Heap:    87328
+  temperature: 26
+=== t=600s 17:36:08 ===
+28999
+11-21 17:36:09.400 28999 29018 I PAE_STATS: frames=30240 fps=47.9 frame_ms=20.86 draw_calls=2 triangles=3053 buffer_bytes=156944 p50_ms=20.86 p95_ms=21.16 p99_ms=21.33
+  Native Heap    87374    87308        0       52   108544   101904     6639
+         Native Heap:    87308
+  temperature: 26
+=== t=630s 17:36:39 ===
+28999
+11-21 17:36:39.326 28999 29018 I PAE_STATS: frames=31680 fps=48.0 frame_ms=20.83 draw_calls=2 triangles=3053 buffer_bytes=156944 p50_ms=20.83 p95_ms=21.17 p99_ms=21.23
+  Native Heap    87374    87308        0       52   108544   101849     6694
+         Native Heap:    87308
+  temperature: 26
+=== t=660s 17:37:09 ===
+28999
+11-21 17:37:09.476 28999 29018 I PAE_STATS: frames=33120 fps=47.4 frame_ms=21.12 draw_calls=2 triangles=3053 buffer_bytes=156944 p50_ms=20.88 p95_ms=23.43 p99_ms=24.00
+  Native Heap    87374    87308        0       52   108544   101838     6705
+         Native Heap:    87308
+  temperature: 26
+=== t=690s 17:37:40 ===
+28999
+11-21 17:37:39.874 28999 29018 I PAE_STATS: frames=34560 fps=46.8 frame_ms=21.36 draw_calls=2 triangles=3053 buffer_bytes=156944 p50_ms=20.86 p95_ms=23.40 p99_ms=23.60
+  Native Heap    87374    87308        0       52   108544   101839     6704
+         Native Heap:    87308
+  temperature: 26
+=== t=720s 17:38:10 ===
+28999
+11-21 17:38:10.332 28999 29018 I PAE_STATS: frames=36000 fps=47.6 frame_ms=21.03 draw_calls=2 triangles=3053 buffer_bytes=156944 p50_ms=20.88 p95_ms=23.44 p99_ms=23.71
+  Native Heap    87374    87308        0       52   108544   101839     6704
+         Native Heap:    87308
+  temperature: 26
+# soak end 17:38:11

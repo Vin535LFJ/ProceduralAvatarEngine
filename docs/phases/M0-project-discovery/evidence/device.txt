@@ -1,0 +1,45 @@
+=== adb devices ===
+* daemon not running; starting now at tcp:5037
+* daemon started successfully
+List of devices attached
+MAX0019111000104       device product:nunai_max model:nunai_max device:nunai_max transport_id:1
+
+=== props ===
+ro.build.version.release=8.1.0
+ro.build.version.sdk=27
+ro.product.model=nunai_max
+ro.product.brand=nunai
+ro.product.cpu.abi=arm64-v8a
+ro.product.cpu.abilist=arm64-v8a,armeabi-v7a,armeabi
+ro.meminfo.total=
+=== features ===
+feature:reqGlEsVersion=0x30002
+feature:android.hardware.audio.output
+feature:android.hardware.bluetooth
+feature:android.hardware.bluetooth_le
+feature:android.hardware.camera
+feature:android.hardware.camera.any
+feature:android.hardware.camera.autofocus
+feature:android.hardware.camera.front
+feature:android.hardware.faketouch
+feature:android.hardware.hdmi.cec
+feature:android.hardware.location
+feature:android.hardware.location.network
+feature:android.hardware.opengles.aep
+feature:android.hardware.ram.normal
+feature:android.hardware.screen.landscape
+feature:android.hardware.type.television
+feature:android.hardware.usb.accessory
+feature:android.hardware.usb.host
+feature:android.hardware.wifi
+feature:android.hardware.wifi.direct
+feature:android.software.app_widgets
+feature:android.software.backup
+feature:android.software.leanback_only
+feature:android.software.live_tv
+feature:android.software.picture_in_picture
+feature:android.software.pppoe
+feature:android.software.voice_recognizers
+feature:android.software.webview
+=== GLES prop ===
+196610

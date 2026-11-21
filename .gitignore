@@ -1,0 +1,17 @@
+# .gitignore
+
+.gradle/
+build/
+local.properties
+*.apk
+*.ap_
+*.dex
+*.class
+.idea/
+*.iml
+.DS_Store
+captures/
+.externalNativeBuild/
+.cxx/
+.zcode/
+*.hprof

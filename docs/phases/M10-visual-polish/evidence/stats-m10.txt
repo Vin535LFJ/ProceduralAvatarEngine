@@ -1,0 +1,2 @@
+11-21 18:50:07.110 31359 31377 I PAE_STATS: frames=1200 fps=47.7 frame_ms=20.95 draw_calls=4 triangles=7537 buffer_bytes=369216 p50_ms=20.96 p95_ms=21.27 p99_ms=21.61
+11-21 18:50:09.620 31359 31377 I PAE_STATS: frames=1320 fps=47.9 frame_ms=20.88 draw_calls=4 triangles=7537 buffer_bytes=369216 p50_ms=20.96 p95_ms=21.24 p99_ms=21.38

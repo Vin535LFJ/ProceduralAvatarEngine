@@ -1,0 +1,7 @@
+# M9 final regression 2026-11-21
+
+100% tests passed, 0 tests failed out of 5
+
+Total Test time (real) =   0.69 sec
+BUILD SUCCESSFUL in 1s
+35 actionable tasks: 3 executed, 32 up-to-date

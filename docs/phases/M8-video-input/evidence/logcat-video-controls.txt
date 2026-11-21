@@ -1,0 +1,69 @@
+--------- beginning of system
+--------- beginning of crash
+--------- beginning of main
+11-21 17:12:24.135 27910 27910 I PAE_VIDEO: video source started: com.pae.host.VideoPoseSource$FileSource@3b44677
+11-21 17:12:24.154 27910 28069 I PAE_VIDEO: video track: video/avc 1920x1080 rot=0 duration=9968s
+11-21 17:12:24.696 27910 28069 I PAE_VIDEO: YUV->RGB conversion path: RenderScript 1920x1080
+11-21 17:12:24.978 27910 28069 I PAE_VIDEO: video stats: decoded=1 skipped=0 inferred=1 pts=0.00s inference_ms=244.1 confidence=0.94
+11-21 17:12:25.298 27910 28069 I PAE_VIDEO: video stats: decoded=3 skipped=1 inferred=2 pts=0.06s
+11-21 17:12:25.994 27910 28069 I PAE_VIDEO: video stats: decoded=34 skipped=31 inferred=3 pts=0.89s
+11-21 17:12:27.002 27910 28069 I PAE_VIDEO: video stats: decoded=67 skipped=61 inferred=6 pts=1.79s
+11-21 17:12:27.670 27910 28069 I PAE_VIDEO: video stats: decoded=99 skipped=91 inferred=8 pts=2.67s
+11-21 17:12:28.682 27910 28069 I PAE_VIDEO: video stats: decoded=132 skipped=121 inferred=11 pts=3.57s
+11-21 17:12:29.522 27910 28069 I PAE_VIDEO: video stats: decoded=165 skipped=151 inferred=14 pts=4.45s
+11-21 17:12:30.557 27910 28069 I PAE_VIDEO: video stats: decoded=199 skipped=181 inferred=18 pts=5.39s
+11-21 17:12:31.356 27910 28069 I PAE_VIDEO: video stats: decoded=232 skipped=211 inferred=21 pts=6.29s
+11-21 17:12:32.298 27910 28069 I PAE_VIDEO: video stats: decoded=265 skipped=241 inferred=24 pts=7.19s
+11-21 17:12:33.059 27910 28069 I PAE_VIDEO: video stats: decoded=297 skipped=271 inferred=26 pts=8.07s
+11-21 17:12:34.142 27910 28069 I PAE_VIDEO: video stats: decoded=331 skipped=301 inferred=30 pts=8.99s
+11-21 17:12:34.456 27910 28069 I PAE_VIDEO: video stats: decoded=340 skipped=309 inferred=31 pts=9.22s inference_ms=208.3 confidence=0.96
+11-21 17:12:35.056 27910 28069 I PAE_VIDEO: video stats: decoded=364 skipped=331 inferred=33 pts=9.87s
+11-21 17:12:35.077 27910 28069 I PAE_VIDEO: video playback reached end of stream
+11-21 17:13:17.004 27910 28069 I PAE_VIDEO: replay to 0.00s (motion filters reset)
+11-21 17:13:17.004 27910 28069 I PAE_VIDEO: video playback reached end of stream
+11-21 17:13:25.172 27910 28069 I PAE_VIDEO: playback resumed at 0.00s
+11-21 17:13:25.172 27910 28069 I PAE_VIDEO: video playback reached end of stream
+11-21 17:13:30.411 27910 28069 I PAE_VIDEO: seek to 9.97s (motion filters reset)
+11-21 17:13:30.412 27910 28069 I PAE_VIDEO: video playback reached end of stream
+11-21 17:13:34.391 27910 28069 I PAE_VIDEO: speed changed to 0.5x at 9.97s
+11-21 17:15:54.221 28224 28224 I PAE_VIDEO: video source started: com.pae.host.VideoPoseSource$FileSource@1545e02
+11-21 17:15:54.241 28224 28351 I PAE_VIDEO: video track: video/avc 1920x1080 rot=0 duration=9968s
+11-21 17:15:54.749 28224 28351 I PAE_VIDEO: YUV->RGB conversion path: RenderScript 1920x1080
+11-21 17:15:54.990 28224 28351 I PAE_VIDEO: video stats: decoded=1 skipped=0 inferred=1 pts=0.00s inference_ms=211.9 confidence=0.94
+11-21 17:15:55.320 28224 28351 I PAE_VIDEO: video stats: decoded=3 skipped=1 inferred=2 pts=0.06s
+11-21 17:15:56.112 28224 28351 I PAE_VIDEO: video stats: decoded=35 skipped=31 inferred=4 pts=0.92s
+11-21 17:15:57.047 28224 28351 I PAE_VIDEO: video stats: decoded=68 skipped=61 inferred=7 pts=1.82s
+11-21 17:15:57.963 28224 28351 I PAE_VIDEO: video stats: decoded=101 skipped=91 inferred=10 pts=2.72s
+11-21 17:15:58.845 28224 28351 I PAE_VIDEO: video stats: decoded=134 skipped=121 inferred=13 pts=3.60s
+11-21 17:15:59.665 28224 28351 I PAE_VIDEO: video stats: decoded=167 skipped=151 inferred=16 pts=4.52s
+11-21 17:16:00.512 28224 28351 I PAE_VIDEO: video stats: decoded=200 skipped=181 inferred=19 pts=5.40s
+11-21 17:16:01.479 28224 28351 I PAE_VIDEO: video stats: decoded=233 skipped=211 inferred=22 pts=6.32s
+11-21 17:16:02.345 28224 28351 I PAE_VIDEO: video stats: decoded=266 skipped=241 inferred=25 pts=7.22s
+11-21 17:16:03.202 28224 28351 I PAE_VIDEO: video stats: decoded=299 skipped=271 inferred=28 pts=8.12s
+11-21 17:16:03.986 28224 28351 I PAE_VIDEO: replay to 0.00s (motion filters reset)
+11-21 17:16:04.397 28224 28351 I PAE_VIDEO: video stats: decoded=318 skipped=287 inferred=31 pts=0.00s inference_ms=263.4 confidence=0.94
+11-21 17:16:04.880 28224 28351 I PAE_VIDEO: video stats: decoded=333 skipped=301 inferred=32 pts=0.39s
+11-21 17:16:06.063 28224 28351 I PAE_VIDEO: video stats: decoded=367 skipped=331 inferred=36 pts=1.32s
+11-21 17:16:06.727 28224 28351 I PAE_VIDEO: video stats: decoded=399 skipped=361 inferred=38 pts=2.19s
+11-21 17:16:07.585 28224 28351 I PAE_VIDEO: video stats: decoded=432 skipped=391 inferred=41 pts=3.09s
+11-21 17:16:08.760 28224 28351 I PAE_VIDEO: video stats: decoded=466 skipped=421 inferred=45 pts=4.02s
+11-21 17:16:09.592 28224 28351 I PAE_VIDEO: video stats: decoded=499 skipped=451 inferred=48 pts=4.92s
+11-21 17:16:10.458 28224 28351 I PAE_VIDEO: video stats: decoded=532 skipped=481 inferred=51 pts=5.82s
+11-21 17:16:11.275 28224 28351 I PAE_VIDEO: video stats: decoded=565 skipped=511 inferred=54 pts=6.72s
+11-21 17:16:12.204 28224 28351 I PAE_VIDEO: video stats: decoded=598 skipped=541 inferred=57 pts=7.62s
+11-21 17:16:13.006 28224 28351 I PAE_VIDEO: video stats: decoded=631 skipped=571 inferred=60 pts=8.52s
+11-21 17:16:13.247 28224 28351 I PAE_VIDEO: video stats: decoded=632 skipped=571 inferred=61 pts=8.55s inference_ms=153.2 confidence=0.97
+11-21 17:16:14.018 28224 28351 I PAE_VIDEO: video stats: decoded=665 skipped=601 inferred=64 pts=9.44s
+11-21 17:16:14.792 28224 28351 I PAE_VIDEO: playback paused at 10.81s
+11-21 17:16:27.815 28224 28351 I PAE_VIDEO: seek to 9.97s (motion filters reset)
+11-21 17:16:27.968 28224 28351 I PAE_VIDEO: video stats: decoded=697 skipped=631 inferred=66 pts=1.87s
+11-21 17:16:28.245 28224 28351 I PAE_VIDEO: video stats: decoded=727 skipped=661 inferred=66 pts=2.70s
+11-21 17:16:28.514 28224 28351 I PAE_VIDEO: video stats: decoded=757 skipped=691 inferred=66 pts=3.50s
+11-21 17:16:28.776 28224 28351 I PAE_VIDEO: video stats: decoded=787 skipped=721 inferred=66 pts=4.32s
+11-21 17:16:29.032 28224 28351 I PAE_VIDEO: video stats: decoded=817 skipped=751 inferred=66 pts=5.14s
+11-21 17:16:29.291 28224 28351 I PAE_VIDEO: video stats: decoded=847 skipped=781 inferred=66 pts=5.95s
+11-21 17:16:29.551 28224 28351 I PAE_VIDEO: video stats: decoded=877 skipped=811 inferred=66 pts=6.77s
+11-21 17:16:29.808 28224 28351 I PAE_VIDEO: video stats: decoded=907 skipped=841 inferred=66 pts=7.59s
+11-21 17:16:30.067 28224 28351 I PAE_VIDEO: video stats: decoded=937 skipped=871 inferred=66 pts=8.42s
+11-21 17:16:30.327 28224 28351 I PAE_VIDEO: video stats: decoded=967 skipped=901 inferred=66 pts=9.22s
+11-21 17:16:30.579 28224 28351 I PAE_VIDEO: video playback reached end of stream

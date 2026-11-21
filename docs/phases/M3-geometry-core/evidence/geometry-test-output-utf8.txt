@@ -1,0 +1,19 @@
+﻿pae_geometry_tests.exe : GEOMETRY_TESTS_MAIN
+At line:513 char:137
++ ... ct -Last 3; & ".\build\host-cygwin\pae_tests\pae_geometry_tests.exe"  ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (GEOMETRY_TESTS_MAIN:String) [], R 
+   emoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[ RUN ] uv_sphere_is_valid_and_deterministic
+[  OK ] uv_sphere_is_valid_and_deterministic
+[ RUN ] ellipsoid_matches_parameter_extents
+[  OK ] ellipsoid_matches_parameter_extents
+[ RUN ] capsule_and_rounded_box_are_valid
+[  OK ] capsule_and_rounded_box_are_valid
+[ RUN ] parallel_transport_frames_avoid_flipping
+[  OK ] parallel_transport_frames_avoid_flipping
+[ RUN ] sweep_and_loft_generate_valid_surfaces
+[  OK ] sweep_and_loft_generate_valid_surfaces
+[ RUN ] validator_rejects_invalid_mesh

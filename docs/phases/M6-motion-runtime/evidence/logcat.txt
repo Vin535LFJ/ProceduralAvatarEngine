@@ -1,0 +1,201 @@
+--------- beginning of main
+11-21 12:11:15.142  1109 22231 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.hpplay.happyplay.aw', appName='乐播投屏', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{dea5344 com.hpplay.happyplay.aw}, appDangbei=null, versionCode=808080432, versionName='com.hpplay.happyplay.aw', startCount=0, startTime=0, firstInstalltime=1230739200000, position=99, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 12:11:15.142  1109 22231 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.filemanager', appName='本地文件管理', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{cbc5c2d com.mgtv.filemanager}, appDangbei=null, versionCode=2130924842, versionName='com.mgtv.filemanager', startCount=0, startTime=0, firstInstalltime=1230739200000, position=98, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 12:11:15.142  1109 22231 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.ota', appName='系统升级', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{8172562 com.mgtv.ota}, appDangbei=null, versionCode=2130924744, versionName='com.mgtv.ota', startCount=0, startTime=0, firstInstalltime=1230739200000, position=96, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 12:11:15.142  1109 22231 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.remote', appName='电视助手', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{b0af6f3 com.mgtv.remote}, appDangbei=null, versionCode=2103848530, versionName='com.mgtv.remote', startCount=0, startTime=0, firstInstalltime=1230739200000, position=0, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 12:11:15.142  1109 22231 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.cast', appName='芒果投屏', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{ddb5fb0 com.mgtv.cast}, appDangbei=null, versionCode=2111001144, versionName='com.mgtv.cast', startCount=0, startTime=0, firstInstalltime=1230739200000, position=0, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 12:11:15.143  1109 22230 I LocalSpUtlis: getBooleanValue,key:apson_app_show_first
+11-21 12:11:15.144  1109 22232 D DataManager4App: getRecentAppList pkg:com.mgtv.cast, power:null
+11-21 12:11:15.144  1109 22230 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.tvos.datareportor', appName='TVOS Screenshot Demo', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{faf8e29 com.mgtv.tvos.datareportor}, appDangbei=null, versionCode=1, versionName='com.mgtv.tvos.datareportor', startCount=0, startTime=0, firstInstalltime=1794480075717, position=0, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 12:11:15.144  1109 22230 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.tv', appName='芒果TV', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{6540f4f com.mgtv.tv}, appDangbei=null, versionCode=22011118, versionName='com.mgtv.tv', startCount=0, startTime=0, firstInstalltime=1230739200000, position=109, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 12:11:15.145  1109 22230 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.pplive.atv', appName='CIBN聚精彩', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{48ec6dc com.pplive.atv}, appDangbei=null, versionCode=63105, versionName='com.pplive.atv', startCount=0, startTime=0, firstInstalltime=1230739200000, position=105, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 12:11:15.145  1109 22230 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.pptv.tvsports.preinstall', appName='CIBN聚体育', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{b89e3e5 com.pptv.tvsports.preinstall}, appDangbei=null, versionCode=394301, versionName='com.pptv.tvsports.preinstall', startCount=0, startTime=0, firstInstalltime=1230739200000, position=104, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 12:11:15.145  1109 22230 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='net.cibntv.ott.sk', appName='CIBN4K花园', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{543feba net.cibntv.ott.sk}, appDangbei=null, versionCode=81, versionName='net.cibntv.ott.sk', startCount=0, startTime=0, firstInstalltime=1230739200000, position=103, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 12:11:15.145  1109 22230 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.tencent.qqmusictv', appName='QQ音乐', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{36c516b com.tencent.qqmusictv}, appDangbei=null, versionCode=407, versionName='com.tencent.qqmusictv', startCount=0, startTime=0, firstInstalltime=1230739200000, position=102, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 12:11:15.145  1109 22230 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.hpplay.happyplay.aw', appName='乐播投屏', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{9af74c8 com.hpplay.happyplay.aw}, appDangbei=null, versionCode=808080432, versionName='com.hpplay.happyplay.aw', startCount=0, startTime=0, firstInstalltime=1230739200000, position=99, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 12:11:15.145  1109 22230 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.filemanager', appName='本地文件管理', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{ff9d961 com.mgtv.filemanager}, appDangbei=null, versionCode=2130924842, versionName='com.mgtv.filemanager', startCount=0, startTime=0, firstInstalltime=1230739200000, position=98, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 12:11:15.145  1109 22230 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.ota', appName='系统升级', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{fa34c86 com.mgtv.ota}, appDangbei=null, versionCode=2130924744, versionName='com.mgtv.ota', startCount=0, startTime=0, firstInstalltime=1230739200000, position=96, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 12:11:15.145  1109 22230 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.remote', appName='电视助手', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{f7c9947 com.mgtv.remote}, appDangbei=null, versionCode=2103848530, versionName='com.mgtv.remote', startCount=0, startTime=0, firstInstalltime=1230739200000, position=0, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 12:11:15.145  1109 22230 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.cast', appName='芒果投屏', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{2ab1574 com.mgtv.cast}, appDangbei=null, versionCode=2111001144, versionName='com.mgtv.cast', startCount=0, startTime=0, firstInstalltime=1230739200000, position=0, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 12:11:15.151  1109 22232 I LocalSpUtlis: getBooleanValue,key:apson_app_show_first
+11-21 12:11:15.152  1109 22232 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.tvos.datareportor', appName='TVOS Screenshot Demo', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{f19aa9d com.mgtv.tvos.datareportor}, appDangbei=null, versionCode=1, versionName='com.mgtv.tvos.datareportor', startCount=0, startTime=0, firstInstalltime=1794480075717, position=0, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 12:11:15.152  1109 22232 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.tv', appName='芒果TV', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{257ab12 com.mgtv.tv}, appDangbei=null, versionCode=22011118, versionName='com.mgtv.tv', startCount=0, startTime=0, firstInstalltime=1230739200000, position=109, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 12:11:15.152  1109 22232 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.pplive.atv', appName='CIBN聚精彩', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{75f82e3 com.pplive.atv}, appDangbei=null, versionCode=63105, versionName='com.pplive.atv', startCount=0, startTime=0, firstInstalltime=1230739200000, position=105, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 12:11:15.152  1109 22232 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.pptv.tvsports.preinstall', appName='CIBN聚体育', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{c1e14e0 com.pptv.tvsports.preinstall}, appDangbei=null, versionCode=394301, versionName='com.pptv.tvsports.preinstall', startCount=0, startTime=0, firstInstalltime=1230739200000, position=104, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 12:11:15.152  1109 22232 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='net.cibntv.ott.sk', appName='CIBN4K花园', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{86b5399 net.cibntv.ott.sk}, appDangbei=null, versionCode=81, versionName='net.cibntv.ott.sk', startCount=0, startTime=0, firstInstalltime=1230739200000, position=103, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 12:11:15.152  1109 22232 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.tencent.qqmusictv', appName='QQ音乐', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{a81665e com.tencent.qqmusictv}, appDangbei=null, versionCode=407, versionName='com.tencent.qqmusictv', startCount=0, startTime=0, firstInstalltime=1230739200000, position=102, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 12:11:15.152  1109 22232 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.hpplay.happyplay.aw', appName='乐播投屏', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{fd6a3f com.hpplay.happyplay.aw}, appDangbei=null, versionCode=808080432, versionName='com.hpplay.happyplay.aw', startCount=0, startTime=0, firstInstalltime=1230739200000, position=99, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 12:11:15.152  1109 22232 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.filemanager', appName='本地文件管理', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{dff9f0c com.mgtv.filemanager}, appDangbei=null, versionCode=2130924842, versionName='com.mgtv.filemanager', startCount=0, startTime=0, firstInstalltime=1230739200000, position=98, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 12:11:15.152  1109 22232 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.ota', appName='系统升级', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{7949055 com.mgtv.ota}, appDangbei=null, versionCode=2130924744, versionName='com.mgtv.ota', startCount=0, startTime=0, firstInstalltime=1230739200000, position=96, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 12:11:15.152  1109 22232 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.remote', appName='电视助手', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{4f98a6a com.mgtv.remote}, appDangbei=null, versionCode=2103848530, versionName='com.mgtv.remote', startCount=0, startTime=0, firstInstalltime=1230739200000, position=0, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 12:11:15.153  1109 22232 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.cast', appName='芒果投屏', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{e686b5b com.mgtv.cast}, appDangbei=null, versionCode=2111001144, versionName='com.mgtv.cast', startCount=0, startTime=0, firstInstalltime=1230739200000, position=0, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-21 12:11:16.028   309  1605 I [Gralloc]: Got fd 16 for handle 1
+11-21 12:11:16.030   309  1605 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 12:11:16.030   309  1605 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-21 12:11:16.031   321   362 I [Gralloc]: Got handle 2 for fd 72
+11-21 12:11:16.031   321   362 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 12:11:16.031   321   362 I [Gralloc]: leave: prime_fd=72,share_attr_fd=75
+11-21 12:11:16.031 22185 22214 I [Gralloc]: Got handle 7 for fd 76
+11-21 12:11:16.031 22185 22214 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 12:11:16.031 22185 22214 I [Gralloc]: leave: prime_fd=76,share_attr_fd=77
+11-21 12:11:16.067   310   425 I [Gralloc]: Got handle 5 for fd 46
+11-21 12:11:16.067   310   425 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 12:11:16.067   310   425 I [Gralloc]: leave: prime_fd=46,share_attr_fd=50
+11-21 12:11:16.074   309  1605 I [Gralloc]: Got fd 16 for handle 1
+11-21 12:11:16.077   309  1605 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 12:11:16.077   309  1605 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-21 12:11:16.077   321   532 I [Gralloc]: Got handle 3 for fd 78
+11-21 12:11:16.077   321   532 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 12:11:16.078   321   532 I [Gralloc]: leave: prime_fd=78,share_attr_fd=80
+11-21 12:11:16.078 22185 22214 I [Gralloc]: Got handle 8 for fd 79
+11-21 12:11:16.078 22185 22214 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 12:11:16.078 22185 22214 I [Gralloc]: leave: prime_fd=79,share_attr_fd=80
+11-21 12:11:16.101   310   425 I [Gralloc]: Got handle 7 for fd 44
+11-21 12:11:16.101   310   425 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 12:11:16.101   310   425 I [Gralloc]: leave: prime_fd=44,share_attr_fd=59
+11-21 12:11:16.405   329   329 I remoteservice.s: type=1400 audit(0.0:1893): avc: denied { dac_override } for capability=1 scontext=u:r:remoteservice:s0 tcontext=u:r:remoteservice:s0 tclass=capability permissive=1
+11-21 12:11:16.637  1109  1934 I MgtvP2pManager: 2026-11-21 12:11:16.636 [MGDS:I<1938>]-[EasySignalHelper.cpp:297<reportUploadInfo>] > [signal], reportUploadInfo
+11-21 12:11:17.105 22185 22203 I PAE_STATS: frames=120 fps=48.2 frame_ms=20.76 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 12:11:17.518  1109 22220 E NetWorkUtils: exec cmd fail:ping -c 1 -w 3 114.114.114.114
+11-21 12:11:17.524  1109 22225 E NetWorkUtils: exec cmd fail:ping -c 1 -w 3 114.114.114.114
+11-21 12:11:17.623 22234 22234 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 0 <<<<<<
+11-21 12:11:17.705 22234 22234 I app_process: The ClassLoaderContext is a special shared library.
+11-21 12:11:17.734 22234 22234 D AndroidRuntime: Calling main entry com.android.commands.input.Input
+11-21 12:11:17.737 22234 22234 I Input   : injectMotionEvent: MotionEvent { action=ACTION_DOWN, actionButton=0, id[0]=0, x[0]=592.0, y[0]=1049.0, toolType[0]=TOOL_TYPE_UNKNOWN, buttonState=0, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=265396871, downTime=265396871, deviceId=0, source=0x1002 }
+11-21 12:11:17.739 22234 22234 I Input   : injectMotionEvent: MotionEvent { action=ACTION_UP, actionButton=0, id[0]=0, x[0]=592.0, y[0]=1049.0, toolType[0]=TOOL_TYPE_UNKNOWN, buttonState=0, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=265396871, downTime=265396871, deviceId=0, source=0x1002 }
+11-21 12:11:17.745 22234 22234 D AndroidRuntime: Shutting down VM
+11-21 12:11:17.773   302  2541 D AudioHardwareTiny: start_output_stream device: 80402
+11-21 12:11:17.773   302  2541 D AudioHardwareTiny: read_out_sound_card: buf =  0 [rockchiphdmi   ]: rockchip_hdmi - rockchip,hdmi
+11-21 12:11:17.773   302  2541 D AudioHardwareTiny: get_card_number: number =0,card_name =  0 [rockchiphdmi   ]: rockchip_hdmi - rockchip,hdmi
+11-21 12:11:17.773   302  2541 D AudioHardwareTiny: read_out_sound_card: buf =                       rockchip,hdmi
+11-21 12:11:17.773   302  2541 D AudioHardwareTiny: read_out_sound_card: buf =  1 [rockchipes7243 ]: rockchip_es7243 - rockchip,es7243
+11-21 12:11:17.773   302  2541 D AudioHardwareTiny: get_card_number: number =1,card_name =  1 [rockchipes7243 ]: rockchip_es7243 - rockchip,es7243
+11-21 12:11:17.773   302  2541 D AudioHardwareTiny: read_out_sound_card: buf =                       rockchip,es7243
+11-21 12:11:17.773   302  2541 D AudioHardwareTiny: read_out_sound_card: buf =  2 [rkhdmidpsound  ]: rk-hdmi-dp-soun - rk-hdmi-dp-sound
+11-21 12:11:17.773   302  2541 D AudioHardwareTiny: !!! mgtv: use [rkhdmidpsound] as [rockchipspdif] !!!
+11-21 12:11:17.773   302  2541 D AudioHardwareTiny: get_card_number: number =2,card_name =  2 [rkhdmidpsound  ]: rk-hdmi-dp-soun - rk-hdmi-dp-sound
+11-21 12:11:17.773   302  2541 D AudioHardwareTiny: read_out_sound_card: buf =                       rk-hdmi-dp-sound
+11-21 12:11:17.773   302  2541 D AudioHardwareTiny: out->Device     : 0x80402
+11-21 12:11:17.773   302  2541 D AudioHardwareTiny: out->SampleRate : 48000
+11-21 12:11:17.773   302  2541 D AudioHardwareTiny: out->Channels   : 2
+11-21 12:11:17.773   302  2541 D AudioHardwareTiny: out->Formate    : 0
+11-21 12:11:17.774   302  2541 D AudioHardwareTiny: out->PreiodSize : 512
+11-21 12:11:17.774   302  2541 D AudioHardwareTiny: out->flags : 0
+11-21 12:11:17.774   302  2541 D alsa_route: route_info->sound_card 0, route_info->devices 0  
+11-21 12:11:17.774   302  2541 D alsa_route: route_set_controls() set route 24
+11-21 12:11:17.774   302  2541 D AudioHardwareTiny: Now set mixer audio_mode is 0 for drm
+11-21 12:11:17.775   302  2541 W StreamHAL: Error from HAL stream in function get_presentation_position: Operation not permitted
+11-21 12:11:18.190  1109  1934 I MgtvP2pManager: 2026-11-21 12:11:18.190 [MGDS:I<1938>]-[EasySignalHelper.cpp:260<heartbeat>] > [signal], heartbeat
+11-21 12:11:19.095   309  1605 I [Gralloc]: Got fd 16 for handle 1
+11-21 12:11:19.096   309  1605 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x333. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 12:11:19.096   309  1605 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-21 12:11:19.096 22250 22250 I [Gralloc]: Got handle 1 for fd 19
+11-21 12:11:19.096 22250 22250 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x333. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 12:11:19.096 22250 22250 I [Gralloc]: leave: prime_fd=19,share_attr_fd=20
+11-21 12:11:19.097   321   359 I [Gralloc]: Got handle 4 for fd 111
+11-21 12:11:19.097   321   359 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x333. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 12:11:19.097   321   359 I [Gralloc]: leave: prime_fd=111,share_attr_fd=112
+11-21 12:11:19.430 22185 22203 I PAE_STATS: frames=240 fps=54.9 frame_ms=18.20 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 12:11:19.546  1109  1934 I MgtvP2pManager: 2026-11-21 12:11:19.543 [MGDS:I<1939>]-[EasyCacheManager.cpp:732<freeMemCacheIfNeeded>] > freeMemCacheIfNeeded by timing, sysSize:1051/1957(MB), limitSize:210.20 MB, cachedSize:0 B
+11-21 12:11:19.553  1109  1934 I MgtvP2pManager: 2026-11-21 12:11:19.552 [MGDS:I<1939>]-[EasyCacheManager.cpp:781<deleteFileIfNeeded>] > deleteFileIfNeeded by timing, sysSize:8444/11021(MB), limitSize:256.00 MB, cachedSize:132.12 MB
+11-21 12:11:19.904 22253 22253 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 0 <<<<<<
+11-21 12:11:19.990 22253 22253 I app_process: The ClassLoaderContext is a special shared library.
+11-21 12:11:20.018 22253 22253 D AndroidRuntime: Calling main entry com.android.commands.input.Input
+11-21 12:11:20.023 22253 22253 I Input   : injectMotionEvent: MotionEvent { action=ACTION_DOWN, actionButton=0, id[0]=0, x[0]=592.0, y[0]=1049.0, toolType[0]=TOOL_TYPE_UNKNOWN, buttonState=0, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=265399156, downTime=265399156, deviceId=0, source=0x1002 }
+11-21 12:11:20.025 22253 22253 I Input   : injectMotionEvent: MotionEvent { action=ACTION_UP, actionButton=0, id[0]=0, x[0]=592.0, y[0]=1049.0, toolType[0]=TOOL_TYPE_UNKNOWN, buttonState=0, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=265399156, downTime=265399156, deviceId=0, source=0x1002 }
+11-21 12:11:20.035 22253 22253 D AndroidRuntime: Shutting down VM
+11-21 12:11:20.568  1109 22220 E NetWorkUtils: exec cmd fail:ping -c 1 -w 3 233.5.5.5
+11-21 12:11:20.568  1109 22225 E NetWorkUtils: exec cmd fail:ping -c 1 -w 3 233.5.5.5
+11-21 12:11:20.644  1109 22225 I NetWorkUtils: exec cmd success:ping -c 1 -w 3 180.76.76.76
+11-21 12:11:20.644  1109 22225 I NetCheckerModule: checkNetwork isRouteAvailable = CHECK_SUCCESS
+11-21 12:11:20.644  1109 22225 I NetWorkUtils: isServerAvailable url = client/dynamic_entry
+11-21 12:11:20.645  1109 22225 W System.err: java.net.MalformedURLException: no protocol: client/dynamic_entry
+11-21 12:11:20.645  1109 22225 W System.err: 	at java.net.URL.<init>(URL.java:590)
+11-21 12:11:20.645  1109 22225 W System.err: 	at java.net.URL.<init>(URL.java:487)
+11-21 12:11:20.646  1109 22225 W System.err: 	at java.net.URL.<init>(URL.java:436)
+11-21 12:11:20.646  1109 22225 W System.err: 	at com.mgtv.tv.base.core.NetWorkUtils.checkServerAvailable(NetWorkUtils.java:393)
+11-21 12:11:20.646  1109 22225 W System.err: 	at com.mgtv.tv.lib.reporter.e$1.run(NetworkChecker.java:71)
+11-21 12:11:20.646  1109 22225 W System.err: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1162)
+11-21 12:11:20.646  1109 22225 W System.err: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+11-21 12:11:20.646  1109 22225 W System.err: 	at java.lang.Thread.run(Thread.java:764)
+11-21 12:11:20.647  1109 22225 E NetCheckerModule: checkNetwork: unknown error type
+11-21 12:11:20.650  1109 22220 I NetWorkUtils: exec cmd success:ping -c 1 -w 3 180.76.76.76
+11-21 12:11:20.650  1109 22220 I NetCheckerModule: checkNetwork isRouteAvailable = CHECK_SUCCESS
+11-21 12:11:20.650  1109 22220 I NetWorkUtils: isServerAvailable url = api/v1/act/assets/overview
+11-21 12:11:20.651  1109 22220 W System.err: java.net.MalformedURLException: no protocol: api/v1/act/assets/overview
+11-21 12:11:20.651  1109 22220 W System.err: 	at java.net.URL.<init>(URL.java:590)
+11-21 12:11:20.651  1109 22220 W System.err: 	at java.net.URL.<init>(URL.java:487)
+11-21 12:11:20.651  1109 22220 W System.err: 	at java.net.URL.<init>(URL.java:436)
+11-21 12:11:20.651  1109 22220 W System.err: 	at com.mgtv.tv.base.core.NetWorkUtils.checkServerAvailable(NetWorkUtils.java:393)
+11-21 12:11:20.651  1109 22220 W System.err: 	at com.mgtv.tv.lib.reporter.e$1.run(NetworkChecker.java:71)
+11-21 12:11:20.651  1109 22220 W System.err: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1162)
+11-21 12:11:20.651  1109 22220 W System.err: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+11-21 12:11:20.651  1109 22220 W System.err: 	at java.lang.Thread.run(Thread.java:764)
+11-21 12:11:20.651  1109 22220 E NetCheckerModule: checkNetwork: unknown error type
+11-21 12:11:21.483   309  1605 I [Gralloc]: Got fd 16 for handle 1
+11-21 12:11:21.483   309  1605 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x333. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 12:11:21.483   309  1605 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-21 12:11:21.484 22270 22270 I [Gralloc]: Got handle 1 for fd 19
+11-21 12:11:21.484 22270 22270 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x333. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 12:11:21.484 22270 22270 I [Gralloc]: leave: prime_fd=19,share_attr_fd=20
+11-21 12:11:21.484   321   532 I [Gralloc]: Got handle 4 for fd 90
+11-21 12:11:21.484   321   532 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x333. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 12:11:21.485   321   532 I [Gralloc]: leave: prime_fd=90,share_attr_fd=104
+11-21 12:11:21.734 22185 22203 I PAE_STATS: frames=360 fps=54.1 frame_ms=18.48 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 12:11:22.268 22274 22274 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 0 <<<<<<
+11-21 12:11:22.350 22274 22274 I app_process: The ClassLoaderContext is a special shared library.
+11-21 12:11:22.379 22274 22274 D AndroidRuntime: Calling main entry com.android.commands.input.Input
+11-21 12:11:22.382 22274 22274 I Input   : injectMotionEvent: MotionEvent { action=ACTION_DOWN, actionButton=0, id[0]=0, x[0]=592.0, y[0]=1049.0, toolType[0]=TOOL_TYPE_UNKNOWN, buttonState=0, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=265401517, downTime=265401517, deviceId=0, source=0x1002 }
+11-21 12:11:22.385 22274 22274 I Input   : injectMotionEvent: MotionEvent { action=ACTION_UP, actionButton=0, id[0]=0, x[0]=592.0, y[0]=1049.0, toolType[0]=TOOL_TYPE_UNKNOWN, buttonState=0, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=265401517, downTime=265401517, deviceId=0, source=0x1002 }
+11-21 12:11:22.390 22274 22274 D AndroidRuntime: Shutting down VM
+11-21 12:11:23.696  1109 22220 E NetWorkUtils: exec cmd fail:ping -c 1 -w 3 114.114.114.114
+11-21 12:11:23.698  1109 22265 E NetWorkUtils: exec cmd fail:ping -c 1 -w 3 114.114.114.114
+11-21 12:11:23.780   309  1605 I [Gralloc]: Got fd 16 for handle 1
+11-21 12:11:23.781   309  1605 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x333. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 12:11:23.781   309  1605 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-21 12:11:23.781 22286 22286 I [Gralloc]: Got handle 1 for fd 19
+11-21 12:11:23.781 22286 22286 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x333. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 12:11:23.782 22286 22286 I [Gralloc]: leave: prime_fd=19,share_attr_fd=20
+11-21 12:11:23.782   321   532 I [Gralloc]: Got handle 4 for fd 112
+11-21 12:11:23.782   321   532 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x333. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 12:11:23.782   321   532 I [Gralloc]: leave: prime_fd=112,share_attr_fd=113
+11-21 12:11:24.049 22185 22203 I PAE_STATS: frames=480 fps=54.8 frame_ms=18.25 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 12:11:24.555 22291 22291 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 0 <<<<<<
+11-21 12:11:24.639 22291 22291 I app_process: The ClassLoaderContext is a special shared library.
+11-21 12:11:24.668 22291 22291 D AndroidRuntime: Calling main entry com.android.commands.input.Input
+11-21 12:11:24.671 22291 22291 I Input   : injectMotionEvent: MotionEvent { action=ACTION_DOWN, actionButton=0, id[0]=0, x[0]=592.0, y[0]=1049.0, toolType[0]=TOOL_TYPE_UNKNOWN, buttonState=0, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=265403805, downTime=265403805, deviceId=0, source=0x1002 }
+11-21 12:11:24.674 22291 22291 I Input   : injectMotionEvent: MotionEvent { action=ACTION_UP, actionButton=0, id[0]=0, x[0]=592.0, y[0]=1049.0, toolType[0]=TOOL_TYPE_UNKNOWN, buttonState=0, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=265403805, downTime=265403805, deviceId=0, source=0x1002 }
+11-21 12:11:24.679 22291 22291 D AndroidRuntime: Shutting down VM
+11-21 12:11:26.131   309  1605 I [Gralloc]: Got fd 16 for handle 1
+11-21 12:11:26.132   309  1605 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x333. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 12:11:26.132   309  1605 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-21 12:11:26.133 22303 22303 I [Gralloc]: Got handle 1 for fd 19
+11-21 12:11:26.133 22303 22303 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x333. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 12:11:26.133 22303 22303 I [Gralloc]: leave: prime_fd=19,share_attr_fd=20
+11-21 12:11:26.133   321   532 I [Gralloc]: Got handle 4 for fd 90
+11-21 12:11:26.133   321   532 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x333. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 12:11:26.133   321   532 I [Gralloc]: leave: prime_fd=90,share_attr_fd=104
+11-21 12:11:26.383 22185 22203 I PAE_STATS: frames=600 fps=53.8 frame_ms=18.58 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 12:11:26.746  1109 22265 E NetWorkUtils: exec cmd fail:ping -c 1 -w 3 233.5.5.5
+11-21 12:11:26.750  1109 22220 E NetWorkUtils: exec cmd fail:ping -c 1 -w 3 233.5.5.5
+11-21 12:11:26.819  1109 22265 I NetWorkUtils: exec cmd success:ping -c 1 -w 3 180.76.76.76
+11-21 12:11:26.822  1109 22220 I NetWorkUtils: exec cmd success:ping -c 1 -w 3 180.76.76.76
+11-21 12:11:26.942 22307 22307 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 0 <<<<<<
+11-21 12:11:27.026 22307 22307 I app_process: The ClassLoaderContext is a special shared library.
+11-21 12:11:27.055 22307 22307 D AndroidRuntime: Calling main entry com.android.commands.input.Input
+11-21 12:11:27.059 22307 22307 I Input   : injectMotionEvent: MotionEvent { action=ACTION_DOWN, actionButton=0, id[0]=0, x[0]=592.0, y[0]=1049.0, toolType[0]=TOOL_TYPE_UNKNOWN, buttonState=0, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=265406193, downTime=265406193, deviceId=0, source=0x1002 }
+11-21 12:11:27.064 22307 22307 I Input   : injectMotionEvent: MotionEvent { action=ACTION_UP, actionButton=0, id[0]=0, x[0]=592.0, y[0]=1049.0, toolType[0]=TOOL_TYPE_UNKNOWN, buttonState=0, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=265406193, downTime=265406193, deviceId=0, source=0x1002 }
+11-21 12:11:27.069 22307 22307 D AndroidRuntime: Shutting down VM
+11-21 12:11:27.085 22185 22190 I zygote64: Do partial code cache collection, code=15KB, data=29KB
+11-21 12:11:27.086 22185 22190 I zygote64: After code cache collection, code=15KB, data=29KB
+11-21 12:11:27.086 22185 22190 I zygote64: Increasing code cache capacity to 128KB
+11-21 12:11:28.414   309  1605 I [Gralloc]: Got fd 16 for handle 1
+11-21 12:11:28.415   309  1605 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x333. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 12:11:28.415   309  1605 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-21 12:11:28.416 22321 22321 I [Gralloc]: Got handle 1 for fd 19
+11-21 12:11:28.416 22321 22321 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x333. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 12:11:28.416 22321 22321 I [Gralloc]: leave: prime_fd=19,share_attr_fd=20
+11-21 12:11:28.417   321   362 I [Gralloc]: Got handle 4 for fd 90
+11-21 12:11:28.417   321   362 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x333. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 12:11:28.417   321   362 I [Gralloc]: leave: prime_fd=90,share_attr_fd=104
+11-21 12:11:28.683 22185 22203 I PAE_STATS: frames=720 fps=54.5 frame_ms=18.34 draw_calls=2 triangles=3053 buffer_bytes=156944

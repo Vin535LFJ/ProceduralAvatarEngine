@@ -1,0 +1,21 @@
+# ctest re-verification 2026-11-21 (build/host-verify, cygwin g++, Unix Makefiles, PAE_HOST=ON)
+-- Generating done
+-- Build files have been written to: C:/Users/Giant/Desktop/GITCODE/Procedural Avatar Engine/build/host-verify
+[ 91%] Built target pae_geometry_tests
+[100%] Built target pae_humanoid_tests
+Internal ctest changing into directory: C:/Users/Giant/Desktop/GITCODE/Procedural Avatar Engine/build/host-verify
+Test project C:/Users/Giant/Desktop/GITCODE/Procedural Avatar Engine/build/host-verify
+    Start 1: pae_core_tests
+1/5 Test #1: pae_core_tests ...................   Passed    0.02 sec
+    Start 2: pae_geometry_tests
+2/5 Test #2: pae_geometry_tests ...............   Passed    0.02 sec
+    Start 3: pae_humanoid_tests
+3/5 Test #3: pae_humanoid_tests ...............   Passed    0.02 sec
+    Start 4: pae_skinning_tests
+4/5 Test #4: pae_skinning_tests ...............   Passed    0.02 sec
+    Start 5: pae_motion_tests
+5/5 Test #5: pae_motion_tests .................   Passed    0.02 sec
+
+100% tests passed, 0 tests failed out of 5
+
+Total Test time (real) =   0.11 sec

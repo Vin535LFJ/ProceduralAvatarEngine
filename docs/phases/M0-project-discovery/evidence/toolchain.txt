@@ -1,0 +1,47 @@
+=== toolchain ===
+java version "17.0.7" 2023-04-18 LTS
+Java(TM) SE Runtime Environment (build 17.0.7+8-LTS-224)
+Java HotSpot(TM) 64-Bit Server VM (build 17.0.7+8-LTS-224, mixed mode, sharing)
+cmake version 3.20.0-rc1
+
+CMake suite maintained and supported by Kitware (kitware.com/cmake).
+g++ (GCC) 11.5.0
+Android Debug Bridge version 1.0.41
+Version 36.0.0-13206524
+Installed as E:\AndroidSdk\platform-tools\adb.exe
+Running on Windows 10.0.26300
+git version 2.55.0.windows.3
+--- cached gradle dists ---
+/c/Users/Giant/.gradle/wrapper/dists/gradle-4.2.1
+/c/Users/Giant/.gradle/wrapper/dists/gradle-5.4.1
+/c/Users/Giant/.gradle/wrapper/dists/gradle-5.4.1-all
+/c/Users/Giant/.gradle/wrapper/dists/gradle-6.5.1
+/c/Users/Giant/.gradle/wrapper/dists/gradle-6.5.1-all
+/c/Users/Giant/.gradle/wrapper/dists/gradle-6.8.3
+/c/Users/Giant/.gradle/wrapper/dists/gradle-7.6-bin
+/c/Users/Giant/.gradle/wrapper/dists/gradle-7.6.1-all
+/c/Users/Giant/.gradle/wrapper/dists/gradle-8.0.2-bin
+/c/Users/Giant/.gradle/wrapper/dists/gradle-8.10-bin
+/c/Users/Giant/.gradle/wrapper/dists/gradle-8.10.2-bin
+/c/Users/Giant/.gradle/wrapper/dists/gradle-8.13-bin
+/c/Users/Giant/.gradle/wrapper/dists/gradle-8.9
+/c/Users/Giant/.gradle/wrapper/dists/gradle-8.9-bin
+/c/Users/Giant/.gradle/wrapper/dists/gradle-9.2.0-bin
+--- cached AGP ---
+/c/Users/Giant/.gradle/caches/modules-2/files-2.1/com.android.tools.build/gradle
+/c/Users/Giant/.gradle/caches/modules-2/files-2.1/com.android.tools.build/gradle/3.5.4
+/c/Users/Giant/.gradle/caches/modules-2/files-2.1/com.android.tools.build/gradle/7.4.2
+--- SDK NDK ---
+/e/AndroidSdk/ndk/21.4.7075529
+/e/AndroidSdk/ndk/22.1.7171670
+/e/AndroidSdk/ndk/25.1.8937393
+/e/AndroidSdk/ndk/27.0.12077973
+--- SDK cmake ---
+/e/AndroidSdk/cmake/3.10.2.4988404
+/e/AndroidSdk/cmake/3.22.1
+--- platforms ---
+/e/AndroidSdk/platforms/android-31
+/e/AndroidSdk/platforms/android-32
+/e/AndroidSdk/platforms/android-33
+/e/AndroidSdk/platforms/android-34
+/e/AndroidSdk/platforms/android-35

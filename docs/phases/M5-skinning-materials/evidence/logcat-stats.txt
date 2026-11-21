@@ -1,0 +1,121 @@
+--------- beginning of main
+11-21 12:04:56.341 21966 21966 I [Gralloc]: leave: prime_fd=19,share_attr_fd=20
+11-21 12:04:56.341   321   532 I [Gralloc]: Got handle 9 for fd 111
+11-21 12:04:56.341   321   532 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x333. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 12:04:56.341   321   532 I [Gralloc]: leave: prime_fd=111,share_attr_fd=112
+11-21 12:04:57.064 21844 21861 I PAE_STATS: frames=2160 fps=54.6 frame_ms=18.31 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 12:04:57.161 21969 21969 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 0 <<<<<<
+11-21 12:04:57.245 21969 21969 I app_process: The ClassLoaderContext is a special shared library.
+11-21 12:04:57.275 21969 21969 D AndroidRuntime: Calling main entry com.android.commands.input.Input
+11-21 12:04:57.278 21969 21969 I Input   : injectMotionEvent: MotionEvent { action=ACTION_DOWN, actionButton=0, id[0]=0, x[0]=592.0, y[0]=1049.0, toolType[0]=TOOL_TYPE_UNKNOWN, buttonState=0, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=265016412, downTime=265016412, deviceId=0, source=0x1002 }
+11-21 12:04:57.283 21969 21969 I Input   : injectMotionEvent: MotionEvent { action=ACTION_UP, actionButton=0, id[0]=0, x[0]=592.0, y[0]=1049.0, toolType[0]=TOOL_TYPE_UNKNOWN, buttonState=0, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=265016412, downTime=265016412, deviceId=0, source=0x1002 }
+11-21 12:04:57.288 21969 21969 D AndroidRuntime: Shutting down VM
+11-21 12:04:57.714 21979 21979 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 0 <<<<<<
+11-21 12:04:57.805 21979 21979 I app_process: The ClassLoaderContext is a special shared library.
+11-21 12:04:57.837 21979 21979 D AndroidRuntime: Calling main entry com.android.commands.input.Input
+11-21 12:04:57.841 21979 21979 I Input   : injectMotionEvent: MotionEvent { action=ACTION_DOWN, actionButton=0, id[0]=0, x[0]=592.0, y[0]=1049.0, toolType[0]=TOOL_TYPE_UNKNOWN, buttonState=0, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=265016974, downTime=265016974, deviceId=0, source=0x1002 }
+11-21 12:04:57.847 21979 21979 I Input   : injectMotionEvent: MotionEvent { action=ACTION_UP, actionButton=0, id[0]=0, x[0]=592.0, y[0]=1049.0, toolType[0]=TOOL_TYPE_UNKNOWN, buttonState=0, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=265016974, downTime=265016974, deviceId=0, source=0x1002 }
+11-21 12:04:57.852 21979 21979 D AndroidRuntime: Shutting down VM
+11-21 12:04:57.966 21844 21849 I zygote64: Do partial code cache collection, code=15KB, data=29KB
+11-21 12:04:57.967 21844 21849 I zygote64: After code cache collection, code=15KB, data=29KB
+11-21 12:04:57.967 21844 21849 I zygote64: Increasing code cache capacity to 128KB
+11-21 12:04:58.270 21989 21989 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 0 <<<<<<
+11-21 12:04:58.362 21989 21989 I app_process: The ClassLoaderContext is a special shared library.
+11-21 12:04:58.394 21989 21989 D AndroidRuntime: Calling main entry com.android.commands.input.Input
+11-21 12:04:58.398 21989 21989 I Input   : injectMotionEvent: MotionEvent { action=ACTION_DOWN, actionButton=0, id[0]=0, x[0]=592.0, y[0]=1049.0, toolType[0]=TOOL_TYPE_UNKNOWN, buttonState=0, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=265017532, downTime=265017532, deviceId=0, source=0x1002 }
+11-21 12:04:58.401 21989 21989 I Input   : injectMotionEvent: MotionEvent { action=ACTION_UP, actionButton=0, id[0]=0, x[0]=592.0, y[0]=1049.0, toolType[0]=TOOL_TYPE_UNKNOWN, buttonState=0, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=265017532, downTime=265017532, deviceId=0, source=0x1002 }
+11-21 12:04:58.406 21989 21989 D AndroidRuntime: Shutting down VM
+11-21 12:04:59.285 21844 21861 I PAE_STATS: frames=2280 fps=50.8 frame_ms=19.67 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 12:04:59.781   309  1605 I [Gralloc]: Got fd 16 for handle 1
+11-21 12:04:59.782   309  1605 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x333. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 12:04:59.782   309  1605 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-21 12:04:59.782 22002 22002 I [Gralloc]: Got handle 1 for fd 19
+11-21 12:04:59.783 22002 22002 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x333. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 12:04:59.783 22002 22002 I [Gralloc]: leave: prime_fd=19,share_attr_fd=20
+11-21 12:04:59.783   321   533 I [Gralloc]: Got handle 9 for fd 110
+11-21 12:04:59.783   321   533 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x333. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 12:04:59.783   321   533 I [Gralloc]: leave: prime_fd=110,share_attr_fd=111
+11-21 12:05:00.008  1109  1109 I Launcher-MguiDataManager:: onReceive: android.intent.action.TIME_TICK
+11-21 12:05:00.025   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:05:00.025   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:05:00.087   462   480 E memtrack: Couldn't load memtrack module
+11-21 12:05:00.087   462   480 W android.os.Debug: failed to get memory consumption info: -1
+11-21 12:05:00.589 22005 22005 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 0 <<<<<<
+11-21 12:05:00.674 22005 22005 I app_process: The ClassLoaderContext is a special shared library.
+11-21 12:05:00.705 22005 22005 D AndroidRuntime: Calling main entry com.android.commands.input.Input
+11-21 12:05:00.708 22005 22005 I Input   : injectMotionEvent: MotionEvent { action=ACTION_DOWN, actionButton=0, id[0]=0, x[0]=336.0, y[0]=1049.0, toolType[0]=TOOL_TYPE_UNKNOWN, buttonState=0, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=265019842, downTime=265019842, deviceId=0, source=0x1002 }
+11-21 12:05:00.711 22005 22005 I Input   : injectMotionEvent: MotionEvent { action=ACTION_UP, actionButton=0, id[0]=0, x[0]=336.0, y[0]=1049.0, toolType[0]=TOOL_TYPE_UNKNOWN, buttonState=0, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=265019842, downTime=265019842, deviceId=0, source=0x1002 }
+11-21 12:05:00.716 22005 22005 D AndroidRuntime: Shutting down VM
+11-21 12:05:00.886 21844 21849 I zygote64: Compiler allocated 6MB to compile void android.view.ViewRootImpl.performTraversals()
+11-21 12:05:01.166 22015 22015 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 0 <<<<<<
+11-21 12:05:01.264 22015 22015 I app_process: The ClassLoaderContext is a special shared library.
+11-21 12:05:01.298 22015 22015 D AndroidRuntime: Calling main entry com.android.commands.input.Input
+11-21 12:05:01.306 22015 22015 I Input   : injectMotionEvent: MotionEvent { action=ACTION_DOWN, actionButton=0, id[0]=0, x[0]=336.0, y[0]=1049.0, toolType[0]=TOOL_TYPE_UNKNOWN, buttonState=0, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=265020436, downTime=265020436, deviceId=0, source=0x1002 }
+11-21 12:05:01.309 22015 22015 I Input   : injectMotionEvent: MotionEvent { action=ACTION_UP, actionButton=0, id[0]=0, x[0]=336.0, y[0]=1049.0, toolType[0]=TOOL_TYPE_UNKNOWN, buttonState=0, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=265020436, downTime=265020436, deviceId=0, source=0x1002 }
+11-21 12:05:01.315 22015 22015 D AndroidRuntime: Shutting down VM
+11-21 12:05:01.483 21844 21861 I PAE_STATS: frames=2400 fps=55.5 frame_ms=18.01 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 12:05:01.852 22025 22025 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 0 <<<<<<
+11-21 12:05:01.947 22025 22025 I app_process: The ClassLoaderContext is a special shared library.
+11-21 12:05:01.981 22025 22025 D AndroidRuntime: Calling main entry com.android.commands.input.Input
+11-21 12:05:01.986 22025 22025 I Input   : injectMotionEvent: MotionEvent { action=ACTION_DOWN, actionButton=0, id[0]=0, x[0]=468.0, y[0]=1049.0, toolType[0]=TOOL_TYPE_UNKNOWN, buttonState=0, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=265021119, downTime=265021119, deviceId=0, source=0x1002 }
+11-21 12:05:01.992 22025 22025 I Input   : injectMotionEvent: MotionEvent { action=ACTION_UP, actionButton=0, id[0]=0, x[0]=468.0, y[0]=1049.0, toolType[0]=TOOL_TYPE_UNKNOWN, buttonState=0, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=265021119, downTime=265021119, deviceId=0, source=0x1002 }
+11-21 12:05:01.999 22025 22025 D AndroidRuntime: Shutting down VM
+11-21 12:05:02.029 21844 21849 I zygote64: Do partial code cache collection, code=56KB, data=60KB
+11-21 12:05:02.031 21844 21849 I zygote64: After code cache collection, code=56KB, data=60KB
+11-21 12:05:02.031 21844 21849 I zygote64: Increasing code cache capacity to 256KB
+11-21 12:05:03.358   309  1605 I [Gralloc]: Got fd 16 for handle 1
+11-21 12:05:03.358   309  1605 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x333. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 12:05:03.358   309  1605 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-21 12:05:03.359 22037 22037 I [Gralloc]: Got handle 1 for fd 19
+11-21 12:05:03.359 22037 22037 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x333. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 12:05:03.359 22037 22037 I [Gralloc]: leave: prime_fd=19,share_attr_fd=20
+11-21 12:05:03.359   321   533 I [Gralloc]: Got handle 9 for fd 111
+11-21 12:05:03.359   321   533 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x333. size=8294400,pixel_stride=1920,byte_stride=7680
+11-21 12:05:03.359   321   533 I [Gralloc]: leave: prime_fd=111,share_attr_fd=112
+11-21 12:05:03.727 21844 21861 I PAE_STATS: frames=2520 fps=56.1 frame_ms=17.84 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 12:05:04.036  1109  1934 I MgtvP2pManager: 2026-11-21 12:05:04.036 [MGDS:I<1939>]-[EasyCacheManager.cpp:732<freeMemCacheIfNeeded>] > freeMemCacheIfNeeded by timing, sysSize:1060/1957(MB), limitSize:212.00 MB, cachedSize:0 B
+11-21 12:05:04.042  1109  1934 I MgtvP2pManager: 2026-11-21 12:05:04.042 [MGDS:I<1939>]-[EasyCacheManager.cpp:781<deleteFileIfNeeded>] > deleteFileIfNeeded by timing, sysSize:8445/11021(MB), limitSize:256.00 MB, cachedSize:132.12 MB
+11-21 12:05:06.023   302   302 D AudioHardwareTiny: Now set mixer audio_mode is 0 for drm
+11-21 12:05:06.023   302   302 D alsa_route: route_set_controls() set route 24
+11-21 12:05:06.023   302   302 D AudioHardwareTiny: close device
+11-21 12:05:06.174 21844 21861 I PAE_STATS: frames=2640 fps=49.0 frame_ms=20.39 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 12:05:08.617 21844 21861 I PAE_STATS: frames=2760 fps=48.8 frame_ms=20.50 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 12:05:11.076 21844 21861 I PAE_STATS: frames=2880 fps=48.8 frame_ms=20.47 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 12:05:13.135  1109  1109 I YouthModeManager: refreshClockTime-1
+11-21 12:05:13.513 21844 21861 I PAE_STATS: frames=3000 fps=49.0 frame_ms=20.39 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 12:05:15.797  1109  1934 I MgtvP2pManager: 2026-11-21 12:05:15.796 [MGDS:I<1938>]-[EasySignalHelper.cpp:297<reportUploadInfo>] > [signal], reportUploadInfo
+11-21 12:05:15.957 21844 21861 I PAE_STATS: frames=3120 fps=48.8 frame_ms=20.51 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 12:05:17.774  1109  1934 I MgtvP2pManager: 2026-11-21 12:05:17.773 [MGDS:I<1938>]-[EasySignalHelper.cpp:260<heartbeat>] > [signal], heartbeat
+11-21 12:05:18.383 21844 21861 I PAE_STATS: frames=3240 fps=49.9 frame_ms=20.02 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 12:05:19.050  1109  1934 I MgtvP2pManager: 2026-11-21 12:05:19.049 [MGDS:I<1939>]-[EasyCacheManager.cpp:732<freeMemCacheIfNeeded>] > freeMemCacheIfNeeded by timing, sysSize:1060/1957(MB), limitSize:212.00 MB, cachedSize:0 B
+11-21 12:05:19.055  1109  1934 I MgtvP2pManager: 2026-11-21 12:05:19.055 [MGDS:I<1939>]-[EasyCacheManager.cpp:781<deleteFileIfNeeded>] > deleteFileIfNeeded by timing, sysSize:8445/11021(MB), limitSize:256.00 MB, cachedSize:132.12 MB
+11-21 12:05:20.789 21844 21861 I PAE_STATS: frames=3360 fps=49.7 frame_ms=20.11 draw_calls=2 triangles=3053 buffer_bytes=156944
+11-21 12:05:22.238 22046 22046 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 0 <<<<<<
+11-21 12:05:22.321 22046 22046 I app_process: The ClassLoaderContext is a special shared library.
+11-21 12:05:22.349 22046 22046 D AndroidRuntime: Calling main entry com.android.commands.input.Input
+11-21 12:05:22.352 22046 22046 I Input   : injectMotionEvent: MotionEvent { action=ACTION_DOWN, actionButton=0, id[0]=0, x[0]=720.0, y[0]=1049.0, toolType[0]=TOOL_TYPE_UNKNOWN, buttonState=0, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=265041486, downTime=265041486, deviceId=0, source=0x1002 }
+11-21 12:05:22.355 22046 22046 I Input   : injectMotionEvent: MotionEvent { action=ACTION_UP, actionButton=0, id[0]=0, x[0]=720.0, y[0]=1049.0, toolType[0]=TOOL_TYPE_UNKNOWN, buttonState=0, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=265041486, downTime=265041486, deviceId=0, source=0x1002 }
+11-21 12:05:22.359 22046 22046 D AndroidRuntime: Shutting down VM
+11-21 12:05:22.376 21844 21844 I PAE_UI  : frames=3441 fps=55.3 frame_ms=18.08 draw_calls=2 triangles=3053 buffer_bytes=156944 avatar_rev=2 scene_rev=4 
+11-21 12:05:22.379   302  2541 D AudioHardwareTiny: start_output_stream device: 80402
+11-21 12:05:22.380   302  2541 D AudioHardwareTiny: read_out_sound_card: buf =  0 [rockchiphdmi   ]: rockchip_hdmi - rockchip,hdmi
+11-21 12:05:22.380   302  2541 D AudioHardwareTiny: get_card_number: number =0,card_name =  0 [rockchiphdmi   ]: rockchip_hdmi - rockchip,hdmi
+11-21 12:05:22.380   302  2541 D AudioHardwareTiny: read_out_sound_card: buf =                       rockchip,hdmi
+11-21 12:05:22.380   302  2541 D AudioHardwareTiny: read_out_sound_card: buf =  1 [rockchipes7243 ]: rockchip_es7243 - rockchip,es7243
+11-21 12:05:22.380   302  2541 D AudioHardwareTiny: get_card_number: number =1,card_name =  1 [rockchipes7243 ]: rockchip_es7243 - rockchip,es7243
+11-21 12:05:22.380   302  2541 D AudioHardwareTiny: read_out_sound_card: buf =                       rockchip,es7243
+11-21 12:05:22.380   302  2541 D AudioHardwareTiny: read_out_sound_card: buf =  2 [rkhdmidpsound  ]: rk-hdmi-dp-soun - rk-hdmi-dp-sound
+11-21 12:05:22.380   302  2541 D AudioHardwareTiny: !!! mgtv: use [rkhdmidpsound] as [rockchipspdif] !!!
+11-21 12:05:22.380   302  2541 D AudioHardwareTiny: get_card_number: number =2,card_name =  2 [rkhdmidpsound  ]: rk-hdmi-dp-soun - rk-hdmi-dp-sound
+11-21 12:05:22.380   302  2541 D AudioHardwareTiny: read_out_sound_card: buf =                       rk-hdmi-dp-sound
+11-21 12:05:22.380   302  2541 D AudioHardwareTiny: out->Device     : 0x80402
+11-21 12:05:22.380   302  2541 D AudioHardwareTiny: out->SampleRate : 48000
+11-21 12:05:22.380   302  2541 D AudioHardwareTiny: out->Channels   : 2
+11-21 12:05:22.380   302  2541 D AudioHardwareTiny: out->Formate    : 0
+11-21 12:05:22.380   302  2541 D AudioHardwareTiny: out->PreiodSize : 512
+11-21 12:05:22.380   302  2541 D AudioHardwareTiny: out->flags : 0
+11-21 12:05:22.380   302  2541 D alsa_route: route_info->sound_card 0, route_info->devices 0  
+11-21 12:05:22.380   302  2541 D alsa_route: route_set_controls() set route 24
+11-21 12:05:22.380   302  2541 D AudioHardwareTiny: Now set mixer audio_mode is 0 for drm
+11-21 12:05:22.381   302  2541 W StreamHAL: Error from HAL stream in function get_presentation_position: Operation not permitted
+11-21 12:05:23.108 21844 21861 I PAE_STATS: frames=3480 fps=51.8 frame_ms=19.30 draw_calls=2 triangles=3053 buffer_bytes=156944

@@ -1,0 +1,3 @@
+Internal ctest changing into directory: C:/Users/Giant/Desktop/GITCODE/Procedural Avatar Engine/build/host
+Test project C:/Users/Giant/Desktop/GITCODE/Procedural Avatar Engine/build/host
+No tests were found!!!

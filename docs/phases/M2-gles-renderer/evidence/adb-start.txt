@@ -1,0 +1,7 @@
+Starting: Intent { cmp=com.pae.host/.MainActivity }
+Status: ok
+Activity: com.pae.host/.MainActivity
+ThisTime: 316
+TotalTime: 316
+WaitTime: 330
+Complete

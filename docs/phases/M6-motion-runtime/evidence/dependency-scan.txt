@@ -1,0 +1,7 @@
+=== motion runtime SDK dependency scan ===
+=== six action screenshot files ===
+docs/phases/M6-motion-runtime/evidence/motion-pose-1.png
+docs/phases/M6-motion-runtime/evidence/motion-pose-2.png
+docs/phases/M6-motion-runtime/evidence/motion-pose-3.png
+docs/phases/M6-motion-runtime/evidence/motion-pose-4.png
+docs/phases/M6-motion-runtime/evidence/motion-pose-5.png
