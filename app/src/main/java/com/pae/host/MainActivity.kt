@@ -71,6 +71,7 @@ class MainActivity : AppCompatActivity() {
         }
     private lateinit var playButton: Button
     private lateinit var speedButton: Button
+    private lateinit var loopButton: Button
     private lateinit var videoControls: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -156,6 +157,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
         videoControls.addView(speedButton)
+        loopButton = actionButton("Loop Off") {
+            if (videoSource.active()) {
+                loopButton.text = if (videoSource.toggleLoop()) "Loop On" else "Loop Off"
+            }
+        }
+        videoControls.addView(loopButton)
         videoControls.addView(actionButton("Replay") { if (videoSource.active()) videoSource.replay() })
         videoControls.addView(actionButton("Stop") {
             if (videoSource.active()) {

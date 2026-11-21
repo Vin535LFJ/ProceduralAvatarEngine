@@ -105,6 +105,16 @@ class VideoPoseSource(private val activity: AppCompatActivity) {
     fun isPlaying(): Boolean = state == State.PLAYING
     fun currentState(): State = state
 
+    // Continuous-input mode: restart from the head when playback reaches the
+    // end, so the video can drive the avatar indefinitely.
+    @Volatile private var loopEnabled = false
+
+    fun toggleLoop(): Boolean {
+        loopEnabled = !loopEnabled
+        Log.i(TAG, "loop mode ${if (loopEnabled) "ON" else "OFF"}")
+        return loopEnabled
+    }
+
     // ---- Implementation ----
 
     private fun start(source: Source) {
@@ -185,7 +195,7 @@ class VideoPoseSource(private val activity: AppCompatActivity) {
             durationUs = if (format.containsKey(MediaFormat.KEY_DURATION))
                 format.getLong(MediaFormat.KEY_DURATION) else 0L
             Log.i(TAG, "video track: $mime ${width}x${height} rot=$rotation " +
-                "duration=${durationUs / 1000}s")
+                "duration=${durationUs / 1_000_000}s")
 
             reader = ImageReader.newInstance(width, height, ImageFormat.YUV_420_888, 3)
             codec = MediaCodec.createDecoderByType(mime)
@@ -243,7 +253,14 @@ class VideoPoseSource(private val activity: AppCompatActivity) {
                     // After flush() a decoder may still hand back the stale EOS
                     // buffer from before the seek; only honour EOS when this
                     // session actually queued an EOS input.
-                    if (eosInputQueued) endOfStream = true
+                    if (eosInputQueued) {
+                        if (loopEnabled) {
+                            endOfStream = false
+                            performSeek(codec, extractor, 0L, "loop")
+                        } else {
+                            endOfStream = true
+                        }
+                    }
                     continue
                 }
                 codec.releaseOutputBuffer(outIndex, true) // render to reader.surface

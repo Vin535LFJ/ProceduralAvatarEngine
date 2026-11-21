@@ -23,15 +23,26 @@
 2. **解码器输出 YUV 而非 RGBA**：`producer format 0x15 != reader 0x1` 崩溃 → ImageReader 改用 `YUV_420_888` + RenderScript YuvToRGB（JPEG 兜底）。
 3. **flush 后残留 EOS 输出缓冲**：seek/replay 后立即误判视频结束 → 仅在本轮真正入队 EOS 输入后采信 EOS 输出。
 
+## 循环输入源模式（2026-11-21 追加，用户要求把视频作为持续输入源）
+
+- 新增 `Loop` 播放开关（VideoPoseSource.toggleLoop）：EOS 时自动回卷到 0 并重置滤波，视频可无限驱动数字人。
+- `vedio_demo.mp4`（用户素材，428×760 竖屏 81.4s）循环验证：`evidence/logcat-vedio-loop.txt`——`loop mode ON` → `loop to 0.00s (motion filters reset)` → 第二圈继续推理 conf **1.00**；`evidence/frame-vedio-loop-{1..4}.png` 展示跨循环边界的连续舞蹈跟随（LOOP ON 按钮可见）。
+- 顺带修复时长日志 µs→s 显示错误（81.4s 曾显示为 81400s）。
+
 ## 真人姿态驱动端到端验证（2026-11-21 补充，用户授权下载测试视频后完成）
 
-- 测试素材：`angel_one_480p.mp4`（Shaka Player 官方演示短片 "Angel One"，600×480 H.264 MP4，60s，单人真人影片；来源 `https://storage.googleapis.com/shaka-demo-assets/angel-one/`，仅作本地测试输入，未打包进 APK）。备选真人素材站（Wikimedia/Pexels）在本环境网络不可达，Google 演示内容桶（shaka-demo-assets）可达且公开。
-- **结果：PASS** —— 人物出镜段（pts 20–56s）ML Kit 置信度 0.42–**0.98**，数字人实时跟随人物动作：
+- 测试素材 2（用户自有素材）：`vedio_demo.mp4`（用户放置于项目根目录，428×760 竖屏 H.264，81.4s，单人舞蹈视频）——**全程 confidence=1.00**，数字人跟随舞蹈动作：
+  - `evidence/frame-vedio-demo-1.png`（跟随站姿）
+  - `evidence/frame-vedio-demo-3.png`（**舞蹈动作**：交叉步 + 手部姿态）
+  - `evidence/logcat-vedio-demo.txt`：428x760 竖屏 150ms/帧推理；顺带修复时长日志 µs→s 显示错误
+- 测试素材 1：`angel_one_480p.mp4`（Shaka Player 官方演示短片 "Angel One"，600×480 H.264 MP4，60s，单人真人影片；来源 `https://storage.googleapis.com/shaka-demo-assets/angel-one/`，仅作本地测试输入，未打包进 APK）。备选真人素材站（Wikimedia/Pexels）在本环境网络不可达，Google 演示内容桶（shaka-demo-assets）可达且公开。
+- **结果：PASS** —— Angel One 人物出镜段（pts 20–56s）ML Kit 置信度 0.42–**0.98**，数字人实时跟随人物动作：
   - `evidence/frame-person-pose-1.png`（pts≈20s，conf 0.77：站立）
   - `evidence/frame-person-pose-2.png`（pts≈27s，conf 0.88：**坐姿**——人物坐下动作完整映射）
   - `evidence/frame-person-pose-3.png`（pts≈32s，conf 0.98：**马步跨坐**）
   - `evidence/logcat-person-drive.txt`：confidence 时间轴与人物出镜吻合；推理 130–170ms/帧（480p 输入，显著优于 1080p 的 ~200ms）
 - 过程中发现并修复第三个真机 bug：**从 ENDED 状态发起 replay/seek 时 `endOfStream` 标志未重置**（`applyCommand` 对非 STOP 命令返回 false 导致复位代码永不执行），表现为重播/拖动后不解码。修复为 `CommandResult` 三态返回（NONE/STOP/RESTARTED），并补充从 ENDED 状态的 replay/seek 验证路径。
+- **YouTube 直链输入不可行的原因**（用户请求 `youtube.com/watch?v=meIO5zM_MLI` 时的结论）：YouTube 链接是网页而非视频流，应用管线无法直接消费；且本机网络到 YouTube 全域名（主站/oEmbed/i.ytimg/googlevideo CDN）均不可达（HTTP 000），无法代下。替代路径：用户自行下载 mp4 放入项目目录（如 vedio_demo.mp4）后推送设备；应用内 HTTP/HLS 直链输入列入 backlog。
 
 ## 已知行为与未验证事项（如实记录）
 

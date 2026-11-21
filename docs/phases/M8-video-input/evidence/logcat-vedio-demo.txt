@@ -1,0 +1,4 @@
+11-21 19:11:43.758 31771 31939 I PAE_VIDEO: video stats: decoded=590 skipped=469 inferred=121 pts=23.56s inference_ms=150.0 confidence=1.00
+11-21 19:11:50.090 31771 31939 I PAE_VIDEO: video stats: decoded=748 skipped=597 inferred=151 pts=29.88s inference_ms=137.4 confidence=1.00
+11-21 19:11:56.046 31771 31939 I PAE_VIDEO: video stats: decoded=897 skipped=716 inferred=181 pts=35.84s inference_ms=158.6 confidence=1.00
+11-21 19:12:02.514 31771 31939 I PAE_VIDEO: video stats: decoded=1059 skipped=848 inferred=211 pts=42.32s inference_ms=140.4 confidence=1.00
