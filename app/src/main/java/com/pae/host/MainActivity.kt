@@ -58,6 +58,9 @@ class MainActivity : AppCompatActivity() {
     private var poseMode = -1
     private var qualityLevel = 1
     private var pantsIndex = 0
+    private var anatomyOn = false
+    private var viewPreset = 0
+    private var debugView = 0
 
     // One-shot image feed for the M7 pipeline verification: the picked image goes
     // through the same detector -> PoseFrame -> JNI path as live camera frames.
@@ -142,6 +145,21 @@ class MainActivity : AppCompatActivity() {
             qualityLevel = (qualityLevel + 1) % 3
             NativeBridge.setQuality(qualityLevel)
             Log.i("PAE_UI", "quality level -> $qualityLevel (0=Low,1=Medium,2=High)")
+        })
+        buttons.addView(actionButton("Anatomy") {
+            anatomyOn = !anatomyOn
+            NativeBridge.setAnatomyPreview(anatomyOn)
+            Log.i("PAE_UI", "anatomy preview -> $anatomyOn (bind pose, neutral material)")
+        })
+        buttons.addView(actionButton("View") {
+            viewPreset = (viewPreset + 1) % 8
+            NativeBridge.setCameraPreset(viewPreset)
+            Log.i("PAE_UI", "camera preset -> $viewPreset (0F/1B/2L/3R/4-5 45deg/6 shoulder/7 torso)")
+        })
+        buttons.addView(actionButton("DbgView") {
+            debugView = (debugView + 1) % 3
+            NativeBridge.setDebugView(debugView)
+            Log.i("PAE_UI", "debug view -> $debugView (0 shading, 1 wireframe, 2 normals)")
         })
         buttons.addView(actionButton("Stats") {
             Log.i("PAE_UI", NativeBridge.stats())

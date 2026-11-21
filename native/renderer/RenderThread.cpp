@@ -4,9 +4,11 @@
 #include "core/diagnostics/Log.h"
 #include "core/math/Math.h"
 #include "procedural/humanoid/Humanoid.h"
+#include "procedural/humanoid/anatomy/HumanAnatomyGenerator.h"
 #include "skeleton/Skinning.h"
 
 #include <chrono>
+#include <set>
 #include <cmath>
 #include <utility>
 
@@ -65,6 +67,32 @@ void main() {
     float rim = pow(1.0 - abs(n.z), 3.0) * uRim;
     fragColor = vec4(base * shade + vec3(rim), 1.0);
 }
+)GLSL";
+
+constexpr const char* kAnatomyNeutralFragment = R"GLSL(#version 300 es
+precision mediump float;
+in vec3 vNormal;
+in vec4 vColor;
+uniform vec3 uNeutral;
+uniform vec3 uLightDir;
+uniform float uAmbient;
+uniform float uToonSteps;
+out vec4 fragColor;
+void main() {
+    vec3 n = normalize(vNormal);
+    float ndl = max(dot(n, normalize(uLightDir)), 0.0);
+    float toon = floor(ndl * uToonSteps) / max(uToonSteps, 1.0);
+    float shade = mix(uAmbient, 1.0, toon);
+    vec3 base = uNeutral; // neutral matte study material
+    fragColor = vec4(base * shade, 1.0);
+}
+)GLSL";
+
+constexpr const char* kAnatomyNormalsFragment = R"GLSL(#version 300 es
+precision mediump float;
+in vec3 vNormal;
+out vec4 fragColor;
+void main() { fragColor = vec4(normalize(vNormal) * 0.5 + 0.5, 1.0); }
 )GLSL";
 
 constexpr const char* kBackgroundVertex = R"GLSL(#version 300 es
@@ -263,6 +291,33 @@ void RenderThread::postMotionReset() {
     queueCv_.notify_one();
 }
 
+void RenderThread::postAnatomyPreview(bool on) {
+    RenderCommand command;
+    command.type = RenderCommandType::AnatomyPreview;
+    command.flag = on;
+    std::lock_guard<std::mutex> lock(queueMutex_);
+    queue_.push_back(command);
+    queueCv_.notify_one();
+}
+
+void RenderThread::postCameraPreset(int preset) {
+    RenderCommand command;
+    command.type = RenderCommandType::CameraPreset;
+    command.value = preset;
+    std::lock_guard<std::mutex> lock(queueMutex_);
+    queue_.push_back(command);
+    queueCv_.notify_one();
+}
+
+void RenderThread::postDebugView(int view) {
+    RenderCommand command;
+    command.type = RenderCommandType::DebugView;
+    command.value = view;
+    std::lock_guard<std::mutex> lock(queueMutex_);
+    queue_.push_back(command);
+    queueCv_.notify_one();
+}
+
 void RenderThread::postQuality(int level) {
     RenderCommand command;
     command.type = RenderCommandType::SetQuality;
@@ -360,6 +415,15 @@ void RenderThread::processCommands() {
             case RenderCommandType::MotionReset:
                 motion_.resetFilters();
                 break;
+            case RenderCommandType::AnatomyPreview:
+                previewMode_ = command.flag ? 1 : 0;
+                break;
+            case RenderCommandType::CameraPreset:
+                cameraPreset_ = command.value;
+                break;
+            case RenderCommandType::DebugView:
+                debugView_ = command.value;
+                break;
             case RenderCommandType::SetQuality: {
                 const int level = command.value;
                 if (level < 0 || level > 2) break;
@@ -423,6 +487,21 @@ bool RenderThread::ensureResources(std::string* error) {
         if (error) *error = "ground shadow upload failed";
         return false;
     }
+    if (!anatomyProgram_.build(kSkinnedVertex, kAnatomyNeutralFragment, error)) return false;
+    if (!anatomyProgram_.bindUniformBlock("BoneBlock", 0)) {
+        if (error) *error = "anatomy BoneBlock binding failed";
+        return false;
+    }
+    if (!anatomyNormalProg_.build(kSkinnedVertex, kAnatomyNormalsFragment, error)) return false;
+    if (!anatomyNormalProg_.bindUniformBlock("BoneBlock", 0)) {
+        if (error) *error = "anatomy normals BoneBlock binding failed";
+        return false;
+    }
+    uniformAnatomyViewProj_ = anatomyProgram_.uniform("uViewProj");
+    uniformAnatomyModel_ = anatomyProgram_.uniform("uModel");
+    uniformAnatomyNeutral_ = anatomyProgram_.uniform("uNeutral");
+    uniformAnatomyNormalViewProj_ = anatomyNormalProg_.uniform("uViewProj");
+    uniformAnatomyNormalModel_ = anatomyNormalProg_.uniform("uModel");
     uniformViewProj_ = skinnedProgram_.uniform("uViewProj");
     uniformModel_ = skinnedProgram_.uniform("uModel");
     uniformSkin_ = skinnedProgram_.uniform("uSkinColor");
@@ -454,6 +533,28 @@ bool RenderThread::ensureResources(std::string* error) {
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);
+
+    // M12-A: unified SDF upper body for the Anatomy Preview Mode.
+    {
+        anatomy::HumanAnatomyParameters anatomyParams;
+        const auto anatomyStart = std::chrono::steady_clock::now();
+        const BodyParameters anatomyBodyParams{};
+        auto anatomy = anatomy::generateAnatomyUpperBody(
+            anatomyParams, anatomyBodyParams, anatomy::AnatomyResolution{});
+        const auto anatomyEnd = std::chrono::steady_clock::now();
+        const double ms = std::chrono::duration<double, std::milli>(
+            anatomyEnd - anatomyStart).count();
+        if (!anatomy.valid || !anatomyMesh_.upload(anatomy.mesh)) {
+            PAE_LOGE("PAE_RENDER", "anatomy mesh upload failed");
+        } else {
+            PAE_LOGI("PAE_RENDER", "anatomy preview ready: %u tris, %.0f ms",
+                     static_cast<unsigned>(anatomy.mesh.indices.size() / 3), ms);
+        }
+        if (!anatomyLines_.upload(buildAnatomyLineMesh(anatomy.mesh))) {
+            PAE_LOGE("PAE_RENDER", "anatomy wireframe upload failed");
+        }
+    }
+
     resourcesReady_ = true;
     return true;
 }
@@ -463,6 +564,29 @@ void RenderThread::releaseGpuResources() {
     shadowMesh_.release();
     boneUbo_.release();
     resourcesReady_ = false;
+}
+
+MeshData RenderThread::buildAnatomyLineMesh(const MeshData& mesh) const {
+    // Edge list (deduplicated) from the triangle indices -> GL_LINES pairs.
+    MeshData lines;
+    lines.vertices = mesh.vertices;
+    std::set<std::pair<uint32_t, uint32_t>> edges;
+    for (size_t i = 0; i + 2 < mesh.indices.size(); i += 3) {
+        const uint32_t a = mesh.indices[i], b = mesh.indices[i + 1], c = mesh.indices[i + 2];
+        edges.insert({std::min(a, b), std::max(a, b)});
+        edges.insert({std::min(b, c), std::max(b, c)});
+        edges.insert({std::min(c, a), std::max(c, a)});
+    }
+    for (const auto& edge : edges) {
+        lines.indices.insert(lines.indices.end(), {edge.first, edge.second});
+    }
+    Aabb bounds;
+    for (const Vertex& v : lines.vertices) bounds.expand(v.position);
+    lines.bounds = bounds;
+    SubMesh sub;
+    sub.indexCount = static_cast<uint32_t>(lines.indices.size());
+    lines.subMeshes.push_back(sub);
+    return lines;
 }
 
 MeshData RenderThread::buildGroundShadow() const {
@@ -518,8 +642,29 @@ void RenderThread::updateBonePalette(int64_t timestampNs) {
 void RenderThread::drawFrame() {
     stats_.beginFrame();
     const float aspect = height_ > 0 ? static_cast<float>(width_) / static_cast<float>(height_) : 1.0f;
-    const Mat4 view = Mat4::lookAt({0.0f, 0.9f, 3.1f}, {0.0f, 0.9f, 0.0f}, {0.0f, 1.0f, 0.0f});
     const Mat4 projection = Mat4::perspective(1.05f, aspect, 0.1f, 100.0f);
+    // M12: fixed evidence cameras (index per §8 of the anatomy preview spec).
+    static const Vec3 kPresetEye[] = {
+        {0.0f, 0.9f, 3.1f},    // 0 FRONT (M11 default)
+        {0.0f, 0.9f, -3.1f},   // 1 BACK
+        {3.1f, 0.9f, 0.0f},    // 2 LEFT (+X side)
+        {-3.1f, 0.9f, 0.0f},   // 3 RIGHT
+        {2.3f, 0.9f, 2.3f},    // 4 45 LEFT
+        {-2.3f, 0.9f, 2.3f},   // 5 45 RIGHT
+        {0.55f, 1.5f, 1.15f},  // 6 SHOULDER CLOSEUP
+        {0.0f, 1.25f, 1.4f},   // 7 TORSO CLOSEUP
+    };
+    static const Vec3 kPresetTarget[] = {
+        {0.0f, 0.9f, 0.0f}, {0.0f, 0.9f, 0.0f}, {0.0f, 0.9f, 0.0f},
+        {0.0f, 0.9f, 0.0f}, {0.0f, 0.9f, 0.0f}, {0.0f, 0.9f, 0.0f},
+        {0.16f, 1.32f, 0.0f}, {0.0f, 1.18f, 0.0f},
+    };
+    const int preset = std::clamp(cameraPreset_, 0, 7);
+    const Mat4 view = previewMode_ != 0
+        ? Mat4::lookAt(kPresetEye[preset], kPresetTarget[preset], {0.0f, 1.0f, 0.0f})
+        : Mat4::lookAt({0.0f, 0.9f, 3.1f}, {0.0f, 0.9f, 0.0f}, {0.0f, 1.0f, 0.0f});
+    const Mat4 viewProjection = projection * view;
+    const Mat4 model = Mat4::translation({0.0f, -0.05f, 0.0f});
 
     glBindVertexArray(0);
     glDisable(GL_DEPTH_TEST);
@@ -536,10 +681,16 @@ void RenderThread::drawFrame() {
 
     const int64_t nowNs = std::chrono::duration_cast<std::chrono::nanoseconds>(
         std::chrono::steady_clock::now().time_since_epoch()).count();
-    updateBonePalette(nowNs);
+    if (previewMode_ != 0) {
+        // Anatomy preview shows the raw bind-pose geometry: identity palette.
+        for (uint16_t bone = 0; bone < BoneCount; ++bone) {
+            paletteData_.writeBone(bone, Mat4{});
+        }
+        boneUbo_.update(paletteData_);
+    } else {
+        updateBonePalette(nowNs);
+    }
 
-    const Mat4 viewProjection = projection * view;
-    const Mat4 model = Mat4::translation({0.0f, -0.05f, 0.0f});
 
     // Ground contact shadow (M10): blended disc under the feet, drawn before
     // the character so the avatar occludes it.
@@ -555,23 +706,58 @@ void RenderThread::drawFrame() {
     glDepthMask(GL_TRUE);
     glDisable(GL_BLEND);
 
-    skinnedProgram_.use();
-    glUniformMatrix4fv(uniformViewProj_, 1, GL_FALSE, viewProjection.m.data());
-    glUniformMatrix4fv(uniformModel_, 1, GL_FALSE, model.m.data());
-    glUniform3f(uniformSkin_, appearance_[0].x, appearance_[0].y, appearance_[0].z);
-    glUniform3f(uniformHair_, appearance_[1].x, appearance_[1].y, appearance_[1].z);
-    glUniform3f(uniformCloth_, appearance_[2].x, appearance_[2].y, appearance_[2].z);
-    glUniform3f(uniformEye_, appearance_[3].x, appearance_[3].y, appearance_[3].z);
-    glUniform3f(uniformPants_, appearance_[4].x, appearance_[4].y, appearance_[4].z);
-    glUniform3f(skinnedProgram_.uniform("uLightDir"), 0.4f, 0.8f, 0.6f);
-    glUniform1f(skinnedProgram_.uniform("uAmbient"), 0.42f);
-    glUniform1f(skinnedProgram_.uniform("uToonSteps"), 3.0f);
-    glUniform1f(skinnedProgram_.uniform("uRim"), 0.12f);
-    avatarMesh_.draw();
-    drawOutline(viewProjection, model);
+    if (previewMode_ == 0) {
+        skinnedProgram_.use();
+        glUniformMatrix4fv(uniformViewProj_, 1, GL_FALSE, viewProjection.m.data());
+        glUniformMatrix4fv(uniformModel_, 1, GL_FALSE, model.m.data());
+        glUniform3f(uniformSkin_, appearance_[0].x, appearance_[0].y, appearance_[0].z);
+        glUniform3f(uniformHair_, appearance_[1].x, appearance_[1].y, appearance_[1].z);
+        glUniform3f(uniformCloth_, appearance_[2].x, appearance_[2].y, appearance_[2].z);
+        glUniform3f(uniformEye_, appearance_[3].x, appearance_[3].y, appearance_[3].z);
+        glUniform3f(uniformPants_, appearance_[4].x, appearance_[4].y, appearance_[4].z);
+        glUniform3f(skinnedProgram_.uniform("uLightDir"), 0.4f, 0.8f, 0.6f);
+        glUniform1f(skinnedProgram_.uniform("uAmbient"), 0.42f);
+        glUniform1f(skinnedProgram_.uniform("uToonSteps"), 3.0f);
+        glUniform1f(skinnedProgram_.uniform("uRim"), 0.12f);
+        avatarMesh_.draw();
+        drawOutline(viewProjection, model);
+    } else {
+        // M12-A anatomy preview: neutral study material + optional wireframe
+        // / normals debug views; bind pose; no outline, no clothing.
+        const Mat4 identity = Mat4{};
+        if (debugView_ == 2) {
+            anatomyNormalProg_.use();
+            glUniformMatrix4fv(uniformAnatomyNormalViewProj_, 1, GL_FALSE,
+                               viewProjection.m.data());
+            glUniformMatrix4fv(uniformAnatomyNormalModel_, 1, GL_FALSE, model.m.data());
+            anatomyMesh_.draw();
+        } else {
+            anatomyProgram_.use();
+            glUniformMatrix4fv(uniformAnatomyViewProj_, 1, GL_FALSE, viewProjection.m.data());
+            glUniformMatrix4fv(uniformAnatomyModel_, 1, GL_FALSE, model.m.data());
+            glUniform3f(uniformAnatomyNeutral_, 0.72f, 0.66f, 0.60f);
+            anatomyMesh_.draw();
+            if (debugView_ == 1) {
+                glDepthRangef(0.0f, 0.0f); // pull lines to the front
+                shadowProgram_.use();
+                glUniformMatrix4fv(uniformShadowViewProj_, 1, GL_FALSE,
+                                   viewProjection.m.data());
+                glUniformMatrix4fv(uniformShadowModel_, 1, GL_FALSE, model.m.data());
+                glUniform4f(uniformShadowColor_, 0.05f, 0.35f, 0.08f, 1.0f);
+                anatomyLines_.drawLines();
+                glDepthRangef(0.0f, 1.0f);
+            }
+        }
+    }
 
     egl_.swapBuffers();
-    stats_.endFrame(4, static_cast<uint32_t>(avatarMesh_.indexCount() / 3) + 1);
+    const uint32_t frameDraws = previewMode_ != 0
+        ? (debugView_ == 1 ? 2u : 3u)
+        : 4u;
+    const uint32_t frameTris = previewMode_ != 0
+        ? static_cast<uint32_t>(anatomyMesh_.indexCount() / 3)
+        : static_cast<uint32_t>(avatarMesh_.indexCount() / 3);
+    stats_.endFrame(frameDraws, frameTris);
     if (stats_.frameCount() % 120 == 0) {
         PAE_LOGI("PAE_STATS", "%s", stats_.toString().c_str());
     }

@@ -18,6 +18,7 @@ public:
 
     bool upload(const MeshData& mesh);
     void draw() const;
+    void drawLines() const; // M12: GL_LINES over line-pair indices
     void release();
     bool valid() const { return vao_ != 0; }
     uint32_t indexCount() const { return indexCount_; }

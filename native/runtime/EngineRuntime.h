@@ -22,6 +22,9 @@ public:
     void pushPose(const PoseFrame& pose);
     void resetMotion();
     void setQuality(int level);
+    void setAnatomyPreview(bool on);
+    void setCameraPreset(int preset);
+    void setDebugView(int view);
     std::string stats() const;
     void shutdown();
 

@@ -30,6 +30,9 @@ enum class RenderCommandType : int {
     SetExternalPose,
     MotionReset,
     SetQuality,
+    AnatomyPreview,
+    CameraPreset,
+    DebugView,
     Shutdown
 };
 
@@ -43,6 +46,7 @@ struct RenderCommand {
     Vec3 vecB{};
     std::array<Vec3, 5> palette{};
     PoseFrame pose{};
+    bool flag = false; // preview/debug toggles ride on the generic flag
 };
 
 class RenderThread {
@@ -64,6 +68,9 @@ public:
     void postExternalPose(const PoseFrame& pose);
     void postMotionReset(); // clear filters/smoothing (video seek, replay, speed change)
     void postQuality(int level); // Low=0 / Medium=1 / High=2 -> geometry detail rebuild
+    void postAnatomyPreview(bool on);  // M12: unified SDF upper-body preview
+    void postCameraPreset(int preset); // M12: fixed evidence camera (0..7)
+    void postDebugView(int view);      // M12: 0 shading / 1 wireframe / 2 normals
     std::string getStats() const;
 
 private:
@@ -74,13 +81,19 @@ private:
     void releaseGpuResources();
     void updateBonePalette(int64_t timestampNs);
     MeshData buildGroundShadow() const;
+    MeshData buildAnatomyLineMesh(const MeshData& mesh) const;
     void drawOutline(const Mat4& viewProjection, const Mat4& model);
+    void drawAnatomyPreview(const Mat4& viewProjection, const Mat4& model);
 
     EglContextManager egl_;
     ShaderProgram skinnedProgram_;
     ShaderProgram backgroundProgram_;
     ShaderProgram outlineProgram_; // inverted-hull cartoon outline (M10)
     ShaderProgram shadowProgram_;  // ground contact shadow disc (M10)
+    ShaderProgram anatomyProgram_;    // M12: anatomy shading (neutral skin)
+    ShaderProgram anatomyNormalProg_; // M12: normals debug view
+    SkinnedGpuMesh anatomyMesh_;      // M12: unified SDF upper body
+    SkinnedGpuMesh anatomyLines_;     // M12: wireframe edge buffer
     SkinnedGpuMesh avatarMesh_;
     SkinnedGpuMesh shadowMesh_;
     BonePaletteUbo boneUbo_;
@@ -100,6 +113,9 @@ private:
     Vec3 backgroundB_{0.28f, 0.36f, 0.52f};
     int poseMode_ = -1;
     int qualityLevel_ = 1;
+    int previewMode_ = 0;  // 0 off, 1 anatomy preview
+    int cameraPreset_ = 0; // M12 evidence camera index
+    int debugView_ = 0;    // 0 shading / 1 wireframe / 2 normals
     uint64_t avatarRevision_ = 1;
     uint64_t sceneRevision_ = 1;
 
@@ -129,6 +145,11 @@ private:
     GLint uniformShadowViewProj_ = -1;
     GLint uniformShadowModel_ = -1;
     GLint uniformShadowColor_ = -1;
+    GLint uniformAnatomyViewProj_ = -1;
+    GLint uniformAnatomyModel_ = -1;
+    GLint uniformAnatomyNeutral_ = -1;
+    GLint uniformAnatomyNormalViewProj_ = -1;
+    GLint uniformAnatomyNormalModel_ = -1;
     int width_ = 0;
     int height_ = 0;
     uint32_t maxQueuedCommands_ = 64;

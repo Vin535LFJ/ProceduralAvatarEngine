@@ -46,6 +46,18 @@ void EngineRuntime::resetMotion() {
     if (renderThread_) renderThread_->postMotionReset();
 }
 
+void EngineRuntime::setAnatomyPreview(bool on) {
+    if (renderThread_) renderThread_->postAnatomyPreview(on);
+}
+
+void EngineRuntime::setCameraPreset(int preset) {
+    if (renderThread_) renderThread_->postCameraPreset(preset);
+}
+
+void EngineRuntime::setDebugView(int view) {
+    if (renderThread_) renderThread_->postDebugView(view);
+}
+
 void EngineRuntime::setQuality(int level) {
     if (renderThread_) renderThread_->postQuality(level);
 }

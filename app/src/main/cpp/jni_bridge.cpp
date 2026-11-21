@@ -136,6 +136,22 @@ Java_com_pae_host_NativeBridge_nativeSetQuality(JNIEnv*, jclass, jlong handle, j
     if (auto* runtime = runtimeFromHandle(handle)) runtime->setQuality(static_cast<int>(level));
 }
 
+JNIEXPORT void JNICALL
+Java_com_pae_host_NativeBridge_nativeSetAnatomyPreview(JNIEnv*, jclass, jlong handle,
+                                                       jboolean on) {
+    if (auto* runtime = runtimeFromHandle(handle)) runtime->setAnatomyPreview(on == JNI_TRUE);
+}
+
+JNIEXPORT void JNICALL
+Java_com_pae_host_NativeBridge_nativeSetCameraPreset(JNIEnv*, jclass, jlong handle, jint preset) {
+    if (auto* runtime = runtimeFromHandle(handle)) runtime->setCameraPreset(static_cast<int>(preset));
+}
+
+JNIEXPORT void JNICALL
+Java_com_pae_host_NativeBridge_nativeSetDebugView(JNIEnv*, jclass, jlong handle, jint view) {
+    if (auto* runtime = runtimeFromHandle(handle)) runtime->setDebugView(static_cast<int>(view));
+}
+
 JNIEXPORT jstring JNICALL
 Java_com_pae_host_NativeBridge_nativeGetStats(JNIEnv* env, jclass, jlong handle) {
     auto* runtime = runtimeFromHandle(handle);

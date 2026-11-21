@@ -61,6 +61,13 @@ bool SkinnedGpuMesh::upload(const MeshData& mesh) {
     return true;
 }
 
+void SkinnedGpuMesh::drawLines() const {
+    if (vao_ == 0 || indexCount_ == 0) return;
+    glBindVertexArray(vao_);
+    glDrawElements(GL_LINES, static_cast<GLsizei>(indexCount_), GL_UNSIGNED_INT, nullptr);
+    glBindVertexArray(0);
+}
+
 void SkinnedGpuMesh::draw() const {
     if (vao_ == 0 || indexCount_ == 0) return;
     glBindVertexArray(vao_);
