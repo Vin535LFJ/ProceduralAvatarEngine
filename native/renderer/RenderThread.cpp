@@ -417,12 +417,15 @@ void RenderThread::processCommands() {
                 break;
             case RenderCommandType::AnatomyPreview:
                 previewMode_ = command.flag ? 1 : 0;
+                PAE_LOGI("PAE_RENDER", "applied anatomyPreview=%d", previewMode_);
                 break;
             case RenderCommandType::CameraPreset:
                 cameraPreset_ = command.value;
+                PAE_LOGI("PAE_RENDER", "applied cameraPreset=%d", cameraPreset_);
                 break;
             case RenderCommandType::DebugView:
                 debugView_ = command.value;
+                PAE_LOGI("PAE_RENDER", "applied debugView=%d", debugView_);
                 break;
             case RenderCommandType::SetQuality: {
                 const int level = command.value;
@@ -644,20 +647,23 @@ void RenderThread::drawFrame() {
     const float aspect = height_ > 0 ? static_cast<float>(width_) / static_cast<float>(height_) : 1.0f;
     const Mat4 projection = Mat4::perspective(1.05f, aspect, 0.1f, 100.0f);
     // M12: fixed evidence cameras (index per §8 of the anatomy preview spec).
+    // M12 upper-body framing: the anatomy mesh spans y 0.90..1.65 (hips..head
+    // top, incl. the -0.05 model offset), so presets 0-5 orbit at a distance
+    // that fills ~55% of the frame height with that 0.75 m span.
     static const Vec3 kPresetEye[] = {
-        {0.0f, 0.9f, 3.1f},    // 0 FRONT (M11 default)
-        {0.0f, 0.9f, -3.1f},   // 1 BACK
-        {3.1f, 0.9f, 0.0f},    // 2 LEFT (+X side)
-        {-3.1f, 0.9f, 0.0f},   // 3 RIGHT
-        {2.3f, 0.9f, 2.3f},    // 4 45 LEFT
-        {-2.3f, 0.9f, 2.3f},   // 5 45 RIGHT
-        {0.55f, 1.5f, 1.15f},  // 6 SHOULDER CLOSEUP
-        {0.0f, 1.25f, 1.4f},   // 7 TORSO CLOSEUP
+        {0.0f, 1.28f, 1.20f},    // 0 FRONT
+        {0.0f, 1.28f, -1.20f},   // 1 BACK
+        {1.20f, 1.28f, 0.0f},    // 2 LEFT (+X side)
+        {-1.20f, 1.28f, 0.0f},   // 3 RIGHT
+        {0.90f, 1.28f, 0.90f},   // 4 45 LEFT
+        {-0.90f, 1.28f, 0.90f},  // 5 45 RIGHT
+        {0.42f, 1.55f, 0.78f},   // 6 SHOULDER CLOSEUP
+        {0.0f, 1.28f, 0.78f},    // 7 TORSO CLOSEUP
     };
     static const Vec3 kPresetTarget[] = {
-        {0.0f, 0.9f, 0.0f}, {0.0f, 0.9f, 0.0f}, {0.0f, 0.9f, 0.0f},
-        {0.0f, 0.9f, 0.0f}, {0.0f, 0.9f, 0.0f}, {0.0f, 0.9f, 0.0f},
-        {0.16f, 1.32f, 0.0f}, {0.0f, 1.18f, 0.0f},
+        {0.0f, 1.26f, 0.0f}, {0.0f, 1.26f, 0.0f}, {0.0f, 1.26f, 0.0f},
+        {0.0f, 1.26f, 0.0f}, {0.0f, 1.26f, 0.0f}, {0.0f, 1.26f, 0.0f},
+        {0.16f, 1.34f, 0.0f}, {0.0f, 1.22f, 0.0f},
     };
     const int preset = std::clamp(cameraPreset_, 0, 7);
     const Mat4 view = previewMode_ != 0
@@ -736,6 +742,11 @@ void RenderThread::drawFrame() {
             glUniformMatrix4fv(uniformAnatomyViewProj_, 1, GL_FALSE, viewProjection.m.data());
             glUniformMatrix4fv(uniformAnatomyModel_, 1, GL_FALSE, model.m.data());
             glUniform3f(uniformAnatomyNeutral_, 0.72f, 0.66f, 0.60f);
+            // Neutral study lighting: without these the shared fragment shader
+            // defaults to ambient=0/steps=0 and the whole mesh renders black.
+            glUniform3f(anatomyProgram_.uniform("uLightDir"), 0.42f, 0.78f, 0.55f);
+            glUniform1f(anatomyProgram_.uniform("uAmbient"), 0.36f);
+            glUniform1f(anatomyProgram_.uniform("uToonSteps"), 6.0f);
             anatomyMesh_.draw();
             if (debugView_ == 1) {
                 glDepthRangef(0.0f, 0.0f); // pull lines to the front

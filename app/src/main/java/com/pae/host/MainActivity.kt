@@ -215,6 +215,29 @@ class MainActivity : AppCompatActivity() {
             videoControls.visibility = ViewGroup.VISIBLE
             playButton.text = "Pause"
         }
+
+        // M12-A deterministic evidence driver: adb shell am start \
+        //   -n com.pae.host/.MainActivity --ez debug_anatomy true \
+        //   --ei debug_preset 3 --ei debug_view 1
+        // Sets the anatomy preview state ABSOLUTELY (no button cycling), so
+        // adb-driven screenshot matrices cannot desync the UI counters.
+        intent?.let { it2 ->
+            if (it2.getBooleanExtra("debug_anatomy", false)) {
+                anatomyOn = true
+                NativeBridge.setAnatomyPreview(true)
+            }
+            val dp = it2.getIntExtra("debug_preset", -1)
+            if (dp in 0..7) {
+                viewPreset = dp
+                NativeBridge.setCameraPreset(dp)
+            }
+            val dv = it2.getIntExtra("debug_view", -1)
+            if (dv in 0..2) {
+                debugView = dv
+                NativeBridge.setDebugView(dv)
+            }
+            Log.i("PAE_UI", "debug extras: anatomy=$anatomyOn preset=$viewPreset view=$debugView")
+        }
     }
 
     private fun showVideoStoragePicker() {
