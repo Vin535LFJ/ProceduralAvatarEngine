@@ -68,8 +68,11 @@ BodyJoints deriveJoints(const BodyParameters& p, float scale) {
     const float shoulderX = p.shoulderWidth * scale * 0.5f;
     const float upperArm = p.upperArmLength * scale;
     const float lowerArm = p.lowerArmLength * scale;
-    const float armAngle = 24.0f * kPi / 180.0f;
-    const float forearmAngle = 10.0f * kPi / 180.0f;
+    // M12-A: relaxed standing pose. Arms hang near-vertical (a natural ~10 deg
+    // abduction) so the silhouette is widest at the deltoids, not at the
+    // wrists — 24 deg read as an A-pose and made the figure look squat.
+    const float armAngle = 10.0f * kPi / 180.0f;
+    const float forearmAngle = 6.0f * kPi / 180.0f;
 
     j.leftShoulder = {shoulderX, j.chest.y, 0.0f};
     j.leftElbow = j.leftShoulder + Vec3{std::sin(armAngle) * upperArm, -std::cos(armAngle) * upperArm, 0.0f};

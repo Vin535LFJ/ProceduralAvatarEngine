@@ -113,11 +113,13 @@ RegionPrimitives buildPrimitives(const HumanAnatomyParameters& q, const BodyJoin
                        0.028f * t};
     m.clavicleR = 0.016f * t * q.clavicleWidth;
 
-    // Deltoid: sits on the shoulder landmark, volume-driven.
-    m.deltoidC = Vec3{j.leftShoulder.x + 0.005f * t * q.deltoidVolume,
-                      j.leftShoulder.y - 0.018f * t * q.shoulderSlope, 0.0f};
-    m.deltoidR = Vec3{0.058f * t * q.deltoidVolume, 0.080f * t * q.deltoidVolume,
-                      0.066f * t * q.deltoidVolume};
+    // Deltoid: caps the shoulder joint, slightly outboard, volume-driven.
+    // Base radius 0.070 (was 0.058) so the shoulder reads as a rounded cap
+    // instead of a narrow shelf above the ribcage.
+    m.deltoidC = Vec3{j.leftShoulder.x + 0.016f * t * q.deltoidVolume,
+                      j.leftShoulder.y - 0.022f * t * q.shoulderSlope, 0.0f};
+    m.deltoidR = Vec3{0.070f * t * q.deltoidVolume, 0.088f * t * q.deltoidVolume,
+                      0.072f * t * q.deltoidVolume};
 
     // Upper arm: deltoid underside -> elbow.
     m.upperArmA = m.deltoidC + Vec3{0.010f * t, -0.025f * t * q.shoulderSlope, 0.0f};
