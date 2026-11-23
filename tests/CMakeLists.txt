@@ -38,5 +38,10 @@ target_include_directories(pae_motion_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/
 target_link_libraries(pae_motion_tests PRIVATE pae_core)
 add_test(NAME pae_motion_tests COMMAND pae_motion_tests)
 
+add_executable(pae_character_patch_tests unit/character_patch_tests.cpp)
+target_include_directories(pae_character_patch_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/harness)
+target_link_libraries(pae_character_patch_tests PRIVATE pae_core)
+add_test(NAME pae_character_patch_tests COMMAND pae_character_patch_tests)
+
 add_executable(pae_proportion_probe unit/proportion_probe.cpp)
 target_link_libraries(pae_proportion_probe PRIVATE pae_core)

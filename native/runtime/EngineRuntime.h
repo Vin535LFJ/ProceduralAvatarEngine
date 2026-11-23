@@ -23,6 +23,7 @@ public:
     void resetMotion();
     void setQuality(int level);
     void setAnatomyPreview(bool on);
+    void setPreviewMode(int mode);
     void setCameraPreset(int preset);
     void setDebugView(int view);
     std::string stats() const;

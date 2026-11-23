@@ -3,10 +3,12 @@
 #include "core/config/EngineConfig.h"
 #include "core/diagnostics/Log.h"
 #include "core/math/Math.h"
+#include "procedural/MeshTopology.h"
 #include "procedural/humanoid/Humanoid.h"
 #include "procedural/humanoid/anatomy/HumanAnatomyGenerator.h"
 #include "skeleton/Skinning.h"
 
+#include <algorithm>
 #include <chrono>
 #include <set>
 #include <cmath>
@@ -322,6 +324,15 @@ void RenderThread::postAnatomyPreview(bool on) {
     queueCv_.notify_one();
 }
 
+void RenderThread::postPreviewMode(int mode) {
+    RenderCommand command;
+    command.type = RenderCommandType::SetPreviewMode;
+    command.value = std::clamp(mode, 0, 2);
+    std::lock_guard<std::mutex> lock(queueMutex_);
+    queue_.push_back(command);
+    queueCv_.notify_one();
+}
+
 void RenderThread::postCameraPreset(int preset) {
     RenderCommand command;
     command.type = RenderCommandType::CameraPreset;
@@ -440,6 +451,10 @@ void RenderThread::processCommands() {
             case RenderCommandType::AnatomyPreview:
                 previewMode_ = command.flag ? 1 : 0;
                 PAE_LOGI("PAE_RENDER", "applied anatomyPreview=%d", previewMode_);
+                break;
+            case RenderCommandType::SetPreviewMode:
+                previewMode_ = command.value;
+                PAE_LOGI("PAE_RENDER", "applied previewMode=%d", previewMode_);
                 break;
             case RenderCommandType::CameraPreset:
                 cameraPreset_ = command.value;
@@ -590,6 +605,30 @@ bool RenderThread::ensureResources(std::string* error) {
         }
     }
 
+    // P1-A: surface-patch torso + shoulder bridge + arm PoC. SDF anatomy
+    // preview above is preserved as a research/contrast path.
+    {
+        CharacterDefinition definition;
+        MeshData patchMesh;
+        if (!BodyPatchGenerator::generate(definition, joints_, skeleton_,
+                                          patchMesh, patchReport_) ||
+            !p1aMesh_.upload(patchMesh)) {
+            PAE_LOGE("PAE_RENDER", "P1-A patch mesh upload failed");
+        } else {
+            const TopologyReport topology = analyzeTopology(patchMesh);
+            PAE_LOGI("PAE_RENDER",
+                     "P1A-REPORT verts=%u tris=%u components=%d boundary=%d nonmanifold=%d "
+                     "degenerate=%d badnorm=%d gen_ms=%.3f boundaries=%zu",
+                     patchReport_.vertexCount, patchReport_.triangleCount,
+                     topology.components, topology.boundaryEdges, topology.nonManifoldEdges,
+                     topology.degenerateTriangles, topology.invalidNormals,
+                     patchReport_.generationMs, patchReport_.boundaries.size());
+        }
+        if (!p1aLines_.upload(buildAnatomyLineMesh(patchMesh))) {
+            PAE_LOGE("PAE_RENDER", "P1-A wireframe upload failed");
+        }
+    }
+
     resourcesReady_ = true;
     return true;
 }
@@ -597,6 +636,8 @@ bool RenderThread::ensureResources(std::string* error) {
 void RenderThread::releaseGpuResources() {
     avatarMesh_.release();
     shadowMesh_.release();
+    p1aMesh_.release();
+    p1aLines_.release();
     boneUbo_.release();
     resourcesReady_ = false;
 }
@@ -719,13 +760,14 @@ void RenderThread::drawFrame() {
 
     const int64_t nowNs = std::chrono::duration_cast<std::chrono::nanoseconds>(
         std::chrono::steady_clock::now().time_since_epoch()).count();
-    if (previewMode_ != 0) {
-        // Anatomy preview shows the raw bind-pose geometry: identity palette.
+    if (previewMode_ == 1) {
+        // SDF anatomy preview shows raw bind-pose geometry: identity palette.
         for (uint16_t bone = 0; bone < BoneCount; ++bone) {
             paletteData_.writeBone(bone, Mat4{});
         }
         boneUbo_.update(paletteData_);
     } else {
+        // P1-A patches and the production avatar both exercise real bone palettes.
         updateBonePalette(nowNs);
     }
 
@@ -759,6 +801,35 @@ void RenderThread::drawFrame() {
         glUniform1f(skinnedProgram_.uniform("uRim"), 0.12f);
         avatarMesh_.draw();
         drawOutline(viewProjection, model);
+    } else if (previewMode_ == 2) {
+        // P1-A patch PoC: continuous gray Lambert by default; normals and
+        // wireframe are the only additional debug views. No toon, no material.
+        if (debugView_ == 2) {
+            anatomyNormalProg_.use();
+            glUniformMatrix4fv(uniformAnatomyNormalViewProj_, 1, GL_FALSE,
+                               viewProjection.m.data());
+            glUniformMatrix4fv(uniformAnatomyNormalModel_, 1, GL_FALSE, model.m.data());
+            p1aMesh_.draw();
+        } else {
+            anatomyClayProg_.use();
+            glUniformMatrix4fv(uniformAnatomyClayViewProj_, 1, GL_FALSE,
+                               viewProjection.m.data());
+            glUniformMatrix4fv(uniformAnatomyClayModel_, 1, GL_FALSE, model.m.data());
+            glUniform3f(uniformAnatomyClayNeutral_, 0.62f, 0.62f, 0.64f);
+            glUniform3f(uniformAnatomyClayKeyDir_, 0.45f, 0.75f, 0.48f);
+            glUniform3f(uniformAnatomyClayFillDir_, -0.55f, 0.15f, 0.35f);
+            p1aMesh_.draw();
+            if (debugView_ == 1) {
+                glDepthRangef(0.0f, 0.0f);
+                shadowProgram_.use();
+                glUniformMatrix4fv(uniformShadowViewProj_, 1, GL_FALSE,
+                                   viewProjection.m.data());
+                glUniformMatrix4fv(uniformShadowModel_, 1, GL_FALSE, model.m.data());
+                glUniform4f(uniformShadowColor_, 0.05f, 0.35f, 0.08f, 1.0f);
+                p1aLines_.drawLines();
+                glDepthRangef(0.0f, 1.0f);
+            }
+        }
     } else {
         // M12-A anatomy preview: neutral study material + optional wireframe
         // / normals debug views; bind pose; no outline, no clothing.
@@ -805,12 +876,13 @@ void RenderThread::drawFrame() {
     }
 
     egl_.swapBuffers();
-    const uint32_t frameDraws = previewMode_ != 0
-        ? ((debugView_ == 1 || debugView_ == 3) ? 3u : 2u)
-        : 4u;
-    const uint32_t frameTris = previewMode_ != 0
-        ? static_cast<uint32_t>(anatomyMesh_.indexCount() / 3)
-        : static_cast<uint32_t>(avatarMesh_.indexCount() / 3);
+    const uint32_t frameDraws = previewMode_ == 0 ? 4u
+        : ((debugView_ == 1 || (previewMode_ == 1 && debugView_ == 3)) ? 3u : 2u);
+    const uint32_t frameTris = previewMode_ == 0
+        ? static_cast<uint32_t>(avatarMesh_.indexCount() / 3)
+        : (previewMode_ == 2
+            ? static_cast<uint32_t>(p1aMesh_.indexCount() / 3)
+            : static_cast<uint32_t>(anatomyMesh_.indexCount() / 3));
     stats_.endFrame(frameDraws, frameTris);
     if (stats_.frameCount() % 120 == 0) {
         PAE_LOGI("PAE_STATS", "%s", stats_.toString().c_str());

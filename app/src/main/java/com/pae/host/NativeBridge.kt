@@ -25,6 +25,7 @@ object NativeBridge {
     private external fun nativeResetMotion(handle: Long)
     private external fun nativeSetQuality(handle: Long, level: Int)
     private external fun nativeSetAnatomyPreview(handle: Long, on: Boolean)
+    private external fun nativeSetPreviewMode(handle: Long, mode: Int)
     private external fun nativeSetCameraPreset(handle: Long, preset: Int)
     private external fun nativeSetDebugView(handle: Long, view: Int)
 
@@ -74,6 +75,10 @@ object NativeBridge {
 
     fun setAnatomyPreview(on: Boolean) {
         if (handle != 0L) nativeSetAnatomyPreview(handle, on)
+    }
+
+    fun setPreviewMode(mode: Int) {
+        if (handle != 0L) nativeSetPreviewMode(handle, mode)
     }
 
     fun setCameraPreset(preset: Int) {

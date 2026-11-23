@@ -1,0 +1,497 @@
+--------- beginning of main
+11-23 11:56:55.189   308   477 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x333. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:56:55.189   308   477 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-23 11:56:55.190  9454  9454 I [Gralloc]: Got handle 1 for fd 10
+11-23 11:56:55.190  9454  9454 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x333. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:56:55.190  9454  9454 I [Gralloc]: leave: prime_fd=10,share_attr_fd=11
+11-23 11:56:55.190   318  1020 I [Gralloc]: Got handle 8 for fd 92
+11-23 11:56:55.190   318  1020 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x333. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:56:55.190   318  1020 I [Gralloc]: leave: prime_fd=92,share_attr_fd=93
+11-23 11:56:55.232   308   477 I [Gralloc]: Got fd 16 for handle 1
+11-23 11:56:55.233   308   477 I [Gralloc]: leave, w : 1920, h : 1008, format : 0x2,internal_format : 0x2, usage : 0xb00. size=7741440,pixel_stride=1920,byte_stride=7680
+11-23 11:56:55.233   308   477 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-23 11:56:55.233   318   364 I [Gralloc]: Got handle 8 for fd 89
+11-23 11:56:55.233   318   364 I [Gralloc]: leave, w : 1920, h : 1008, format : 0x2,internal_format : 0x2, usage : 0xb00. size=7741440,pixel_stride=1920,byte_stride=7680
+11-23 11:56:55.233   318   364 I [Gralloc]: leave: prime_fd=89,share_attr_fd=90
+11-23 11:56:55.234  9368  9387 I [Gralloc]: Got handle 8 for fd 96
+11-23 11:56:55.234  9368  9387 I [Gralloc]: leave, w : 1920, h : 1008, format : 0x2,internal_format : 0x2, usage : 0xb00. size=7741440,pixel_stride=1920,byte_stride=7680
+11-23 11:56:55.234  9368  9387 I [Gralloc]: leave: prime_fd=96,share_attr_fd=97
+11-23 11:56:55.262   309  3086 I [Gralloc]: Got handle 11 for fd 68
+11-23 11:56:55.262   309  3086 I [Gralloc]: leave, w : 1920, h : 1008, format : 0x2,internal_format : 0x2, usage : 0xb00. size=7741440,pixel_stride=1920,byte_stride=7680
+11-23 11:56:55.262   309  3086 I [Gralloc]: leave: prime_fd=68,share_attr_fd=70
+11-23 11:56:55.705  9368  9387 I PAE_STATS: frames=120 fps=51.1 frame_ms=19.57 draw_calls=2 triangles=1664 buffer_bytes=688960 p50_ms=20.71 p95_ms=24.05 p99_ms=31.30
+11-23 11:56:55.756   969  1503 I MgtvP2pManager: 2026-11-23 11:56:55.756 [MGDS:I<1507>]-[EasySignalHelper.cpp:297<reportUploadInfo>] > [signal], reportUploadInfo
+--------- beginning of system
+11-23 11:56:57.524   462  2881 I ActivityManager: Force stopping com.pae.host appid=10033 user=0: from pid 9459
+11-23 11:56:57.524   462  2881 I ActivityManager: Killing 9368:com.pae.host/u0a33 (adj 0): stop com.pae.host
+11-23 11:56:57.525   462  2881 W ActivityManager: Force removing ActivityRecord{6255967 u0 com.pae.host/.MainActivity t731}: app died, no saved state
+11-23 11:56:57.525   462   484 W system_server: kill(-9368, 9) failed: No such process
+11-23 11:56:57.540   462   546 I InputReader: Reconfiguring input devices.  changes=0x00000004
+11-23 11:56:57.541   462  2881 D mgtv    : com.mgtv.app.state start activityStack
+11-23 11:56:57.542   462  2881 E ActivityManager: getPackageFerformanceMode--ComponentInfo{com.mgtv.myapp/com.mgtv.myapp.view.activity.AppManagerActivity}----com.mgtv.myapp
+11-23 11:56:57.559   309  3086 D hwcomposer-drm: hwc_set: layers_map size is 0
+11-23 11:56:57.559   309  3086 E hwcomposer-drm: hwc_set: not normal frame happen
+11-23 11:56:57.559   309  3086 D hwc_debug: layer[0]=
+11-23 11:56:57.559   309  3086 D hwc_debug: 	layer=0x7e6620dde8,type=3,hints=3,flags=0,handle=0x7e66c33f00,format=0x1,fd =47,transform=0x0,blend=0x105,sourceCropf{0,0,1920,1080},sourceCrop{0,0,1156579328,1149698048},displayFrame{0,0,1920,1080},rect[0]={0,0,1920,1080},
+11-23 11:56:57.565   309  3086 D hwcomposer-drm: hwc_set: layers_map size is 0
+11-23 11:56:57.565   309  3086 E hwcomposer-drm: hwc_set: not normal frame happen
+11-23 11:56:57.565   309  3086 D hwc_debug: layer[0]=
+11-23 11:56:57.565   309  3086 D hwc_debug: 	layer=0x7e6620dca8,type=3,hints=3,flags=0,handle=0x7e66c33f00,format=0x1,fd =47,transform=0x0,blend=0x105,sourceCropf{0,0,1920,1080},sourceCrop{0,0,1156579328,1149698048},displayFrame{0,0,1920,1080},rect[0]={0,0,1920,1080},
+11-23 11:56:57.570   462   484 W system_server: kill(-9368, 9) failed: No such process
+11-23 11:56:57.578   309  3086 D hwcomposer-drm: hwc_set: layers_map size is 0
+11-23 11:56:57.578   309  3086 E hwcomposer-drm: hwc_set: not normal frame happen
+11-23 11:56:57.578   309  3086 D hwc_debug: layer[0]=
+11-23 11:56:57.578   309  3086 D hwc_debug: 	layer=0x7e6620dde8,type=3,hints=3,flags=0,handle=0x7e66c33f00,format=0x1,fd =47,transform=0x0,blend=0x105,sourceCropf{0,0,1920,1080},sourceCrop{0,0,1156579328,1149698048},displayFrame{0,0,1920,1080},rect[0]={0,0,1920,1080},
+11-23 11:56:57.595   309  3086 D hwcomposer-drm: hwc_set: layers_map size is 0
+11-23 11:56:57.595   309  3086 E hwcomposer-drm: hwc_set: not normal frame happen
+11-23 11:56:57.595   309  3086 D hwc_debug: layer[0]=
+11-23 11:56:57.595   309  3086 D hwc_debug: 	layer=0x7e6620dca8,type=3,hints=3,flags=0,handle=0x7e66c33f00,format=0x1,fd =47,transform=0x0,blend=0x105,sourceCropf{0,0,1920,1080},sourceCrop{0,0,1156579328,1149698048},displayFrame{0,0,1920,1080},rect[0]={0,0,1920,1080},
+11-23 11:56:57.600   308   477 I [Gralloc]: Got fd 16 for handle 1
+11-23 11:56:57.602   308   477 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x900. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:56:57.602   308   477 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-23 11:56:57.602   318   493 I [Gralloc]: Got handle 1 for fd 39
+11-23 11:56:57.602   318   493 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x900. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:56:57.602   318   493 I [Gralloc]: leave: prime_fd=39,share_attr_fd=41
+11-23 11:56:57.611   309  3086 D hwcomposer-drm: hwc_set: layers_map size is 0
+11-23 11:56:57.611   309  3086 E hwcomposer-drm: hwc_set: not normal frame happen
+11-23 11:56:57.611   309  3086 D hwc_debug: layer[0]=
+11-23 11:56:57.611   309  3086 D hwc_debug: 	layer=0x7e6620dde8,type=3,hints=3,flags=0,handle=0x7e66c33f00,format=0x1,fd =47,transform=0x0,blend=0x105,sourceCropf{0,0,1920,1080},sourceCrop{0,0,1156579328,1149698048},displayFrame{0,0,1920,1080},rect[0]={0,0,1920,1080},
+11-23 11:56:57.614   308   308 I [Gralloc]: Got fd 16 for handle 1
+11-23 11:56:57.616   462   484 W system_server: kill(-9368, 9) failed: No such process
+11-23 11:56:57.616   308   308 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x900. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:56:57.616   308   308 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-23 11:56:57.617   318   493 I [Gralloc]: Got handle 2 for fd 51
+11-23 11:56:57.617   318   493 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x900. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:56:57.617   318   493 I [Gralloc]: leave: prime_fd=51,share_attr_fd=59
+11-23 11:56:57.628   309  3086 D hwcomposer-drm: hwc_set: layers_map size is 0
+11-23 11:56:57.628   309  3086 E hwcomposer-drm: hwc_set: not normal frame happen
+11-23 11:56:57.628   309  3086 D hwc_debug: layer[0]=
+11-23 11:56:57.628   309  3086 D hwc_debug: 	layer=0x7e6620dca8,type=3,hints=3,flags=0,handle=0x7e66c33f00,format=0x1,fd =47,transform=0x0,blend=0x105,sourceCropf{0,0,1920,1080},sourceCrop{0,0,1156579328,1149698048},displayFrame{0,0,1920,1080},rect[0]={0,0,1920,1080},
+11-23 11:56:57.630   308   477 I [Gralloc]: Got fd 16 for handle 1
+11-23 11:56:57.632   308   477 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x900. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:56:57.632   308   477 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-23 11:56:57.632   318   493 I [Gralloc]: Got handle 3 for fd 61
+11-23 11:56:57.632   318   493 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x900. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:56:57.632   318   493 I [Gralloc]: leave: prime_fd=61,share_attr_fd=63
+11-23 11:56:57.645   309  3086 D hwcomposer-drm: hwc_set: layers_map size is 0
+11-23 11:56:57.645   309  3086 E hwcomposer-drm: hwc_set: not normal frame happen
+11-23 11:56:57.645   309  3086 D hwc_debug: layer[0]=
+11-23 11:56:57.645   309  3086 D hwc_debug: 	layer=0x7e6620dde8,type=3,hints=3,flags=0,handle=0x7e66c33f00,format=0x1,fd =47,transform=0x0,blend=0x105,sourceCropf{0,0,1920,1080},sourceCrop{0,0,1156579328,1149698048},displayFrame{0,0,1920,1080},rect[0]={0,0,1920,1080},
+11-23 11:56:57.646   308   308 I [Gralloc]: Got fd 16 for handle 1
+11-23 11:56:57.647   308   308 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x900. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:56:57.647   308   308 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-23 11:56:57.647   318   493 I [Gralloc]: Got handle 4 for fd 66
+11-23 11:56:57.647   318   493 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x900. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:56:57.647   318   493 I [Gralloc]: leave: prime_fd=66,share_attr_fd=67
+11-23 11:56:57.649   462  2881 W InputMethodManagerService: Got RemoteException sending setActive(false) notification to pid 9368 uid 10033
+11-23 11:56:57.651  1047  2605 D mali_winsys: EGLint new_window_surface(egl_winsys_display *, void *, EGLSurface, EGLConfig, egl_winsys_surface **, egl_color_buffer_format *, EGLBoolean) returns 0x3000
+11-23 11:56:57.652  1132  1132 D SogouIME API: ==============num:32
+11-23 11:56:57.652  1132  1132 D SogouIME: mFocusedComponent:30   isHkbEnable:false
+11-23 11:56:57.653  1132  1132 D SogouIME: =====configKeyboard=======是否有硬件盘:false     硬件盘是否不再隐藏：false
+11-23 11:56:57.660   462   489 W ActivityManager: setHasOverlayUi called on unknown pid: 9368
+11-23 11:56:57.661   462   484 W system_server: kill(-9368, 9) failed: No such process
+11-23 11:56:57.661   309  3086 D hwcomposer-drm: hwc_set: layers_map size is 0
+11-23 11:56:57.661   309  3086 E hwcomposer-drm: hwc_set: not normal frame happen
+11-23 11:56:57.661   309  3086 D hwc_debug: layer[0]=
+11-23 11:56:57.661   309  3086 D hwc_debug: 	layer=0x7e6620dca8,type=3,hints=3,flags=0,handle=0x7e66c33f00,format=0x1,fd =47,transform=0x0,blend=0x105,sourceCropf{0,0,1920,1080},sourceCrop{0,0,1156579328,1149698048},displayFrame{0,0,1920,1080},rect[0]={0,0,1920,1080},
+11-23 11:56:57.678   309  3086 D hwcomposer-drm: hwc_set: layers_map size is 0
+11-23 11:56:57.678   309  3086 E hwcomposer-drm: hwc_set: not normal frame happen
+11-23 11:56:57.678   309  3086 D hwc_debug: layer[0]=
+11-23 11:56:57.678   309  3086 D hwc_debug: 	layer=0x7e6620dde8,type=3,hints=3,flags=0,handle=0x7e66c33f00,format=0x1,fd =47,transform=0x0,blend=0x105,sourceCropf{0,0,1920,1080},sourceCrop{0,0,1156579328,1149698048},displayFrame{0,0,1920,1080},rect[0]={0,0,1920,1080},
+11-23 11:56:57.680   308   308 I [Gralloc]: Got fd 16 for handle 1
+11-23 11:56:57.683   308   308 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:56:57.683   308   308 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-23 11:56:57.683   318   364 I [Gralloc]: Got handle 4 for fd 40
+11-23 11:56:57.683   318   364 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:56:57.683   318   364 I [Gralloc]: leave: prime_fd=40,share_attr_fd=42
+11-23 11:56:57.684  1047  2605 I [Gralloc]: Got handle 1 for fd 91
+11-23 11:56:57.684  1047  2605 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:56:57.684  1047  2605 I [Gralloc]: leave: prime_fd=91,share_attr_fd=92
+11-23 11:56:57.695   309  3086 D hwcomposer-drm: hwc_set: layers_map size is 0
+11-23 11:56:57.695   309  3086 E hwcomposer-drm: hwc_set: not normal frame happen
+11-23 11:56:57.695   309  3086 D hwc_debug: layer[0]=
+11-23 11:56:57.695   309  3086 D hwc_debug: 	layer=0x7e6620dca8,type=3,hints=3,flags=0,handle=0x7e66c33f00,format=0x1,fd =47,transform=0x0,blend=0x105,sourceCropf{0,0,1920,1080},sourceCrop{0,0,1156579328,1149698048},displayFrame{0,0,1920,1080},rect[0]={0,0,1920,1080},
+11-23 11:56:57.698   462   546 I InputReader: Reconfiguring input devices.  changes=0x00000004
+11-23 11:56:57.704   462   484 W system_server: kill(-9368, 9) failed: No such process
+11-23 11:56:57.704   462   484 I system_server: Successfully killed process cgroup uid 10033 pid 9368 in 179ms
+11-23 11:56:57.712   309  3086 I [Gralloc]: Got handle 1 for fd 32
+11-23 11:56:57.712   309  3086 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:56:57.712   309  3086 I [Gralloc]: leave: prime_fd=32,share_attr_fd=33
+11-23 11:56:58.338   462  1425 D mgtv    : com.mgtv.app.state start ActivityStackSupervisor
+11-23 11:56:58.338   462  1425 I ActivityManager: START u0 {flg=0x10000000 cmp=com.pae.host/.MainActivity (has extras)} from uid 2000
+11-23 11:56:58.345   462  1425 D mgtv    : com.mgtv.app.state start activityStack
+11-23 11:56:58.345   462  1425 E ActivityManager: getPackageFerformanceMode--ComponentInfo{com.pae.host/com.pae.host.MainActivity}----com.pae.host
+11-23 11:56:58.346  1047  1047 D DataReportImp: reportPV:APPM,
+11-23 11:56:58.349  1047  1047 D DeviceInfoManager: App Business Version is not Empty
+11-23 11:56:58.349  1047  1047 D DeviceInfoManager: App Business Version is not Empty
+11-23 11:56:58.350  1047  1047 D DataReportImp: report:com.mgtv.mx.datareport.model.PVModel@543532c
+11-23 11:56:58.350  1047  1047 E DataReportImp: mSurveyorStub == null
+11-23 11:56:58.358   462  6761 D mgtv    : com.mgtv.app.state start activityStack
+11-23 11:56:58.358   462  6761 E ActivityManager: getPackageFerformanceMode--ComponentInfo{com.pae.host/com.pae.host.MainActivity}----com.pae.host
+11-23 11:56:58.376  9466  9466 I zygote64: Late-enabling -Xcheck:jni
+11-23 11:56:58.377   462  6761 I ActivityManager: Start proc 9466:com.pae.host/u0a33 for activity com.pae.host/.MainActivity
+11-23 11:56:58.398   308   477 I [Gralloc]: Got fd 16 for handle 1
+11-23 11:56:58.398   308   477 I [Gralloc]: leave, w : 360, h : 202, format : 0x1,internal_format : 0x1, usage : 0x333. size=297344,pixel_stride=368,byte_stride=1472
+11-23 11:56:58.398   308   477 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-23 11:56:58.398   462  6761 I [Gralloc]: Got handle 1 for fd 214
+11-23 11:56:58.398   462  6761 I [Gralloc]: leave, w : 360, h : 202, format : 0x1,internal_format : 0x1, usage : 0x333. size=297344,pixel_stride=368,byte_stride=1472
+11-23 11:56:58.398   462  6761 I [Gralloc]: leave: prime_fd=214,share_attr_fd=220
+11-23 11:56:58.399   318   493 I [Gralloc]: Got handle 5 for fd 73
+11-23 11:56:58.399   308   308 I [Gralloc]: Got fd 16 for handle 1
+11-23 11:56:58.399   318   493 I [Gralloc]: leave, w : 360, h : 202, format : 0x1,internal_format : 0x1, usage : 0x333. size=297344,pixel_stride=368,byte_stride=1472
+11-23 11:56:58.399   318   493 I [Gralloc]: leave: prime_fd=73,share_attr_fd=74
+11-23 11:56:58.402   308   308 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x933. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:56:58.402   308   308 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-23 11:56:58.402   318   364 I [Gralloc]: Got handle 6 for fd 70
+11-23 11:56:58.402   318   364 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x933. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:56:58.402   318   364 I [Gralloc]: leave: prime_fd=70,share_attr_fd=71
+11-23 11:56:58.402   462   525 I [Gralloc]: Got handle 2 for fd 228
+11-23 11:56:58.402   462   525 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x933. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:56:58.402   462   525 I [Gralloc]: leave: prime_fd=228,share_attr_fd=229
+11-23 11:56:58.462   318   364 E BufferQueueProducer: [com.mgtv.myapp/com.mgtv.myapp.view.activity.AppManagerActivity#0] disconnect: not connected (req=1)
+11-23 11:56:58.462  1047  2605 W libEGL  : EGLNativeWindowType 0xcecd1008 disconnect failed
+11-23 11:56:58.479   309  3086 I [Gralloc]: Got handle 3 for fd 27
+11-23 11:56:58.479   309  3086 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x933. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:56:58.479   309  3086 I [Gralloc]: leave: prime_fd=27,share_attr_fd=42
+11-23 11:56:58.481  9466  9466 D WM-WrkMgrInitializer: Initializing WorkManager with default configuration.
+11-23 11:56:58.521  9466  9466 D AppCompatDelegate: Checking for metadata for AppLocalesMetadataHolderService : Service not found
+11-23 11:56:58.553  9466  9466 I PAE_JNI : runtime created
+11-23 11:56:58.558  9466  9486 I mali_so : [File] : hardware/arm/maliT760/driver/product/base/src/mali_base_kbase.c; [Line] : 876; [Func] : base_context_deal_with_version_affairs_rk_ext;
+11-23 11:56:58.558  9466  9486 I mali_so : arm_release_ver of this mali_so is 'r18p0-01rel0', rk_so_ver is '8@0'.
+11-23 11:56:58.558  9466  9486 D mali_so : [File] : hardware/arm/maliT760/driver/product/base/src/mali_base_kbase.c; [Line] : 881; [Func] : base_context_deal_with_version_affairs_rk_ext;
+11-23 11:56:58.558  9466  9486 D mali_so : current process is NOT sf, to bail out.
+11-23 11:56:58.569  9466  9486 I com.pae.host: android::hardware::configstore::V1_0::ISurfaceFlingerConfigs::hasWideColorDisplay retrieved: 0
+11-23 11:56:58.569  9466  9486 I PAE_EGL : EGL initialized version 1.4
+11-23 11:56:58.571  9466  9486 I PAE_EGL : GLES 3.0 EGL context created
+11-23 11:56:58.746  9466  9466 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-23 11:56:58.748  9466  9499 W GooglePlayServicesUtil: com.pae.host requires the Google Play Store, but it is missing.
+11-23 11:56:58.749  9466  9499 W GoogleApiManager: The service for com.google.android.gms.common.internal.service.zap is not available: ConnectionResult{statusCode=SERVICE_INVALID, resolution=null, message=null}
+11-23 11:56:58.751  9466  9497 D TransportRuntime.JobInfoScheduler: Scheduling upload for context TransportContext(cct, DEFAULT, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) with jobId=311960053 in 30000ms(Backend next call timestamp 0). Attempt 1
+11-23 11:56:58.757  9466  9497 D TransportRuntime.JobInfoScheduler: Scheduling upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) with jobId=316940790 in 86400000ms(Backend next call timestamp 0). Attempt 1
+11-23 11:56:58.803  9466  9471 I zygote64: Do partial code cache collection, code=12KB, data=25KB
+11-23 11:56:58.803  9466  9471 I zygote64: After code cache collection, code=12KB, data=25KB
+11-23 11:56:58.803  9466  9471 I zygote64: Increasing code cache capacity to 128KB
+11-23 11:56:58.804  9466  9471 I zygote64: Do partial code cache collection, code=12KB, data=45KB
+11-23 11:56:58.804  9466  9471 I zygote64: After code cache collection, code=12KB, data=45KB
+11-23 11:56:58.804  9466  9471 I zygote64: Increasing code cache capacity to 256KB
+11-23 11:56:58.804  9466  9471 I zygote64: Compiler allocated 7MB to compile void android.widget.TextView.<init>(android.content.Context, android.util.AttributeSet, int, int)
+11-23 11:56:58.959  9466  9466 W zygote64: Long monitor contention with owner MLHandler (9498) at java.util.HashMap$Node java.util.HashMap.getNode(int, java.lang.Object)(HashMap.java:573) waiters=0 in java.util.zip.ZipEntry java.util.zip.ZipFile.getEntry(java.lang.String) for 194ms
+11-23 11:56:58.969  9466  9502 I MLKitRemoteConfigSaver: remote config settings file not yet present: /data/user/0/com.pae.host/no_backup/com.google.mlkit.RemoteConfig
+11-23 11:56:58.969  9466  9502 W MLKit RemoteConfigRestC: Cached remote config was null!
+11-23 11:56:58.970  9466  9500 I PoseTaskWithRes: vision_pose_detection_enable_acceleration = true
+11-23 11:56:58.970  9466  9500 I PoseTaskWithRes: vision_pose_detection_enable_acceleration_gpu = true
+11-23 11:56:58.971  9466  9498 W LibraryVersion: Failed to get app version for libraryName: shared-installation-id
+11-23 11:56:58.973  9466  9504 I MLKitRemoteConfigSaver: remote config settings file not yet present: /data/user/0/com.pae.host/no_backup/com.google.mlkit.RemoteConfig
+11-23 11:56:58.973  9466  9504 D MLKit RemoteConfigRestC: Getting installation id...
+11-23 11:56:58.974  9466  9504 I MLKitInstallationIdSaver: Installation id file not yet present: /data/user/0/com.pae.host/no_backup/com.google.mlkit.InstallationId
+11-23 11:56:58.974  9466  9504 D MLKitInstallationIdGenerator: Generated installation id: cJuyA7I7kzK20ESzZczCXt
+11-23 11:56:58.979  9466  9486 I PAE_RENDER: applied previewMode=2
+11-23 11:56:58.980  9466  9486 I PAE_RENDER: applied cameraPreset=6
+11-23 11:56:58.980  9466  9486 I PAE_RENDER: applied debugView=3
+11-23 11:56:58.980  9466  9466 I PAE_UI  : debug extras: anatomy=false preset=6 view=3
+11-23 11:56:58.984  9466  9505 I CameraManagerGlobal: Connecting to camera service
+11-23 11:56:58.987  9466  9498 W LibraryVersion: Failed to get app version for libraryName: shared-remote-config
+11-23 11:56:58.988  9466  9505 D CameraValidator: Verifying camera lens facing on nunai_max, lensFacingInteger: null
+11-23 11:56:58.989  9466  9505 E CameraValidator: Camera LensFacing verification failed, existing cameras: []
+11-23 11:56:58.991  9466  9505 W CameraX : Retry init. Start time 3828994 current time 3829009
+11-23 11:56:58.991  9466  9505 W CameraX : androidx.camera.core.impl.CameraValidator$CameraIdListIncorrectException: Expected camera missing from device.
+11-23 11:56:58.991  9466  9505 W CameraX : 	at androidx.camera.core.impl.CameraValidator.validateCameras(CameraValidator.java:97)
+11-23 11:56:58.991  9466  9505 W CameraX : 	at androidx.camera.core.CameraX.lambda$initAndRetryRecursively$2$androidx-camera-core-CameraX(CameraX.java:342)
+11-23 11:56:58.991  9466  9505 W CameraX : 	at androidx.camera.core.CameraX$$ExternalSyntheticLambda3.run(Unknown Source:10)
+11-23 11:56:58.991  9466  9505 W CameraX : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1162)
+11-23 11:56:58.991  9466  9505 W CameraX : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+11-23 11:56:58.991  9466  9505 W CameraX : 	at java.lang.Thread.run(Thread.java:764)
+11-23 11:56:58.991  9466  9505 W CameraX : Caused by: java.lang.IllegalArgumentException: No available camera can be found
+11-23 11:56:58.991  9466  9505 W CameraX : 	at androidx.camera.core.CameraSelector.select(CameraSelector.java:82)
+11-23 11:56:58.991  9466  9505 W CameraX : 	at androidx.camera.core.impl.CameraValidator.validateCameras(CameraValidator.java:83)
+11-23 11:56:58.991  9466  9505 W CameraX : 	... 5 more
+11-23 11:56:58.998  9466  9499 W GooglePlayServicesUtil: com.pae.host requires the Google Play Store, but it is missing.
+11-23 11:56:58.998  9466  9499 W GoogleApiManager: The service for com.google.android.gms.common.internal.service.zap is not available: ConnectionResult{statusCode=SERVICE_INVALID, resolution=null, message=null}
+11-23 11:56:59.002  9466  9502 I MLKitRemoteConfigSaver: remote config settings file not yet present: /data/user/0/com.pae.host/no_backup/com.google.mlkit.RemoteConfig
+11-23 11:56:59.002  9466  9502 W MLKit RemoteConfigRestC: Cached remote config was null!
+11-23 11:56:59.002  9466  9508 I PoseTaskWithRes: vision_pose_detection_enable_acceleration = true
+11-23 11:56:59.003  9466  9508 I PoseTaskWithRes: vision_pose_detection_enable_acceleration_gpu = true
+11-23 11:56:59.009  9466  9509 D OpenGLRenderer: HWUI GL Pipeline
+11-23 11:56:59.016  9466  9466 I Choreographer: Skipped 30 frames!  The application may be doing too much work on its main thread.
+11-23 11:56:59.038  9466  9508 I PoseTaskWithRes: graphVariant = 
+11-23 11:56:59.039  9466  9500 I PoseTaskWithRes: graphVariant = 
+11-23 11:56:59.089  9466  9497 D TransportRuntime.SQLiteEventStore: Storing event with priority=DEFAULT, name=FIREBASE_ML_SDK for destination cct
+11-23 11:56:59.102  9466  9500 I native  : I0000 00:00:1795406219.102235    9500 register_natives.cc:68] Skipping registration and clearing exception. Class or native methods not found, may be unused and/or trimmed by Proguard.
+11-23 11:56:59.103  9466  9500 I native  : I0000 00:00:1795406219.103676    9500 asset_manager_util.cc:61] Created global reference to asset manager.
+11-23 11:56:59.105  9466  9508 I native  : I0000 00:00:1795406219.104177    9508 asset_manager_util.cc:61] Created global reference to asset manager.
+11-23 11:56:59.106  9466  9509 I OpenGLRenderer: Initialized EGL, version 1.4
+11-23 11:56:59.106  9466  9509 D OpenGLRenderer: Swap behavior 2
+11-23 11:56:59.113  9466  9509 D mali_winsys: EGLint new_window_surface(egl_winsys_display *, void *, EGLSurface, EGLConfig, egl_winsys_surface **, egl_color_buffer_format *, EGLBoolean) returns 0x3000
+11-23 11:56:59.123  9466  9497 D TransportRuntime.JobInfoScheduler: Upload for context TransportContext(cct, DEFAULT, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
+11-23 11:56:59.128  9466  9508 I native  : I0000 00:00:1795406219.128139    9508 graph.cc:502] Start running the graph, waiting for inputs.
+11-23 11:56:59.128  9466  9466 I PAE_SURFACE: surfaceCreated
+11-23 11:56:59.128  9466  9508 I native  : I0000 00:00:1795406219.128309    9508 gl_context_egl.cc:86] Successfully initialized EGL. Major : 1 Minor: 4
+11-23 11:56:59.128  9466  9466 I PAE_SURFACE: surfaceChanged 1920x1008
+11-23 11:56:59.130  9466  9500 I native  : I0000 00:00:1795406219.130676    9500 graph.cc:502] Start running the graph, waiting for inputs.
+11-23 11:56:59.130  9466  9500 I native  : I0000 00:00:1795406219.130829    9500 gl_context_egl.cc:86] Successfully initialized EGL. Major : 1 Minor: 4
+11-23 11:56:59.142  9466  9486 D mali_winsys: EGLint new_window_surface(egl_winsys_display *, void *, EGLSurface, EGLConfig, egl_winsys_surface **, egl_color_buffer_format *, EGLBoolean) returns 0x3000
+11-23 11:56:59.143  9466  9486 I PAE_GLCAPS: GL_VERSION=OpenGL ES 3.2 v1.r18p0-01rel0.16f2a2e3305581ae54dd0f9788beb400
+11-23 11:56:59.143  9466  9486 I PAE_GLCAPS: GL_RENDERER=Mali-T860
+11-23 11:56:59.143  9466  9486 I PAE_GLCAPS: GL_VENDOR=ARM
+11-23 11:56:59.143  9466  9486 I PAE_GLCAPS: GLSL_VERSION=OpenGL ES GLSL ES 3.20
+11-23 11:56:59.143  9466  9486 I PAE_GLCAPS: MAX_VERTEX_UNIFORM_BLOCKS=12 MAX_TEXTURE_SIZE=8192 MAX_VERTEX_ATTRIBS=16
+11-23 11:56:59.145  9466  9524 I native  : I0000 00:00:1795406219.145597    9524 gl_context.cc:374] GL version: 3.2 (OpenGL ES 3.2 v1.r18p0-01rel0.16f2a2e3305581ae54dd0f9788beb400), renderer: Mali-T860
+11-23 11:56:59.148  9466  9525 I native  : I0000 00:00:1795406219.148599    9525 gl_context.cc:374] GL version: 3.2 (OpenGL ES 3.2 v1.r18p0-01rel0.16f2a2e3305581ae54dd0f9788beb400), renderer: Mali-T860
+11-23 11:56:59.156  9466  9497 D TransportRuntime.SQLiteEventStore: Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
+11-23 11:56:59.169  9466  9471 I zygote64: Do full code cache collection, code=125KB, data=82KB
+11-23 11:56:59.170  9466  9471 I zygote64: After code cache collection, code=118KB, data=64KB
+11-23 11:56:59.179  9466  9512 I native  : I0000 00:00:1795406219.178982    9512 resource_util_android.cc:82] Successfully loaded: mlkit_pose/pose_person_detector_f16.tflite
+11-23 11:56:59.183   308   308 I [Gralloc]: Got fd 16 for handle 1
+11-23 11:56:59.185   308   308 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:56:59.185   308   308 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-23 11:56:59.185   318   364 I [Gralloc]: Got handle 1 for fd 60
+11-23 11:56:59.185   318   364 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:56:59.185   318   364 I [Gralloc]: leave: prime_fd=60,share_attr_fd=61
+11-23 11:56:59.188  9466  9512 I tflite  : Created TensorFlow Lite XNNPACK delegate for CPU.
+11-23 11:56:59.190  9466  9512 E tflite  : No subgraph in the model.
+11-23 11:56:59.190  9466  9521 I native  : I0000 00:00:1795406219.189750    9521 resource_util_android.cc:82] Successfully loaded: mlkit_pose/pose_person_detector_f16.tflite
+11-23 11:56:59.190  9466  9497 D TransportRuntime.JobInfoScheduler: Upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
+11-23 11:56:59.193  9466  9512 E native  : E0000 00:00:1795406219.193573    9512 inference_interpreter_delegate_runner.cc:446] INTERNAL: RET_CHECK failure (third_party/mediapipe/calculators/tensor/inference_interpreter_delegate_runner.cc:446) interpreter_builder(&interpreter) == kTfLiteOk (1 vs. 0) 
+11-23 11:56:59.193  9466  9512 E native  : Stack trace:
+11-23 11:56:59.194  9466  9500 E native  : E0000 00:00:1795406219.194145    9500 calculator_graph.cc:901] INTERNAL: CalculatorGraph::Run() failed: 
+11-23 11:56:59.194  9466  9500 E native  : Calculator::Open() for node "posetrackingsubgraph__posedetectionsubgraph__inferencecalculator__posetrackingsubgraph__posedetectionsubgraph__InferenceCalculator" failed: RET_CHECK failure (third_party/mediapipe/calculators/tensor/inference_interpreter_delegate_runner.cc:446) interpreter_builder(&interpreter) == kTfLiteOk (1 vs. 0) 
+11-23 11:56:59.194  9466  9500 E native  : === Source Location Trace: === 
+11-23 11:56:59.194  9466  9500 E native  : third_party/mediapipe/calculators/tensor/inference_interpreter_delegate_runner.cc:446
+11-23 11:56:59.194  9466  9500 E native  : third_party/mediapipe/calculators/tensor/inference_calculator_cpu.cc:140
+11-23 11:56:59.194  9466  9500 E native  : third_party/mediapipe/framework/calculator_node.cc:561
+11-23 11:56:59.197  9466  9509 I [Gralloc]: Got handle 1 for fd 75
+11-23 11:56:59.198  9466  9509 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:56:59.198  9466  9509 I [Gralloc]: leave: prime_fd=75,share_attr_fd=76
+11-23 11:56:59.201  9466  9521 I tflite  : Initialized TensorFlow Lite runtime.
+11-23 11:56:59.224   462   489 I ActivityManager: Displayed com.pae.host/.MainActivity: +862ms
+11-23 11:56:59.232  1132  1132 D SogouIME API: ==============num:32
+11-23 11:56:59.232  1132  1132 D SogouIME: mFocusedComponent:30   isHkbEnable:false
+11-23 11:56:59.232  9466  9486 I PAE_GEOMETRY: generateHumanoid: 8106 verts, 14064 tris, 78.87 ms, detail=1
+11-23 11:56:59.233  1132  1132 D SogouIME: =====configKeyboard=======是否有硬件盘:false     硬件盘是否不再隐藏：false
+11-23 11:56:59.239  9466  9497 D TransportRuntime.SQLiteEventStore: Storing event with priority=DEFAULT, name=FIREBASE_ML_SDK for destination cct
+11-23 11:56:59.248   308   308 I [Gralloc]: Got fd 16 for handle 1
+11-23 11:56:59.249   308   308 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:56:59.249   308   308 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-23 11:56:59.249   318  1020 I [Gralloc]: Got handle 2 for fd 68
+11-23 11:56:59.249   318  1020 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:56:59.249   318  1020 I [Gralloc]: leave: prime_fd=68,share_attr_fd=69
+11-23 11:56:59.249  9466  9509 I [Gralloc]: Got handle 2 for fd 79
+11-23 11:56:59.250  9466  9509 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:56:59.250  9466  9509 I [Gralloc]: leave: prime_fd=79,share_attr_fd=80
+11-23 11:56:59.261  9466  9466 E MobileVisionBase: Error preloading model resource
+11-23 11:56:59.261  9466  9466 E MobileVisionBase: com.google.mlkit.common.MlKitException: Internal error has occurred when executing ML Kit tasks
+11-23 11:56:59.261  9466  9466 E MobileVisionBase: 	at com.google.mlkit.common.sdkinternal.ModelResource.zza(com.google.mlkit:common@@18.11.0:9)
+11-23 11:56:59.261  9466  9466 E MobileVisionBase: 	at com.google.mlkit.common.sdkinternal.zzn.run(Unknown Source:10)
+11-23 11:56:59.261  9466  9466 E MobileVisionBase: 	at com.google.mlkit.common.sdkinternal.zzt.run(com.google.mlkit:common@@18.11.0:2)
+11-23 11:56:59.261  9466  9466 E MobileVisionBase: 	at com.google.mlkit.common.sdkinternal.MlKitThreadPool.zze(com.google.mlkit:common@@18.11.0:4)
+11-23 11:56:59.261  9466  9466 E MobileVisionBase: 	at com.google.mlkit.common.sdkinternal.MlKitThreadPool.zzc(com.google.mlkit:common@@18.11.0:1)
+11-23 11:56:59.261  9466  9466 E MobileVisionBase: 	at com.google.mlkit.common.sdkinternal.zzi.run(Unknown Source:2)
+11-23 11:56:59.261  9466  9466 E MobileVisionBase: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1162)
+11-23 11:56:59.261  9466  9466 E MobileVisionBase: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+11-23 11:56:59.261  9466  9466 E MobileVisionBase: 	at com.google.mlkit.common.sdkinternal.MlKitThreadPool.zzd(com.google.mlkit:common@@18.11.0:2)
+11-23 11:56:59.261  9466  9466 E MobileVisionBase: 	at com.google.mlkit.common.sdkinternal.zzk.run(Unknown Source:2)
+11-23 11:56:59.261  9466  9466 E MobileVisionBase: 	at java.lang.Thread.run(Thread.java:764)
+11-23 11:56:59.261  9466  9466 E MobileVisionBase: Caused by: com.google.android.gms.internal.mlkit_vision_mediapipe.zzhu: internal: CalculatorGraph::Run() failed: 
+11-23 11:56:59.261  9466  9466 E MobileVisionBase: Calculator::Open() for node "posetrackingsubgraph__posedetectionsubgraph__inferencecalculator__posetrackingsubgraph__posedetectionsubgraph__InferenceCalculator" failed: RET_CHECK failure (third_party/mediapipe/calculators/tensor/inference_interpreter_delegate_runner.cc:446) interpreter_builder(&interpreter) == kTfLiteOk (1 vs. 0) 
+11-23 11:56:59.261  9466  9466 E MobileVisionBase: 	at com.google.android.gms.internal.mlkit_vision_mediapipe.zzhp.zzx(Native Method)
+11-23 11:56:59.261  9466  9466 E MobileVisionBase: 	at com.google.android.gms.internal.mlkit_vision_mediapipe.zzhp.zzn(com.google.mlkit:mediapipe-internal@@17.0.0-beta10:2)
+11-23 11:56:59.261  9466  9466 E MobileVisionBase: 	at com.google.mlkit.vision.mediapipe.zzg.zzg(com.google.mlkit:mediapipe-internal@@17.0.0-beta10:2)
+11-23 11:56:59.261  9466  9466 E MobileVisionBase: 	at com.google.mlkit.vision.mediapipe.zzg.zze(com.google.mlkit:mediapipe-internal@@17.0.0-beta10:2)
+11-23 11:56:59.261  9466  9466 E MobileVisionBase: 	at com.google.mlkit.vision.mediapipe.MediaPipeGraphRunner.load(com.google.mlkit:mediapipe-internal@@17.0.0-beta10:5)
+11-23 11:56:59.261  9466  9466 E MobileVisionBase: 	at com.google.mlkit.vision.pose.internal.zzh.load(com.google.mlkit:pose-detection-common@@18.0.0-beta5:43)
+11-23 11:56:59.261  9466  9466 E MobileVisionBase: 	at com.google.mlkit.common.sdkinternal.ModelResource.zza(com.google.mlkit:common@@18.11.0:4)
+11-23 11:56:59.261  9466  9466 E MobileVisionBase: 	... 10 more
+11-23 11:56:59.263   309   309 I [Gralloc]: Got handle 1 for fd 43
+11-23 11:56:59.264   309   309 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:56:59.264   309   309 I [Gralloc]: leave: prime_fd=43,share_attr_fd=44
+11-23 11:56:59.276  9466  9497 D TransportRuntime.JobInfoScheduler: Upload for context TransportContext(cct, DEFAULT, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
+11-23 11:56:59.280   309   309 I [Gralloc]: Got handle 5 for fd 39
+11-23 11:56:59.281   309   309 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:56:59.281   309   309 I [Gralloc]: leave: prime_fd=39,share_attr_fd=45
+11-23 11:56:59.284   308   308 I [Gralloc]: Got fd 16 for handle 1
+11-23 11:56:59.286   308   308 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:56:59.286   308   308 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-23 11:56:59.287   318  1020 I [Gralloc]: Got handle 3 for fd 67
+11-23 11:56:59.287   318  1020 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:56:59.287   318  1020 I [Gralloc]: leave: prime_fd=67,share_attr_fd=75
+11-23 11:56:59.288  9466  9509 I [Gralloc]: Got handle 3 for fd 82
+11-23 11:56:59.288  9466  9509 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:56:59.288  9466  9509 I [Gralloc]: leave: prime_fd=82,share_attr_fd=83
+11-23 11:56:59.306  9466  9497 D TransportRuntime.SQLiteEventStore: Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
+11-23 11:56:59.319   309   309 I [Gralloc]: Got handle 7 for fd 54
+11-23 11:56:59.319   309   309 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:56:59.319   309   309 I [Gralloc]: leave: prime_fd=54,share_attr_fd=64
+11-23 11:56:59.342  9466  9497 D TransportRuntime.JobInfoScheduler: Upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
+11-23 11:56:59.529  9466  9521 I tflite  : Replacing 291 out of 291 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for the whole graph.
+11-23 11:56:59.535  9466  9505 D CameraValidator: Verifying camera lens facing on nunai_max, lensFacingInteger: null
+11-23 11:56:59.537  9466  9505 E CameraValidator: Camera LensFacing verification failed, existing cameras: []
+11-23 11:56:59.541  9466  9505 W CameraX : Retry init. Start time 3828994 current time 3829557
+11-23 11:56:59.541  9466  9505 W CameraX : androidx.camera.core.impl.CameraValidator$CameraIdListIncorrectException: Expected camera missing from device.
+11-23 11:56:59.541  9466  9505 W CameraX : 	at androidx.camera.core.impl.CameraValidator.validateCameras(CameraValidator.java:97)
+11-23 11:56:59.541  9466  9505 W CameraX : 	at androidx.camera.core.CameraX.lambda$initAndRetryRecursively$2$androidx-camera-core-CameraX(CameraX.java:342)
+11-23 11:56:59.541  9466  9505 W CameraX : 	at androidx.camera.core.CameraX$$ExternalSyntheticLambda3.run(Unknown Source:10)
+11-23 11:56:59.541  9466  9505 W CameraX : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1162)
+11-23 11:56:59.541  9466  9505 W CameraX : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+11-23 11:56:59.541  9466  9505 W CameraX : 	at java.lang.Thread.run(Thread.java:764)
+11-23 11:56:59.541  9466  9505 W CameraX : Caused by: java.lang.IllegalArgumentException: No available camera can be found
+11-23 11:56:59.541  9466  9505 W CameraX : 	at androidx.camera.core.CameraSelector.select(CameraSelector.java:82)
+11-23 11:56:59.541  9466  9505 W CameraX : 	at androidx.camera.core.impl.CameraValidator.validateCameras(CameraValidator.java:83)
+11-23 11:56:59.541  9466  9505 W CameraX : 	... 5 more
+11-23 11:56:59.576  9466  9521 W native  : W0000 00:00:1795406219.576054    9521 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+11-23 11:56:59.614  9466  9515 I native  : I0000 00:00:1795406219.614344    9515 resource_util_android.cc:82] Successfully loaded: mlkit_pose/pose_landmark_detector_full_f16_inf.tflite
+11-23 11:56:59.659  9466  9515 I tflite  : Replacing 310 out of 310 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for the whole graph.
+11-23 11:56:59.675  9466  9515 W native  : W0000 00:00:1795406219.675209    9515 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+11-23 11:56:59.686  9466  9497 D TransportRuntime.SQLiteEventStore: Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
+11-23 11:56:59.704  9466  9471 I zygote64: Do partial code cache collection, code=124KB, data=71KB
+11-23 11:56:59.705  9466  9471 I zygote64: After code cache collection, code=124KB, data=71KB
+11-23 11:56:59.705  9466  9471 I zygote64: Increasing code cache capacity to 512KB
+11-23 11:56:59.707  9466  9497 D TransportRuntime.JobInfoScheduler: Upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
+11-23 11:56:59.761   308   308 I [Gralloc]: Got fd 16 for handle 1
+11-23 11:56:59.762   308   308 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x333. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:56:59.762   308   308 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-23 11:56:59.762  9536  9536 I [Gralloc]: Got handle 1 for fd 10
+11-23 11:56:59.762  9536  9536 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x333. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:56:59.762  9536  9536 I [Gralloc]: leave: prime_fd=10,share_attr_fd=11
+11-23 11:56:59.763   318   493 I [Gralloc]: Got handle 4 for fd 70
+11-23 11:56:59.763   318   493 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x333. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:56:59.763   318   493 I [Gralloc]: leave: prime_fd=70,share_attr_fd=71
+11-23 11:57:00.002   969   969 I Launcher-MguiDataManager:: onReceive: android.intent.action.TIME_TICK
+11-23 11:57:00.086  9466  9505 D CameraValidator: Verifying camera lens facing on nunai_max, lensFacingInteger: null
+11-23 11:57:00.088  9466  9505 E CameraValidator: Camera LensFacing verification failed, existing cameras: []
+11-23 11:57:00.091  9466  9505 W CameraX : Retry init. Start time 3828994 current time 3830107
+11-23 11:57:00.091  9466  9505 W CameraX : androidx.camera.core.impl.CameraValidator$CameraIdListIncorrectException: Expected camera missing from device.
+11-23 11:57:00.091  9466  9505 W CameraX : 	at androidx.camera.core.impl.CameraValidator.validateCameras(CameraValidator.java:97)
+11-23 11:57:00.091  9466  9505 W CameraX : 	at androidx.camera.core.CameraX.lambda$initAndRetryRecursively$2$androidx-camera-core-CameraX(CameraX.java:342)
+11-23 11:57:00.091  9466  9505 W CameraX : 	at androidx.camera.core.CameraX$$ExternalSyntheticLambda3.run(Unknown Source:10)
+11-23 11:57:00.091  9466  9505 W CameraX : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1162)
+11-23 11:57:00.091  9466  9505 W CameraX : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+11-23 11:57:00.091  9466  9505 W CameraX : 	at java.lang.Thread.run(Thread.java:764)
+11-23 11:57:00.091  9466  9505 W CameraX : Caused by: java.lang.IllegalArgumentException: No available camera can be found
+11-23 11:57:00.091  9466  9505 W CameraX : 	at androidx.camera.core.CameraSelector.select(CameraSelector.java:82)
+11-23 11:57:00.091  9466  9505 W CameraX : 	at androidx.camera.core.impl.CameraValidator.validateCameras(CameraValidator.java:83)
+11-23 11:57:00.091  9466  9505 W CameraX : 	... 5 more
+11-23 11:57:00.635  9466  9505 D CameraValidator: Verifying camera lens facing on nunai_max, lensFacingInteger: null
+11-23 11:57:00.637  9466  9505 E CameraValidator: Camera LensFacing verification failed, existing cameras: []
+11-23 11:57:00.640  9466  9505 W CameraX : Retry init. Start time 3828994 current time 3830657
+11-23 11:57:00.640  9466  9505 W CameraX : androidx.camera.core.impl.CameraValidator$CameraIdListIncorrectException: Expected camera missing from device.
+11-23 11:57:00.640  9466  9505 W CameraX : 	at androidx.camera.core.impl.CameraValidator.validateCameras(CameraValidator.java:97)
+11-23 11:57:00.640  9466  9505 W CameraX : 	at androidx.camera.core.CameraX.lambda$initAndRetryRecursively$2$androidx-camera-core-CameraX(CameraX.java:342)
+11-23 11:57:00.640  9466  9505 W CameraX : 	at androidx.camera.core.CameraX$$ExternalSyntheticLambda3.run(Unknown Source:10)
+11-23 11:57:00.640  9466  9505 W CameraX : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1162)
+11-23 11:57:00.640  9466  9505 W CameraX : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+11-23 11:57:00.640  9466  9505 W CameraX : 	at java.lang.Thread.run(Thread.java:764)
+11-23 11:57:00.640  9466  9505 W CameraX : Caused by: java.lang.IllegalArgumentException: No available camera can be found
+11-23 11:57:00.640  9466  9505 W CameraX : 	at androidx.camera.core.CameraSelector.select(CameraSelector.java:82)
+11-23 11:57:00.640  9466  9505 W CameraX : 	at androidx.camera.core.impl.CameraValidator.validateCameras(CameraValidator.java:83)
+11-23 11:57:00.640  9466  9505 W CameraX : 	... 5 more
+11-23 11:57:00.669   308   308 I [Gralloc]: Got fd 16 for handle 1
+11-23 11:57:00.672   308   308 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:57:00.672   308   308 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-23 11:57:00.672   318   493 I [Gralloc]: Got handle 4 for fd 40
+11-23 11:57:00.672   318   493 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:57:00.672   318   493 I [Gralloc]: leave: prime_fd=40,share_attr_fd=51
+11-23 11:57:00.672  9466  9509 I [Gralloc]: Got handle 4 for fd 74
+11-23 11:57:00.672  9466  9509 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:57:00.672  9466  9509 I [Gralloc]: leave: prime_fd=74,share_attr_fd=85
+11-23 11:57:00.696   309  3086 I [Gralloc]: Got handle 3 for fd 33
+11-23 11:57:00.696   309  3086 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:57:00.696   309  3086 I [Gralloc]: leave: prime_fd=33,share_attr_fd=37
+11-23 11:57:01.148  9466  9505 D CameraValidator: Verifying camera lens facing on nunai_max, lensFacingInteger: null
+11-23 11:57:01.149  9466  9505 E CameraValidator: Camera LensFacing verification failed, existing cameras: []
+11-23 11:57:01.149  9466  9505 W CameraX : Retry init. Start time 3828994 current time 3831168
+11-23 11:57:01.149  9466  9505 W CameraX : androidx.camera.core.impl.CameraValidator$CameraIdListIncorrectException: Expected camera missing from device.
+11-23 11:57:01.149  9466  9505 W CameraX : 	at androidx.camera.core.impl.CameraValidator.validateCameras(CameraValidator.java:97)
+11-23 11:57:01.149  9466  9505 W CameraX : 	at androidx.camera.core.CameraX.lambda$initAndRetryRecursively$2$androidx-camera-core-CameraX(CameraX.java:342)
+11-23 11:57:01.149  9466  9505 W CameraX : 	at androidx.camera.core.CameraX$$ExternalSyntheticLambda3.run(Unknown Source:10)
+11-23 11:57:01.149  9466  9505 W CameraX : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1162)
+11-23 11:57:01.149  9466  9505 W CameraX : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+11-23 11:57:01.149  9466  9505 W CameraX : 	at java.lang.Thread.run(Thread.java:764)
+11-23 11:57:01.149  9466  9505 W CameraX : Caused by: java.lang.IllegalArgumentException: No available camera can be found
+11-23 11:57:01.149  9466  9505 W CameraX : 	at androidx.camera.core.CameraSelector.select(CameraSelector.java:82)
+11-23 11:57:01.149  9466  9505 W CameraX : 	at androidx.camera.core.impl.CameraValidator.validateCameras(CameraValidator.java:83)
+11-23 11:57:01.149  9466  9505 W CameraX : 	... 5 more
+11-23 11:57:01.688  9466  9505 D CameraValidator: Verifying camera lens facing on nunai_max, lensFacingInteger: null
+11-23 11:57:01.689  9466  9505 E CameraValidator: Camera LensFacing verification failed, existing cameras: []
+11-23 11:57:01.689  9466  9505 E CameraX : The device might underreport the amount of the cameras. Finish the initialize task since we are already reaching the maximum number of retries.
+11-23 11:57:01.695  9466  9466 W PAE_POSE: camera selector FRONT failed: Provided camera selector unable to resolve a camera for the given use case
+11-23 11:57:01.696  9466  9466 W PAE_POSE: camera selector BACK failed: Provided camera selector unable to resolve a camera for the given use case
+11-23 11:57:01.696  9466  9466 W PAE_POSE: camera selector ANY failed: Provided camera selector unable to resolve a camera for the given use case
+11-23 11:57:01.696  9466  9466 E PAE_POSE: no camera resolved on this device; synthetic provider stays active
+11-23 11:57:02.783   308   308 I [Gralloc]: Got fd 16 for handle 1
+11-23 11:57:02.786   308   308 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x333. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:57:02.786   308   308 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-23 11:57:02.786  9543  9543 I [Gralloc]: Got handle 1 for fd 10
+11-23 11:57:02.786  9543  9543 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x333. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:57:02.786  9543  9543 I [Gralloc]: leave: prime_fd=10,share_attr_fd=11
+11-23 11:57:02.787   318   364 I [Gralloc]: Got handle 5 for fd 77
+11-23 11:57:02.787   318   364 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x333. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:57:02.787   318   364 I [Gralloc]: leave: prime_fd=77,share_attr_fd=78
+11-23 11:57:03.407  9466  9486 I PAE_GEOMETRY: Human Anatomy Report: verts=20494 tris=40984 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 gen_ms=3652 res=88x132x52 | chest=0.572 waist=0.618 shoulder_x=0.293 pelvis=0.637
+11-23 11:57:03.501  9466  9486 I PAE_RENDER: anatomy preview ready: 40984 tris, 4128 ms
+11-23 11:57:03.822  9466  9486 I PAE_RENDER: P1A-REPORT verts=870 tris=1664 components=1 boundary=80 nonmanifold=0 degenerate=0 badnorm=0 gen_ms=2.419 boundaries=4
+11-23 11:57:03.835  9466  9486 I PAE_RENDER: surface ready 1920x1008
+11-23 11:57:03.844   308   308 I [Gralloc]: Got fd 16 for handle 1
+11-23 11:57:03.844   308   308 I [Gralloc]: leave, w : 1920, h : 1008, format : 0x2,internal_format : 0x2, usage : 0xb00. size=7741440,pixel_stride=1920,byte_stride=7680
+11-23 11:57:03.844   308   308 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-23 11:57:03.844   318   493 I [Gralloc]: Got handle 5 for fd 59
+11-23 11:57:03.844   318   493 I [Gralloc]: leave, w : 1920, h : 1008, format : 0x2,internal_format : 0x2, usage : 0xb00. size=7741440,pixel_stride=1920,byte_stride=7680
+11-23 11:57:03.844   318   493 I [Gralloc]: leave: prime_fd=59,share_attr_fd=72
+11-23 11:57:03.845  9466  9486 I [Gralloc]: Got handle 5 for fd 87
+11-23 11:57:03.845  9466  9486 I [Gralloc]: leave, w : 1920, h : 1008, format : 0x2,internal_format : 0x2, usage : 0xb00. size=7741440,pixel_stride=1920,byte_stride=7680
+11-23 11:57:03.845  9466  9486 I [Gralloc]: leave: prime_fd=87,share_attr_fd=88
+11-23 11:57:03.851  9466  9486 I PAE_STATS: frames=0 fps=0.0 frame_ms=0.00 draw_calls=2 triangles=1664 buffer_bytes=688960 p50_ms=0.00 p95_ms=0.00 p99_ms=0.00
+11-23 11:57:03.875   308   308 I [Gralloc]: Got fd 16 for handle 1
+11-23 11:57:03.876   308   308 I [Gralloc]: leave, w : 1920, h : 1008, format : 0x2,internal_format : 0x2, usage : 0xb00. size=7741440,pixel_stride=1920,byte_stride=7680
+11-23 11:57:03.876   308   308 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-23 11:57:03.876   318   493 I [Gralloc]: Got handle 6 for fd 78
+11-23 11:57:03.876   318   493 I [Gralloc]: leave, w : 1920, h : 1008, format : 0x2,internal_format : 0x2, usage : 0xb00. size=7741440,pixel_stride=1920,byte_stride=7680
+11-23 11:57:03.876   318   493 I [Gralloc]: leave: prime_fd=78,share_attr_fd=79
+11-23 11:57:03.876  9466  9486 I [Gralloc]: Got handle 6 for fd 90
+11-23 11:57:03.877  9466  9486 I [Gralloc]: leave, w : 1920, h : 1008, format : 0x2,internal_format : 0x2, usage : 0xb00. size=7741440,pixel_stride=1920,byte_stride=7680
+11-23 11:57:03.877  9466  9486 I [Gralloc]: leave: prime_fd=90,share_attr_fd=91
+11-23 11:57:03.879   309   309 I [Gralloc]: Got handle 8 for fd 59
+11-23 11:57:03.879   309   309 I [Gralloc]: leave, w : 1920, h : 1008, format : 0x2,internal_format : 0x2, usage : 0xb00. size=7741440,pixel_stride=1920,byte_stride=7680
+11-23 11:57:03.879   309   309 I [Gralloc]: leave: prime_fd=59,share_attr_fd=60
+11-23 11:57:03.895   309   309 I [Gralloc]: Got handle 9 for fd 63
+11-23 11:57:03.895   309   309 I [Gralloc]: leave, w : 1920, h : 1008, format : 0x2,internal_format : 0x2, usage : 0xb00. size=7741440,pixel_stride=1920,byte_stride=7680
+11-23 11:57:03.895   309   309 I [Gralloc]: leave: prime_fd=63,share_attr_fd=66
+11-23 11:57:03.925   308   308 I [Gralloc]: Got fd 16 for handle 1
+11-23 11:57:03.925   308   308 I [Gralloc]: leave, w : 1920, h : 1008, format : 0x2,internal_format : 0x2, usage : 0xb00. size=7741440,pixel_stride=1920,byte_stride=7680
+11-23 11:57:03.925   308   308 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-23 11:57:03.925   318   493 I [Gralloc]: Got handle 7 for fd 86
+11-23 11:57:03.925   318   493 I [Gralloc]: leave, w : 1920, h : 1008, format : 0x2,internal_format : 0x2, usage : 0xb00. size=7741440,pixel_stride=1920,byte_stride=7680
+11-23 11:57:03.925   318   493 I [Gralloc]: leave: prime_fd=86,share_attr_fd=87
+11-23 11:57:03.926  9466  9486 I [Gralloc]: Got handle 7 for fd 93
+11-23 11:57:03.926  9466  9486 I [Gralloc]: leave, w : 1920, h : 1008, format : 0x2,internal_format : 0x2, usage : 0xb00. size=7741440,pixel_stride=1920,byte_stride=7680
+11-23 11:57:03.926  9466  9486 I [Gralloc]: leave: prime_fd=93,share_attr_fd=94
+11-23 11:57:03.946   309   309 I [Gralloc]: Got handle 10 for fd 52
+11-23 11:57:03.946   309   309 I [Gralloc]: leave, w : 1920, h : 1008, format : 0x2,internal_format : 0x2, usage : 0xb00. size=7741440,pixel_stride=1920,byte_stride=7680
+11-23 11:57:03.946   309   309 I [Gralloc]: leave: prime_fd=52,share_attr_fd=70
+11-23 11:57:04.474  9466  9547 D ProfileInstaller: Installing profile for com.pae.host
+11-23 11:57:04.844   969   969 I YouthModeManager: refreshClockTime-1
+11-23 11:57:05.853   308   308 I [Gralloc]: Got fd 16 for handle 1
+11-23 11:57:05.854   308   308 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x333. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:57:05.854   308   308 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-23 11:57:05.854  9550  9550 I [Gralloc]: Got handle 1 for fd 10
+11-23 11:57:05.854  9550  9550 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x333. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:57:05.854  9550  9550 I [Gralloc]: leave: prime_fd=10,share_attr_fd=11
+11-23 11:57:05.855   318   493 I [Gralloc]: Got handle 8 for fd 92
+11-23 11:57:05.855   318   493 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x333. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:57:05.855   318   493 I [Gralloc]: leave: prime_fd=92,share_attr_fd=93
+11-23 11:57:05.894   308   308 I [Gralloc]: Got fd 16 for handle 1
+11-23 11:57:05.895   308   308 I [Gralloc]: leave, w : 1920, h : 1008, format : 0x2,internal_format : 0x2, usage : 0xb00. size=7741440,pixel_stride=1920,byte_stride=7680
+11-23 11:57:05.895   308   308 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-23 11:57:05.895   318   493 I [Gralloc]: Got handle 8 for fd 41
+11-23 11:57:05.895   318   493 I [Gralloc]: leave, w : 1920, h : 1008, format : 0x2,internal_format : 0x2, usage : 0xb00. size=7741440,pixel_stride=1920,byte_stride=7680
+11-23 11:57:05.895   318   493 I [Gralloc]: leave: prime_fd=41,share_attr_fd=89
+11-23 11:57:05.895  9466  9486 I [Gralloc]: Got handle 8 for fd 96
+11-23 11:57:05.895  9466  9486 I [Gralloc]: leave, w : 1920, h : 1008, format : 0x2,internal_format : 0x2, usage : 0xb00. size=7741440,pixel_stride=1920,byte_stride=7680
+11-23 11:57:05.895  9466  9486 I [Gralloc]: leave: prime_fd=96,share_attr_fd=97
+11-23 11:57:05.912   309  3086 I [Gralloc]: Got handle 11 for fd 62
+11-23 11:57:05.912   309  3086 I [Gralloc]: leave, w : 1920, h : 1008, format : 0x2,internal_format : 0x2, usage : 0xb00. size=7741440,pixel_stride=1920,byte_stride=7680
+11-23 11:57:05.912   309  3086 I [Gralloc]: leave: prime_fd=62,share_attr_fd=67
+11-23 11:57:06.292  9466  9486 I PAE_STATS: frames=120 fps=55.1 frame_ms=18.14 draw_calls=2 triangles=1664 buffer_bytes=688960 p50_ms=20.50 p95_ms=23.22 p99_ms=30.17
+11-23 11:57:06.611   969  1503 I MgtvP2pManager: 2026-11-23 11:57:06.610 [MGDS:I<1508>]-[EasyCacheManager.cpp:732<freeMemCacheIfNeeded>] > freeMemCacheIfNeeded by timing, sysSize:1124/1957(MB), limitSize:224.80 MB, cachedSize:0 B
+11-23 11:57:06.618   969  1503 I MgtvP2pManager: 2026-11-23 11:57:06.618 [MGDS:I<1508>]-[EasyCacheManager.cpp:781<deleteFileIfNeeded>] > deleteFileIfNeeded by timing, sysSize:8291/11021(MB), limitSize:256.00 MB, cachedSize:49.87 MB
+11-23 11:57:08.092   969  1503 I MgtvP2pManager: 2026-11-23 11:57:08.092 [MGDS:I<1507>]-[EasySignalHelper.cpp:260<heartbeat>] > [signal], heartbeat
+11-23 11:57:08.841  9466  9486 I PAE_STATS: frames=240 fps=46.6 frame_ms=21.48 draw_calls=2 triangles=1664 buffer_bytes=688960 p50_ms=20.81 p95_ms=23.63 p99_ms=30.12

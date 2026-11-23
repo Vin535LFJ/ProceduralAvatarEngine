@@ -1,0 +1,8 @@
+Internal ctest changing into directory: C:/Users/Giant/Desktop/GITCODE/Procedural Avatar Engine/build/host-cygwin
+Test project C:/Users/Giant/Desktop/GITCODE/Procedural Avatar Engine/build/host-cygwin
+    Start 9: pae_character_patch_tests
+1/1 Test #9: pae_character_patch_tests ........   Passed    0.15 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.17 sec

@@ -6,6 +6,7 @@
 #include "renderer/gl/ShaderProgram.h"
 #include "renderer/gl/SkinnedGpuMesh.h"
 #include "renderer/stats/RenderStats.h"
+#include "procedural/character/BodyPatchGenerator.h"
 #include "motion/MotionRuntime.h"
 #include "skeleton/Skeleton.h"
 
@@ -31,6 +32,7 @@ enum class RenderCommandType : int {
     MotionReset,
     SetQuality,
     AnatomyPreview,
+    SetPreviewMode,
     CameraPreset,
     DebugView,
     Shutdown
@@ -69,6 +71,7 @@ public:
     void postMotionReset(); // clear filters/smoothing (video seek, replay, speed change)
     void postQuality(int level); // Low=0 / Medium=1 / High=2 -> geometry detail rebuild
     void postAnatomyPreview(bool on);  // M12: unified SDF upper-body preview
+    void postPreviewMode(int mode);    // 0 avatar / 1 anatomy / 2 P1-A patches
     void postCameraPreset(int preset); // M12: fixed evidence camera (0..7)
     void postDebugView(int view);      // M12: 0 shading / 1 wireframe / 2 normals
     std::string getStats() const;
@@ -95,6 +98,9 @@ private:
     ShaderProgram anatomyClayProg_;   // M13: gray-clay smooth-lambert study view
     SkinnedGpuMesh anatomyMesh_;      // M12: unified SDF upper body
     SkinnedGpuMesh anatomyLines_;     // M12: wireframe edge buffer
+    SkinnedGpuMesh p1aMesh_;           // P1-A: surface-patch torso/shoulder/arm
+    SkinnedGpuMesh p1aLines_;          // P1-A: wireframe edge buffer
+    PatchGenerationReport patchReport_;
     SkinnedGpuMesh avatarMesh_;
     SkinnedGpuMesh shadowMesh_;
     BonePaletteUbo boneUbo_;

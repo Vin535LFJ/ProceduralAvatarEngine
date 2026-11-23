@@ -21,6 +21,7 @@ set(PAE_CORE_SOURCES
     procedural/humanoid/anatomy/AnatomyField.cpp
     procedural/humanoid/anatomy/HumanAnatomyGenerator.cpp
     procedural/MeshTopology.cpp
+    procedural/character/BodyPatchGenerator.cpp
     skeleton/Skeleton.cpp
     skeleton/Skinning.cpp
     skeleton/weights/WeightGenerator.cpp

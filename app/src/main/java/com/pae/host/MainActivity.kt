@@ -221,10 +221,19 @@ class MainActivity : AppCompatActivity() {
         //   --ei debug_preset 3 --ei debug_view 1
         // Sets the anatomy preview state ABSOLUTELY (no button cycling), so
         // adb-driven screenshot matrices cannot desync the UI counters.
+        // P1-A deterministic driver: --ei debug_generator 2 --ei debug_pose -1
+        //   --ei debug_preset 0 --ei debug_view 3
         intent?.let { it2 ->
             if (it2.getBooleanExtra("debug_anatomy", false)) {
                 anatomyOn = true
                 NativeBridge.setAnatomyPreview(true)
+            }
+            val generator = it2.getIntExtra("debug_generator", -1)
+            if (generator in 0..2) NativeBridge.setPreviewMode(generator)
+            val fixedPose = it2.getIntExtra("debug_pose", Int.MIN_VALUE)
+            if (fixedPose != Int.MIN_VALUE) {
+                poseMode = fixedPose
+                NativeBridge.setPoseMode(fixedPose)
             }
             val dp = it2.getIntExtra("debug_preset", -1)
             if (dp in 0..7) {

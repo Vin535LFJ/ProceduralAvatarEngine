@@ -50,6 +50,10 @@ void EngineRuntime::setAnatomyPreview(bool on) {
     if (renderThread_) renderThread_->postAnatomyPreview(on);
 }
 
+void EngineRuntime::setPreviewMode(int mode) {
+    if (renderThread_) renderThread_->postPreviewMode(mode);
+}
+
 void EngineRuntime::setCameraPreset(int preset) {
     if (renderThread_) renderThread_->postCameraPreset(preset);
 }

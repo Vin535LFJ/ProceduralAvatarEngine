@@ -1,0 +1,29 @@
+clay preset0
+  ok cov=6.76% (try 3) -> docs/phases/P1A-geometry-poc/evidence/clay_preset0.png
+clay preset1
+  ok cov=5.42% (try 3) -> docs/phases/P1A-geometry-poc/evidence/clay_preset1.png
+clay preset2
+  ok cov=4.59% (try 3) -> docs/phases/P1A-geometry-poc/evidence/clay_preset2.png
+clay preset3
+  ok cov=2.91% (try 3) -> docs/phases/P1A-geometry-poc/evidence/clay_preset3.png
+clay preset4
+  ok cov=6.03% (try 3) -> docs/phases/P1A-geometry-poc/evidence/clay_preset4.png
+clay preset5
+  ok cov=4.8% (try 3) -> docs/phases/P1A-geometry-poc/evidence/clay_preset5.png
+clay preset6
+  ok cov=8.62% (try 3) -> docs/phases/P1A-geometry-poc/evidence/clay_preset6.png
+clay preset7
+  ok cov=15.01% (try 3) -> docs/phases/P1A-geometry-poc/evidence/clay_preset7.png
+wire_front
+  ok cov=6.98% (try 3) -> docs/phases/P1A-geometry-poc/evidence/wire_front.png
+wire_shoulder
+  ok cov=9.14% (try 3) -> docs/phases/P1A-geometry-poc/evidence/wire_shoulder.png
+normals_front
+  ok cov=6.77% (try 3) -> docs/phases/P1A-geometry-poc/evidence/normals_front.png
+normals_shoulder
+  ok cov=8.62% (try 3) -> docs/phases/P1A-geometry-poc/evidence/normals_shoulder.png
+action_elbow_front
+  ok cov=6.96% (try 3) -> docs/phases/P1A-geometry-poc/evidence/action_elbow_front.png
+action_elbow_shoulder
+  ok cov=10.0% (try 3) -> docs/phases/P1A-geometry-poc/evidence/action_elbow_shoulder.png
+capture done

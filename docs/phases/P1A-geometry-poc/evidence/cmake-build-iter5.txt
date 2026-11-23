@@ -1,0 +1,7 @@
+Consolidate compiler generated dependencies of target pae_core
+[  4%] Building CXX object CMakeFiles/pae_core.dir/procedural/character/BodyPatchGenerator.cpp.obj
+[  8%] Linking CXX static library libpae_core.a
+[ 91%] Built target pae_core
+[ 95%] Building CXX object pae_tests/CMakeFiles/pae_character_patch_tests.dir/unit/character_patch_tests.cpp.obj
+[100%] Linking CXX executable pae_character_patch_tests.exe
+[100%] Built target pae_character_patch_tests

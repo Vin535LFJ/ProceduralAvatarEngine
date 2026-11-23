@@ -1,0 +1,28 @@
+Internal ctest changing into directory: C:/Users/Giant/Desktop/GITCODE/Procedural Avatar Engine/build/host-cygwin
+Test project C:/Users/Giant/Desktop/GITCODE/Procedural Avatar Engine/build/host-cygwin
+    Start 9: pae_character_patch_tests
+1/1 Test #9: pae_character_patch_tests ........***Failed    0.79 sec
+[ RUN ] p1a_patch_mesh_is_valid_and_connected
+[I/PAE_GEOMETRY] generateHumanoid: 8106 verts, 14064 tris, 8.35 ms, detail=1
+P1A-TOPO verts=819 tris=1536 components=1 boundary=104 nonmanifold=0 degenerate=0 dup=0 badnorm=0 gen_ms=0.575
+[  OK ] p1a_patch_mesh_is_valid_and_connected
+[ RUN ] p1a_parameters_change_actual_shape
+[I/PAE_GEOMETRY] generateHumanoid: 8106 verts, 14064 tris, 8.17 ms, detail=1
+[I/PAE_GEOMETRY] generateHumanoid: 8106 verts, 14064 tris, 7.68 ms, detail=1
+[I/PAE_GEOMETRY] generateHumanoid: 8106 verts, 14064 tris, 7.54 ms, detail=1
+P1A-PARAM chestHalfWidth 0.2674 -> 0.2674
+FAIL C:/Users/Giant/Desktop/GITCODE/Procedural Avatar Engine/tests/unit/character_patch_tests.cpp:81: widthB > widthA + 0.02f
+[FAIL ] p1a_parameters_change_actual_shape
+[ RUN ] p1a_weights_are_valid
+[I/PAE_GEOMETRY] generateHumanoid: 8106 verts, 14064 tris, 7.40 ms, detail=1
+[  OK ] p1a_weights_are_valid
+3 cases, 1 failures
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.81 sec
+
+The following tests FAILED:
+	  9 - pae_character_patch_tests (Failed)
+Errors while running CTest

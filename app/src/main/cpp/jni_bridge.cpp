@@ -143,6 +143,11 @@ Java_com_pae_host_NativeBridge_nativeSetAnatomyPreview(JNIEnv*, jclass, jlong ha
 }
 
 JNIEXPORT void JNICALL
+Java_com_pae_host_NativeBridge_nativeSetPreviewMode(JNIEnv*, jclass, jlong handle, jint mode) {
+    if (auto* runtime = runtimeFromHandle(handle)) runtime->setPreviewMode(static_cast<int>(mode));
+}
+
+JNIEXPORT void JNICALL
 Java_com_pae_host_NativeBridge_nativeSetCameraPreset(JNIEnv*, jclass, jlong handle, jint preset) {
     if (auto* runtime = runtimeFromHandle(handle)) runtime->setCameraPreset(static_cast<int>(preset));
 }

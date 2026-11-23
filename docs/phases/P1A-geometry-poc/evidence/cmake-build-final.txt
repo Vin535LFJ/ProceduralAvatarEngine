@@ -1,0 +1,21 @@
+Consolidate compiler generated dependencies of target pae_core
+[ 52%] Built target pae_core
+[ 54%] Linking CXX executable pae_skinning_tests.exe
+[ 57%] Built target pae_skinning_tests
+[ 59%] Linking CXX executable pae_core_tests.exe
+[ 61%] Built target pae_core_tests
+[ 64%] Linking CXX executable pae_fusion_tests.exe
+[ 66%] Built target pae_fusion_tests
+[ 69%] Linking CXX executable pae_geometry_tests.exe
+[ 71%] Built target pae_geometry_tests
+[ 73%] Linking CXX executable pae_motion_tests.exe
+[ 76%] Built target pae_motion_tests
+[ 78%] Linking CXX executable pae_face_hair_tests.exe
+[ 80%] Built target pae_face_hair_tests
+[ 83%] Linking CXX executable pae_anatomy_tests.exe
+[ 85%] Built target pae_anatomy_tests
+[ 88%] Linking CXX executable pae_humanoid_tests.exe
+[ 90%] Built target pae_humanoid_tests
+[ 95%] Built target pae_character_patch_tests
+[ 97%] Linking CXX executable pae_proportion_probe.exe
+[100%] Built target pae_proportion_probe
