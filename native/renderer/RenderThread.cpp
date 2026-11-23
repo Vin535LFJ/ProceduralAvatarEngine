@@ -95,6 +95,28 @@ out vec4 fragColor;
 void main() { fragColor = vec4(normalize(vNormal) * 0.5 + 0.5, 1.0); }
 )GLSL";
 
+// M13: gray-clay study view. Continuous smooth Lambert only — no toon
+// quantisation, no rim, no palette. Toon banding in the old neutral view
+// quantised the shading into 6 flat rings, which hid (or invented) surface
+// detail and made morphology acceptance unreliable. Neutral gray + a key and
+// a dim fill light so form is read purely from curvature.
+constexpr const char* kAnatomyClayFragment = R"GLSL(#version 300 es
+precision mediump float;
+in vec3 vNormal;
+in vec4 vColor;
+uniform vec3 uNeutral;
+uniform vec3 uKeyDir;
+uniform vec3 uFillDir;
+out vec4 fragColor;
+void main() {
+    vec3 n = normalize(vNormal);
+    float key = max(dot(n, normalize(uKeyDir)), 0.0);
+    float fill = max(dot(n, normalize(uFillDir)), 0.0);
+    float lambert = 0.22 + 0.75 * key + 0.22 * fill;
+    fragColor = vec4(uNeutral * lambert, 1.0);
+}
+)GLSL";
+
 constexpr const char* kBackgroundVertex = R"GLSL(#version 300 es
 void main() {
     vec2 p = vec2(float((gl_VertexID << 1) & 2), float(gl_VertexID & 2));
@@ -500,11 +522,21 @@ bool RenderThread::ensureResources(std::string* error) {
         if (error) *error = "anatomy normals BoneBlock binding failed";
         return false;
     }
+    if (!anatomyClayProg_.build(kSkinnedVertex, kAnatomyClayFragment, error)) return false;
+    if (!anatomyClayProg_.bindUniformBlock("BoneBlock", 0)) {
+        if (error) *error = "anatomy clay BoneBlock binding failed";
+        return false;
+    }
     uniformAnatomyViewProj_ = anatomyProgram_.uniform("uViewProj");
     uniformAnatomyModel_ = anatomyProgram_.uniform("uModel");
     uniformAnatomyNeutral_ = anatomyProgram_.uniform("uNeutral");
     uniformAnatomyNormalViewProj_ = anatomyNormalProg_.uniform("uViewProj");
     uniformAnatomyNormalModel_ = anatomyNormalProg_.uniform("uModel");
+    uniformAnatomyClayViewProj_ = anatomyClayProg_.uniform("uViewProj");
+    uniformAnatomyClayModel_ = anatomyClayProg_.uniform("uModel");
+    uniformAnatomyClayNeutral_ = anatomyClayProg_.uniform("uNeutral");
+    uniformAnatomyClayKeyDir_ = anatomyClayProg_.uniform("uKeyDir");
+    uniformAnatomyClayFillDir_ = anatomyClayProg_.uniform("uFillDir");
     uniformViewProj_ = skinnedProgram_.uniform("uViewProj");
     uniformModel_ = skinnedProgram_.uniform("uModel");
     uniformSkin_ = skinnedProgram_.uniform("uSkinColor");
@@ -737,6 +769,17 @@ void RenderThread::drawFrame() {
                                viewProjection.m.data());
             glUniformMatrix4fv(uniformAnatomyNormalModel_, 1, GL_FALSE, model.m.data());
             anatomyMesh_.draw();
+        } else if (debugView_ == 3) {
+            // M13 gray clay: continuous Lambert, no toon banding — the only
+            // view morphology should be accepted in.
+            anatomyClayProg_.use();
+            glUniformMatrix4fv(uniformAnatomyClayViewProj_, 1, GL_FALSE,
+                               viewProjection.m.data());
+            glUniformMatrix4fv(uniformAnatomyClayModel_, 1, GL_FALSE, model.m.data());
+            glUniform3f(uniformAnatomyClayNeutral_, 0.62f, 0.62f, 0.64f);
+            glUniform3f(uniformAnatomyClayKeyDir_, 0.45f, 0.75f, 0.48f);
+            glUniform3f(uniformAnatomyClayFillDir_, -0.55f, 0.15f, 0.35f);
+            anatomyMesh_.draw();
         } else {
             anatomyProgram_.use();
             glUniformMatrix4fv(uniformAnatomyViewProj_, 1, GL_FALSE, viewProjection.m.data());
@@ -748,7 +791,7 @@ void RenderThread::drawFrame() {
             glUniform1f(anatomyProgram_.uniform("uAmbient"), 0.36f);
             glUniform1f(anatomyProgram_.uniform("uToonSteps"), 6.0f);
             anatomyMesh_.draw();
-            if (debugView_ == 1) {
+            if (debugView_ == 1 || debugView_ == 3) {
                 glDepthRangef(0.0f, 0.0f); // pull lines to the front
                 shadowProgram_.use();
                 glUniformMatrix4fv(uniformShadowViewProj_, 1, GL_FALSE,
@@ -763,7 +806,7 @@ void RenderThread::drawFrame() {
 
     egl_.swapBuffers();
     const uint32_t frameDraws = previewMode_ != 0
-        ? (debugView_ == 1 ? 2u : 3u)
+        ? ((debugView_ == 1 || debugView_ == 3) ? 3u : 2u)
         : 4u;
     const uint32_t frameTris = previewMode_ != 0
         ? static_cast<uint32_t>(anatomyMesh_.indexCount() / 3)

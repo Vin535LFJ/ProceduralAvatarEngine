@@ -157,9 +157,9 @@ class MainActivity : AppCompatActivity() {
             Log.i("PAE_UI", "camera preset -> $viewPreset (0F/1B/2L/3R/4-5 45deg/6 shoulder/7 torso)")
         })
         buttons.addView(actionButton("DbgView") {
-            debugView = (debugView + 1) % 3
+            debugView = (debugView + 1) % 4
             NativeBridge.setDebugView(debugView)
-            Log.i("PAE_UI", "debug view -> $debugView (0 shading, 1 wireframe, 2 normals)")
+            Log.i("PAE_UI", "debug view -> $debugView (0 shading, 1 wireframe, 2 normals, 3 gray clay)")
         })
         buttons.addView(actionButton("Stats") {
             Log.i("PAE_UI", NativeBridge.stats())
@@ -232,7 +232,7 @@ class MainActivity : AppCompatActivity() {
                 NativeBridge.setCameraPreset(dp)
             }
             val dv = it2.getIntExtra("debug_view", -1)
-            if (dv in 0..2) {
+            if (dv in 0..3) {
                 debugView = dv
                 NativeBridge.setDebugView(dv)
             }

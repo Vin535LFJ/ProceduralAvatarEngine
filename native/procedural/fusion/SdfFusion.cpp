@@ -61,36 +61,45 @@ float sdSmoothSubtraction(float a, float b, float k) {
     return nb * (1.0f - h) + a * h - k * h * (1.0f - h);
 }
 
-MeshData extractSurfaceNets(const FusionVolume& volume, const SdfField& sdf) {
+MeshData extractSurfaceNets(const FusionVolume& volume, const SdfField& sdf,
+                           std::vector<std::array<uint32_t, 4>>* quadIndices) {
     MeshData mesh;
-    const int n = std::max(2, volume.resolution);
+    // M13: per-axis resolution — a body-wide X and a thin Z are no longer
+    // forced onto the same lattice density.
+    const int nx = std::max(2, volume.resolution[0]);
+    const int ny = std::max(2, volume.resolution[1]);
+    const int nz = std::max(2, volume.resolution[2]);
+    const int grid[3] = {nx, ny, nz};
     const Vec3 origin = volume.center - volume.size * 0.5f;
-    const Vec3 cellSize = volume.size * (1.0f / static_cast<float>(n));
-    const int dim = n + 1;
-    const size_t dimSize = static_cast<size_t>(dim);
+    const Vec3 cellSize{volume.size.x / static_cast<float>(nx),
+                        volume.size.y / static_cast<float>(ny),
+                        volume.size.z / static_cast<float>(nz)};
+    const int extent[3] = {nx + 1, ny + 1, nz + 1};
 
-    // Corner samples over the (n+1)^3 lattice.
-    std::vector<float> samples(dimSize * dimSize * dimSize);
-    auto sampleIndex = [dim](int x, int y, int z) {
-        return static_cast<size_t>(x) * dim * dim + static_cast<size_t>(y) * dim + static_cast<size_t>(z);
+    auto sampleIndex = [&extent](int x, int y, int z) {
+        return static_cast<size_t>((x * extent[1] + y) * extent[2] + z);
     };
-    for (int x = 0; x < dim; ++x) {
-        for (int y = 0; y < dim; ++y) {
-            for (int z = 0; z < dim; ++z) {
+    const size_t sampleCount = static_cast<size_t>(extent[0]) * extent[1] * extent[2];
+
+    // Corner samples over the (nx+1)x(ny+1)x(nz+1) lattice.
+    std::vector<float> samples(sampleCount);
+    for (int x = 0; x < extent[0]; ++x) {
+        for (int y = 0; y < extent[1]; ++y) {
+            for (int z = 0; z < extent[2]; ++z) {
                 samples[sampleIndex(x, y, z)] =
-                    sdf(origin + hadamard(
-                        Vec3{static_cast<float>(x), static_cast<float>(y), static_cast<float>(z)},
-                        cellSize));
+                    sdf(origin + hadamard(Vec3{static_cast<float>(x), static_cast<float>(y),
+                                               static_cast<float>(z)},
+                                          cellSize));
             }
         }
     }
     auto cornerSample = [&](int x, int y, int z) { return samples[sampleIndex(x, y, z)]; };
 
     // One dual vertex per cell whose 8 corners straddle the isosurface.
-    const size_t cellCount = static_cast<size_t>(n) * n * n;
+    const size_t cellCount = static_cast<size_t>(nx) * ny * nz;
     std::vector<int> cellVertex(cellCount, -1);
-    auto cellIndex = [n](int x, int y, int z) {
-        return static_cast<size_t>(x) * n * n + static_cast<size_t>(y) * n + static_cast<size_t>(z);
+    auto cellIndex = [grid](int x, int y, int z) {
+        return static_cast<size_t>((x * grid[1] + y) * grid[2] + z);
     };
     std::vector<Vec3> positions;
     const int cornerOffset[8][3] = {
@@ -100,9 +109,9 @@ MeshData extractSurfaceNets(const FusionVolume& volume, const SdfField& sdf) {
         {0, 1}, {1, 2}, {2, 3}, {3, 0}, {4, 5}, {5, 6}, {6, 7}, {7, 4},
         {0, 4}, {1, 5}, {2, 6}, {3, 7}};
 
-    for (int x = 0; x < n; ++x) {
-        for (int y = 0; y < n; ++y) {
-            for (int z = 0; z < n; ++z) {
+    for (int x = 0; x < nx; ++x) {
+        for (int y = 0; y < ny; ++y) {
+            for (int z = 0; z < nz; ++z) {
                 float corner[8];
                 bool anyNeg = false, anyPos = false;
                 for (int c = 0; c < 8; ++c) {
@@ -166,7 +175,7 @@ MeshData extractSurfaceNets(const FusionVolume& volume, const SdfField& sdf) {
     std::vector<QuadRecord> quads;
 
     auto cellVertexAt = [&](int x, int y, int z) -> int {
-        if (x < 0 || y < 0 || z < 0 || x >= n || y >= n || z >= n) return -1;
+        if (x < 0 || y < 0 || z < 0 || x >= nx || y >= ny || z >= nz) return -1;
         return cellVertex[cellIndex(x, y, z)];
     };
 
@@ -175,9 +184,9 @@ MeshData extractSurfaceNets(const FusionVolume& volume, const SdfField& sdf) {
         const int u = (axis + 1) % 3;
         const int v = (axis + 2) % 3;
         int pos[3];
-        for (pos[0] = 0; pos[0] < n; ++pos[0]) {
-            for (pos[1] = 0; pos[1] < n; ++pos[1]) {
-                for (pos[2] = 0; pos[2] < n; ++pos[2]) {
+        for (pos[0] = 0; pos[0] < nx; ++pos[0]) {
+            for (pos[1] = 0; pos[1] < ny; ++pos[1]) {
+                for (pos[2] = 0; pos[2] < nz; ++pos[2]) {
                     const float s0 = cornerSample(pos[0], pos[1], pos[2]);
                     const float s1 = cornerSample(pos[0] + axisOffset[axis][0],
                                                   pos[1] + axisOffset[axis][1],
@@ -224,6 +233,9 @@ MeshData extractSurfaceNets(const FusionVolume& volume, const SdfField& sdf) {
         } else {
             mesh.indices.insert(mesh.indices.end(), {quad.v[0], quad.v[2], quad.v[1],
                                                      quad.v[0], quad.v[3], quad.v[2]});
+        }
+        if (quadIndices) {
+            quadIndices->push_back({quad.v[0], quad.v[1], quad.v[2], quad.v[3]});
         }
     }
     return finalizeFusion(mesh);

@@ -38,18 +38,25 @@ AnatomyResult generateAnatomyUpperBody(const HumanAnatomyParameters& params,
     const BodyJoints& j = result.joints;
 
     // Field over the body volume (covers hips -> head top, arms to wrists).
-    auto field = [&](Vec3 p) { return upperBodySdf(params, j, p); };
+    // M13: the primitive set is resolved once and captured, so the hundreds of
+    // thousands of samples do not each rebuild the joint-anchored primitives.
+    auto field = makeUpperBodyField(params, j);
 
     fusion::FusionVolume volume;
-    // Cube grid sized to cover the full anatomy (arms to wrists, pole to hips)
-    // so nothing is clipped at the volume boundary.
+    // Anisotropic volume: the torso is far wider than it is deep, so the box
+    // and the cell counts are set per axis. X covers the arms out to the
+    // wrists, Y the head-top-to-hips span, Z the torso depth plus margin.
     const float extentY = (j.head.y + 0.14f) - (j.hips.y - 0.10f);
-    const float size = extentY + 0.30f;
+    const float sizeX = (2.0f * (j.leftWrist.x + 0.10f));
+    const float sizeZ = 0.40f;
     volume.center = Vec3{0.0f, (j.head.y + 0.14f + j.hips.y - 0.10f) * 0.5f, 0.0f};
-    volume.size = Vec3{size, size, size};
-    volume.resolution = std::max(32, resolution.y);
+    volume.size = Vec3{sizeX, extentY + 0.30f, sizeZ};
+    // Cells per axis, floored so no axis degenerates; X/Y/Z are honoured
+    // independently (a scalar resolution cannot express a body-shaped grid).
+    volume.resolution = {std::max(16, resolution.x), std::max(24, resolution.y),
+                         std::max(12, resolution.z)};
 
-    MeshData mesh = fusion::extractSurfaceNets(volume, field);
+    MeshData mesh = fusion::extractSurfaceNets(volume, field, &result.surfaceQuads);
     if (mesh.vertices.empty() || mesh.indices.empty()) {
         PAE_LOGE("PAE_GEOMETRY", "anatomy extraction produced no geometry");
         return result;

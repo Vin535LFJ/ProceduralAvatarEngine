@@ -1,9 +1,11 @@
 #pragma once
 
-// M12-A: unified upper-body generator — the composed anatomy SDF field is
+// M12-A/M13: unified upper-body generator — the composed anatomy SDF field is
 // extracted into ONE continuous, watertight mesh (Surface Nets), weights are
 // derived from the region fields, and a Human Anatomy Report is produced.
 // This is the production path (not a PoC): the SDF IS the body surface.
+// M13: the sampling volume is anisotropic and the dual-lattice quad
+// connectivity is retained (surfaceQuads) for topology analysis.
 
 #include "core/math/Math.h"
 #include "procedural/MeshData.h"
@@ -11,18 +13,26 @@
 #include "procedural/humanoid/Humanoid.h"
 #include "skeleton/Skeleton.h"
 
+#include <array>
+#include <cstdint>
+#include <vector>
+
 namespace pae::anatomy {
 
 struct AnatomyResolution {
-    int x = 72;  // cells across the body width
-    int y = 112; // cells across the body height
-    int z = 44;  // cells across the body depth
+    int x = 88;  // cells across the body width
+    int y = 132; // cells across the body height
+    int z = 52;  // cells across the body depth
 };
 
 struct AnatomyResult {
     MeshData mesh;      // ONE continuous upper-body surface (bind pose)
     Skeleton skeleton;  // standard 22-bone protocol
     BodyJoints joints;
+    // Dual-lattice quad faces of the extraction (v0..v3). The rendered mesh is
+    // triangulated, but these are what a topology analyzer can measure for
+    // quad-ness / edge flow.
+    std::vector<std::array<uint32_t, 4>> surfaceQuads;
     bool valid = false;
 };
 

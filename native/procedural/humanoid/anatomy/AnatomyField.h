@@ -10,6 +10,7 @@
 #include "skeleton/Skeleton.h"
 
 #include <array>
+#include <functional>
 
 namespace pae::anatomy {
 
@@ -59,6 +60,13 @@ constexpr int RegionCount = static_cast<int>(BodyRegion::RegionCount);
 // Signed distance of the composed upper-body surface (negative inside).
 // Left/right symmetry is guaranteed internally (paired regions mirrored).
 float upperBodySdf(const HumanAnatomyParameters& params, const BodyJoints& joints, Vec3 p);
+
+// Same field with the joint-derived primitives resolved ONCE and captured in
+// the returned closure. extractSurfaceNets evaluates the field hundreds of
+// thousands of times; rebuilding the primitive set per call was the dominant
+// cost of the generation step.
+std::function<float(Vec3)> makeUpperBodyField(const HumanAnatomyParameters& params,
+                                             const BodyJoints& joints);
 
 // Region field values at a point, evaluated on the point's own side
 // (paired regions resolved left/right by the sign of p.x).

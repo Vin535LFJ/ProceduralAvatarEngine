@@ -2,20 +2,25 @@
 
 // M11: local SDF fusion utilities. Surface Nets (dual contouring lite)
 // extracts a quad-connected, orientation-corrected mesh from a signed
-// distance function over a small local volume — used only for joint
-// blend patches (shoulder/hip/neck), never for the whole body.
+// distance function over a local volume — used for joint blend patches and
+// (M13) for the upper-body implicit surface.
 
 #include "core/math/Math.h"
 #include "procedural/MeshData.h"
 
+#include <array>
 #include <functional>
+#include <cstdint>
 
 namespace pae::fusion {
 
+// M13: resolution is per-axis. The body is far wider than it is deep, so a
+// single scalar forces a cubic lattice and wastes sample density on the
+// thin axes (or starves the wide ones).
 struct FusionVolume {
-    Vec3 center{0.0f, 0.0f, 0.0f}; // world center of the local volume
-    Vec3 size{1.0f, 1.0f, 1.0f};   // full extent per axis
-    int resolution = 20;           // cells per axis (grid is resolution+1 samples)
+    Vec3 center{0.0f, 0.0f, 0.0f};              // world center of the volume
+    Vec3 size{1.0f, 1.0f, 1.0f};                // full extent per axis
+    std::array<int, 3> resolution{20, 20, 20}; // cells per axis (n+1 samples)
 };
 
 // SDF signature: negative inside the solid, positive outside.
@@ -23,8 +28,11 @@ using SdfField = std::function<float(Vec3)>;
 
 // Extract a surface with per-vertex normals taken from the SDF gradient.
 // Quads are triangulated; winding is corrected against the gradient so all
-// faces point outward.
-MeshData extractSurfaceNets(const FusionVolume& volume, const SdfField& sdf);
+// faces point outward. The dual-lattice quad connectivity (v0..v3 per face)
+// can optionally be captured for topology analysis (edge flow / quad-ness),
+// which the triangulated output alone cannot express.
+MeshData extractSurfaceNets(const FusionVolume& volume, const SdfField& sdf,
+                            std::vector<std::array<uint32_t, 4>>* quadIndices = nullptr);
 
 // SDF primitives (world-space).
 float sdSphere(Vec3 p, Vec3 center, float radius);

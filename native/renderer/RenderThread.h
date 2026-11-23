@@ -92,6 +92,7 @@ private:
     ShaderProgram shadowProgram_;  // ground contact shadow disc (M10)
     ShaderProgram anatomyProgram_;    // M12: anatomy shading (neutral skin)
     ShaderProgram anatomyNormalProg_; // M12: normals debug view
+    ShaderProgram anatomyClayProg_;   // M13: gray-clay smooth-lambert study view
     SkinnedGpuMesh anatomyMesh_;      // M12: unified SDF upper body
     SkinnedGpuMesh anatomyLines_;     // M12: wireframe edge buffer
     SkinnedGpuMesh avatarMesh_;
@@ -115,7 +116,7 @@ private:
     int qualityLevel_ = 1;
     int previewMode_ = 0;  // 0 off, 1 anatomy preview
     int cameraPreset_ = 0; // M12 evidence camera index
-    int debugView_ = 0;    // 0 shading / 1 wireframe / 2 normals
+    int debugView_ = 0;    // 0 shading / 1 wireframe / 2 normals / 3 gray clay (M13)
     uint64_t avatarRevision_ = 1;
     uint64_t sceneRevision_ = 1;
 
@@ -150,6 +151,11 @@ private:
     GLint uniformAnatomyNeutral_ = -1;
     GLint uniformAnatomyNormalViewProj_ = -1;
     GLint uniformAnatomyNormalModel_ = -1;
+GLint uniformAnatomyClayViewProj_ = -1;
+GLint uniformAnatomyClayModel_ = -1;
+GLint uniformAnatomyClayNeutral_ = -1;
+GLint uniformAnatomyClayKeyDir_ = -1;
+GLint uniformAnatomyClayFillDir_ = -1;
     int width_ = 0;
     int height_ = 0;
     uint32_t maxQueuedCommands_ = 64;

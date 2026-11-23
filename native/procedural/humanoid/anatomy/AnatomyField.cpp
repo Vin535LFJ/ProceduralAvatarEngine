@@ -146,48 +146,112 @@ RegionPrimitives buildPrimitives(const HumanAnatomyParameters& q, const BodyJoin
     return m;
 }
 
-// Single-sided evaluation (left/+X paired regions). Wrap with the mirror.
-float evaluateSide(const HumanAnatomyParameters& q, const BodyJoints& j, Vec3 p) {
-    RegionPrimitives m = buildPrimitives(q, j);
+// Bounding sphere of a feature, inflated by its blend radius. A point outside
+// (radius + k) has SDF > k, and smooth-union(x, y, k) equals min(x, y)
+// whenever |x - y| >= k — so the whole feature can be skipped without
+// changing the composed field. Most sampled cells are far from most features,
+// so this is what keeps the M13 feature system affordable.
+struct Bound { Vec3 center; float radius; };
 
-    float torso = sdEllipsoid(p, m.ribCageC, m.ribCageR);
-    torso = sdSmoothUnion(torso, sdEllipsoid(p, m.abdomenC, m.abdomenR), 0.055f * q.smoothness);
-    torso = sdSmoothUnion(torso, sdEllipsoid(p, m.pelvisC, m.pelvisR), 0.05f * q.smoothness);
-    torso = sdSmoothSubtraction(torso, sdSphere(p, m.backCarveC, m.backCarveR),
-                                0.05f * q.smoothness);
+Bound boundEllipsoid(Vec3 c, Vec3 r) { return Bound{c, r.length()}; }
 
-    // Shoulder: deltoid fuses with the widest k — the key M12 blend.
-    float shoulder = sdEllipsoid(p, m.deltoidC, m.deltoidR);
-    shoulder = sdSmoothUnion(shoulder,
-                             sdCapsule(p, m.clavicleA, m.clavicleB, m.clavicleR),
-                             0.022f * q.smoothness);
-    float body = sdSmoothUnion(torso, shoulder,
-                               (0.06f + 0.06f * q.axillaDepth) * q.smoothness);
-
-    // Arm: tapered capsules + spindle with the tightest blends.
-    float arm = sdRoundCone(p, m.upperArmA, m.upperArmRa, m.upperArmB, m.upperArmRb);
-    arm = sdSmoothUnion(arm, sdSphere(p, m.elbowC, m.elbowR), 0.028f * q.smoothness);
-    arm = sdSmoothUnion(arm, sdRoundCone(p, m.forearmA, m.forearmRa, m.forearmB, m.forearmRb),
-                        0.032f * q.smoothness);
-    arm = sdSmoothUnion(arm, sdSphere(p, m.forearmSpindleC, m.forearmSpindleR),
-                        0.040f * q.smoothness);
-    body = sdSmoothUnion(body, arm, 0.045f * q.smoothness);
-
-    body = sdSmoothUnion(body, sdCapsule(p, m.neckA, m.neckB, m.neckR), 0.05f * q.smoothness);
-    body = sdSmoothUnion(body, sdEllipsoid(p, m.headC, m.headR), 0.04f * q.smoothness);
-    return body;
+Bound boundSegment(Vec3 a, Vec3 b, float r) {
+    return Bound{(a + b) * 0.5f, (a - b).length() * 0.5f + r};
 }
+
+// True when the feature's primitive provably cannot influence p.
+bool prune(const Bound& b, float k, Vec3 p) {
+    const float reach = b.radius + k;
+    return (p - b.center).lengthSq() > reach * reach;
+}
+
+// Union that skips the b-primitive when a bounding test proves it inert.
+float prunedUnion(float a, float b, float k, const Bound& bound, Vec3 p) {
+    if (prune(bound, k, p)) return a;
+    return sdSmoothUnion(a, b, k);
+}
+
+// Single-sided evaluation happens inside makeUpperBodyField, where the
+// joint-anchored primitive set and its bounding spheres are resolved once.
 
 Vec3 mirrorX(Vec3 p) { return {-p.x, p.y, p.z}; }
 
 } // namespace
 
 float upperBodySdf(const HumanAnatomyParameters& params, const BodyJoints& joints, Vec3 p) {
-    // Mirror evaluation: paired regions are modeled on +X; the min against
-    // the x-mirrored field guarantees perfect left/right symmetry.
-    const float left = evaluateSide(params, joints, p);
-    const float right = evaluateSide(params, joints, mirrorX(p));
-    return std::min(left, right);
+    return makeUpperBodyField(params, joints)(p);
+}
+
+std::function<float(Vec3)> makeUpperBodyField(const HumanAnatomyParameters& params,
+                                             const BodyJoints& joints) {
+    // Resolve the joint-anchored primitive set once; both mirrored sides and
+    // every later evaluation reuse it.
+    const RegionPrimitives m = buildPrimitives(params, joints);
+    const Bound ribBound = boundEllipsoid(m.ribCageC, m.ribCageR);
+    const Bound abdomenBound = boundEllipsoid(m.abdomenC, m.abdomenR);
+    const Bound pelvisBound = boundEllipsoid(m.pelvisC, m.pelvisR);
+    const Bound backBound = Bound{m.backCarveC, m.backCarveR};
+    const Bound deltoidBound = boundEllipsoid(m.deltoidC, m.deltoidR);
+    const Bound clavicleBound = boundSegment(m.clavicleA, m.clavicleB, m.clavicleR);
+    const Bound upperArmBound = boundSegment(m.upperArmA, m.upperArmB, m.upperArmRa);
+    const Bound forearmBound = boundSegment(m.forearmA, m.forearmB, m.forearmRa);
+    const Bound armGroupBound = Bound{(m.upperArmA + m.forearmB) * 0.5f,
+                                      (m.upperArmA - m.forearmB).length() * 0.5f
+                                          + m.forearmSpindleR};
+    const Bound neckBound = boundSegment(m.neckA, m.neckB, m.neckR);
+    const Bound headBound = boundEllipsoid(m.headC, m.headR);
+    const float smoothness = params.smoothness;
+    const float kShoulder = (0.06f + 0.06f * params.axillaDepth) * smoothness;
+
+    auto side = [=](Vec3 p) {
+        // Finite "far" sentinel: a real infinity would turn the smooth-blend
+        // term a*h into 0*inf = NaN and poison the whole field.
+        constexpr float kFar = 1e6f;
+        float torso = prune(ribBound, 0.055f * smoothness, p)
+            ? kFar
+            : sdEllipsoid(p, m.ribCageC, m.ribCageR);
+        torso = prunedUnion(torso, sdEllipsoid(p, m.abdomenC, m.abdomenR),
+                            0.055f * smoothness, abdomenBound, p);
+        torso = prunedUnion(torso, sdEllipsoid(p, m.pelvisC, m.pelvisR),
+                            0.05f * smoothness, pelvisBound, p);
+        if (!prune(backBound, 0.05f * smoothness, p)) {
+            torso = sdSmoothSubtraction(torso, sdSphere(p, m.backCarveC, m.backCarveR),
+                                        0.05f * smoothness);
+        }
+        if (!prune(Bound{deltoidBound.center, deltoidBound.radius + clavicleBound.radius},
+                   kShoulder, p)) {
+            float shoulder = sdEllipsoid(p, m.deltoidC, m.deltoidR);
+            shoulder = prunedUnion(shoulder, sdCapsule(p, m.clavicleA, m.clavicleB, m.clavicleR),
+                                   0.022f * smoothness, clavicleBound, p);
+            torso = sdSmoothUnion(torso, shoulder, kShoulder);
+        }
+        if (!prune(armGroupBound, 0.045f * smoothness, p)) {
+            float arm = sdRoundCone(p, m.upperArmA, m.upperArmRa, m.upperArmB, m.upperArmRb);
+            arm = prunedUnion(arm, sdSphere(p, m.elbowC, m.elbowR), 0.028f * smoothness,
+                              Bound{m.elbowC, m.elbowR}, p);
+            arm = prunedUnion(arm, sdRoundCone(p, m.forearmA, m.forearmRa, m.forearmB,
+                                               m.forearmRb),
+                              0.032f * smoothness,
+                              Bound{forearmBound.center,
+                                    (m.forearmA - m.forearmB).length() * 0.5f + m.forearmRa},
+                              p);
+            arm = prunedUnion(arm, sdSphere(p, m.forearmSpindleC, m.forearmSpindleR),
+                              0.040f * smoothness,
+                              Bound{m.forearmSpindleC, m.forearmSpindleR}, p);
+            torso = sdSmoothUnion(torso, arm, 0.045f * smoothness);
+        }
+        torso = prunedUnion(torso, sdCapsule(p, m.neckA, m.neckB, m.neckR),
+                            0.05f * smoothness,
+                            neckBound, p);
+        torso = prunedUnion(torso, sdEllipsoid(p, m.headC, m.headR), 0.04f * smoothness,
+                            headBound, p);
+        return torso;
+    };
+    // NOTE: the mirror is always evaluated — the L/R symmetry of the result
+    // depends on min(side(p), side(-p)) and must not be short-circuited.
+    return [side](Vec3 p) {
+        return std::min(side(p), side(mirrorX(p)));
+    };
 }
 
 std::array<float, RegionCount> regionFields(const HumanAnatomyParameters& params,

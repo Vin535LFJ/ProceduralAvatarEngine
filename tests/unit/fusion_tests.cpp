@@ -37,7 +37,7 @@ PAE_TEST_CASE(fusion_two_spheres_merges_into_single_blob) {
     FusionVolume volume;
     volume.center = {0.0f, 0.0f, 0.0f};
     volume.size = {2.4f, 2.4f, 2.4f};
-    volume.resolution = 20;
+    volume.resolution = {20, 20, 20};
     const float k = 0.3f;
     const SdfField field = [k](Vec3 p) {
         const float a = sdSphere(p, Vec3{-0.35f, 0.0f, 0.0f}, 0.5f);
@@ -66,7 +66,7 @@ PAE_TEST_CASE(fusion_capsule_ellipsoid_shoulder_blend) {
     FusionVolume volume;
     volume.center = {0.0f, 1.3f, 0.0f};
     volume.size = {1.6f, 1.2f, 1.4f};
-    volume.resolution = 28;
+    volume.resolution = {28, 28, 28};
     const float k = 0.12f;
     const SdfField field = [k](Vec3 p) {
         const float torso = sdEllipsoidApprox(p, Vec3{0.0f, 1.3f, 0.0f}, Vec3{0.21f, 0.26f, 0.15f});
@@ -96,7 +96,7 @@ PAE_TEST_CASE(fusion_smooth_subtraction_carves_socket) {
     FusionVolume volume;
     volume.center = {0.0f, 0.0f, 0.0f};
     volume.size = {1.6f, 1.6f, 1.6f};
-    volume.resolution = 28;
+    volume.resolution = {28, 28, 28};
     const float k = 0.08f;
     const SdfField field = [k](Vec3 p) {
         const float ball = sdSphere(p, Vec3{0.0f, 0.0f, 0.0f}, 0.6f);
@@ -177,7 +177,7 @@ PAE_TEST_CASE(poc_shoulder_fusion_comparison) {
         FusionVolume volume;
         volume.center = Vec3{0.24f, 1.28f, 0.0f};
         volume.size = {0.8f, 0.7f, 0.7f};
-        volume.resolution = 28;
+        volume.resolution = {28, 28, 28};
         const auto t0 = std::chrono::steady_clock::now();
         const MeshData c = extractSurfaceNets(volume, bodyField);
         const auto t1 = std::chrono::steady_clock::now();
