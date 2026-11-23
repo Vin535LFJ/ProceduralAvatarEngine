@@ -65,10 +65,14 @@
 
 - [x] G2 证据冻结在 `a32251b` 并推送远端
 - [x] 独立审核提示词已生成：`docs/phases/anatomy-driven-geometry-poc/02-route-review-prompt.md`
-- [ ] 负责人审阅 G2 报告 + 审核人意见 → 签署 G3 `DEFER`
-- [ ] 新建 **DEC-08**（是否采纳 09 文档的分层 Shape Model 契约）→ OPEN
-- [ ] 新建 **AUTH-08**（PoC-SM 实现授权，见 §5）→ OPEN
-- [ ] 把 09 文档状态从 PROPOSAL 更新为"部分采纳：后端候选实证，形态待 PoC-SM"
+- [x] 负责人 2026-11-23「同意，采纳你全部建议」→ G3 记 `DEFER`、`approved route` 保持空
+- [x] **DEC-09 = APPROVED**：采纳 09 文档的分层 Shape Model 契约（已写入 SPEC §7.1）
+- [x] 09 文档状态更新为 `ADOPTED IN PRINCIPLE`，并写入 G2 证据回填
+- [x] 视觉评价协议草案：`04-visual-rubric.md`（AI 只定协议，参考图/判定留负责人）
+- [x] ADR-011（Shape Model 契约）、ADR-012（Saltline 研究）草案已起草
+- [ ] **AUTH-08 仍为 OPEN**：负责人需给出基线 commit 与 worktree 路径；在此之前 AI 不实施 PoC-SM
+- [ ] DEC-05 参考图 / rubric 仍待负责人提供（没有它不得宣布视觉合格、不得重跑 G2）
+- [ ] 独立审核人意见回收（提示词已生成，审核尚未执行）
 
 ### 阶段 1 — 视觉标准（前置：负责人，不是 AI）
 
@@ -127,21 +131,27 @@
 | 范围 | 新建 `native/procedural/shape/v2/` 下的 host-only 契约与 envelope；新增 host 测试与 Before/After 灰模探针；从 `a32251b` 另开 worktree 分支 |
 | 禁止 | 不改 BoneId 0–21 / UBO[22] ABI；不改 `RenderThread` 生产入口；不替换 legacy 三路径；不碰原工作区 L1；不引入 Three.js / JS 运行时 |
 | 生成物 | `CharacterDefinition` 契约、Shared Skin Envelope 参考面、Before/After 报告与灰模图、ADR-011 草案 |
-| 前置 | DEC-05 参考图/rubric 批准 + DEC-08 采纳 09 分层契约 + G3 `DEFER` 签署 |
+| 前置 | DEC-05 参考图/rubric 批准 + DEC-09 采纳 09 分层契约 + G3 `DEFER` 签署 |
 | 修改工作区 | 仅新 worktree（L3/L4） |
 | 风险 | 中（形态语义契约设计错误会导致重做；用 DEC-05 + 阶段 1 rubric 控制） |
 | 状态 | **OPEN — 未授权，AI 不得开始实施** |
 
 ---
 
-## 6. 需要负责人回答的问题
+## 6. 决策记录与剩余输入
 
-1. 是否同意 **G3 = DEFER**、R1 保留参考 / R2 保留候选 / R3 暂停投入？
-2. 是否采纳 09 文档的 `CharacterDefinition` 分层契约（DEC-08）？
-3. 能否提供 DEC-05 的**授权参考图 + rubric**？没有它，阶段 1 和阶段 3 都无法完成。
-4. 是否批准 AUTH-08？批准的工作树路径和基线 commit 是什么？
-5. ≤5° 接缝合同失败在 PoC-SM 之前是"阻塞签署"还是"可接受风险"？本方案建议阻塞。
-6. Saltline 研究是否单独立 ADR，还是并入 PoC-SM 的 ADR-011？
+**2026-11-23 负责人已确认**（"同意，采纳你全部建议"）：
+
+1. ✅ G3 = `DEFER`；R1 保留参考 / R2 保留候选并暂停加码 / R3 暂停投入。
+2. ✅ 采纳 09 文档的 `CharacterDefinition` 分层契约 → **DEC-09 = APPROVED**。
+3. ✅ ≤5° 接缝失败列为 PoC-SM **阻塞验收条件**（非可接受风险）。
+4. ✅ Saltline 方法研究**单独立 ADR**（ADR-012 草案），不并入 ADR-011，不引入 Three.js。
+
+**仍需负责人给出具体值（AI 不能代填）**：
+
+5. ⬜ DEC-05 的**授权参考图 + rubric**来源。没有它，阶段 1 与阶段 3 均无法完成；`04-visual-rubric.md` 的判定栏保持空。
+6. ⬜ AUTH-08 的**基线 commit** 与 **worktree 路径**。在此之前 PoC-SM 代码实施不启动。
+7. ⬜ ADR-011 / ADR-012 的签署（当前均为 DRAFT）。
 
 ---
 

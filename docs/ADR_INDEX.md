@@ -14,5 +14,9 @@
 | ADR-008 | 人体几何选型 | 部分被 ADR-010 取代 |
 | ADR-009 | 统一 SDF 上半身 | 在 P1 最终人体唯一主线范围内被 ADR-010 取代；SDF 仍可做局部辅助研究 |
 | ADR-010 | P1 正式人体主线 | Accepted（待用户 P0 Gate 确认） |
+| ADR-011 | CharacterDefinition 分层 Shape Model 契约 | **DRAFT**（DEC-09 已采纳为方向；实施受 AUTH-08 约束） |
+| ADR-012 | Saltline 程序化资源生成方法独立模块研究 | **DRAFT**（研究阶段，不引入 Three.js / 网页运行时） |
 
 详见 `docs/architecture-decisions/ADR-010-p1-surface-patch-mainline.md`。
+ADR-011 / ADR-012 草案见 `docs/architecture-decisions/ADR-011-shape-model-contract.draft.md`、
+`docs/architecture-decisions/ADR-012-saltline-module-study.draft.md`。

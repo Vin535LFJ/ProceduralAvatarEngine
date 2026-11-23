@@ -225,6 +225,7 @@ flowchart TD
 | DEC-05 | 目标参考形态与视觉验收数据 | ①负责人提供授权参考图 + rubric；②仅灰模协议无外部参考；③AI 自定 | ①由负责人确认目标形态和标准 | **没有负责人认可的目标形态，AI 只能做数值对照，不能宣布视觉合格** | 固定机位视觉 Gate，owner 独立否决 | 负责人 | `OPEN` |
 | DEC-06 | 参数与 Muscle Feature 处理原则 | ①标记未实现、G1/G2 重建；②把半成品当已实现；③删除历史参数 | ①声明未进顶点者标 `NOT IMPLEMENTED`/`DECLARED ONLY`；muscle feature 归入 Shape Model 重新设计，不复用半成品 API | `AnatomyFeatures.cpp` 死代码；6+ 参数不进顶点（§9） | G0 Parameter Baseline + G2 参数组对照 | 负责人 | `OPEN` |
 | DEC-07 | 遗留路线冻结原则 | ①三路径冻结为基线、不删不静默替换；②删除 legacy；③静默替换 | ①冻结为对照基线，新能力走独立 previewMode | ADR-010:22 / 缺陷报告:6 要求保留；避免"堆模块"重演 | `previewMode_` 回归 0/1/2；Git diff 审计 | 负责人 | `OPEN` |
+| DEC-09 | 是否采纳 09 文档的 `CharacterDefinition` 分层 Shape Model 契约作为下一阶段上游设计 | ①采纳为 PoC-SM 契约；②另起炉灶；③继续加 R2/R3 代码量 | ①采纳为契约；R2 保留为后端候选；R3 暂停投入 | G2 实证：R3 上胸缺口 13.5 cm、有效参数 7/20（不收敛）；R2 E2 0.98 mm / 0 sliver / stable ID（后端成立）。G1/G2 的 PoC-A 是路线比较，形态 PoC 另起名为 PoC-SM，避免与 09 的 PoC-A 冲突 | PoC-SM Before/After 灰模 + ≤5° 接缝复测 + 以新 Target Reference 重跑 G2 | 负责人 | `APPROVED`（2026-11-23 负责人「同意，采纳你全部建议」；实施仍受 AUTH-08 约束） |
 
 ### 7.2 G3 Decision Record 模板（GATE-04 签署物）
 
@@ -241,7 +242,8 @@ flowchart TD
 | AUTH-04 | Android Build | `./gradlew assembleDebug` | APK + SHA256 | 否（worktree 内） | 中（SDK/网络） | `OPEN` |
 | AUTH-05 | TV Box 安装与证据采集 | `adb install -r <apk>` + 固定 preset 截图 + `adb logcat` | evidence 截图/日志 | 设备状态 | 中 | `OPEN` |
 | AUTH-06 | 其他可能产生工作区修改的命令 | 逐条列明后单独授权；未列明者禁止执行 | 视命令 | 可能 | 视命令 | `OPEN` |
-| AUTH-07 | G1/G2 实现（新建 R2/R3 最小实验） | 新 previewMode 通道；不触碰遗留三路径；不改 ABI | 新源码/测试文件（worktree 内） | 是（worktree 内新增） | 中 | `OPEN` |
+| AUTH-07 | G1/G2 实现（新建 R2/R3 最小实验） | 新 previewMode 通道；不触碰遗留三路径；不改 ABI | 新源码/测试文件（worktree 内） | 是（worktree 内新增） | 中 | `EXECUTED`（`a32251b`，已推送远端） |
+| AUTH-08 | PoC-SM：Shape Model v2 形态 PoC | 新 worktree；新建 `native/procedural/shape/v2/` host-only 契约 + shared envelope + Before/After 灰模探针；不改 BoneId 0–21 / UBO[22] ABI；不改 RenderThread 生产入口；不替换 legacy 三路径；不引入 Three.js / JS 运行时 | 契约、envelope 参考面、ADR-011 草案、Before/After 报告与灰模图 | 是（新 worktree，L1 不变） | 中（形态语义契约设计错误会重做；用 DEC-05 + visual rubric 控制） | `OPEN — 未授权，AI 不得开始实施` |
 
 ### 7.4 GATE Register（验收状态）— 全部 NOT RUN
 
@@ -249,8 +251,8 @@ flowchart TD
 |---|---|---|---|
 | GATE-01 | G0 Evidence Baseline | `NOT RUN` | 负责人复核 |
 | GATE-02 | G1 Route Feasibility | `NOT RUN` | 工程 |
-| GATE-03 | G2 Fair Comparison | `NOT RUN` | 负责人复核 |
-| GATE-04 | G3 Owner Investment Decision | `OPEN / NOT SIGNED` | **负责人** |
+| GATE-03 | G2 Fair Comparison | `EVIDENCE COMPLETE / AWAITING OWNER REVIEW`（工程证据 `a32251b` 已推送；阈值未批，不得判 PASS） | 负责人复核 |
+| GATE-04 | G3 Owner Investment Decision | **`DEFER`** — 补 DEC-05 参考图 + PoC-SM Before/After + 新 Target Reference 下的 G2 重测后重开；`approved route` 保持空 | **负责人**（2026-11-23 采纳 DEFER；未签字） |
 | GATE-05 | G4 Full Character Expansion | `NOT RUN` | 负责人 |
 
 ### 7.5 旧编号 → 统一编号映射（消除 A1–A12 / 附录 A1–A11 冲突）

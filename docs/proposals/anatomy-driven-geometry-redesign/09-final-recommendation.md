@@ -6,7 +6,11 @@
 
 这不是“所有部位都用 SDF”，也不是“所有部位都用 Sweep”，更不是把多套生成器各自输出的 mesh 焊在一起。人体解剖语义是唯一上游，曲面/场是不同区域的形态表达工具，最终皮肤外表面共享一套连续解算，动画 mesh 则使用固定的解剖拓扑模板。
 
-> **状态：PROPOSAL — 等待项目负责人批准**
+> **状态：ADOPTED IN PRINCIPLE（2026-11-23）— 分层 Shape Model 契约已由负责人采纳（SPEC DEC-09）；新代码实施未授权（AUTH-08 OPEN）。**
+>
+> G2 回填（提交 `a32251b`）：固定 quad template 投影后端首次实测成立（E2 0.98 mm / 0 sliver / stable ID 跨参数组恒定）；但 **shared skin envelope 的新形态仍未被验证**。R3 包络上胸缺口 13.5 cm、有效参数 7/20 且模板加密不收敛，实证了本文问题一"M12 shape model 仍不足"的判断。肩根接缝最大二面角 47.66° / 16.13° 超过 ≤5° 合同值，实证了本文问题四"肩 bridge 不是肩带/腋窝共同形态模型"的判断——该项已列为 PoC-SM 的阻塞验收条件。
+>
+> 本文的 "PoC-A"（形态 PoC）已改名为 **PoC-SM**，以免与 SPEC v2.1 中已完成的路线比较 PoC-A（现称 **PoC-R**）混淆。后续依次为 PoC-SHOULDER / PoC-LIMB / PoC-FULL。详见 `docs/phases/anatomy-driven-geometry-poc/03-g3-defer-and-next-phase-proposal.md`。
 
 ## 2. 八个核心问题的回答
 
