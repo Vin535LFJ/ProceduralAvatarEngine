@@ -1,61 +1,32 @@
-# Procedural Avatar Engine
+# Procedural Character Foundation v1.0
 
-纯程序化 3D 卡通数字人引擎 MVP：姿态输入（合成动作 / ML Kit 姿态识别 / 本地视频）驱动由代码与参数生成的卡通人体，使用 Android NDK + C++17 + 自研 OpenGL ES 3.0 渲染器实时渲染。
+本交付包包含三份正式工程文档：
 
-**零外部美术资产**：几何、骨骼、蒙皮权重、材质、背景全部由程序生成；不加载 GLB/GLTF/FBX/OBJ、外部贴图或 HDRI。姿态识别 SDK（ML Kit）作为已披露的软件依赖（见 `docs/dependencies.md`）。
+1. `01_Procedural_Character_Foundation_Specification_v1.0.md` — 技术设计规范：定义架构、几何主线、骨骼/坐标/蒙皮契约、数据结构、性能和验收标准。
+2. `02_Procedural_Character_Development_Roadmap_v1.0.md` — 开发指导计划：定义 P0–P5 阶段、需求/设计/实施/验证/验收闭环。
+3. `03_AI_Engineering_Execution_Prompt_v1.0.md` — AI 工程执行提示词：指导 Agent 按规范与计划审计和实施，避免一次性扩张范围。
 
-## 构建
+## 使用顺序
 
-要求：JDK 17、Android SDK（platform 33 / build-tools / NDK 25.1.8937393 / CMake 3.22.1）。
+1. 先由项目负责人审阅三份文档，确认技术决策。
+2. 将三份 Markdown 一起提供给具备仓库读写和终端能力的 AI Agent。
+3. 按执行提示词从 P0 开始，不要跳过仓库审计和契约冻结。
+4. P1-A 几何 PoC 必须在 Android GLES Renderer 中给出真实多视角证据，先由项目负责人确认视觉方向，再扩展完整人体。
+5. P1 通过后，再进入 P2 换装；P4 才接入 ML Kit。
 
-```bash
-# 指定 SDK 位置（或使用 ANDROID_HOME）
-echo "sdk.dir=E\\:\\\\AndroidSdk" > local.properties   # 按实际 SDK 路径修改（该文件被 gitignore）
+## 仓库审查基线
 
-./gradlew :app:assembleDebug            # 产出 app/build/outputs/apk/debug/app-debug.apk
-```
+文档编写参考 `Vin535LFJ/ProceduralAvatarEngine` 的 `main` 分支提交：
 
-## 安装与运行
+`c539afbec299ed4a066429ea09f9d3d36e67f74d`
 
-```bash
-adb install -r app/build/outputs/apk/debug/app-debug.apk
-adb shell am start -n com.pae.host/.MainActivity
-```
+AI 执行时必须重新获取最新仓库 SHA，并核对现有代码；不得假定该提交仍是最新。
 
-## 界面操作（TV 遥控 / 触屏通用）
+## 重要原则
 
-| 按钮 | 功能 |
-|---|---|
-| Skin / Hair / Cloth | 循环切换皮肤 / 头发 / 服装颜色（仅 Uniform 更新，不重建几何） |
-| BG | 循环纯色 / 渐变 / 程序化摄影棚背景 |
-| Pose | 循环合成动作：自动 → 抬臂 → 屈肘 → 双臂 → 下蹲 → 抬腿（同时切回合成驱动源） |
-| Camera | 授予相机权限后启动实时姿态跟随（需要设备有可用摄像头） |
-| TestImg | 选择一张本机图片做单帧姿态推理（管线验证；无系统文件选择器的电视盒子自动回退到应用内浏览器） |
-| Video | 选择本机视频：解码 → 姿态推理 → PTS 时间轴驱动（Pause / ±10s / 倍速 / Replay / Stop） |
-| Quality | 循环 Low / Medium / High 几何细分档位 |
-| Stats | 输出渲染统计（FPS、帧时间 P50/P95/P99、draw calls、三角形数） |
-
-## 测试
-
-```bash
-# 宿主单元测试（无需 Android 设备）：CMake + 自研 mini test 框架
-cmake -S native -B build/host -G "Unix Makefiles" -DPAE_HOST=ON -DCMAKE_BUILD_TYPE=Release
-cmake --build build/host -j 8
-ctest --test-dir build/host --output-on-failure    # 5 套件 / 24 用例
-```
-
-真机验证记录与证据：`docs/phases/M0..M9/*/04-test-and-acceptance.md` 与 `evidence/`。
-
-## 文档
-
-- 技术规范：`docs/Procedural_Avatar_Engine_Technical_Spec_v1.0.md`
-- 开发计划与阶段门：`docs/Procedural_Avatar_Engine_Development_Guidance_Plan_v1.0.md`
-- 项目状态：`docs/project-status.md`；需求追踪：`docs/requirements/requirements-traceability.md`
-- 架构决策（ADR）：`docs/architecture-decisions/`
-- 性能：`docs/performance/`；发布清单：`docs/release/mvp-readiness-checklist.md`
-
-## 已知限制
-
-- 单目姿态识别的深度歧义（转身 / 前后动作近似跟随，Spec §7.6）；不宣称精确 3D 动捕。
-- 摄像头实时路径需带可用摄像头的设备（基准电视盒子无摄像头，该项未验证）。
-- ML Kit 对非人物画面可能输出误报关键点（人物存在性判定列入 backlog）。
+- 底层保留 Saltline-inspired procedural asset generation。
+- 上层采用 Modular Avatar 组织角色组件。
+- P1 主几何路线是解剖控制点 + 参数化 Surface Patch + Topology Template + 非圆形可变截面 Sweep。
+- SDF 保留为局部辅助/研究工具，不作为 P1 最终动画人体网格的唯一生产方式。
+- 不使用外部 3D 美术资产或完整游戏引擎。
+- AI 自评、编译成功或 CTest 全绿不能替代视觉 Gate 和 Android 真机验证。
