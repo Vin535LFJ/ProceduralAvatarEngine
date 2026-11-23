@@ -3,7 +3,8 @@
 > 本文件是项目状态的**唯一**入口。不要再创建 `PROJECT_STATUS.md` 等仅大小写/下划线不同的副本。
 
 - 更新：2026-11-23
-- 当前阶段：**P0 基础契约与审计（实施中，Gate 未确认）**
+- 当前阶段：**P0 完成，等待用户 Gate 确认**（P0 实施状态 COMPLETE；Gate 状态 NOT VERIFIED）
+- P0 提交：`835dc71 docs+fix: freeze P0 contracts and correct shoulder bone semantics`，已推送 `feature/procedural-character-foundation`；基线提交 `399967f`。
 - 权威基线：`01_Procedural_Character_Foundation_Specification_v1.0.md`、`02_Procedural_Character_Development_Roadmap_v1.0.md`、`03_AI_Engineering_Execution_Prompt_v1.0.md`、`README.md`（位于仓库根目录；用户引用的同名子目录当前不存在，仅有 zip）。
 
 ---
