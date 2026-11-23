@@ -1,0 +1,11 @@
+Consolidate compiler generated dependencies of target pae_core
+[ 91%] Built target pae_core
+Consolidate compiler generated dependencies of target pae_humanoid_tests
+[ 95%] Building CXX object pae_tests/CMakeFiles/pae_humanoid_tests.dir/unit/humanoid_tests.cpp.obj
+[100%] Linking CXX executable pae_humanoid_tests.exe
+[100%] Built target pae_humanoid_tests
+[ 91%] Built target pae_core
+Consolidate compiler generated dependencies of target pae_skinning_tests
+[ 95%] Building CXX object pae_tests/CMakeFiles/pae_skinning_tests.dir/unit/skinning_tests.cpp.obj
+[100%] Linking CXX executable pae_skinning_tests.exe
+[100%] Built target pae_skinning_tests

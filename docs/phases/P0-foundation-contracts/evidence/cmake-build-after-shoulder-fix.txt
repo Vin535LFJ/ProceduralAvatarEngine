@@ -1,0 +1,34 @@
+[  2%] Building CXX object CMakeFiles/pae_core.dir/procedural/humanoid/anatomy/AnatomyField.cpp.obj
+[  5%] Building CXX object CMakeFiles/pae_core.dir/skeleton/Skeleton.cpp.obj
+[  7%] Building CXX object CMakeFiles/pae_core.dir/motion/providers/SyntheticPoseProvider.cpp.obj
+[ 10%] Linking CXX static library libpae_core.a
+[ 53%] Built target pae_core
+Consolidate compiler generated dependencies of target pae_skinning_tests
+[ 56%] Building CXX object pae_tests/CMakeFiles/pae_skinning_tests.dir/unit/skinning_tests.cpp.obj
+[ 58%] Linking CXX executable pae_skinning_tests.exe
+[ 58%] Built target pae_skinning_tests
+Consolidate compiler generated dependencies of target pae_core_tests
+[ 61%] Linking CXX executable pae_core_tests.exe
+[ 64%] Built target pae_core_tests
+Consolidate compiler generated dependencies of target pae_fusion_tests
+[ 66%] Linking CXX executable pae_fusion_tests.exe
+[ 69%] Built target pae_fusion_tests
+Consolidate compiler generated dependencies of target pae_geometry_tests
+[ 71%] Linking CXX executable pae_geometry_tests.exe
+[ 74%] Built target pae_geometry_tests
+Consolidate compiler generated dependencies of target pae_motion_tests
+[ 76%] Linking CXX executable pae_motion_tests.exe
+[ 79%] Built target pae_motion_tests
+Consolidate compiler generated dependencies of target pae_face_hair_tests
+[ 82%] Linking CXX executable pae_face_hair_tests.exe
+[ 84%] Built target pae_face_hair_tests
+Consolidate compiler generated dependencies of target pae_anatomy_tests
+[ 87%] Linking CXX executable pae_anatomy_tests.exe
+[ 89%] Built target pae_anatomy_tests
+Consolidate compiler generated dependencies of target pae_humanoid_tests
+[ 92%] Building CXX object pae_tests/CMakeFiles/pae_humanoid_tests.dir/unit/humanoid_tests.cpp.obj
+[ 94%] Linking CXX executable pae_humanoid_tests.exe
+[ 94%] Built target pae_humanoid_tests
+Consolidate compiler generated dependencies of target pae_proportion_probe
+[ 97%] Linking CXX executable pae_proportion_probe.exe
+[100%] Built target pae_proportion_probe

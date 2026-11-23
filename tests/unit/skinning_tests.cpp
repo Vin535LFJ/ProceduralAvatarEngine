@@ -101,6 +101,49 @@ PAE_TEST_CASE(region_weights_keep_head_dominant) {
     }
 }
 
+PAE_TEST_CASE(shoulder_fix_keeps_skinning_inputs_valid) {
+    const HumanoidResult humanoid = generateHumanoid(BodyParameters{});
+    const Skeleton& skeleton = humanoid.skeleton;
+    const float shoulderLength =
+        (skeleton.bones[BoneLeftShoulder].head - skeleton.bones[BoneLeftShoulder].tail).length();
+    const float upperArmLength =
+        (skeleton.bones[BoneLeftUpperArm].head - skeleton.bones[BoneLeftUpperArm].tail).length();
+    EXPECT_TRUE(shoulderLength > 0.01f);
+    EXPECT_TRUE(upperArmLength > shoulderLength);
+
+    for (const Vertex& vertex : humanoid.mesh.vertices) {
+        const float sum = vertex.weights.x + vertex.weights.y + vertex.weights.z + vertex.weights.w;
+        EXPECT_TRUE(sum > 0.99f && sum < 1.01f);
+        EXPECT_TRUE(vertex.joints.x < BoneCount);
+        EXPECT_TRUE(vertex.joints.y < BoneCount);
+    }
+}
+
+PAE_TEST_CASE(shoulder_region_weights_remain_anatomical) {
+    const HumanoidResult humanoid = generateHumanoid(BodyParameters{});
+    const Vec3 shoulder = humanoid.joints.leftShoulder;
+    int checked = 0;
+    int relevant = 0;
+    for (const Vertex& v : humanoid.mesh.vertices) {
+        if (v.position.x < shoulder.x - 0.08f || v.position.x > shoulder.x + 0.12f ||
+            std::fabs(v.position.y - shoulder.y) > 0.10f) {
+            continue;
+        }
+        ++checked;
+        const uint16_t joints[4] = {v.joints.x, v.joints.y, v.joints.z, v.joints.w};
+        const float weights[4] = {v.weights.x, v.weights.y, v.weights.z, v.weights.w};
+        float shoulderRegionWeight = 0.0f;
+        for (int i = 0; i < 4; ++i) {
+            if (joints[i] == BoneLeftShoulder || joints[i] == BoneLeftUpperArm) {
+                shoulderRegionWeight += weights[i];
+            }
+        }
+        if (shoulderRegionWeight > 0.10f) ++relevant;
+    }
+    EXPECT_TRUE(checked > 0);
+    EXPECT_TRUE(relevant > checked / 2);
+}
+
 int main() {
     return test::runAllTests();
 }

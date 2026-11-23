@@ -1,0 +1,22 @@
+Internal ctest changing into directory: C:/Users/Giant/Desktop/GITCODE/Procedural Avatar Engine/build/host-cygwin
+Test project C:/Users/Giant/Desktop/GITCODE/Procedural Avatar Engine/build/host-cygwin
+    Start 1: pae_core_tests
+1/8 Test #1: pae_core_tests ...................   Passed    0.06 sec
+    Start 2: pae_geometry_tests
+2/8 Test #2: pae_geometry_tests ...............   Passed    0.04 sec
+    Start 3: pae_fusion_tests
+3/8 Test #3: pae_fusion_tests .................   Passed    0.09 sec
+    Start 4: pae_face_hair_tests
+4/8 Test #4: pae_face_hair_tests ..............   Passed    0.07 sec
+    Start 5: pae_anatomy_tests
+5/8 Test #5: pae_anatomy_tests ................   Passed    1.56 sec
+    Start 6: pae_humanoid_tests
+6/8 Test #6: pae_humanoid_tests ...............   Passed    0.10 sec
+    Start 7: pae_skinning_tests
+7/8 Test #7: pae_skinning_tests ...............   Passed    0.09 sec
+    Start 8: pae_motion_tests
+8/8 Test #8: pae_motion_tests .................   Passed    0.14 sec
+
+100% tests passed, 0 tests failed out of 8
+
+Total Test time (real) =   2.20 sec

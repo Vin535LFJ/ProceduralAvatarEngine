@@ -1,0 +1,336 @@
+--------- beginning of main
+11-23 11:10:00.762  2227  2258 W GoogleApiManager: The service for com.google.android.gms.common.internal.service.zap is not available: ConnectionResult{statusCode=SERVICE_INVALID, resolution=null, message=null}
+11-23 11:10:00.769  2227  2256 D TransportRuntime.JobInfoScheduler: Scheduling upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) with jobId=316940790 in 86400000ms(Backend next call timestamp 0). Attempt 1
+11-23 11:10:00.922   324   324 I remoteservice.s: type=1400 audit(0.0:165): avc: denied { dac_override } for capability=1 scontext=u:r:remoteservice:s0 tcontext=u:r:remoteservice:s0 tclass=capability permissive=1
+11-23 11:10:00.922   324   324 I remoteservice.s: type=1400 audit(0.0:166): avc: denied { read } for name="action" dev="mmcblk1p17" ino=131087 scontext=u:r:remoteservice:s0 tcontext=u:object_r:system_data_file:s0 tclass=file permissive=1
+11-23 11:10:00.922   324   324 I remoteservice.s: type=1400 audit(0.0:167): avc: denied { open } for path="/data/dropbear/action" dev="mmcblk1p17" ino=131087 scontext=u:r:remoteservice:s0 tcontext=u:object_r:system_data_file:s0 tclass=file permissive=1
+11-23 11:10:00.922   324   324 I remoteservice.s: type=1400 audit(0.0:168): avc: denied { execute } for name="toybox" dev="mmcblk1p12" ino=717 scontext=u:r:remoteservice:s0 tcontext=u:object_r:toolbox_exec:s0 tclass=file permissive=1
+11-23 11:10:00.922   324   324 I remoteservice.s: type=1400 audit(0.0:169): avc: denied { getattr } for path="/system/bin/toybox" dev="mmcblk1p12" ino=717 scontext=u:r:remoteservice:s0 tcontext=u:object_r:toolbox_exec:s0 tclass=file permissive=1
+11-23 11:10:00.922  2260  2260 I remoteservice.s: type=1400 audit(0.0:170): avc: denied { read open } for path="/system/bin/toybox" dev="mmcblk1p12" ino=717 scontext=u:r:remoteservice:s0 tcontext=u:object_r:toolbox_exec:s0 tclass=file permissive=1
+11-23 11:10:00.922  2260  2260 I remoteservice.s: type=1400 audit(0.0:171): avc: denied { execute_no_trans } for path="/system/bin/toybox" dev="mmcblk1p12" ino=717 scontext=u:r:remoteservice:s0 tcontext=u:object_r:toolbox_exec:s0 tclass=file permissive=1
+11-23 11:10:00.938  2227  2227 I PAE_UI  : debug extras: anatomy=false preset=0 view=0
+11-23 11:10:00.939  2227  2263 I MLKitRemoteConfigSaver: remote config settings file not yet present: /data/user/0/com.pae.host/no_backup/com.google.mlkit.RemoteConfig
+11-23 11:10:00.939  2227  2263 W MLKit RemoteConfigRestC: Cached remote config was null!
+11-23 11:10:00.940  2227  2259 I PoseTaskWithRes: vision_pose_detection_enable_acceleration = true
+11-23 11:10:00.940  2227  2259 I PoseTaskWithRes: vision_pose_detection_enable_acceleration_gpu = true
+11-23 11:10:00.946  2227  2265 I MLKitRemoteConfigSaver: remote config settings file not yet present: /data/user/0/com.pae.host/no_backup/com.google.mlkit.RemoteConfig
+11-23 11:10:00.946  2227  2265 D MLKit RemoteConfigRestC: Getting installation id...
+11-23 11:10:00.946  2227  2265 I MLKitInstallationIdSaver: Installation id file not yet present: /data/user/0/com.pae.host/no_backup/com.google.mlkit.InstallationId
+11-23 11:10:00.947  2227  2265 D MLKitInstallationIdGenerator: Generated installation id: eFwgGB2d5oGiJTCd-yzIex
+11-23 11:10:00.958  2227  2257 W LibraryVersion: Failed to get app version for libraryName: shared-installation-id
+11-23 11:10:00.960  2227  2258 W GooglePlayServicesUtil: com.pae.host requires the Google Play Store, but it is missing.
+11-23 11:10:00.961  2227  2258 W GoogleApiManager: The service for com.google.android.gms.common.internal.service.zap is not available: ConnectionResult{statusCode=SERVICE_INVALID, resolution=null, message=null}
+11-23 11:10:00.964  2227  2264 I CameraManagerGlobal: Connecting to camera service
+11-23 11:10:00.966  2227  2263 I MLKitRemoteConfigSaver: remote config settings file not yet present: /data/user/0/com.pae.host/no_backup/com.google.mlkit.RemoteConfig
+11-23 11:10:00.967  2227  2263 W MLKit RemoteConfigRestC: Cached remote config was null!
+11-23 11:10:00.967  2227  2264 D CameraValidator: Verifying camera lens facing on nunai_max, lensFacingInteger: null
+11-23 11:10:00.968  2227  2267 I PoseTaskWithRes: vision_pose_detection_enable_acceleration = true
+11-23 11:10:00.968  2227  2267 I PoseTaskWithRes: vision_pose_detection_enable_acceleration_gpu = true
+11-23 11:10:00.969  2227  2257 W LibraryVersion: Failed to get app version for libraryName: shared-remote-config
+11-23 11:10:00.970  2227  2264 E CameraValidator: Camera LensFacing verification failed, existing cameras: []
+11-23 11:10:00.972  2227  2264 W CameraX : Retry init. Start time 1010954 current time 1010990
+11-23 11:10:00.972  2227  2264 W CameraX : androidx.camera.core.impl.CameraValidator$CameraIdListIncorrectException: Expected camera missing from device.
+11-23 11:10:00.972  2227  2264 W CameraX : 	at androidx.camera.core.impl.CameraValidator.validateCameras(CameraValidator.java:97)
+11-23 11:10:00.972  2227  2264 W CameraX : 	at androidx.camera.core.CameraX.lambda$initAndRetryRecursively$2$androidx-camera-core-CameraX(CameraX.java:342)
+11-23 11:10:00.972  2227  2264 W CameraX : 	at androidx.camera.core.CameraX$$ExternalSyntheticLambda3.run(Unknown Source:10)
+11-23 11:10:00.972  2227  2264 W CameraX : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1162)
+11-23 11:10:00.972  2227  2264 W CameraX : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+11-23 11:10:00.972  2227  2264 W CameraX : 	at java.lang.Thread.run(Thread.java:764)
+11-23 11:10:00.972  2227  2264 W CameraX : Caused by: java.lang.IllegalArgumentException: No available camera can be found
+11-23 11:10:00.972  2227  2264 W CameraX : 	at androidx.camera.core.CameraSelector.select(CameraSelector.java:82)
+11-23 11:10:00.972  2227  2264 W CameraX : 	at androidx.camera.core.impl.CameraValidator.validateCameras(CameraValidator.java:83)
+11-23 11:10:00.972  2227  2264 W CameraX : 	... 5 more
+11-23 11:10:00.975  2227  2268 D OpenGLRenderer: HWUI GL Pipeline
+11-23 11:10:01.001  2227  2259 I PoseTaskWithRes: graphVariant = 
+11-23 11:10:01.003  2227  2267 I PoseTaskWithRes: graphVariant = 
+11-23 11:10:01.033  2227  2259 I native  : I0000 00:00:1795403401.033651    2259 register_natives.cc:68] Skipping registration and clearing exception. Class or native methods not found, may be unused and/or trimmed by Proguard.
+11-23 11:10:01.034  2227  2259 I native  : I0000 00:00:1795403401.034846    2259 asset_manager_util.cc:61] Created global reference to asset manager.
+11-23 11:10:01.035  2227  2267 I native  : I0000 00:00:1795403401.035433    2267 asset_manager_util.cc:61] Created global reference to asset manager.
+11-23 11:10:01.056  2227  2259 I native  : I0000 00:00:1795403401.056798    2259 graph.cc:502] Start running the graph, waiting for inputs.
+11-23 11:10:01.056  2227  2259 I native  : I0000 00:00:1795403401.056946    2259 gl_context_egl.cc:86] Successfully initialized EGL. Major : 1 Minor: 4
+11-23 11:10:01.060  2227  2268 I OpenGLRenderer: Initialized EGL, version 1.4
+11-23 11:10:01.060  2227  2268 D OpenGLRenderer: Swap behavior 2
+11-23 11:10:01.065  2227  2284 I native  : I0000 00:00:1795403401.065609    2284 gl_context.cc:374] GL version: 3.2 (OpenGL ES 3.2 v1.r18p0-01rel0.16f2a2e3305581ae54dd0f9788beb400), renderer: Mali-T860
+11-23 11:10:01.065  2227  2267 I native  : I0000 00:00:1795403401.065866    2267 graph.cc:502] Start running the graph, waiting for inputs.
+11-23 11:10:01.066  2227  2267 I native  : I0000 00:00:1795403401.066026    2267 gl_context_egl.cc:86] Successfully initialized EGL. Major : 1 Minor: 4
+11-23 11:10:01.089  2227  2268 D mali_winsys: EGLint new_window_surface(egl_winsys_display *, void *, EGLSurface, EGLConfig, egl_winsys_surface **, egl_color_buffer_format *, EGLBoolean) returns 0x3000
+11-23 11:10:01.090  2227  2285 I native  : I0000 00:00:1795403401.090579    2285 gl_context.cc:374] GL version: 3.2 (OpenGL ES 3.2 v1.r18p0-01rel0.16f2a2e3305581ae54dd0f9788beb400), renderer: Mali-T860
+11-23 11:10:01.094  2227  2227 I PAE_SURFACE: surfaceCreated
+11-23 11:10:01.095  2227  2227 I PAE_SURFACE: surfaceChanged 1920x1008
+11-23 11:10:01.096  2227  2245 D mali_winsys: EGLint new_window_surface(egl_winsys_display *, void *, EGLSurface, EGLConfig, egl_winsys_surface **, egl_color_buffer_format *, EGLBoolean) returns 0x3000
+11-23 11:10:01.097  2227  2245 I PAE_GLCAPS: GL_VERSION=OpenGL ES 3.2 v1.r18p0-01rel0.16f2a2e3305581ae54dd0f9788beb400
+11-23 11:10:01.097  2227  2245 I PAE_GLCAPS: GL_RENDERER=Mali-T860
+11-23 11:10:01.097  2227  2245 I PAE_GLCAPS: GL_VENDOR=ARM
+11-23 11:10:01.097  2227  2245 I PAE_GLCAPS: GLSL_VERSION=OpenGL ES GLSL ES 3.20
+11-23 11:10:01.097  2227  2245 I PAE_GLCAPS: MAX_VERTEX_UNIFORM_BLOCKS=12 MAX_TEXTURE_SIZE=8192 MAX_VERTEX_ATTRIBS=16
+11-23 11:10:01.103  2227  2271 I native  : I0000 00:00:1795403401.103264    2271 resource_util_android.cc:82] Successfully loaded: mlkit_pose/pose_person_detector_f16.tflite
+11-23 11:10:01.108  2227  2259 E native  : E0000 00:00:1795403401.108448    2259 calculator_graph.cc:901] UNKNOWN: CalculatorGraph::Run() failed: 
+11-23 11:10:01.108  2227  2259 E native  : Calculator::Open() for node "posetrackingsubgraph__posedetectionsubgraph__inferencecalculator__posetrackingsubgraph__posedetectionsubgraph__InferenceCalculator" failed: Failed to read file
+11-23 11:10:01.108  2227  2259 E native  : === Source Location Trace: ===
+11-23 11:10:01.108  2227  2259 E native  : third_party/mediapipe/util/android/file/base/helpers.cc:64
+11-23 11:10:01.108  2227  2259 E native  : third_party/mediapipe/util/tflite/tflite_model_loader.cc:95
+11-23 11:10:01.108  2227  2259 E native  : third_party/mediapipe/calculators/tensor/inference_calculator_cpu.cc:186
+11-23 11:10:01.108  2227  2259 E native  : third_party/mediapipe/calculators/tensor/inference_calculator_cpu.cc:140
+11-23 11:10:01.108  2227  2259 E native  : third_party/mediapipe/framework/calculator_node.cc:561
+11-23 11:10:01.123  2227  2279 I native  : I0000 00:00:1795403401.123787    2279 resource_util_android.cc:82] Successfully loaded: mlkit_pose/pose_person_detector_f16.tflite
+11-23 11:10:01.138  2227  2279 I tflite  : Created TensorFlow Lite XNNPACK delegate for CPU.
+11-23 11:10:01.138  2227  2279 I tflite  : Initialized TensorFlow Lite runtime.
+11-23 11:10:01.146   308   478 I [Gralloc]: Got fd 16 for handle 1
+11-23 11:10:01.147   308   478 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:10:01.147   308   478 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-23 11:10:01.147   318   495 I [Gralloc]: Got handle 1 for fd 51
+11-23 11:10:01.147   318   495 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:10:01.147   318   495 I [Gralloc]: leave: prime_fd=51,share_attr_fd=52
+11-23 11:10:01.153  2227  2256 D TransportRuntime.SQLiteEventStore: Storing event with priority=DEFAULT, name=FIREBASE_ML_SDK for destination cct
+11-23 11:10:01.156  2227  2268 I [Gralloc]: Got handle 1 for fd 73
+11-23 11:10:01.157  2227  2268 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:10:01.157  2227  2268 I [Gralloc]: leave: prime_fd=73,share_attr_fd=74
+11-23 11:10:01.175  2227  2256 D TransportRuntime.JobInfoScheduler: Scheduling upload for context TransportContext(cct, DEFAULT, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) with jobId=311960053 in 30000ms(Backend next call timestamp 0). Attempt 1
+11-23 11:10:01.211  2227  2256 D TransportRuntime.SQLiteEventStore: Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
+11-23 11:10:01.239   462   489 I ActivityManager: Displayed com.pae.host/.MainActivity: +904ms
+11-23 11:10:01.247  2227  2256 D TransportRuntime.JobInfoScheduler: Upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
+11-23 11:10:01.254  1132  1132 D SogouIME API: ==============num:32
+11-23 11:10:01.255  1132  1132 D SogouIME: mFocusedComponent:30   isHkbEnable:false
+11-23 11:10:01.256  1132  1132 D SogouIME: =====configKeyboard=======是否有硬件盘:false     硬件盘是否不再隐藏：false
+11-23 11:10:01.258   969   969 I Launcher-AppListHelper:: updateRecentlyAppInfo: 
+11-23 11:10:01.275   969   969 I Launcher-AppListHelper:: updateRecentlyAppInfo: 
+11-23 11:10:01.278   309   309 I [Gralloc]: Got handle 1 for fd 50
+11-23 11:10:01.278   309   309 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:10:01.278   309   309 I [Gralloc]: leave: prime_fd=50,share_attr_fd=51
+11-23 11:10:01.278  2227  2256 D TransportRuntime.SQLiteEventStore: Storing event with priority=DEFAULT, name=FIREBASE_ML_SDK for destination cct
+11-23 11:10:01.289  2227  2232 I zygote64: Do full code cache collection, code=124KB, data=83KB
+11-23 11:10:01.293   969  2294 I DataManager4App: isMiwaChannel: false
+11-23 11:10:01.294   969   969 I Launcher-AppListHelper:: updateRecentlyAppInfo: 
+11-23 11:10:01.294  2227  2232 I zygote64: After code cache collection, code=121KB, data=66KB
+--------- beginning of system
+11-23 11:10:01.295   969  2294 E ActivityThread: Failed to find provider info for com.mgtv.os.configprovider
+11-23 11:10:01.296   969  2294 E ConfigInfoProviderHelp: IllegalArgumentException:java.lang.IllegalArgumentException: Unknown URI content://com.mgtv.os.configprovider,use cache data:[app_sort:com.mgtv.tvos.datareportor;com.mgtv.tv;com.pplive.atv;com.pptv.tvsports.preinstall;net.cibntv.ott.sk;com.tencent.qqmusictv;com.hpplay.happyplay.aw;com.mgtv.filemanager;com.mgtv.ota;com.mgtv.remote;com.mgtv.cast]
+11-23 11:10:01.296   969  2294 D DataManager4App: isMiwaChannel: false  packageNamelist: com.mgtv.tvos.datareportor;com.mgtv.tv;com.pplive.atv;com.pptv.tvsports.preinstall;net.cibntv.ott.sk;com.tencent.qqmusictv;com.hpplay.happyplay.aw;com.mgtv.filemanager;com.mgtv.ota;com.mgtv.remote;com.mgtv.cast
+11-23 11:10:01.307   969  2294 D DataManager4App: getRecentAppList pkg:com.mgtv.tvos.datareportor, power:null
+11-23 11:10:01.307   308   478 I [Gralloc]: Got fd 16 for handle 1
+11-23 11:10:01.308   308   478 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:10:01.308   308   478 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-23 11:10:01.308   318  1020 I [Gralloc]: Got handle 3 for fd 64
+11-23 11:10:01.308   318  1020 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:10:01.308   318  1020 I [Gralloc]: leave: prime_fd=64,share_attr_fd=65
+11-23 11:10:01.308  2227  2268 I [Gralloc]: Got handle 2 for fd 79
+11-23 11:10:01.308  2227  2268 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:10:01.308  2227  2268 I [Gralloc]: leave: prime_fd=79,share_attr_fd=80
+11-23 11:10:01.320   969  2294 D DataManager4App: getRecentAppList pkg:com.mgtv.tv, power:null
+11-23 11:10:01.323   969  2296 I DataManager4App: isMiwaChannel: false
+11-23 11:10:01.326   969  2296 E ActivityThread: Failed to find provider info for com.mgtv.os.configprovider
+11-23 11:10:01.327   969  2294 D DataManager4App: getRecentAppList pkg:com.pplive.atv, power:null
+11-23 11:10:01.327   969  2296 E ConfigInfoProviderHelp: IllegalArgumentException:java.lang.IllegalArgumentException: Unknown URI content://com.mgtv.os.configprovider,use cache data:[app_sort:com.mgtv.tvos.datareportor;com.mgtv.tv;com.pplive.atv;com.pptv.tvsports.preinstall;net.cibntv.ott.sk;com.tencent.qqmusictv;com.hpplay.happyplay.aw;com.mgtv.filemanager;com.mgtv.ota;com.mgtv.remote;com.mgtv.cast]
+11-23 11:10:01.327   969  2296 D DataManager4App: isMiwaChannel: false  packageNamelist: com.mgtv.tvos.datareportor;com.mgtv.tv;com.pplive.atv;com.pptv.tvsports.preinstall;net.cibntv.ott.sk;com.tencent.qqmusictv;com.hpplay.happyplay.aw;com.mgtv.filemanager;com.mgtv.ota;com.mgtv.remote;com.mgtv.cast
+11-23 11:10:01.329   969  2296 D DataManager4App: getRecentAppList pkg:com.mgtv.tvos.datareportor, power:null
+11-23 11:10:01.333   969  2296 D DataManager4App: getRecentAppList pkg:com.mgtv.tv, power:null
+11-23 11:10:01.334   969  2294 D DataManager4App: getRecentAppList pkg:com.pptv.tvsports.preinstall, power:null
+11-23 11:10:01.335  2227  2256 D TransportRuntime.JobInfoScheduler: Upload for context TransportContext(cct, DEFAULT, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
+11-23 11:10:01.337   969  2296 D DataManager4App: getRecentAppList pkg:com.pplive.atv, power:null
+11-23 11:10:01.340   969  2295 I DataManager4App: isMiwaChannel: false
+11-23 11:10:01.341   969  2296 D DataManager4App: getRecentAppList pkg:com.pptv.tvsports.preinstall, power:null
+11-23 11:10:01.344  2227  2227 E MobileVisionBase: Error preloading model resource
+11-23 11:10:01.344  2227  2227 E MobileVisionBase: com.google.mlkit.common.MlKitException: Internal error has occurred when executing ML Kit tasks
+11-23 11:10:01.344  2227  2227 E MobileVisionBase: 	at com.google.mlkit.common.sdkinternal.ModelResource.zza(com.google.mlkit:common@@18.11.0:9)
+11-23 11:10:01.344  2227  2227 E MobileVisionBase: 	at com.google.mlkit.common.sdkinternal.zzn.run(Unknown Source:10)
+11-23 11:10:01.344  2227  2227 E MobileVisionBase: 	at com.google.mlkit.common.sdkinternal.zzt.run(com.google.mlkit:common@@18.11.0:2)
+11-23 11:10:01.344  2227  2227 E MobileVisionBase: 	at com.google.mlkit.common.sdkinternal.MlKitThreadPool.zze(com.google.mlkit:common@@18.11.0:4)
+11-23 11:10:01.344  2227  2227 E MobileVisionBase: 	at com.google.mlkit.common.sdkinternal.MlKitThreadPool.zzc(com.google.mlkit:common@@18.11.0:1)
+11-23 11:10:01.344  2227  2227 E MobileVisionBase: 	at com.google.mlkit.common.sdkinternal.zzi.run(Unknown Source:2)
+11-23 11:10:01.344  2227  2227 E MobileVisionBase: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1162)
+11-23 11:10:01.344  2227  2227 E MobileVisionBase: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+11-23 11:10:01.344  2227  2227 E MobileVisionBase: 	at com.google.mlkit.common.sdkinternal.MlKitThreadPool.zzd(com.google.mlkit:common@@18.11.0:2)
+11-23 11:10:01.344  2227  2227 E MobileVisionBase: 	at com.google.mlkit.common.sdkinternal.zzk.run(Unknown Source:2)
+11-23 11:10:01.344  2227  2227 E MobileVisionBase: 	at java.lang.Thread.run(Thread.java:764)
+11-23 11:10:01.344  2227  2227 E MobileVisionBase: Caused by: com.google.android.gms.internal.mlkit_vision_mediapipe.zzhu: unknown: CalculatorGraph::Run() failed: 
+11-23 11:10:01.344  2227  2227 E MobileVisionBase: Calculator::Open() for node "posetrackingsubgraph__posedetectionsubgraph__inferencecalculator__posetrackingsubgraph__posedetectionsubgraph__InferenceCalculator" failed: Failed to read file
+11-23 11:10:01.344  2227  2227 E MobileVisionBase: 	at com.google.android.gms.internal.mlkit_vision_mediapipe.zzhp.zzx(Native Method)
+11-23 11:10:01.344  2227  2227 E MobileVisionBase: 	at com.google.android.gms.internal.mlkit_vision_mediapipe.zzhp.zzn(com.google.mlkit:mediapipe-internal@@17.0.0-beta10:2)
+11-23 11:10:01.344  2227  2227 E MobileVisionBase: 	at com.google.mlkit.vision.mediapipe.zzg.zzg(com.google.mlkit:mediapipe-internal@@17.0.0-beta10:2)
+11-23 11:10:01.344  2227  2227 E MobileVisionBase: 	at com.google.mlkit.vision.mediapipe.zzg.zze(com.google.mlkit:mediapipe-internal@@17.0.0-beta10:2)
+11-23 11:10:01.344  2227  2227 E MobileVisionBase: 	at com.google.mlkit.vision.mediapipe.MediaPipeGraphRunner.load(com.google.mlkit:mediapipe-internal@@17.0.0-beta10:5)
+11-23 11:10:01.344  2227  2227 E MobileVisionBase: 	at com.google.mlkit.vision.pose.internal.zzh.load(com.google.mlkit:pose-detection-common@@18.0.0-beta5:43)
+11-23 11:10:01.344  2227  2227 E MobileVisionBase: 	at com.google.mlkit.common.sdkinternal.ModelResource.zza(com.google.mlkit:common@@18.11.0:4)
+11-23 11:10:01.344  2227  2227 E MobileVisionBase: 	... 10 more
+11-23 11:10:01.344   969  2295 E ActivityThread: Failed to find provider info for com.mgtv.os.configprovider
+11-23 11:10:01.345   969  2295 E ConfigInfoProviderHelp: IllegalArgumentException:java.lang.IllegalArgumentException: Unknown URI content://com.mgtv.os.configprovider,use cache data:[app_sort:com.mgtv.tvos.datareportor;com.mgtv.tv;com.pplive.atv;com.pptv.tvsports.preinstall;net.cibntv.ott.sk;com.tencent.qqmusictv;com.hpplay.happyplay.aw;com.mgtv.filemanager;com.mgtv.ota;com.mgtv.remote;com.mgtv.cast]
+11-23 11:10:01.346   969  2295 D DataManager4App: isMiwaChannel: false  packageNamelist: com.mgtv.tvos.datareportor;com.mgtv.tv;com.pplive.atv;com.pptv.tvsports.preinstall;net.cibntv.ott.sk;com.tencent.qqmusictv;com.hpplay.happyplay.aw;com.mgtv.filemanager;com.mgtv.ota;com.mgtv.remote;com.mgtv.cast
+11-23 11:10:01.346   969  2295 D DataManager4App: getRecentAppList pkg:com.mgtv.tvos.datareportor, power:null
+11-23 11:10:01.349  2227  2245 I PAE_GEOMETRY: generateHumanoid: 8106 verts, 14064 tris, 58.74 ms, detail=1
+11-23 11:10:01.351   969  2295 D DataManager4App: getRecentAppList pkg:com.mgtv.tv, power:null
+11-23 11:10:01.351   969  2295 D DataManager4App: getRecentAppList pkg:com.pplive.atv, power:null
+11-23 11:10:01.352   969  2294 D DataManager4App: getRecentAppList pkg:net.cibntv.ott.sk, power:null
+11-23 11:10:01.354   969  2295 D DataManager4App: getRecentAppList pkg:com.pptv.tvsports.preinstall, power:null
+11-23 11:10:01.356   969  2296 D DataManager4App: getRecentAppList pkg:net.cibntv.ott.sk, power:null
+11-23 11:10:01.358   969  2295 D DataManager4App: getRecentAppList pkg:net.cibntv.ott.sk, power:null
+11-23 11:10:01.362   309   309 I [Gralloc]: Got handle 3 for fd 61
+11-23 11:10:01.362   309   309 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:10:01.362   309   309 I [Gralloc]: leave: prime_fd=61,share_attr_fd=62
+11-23 11:10:01.362  2227  2256 D TransportRuntime.SQLiteEventStore: Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
+11-23 11:10:01.371  2227  2256 D TransportRuntime.JobInfoScheduler: Upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
+11-23 11:10:01.393   969  2296 D DataManager4App: getRecentAppList pkg:com.tencent.qqmusictv, power:null
+11-23 11:10:01.403   969   969 I VoiceFloatingViewManager: detach : ChannelHomeActivity
+11-23 11:10:01.403   969   969 I ProxyApp: ChannelHomeActivity onStop time = 1011422
+11-23 11:10:01.403   969   969 I YouthModeManager: onActivityStopped0
+11-23 11:10:01.404   969   969 I YouthModeManager: exit
+11-23 11:10:01.404   969   969 I YouthModeManager:  in exit
+11-23 11:10:01.404   969   969 I YouthModeManager: exit success
+11-23 11:10:01.405   969   969 I HugeAdManager: isNeedExitAnim, mStartedEnterAnim:false
+11-23 11:10:01.405   969   969 I PopDispatchManager: onHidePop,pri:78,rmSuc:false
+11-23 11:10:01.406   969   969 D RePlugin.ws001: PAC.callOnLowMemory(): Call onTrimMemory(), cl=com.qihoo360.replugin.PluginDexClassLoader[DexPathList[[zip file "/data/user/0/com.mgtv.mgui/app_p_a/1352567954.jar"],nativeLibraryDirectories=[/data/user/0/com.mgtv.mgui/app_p_n/1352567954/arm, /data/app/com.mgtv.mgui-fNNd5AyGhnQcmndRFg1iQQ==/lib/arm, /system/fake-libs, /data/app/com.mgtv.mgui-fNNd5AyGhnQcmndRFg1iQQ==/base.apk!/lib/armeabi, /system/lib, /vendor/lib]]]; lv=20
+11-23 11:10:01.407   969   969 I MyLogImp: onTrimMemory level:20
+11-23 11:10:01.407   969   969 D Tinker.DefaultAppLike: onTrimMemory level:20
+11-23 11:10:01.407   969   969 I Launcher-Tinker.TVOS:: onTrimMemory
+11-23 11:10:01.409   969  2295 D DataManager4App: getRecentAppList pkg:com.tencent.qqmusictv, power:null
+11-23 11:10:01.415   969  2296 D DataManager4App: getRecentAppList pkg:com.hpplay.happyplay.aw, power:null
+11-23 11:10:01.420   969  2294 D DataManager4App: getRecentAppList pkg:com.tencent.qqmusictv, power:null
+11-23 11:10:01.421   969  2294 D DataManager4App: getRecentAppList pkg:com.hpplay.happyplay.aw, power:null
+11-23 11:10:01.424   969  2295 D DataManager4App: getRecentAppList pkg:com.hpplay.happyplay.aw, power:null
+11-23 11:10:01.439   969  2294 D DataManager4App: getRecentAppList pkg:com.mgtv.filemanager, power:null
+11-23 11:10:01.443   969  2294 D DataManager4App: getRecentAppList pkg:com.mgtv.ota, power:null
+11-23 11:10:01.445   969  2296 D DataManager4App: getRecentAppList pkg:com.mgtv.filemanager, power:null
+11-23 11:10:01.446   969  2296 D DataManager4App: getRecentAppList pkg:com.mgtv.ota, power:null
+11-23 11:10:01.448   969  2295 D DataManager4App: getRecentAppList pkg:com.mgtv.filemanager, power:null
+11-23 11:10:01.452   969  2295 D DataManager4App: getRecentAppList pkg:com.mgtv.ota, power:null
+11-23 11:10:01.465   969  2296 D DataManager4App: getRecentAppList pkg:com.mgtv.remote, power:null
+11-23 11:10:01.469   969  2295 D DataManager4App: getRecentAppList pkg:com.mgtv.remote, power:null
+11-23 11:10:01.471   969  2294 D DataManager4App: getRecentAppList pkg:com.mgtv.remote, power:null
+11-23 11:10:01.475   969  2294 D DataManager4App: getRecentAppList pkg:com.mgtv.cast, power:null
+11-23 11:10:01.476   969  2294 I LocalSpUtlis: getBooleanValue,key:apson_app_show_first
+11-23 11:10:01.477   969  2294 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.tvos.datareportor', appName='TVOS Screenshot Demo', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{b4f44dc com.mgtv.tvos.datareportor}, appDangbei=null, versionCode=1, versionName='com.mgtv.tvos.datareportor', startCount=0, startTime=0, firstInstalltime=1794480075717, position=0, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-23 11:10:01.477   969  2294 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.tv', appName='芒果TV', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{5e389e5 com.mgtv.tv}, appDangbei=null, versionCode=22011118, versionName='com.mgtv.tv', startCount=0, startTime=0, firstInstalltime=1230739200000, position=109, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-23 11:10:01.477   969  2294 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.pplive.atv', appName='CIBN聚精彩', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{203acba com.pplive.atv}, appDangbei=null, versionCode=63105, versionName='com.pplive.atv', startCount=0, startTime=0, firstInstalltime=1230739200000, position=105, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-23 11:10:01.477   969  2294 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.pptv.tvsports.preinstall', appName='CIBN聚体育', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{c0d676b com.pptv.tvsports.preinstall}, appDangbei=null, versionCode=394301, versionName='com.pptv.tvsports.preinstall', startCount=0, startTime=0, firstInstalltime=1230739200000, position=104, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-23 11:10:01.477   969  2294 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='net.cibntv.ott.sk', appName='CIBN4K花园', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{ef9d2c8 net.cibntv.ott.sk}, appDangbei=null, versionCode=81, versionName='net.cibntv.ott.sk', startCount=0, startTime=0, firstInstalltime=1230739200000, position=103, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-23 11:10:01.478   969  2294 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.tencent.qqmusictv', appName='QQ音乐', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{d47df61 com.tencent.qqmusictv}, appDangbei=null, versionCode=407, versionName='com.tencent.qqmusictv', startCount=0, startTime=0, firstInstalltime=1230739200000, position=102, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-23 11:10:01.478   969  2294 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.hpplay.happyplay.aw', appName='乐播投屏', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{3afda86 com.hpplay.happyplay.aw}, appDangbei=null, versionCode=808080432, versionName='com.hpplay.happyplay.aw', startCount=0, startTime=0, firstInstalltime=1230739200000, position=99, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-23 11:10:01.478   969  2294 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.filemanager', appName='本地文件管理', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{190f47 com.mgtv.filemanager}, appDangbei=null, versionCode=2130924842, versionName='com.mgtv.filemanager', startCount=0, startTime=0, firstInstalltime=1230739200000, position=98, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-23 11:10:01.478   969  2294 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.ota', appName='系统升级', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{53d5374 com.mgtv.ota}, appDangbei=null, versionCode=2130924744, versionName='com.mgtv.ota', startCount=0, startTime=0, firstInstalltime=1230739200000, position=96, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-23 11:10:01.478   969  2294 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.remote', appName='电视助手', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{a42109d com.mgtv.remote}, appDangbei=null, versionCode=2103848530, versionName='com.mgtv.remote', startCount=0, startTime=0, firstInstalltime=1230739200000, position=0, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-23 11:10:01.478   969  2294 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.cast', appName='芒果投屏', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{59f1912 com.mgtv.cast}, appDangbei=null, versionCode=2111001144, versionName='com.mgtv.cast', startCount=0, startTime=0, firstInstalltime=1230739200000, position=0, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-23 11:10:01.481   969  2295 D DataManager4App: getRecentAppList pkg:com.mgtv.cast, power:null
+11-23 11:10:01.483   969  2295 I LocalSpUtlis: getBooleanValue,key:apson_app_show_first
+11-23 11:10:01.483   969  2295 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.tvos.datareportor', appName='TVOS Screenshot Demo', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{89632e0 com.mgtv.tvos.datareportor}, appDangbei=null, versionCode=1, versionName='com.mgtv.tvos.datareportor', startCount=0, startTime=0, firstInstalltime=1794480075717, position=0, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-23 11:10:01.485   969  2295 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.tv', appName='芒果TV', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{4b41999 com.mgtv.tv}, appDangbei=null, versionCode=22011118, versionName='com.mgtv.tv', startCount=0, startTime=0, firstInstalltime=1230739200000, position=109, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-23 11:10:01.486   969  2295 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.pplive.atv', appName='CIBN聚精彩', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{5d1b45e com.pplive.atv}, appDangbei=null, versionCode=63105, versionName='com.pplive.atv', startCount=0, startTime=0, firstInstalltime=1230739200000, position=105, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-23 11:10:01.486   969  2295 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.pptv.tvsports.preinstall', appName='CIBN聚体育', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{df2a03f com.pptv.tvsports.preinstall}, appDangbei=null, versionCode=394301, versionName='com.pptv.tvsports.preinstall', startCount=0, startTime=0, firstInstalltime=1230739200000, position=104, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-23 11:10:01.488   969  2296 D DataManager4App: getRecentAppList pkg:com.mgtv.cast, power:null
+11-23 11:10:01.489   969  2296 I LocalSpUtlis: getBooleanValue,key:apson_app_show_first
+11-23 11:10:01.490   969  2296 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.tvos.datareportor', appName='TVOS Screenshot Demo', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{6a3b655 com.mgtv.tvos.datareportor}, appDangbei=null, versionCode=1, versionName='com.mgtv.tvos.datareportor', startCount=0, startTime=0, firstInstalltime=1794480075717, position=0, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-23 11:10:01.490   969  2296 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.tv', appName='芒果TV', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{b86a com.mgtv.tv}, appDangbei=null, versionCode=22011118, versionName='com.mgtv.tv', startCount=0, startTime=0, firstInstalltime=1230739200000, position=109, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-23 11:10:01.490   969  2296 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.pplive.atv', appName='CIBN聚精彩', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{47b015b com.pplive.atv}, appDangbei=null, versionCode=63105, versionName='com.pplive.atv', startCount=0, startTime=0, firstInstalltime=1230739200000, position=105, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-23 11:10:01.490   969  2296 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.pptv.tvsports.preinstall', appName='CIBN聚体育', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{a2b7df8 com.pptv.tvsports.preinstall}, appDangbei=null, versionCode=394301, versionName='com.pptv.tvsports.preinstall', startCount=0, startTime=0, firstInstalltime=1230739200000, position=104, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-23 11:10:01.490   969  2296 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='net.cibntv.ott.sk', appName='CIBN4K花园', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{ab662d1 net.cibntv.ott.sk}, appDangbei=null, versionCode=81, versionName='net.cibntv.ott.sk', startCount=0, startTime=0, firstInstalltime=1230739200000, position=103, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-23 11:10:01.491   969  2295 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='net.cibntv.ott.sk', appName='CIBN4K花园', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{69f136 net.cibntv.ott.sk}, appDangbei=null, versionCode=81, versionName='net.cibntv.ott.sk', startCount=0, startTime=0, firstInstalltime=1230739200000, position=103, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-23 11:10:01.491   969  2295 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.tencent.qqmusictv', appName='QQ音乐', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{a5e5837 com.tencent.qqmusictv}, appDangbei=null, versionCode=407, versionName='com.tencent.qqmusictv', startCount=0, startTime=0, firstInstalltime=1230739200000, position=102, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-23 11:10:01.491   969  2295 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.hpplay.happyplay.aw', appName='乐播投屏', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{a9681a4 com.hpplay.happyplay.aw}, appDangbei=null, versionCode=808080432, versionName='com.hpplay.happyplay.aw', startCount=0, startTime=0, firstInstalltime=1230739200000, position=99, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-23 11:10:01.492   969  2295 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.filemanager', appName='本地文件管理', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{66d5b0d com.mgtv.filemanager}, appDangbei=null, versionCode=2130924842, versionName='com.mgtv.filemanager', startCount=0, startTime=0, firstInstalltime=1230739200000, position=98, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-23 11:10:01.492   969  2295 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.ota', appName='系统升级', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{75beac2 com.mgtv.ota}, appDangbei=null, versionCode=2130924744, versionName='com.mgtv.ota', startCount=0, startTime=0, firstInstalltime=1230739200000, position=96, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-23 11:10:01.492   969  2295 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.remote', appName='电视助手', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{7b640d3 com.mgtv.remote}, appDangbei=null, versionCode=2103848530, versionName='com.mgtv.remote', startCount=0, startTime=0, firstInstalltime=1230739200000, position=0, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-23 11:10:01.493   969  2295 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.cast', appName='芒果投屏', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{68c1410 com.mgtv.cast}, appDangbei=null, versionCode=2111001144, versionName='com.mgtv.cast', startCount=0, startTime=0, firstInstalltime=1230739200000, position=0, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-23 11:10:01.498   969  2296 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.tencent.qqmusictv', appName='QQ音乐', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{c06613c com.tencent.qqmusictv}, appDangbei=null, versionCode=407, versionName='com.tencent.qqmusictv', startCount=0, startTime=0, firstInstalltime=1230739200000, position=102, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-23 11:10:01.498   969  2296 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.hpplay.happyplay.aw', appName='乐播投屏', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{bfdec5 com.hpplay.happyplay.aw}, appDangbei=null, versionCode=808080432, versionName='com.hpplay.happyplay.aw', startCount=0, startTime=0, firstInstalltime=1230739200000, position=99, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-23 11:10:01.498   969  2296 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.filemanager', appName='本地文件管理', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{8f0101a com.mgtv.filemanager}, appDangbei=null, versionCode=2130924842, versionName='com.mgtv.filemanager', startCount=0, startTime=0, firstInstalltime=1230739200000, position=98, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-23 11:10:01.498   969  2296 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.ota', appName='系统升级', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{13af74b com.mgtv.ota}, appDangbei=null, versionCode=2130924744, versionName='com.mgtv.ota', startCount=0, startTime=0, firstInstalltime=1230739200000, position=96, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-23 11:10:01.498   969  2296 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.remote', appName='电视助手', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{c765528 com.mgtv.remote}, appDangbei=null, versionCode=2103848530, versionName='com.mgtv.remote', startCount=0, startTime=0, firstInstalltime=1230739200000, position=0, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-23 11:10:01.499   969  2296 D DataManager4App:  getRecentAppList return AppModel_2 =  AppModel{jumpType=1, packageName='com.mgtv.cast', appName='芒果投屏', appIconUrl='null', app_imgH_url='null', app_imgBig_url='null', app_imgUrl_jumpicon='null', appInfo=ApplicationInfo{144a241 com.mgtv.cast}, appDangbei=null, versionCode=2111001144, versionName='com.mgtv.cast', startCount=0, startTime=0, firstInstalltime=1230739200000, position=0, isShow='null', isDown='null', isInstall='null', isIconShow='null', isStartUp='null', isUninstall='null'}
+11-23 11:10:01.512  2227  2264 D CameraValidator: Verifying camera lens facing on nunai_max, lensFacingInteger: null
+11-23 11:10:01.513  2227  2264 E CameraValidator: Camera LensFacing verification failed, existing cameras: []
+11-23 11:10:01.515  2227  2279 I tflite  : Replacing 291 out of 291 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for the whole graph.
+11-23 11:10:01.515  2227  2264 W CameraX : Retry init. Start time 1010954 current time 1011533
+11-23 11:10:01.515  2227  2264 W CameraX : androidx.camera.core.impl.CameraValidator$CameraIdListIncorrectException: Expected camera missing from device.
+11-23 11:10:01.515  2227  2264 W CameraX : 	at androidx.camera.core.impl.CameraValidator.validateCameras(CameraValidator.java:97)
+11-23 11:10:01.515  2227  2264 W CameraX : 	at androidx.camera.core.CameraX.lambda$initAndRetryRecursively$2$androidx-camera-core-CameraX(CameraX.java:342)
+11-23 11:10:01.515  2227  2264 W CameraX : 	at androidx.camera.core.CameraX$$ExternalSyntheticLambda3.run(Unknown Source:10)
+11-23 11:10:01.515  2227  2264 W CameraX : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1162)
+11-23 11:10:01.515  2227  2264 W CameraX : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+11-23 11:10:01.515  2227  2264 W CameraX : 	at java.lang.Thread.run(Thread.java:764)
+11-23 11:10:01.515  2227  2264 W CameraX : Caused by: java.lang.IllegalArgumentException: No available camera can be found
+11-23 11:10:01.515  2227  2264 W CameraX : 	at androidx.camera.core.CameraSelector.select(CameraSelector.java:82)
+11-23 11:10:01.515  2227  2264 W CameraX : 	at androidx.camera.core.impl.CameraValidator.validateCameras(CameraValidator.java:83)
+11-23 11:10:01.515  2227  2264 W CameraX : 	... 5 more
+11-23 11:10:01.564  2227  2279 W native  : W0000 00:00:1795403401.563982    2279 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+11-23 11:10:01.616  2227  2281 I native  : I0000 00:00:1795403401.616903    2281 resource_util_android.cc:82] Successfully loaded: mlkit_pose/pose_landmark_detector_full_f16_inf.tflite
+11-23 11:10:01.666  2227  2281 I tflite  : Replacing 310 out of 310 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for the whole graph.
+11-23 11:10:01.682  2227  2281 W native  : W0000 00:00:1795403401.682904    2281 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+11-23 11:10:01.695  2227  2256 D TransportRuntime.SQLiteEventStore: Storing event with priority=VERY_LOW, name=FIREBASE_ML_SDK for destination cct
+11-23 11:10:01.710  2227  2232 I zygote64: Do partial code cache collection, code=124KB, data=72KB
+11-23 11:10:01.711  2227  2232 I zygote64: After code cache collection, code=124KB, data=72KB
+11-23 11:10:01.711  2227  2232 I zygote64: Increasing code cache capacity to 512KB
+11-23 11:10:01.713  2227  2256 D TransportRuntime.JobInfoScheduler: Upload for context TransportContext(cct, VERY_LOW, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
+11-23 11:10:02.038  2227  2264 D CameraValidator: Verifying camera lens facing on nunai_max, lensFacingInteger: null
+11-23 11:10:02.040  2227  2264 E CameraValidator: Camera LensFacing verification failed, existing cameras: []
+11-23 11:10:02.043  2227  2264 W CameraX : Retry init. Start time 1010954 current time 1012059
+11-23 11:10:02.043  2227  2264 W CameraX : androidx.camera.core.impl.CameraValidator$CameraIdListIncorrectException: Expected camera missing from device.
+11-23 11:10:02.043  2227  2264 W CameraX : 	at androidx.camera.core.impl.CameraValidator.validateCameras(CameraValidator.java:97)
+11-23 11:10:02.043  2227  2264 W CameraX : 	at androidx.camera.core.CameraX.lambda$initAndRetryRecursively$2$androidx-camera-core-CameraX(CameraX.java:342)
+11-23 11:10:02.043  2227  2264 W CameraX : 	at androidx.camera.core.CameraX$$ExternalSyntheticLambda3.run(Unknown Source:10)
+11-23 11:10:02.043  2227  2264 W CameraX : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1162)
+11-23 11:10:02.043  2227  2264 W CameraX : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+11-23 11:10:02.043  2227  2264 W CameraX : 	at java.lang.Thread.run(Thread.java:764)
+11-23 11:10:02.043  2227  2264 W CameraX : Caused by: java.lang.IllegalArgumentException: No available camera can be found
+11-23 11:10:02.043  2227  2264 W CameraX : 	at androidx.camera.core.CameraSelector.select(CameraSelector.java:82)
+11-23 11:10:02.043  2227  2264 W CameraX : 	at androidx.camera.core.impl.CameraValidator.validateCameras(CameraValidator.java:83)
+11-23 11:10:02.043  2227  2264 W CameraX : 	... 5 more
+11-23 11:10:02.585  2227  2264 D CameraValidator: Verifying camera lens facing on nunai_max, lensFacingInteger: null
+11-23 11:10:02.587  2227  2264 E CameraValidator: Camera LensFacing verification failed, existing cameras: []
+11-23 11:10:02.590  2227  2264 W CameraX : Retry init. Start time 1010954 current time 1012606
+11-23 11:10:02.590  2227  2264 W CameraX : androidx.camera.core.impl.CameraValidator$CameraIdListIncorrectException: Expected camera missing from device.
+11-23 11:10:02.590  2227  2264 W CameraX : 	at androidx.camera.core.impl.CameraValidator.validateCameras(CameraValidator.java:97)
+11-23 11:10:02.590  2227  2264 W CameraX : 	at androidx.camera.core.CameraX.lambda$initAndRetryRecursively$2$androidx-camera-core-CameraX(CameraX.java:342)
+11-23 11:10:02.590  2227  2264 W CameraX : 	at androidx.camera.core.CameraX$$ExternalSyntheticLambda3.run(Unknown Source:10)
+11-23 11:10:02.590  2227  2264 W CameraX : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1162)
+11-23 11:10:02.590  2227  2264 W CameraX : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+11-23 11:10:02.590  2227  2264 W CameraX : 	at java.lang.Thread.run(Thread.java:764)
+11-23 11:10:02.590  2227  2264 W CameraX : Caused by: java.lang.IllegalArgumentException: No available camera can be found
+11-23 11:10:02.590  2227  2264 W CameraX : 	at androidx.camera.core.CameraSelector.select(CameraSelector.java:82)
+11-23 11:10:02.590  2227  2264 W CameraX : 	at androidx.camera.core.impl.CameraValidator.validateCameras(CameraValidator.java:83)
+11-23 11:10:02.590  2227  2264 W CameraX : 	... 5 more
+11-23 11:10:02.607   308   478 I [Gralloc]: Got fd 16 for handle 1
+11-23 11:10:02.608   308   478 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:10:02.608   308   478 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-23 11:10:02.608   318   364 I [Gralloc]: Got handle 2 for fd 50
+11-23 11:10:02.608   318   364 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:10:02.608   318   364 I [Gralloc]: leave: prime_fd=50,share_attr_fd=56
+11-23 11:10:02.608  2227  2268 I [Gralloc]: Got handle 3 for fd 78
+11-23 11:10:02.608  2227  2268 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:10:02.609  2227  2268 I [Gralloc]: leave: prime_fd=78,share_attr_fd=82
+11-23 11:10:02.628   309   309 I [Gralloc]: Got handle 5 for fd 45
+11-23 11:10:02.628   309   309 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:10:02.628   309   309 I [Gralloc]: leave: prime_fd=45,share_attr_fd=46
+11-23 11:10:02.765   308   478 I [Gralloc]: Got fd 16 for handle 1
+11-23 11:10:02.767   308   478 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:10:02.767   308   478 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-23 11:10:02.767   318   364 I [Gralloc]: Got handle 4 for fd 42
+11-23 11:10:02.767   318   364 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:10:02.767   318   364 I [Gralloc]: leave: prime_fd=42,share_attr_fd=61
+11-23 11:10:02.768  2227  2268 I [Gralloc]: Got handle 4 for fd 84
+11-23 11:10:02.768  2227  2268 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:10:02.768  2227  2268 I [Gralloc]: leave: prime_fd=84,share_attr_fd=85
+11-23 11:10:02.795   309   309 I [Gralloc]: Got handle 7 for fd 38
+11-23 11:10:02.795   309   309 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:10:02.795   309   309 I [Gralloc]: leave: prime_fd=38,share_attr_fd=39
+11-23 11:10:03.095  2227  2264 D CameraValidator: Verifying camera lens facing on nunai_max, lensFacingInteger: null
+11-23 11:10:03.096  2227  2264 E CameraValidator: Camera LensFacing verification failed, existing cameras: []
+11-23 11:10:03.097  2227  2264 W CameraX : Retry init. Start time 1010954 current time 1013115
+11-23 11:10:03.097  2227  2264 W CameraX : androidx.camera.core.impl.CameraValidator$CameraIdListIncorrectException: Expected camera missing from device.
+11-23 11:10:03.097  2227  2264 W CameraX : 	at androidx.camera.core.impl.CameraValidator.validateCameras(CameraValidator.java:97)
+11-23 11:10:03.097  2227  2264 W CameraX : 	at androidx.camera.core.CameraX.lambda$initAndRetryRecursively$2$androidx-camera-core-CameraX(CameraX.java:342)
+11-23 11:10:03.097  2227  2264 W CameraX : 	at androidx.camera.core.CameraX$$ExternalSyntheticLambda3.run(Unknown Source:10)
+11-23 11:10:03.097  2227  2264 W CameraX : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1162)
+11-23 11:10:03.097  2227  2264 W CameraX : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+11-23 11:10:03.097  2227  2264 W CameraX : 	at java.lang.Thread.run(Thread.java:764)
+11-23 11:10:03.097  2227  2264 W CameraX : Caused by: java.lang.IllegalArgumentException: No available camera can be found
+11-23 11:10:03.097  2227  2264 W CameraX : 	at androidx.camera.core.CameraSelector.select(CameraSelector.java:82)
+11-23 11:10:03.097  2227  2264 W CameraX : 	at androidx.camera.core.impl.CameraValidator.validateCameras(CameraValidator.java:83)
+11-23 11:10:03.097  2227  2264 W CameraX : 	... 5 more
+11-23 11:10:03.639  2227  2264 D CameraValidator: Verifying camera lens facing on nunai_max, lensFacingInteger: null
+11-23 11:10:03.639  2227  2264 E CameraValidator: Camera LensFacing verification failed, existing cameras: []
+11-23 11:10:03.640  2227  2264 E CameraX : The device might underreport the amount of the cameras. Finish the initialize task since we are already reaching the maximum number of retries.
+11-23 11:10:03.646  2227  2227 W PAE_POSE: camera selector FRONT failed: Provided camera selector unable to resolve a camera for the given use case
+11-23 11:10:03.646  2227  2227 W PAE_POSE: camera selector BACK failed: Provided camera selector unable to resolve a camera for the given use case
+11-23 11:10:03.647  2227  2227 W PAE_POSE: camera selector ANY failed: Provided camera selector unable to resolve a camera for the given use case
+11-23 11:10:03.647  2227  2227 E PAE_POSE: no camera resolved on this device; synthetic provider stays active
+11-23 11:10:04.534   969  1503 I MgtvP2pManager: 2026-11-23 11:10:04.528 [MGDS:I<1508>]-[EasyCacheManager.cpp:732<freeMemCacheIfNeeded>] > freeMemCacheIfNeeded by timing, sysSize:1307/1957(MB), limitSize:261.40 MB, cachedSize:0 B
+11-23 11:10:04.534   969  1503 I MgtvP2pManager: 2026-11-23 11:10:04.532 [MGDS:I<1508>]-[EasyCacheManager.cpp:781<deleteFileIfNeeded>] > deleteFileIfNeeded by timing, sysSize:8292/11021(MB), limitSize:256.00 MB, cachedSize:49.87 MB
+11-23 11:10:05.091   969  1503 I MgtvP2pManager: 2026-11-23 11:10:05.091 [MGDS:I<1507>]-[EasySignalHelper.cpp:260<heartbeat>] > [signal], heartbeat

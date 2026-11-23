@@ -90,10 +90,17 @@ bool SyntheticPoseProvider::pollLatest(PoseFrame& out) {
         const Vec4 transformed = pose.palette[bone].transform(Vec4{bindHead, 1.0f});
         return Vec3{transformed.x, transformed.y, transformed.z};
     };
+    // P0 Shoulder/UpperArm fix: the anatomical shoulder landmark is the
+    // glenohumeral joint, which is now the Shoulder bone's TAIL.
+    auto posedTail = [&](uint16_t bone) {
+        const Vec3 bindTail = skeleton_.bones[bone].tail;
+        const Vec4 transformed = pose.palette[bone].transform(Vec4{bindTail, 1.0f});
+        return Vec3{transformed.x, transformed.y, transformed.z};
+    };
 
     addLandmark(out, LkNose, posedHead(BoneHead) + Vec3{0.0f, 0.03f, 0.06f}, confidence_);
-    addLandmark(out, LkLeftShoulder, posedHead(BoneLeftShoulder), confidence_);
-    addLandmark(out, LkRightShoulder, posedHead(BoneRightShoulder), confidence_);
+    addLandmark(out, LkLeftShoulder, posedTail(BoneLeftShoulder), confidence_);
+    addLandmark(out, LkRightShoulder, posedTail(BoneRightShoulder), confidence_);
     addLandmark(out, LkLeftElbow, posedHead(BoneLeftLowerArm), confidence_);
     addLandmark(out, LkRightElbow, posedHead(BoneRightLowerArm), confidence_);
     addLandmark(out, LkLeftWrist, posedHead(BoneLeftHand), confidence_);

@@ -1,0 +1,43 @@
+Consolidate compiler generated dependencies of target pae_core
+[  2%] Building CXX object CMakeFiles/pae_core.dir/procedural/humanoid/anatomy/AnatomyField.cpp.obj
+[  5%] Building CXX object CMakeFiles/pae_core.dir/procedural/humanoid/anatomy/HumanAnatomyGenerator.cpp.obj
+[  7%] Building CXX object CMakeFiles/pae_core.dir/procedural/MeshTopology.cpp.obj
+[ 10%] Building CXX object CMakeFiles/pae_core.dir/skeleton/Skeleton.cpp.obj
+[ 12%] Building CXX object CMakeFiles/pae_core.dir/skeleton/weights/WeightGenerator.cpp.obj
+[ 15%] Building CXX object CMakeFiles/pae_core.dir/motion/providers/ExternalPoseProvider.cpp.obj
+[ 17%] Building CXX object CMakeFiles/pae_core.dir/motion/retargeting/Retargeting.cpp.obj
+[ 20%] Building CXX object CMakeFiles/pae_core.dir/motion/MotionRuntime.cpp.obj
+[ 23%] Linking CXX static library libpae_core.a
+[ 53%] Built target pae_core
+Consolidate compiler generated dependencies of target pae_skinning_tests
+[ 56%] Building CXX object pae_tests/CMakeFiles/pae_skinning_tests.dir/unit/skinning_tests.cpp.obj
+[ 58%] Linking CXX executable pae_skinning_tests.exe
+[ 58%] Built target pae_skinning_tests
+Consolidate compiler generated dependencies of target pae_core_tests
+[ 61%] Building CXX object pae_tests/CMakeFiles/pae_core_tests.dir/unit/core_tests.cpp.obj
+[ 64%] Linking CXX executable pae_core_tests.exe
+[ 64%] Built target pae_core_tests
+[ 66%] Building CXX object pae_tests/CMakeFiles/pae_fusion_tests.dir/unit/fusion_tests.cpp.obj
+[ 69%] Linking CXX executable pae_fusion_tests.exe
+[ 69%] Built target pae_fusion_tests
+Consolidate compiler generated dependencies of target pae_geometry_tests
+[ 71%] Building CXX object pae_tests/CMakeFiles/pae_geometry_tests.dir/unit/geometry_tests.cpp.obj
+[ 74%] Linking CXX executable pae_geometry_tests.exe
+[ 74%] Built target pae_geometry_tests
+Consolidate compiler generated dependencies of target pae_motion_tests
+[ 76%] Building CXX object pae_tests/CMakeFiles/pae_motion_tests.dir/unit/motion_tests.cpp.obj
+[ 79%] Linking CXX executable pae_motion_tests.exe
+[ 79%] Built target pae_motion_tests
+[ 82%] Building CXX object pae_tests/CMakeFiles/pae_face_hair_tests.dir/unit/face_hair_tests.cpp.obj
+[ 84%] Linking CXX executable pae_face_hair_tests.exe
+[ 84%] Built target pae_face_hair_tests
+[ 87%] Building CXX object pae_tests/CMakeFiles/pae_anatomy_tests.dir/unit/anatomy_tests.cpp.obj
+[ 89%] Linking CXX executable pae_anatomy_tests.exe
+[ 89%] Built target pae_anatomy_tests
+Consolidate compiler generated dependencies of target pae_humanoid_tests
+[ 92%] Building CXX object pae_tests/CMakeFiles/pae_humanoid_tests.dir/unit/humanoid_tests.cpp.obj
+[ 94%] Linking CXX executable pae_humanoid_tests.exe
+[ 94%] Built target pae_humanoid_tests
+[ 97%] Building CXX object pae_tests/CMakeFiles/pae_proportion_probe.dir/unit/proportion_probe.cpp.obj
+[100%] Linking CXX executable pae_proportion_probe.exe
+[100%] Built target pae_proportion_probe

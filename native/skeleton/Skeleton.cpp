@@ -38,12 +38,15 @@ Skeleton buildHumanoidSkeleton(const BodyJoints& j) {
     set(BoneNeck, BoneChest, j.neck, j.neck + (j.head - j.neck) * 0.75f);
     set(BoneHead, BoneNeck, j.head, j.head + (j.head - j.neck) * 1.2f);
 
-    set(BoneLeftShoulder, BoneChest, j.leftShoulder, j.leftElbow);
+    // P0: Shoulder is the clavicle/shoulder-girdle segment from the chest to
+    // the glenohumeral joint; UpperArm starts at that joint and ends at the
+    // elbow. BoneId ABI is unchanged.
+    set(BoneLeftShoulder, BoneChest, j.chest, j.leftShoulder);
     set(BoneLeftUpperArm, BoneLeftShoulder, j.leftShoulder, j.leftElbow);
     set(BoneLeftLowerArm, BoneLeftUpperArm, j.leftElbow, j.leftWrist);
     set(BoneLeftHand, BoneLeftLowerArm, j.leftWrist, j.leftHand);
 
-    set(BoneRightShoulder, BoneChest, j.rightShoulder, j.rightElbow);
+    set(BoneRightShoulder, BoneChest, j.chest, j.rightShoulder);
     set(BoneRightUpperArm, BoneRightShoulder, j.rightShoulder, j.rightElbow);
     set(BoneRightLowerArm, BoneRightUpperArm, j.rightElbow, j.rightWrist);
     set(BoneRightHand, BoneRightLowerArm, j.rightWrist, j.rightHand);

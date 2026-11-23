@@ -151,6 +151,7 @@ struct RegionPrimitives {
     Vec3 trapA;
     Vec3 trapB;
     float trapRa;
+    float trapRbBelly;
     float trapRb;
     Vec3 pecA;
     Vec3 pecB;
@@ -488,7 +489,9 @@ uint16_t regionBone(BodyRegion region, int side) {
         case BodyRegion::Abdomen: return BoneSpine;
         case BodyRegion::Pelvis: return BoneHips;
         case BodyRegion::Clavicle: return BoneChest;
-        case BodyRegion::Deltoid: return left ? BoneLeftShoulder : BoneRightShoulder;
+        // P0 Shoulder/UpperArm fix: the deltoid follows the humerus; the
+        // Shoulder bone now represents the clavicle/shoulder girdle only.
+        case BodyRegion::Deltoid: return left ? BoneLeftUpperArm : BoneRightUpperArm;
         case BodyRegion::UpperArm: return left ? BoneLeftUpperArm : BoneRightUpperArm;
         case BodyRegion::Forearm: return left ? BoneLeftLowerArm : BoneRightLowerArm;
         case BodyRegion::Neck: return BoneNeck;

@@ -1,0 +1,63 @@
+Internal ctest changing into directory: C:/Users/Giant/Desktop/GITCODE/Procedural Avatar Engine/build/host-cygwin
+Test project C:/Users/Giant/Desktop/GITCODE/Procedural Avatar Engine/build/host-cygwin
+    Start 6: pae_humanoid_tests
+1/2 Test #6: pae_humanoid_tests ...............***Failed    0.09 sec
+[ RUN ] body_parameters_are_clamped
+[  OK ] body_parameters_are_clamped
+[ RUN ] skeleton_hierarchy_and_ibm_are_valid
+[I/PAE_GEOMETRY] generateHumanoid: 8106 verts, 14064 tris, 7.30 ms, detail=1
+[  OK ] skeleton_hierarchy_and_ibm_are_valid
+[ RUN ] humanoid_mesh_and_weights_are_valid
+[I/PAE_GEOMETRY] generateHumanoid: 8106 verts, 14064 tris, 7.43 ms, detail=1
+[  OK ] humanoid_mesh_and_weights_are_valid
+[ RUN ] humanoid_generation_is_deterministic
+[I/PAE_GEOMETRY] generateHumanoid: 12140 verts, 21684 tris, 10.62 ms, detail=2
+[I/PAE_GEOMETRY] generateHumanoid: 12140 verts, 21684 tris, 9.70 ms, detail=2
+[  OK ] humanoid_generation_is_deterministic
+[ RUN ] heatmap_colors_are_generated
+[I/PAE_GEOMETRY] generateHumanoid: 8106 verts, 14064 tris, 6.84 ms, detail=1
+[  OK ] heatmap_colors_are_generated
+[ RUN ] shoulder_and_upperarm_semantics_are_distinct
+[I/PAE_GEOMETRY] generateHumanoid: 8106 verts, 14064 tris, 6.59 ms, detail=1
+FAIL C:/Users/Giant/Desktop/GITCODE/Procedural Avatar Engine/tests/unit/humanoid_tests.cpp:115: (shoulder.tail - upper.head).length() < 1e-5f
+FAIL C:/Users/Giant/Desktop/GITCODE/Procedural Avatar Engine/tests/unit/humanoid_tests.cpp:117: (shoulder.head - shoulder.tail).length() < 0.20f
+FAIL C:/Users/Giant/Desktop/GITCODE/Procedural Avatar Engine/tests/unit/humanoid_tests.cpp:118: (upper.head - upper.tail).length() > (shoulder.head - shoulder.tail).length()
+FAIL C:/Users/Giant/Desktop/GITCODE/Procedural Avatar Engine/tests/unit/humanoid_tests.cpp:120: (shoulder.head - upper.head).length() > 1e-5f
+FAIL C:/Users/Giant/Desktop/GITCODE/Procedural Avatar Engine/tests/unit/humanoid_tests.cpp:115: (shoulder.tail - upper.head).length() < 1e-5f
+FAIL C:/Users/Giant/Desktop/GITCODE/Procedural Avatar Engine/tests/unit/humanoid_tests.cpp:117: (shoulder.head - shoulder.tail).length() < 0.20f
+FAIL C:/Users/Giant/Desktop/GITCODE/Procedural Avatar Engine/tests/unit/humanoid_tests.cpp:118: (upper.head - upper.tail).length() > (shoulder.head - shoulder.tail).length()
+FAIL C:/Users/Giant/Desktop/GITCODE/Procedural Avatar Engine/tests/unit/humanoid_tests.cpp:120: (shoulder.head - upper.head).length() > 1e-5f
+[FAIL ] shoulder_and_upperarm_semantics_are_distinct
+6 cases, 8 failures
+
+    Start 7: pae_skinning_tests
+2/2 Test #7: pae_skinning_tests ...............***Failed    0.08 sec
+[ RUN ] identity_pose_preserves_mesh
+[I/PAE_GEOMETRY] generateHumanoid: 8106 verts, 14064 tris, 7.04 ms, detail=1
+[  OK ] identity_pose_preserves_mesh
+[ RUN ] single_bone_rotation_moves_expected_vertex
+[I/PAE_GEOMETRY] generateHumanoid: 8106 verts, 14064 tris, 7.88 ms, detail=1
+[  OK ] single_bone_rotation_moves_expected_vertex
+[ RUN ] ubo_std140_layout_matches_mat4
+[  OK ] ubo_std140_layout_matches_mat4
+[ RUN ] region_weights_blend_across_hip_boundary
+[I/PAE_GEOMETRY] generateHumanoid: 8106 verts, 14064 tris, 7.94 ms, detail=1
+[  OK ] region_weights_blend_across_hip_boundary
+[ RUN ] region_weights_keep_head_dominant
+[I/PAE_GEOMETRY] generateHumanoid: 8106 verts, 14064 tris, 7.13 ms, detail=1
+[  OK ] region_weights_keep_head_dominant
+[ RUN ] shoulder_fix_keeps_skinning_inputs_valid
+[I/PAE_GEOMETRY] generateHumanoid: 8106 verts, 14064 tris, 6.92 ms, detail=1
+FAIL C:/Users/Giant/Desktop/GITCODE/Procedural Avatar Engine/tests/unit/skinning_tests.cpp:112: upperArmLength > shoulderLength
+[FAIL ] shoulder_fix_keeps_skinning_inputs_valid
+6 cases, 1 failures
+
+
+0% tests passed, 2 tests failed out of 2
+
+Total Test time (real) =   0.19 sec
+
+The following tests FAILED:
+	  6 - pae_humanoid_tests (Failed)
+	  7 - pae_skinning_tests (Failed)
+Errors while running CTest

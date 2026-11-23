@@ -24,6 +24,9 @@ PAE_TEST_CASE(skeleton_hierarchy_and_ibm_are_valid) {
     const HumanoidResult humanoid = generateHumanoid(BodyParameters{});
     const Skeleton& skeleton = humanoid.skeleton;
     EXPECT_TRUE(humanoid.valid);
+    EXPECT_TRUE(BoneCount == 22);
+    EXPECT_TRUE(std::strcmp(boneName(BoneLeftShoulder), "LeftShoulder") == 0);
+    EXPECT_TRUE(std::strcmp(boneName(BoneLeftUpperArm), "LeftUpperArm") == 0);
     for (uint16_t i = 0; i < BoneCount; ++i) {
         const BoneDefinition& bone = skeleton.bones[i];
         EXPECT_TRUE(bone.id == i);
@@ -98,6 +101,27 @@ PAE_TEST_CASE(heatmap_colors_are_generated) {
         }
     }
     EXPECT_TRUE(hasVariation);
+}
+
+PAE_TEST_CASE(shoulder_and_upperarm_semantics_are_distinct) {
+    const HumanoidResult humanoid = generateHumanoid(BodyParameters{});
+    const Skeleton& skeleton = humanoid.skeleton;
+
+    const uint16_t shoulderBones[2] = {BoneLeftShoulder, BoneRightShoulder};
+    const uint16_t upperBones[2] = {BoneLeftUpperArm, BoneRightUpperArm};
+    for (int side = 0; side < 2; ++side) {
+        const BoneDefinition& shoulder = skeleton.bones[shoulderBones[side]];
+        const BoneDefinition& upper = skeleton.bones[upperBones[side]];
+
+        EXPECT_TRUE(shoulder.parent == BoneChest);
+        EXPECT_TRUE(upper.parent == shoulderBones[side]);
+        EXPECT_TRUE((shoulder.tail - upper.head).length() < 1e-5f);
+        EXPECT_TRUE((shoulder.head - shoulder.tail).length() > 0.01f);
+        EXPECT_TRUE((shoulder.head - shoulder.tail).length() < 0.30f);
+        EXPECT_TRUE((upper.head - upper.tail).length() >
+                    (shoulder.head - shoulder.tail).length());
+        EXPECT_TRUE((shoulder.head - upper.head).length() > 1e-5f);
+    }
 }
 
 int main() {

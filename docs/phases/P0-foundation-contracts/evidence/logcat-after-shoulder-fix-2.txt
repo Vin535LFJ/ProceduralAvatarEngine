@@ -1,0 +1,132 @@
+--------- beginning of main
+11-23 11:10:02.608   308   478 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:10:02.608   308   478 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-23 11:10:02.608   318   364 I [Gralloc]: Got handle 2 for fd 50
+11-23 11:10:02.608   318   364 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:10:02.608   318   364 I [Gralloc]: leave: prime_fd=50,share_attr_fd=56
+11-23 11:10:02.608  2227  2268 I [Gralloc]: Got handle 3 for fd 78
+11-23 11:10:02.608  2227  2268 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:10:02.609  2227  2268 I [Gralloc]: leave: prime_fd=78,share_attr_fd=82
+11-23 11:10:02.628   309   309 I [Gralloc]: Got handle 5 for fd 45
+11-23 11:10:02.628   309   309 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:10:02.628   309   309 I [Gralloc]: leave: prime_fd=45,share_attr_fd=46
+11-23 11:10:02.765   308   478 I [Gralloc]: Got fd 16 for handle 1
+11-23 11:10:02.767   308   478 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:10:02.767   308   478 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-23 11:10:02.767   318   364 I [Gralloc]: Got handle 4 for fd 42
+11-23 11:10:02.767   318   364 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:10:02.767   318   364 I [Gralloc]: leave: prime_fd=42,share_attr_fd=61
+11-23 11:10:02.768  2227  2268 I [Gralloc]: Got handle 4 for fd 84
+11-23 11:10:02.768  2227  2268 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:10:02.768  2227  2268 I [Gralloc]: leave: prime_fd=84,share_attr_fd=85
+11-23 11:10:02.795   309   309 I [Gralloc]: Got handle 7 for fd 38
+11-23 11:10:02.795   309   309 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0xb00. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:10:02.795   309   309 I [Gralloc]: leave: prime_fd=38,share_attr_fd=39
+11-23 11:10:03.095  2227  2264 D CameraValidator: Verifying camera lens facing on nunai_max, lensFacingInteger: null
+11-23 11:10:03.096  2227  2264 E CameraValidator: Camera LensFacing verification failed, existing cameras: []
+11-23 11:10:03.097  2227  2264 W CameraX : Retry init. Start time 1010954 current time 1013115
+11-23 11:10:03.097  2227  2264 W CameraX : androidx.camera.core.impl.CameraValidator$CameraIdListIncorrectException: Expected camera missing from device.
+11-23 11:10:03.097  2227  2264 W CameraX : 	at androidx.camera.core.impl.CameraValidator.validateCameras(CameraValidator.java:97)
+11-23 11:10:03.097  2227  2264 W CameraX : 	at androidx.camera.core.CameraX.lambda$initAndRetryRecursively$2$androidx-camera-core-CameraX(CameraX.java:342)
+11-23 11:10:03.097  2227  2264 W CameraX : 	at androidx.camera.core.CameraX$$ExternalSyntheticLambda3.run(Unknown Source:10)
+11-23 11:10:03.097  2227  2264 W CameraX : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1162)
+11-23 11:10:03.097  2227  2264 W CameraX : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+11-23 11:10:03.097  2227  2264 W CameraX : 	at java.lang.Thread.run(Thread.java:764)
+11-23 11:10:03.097  2227  2264 W CameraX : Caused by: java.lang.IllegalArgumentException: No available camera can be found
+11-23 11:10:03.097  2227  2264 W CameraX : 	at androidx.camera.core.CameraSelector.select(CameraSelector.java:82)
+11-23 11:10:03.097  2227  2264 W CameraX : 	at androidx.camera.core.impl.CameraValidator.validateCameras(CameraValidator.java:83)
+11-23 11:10:03.097  2227  2264 W CameraX : 	... 5 more
+11-23 11:10:03.639  2227  2264 D CameraValidator: Verifying camera lens facing on nunai_max, lensFacingInteger: null
+11-23 11:10:03.639  2227  2264 E CameraValidator: Camera LensFacing verification failed, existing cameras: []
+11-23 11:10:03.640  2227  2264 E CameraX : The device might underreport the amount of the cameras. Finish the initialize task since we are already reaching the maximum number of retries.
+11-23 11:10:03.646  2227  2227 W PAE_POSE: camera selector FRONT failed: Provided camera selector unable to resolve a camera for the given use case
+11-23 11:10:03.646  2227  2227 W PAE_POSE: camera selector BACK failed: Provided camera selector unable to resolve a camera for the given use case
+11-23 11:10:03.647  2227  2227 W PAE_POSE: camera selector ANY failed: Provided camera selector unable to resolve a camera for the given use case
+11-23 11:10:03.647  2227  2227 E PAE_POSE: no camera resolved on this device; synthetic provider stays active
+11-23 11:10:04.534   969  1503 I MgtvP2pManager: 2026-11-23 11:10:04.528 [MGDS:I<1508>]-[EasyCacheManager.cpp:732<freeMemCacheIfNeeded>] > freeMemCacheIfNeeded by timing, sysSize:1307/1957(MB), limitSize:261.40 MB, cachedSize:0 B
+11-23 11:10:04.534   969  1503 I MgtvP2pManager: 2026-11-23 11:10:04.532 [MGDS:I<1508>]-[EasyCacheManager.cpp:781<deleteFileIfNeeded>] > deleteFileIfNeeded by timing, sysSize:8292/11021(MB), limitSize:256.00 MB, cachedSize:49.87 MB
+11-23 11:10:05.091   969  1503 I MgtvP2pManager: 2026-11-23 11:10:05.091 [MGDS:I<1507>]-[EasySignalHelper.cpp:260<heartbeat>] > [signal], heartbeat
+11-23 11:10:05.375   318  1020 D PermissionCache: checking android.permission.READ_FRAME_BUFFER for uid=2000 => granted (693 us)
+11-23 11:10:05.406   308   478 I [Gralloc]: Got fd 16 for handle 1
+11-23 11:10:05.409   308   478 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x333. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:10:05.409   308   478 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-23 11:10:05.409  2306  2306 I [Gralloc]: Got handle 1 for fd 10
+11-23 11:10:05.409  2306  2306 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x333. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:10:05.409  2306  2306 I [Gralloc]: leave: prime_fd=10,share_attr_fd=11
+11-23 11:10:05.410   318  1020 I [Gralloc]: Got handle 5 for fd 71
+11-23 11:10:05.410   318  1020 I [Gralloc]: leave, w : 1920, h : 1080, format : 0x1,internal_format : 0x1, usage : 0x333. size=8294400,pixel_stride=1920,byte_stride=7680
+11-23 11:10:05.410   318  1020 I [Gralloc]: leave: prime_fd=71,share_attr_fd=72
+11-23 11:10:05.495  2227  2245 I PAE_GEOMETRY: Human Anatomy Report: verts=20494 tris=40984 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 gen_ms=3625 res=88x132x52 | chest=0.572 waist=0.618 shoulder_x=0.293 pelvis=0.637
+11-23 11:10:05.591  2227  2245 I PAE_RENDER: anatomy preview ready: 40984 tris, 4105 ms
+11-23 11:10:05.804  1363  1920 I SendingNotification: Sending root device messages: http://192.168.31.24:40915/upnp/dev/ac098300-3143-47fe-88ce-17a0ef07c0ea/desc
+11-23 11:10:05.892  2227  2245 I PAE_RENDER: surface ready 1920x1008
+11-23 11:10:05.900   308   478 I [Gralloc]: Got fd 16 for handle 1
+11-23 11:10:05.900   308   478 I [Gralloc]: leave, w : 1920, h : 1008, format : 0x2,internal_format : 0x2, usage : 0xb00. size=7741440,pixel_stride=1920,byte_stride=7680
+11-23 11:10:05.900   308   478 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-23 11:10:05.901   318   364 I [Gralloc]: Got handle 5 for fd 49
+11-23 11:10:05.901   318   364 I [Gralloc]: leave, w : 1920, h : 1008, format : 0x2,internal_format : 0x2, usage : 0xb00. size=7741440,pixel_stride=1920,byte_stride=7680
+11-23 11:10:05.901   318   364 I [Gralloc]: leave: prime_fd=49,share_attr_fd=68
+11-23 11:10:05.901  2227  2245 I [Gralloc]: Got handle 5 for fd 87
+11-23 11:10:05.901  2227  2245 I [Gralloc]: leave, w : 1920, h : 1008, format : 0x2,internal_format : 0x2, usage : 0xb00. size=7741440,pixel_stride=1920,byte_stride=7680
+11-23 11:10:05.901  2227  2245 I [Gralloc]: leave: prime_fd=87,share_attr_fd=88
+11-23 11:10:05.918  2227  2245 I PAE_STATS: frames=0 fps=0.0 frame_ms=0.00 draw_calls=4 triangles=14064 buffer_bytes=688960 p50_ms=0.00 p95_ms=0.00 p99_ms=0.00
+11-23 11:10:05.943   308   478 I [Gralloc]: Got fd 16 for handle 1
+11-23 11:10:05.943   308   478 I [Gralloc]: leave, w : 1920, h : 1008, format : 0x2,internal_format : 0x2, usage : 0xb00. size=7741440,pixel_stride=1920,byte_stride=7680
+11-23 11:10:05.943   308   478 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-23 11:10:05.943   318   364 I [Gralloc]: Got handle 6 for fd 72
+11-23 11:10:05.943   318   364 I [Gralloc]: leave, w : 1920, h : 1008, format : 0x2,internal_format : 0x2, usage : 0xb00. size=7741440,pixel_stride=1920,byte_stride=7680
+11-23 11:10:05.943   318   364 I [Gralloc]: leave: prime_fd=72,share_attr_fd=73
+11-23 11:10:05.944  2227  2245 I [Gralloc]: Got handle 6 for fd 90
+11-23 11:10:05.944  2227  2245 I [Gralloc]: leave, w : 1920, h : 1008, format : 0x2,internal_format : 0x2, usage : 0xb00. size=7741440,pixel_stride=1920,byte_stride=7680
+11-23 11:10:05.944  2227  2245 I [Gralloc]: leave: prime_fd=90,share_attr_fd=91
+11-23 11:10:05.945   309   309 I [Gralloc]: Got handle 8 for fd 55
+11-23 11:10:05.945   309   309 I [Gralloc]: leave, w : 1920, h : 1008, format : 0x2,internal_format : 0x2, usage : 0xb00. size=7741440,pixel_stride=1920,byte_stride=7680
+11-23 11:10:05.945   309   309 I [Gralloc]: leave: prime_fd=55,share_attr_fd=59
+11-23 11:10:05.978   308   478 I [Gralloc]: Got fd 16 for handle 1
+11-23 11:10:05.978   309   309 I [Gralloc]: Got handle 9 for fd 65
+11-23 11:10:05.979   308   478 I [Gralloc]: leave, w : 1920, h : 1008, format : 0x2,internal_format : 0x2, usage : 0xb00. size=7741440,pixel_stride=1920,byte_stride=7680
+11-23 11:10:05.979   308   478 I [Gralloc]: leave: prime_fd=16,share_attr_fd=17
+11-23 11:10:05.979   309   309 I [Gralloc]: leave, w : 1920, h : 1008, format : 0x2,internal_format : 0x2, usage : 0xb00. size=7741440,pixel_stride=1920,byte_stride=7680
+11-23 11:10:05.979   309   309 I [Gralloc]: leave: prime_fd=65,share_attr_fd=68
+11-23 11:10:05.979   318   364 I [Gralloc]: Got handle 7 for fd 78
+11-23 11:10:05.979   318   364 I [Gralloc]: leave, w : 1920, h : 1008, format : 0x2,internal_format : 0x2, usage : 0xb00. size=7741440,pixel_stride=1920,byte_stride=7680
+11-23 11:10:05.979   318   364 I [Gralloc]: leave: prime_fd=78,share_attr_fd=79
+11-23 11:10:05.980  2227  2245 I [Gralloc]: Got handle 7 for fd 93
+11-23 11:10:05.980  2227  2245 I [Gralloc]: leave, w : 1920, h : 1008, format : 0x2,internal_format : 0x2, usage : 0xb00. size=7741440,pixel_stride=1920,byte_stride=7680
+11-23 11:10:05.980  2227  2245 I [Gralloc]: leave: prime_fd=93,share_attr_fd=94
+11-23 11:10:06.011  1363  1920 I SendingNotification: Sending root device messages: http://192.168.31.24:40915/upnp/dev/ac098300-3143-47fe-88ce-17a0ef07c0ea/desc
+11-23 11:10:06.012   309   309 I [Gralloc]: Got handle 10 for fd 58
+11-23 11:10:06.012   309   309 I [Gralloc]: leave, w : 1920, h : 1008, format : 0x2,internal_format : 0x2, usage : 0xb00. size=7741440,pixel_stride=1920,byte_stride=7680
+11-23 11:10:06.012   309   309 I [Gralloc]: leave: prime_fd=58,share_attr_fd=64
+11-23 11:10:06.218  1363  1920 I SendingNotification: Sending root device messages: http://192.168.31.24:40915/upnp/dev/ac098300-3143-47fe-88ce-17a0ef07c0ea/desc
+11-23 11:10:06.800  2227  2311 D ProfileInstaller: Installing profile for com.pae.host
+11-23 11:10:07.598   969  1503 I MgtvP2pManager: 2026-11-23 11:10:07.597 [MGDS:I<1507>]-[EasySignalHelper.cpp:297<reportUploadInfo>] > [signal], reportUploadInfo
+11-23 11:10:08.427  2227  2245 I PAE_STATS: frames=120 fps=48.5 frame_ms=20.61 draw_calls=4 triangles=14064 buffer_bytes=688960 p50_ms=20.84 p95_ms=21.48 p99_ms=34.91
+11-23 11:10:10.931  2227  2245 I PAE_STATS: frames=240 fps=47.9 frame_ms=20.86 draw_calls=4 triangles=14064 buffer_bytes=688960 p50_ms=20.83 p95_ms=21.35 p99_ms=34.60
+11-23 11:10:13.433  2227  2245 I PAE_STATS: frames=360 fps=47.8 frame_ms=20.92 draw_calls=4 triangles=14064 buffer_bytes=688960 p50_ms=20.84 p95_ms=21.29 p99_ms=21.54
+11-23 11:10:15.938  2227  2245 I PAE_STATS: frames=480 fps=47.9 frame_ms=20.87 draw_calls=4 triangles=14064 buffer_bytes=688960 p50_ms=20.85 p95_ms=21.29 p99_ms=21.61
+11-23 11:10:18.439  2227  2245 I PAE_STATS: frames=600 fps=48.0 frame_ms=20.85 draw_calls=4 triangles=14064 buffer_bytes=688960 p50_ms=20.87 p95_ms=21.27 p99_ms=21.61
+11-23 11:10:19.553   969  1503 I MgtvP2pManager: 2026-11-23 11:10:19.547 [MGDS:I<1508>]-[EasyCacheManager.cpp:732<freeMemCacheIfNeeded>] > freeMemCacheIfNeeded by timing, sysSize:1300/1957(MB), limitSize:260.00 MB, cachedSize:0 B
+11-23 11:10:19.553   969  1503 I MgtvP2pManager: 2026-11-23 11:10:19.551 [MGDS:I<1508>]-[EasyCacheManager.cpp:781<deleteFileIfNeeded>] > deleteFileIfNeeded by timing, sysSize:8292/11021(MB), limitSize:256.00 MB, cachedSize:49.87 MB
+11-23 11:10:20.656   969   969 I ReportCache: reprot event for delay
+11-23 11:10:20.663   969  2317 I Launcher-HostDataExchangeAdapter:: requestData => event:appInfo jsonParams: null
+11-23 11:10:20.663   969  2317 D DeviceInfoManager: App Business Version is not Empty
+11-23 11:10:20.949  2227  2245 I PAE_STATS: frames=720 fps=47.9 frame_ms=20.87 draw_calls=4 triangles=14064 buffer_bytes=688960 p50_ms=20.88 p95_ms=21.26 p99_ms=21.56
+11-23 11:10:23.449  2227  2245 I PAE_STATS: frames=840 fps=47.7 frame_ms=20.97 draw_calls=4 triangles=14064 buffer_bytes=688960 p50_ms=20.86 p95_ms=21.29 p99_ms=21.60
+11-23 11:10:25.954  2227  2245 I PAE_STATS: frames=960 fps=48.0 frame_ms=20.85 draw_calls=4 triangles=14064 buffer_bytes=688960 p50_ms=20.85 p95_ms=21.31 p99_ms=21.81
+11-23 11:10:27.672   969  1503 I MgtvP2pManager: 2026-11-23 11:10:27.671 [MGDS:I<1507>]-[EasySignalHelper.cpp:297<reportUploadInfo>] > [signal], reportUploadInfo
+11-23 11:10:28.459  2227  2245 I PAE_STATS: frames=1080 fps=47.7 frame_ms=20.98 draw_calls=4 triangles=14064 buffer_bytes=688960 p50_ms=20.85 p95_ms=21.38 p99_ms=22.01
+11-23 11:10:30.091   462   481 E memtrack: Couldn't load memtrack module
+11-23 11:10:30.092   462   481 W android.os.Debug: failed to get memory consumption info: -1
+11-23 11:10:30.156   462   481 E memtrack: Couldn't load memtrack module
+11-23 11:10:30.156   462   481 W android.os.Debug: failed to get memory consumption info: -1
+11-23 11:10:30.182   462   481 E memtrack: Couldn't load memtrack module
+11-23 11:10:30.182   462   481 W android.os.Debug: failed to get memory consumption info: -1
+11-23 11:10:30.216   462   481 E memtrack: Couldn't load memtrack module
+11-23 11:10:30.216   462   481 W android.os.Debug: failed to get memory consumption info: -1
+11-23 11:10:30.931  2227  2245 I PAE_STATS: frames=1200 fps=48.3 frame_ms=20.70 draw_calls=4 triangles=14064 buffer_bytes=688960 p50_ms=20.86 p95_ms=21.38 p99_ms=21.94
+11-23 11:10:31.238  2227  2256 D TransportRuntime.CctTransportBackend: Making request to: https://firebaselogging.googleapis.com/v0cc/log/batch?format=json_proto3
+11-23 11:10:33.419  2227  2245 I PAE_STATS: frames=1320 fps=47.9 frame_ms=20.87 draw_calls=4 triangles=14064 buffer_bytes=688960 p50_ms=20.84 p95_ms=21.35 p99_ms=21.82
+11-23 11:10:34.559   969  1503 I MgtvP2pManager: 2026-11-23 11:10:34.555 [MGDS:I<1508>]-[EasyCacheManager.cpp:732<freeMemCacheIfNeeded>] > freeMemCacheIfNeeded by timing, sysSize:1300/1957(MB), limitSize:260.00 MB, cachedSize:0 B
+11-23 11:10:34.560   969  1503 I MgtvP2pManager: 2026-11-23 11:10:34.557 [MGDS:I<1508>]-[EasyCacheManager.cpp:781<deleteFileIfNeeded>] > deleteFileIfNeeded by timing, sysSize:8292/11021(MB), limitSize:256.00 MB, cachedSize:49.87 MB
+11-23 11:10:35.917  2227  2245 I PAE_STATS: frames=1440 fps=48.0 frame_ms=20.82 draw_calls=4 triangles=14064 buffer_bytes=688960 p50_ms=20.82 p95_ms=21.25 p99_ms=21.55
