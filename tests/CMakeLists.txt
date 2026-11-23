@@ -13,6 +13,12 @@ target_include_directories(pae_fusion_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/
 target_link_libraries(pae_fusion_tests PRIVATE pae_core)
 add_test(NAME pae_fusion_tests COMMAND pae_fusion_tests)
 
+# G2 (SPEC 6.2 note): smooth-union sign, derived and tested before any edit.
+add_executable(pae_smooth_union_sign_tests unit/smooth_union_sign_tests.cpp)
+target_include_directories(pae_smooth_union_sign_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/harness)
+target_link_libraries(pae_smooth_union_sign_tests PRIVATE pae_core)
+add_test(NAME pae_smooth_union_sign_tests COMMAND pae_smooth_union_sign_tests)
+
 add_executable(pae_face_hair_tests unit/face_hair_tests.cpp)
 target_include_directories(pae_face_hair_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/harness)
 target_link_libraries(pae_face_hair_tests PRIVATE pae_core)
@@ -45,3 +51,32 @@ add_test(NAME pae_character_patch_tests COMMAND pae_character_patch_tests)
 
 add_executable(pae_proportion_probe unit/proportion_probe.cpp)
 target_link_libraries(pae_proportion_probe PRIVATE pae_core)
+
+# G1 (AUTH-07): PoC-A geometry routes R1/R2/R3 + the unified Shape Model
+# parameter contract. These sources are compiled ONLY into the host PoC
+# targets so the production Android build stays untouched.
+set(PAE_POC_SHAPE_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/../native/procedural/shape/ShapeModel.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../native/procedural/shape/QuadTemplate.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../native/procedural/shape/PocRoutes.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../native/procedural/shape/TopologyAudit.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../native/procedural/shape/SurfaceMetrics.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../native/procedural/shape/CameraProtocol.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../native/procedural/shape/LayerAMetrics.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../native/procedural/shape/SkinWeights.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../native/procedural/shape/ImageWriter.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../native/procedural/shape/ClayRenderer.cpp
+)
+
+add_executable(pae_poc_route_tests unit/poc_routes_tests.cpp ${PAE_POC_SHAPE_SOURCES})
+target_include_directories(pae_poc_route_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/harness)
+target_link_libraries(pae_poc_route_tests PRIVATE pae_core)
+add_test(NAME pae_poc_route_tests COMMAND pae_poc_route_tests)
+
+add_executable(poc_route_probe unit/poc_route_probe.cpp ${PAE_POC_SHAPE_SOURCES})
+target_link_libraries(poc_route_probe PRIVATE pae_core)
+
+# G2 (GATE-03): the fair-comparison probe - same input, same reference, same
+# sampling, same camera for every route; E1/E2/E3 measured separately.
+add_executable(poc_fair_comparison_probe unit/poc_fair_comparison_probe.cpp ${PAE_POC_SHAPE_SOURCES})
+target_link_libraries(poc_fair_comparison_probe PRIVATE pae_core)

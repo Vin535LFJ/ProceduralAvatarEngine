@@ -2,6 +2,7 @@
 
 .gradle/
 build/
+build-host/
 local.properties
 *.apk
 *.ap_

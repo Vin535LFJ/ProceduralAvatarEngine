@@ -1,0 +1,13 @@
+[ 81%] Built target pae_core
+Consolidate compiler generated dependencies of target pae_poc_route_tests
+[ 85%] Building CXX object pae_tests/CMakeFiles/pae_poc_route_tests.dir/unit/poc_routes_tests.cpp.obj
+[ 88%] Building CXX object pae_tests/CMakeFiles/pae_poc_route_tests.dir/E_/AI-Tools/ProceduralAvatarEngine-PoC/native/procedural/shape/ShapeModel.cpp.obj
+[ 92%] Linking CXX executable pae_poc_route_tests.exe
+[100%] Built target pae_poc_route_tests
+[ 81%] Built target pae_core
+[ 85%] Building CXX object pae_tests/CMakeFiles/poc_route_probe.dir/unit/poc_route_probe.cpp.obj
+[ 88%] Building CXX object pae_tests/CMakeFiles/poc_route_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-PoC/native/procedural/shape/ShapeModel.cpp.obj
+[ 92%] Building CXX object pae_tests/CMakeFiles/poc_route_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-PoC/native/procedural/shape/QuadTemplate.cpp.obj
+[ 96%] Building CXX object pae_tests/CMakeFiles/poc_route_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-PoC/native/procedural/shape/PocRoutes.cpp.obj
+[100%] Linking CXX executable poc_route_probe.exe
+[100%] Built target poc_route_probe

@@ -475,6 +475,11 @@ void RenderThread::processCommands() {
                 if (humanoid.valid && avatarMesh_.upload(humanoid.mesh)) {
                     skeleton_ = humanoid.skeleton;
                     joints_ = humanoid.joints;
+                    // DEF-01 (Plan B): keep the geometry cache in sync with the
+                    // rebuilt avatar so a later surface re-creation re-uploads
+                    // instead of regenerating.
+                    cachedAvatarMesh_ = humanoid.mesh;
+                    hasCachedAvatar_ = true;
                     ++avatarRevision_; // geometry rebuilt: full avatar revision bump
                     stats_.setBufferBytes(static_cast<uint64_t>(
                         humanoid.mesh.vertices.size() * 64 +
@@ -565,20 +570,32 @@ bool RenderThread::ensureResources(std::string* error) {
     uniformResolution_ = backgroundProgram_.uniform("uResolution");
 
     if (!boneUbo_.create(error)) return false;
-    const HumanoidResult humanoid = generateHumanoid(BodyParameters{}, false);
-    if (!humanoid.valid || !avatarMesh_.upload(humanoid.mesh)) {
+    if (!hasCachedAvatar_) {
+        const HumanoidResult humanoid = generateHumanoid(BodyParameters{}, false);
+        if (!humanoid.valid) {
+            if (error) *error = "skinned humanoid generation failed";
+            return false;
+        }
+        cachedAvatarMesh_ = humanoid.mesh;
+        skeleton_ = humanoid.skeleton;
+        joints_ = humanoid.joints;
+        hasCachedAvatar_ = true;
+        if (!motion_.initialize(skeleton_, joints_)) {
+            if (error) *error = "motion runtime init failed";
+            return false;
+        }
+        ++avatarRevision_;
+        PAE_LOGI("PAE_RENDER", "geometry generated: avatar");
+    } else {
+        PAE_LOGI("PAE_RENDER", "geometry cache hit: avatar");
+    }
+    if (!avatarMesh_.upload(cachedAvatarMesh_)) {
         if (error) *error = "skinned humanoid upload failed";
         return false;
     }
-    skeleton_ = humanoid.skeleton;
-    joints_ = humanoid.joints;
-    if (!motion_.initialize(skeleton_, joints_)) {
-        if (error) *error = "motion runtime init failed";
-        return false;
-    }
-    ++avatarRevision_;
     stats_.setBufferBytes(static_cast<uint64_t>(
-        humanoid.mesh.vertices.size() * 64 + humanoid.mesh.indices.size() * sizeof(uint32_t) +
+        cachedAvatarMesh_.vertices.size() * 64 +
+        cachedAvatarMesh_.indices.size() * sizeof(uint32_t) +
         BonePaletteUboData::kBytes));
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
@@ -586,21 +603,32 @@ bool RenderThread::ensureResources(std::string* error) {
 
     // M12-A: unified SDF upper body for the Anatomy Preview Mode.
     {
-        anatomy::HumanAnatomyParameters anatomyParams;
-        const auto anatomyStart = std::chrono::steady_clock::now();
-        const BodyParameters anatomyBodyParams{};
-        auto anatomy = anatomy::generateAnatomyUpperBody(
-            anatomyParams, anatomyBodyParams, anatomy::AnatomyResolution{});
-        const auto anatomyEnd = std::chrono::steady_clock::now();
-        const double ms = std::chrono::duration<double, std::milli>(
-            anatomyEnd - anatomyStart).count();
-        if (!anatomy.valid || !anatomyMesh_.upload(anatomy.mesh)) {
-            PAE_LOGE("PAE_RENDER", "anatomy mesh upload failed");
+        if (!hasCachedAnatomy_) {
+            anatomy::HumanAnatomyParameters anatomyParams;
+            const auto anatomyStart = std::chrono::steady_clock::now();
+            const BodyParameters anatomyBodyParams{};
+            auto anatomy = anatomy::generateAnatomyUpperBody(
+                anatomyParams, anatomyBodyParams, anatomy::AnatomyResolution{});
+            const auto anatomyEnd = std::chrono::steady_clock::now();
+            const double ms = std::chrono::duration<double, std::milli>(
+                anatomyEnd - anatomyStart).count();
+            if (!anatomy.valid) {
+                PAE_LOGE("PAE_RENDER", "anatomy generation failed");
+            } else {
+                cachedAnatomyMesh_ = anatomy.mesh;
+                hasCachedAnatomy_ = true;
+                PAE_LOGI("PAE_RENDER", "anatomy preview ready: %u tris, %.0f ms",
+                         static_cast<unsigned>(cachedAnatomyMesh_.indices.size() / 3), ms);
+            }
         } else {
-            PAE_LOGI("PAE_RENDER", "anatomy preview ready: %u tris, %.0f ms",
-                     static_cast<unsigned>(anatomy.mesh.indices.size() / 3), ms);
+            PAE_LOGI("PAE_RENDER", "geometry cache hit: anatomy (%u tris)",
+                     static_cast<unsigned>(cachedAnatomyMesh_.indices.size() / 3));
         }
-        if (!anatomyLines_.upload(buildAnatomyLineMesh(anatomy.mesh))) {
+        if (hasCachedAnatomy_ && !anatomyMesh_.upload(cachedAnatomyMesh_)) {
+            PAE_LOGE("PAE_RENDER", "anatomy mesh upload failed");
+        }
+        if (hasCachedAnatomy_ &&
+            !anatomyLines_.upload(buildAnatomyLineMesh(cachedAnatomyMesh_))) {
             PAE_LOGE("PAE_RENDER", "anatomy wireframe upload failed");
         }
     }
@@ -608,23 +636,35 @@ bool RenderThread::ensureResources(std::string* error) {
     // P1-A: surface-patch torso + shoulder bridge + arm PoC. SDF anatomy
     // preview above is preserved as a research/contrast path.
     {
-        CharacterDefinition definition;
-        MeshData patchMesh;
-        if (!BodyPatchGenerator::generate(definition, joints_, skeleton_,
-                                          patchMesh, patchReport_) ||
-            !p1aMesh_.upload(patchMesh)) {
-            PAE_LOGE("PAE_RENDER", "P1-A patch mesh upload failed");
+        bool p1aRegenerated = false;
+        if (!hasCachedP1a_) {
+            CharacterDefinition definition;
+            MeshData patchMesh;
+            if (!BodyPatchGenerator::generate(definition, joints_, skeleton_,
+                                              patchMesh, patchReport_)) {
+                PAE_LOGE("PAE_RENDER", "P1-A patch generation failed");
+            } else {
+                cachedP1aMesh_ = patchMesh;
+                hasCachedP1a_ = true;
+                p1aRegenerated = true;
+            }
         } else {
-            const TopologyReport topology = analyzeTopology(patchMesh);
+            PAE_LOGI("PAE_RENDER", "geometry cache hit: p1a");
+        }
+        if (hasCachedP1a_ && !p1aMesh_.upload(cachedP1aMesh_)) {
+            PAE_LOGE("PAE_RENDER", "P1-A patch mesh upload failed");
+        } else if (hasCachedP1a_) {
+            const TopologyReport topology = analyzeTopology(cachedP1aMesh_);
             PAE_LOGI("PAE_RENDER",
-                     "P1A-REPORT verts=%u tris=%u components=%d boundary=%d nonmanifold=%d "
+                     "P1A-REPORT%s verts=%u tris=%u components=%d boundary=%d nonmanifold=%d "
                      "degenerate=%d badnorm=%d gen_ms=%.3f boundaries=%zu",
+                     p1aRegenerated ? "" : " (cached)",
                      patchReport_.vertexCount, patchReport_.triangleCount,
                      topology.components, topology.boundaryEdges, topology.nonManifoldEdges,
                      topology.degenerateTriangles, topology.invalidNormals,
                      patchReport_.generationMs, patchReport_.boundaries.size());
         }
-        if (!p1aLines_.upload(buildAnatomyLineMesh(patchMesh))) {
+        if (hasCachedP1a_ && !p1aLines_.upload(buildAnatomyLineMesh(cachedP1aMesh_))) {
             PAE_LOGE("PAE_RENDER", "P1-A wireframe upload failed");
         }
     }
@@ -638,6 +678,11 @@ void RenderThread::releaseGpuResources() {
     shadowMesh_.release();
     p1aMesh_.release();
     p1aLines_.release();
+    // DEF-01 (Plan B): the anatomy buffers used to stay alive across a surface
+    // teardown. They are GPU objects and belong to the released set; the
+    // CPU-side mesh stays in the geometry cache for a fast re-upload.
+    anatomyMesh_.release();
+    anatomyLines_.release();
     boneUbo_.release();
     resourcesReady_ = false;
 }

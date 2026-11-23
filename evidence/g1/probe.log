@@ -1,0 +1,67 @@
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=5108 tris=10212 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 gen_ms=190 res=44x66x26 | chest=0.569 waist=0.617 shoulder_x=0.291 pelvis=0.632
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=5108 tris=10212 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 gen_ms=182 res=44x66x26 | chest=0.569 waist=0.617 shoulder_x=0.291 pelvis=0.632
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=5108 tris=10212 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 gen_ms=186 res=44x66x26 | chest=0.569 waist=0.617 shoulder_x=0.291 pelvis=0.632
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=5342 tris=10696 components=1 boundary=0 nonmanifold=2 degen=0 dup=0 badnorm=0 gen_ms=189 res=44x66x26 | chest=0.579 waist=0.617 shoulder_x=0.295 pelvis=0.632
+target reference: valid=1 samples=2066
+# G1 route metrics (host probe)
+
+Target reference: anatomy SDF isosurface, torso + shoulder-root region, 2066 samples.
+Anatomy resolution: 44x66x26.
+
+## Template resolution 10 rings x 16 segments (coarse, unit-test spec)
+
+| Route | Status | Verts | Tris | Quads | Components | Boundary | NonManifold | Degenerate | MeanEdge(m) | E1 mean(m) | E1 max(m) |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| R1 SDF + Surface Nets | FEASIBLE | 5108 | 10212 | 5106 | 1 | 0 | 0 | 0 | 0.017 | 0.0000 | 0.0000 |
+| R2 quad template projected on SDF | FEASIBLE | 162 | 320 | 144 | 1 | 0 | 0 | 0 | 0.069 | 0.0252 | 0.0710 |
+| R3 quad template on B-spline control lattice | FEASIBLE | 162 | 320 | 144 | 1 | 0 | 0 | 0 | 0.057 | 0.0429 | 0.1357 |
+
+- R1 SDF + Surface Nets: generation 194 ms
+- R2 quad template projected on SDF: generation 9 ms
+- R3 quad template on B-spline control lattice: generation 0 ms
+
+## Template resolution 26 rings x 32 segments (production PoC-A spec)
+
+| Route | Status | Verts | Tris | Quads | Components | Boundary | NonManifold | Degenerate | MeanEdge(m) | E1 mean(m) | E1 max(m) |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| R1 SDF + Surface Nets | FEASIBLE | 5108 | 10212 | 5106 | 1 | 0 | 0 | 0 | 0.017 | 0.0000 | 0.0000 |
+| R2 quad template projected on SDF | FEASIBLE | 834 | 1664 | 800 | 1 | 0 | 0 | 0 | 0.032 | 0.0116 | 0.0387 |
+| R3 quad template on B-spline control lattice | FEASIBLE | 834 | 1664 | 800 | 1 | 0 | 0 | 0 | 0.027 | 0.0353 | 0.1332 |
+
+- R1 SDF + Surface Nets: generation 201 ms
+- R2 quad template projected on SDF: generation 53 ms
+- R3 quad template on B-spline control lattice: generation 0 ms
+
+## Topology stability under a shape change
+
+Shape change: chestWidth 1.00 -> 1.15, pelvisWidth 1.00 -> 1.12.
+
+| Route | Verts before | Verts after | Vertex set fixed | Index-wise delta well defined |
+|---|---|---|---|---|
+| R1 SDF + Surface Nets | 5108 | 5342 | NO | NO |
+| R2 quad template projected on SDF | 834 | 834 | yes | yes |
+| R3 quad template on B-spline control lattice | 834 | 834 | yes | yes |
+
+## E1 error distribution by height band (production template)
+
+A DISCRETISATION error shrinks as the template resolution goes up; a MODEL error (the route's shape model cannot represent the anatomy) does not.
+
+**R2 quad template projected on SDF** - E1 by height band (metres):
+
+| Height band | Samples | E1 mean | E1 max |
+|---|---|---|---|
+| y=[0.85, 0.95) | 440 | 0.0093 | 0.0210 |
+| y=[0.95, 1.05) | 350 | 0.0082 | 0.0170 |
+| y=[1.05, 1.15) | 552 | 0.0124 | 0.0365 |
+| y=[1.15, 1.25) | 584 | 0.0143 | 0.0387 |
+| y=[1.25, 1.35) | 92 | 0.0143 | 0.0359 |
+
+**R3 quad template on B-spline control lattice** - E1 by height band (metres):
+
+| Height band | Samples | E1 mean | E1 max |
+|---|---|---|---|
+| y=[0.85, 0.95) | 440 | 0.0134 | 0.0318 |
+| y=[0.95, 1.05) | 350 | 0.0117 | 0.0300 |
+| y=[1.05, 1.15) | 552 | 0.0451 | 0.1332 |
+| y=[1.15, 1.25) | 584 | 0.0550 | 0.1209 |
+| y=[1.25, 1.35) | 92 | 0.0533 | 0.1077 |

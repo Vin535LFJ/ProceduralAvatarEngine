@@ -108,6 +108,15 @@ private:
     Skeleton skeleton_;
     BodyJoints joints_;
     MotionRuntime motion_;
+    // DEF-01 (Plan B): CPU-side geometry cache. A surface (re)creation can then
+    // re-upload GPU buffers instead of regenerating geometry, which used to
+    // block the render thread for ~4.1 s on device and showed a black window.
+    MeshData cachedAvatarMesh_;
+    MeshData cachedAnatomyMesh_;
+    MeshData cachedP1aMesh_;
+    bool hasCachedAvatar_ = false;
+    bool hasCachedAnatomy_ = false;
+    bool hasCachedP1a_ = false;
     GlCapabilities caps_;
     RenderStats stats_;
 

@@ -49,16 +49,31 @@ float sdCapsule(Vec3 p, Vec3 a, Vec3 b, float radius) {
 }
 
 float sdSmoothUnion(float a, float b, float k) {
+    // G2 (SPEC 6.2 note): negative-inside smooth union requires -k*h*(1-h).
+    //
+    // Derivation: with h = clamp(1/2 + (b-a)/(2k),0,1) and
+    // f = b(1-h) + a*h + c*k*h*(1-h), inside the blend band a-b = k(1-2h)
+    // and df/da = h - (1+c)(1-2h)/2, df/db = (1-h) + (1+c)(1-2h)/2.
+    // Only c = -1 keeps both partials in [0,1] (the SDF distance bound);
+    // c = +1 gives 3h-1 and 2-3h, which leave [0,1] when h < 1/3.
+    // At coincident surfaces c = -1 yields f = -k/4 (inside -> the union
+    // bulges outward), while c = +1 yields +k/4 (a carve, not a union).
+    // AnatomyField.cpp already uses the correct sign; this dormant utility
+    // was the only path with the inverted one. See
+    // tests/unit/smooth_union_sign_tests.cpp for the dual-implementation test.
     const float h = std::clamp(0.5f + 0.5f * (b - a) / k, 0.0f, 1.0f);
-    return b * (1.0f - h) + a * h + k * h * (1.0f - h);
+    return b * (1.0f - h) + a * h - k * h * (1.0f - h);
 }
 
 float sdSmoothSubtraction(float a, float b, float k) {
     // a minus b: solid only where a is solid and b is not — a smooth MAX of
     // a and -b (b is an SDF, so -b is negative outside b and positive inside).
+    // A smooth max is -smin(-a,-b), so its smoothing term has the OPPOSITE
+    // sign to the union in this h convention. At coincident surfaces a
+    // subtraction must carve (f = +k/4, outside), hence +k*h*(1-h).
     const float nb = -b;
     const float h = std::clamp(0.5f - 0.5f * (nb - a) / k, 0.0f, 1.0f);
-    return nb * (1.0f - h) + a * h - k * h * (1.0f - h);
+    return nb * (1.0f - h) + a * h + k * h * (1.0f - h);
 }
 
 MeshData extractSurfaceNets(const FusionVolume& volume, const SdfField& sdf,

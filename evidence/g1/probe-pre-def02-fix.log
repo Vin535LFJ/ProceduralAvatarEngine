@@ -1,0 +1,16 @@
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=5108 tris=10212 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 gen_ms=172 res=44x66x26 | chest=0.569 waist=0.617 shoulder_x=0.291 pelvis=0.632
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=5108 tris=10212 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 gen_ms=171 res=44x66x26 | chest=0.569 waist=0.617 shoulder_x=0.291 pelvis=0.632
+target reference: valid=1 samples=3172
+# G1 route metrics (host probe)
+
+Target reference: anatomy SDF isosurface, torso + shoulder-root region, 3172 samples.
+
+| Route | Status | Verts | Tris | Quads | Components | Boundary | NonManifold | Degenerate | MeanEdge(m) | E1 mean(m) | E1 max(m) |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| R1 SDF + Surface Nets | FEASIBLE | 5108 | 10212 | 5106 | 1 | 0 | 0 | 0 | 0.017 | 0.0000 | 0.0000 |
+| R2 quad template projected on SDF | FEASIBLE | 860 | 1664 | 800 | 1 | 54 | 0 | 0 | 0.033 | 0.0433 | 0.1501 |
+| R3 quad template on B-spline control lattice | FEASIBLE | 860 | 1664 | 800 | 1 | 54 | 0 | 0 | 0.028 | 0.0533 | 0.1436 |
+
+- R1 SDF + Surface Nets: generation 183 ms
+- R2 quad template projected on SDF: generation 41 ms
+- R3 quad template on B-spline control lattice: generation 0 ms

@@ -1,0 +1,73 @@
+[ RUN ] shape_parameter_contract_is_complete
+[  OK ] shape_parameter_contract_is_complete
+[ RUN ] shape_parameter_write_validates_range_and_name
+[  OK ] shape_parameter_write_validates_range_and_name
+[ RUN ] route_r2_r3_topology_is_parameter_independent
+[  OK ] route_r2_r3_topology_is_parameter_independent
+[ RUN ] routes_share_one_skeleton
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=5108 tris=10212 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 gen_ms=186 res=44x66x26 | chest=0.569 waist=0.617 shoulder_x=0.291 pelvis=0.632
+  reference skeleton: hips y=0.864 chest y=1.254 shoulder x=0.202 elbow x=0.252
+  hardcoded BodyJoints{}: hips y=0.900 chest y=1.350 shoulder x=0.200 elbow x=0.400 (NOT used)
+[  OK ] routes_share_one_skeleton
+[ RUN ] route_r1_topology_is_not_fixed
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=5108 tris=10212 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 gen_ms=185 res=44x66x26 | chest=0.569 waist=0.617 shoulder_x=0.291 pelvis=0.632
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=5342 tris=10696 components=1 boundary=0 nonmanifold=2 degen=0 dup=0 badnorm=0 gen_ms=187 res=44x66x26 | chest=0.579 waist=0.617 shoulder_x=0.295 pelvis=0.632
+  R1 verts 5108 -> 5342 (topology NOT fixed)
+  R2 verts 162 -> 162, R3 verts 162 -> 162 (topology fixed)
+[  OK ] route_r1_topology_is_not_fixed
+[ RUN ] route_topology_is_clean
+[  OK ] route_topology_is_clean
+[ RUN ] declared_only_parameters_have_zero_effect
+  [declared-only] torsoHeight        R2 delta=0 R3 delta=0
+  [declared-only] upperArmLength     R2 delta=0 R3 delta=0
+  [declared-only] stylization        R2 delta=0 R3 delta=0
+[  OK ] declared_only_parameters_have_zero_effect
+[ RUN ] wired_parameters_effect_is_measured
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=5108 tris=10212 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 gen_ms=180 res=44x66x26 | chest=0.569 waist=0.617 shoulder_x=0.291 pelvis=0.632
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=5108 tris=10212 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 gen_ms=185 res=44x66x26 | chest=0.569 waist=0.617 shoulder_x=0.291 pelvis=0.632
+  [wired] shoulderWidth      R1=0.000000                 R2=0.000000   R3=0.000000   MASKED(read but not visible)
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=5140 tris=10276 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 gen_ms=188 res=44x66x26 | chest=0.572 waist=0.617 shoulder_x=0.294 pelvis=0.632
+  [wired] chestWidth         R1=N/A(vertex set changed)  R2=0.010170   R3=0.007320   EFFECTIVE
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=5136 tris=10268 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 gen_ms=186 res=44x66x26 | chest=0.568 waist=0.617 shoulder_x=0.291 pelvis=0.632
+  [wired] chestDepth         R1=N/A(vertex set changed)  R2=0.005995   R3=0.004946   EFFECTIVE
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=5112 tris=10220 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 gen_ms=181 res=44x66x26 | chest=0.569 waist=0.617 shoulder_x=0.291 pelvis=0.632
+  [wired] waistWidth         R1=N/A(vertex set changed)  R2=0.005582   R3=0.005627   EFFECTIVE
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=5104 tris=10204 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 gen_ms=182 res=44x66x26 | chest=0.569 waist=0.617 shoulder_x=0.291 pelvis=0.632
+  [wired] waistDepth         R1=N/A(vertex set changed)  R2=0.004314   R3=0.004215   EFFECTIVE
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=5170 tris=10336 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 gen_ms=186 res=44x66x26 | chest=0.569 waist=0.617 shoulder_x=0.291 pelvis=0.632
+  [wired] pelvisWidth        R1=N/A(vertex set changed)  R2=0.009651   R3=0.007205   EFFECTIVE
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=5112 tris=10220 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 gen_ms=180 res=44x66x26 | chest=0.569 waist=0.617 shoulder_x=0.291 pelvis=0.632
+  [wired] ribCageVolume      R1=N/A(vertex set changed)  R2=0.001115   R3=0.000586   EFFECTIVE
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=5112 tris=10220 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 gen_ms=177 res=44x66x26 | chest=0.569 waist=0.617 shoulder_x=0.291 pelvis=0.632
+  [wired] abdominalVolume    R1=N/A(vertex set changed)  R2=0.000442   R3=0.000000   EFFECTIVE
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=5106 tris=10208 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 gen_ms=178 res=44x66x26 | chest=0.569 waist=0.617 shoulder_x=0.291 pelvis=0.632
+  [wired] backDepth          R1=N/A(vertex set changed)  R2=0.011244   R3=0.000000   EFFECTIVE
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=5108 tris=10212 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 gen_ms=174 res=44x66x26 | chest=0.569 waist=0.617 shoulder_x=0.291 pelvis=0.632
+  [wired] waistCurvature     R1=0.916667                 R2=0.002272   R3=0.002318   EFFECTIVE
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=5108 tris=10212 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 gen_ms=181 res=44x66x26 | chest=0.569 waist=0.617 shoulder_x=0.291 pelvis=0.632
+  [wired] clavicleWidth      R1=0.864243                 R2=0.001481   R3=0.000000   EFFECTIVE
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=5148 tris=10292 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 gen_ms=180 res=44x66x26 | chest=0.573 waist=0.617 shoulder_x=0.294 pelvis=0.632
+  [wired] deltoidVolume      R1=N/A(vertex set changed)  R2=0.009032   R3=0.000000   EFFECTIVE
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=5092 tris=10180 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 gen_ms=192 res=44x66x26 | chest=0.570 waist=0.617 shoulder_x=0.291 pelvis=0.632
+  [wired] shoulderSlope      R1=N/A(vertex set changed)  R2=0.000889   R3=0.000000   EFFECTIVE
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=5116 tris=10228 components=1 boundary=0 nonmanifold=0 degen=4 dup=0 badnorm=0 gen_ms=186 res=44x66x26 | chest=0.570 waist=0.617 shoulder_x=0.292 pelvis=0.632
+  [wired] axillaDepth        R1=N/A(vertex set changed)  R2=0.004914   R3=0.000000   EFFECTIVE
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=5116 tris=10228 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 gen_ms=182 res=44x66x26 | chest=0.572 waist=0.617 shoulder_x=0.294 pelvis=0.632
+  [wired] upperArmVolume     R1=N/A(vertex set changed)  R2=0.001193   R3=0.000000   EFFECTIVE
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=5120 tris=10236 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 gen_ms=186 res=44x66x26 | chest=0.570 waist=0.617 shoulder_x=0.291 pelvis=0.632
+  [wired] elbowWidth         R1=N/A(vertex set changed)  R2=0.000539   R3=0.000000   EFFECTIVE
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=5108 tris=10212 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 gen_ms=185 res=44x66x26 | chest=0.569 waist=0.617 shoulder_x=0.291 pelvis=0.633
+  [wired] forearmLength      R1=0.000653                 R2=0.000000   R3=0.000000   EFFECTIVE
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=5112 tris=10220 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 gen_ms=186 res=44x66x26 | chest=0.569 waist=0.619 shoulder_x=0.291 pelvis=0.636
+  [wired] forearmVolume      R1=N/A(vertex set changed)  R2=0.000002   R3=0.000000   MASKED(read but not visible)
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=5112 tris=10220 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 gen_ms=174 res=44x66x26 | chest=0.569 waist=0.618 shoulder_x=0.291 pelvis=0.633
+  [wired] wristWidth         R1=N/A(vertex set changed)  R2=0.000000   R3=0.000000   MASKED(read but not visible)
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=5236 tris=10472 components=1 boundary=0 nonmanifold=2 degen=0 dup=0 badnorm=0 gen_ms=186 res=44x66x26 | chest=0.576 waist=0.619 shoulder_x=0.294 pelvis=0.635
+  [wired] smoothness         R1=N/A(vertex set changed)  R2=0.129422   R3=0.000000   EFFECTIVE
+  wired parameters with measurable effect: 17, masked: 3
+[  OK ] wired_parameters_effect_is_measured
+[ RUN ] e1_is_measured_per_route
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=5108 tris=10212 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 gen_ms=186 res=44x66x26 | chest=0.569 waist=0.617 shoulder_x=0.291 pelvis=0.632
+  E1 target samples=2066  R2 mean=0.02519 max=0.07098  R3 mean=0.04295 max=0.13573
+[  OK ] e1_is_measured_per_route
+9 cases, 0 failures

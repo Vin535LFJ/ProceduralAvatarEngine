@@ -1,0 +1,36 @@
+--------- beginning of system
+--------- beginning of main
+11-23 18:50:03.569 15865 15865 I PAE_JNI : runtime created
+11-23 18:50:03.588 15865 15894 I PAE_EGL : EGL initialized version 1.4
+11-23 18:50:03.590 15865 15894 I PAE_EGL : GLES 3.0 EGL context created
+11-23 18:50:03.972 15865 15865 I PAE_UI  : debug extras: anatomy=false preset=0 view=0
+11-23 18:50:08.591 15865 15894 I PAE_RENDER: anatomy preview ready: 40984 tris, 4120 ms
+11-23 18:50:08.915 15865 15894 I PAE_RENDER: P1A-REPORT verts=870 tris=1664 components=1 boundary=80 nonmanifold=0 degenerate=0 badnorm=0 gen_ms=2.381 boundaries=4
+11-23 18:50:08.927 15865 15894 I PAE_RENDER: surface ready 1920x1008
+11-23 18:51:10.980 15865 15865 I PAE_UI  : frames=2983 fps=54.6 frame_ms=18.30 draw_calls=4 triangles=14064 buffer_bytes=688960 p50_ms=20.93 p95_ms=21.21 p99_ms=21.57 avatar_rev=2 scene_rev=1 
+11-23 18:51:14.220 15865 15865 I PAE_UI  : anatomy preview -> true (bind pose, neutral material)
+11-23 18:51:14.222 15865 15894 I PAE_RENDER: applied anatomyPreview=1
+11-23 18:51:18.606 15865 15865 I PAE_UI  : debug view -> 1 (0 shading, 1 wireframe, 2 normals, 3 gray clay)
+11-23 18:51:18.613 15865 15894 I PAE_RENDER: applied debugView=1
+11-23 18:51:21.970 15865 15865 I PAE_UI  : debug view -> 2 (0 shading, 1 wireframe, 2 normals, 3 gray clay)
+11-23 18:51:21.985 15865 15894 I PAE_RENDER: applied debugView=2
+11-23 18:51:25.409 15865 15865 I PAE_UI  : debug view -> 3 (0 shading, 1 wireframe, 2 normals, 3 gray clay)
+11-23 18:51:25.410 15865 15894 I PAE_RENDER: applied debugView=3
+11-23 18:51:35.020 15865 15865 I PAE_UI  : camera preset -> 1 (0F/1B/2L/3R/4-5 45deg/6 shoulder/7 torso)
+11-23 18:51:35.022 15865 15894 I PAE_RENDER: applied cameraPreset=1
+11-23 18:51:36.622 15865 15865 I PAE_UI  : camera preset -> 2 (0F/1B/2L/3R/4-5 45deg/6 shoulder/7 torso)
+11-23 18:51:36.627 15865 15894 I PAE_RENDER: applied cameraPreset=2
+11-23 18:51:38.219 15865 15865 I PAE_UI  : camera preset -> 3 (0F/1B/2L/3R/4-5 45deg/6 shoulder/7 torso)
+11-23 18:51:38.228 15865 15894 I PAE_RENDER: applied cameraPreset=3
+11-23 18:51:39.839 15865 15865 I PAE_UI  : camera preset -> 4 (0F/1B/2L/3R/4-5 45deg/6 shoulder/7 torso)
+11-23 18:51:39.851 15865 15894 I PAE_RENDER: applied cameraPreset=4
+11-23 18:51:41.455 15865 15865 I PAE_UI  : camera preset -> 5 (0F/1B/2L/3R/4-5 45deg/6 shoulder/7 torso)
+11-23 18:51:41.463 15865 15894 I PAE_RENDER: applied cameraPreset=5
+11-23 18:51:43.086 15865 15865 I PAE_UI  : camera preset -> 6 (0F/1B/2L/3R/4-5 45deg/6 shoulder/7 torso)
+11-23 18:51:43.094 15865 15894 I PAE_RENDER: applied cameraPreset=6
+11-23 18:51:47.503 15865 15865 I PAE_UI  : camera preset -> 7 (0F/1B/2L/3R/4-5 45deg/6 shoulder/7 torso)
+11-23 18:51:47.508 15865 15894 I PAE_RENDER: applied cameraPreset=7
+11-23 18:53:39.642 15865 15894 I PAE_EGL : EGLSurface destroyed
+11-23 18:53:47.238 15865 15894 I PAE_RENDER: anatomy preview ready: 40984 tris, 4125 ms
+11-23 18:53:47.562 15865 15894 I PAE_RENDER: P1A-REPORT verts=870 tris=1664 components=1 boundary=80 nonmanifold=0 degenerate=0 badnorm=0 gen_ms=2.418 boundaries=4
+11-23 18:53:47.574 15865 15894 I PAE_RENDER: surface ready 1920x1008

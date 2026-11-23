@@ -1,0 +1,30 @@
+--------- beginning of system
+--------- beginning of main
+11-23 19:08:55.235 16661 16661 I PAE_JNI : runtime created
+11-23 19:08:55.250 16661 16689 I PAE_EGL : EGL initialized version 1.4
+11-23 19:08:55.253 16661 16689 I PAE_EGL : GLES 3.0 EGL context created
+11-23 19:08:55.724 16661 16661 I PAE_UI  : debug extras: anatomy=false preset=0 view=0
+11-23 19:08:56.082 16661 16689 I PAE_RENDER: geometry generated: avatar
+11-23 19:09:00.223 16661 16689 I PAE_RENDER: anatomy preview ready: 40984 tris, 4100 ms
+11-23 19:09:00.642 16661 16689 I PAE_RENDER: P1A-REPORT verts=870 tris=1664 components=1 boundary=80 nonmanifold=0 degenerate=0 badnorm=0 gen_ms=2.420 boundaries=4
+11-23 19:09:00.653 16661 16689 I PAE_RENDER: surface ready 1920x1008
+11-23 19:09:02.944 16661 16689 I PAE_EGL : EGLSurface destroyed
+11-23 19:09:05.425 16661 16689 I PAE_RENDER: geometry cache hit: avatar
+11-23 19:09:05.465 16661 16689 I PAE_RENDER: geometry cache hit: anatomy (40984 tris)
+11-23 19:09:05.886 16661 16689 I PAE_RENDER: geometry cache hit: p1a
+11-23 19:09:05.906 16661 16689 I PAE_RENDER: P1A-REPORT verts=870 tris=1664 components=1 boundary=80 nonmanifold=0 degenerate=0 badnorm=0 gen_ms=2.420 boundaries=4
+11-23 19:09:05.918 16661 16689 I PAE_RENDER: surface ready 1920x1008
+11-23 19:10:14.955 16869 16869 I PAE_JNI : runtime created
+11-23 19:10:14.973 16869 16899 I PAE_EGL : EGL initialized version 1.4
+11-23 19:10:14.976 16869 16899 I PAE_EGL : GLES 3.0 EGL context created
+11-23 19:10:15.367 16869 16869 I PAE_UI  : debug extras: anatomy=false preset=0 view=0
+11-23 19:10:15.711 16869 16899 I PAE_RENDER: geometry generated: avatar
+11-23 19:10:19.866 16869 16899 I PAE_RENDER: anatomy preview ready: 40984 tris, 4113 ms
+11-23 19:10:20.288 16869 16899 I PAE_RENDER: P1A-REPORT verts=870 tris=1664 components=1 boundary=80 nonmanifold=0 degenerate=0 badnorm=0 gen_ms=2.432 boundaries=4
+11-23 19:10:20.300 16869 16899 I PAE_RENDER: surface ready 1920x1008
+11-23 19:10:22.559 16869 16899 I PAE_EGL : EGLSurface destroyed
+11-23 19:10:24.862 16869 16899 I PAE_RENDER: geometry cache hit: avatar
+11-23 19:10:24.908 16869 16899 I PAE_RENDER: geometry cache hit: anatomy (40984 tris)
+11-23 19:10:25.317 16869 16899 I PAE_RENDER: geometry cache hit: p1a
+11-23 19:10:25.337 16869 16899 I PAE_RENDER: P1A-REPORT (cached) verts=870 tris=1664 components=1 boundary=80 nonmanifold=0 degenerate=0 badnorm=0 gen_ms=2.432 boundaries=4
+11-23 19:10:25.349 16869 16899 I PAE_RENDER: surface ready 1920x1008

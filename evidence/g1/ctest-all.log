@@ -1,0 +1,26 @@
+Internal ctest changing into directory: E:/AI-Tools/ProceduralAvatarEngine-PoC/build-host
+Test project E:/AI-Tools/ProceduralAvatarEngine-PoC/build-host
+      Start  1: pae_core_tests
+ 1/10 Test  #1: pae_core_tests ...................   Passed    0.12 sec
+      Start  2: pae_geometry_tests
+ 2/10 Test  #2: pae_geometry_tests ...............   Passed    0.10 sec
+      Start  3: pae_fusion_tests
+ 3/10 Test  #3: pae_fusion_tests .................   Passed    0.12 sec
+      Start  4: pae_face_hair_tests
+ 4/10 Test  #4: pae_face_hair_tests ..............   Passed    0.13 sec
+      Start  5: pae_anatomy_tests
+ 5/10 Test  #5: pae_anatomy_tests ................   Passed    1.43 sec
+      Start  6: pae_humanoid_tests
+ 6/10 Test  #6: pae_humanoid_tests ...............   Passed    0.14 sec
+      Start  7: pae_skinning_tests
+ 7/10 Test  #7: pae_skinning_tests ...............   Passed    0.13 sec
+      Start  8: pae_motion_tests
+ 8/10 Test  #8: pae_motion_tests .................   Passed    0.17 sec
+      Start  9: pae_character_patch_tests
+ 9/10 Test  #9: pae_character_patch_tests ........   Passed    0.15 sec
+      Start 10: pae_poc_route_tests
+10/10 Test #10: pae_poc_route_tests ..............   Passed    5.90 sec
+
+100% tests passed, 0 tests failed out of 10
+
+Total Test time (real) =   8.48 sec
