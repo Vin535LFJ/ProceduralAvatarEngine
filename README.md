@@ -1,10 +1,26 @@
 # Procedural Character Foundation v1.0
 
-本交付包包含三份正式工程文档：
+本仓库包含三份冻结的正式工程文档（v1.0 基线，位于仓库根目录）：
 
 1. `01_Procedural_Character_Foundation_Specification_v1.0.md` — 技术设计规范：定义架构、几何主线、骨骼/坐标/蒙皮契约、数据结构、性能和验收标准。
 2. `02_Procedural_Character_Development_Roadmap_v1.0.md` — 开发指导计划：定义 P0–P5 阶段、需求/设计/实施/验证/验收闭环。
 3. `03_AI_Engineering_Execution_Prompt_v1.0.md` — AI 工程执行提示词：指导 Agent 按规范与计划审计和实施，避免一次性扩张范围。
+
+## 当前设计文档索引（2026-11-23 更新）
+
+| 状态 | 文档 | 说明 |
+|---|---|---|
+| 当前基线（冻结） | `01_Procedural_Character_Foundation_Specification_v1.0.md` | P0 冻结的架构/骨架/网格/蒙皮/视觉/线程契约 |
+| 当前基线（冻结） | `02_Procedural_Character_Development_Roadmap_v1.0.md` | P0–P5 路线图 |
+| 当前基线（冻结） | `03_AI_Engineering_Execution_Prompt_v1.0.md` | AI 工程执行提示词 |
+| 新路线设计提案（PROPOSAL，未批准） | `ProceduralAvatarEngine-Anatomy-driven-Geometry-Redesign-v1.0.zip` | Anatomy-driven Geometry 设计包原始 zip |
+| 新路线设计提案（PROPOSAL，未批准） | `docs/proposals/anatomy-driven-geometry-redesign/` | 上述 zip 解压后的 README + 00–09 共 11 份文档 |
+| 新路线开发总提示词 | `ProceduralAvatarEngine-Anatomy-driven-Geometry-Development-Prompt-v1.0.md` | 新路线的开发闸门与流程约束 |
+| 新路线实施规格（DRAFT，未批准） | `docs/phases/anatomy-driven-geometry-poc/00-implementation-spec.md` | 第一阶段仓库/源码审查、D-01…D-10 OPEN 决策、G0/A 规格草案 |
+| 历史文档 | [`docs/archive/README.md`](docs/archive/README.md) | 已归档的 M 路线 v1.1 / 初版 zip 快照索引；仅作追溯，不作开发依据 |
+
+> 重要：Anatomy-driven Geometry 相关文件状态为 PROPOSAL / DRAFT，**未获批准**，不取代冻结的 01/02/03 与
+> `docs/foundation/*`、`docs/architecture-decisions/*`。P1-A 视觉 Gate 仍为 REJECTED。
 
 ## 使用顺序
 
