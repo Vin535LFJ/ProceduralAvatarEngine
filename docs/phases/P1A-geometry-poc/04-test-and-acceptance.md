@@ -14,7 +14,7 @@
 | 固定相机证据 | PASS | `clay_preset0..7.png`（gray Lambert），`wire_front/shoulder.png`，`normals_front/shoulder.png`，`action_elbow_front/shoulder.png` |
 | 与 M11/M12 同机位对照 | PASS（证据已提交，结论待用户） | P1-A `clay_presetN.png` 与 `docs/phases/M12-unified-human-geometry/evidence/dv3_presetN.png` 使用相同 preset 0..7 |
 | 关节动作 | PARTIAL | 屈肘动作可见连续变形；动作前后仍有可见局部折痕/接缝，见下 |
-| 用户视觉 Gate | **NOT VERIFIED** | 提交证据等待项目负责人确认；未进入 P1-B |
+| 用户视觉 Gate | **REJECTED** | 项目负责人判定“目前效果特别差了”；缺陷清单见 `06-visual-defect-report.md`；未进入 P1-B |
 
 ## 视觉自评（不代替用户 Gate）
 

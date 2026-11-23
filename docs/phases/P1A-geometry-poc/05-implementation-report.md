@@ -2,7 +2,7 @@
 
 ## 阶段结论
 
-- 状态：**NOT VERIFIED（证据已提交，等待用户视觉 Gate）**
+- 状态：**REJECTED（用户视觉 Gate 未通过；最新代码与缺陷全部保留）**
 - 前一提交：`3e573dd`；本阶段提交：见 `git log -1 --format=%H -- docs/phases/P1A-geometry-poc`。
 - 完成：视觉目标补充契约、Rig-aware Landmark 驱动、Topology Template / boundary 契约、非圆 Variable-profile Sweep、PTF、面积加权法线、Patch Assembler、真机多视角灰模证据、同机位新旧对照、动作与性能数据。
 - 未完成：用户视觉确认；P1-B 全部内容；最终商业外观（P3）。
@@ -47,4 +47,4 @@
 
 工程上已证明该路线能生成单一连通、非退化、法线合法的程序化局部人体，并能在 Android GLES3 真机运行。视觉上仍有肩部细暗线、臂部一定圆管感与肘部轻微折痕；这些没有被隐藏或包装成通过。是否达到项目负责人要求的视觉方向，必须由用户裁决。
 
-按规则：**P1-A Gate 未确认，不进入 P1-B**。
+按规则：**P1-A Gate 已被项目方否定，不进入 P1-B**；失败原因与保留内容见 `06-visual-defect-report.md`。

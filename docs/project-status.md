@@ -3,7 +3,7 @@
 > 本文件是项目状态的**唯一**入口。不要再创建 `PROJECT_STATUS.md` 等仅大小写/下划线不同的副本。
 
 - 更新：2026-11-23
-- 当前阶段：**P1-A 证据已提交，等待用户视觉 Gate**（P0 Gate 已由用户确认进入 P1-A；P1-A Gate 状态 NOT VERIFIED）
+- 当前阶段：**P1-A 视觉 Gate REJECTED，停留在 P1-A**（项目方判定效果特别差；最新代码、截图和缺陷全部保留）
 - P0 提交：`835dc71 docs+fix: freeze P0 contracts and correct shoulder bone semantics`，已推送 `feature/procedural-character-foundation`；基线提交 `399967f`。
 - 权威基线：`01_Procedural_Character_Foundation_Specification_v1.0.md`、`02_Procedural_Character_Development_Roadmap_v1.0.md`、`03_AI_Engineering_Execution_Prompt_v1.0.md`、`README.md`（位于仓库根目录；用户引用的同名子目录当前不存在，仅有 zip）。
 
@@ -21,7 +21,7 @@
 | Gate | 状态 | 说明 |
 |---|---|---|
 | P0 | NOT VERIFIED | 契约/审计/ADR 已写入，待用户确认 |
-| P1-A | NOT VERIFIED（证据已提交） | 新几何 PoC 已在真机运行并提交 8 视角灰模/线框/法线/动作证据；仍有肩部细暗线、臂部圆管感、肘部轻微折痕；未进入 P1-B |
+| P1-A | REJECTED | 项目方判定效果特别差；工程指标通过但视觉不达标。缺陷档案 `docs/phases/P1A-geometry-poc/06-visual-defect-report.md`；不进入 P1-B |
 | P1-B/C/D + P1 最终 | NOT VERIFIED | 严格串行，不提前开始 |
 | P2/P3 | NOT VERIFIED | 等 P1 Gate |
 | P4 | 分项状态见下表 | 视频链路与实时摄像头分开判定 |
