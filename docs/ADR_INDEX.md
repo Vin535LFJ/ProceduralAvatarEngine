@@ -16,6 +16,7 @@
 | ADR-010 | P1 正式人体主线 | Accepted（待用户 P0 Gate 确认） |
 | ADR-011 | CharacterDefinition 分层 Shape Model 契约 | **Accepted**（2026-11-24；仅批准契约结构 + 冻结边界 F-1..F-6，不构成任何 Gate 的 PASS） |
 | ADR-012 | Saltline 程序化资源生成方法独立模块研究 | **Accepted — Research Only**（2026-11-24；不引入 Three.js / 网页运行时；非 PoC-SM 强制前置） |
+| ADR-013 | AI 开发轮次的验收契约 | **Accepted**（2026-11-24；每轮必须交代码 + 视觉证据 + 验收结果，缺一不计工程里程碑；权威正文 `AGENT.md`） |
 
 详见 `docs/architecture-decisions/ADR-010-p1-surface-patch-mainline.md`。
 ADR-011 / ADR-012 见 `docs/architecture-decisions/ADR-011-shape-model-contract.md`、

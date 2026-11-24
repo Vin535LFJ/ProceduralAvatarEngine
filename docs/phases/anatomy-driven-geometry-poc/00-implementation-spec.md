@@ -568,6 +568,13 @@ G0 未过 → 不开始 G1。
 
 流程：`grill-with-docs → to-spec → to-tickets → implement + tdd → 独立 code-review → retro`。本阶段只到 to-spec（candidate）。TDD 顺序：先写失败测试（参数校验、landmark 约束、真实 C0/G1、topology、权重、确定性、极端参数），再写最小实现；不通过改弱断言让测试变绿。报告状态只用 `PASS / FAIL / PARTIAL / NOT VERIFIED`；未执行项 `NOT RUN`，不预写 PASS。
 
+> **验收契约（ADR-013，2026-11-24 ACCEPTED）**：上述状态语义已从"报告用语"升级为**拒收条件**。
+> 每轮必须交出三类实际产出——①代码（可运行实现 + 测试 + 明确 Git Diff）、
+> ②视觉证据（本轮新生成的人体图片 / 视角对照 / 几何测量）、
+> ③验收结果（测试日志原文 / 失败项 / 参数影响 / 未验证项）。
+> 无三类产出的轮次**不计工程里程碑**。权威正文见仓库根 `AGENT.md`；
+> 自检清单与拒收反例见 `AGENT.md` §4/§5。
+
 ## 16. 文件边界与回滚 `[FACT]` `[RECOMMENDATION]`
 
 - 本阶段新增：`00-implementation-spec.md`（本文件，修订）、`01-spec-consolidation-change-report.md`（变更清单）。
