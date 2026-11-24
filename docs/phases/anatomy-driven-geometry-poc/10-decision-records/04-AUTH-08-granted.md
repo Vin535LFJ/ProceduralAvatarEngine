@@ -107,8 +107,16 @@ git -C "E:/AI-Tools/ProceduralAvatarEngine-poc-sm" checkout <GOV_COMMIT> -- docs
 | worktree 路径 | `E:/AI-Tools/ProceduralAvatarEngine-poc-sm` ✅ 已创建 |
 | 分支 | `poc-sm/shape-model-v2` ✅ 已创建 |
 | 起点 commit | `a32251bf798e46159696a637a699a062453df345` ✅ |
+| 治理上下文带入 | commit `3b3532e`（`docs/` 树取自 `d085ff3`），已推送 `origin/poc-sm/shape-model-v2` ✅ |
 | `git worktree list` | 现有 **3** 项（原工作区 / PoC-A 工作区 / poc-sm 工作区）✅ |
 | 新 worktree `git status` | 干净 ✅ |
+| 生产代码改动 | **无** —— 仅 `docs/` 与 `.gitattributes`；`native/` `tests/` `tools/` `evidence/` `app/` 均未触碰 ✅ |
+
+> **分支结构**：
+> `poc-sm/shape-model-v2` = `a32251b`（G2 证据冻结点）+ `3b3532e`（治理上下文带入）。
+> 真正的 PoC-SM 实现提交将叠加在 `3b3532e` 之上。
+> 回滚 = 删除该分支与 worktree，`a32251b` 的 G2 证据与
+> `origin/feature/procedural-character-foundation` 均不受影响（RB-2 / RB-3）。
 
 > **采用 `checkout -- docs/` 而非 `cherry-pick`**：cherry-pick 会在新分支产生多个与 PoC-SM 无关的提交，污染分支历史；
 > `checkout -- docs/` 只取文件树。两种方式产出的 `docs/` 内容**完全等价**。
