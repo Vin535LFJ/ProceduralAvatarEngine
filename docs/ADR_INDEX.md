@@ -14,5 +14,14 @@
 | ADR-008 | 人体几何选型 | 部分被 ADR-010 取代 |
 | ADR-009 | 统一 SDF 上半身 | 在 P1 最终人体唯一主线范围内被 ADR-010 取代；SDF 仍可做局部辅助研究 |
 | ADR-010 | P1 正式人体主线 | Accepted（待用户 P0 Gate 确认） |
+| ADR-011 | CharacterDefinition 分层 Shape Model 契约 | **Accepted**（2026-11-24；仅批准契约结构 + 冻结边界 F-1..F-6，不构成任何 Gate 的 PASS） |
+| ADR-012 | Saltline 程序化资源生成方法独立模块研究 | **Accepted — Research Only**（2026-11-24；不引入 Three.js / 网页运行时；非 PoC-SM 强制前置） |
 
 详见 `docs/architecture-decisions/ADR-010-p1-surface-patch-mainline.md`。
+ADR-011 / ADR-012 见 `docs/architecture-decisions/ADR-011-shape-model-contract.md`、
+`docs/architecture-decisions/ADR-012-saltline-module-study.md`。
+
+> **决策记录归档**：`docs/phases/anatomy-driven-geometry-poc/10-decision-records/`
+> 收录 2026-11-24 签署的 ADR-011 / ADR-012、OQ-03（≤5° 硬条件与测量口径）、
+> OQ-05（G3 DEFER）、AUTH-08（授权书）五份决策记录。
+> 2026-11-23 的 `.draft.md` 版本已由 Git 历史保留（提交 `1ce1a21`）。

@@ -1,0 +1,20 @@
+# Scoped EOL pinning for the blocker-closure package.
+#
+# SHA256SUMS.txt in this folder records SHA256 over the exact bytes of the 13
+# markdown deliverables. The repository-wide setting core.autocrlf=true would
+# otherwise check these files out as CRLF on Windows, so a reviewer's
+# `sha256sum -c SHA256SUMS.txt` would report 13 mismatches that are pure
+# line-ending artifacts, not content drift.
+#
+# `text eol=lf` keeps the blob in the index as LF (unchanged) and forces the
+# working-tree copy to LF on every platform, so the recorded hashes verify
+# byte-for-byte on Linux, macOS and Windows alike.
+#
+# Scope is deliberately limited to this folder and the sibling 08- folder so
+# that no pre-existing file in the repository has its checkout behaviour
+# changed by this commit.
+docs/phases/anatomy-driven-geometry-poc/08-dec05-visual-direction-review/*.md text eol=lf
+docs/phases/anatomy-driven-geometry-poc/08-dec05-visual-direction-review/*.txt text eol=lf
+docs/phases/anatomy-driven-geometry-poc/09-blocker-closure-auth08/*.md text eol=lf
+docs/phases/anatomy-driven-geometry-poc/09-blocker-closure-auth08/*.txt text eol=lf
+docs/phases/anatomy-driven-geometry-poc/10-decision-records/*.md text eol=lf

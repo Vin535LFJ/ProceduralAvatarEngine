@@ -2,7 +2,27 @@
 
 > 本文件是项目状态的**唯一**入口。不要再创建 `PROJECT_STATUS.md` 等仅大小写/下划线不同的副本。
 
-- 更新：2026-11-23
+> ### ⚠️ 本文件已不是当前阶段的权威状态源（2026-11-24 标注）
+>
+> 本文件正文描述的是 **P1-A 阶段**（截至 2026-11-23），**不包含**其后的
+> Anatomy-driven Geometry PoC 阶段进展：G0/G1/G2 证据、**G3 = `DEFER`（已签署）**、
+> **ADR-011 = `ACCEPTED`**、**ADR-012 = `ACCEPTED — RESEARCH ONLY`**、
+> **AUTH-08 = `GRANTED`**、以及 **PoC-SM** 形态 PoC 授权。
+>
+> **当前阶段权威入口**（按优先级）：
+>
+> | 用途 | 位置 |
+> |---|---|
+> | 决策记录（2026-11-24 签署） | `docs/phases/anatomy-driven-geometry-poc/10-decision-records/00-INDEX.md` |
+> | 待决问题单一 Register | `docs/phases/anatomy-driven-geometry-poc/07-open-issues.md` |
+> | 实施 SPEC（含 Register / 验收标准） | `docs/phases/anatomy-driven-geometry-poc/00-implementation-spec.md` |
+> | 负责人待办一页纸 | `docs/phases/anatomy-driven-geometry-poc/06-owner-signoff-checklist.md` |
+> | ADR 索引 | `docs/ADR_INDEX.md` |
+>
+> 本文件正文**暂按原样保留**（作为 P1-A 阶段的历史记录），待后续统一重写。
+> 引用本文 §A/§B 的结论时请先对照上表。
+
+- 更新：2026-11-23（**阶段标注于 2026-11-24 追加**）
 - 当前阶段：**P1-A 视觉 Gate REJECTED，停留在 P1-A**（项目方判定效果特别差；最新代码、截图和缺陷全部保留）
 - P0 提交：`835dc71 docs+fix: freeze P0 contracts and correct shoulder bone semantics`，已推送 `feature/procedural-character-foundation`；基线提交 `399967f`。
 - 权威基线：`01_Procedural_Character_Foundation_Specification_v1.0.md`、`02_Procedural_Character_Development_Roadmap_v1.0.md`、`03_AI_Engineering_Execution_Prompt_v1.0.md`、`README.md`（位于仓库根目录；用户引用的同名子目录当前不存在，仅有 zip）。

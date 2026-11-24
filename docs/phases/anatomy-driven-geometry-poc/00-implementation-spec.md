@@ -214,24 +214,25 @@ flowchart TD
 
 ## 7. Register 体系（DECISION / AUTHORIZATION / GATE）
 
-### 7.1 DECISION Register（架构、形态、范围）— 全部 OPEN
+### 7.1 DECISION Register（架构、形态、范围）
 
 | ID | Question | Options | Recommendation（**非批准**） | Rationale / Consequences | Validation | Approval Owner | 状态 |
 |---|---|---|---|---|---|---|---|
 | DEC-01 | 基础体型 archetype | ①单一中性轻度运动型 H≈1.70m；②男性化；③女性化；④多 profile | ①只锁一种，先不支持多 profile | 单一 baseline 可复现、可归因；多 profile 污染变量控制。换体型需重跑 | GATE-03 固定机位视觉审查 | 负责人 | `OPEN` |
 | DEC-02 | PoC-A 几何范围 | ①胸腹腰盆上部+双侧肩连接锚点、不含上臂；②截面/单臂；③含完整肩 | ①接受躯干/腰盆/肩连接锚点，不做完整手臂 | 与"不提前开发肩/手臂"一致；crop 需显式登记 | 几何边界审查 + manifest | 负责人 | `OPEN` |
 | DEC-03 | 设备策略 | ①TV Box + 手机；②仅 TV Box + 书面豁免；③补设备 | ②当前允许 TV Box，手机维持 `[UNVERIFIED]`；豁免由负责人确认 | 仅 `nunai_max` 在线；手机路径硬件 BLOCKED。TV Box 结果不得写成手机通过 | 真机 P50/P95/P99 + APK SHA | 负责人 | `OPEN` |
-| DEC-04 | ADR-011 授权 | ①新建 ADR-011，不覆盖旧 ADR；②改写旧 ADR；③不建 | ①新建 ADR-011，不覆盖 ADR-008/009/010 | ADR-010 仍 Accepted（待 P0 Gate）；冻结文档不应被覆盖 | 负责人签字 ADR-011 后更新状态入口 | 负责人 | `OPEN` |
+| DEC-04 | ADR-011 授权 | ①新建 ADR-011，不覆盖旧 ADR；②改写旧 ADR；③不建 | ①新建 ADR-011，不覆盖 ADR-008/009/010 | ADR-010 仍 Accepted（待 P0 Gate）；冻结文档不应被覆盖 | 负责人签字 ADR-011 后更新状态入口 | 负责人 | `APPROVED`（2026-11-24 签署 ADR-011 = `ACCEPTED`，`docs/architecture-decisions/ADR-011-shape-model-contract.md`） |
 | DEC-05 | 目标参考形态与视觉验收数据 | ①负责人提供授权参考图 + rubric；②仅灰模协议无外部参考；③AI 自定 | ①由负责人确认目标形态和标准 | **没有负责人认可的目标形态，AI 只能做数值对照，不能宣布视觉合格** | 固定机位视觉 Gate，owner 独立否决 | 负责人 | `OPEN` |
 | DEC-06 | 参数与 Muscle Feature 处理原则 | ①标记未实现、G1/G2 重建；②把半成品当已实现；③删除历史参数 | ①声明未进顶点者标 `NOT IMPLEMENTED`/`DECLARED ONLY`；muscle feature 归入 Shape Model 重新设计，不复用半成品 API | `AnatomyFeatures.cpp` 死代码；6+ 参数不进顶点（§9） | G0 Parameter Baseline + G2 参数组对照 | 负责人 | `OPEN` |
 | DEC-07 | 遗留路线冻结原则 | ①三路径冻结为基线、不删不静默替换；②删除 legacy；③静默替换 | ①冻结为对照基线，新能力走独立 previewMode | ADR-010:22 / 缺陷报告:6 要求保留；避免"堆模块"重演 | `previewMode_` 回归 0/1/2；Git diff 审计 | 负责人 | `OPEN` |
+| DEC-09 | 是否采纳 09 文档的 `CharacterDefinition` 分层 Shape Model 契约作为下一阶段上游设计 | ①采纳为 PoC-SM 契约；②另起炉灶；③继续加 R2/R3 代码量 | ①采纳为契约；R2 保留为后端候选；R3 暂停投入 | G2 实证：R3 上胸缺口 13.5 cm、有效参数 7/20（不收敛）；R2 E2 0.98 mm / 0 sliver / stable ID（后端成立）。G1/G2 的 PoC-A 是路线比较，形态 PoC 另起名为 PoC-SM，避免与 09 的 PoC-A 冲突 | PoC-SM Before/After 灰模 + ≤5° 接缝复测 + 以新 Target Reference 重跑 G2 | 负责人 | `APPROVED`（2026-11-23 负责人「同意，采纳你全部建议」；实施仍受 AUTH-08 约束） |
 
 ### 7.2 G3 Decision Record 模板（GATE-04 签署物）
 
 字段：仅列出 G1 判定为 **FEASIBLE** 的路线 R1/R2/R3（KILLED 路线列在附注，不参与决策；+可选 R4 Dual Contouring，无理由不扩大）；每选项 Layer A/B 证据、截图、kill 记录；推荐项；后果（ABI/主线/遗留影响）；kill criteria；**GPU Parity 后续风险与 G4 前完成计划**；**`approved route`（唯一，默认空）**；owner 签字 / 日期 / 状态 `OPEN`。
 `[RECOMMENDATION]` 未签即 OPEN，不得进 G4。REJECT = 该路线 KILL 并记原因；DEFER = 补指定证据后重开 G2，不得默认为通过。仅有 1 条 FEASIBLE 路线时 G1 已 STOP 重评，不进入本决策记录。
 
-### 7.3 AUTHORIZATION Register（操作与构建授权）— 全部 OPEN
+### 7.3 AUTHORIZATION Register（操作与构建授权）
 
 | ID | 操作 | 范围 / 命令 | 生成文件 | 修改工作区? | 风险 | 状态 |
 |---|---|---|---|---|---|---|
@@ -241,16 +242,17 @@ flowchart TD
 | AUTH-04 | Android Build | `./gradlew assembleDebug` | APK + SHA256 | 否（worktree 内） | 中（SDK/网络） | `OPEN` |
 | AUTH-05 | TV Box 安装与证据采集 | `adb install -r <apk>` + 固定 preset 截图 + `adb logcat` | evidence 截图/日志 | 设备状态 | 中 | `OPEN` |
 | AUTH-06 | 其他可能产生工作区修改的命令 | 逐条列明后单独授权；未列明者禁止执行 | 视命令 | 可能 | 视命令 | `OPEN` |
-| AUTH-07 | G1/G2 实现（新建 R2/R3 最小实验） | 新 previewMode 通道；不触碰遗留三路径；不改 ABI | 新源码/测试文件（worktree 内） | 是（worktree 内新增） | 中 | `OPEN` |
+| AUTH-07 | G1/G2 实现（新建 R2/R3 最小实验） | 新 previewMode 通道；不触碰遗留三路径；不改 ABI | 新源码/测试文件（worktree 内） | 是（worktree 内新增） | 中 | `EXECUTED`（`a32251b`，已推送远端） |
+| AUTH-08 | PoC-SM：Shape Model v2 形态 PoC | 新 worktree；新建 `native/procedural/shape/v2/` host-only 契约 + shared envelope + Before/After 灰模探针；不改 BoneId 0–21 / UBO[22] ABI；不改 RenderThread 生产入口；不替换 legacy 三路径；不引入 Three.js / JS 运行时 | 契约、envelope 参考面、ADR-011 草案、Before/After 报告与灰模图 | 是（新 worktree，L1 不变） | 中（形态语义契约设计错误会重做；用 DEC-05 + visual rubric 控制） | **`GRANTED`（2026-11-24）** —— 基线 `a32251bf798e46159696a637a699a062453df345`；worktree `E:/AI-Tools/ProceduralAvatarEngine-poc-sm`；分支 `poc-sm/shape-model-v2`；AL-7 姿态轴协议**纳入**（OQ-33）。授权书：`10-decision-records/04-AUTH-08-granted.md` |
 
-### 7.4 GATE Register（验收状态）— 全部 NOT RUN
+### 7.4 GATE Register（验收状态）
 
 | ID | Gate | 状态 | 签署人 |
 |---|---|---|---|
 | GATE-01 | G0 Evidence Baseline | `NOT RUN` | 负责人复核 |
 | GATE-02 | G1 Route Feasibility | `NOT RUN` | 工程 |
-| GATE-03 | G2 Fair Comparison | `NOT RUN` | 负责人复核 |
-| GATE-04 | G3 Owner Investment Decision | `OPEN / NOT SIGNED` | **负责人** |
+| GATE-03 | G2 Fair Comparison | `EVIDENCE COMPLETE / AWAITING OWNER REVIEW`（工程证据 `a32251b` 已推送；阈值未批，不得判 PASS） | 负责人复核 |
+| GATE-04 | G3 Owner Investment Decision | **`DEFER`（已于 2026-11-24 签署）** — 补 DEC-05 参考图 + PoC-SM Before/After + 新 Target Reference 下的 G2 重测后重开；`approved route` 保持空 | **负责人**（2026-11-24 签署；记录：`05-g3-decision-record.md`） |
 | GATE-05 | G4 Full Character Expansion | `NOT RUN` | 负责人 |
 
 ### 7.5 旧编号 → 统一编号映射（消除 A1–A12 / 附录 A1–A11 冲突）
@@ -495,6 +497,29 @@ G0 未过 → 不开始 G1。
 | 5 | Landmark Error | 对应 landmark 欧氏距离（同一集合、同一单位） | TBD | G0 Landmark Baseline |
 | 6 | Reference Surface Distance | 双向 Hausdorff / RMS（§8 E1），记录样本数 | TBD | G2 Layer A 基线 |
 | 7 | Normal Deviation | 采样点法线与参考法线夹角分布（p50/p95/max）；smooth/hard seam 分类 | `≤5°`（smooth seam，合同已有 `docs/foundation/03`）；其余 TBD | 合同值复用；其余 G2 基线 |
+
+### 13.1 ≤5° 合同值的测量定义（2026-11-24 随 OQ-03 决策固定）
+
+`[VERIFIED]` "≤5°"此前只有阈值、没有可复核的测量口径，导致判定不可复现。OQ-03 决策记录
+（`10-decision-records/01-OQ-03-decision-seam-hard-condition.md`）固定如下，并作为
+**PoC-SM 复测与 G2 重跑的共同口径**：
+
+| 项 | 固定口径 |
+|---|---|
+| **测量对象** | canonical mesh（固定拓扑四边模板）的**肩根 crop 环**（crop 标签 `shoulder-root`，`ringIndex = rings-1`） |
+| **角度定义** | 相邻两个 quad 的**面法线夹角**，取值域 **[0°, 180°]**（> 90° 表示折叠/翻面，必须暴露而非折成锐角） |
+| **法线朝向** | **外法线**，由面顶点绕序（winding）确定；统计前必须验证绕序一致性 |
+| **纳入的 quad** | 上行顶点落在 crop 环上的那一圈 quad（`ringIndex - 1` 带）；底盖扇形三角纳入并单独标注 |
+| **排除的 quad** | 与该环**不共享边**的 quad |
+| **统计量** | 环上所有相邻 quad 对夹角的 **max**（硬条件用 max，不用 mean） |
+| **输出** | max、mean、p95、纳入 quad 数、参与角度样本数 |
+| **不适用时** | 路线无 crop 环 → 记 `NOT APPLICABLE`，**不得**记 PASS |
+
+**性质**：≤5° 是 **PoC-SM 的几何验收硬条件**，**不阻止 PoC-SM 开始编码**（AUTH-08 已签发）。
+测量值 > 5° → `G-P1-GEO` 不得判 PASS，且 G2 重开后只能记部分通过。
+
+> ⚠️ **口径变更纪律**：本口径的任何修改必须由负责人决定并重新记录，**不得由实现侧单方面调整**。
+> 已发布的 G2 数值（R1/R2 47.66°、R3 16.13°）在新口径下**必须重算**后才能用于判定。
 | 8 | Surface Volume Delta | 参数变化前后体积差与区域限定差 | TBD | G0 Parameter Baseline |
 | 9 | Parameter Region Impact | 目标区域顶点位移 >0 且 mustRemainStableRegions 位移在阈值内；非法向影响计数 | TBD | G2 参数组基线 |
 | 10 | Topology Stability | 同 ID 跨参数指向同一解剖位置的比例；face 邻接恒定比例；components/boundary/nonmanifold | TBD（components=1、boundary=0 除 crop、nonmanifold=0 为合同目标） | G2 Layer B + 负责人 |
