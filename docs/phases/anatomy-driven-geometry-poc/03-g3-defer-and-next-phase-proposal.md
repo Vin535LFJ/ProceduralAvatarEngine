@@ -4,6 +4,19 @@
 > 上游设计：`docs/proposals/anatomy-driven-geometry-redesign/09-final-recommendation.md`（仍为 PROPOSAL，未批准）。
 > 本阶段证据：`a32251b`（G0/G1/G2 代码与证据），已推送 `origin/feature/procedural-character-foundation`。
 
+> ### ⚠️ 2026-11-24 状态更新（本文正文保留 2026-11-23 原状，不做追溯性改写）
+>
+> 本文写作时 AUTH-08 / ADR-011 / ADR-012 均为 DRAFT。**现已完成签署**，本文中的对应描述已过时：
+>
+> | 本文中的表述 | 2026-11-24 实际状态 |
+> |---|---|
+> | 「AUTH-08 仍为 OPEN」（§4/§7） | **`GRANTED`** —— 基线 `a32251b` / worktree `E:/AI-Tools/ProceduralAvatarEngine-poc-sm` / 分支 `poc-sm/shape-model-v2`；PoC-SM **可以编码** |
+> | 「ADR-011 / ADR-012 当前均为 DRAFT」（§7） | **均已签署** —— ADR-011 `ACCEPTED`；ADR-012 `ACCEPTED — RESEARCH ONLY` |
+> | G3 = DEFER（待签） | **`DEFER` 已于 2026-11-24 签署**，`approved route` 保持空 |
+>
+> 权威状态见：`10-decision-records/00-INDEX.md`、`07-open-issues.md`、SPEC §7。
+> **DEC-05 仍未批准** → 几何验收与视觉判定仍不可执行。
+
 ## 0. 一句话结论
 
 **停止加 R2/R3 的代码量。** G3 记为 `DEFER`；先把负责人认可的视觉标准立起来，再做一次以 09 文档为设计依据的 **Shape Model v2 形态 PoC**；R2 固定拓扑投影作为后端候选保留，不参与本轮形态竞争。

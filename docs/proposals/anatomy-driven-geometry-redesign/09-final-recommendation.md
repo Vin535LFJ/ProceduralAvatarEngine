@@ -6,7 +6,10 @@
 
 这不是“所有部位都用 SDF”，也不是“所有部位都用 Sweep”，更不是把多套生成器各自输出的 mesh 焊在一起。人体解剖语义是唯一上游，曲面/场是不同区域的形态表达工具，最终皮肤外表面共享一套连续解算，动画 mesh 则使用固定的解剖拓扑模板。
 
-> **状态：ADOPTED IN PRINCIPLE（2026-11-23）— 分层 Shape Model 契约已由负责人采纳（SPEC DEC-09）；新代码实施未授权（AUTH-08 OPEN）。**
+> **状态：ADOPTED IN PRINCIPLE（2026-11-23）— 分层 Shape Model 契约已由负责人采纳（SPEC DEC-09）。**
+> **实施授权已到位（2026-11-24）：AUTH-08 = `GRANTED`**（基线 `a32251b` / worktree `E:/AI-Tools/ProceduralAvatarEngine-poc-sm` / 分支 `poc-sm/shape-model-v2`）；
+> **ADR-011 = `ACCEPTED`**，**ADR-012 = `ACCEPTED — RESEARCH ONLY`**，**G3 = `DEFER`（已签署）**。
+> 但 **DEC-05 尚未批准 → 几何验收与视觉判定仍不可执行**。详见 `docs/phases/anatomy-driven-geometry-poc/10-decision-records/00-INDEX.md`。
 >
 > G2 回填（提交 `a32251b`）：固定 quad template 投影后端首次实测成立（E2 0.98 mm / 0 sliver / stable ID 跨参数组恒定）；但 **shared skin envelope 的新形态仍未被验证**。R3 包络上胸缺口 13.5 cm、有效参数 7/20 且模板加密不收敛，实证了本文问题一"M12 shape model 仍不足"的判断。肩根接缝最大二面角 47.66° / 16.13° 超过 ≤5° 合同值，实证了本文问题四"肩 bridge 不是肩带/腋窝共同形态模型"的判断——该项已列为 PoC-SM 的阻塞验收条件。
 >
