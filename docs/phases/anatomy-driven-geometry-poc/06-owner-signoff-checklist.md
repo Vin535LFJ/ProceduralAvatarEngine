@@ -28,11 +28,34 @@
 | # | 事项 | 阻塞什么 | 当前状态 / 证据 | 负责人填写 |
 |---|---|---|---|---|
 | **1** | **DEC-05 / Canonical Acceptance Sheet**（OQ-01 及 OQ-28/29/30/31/32）：批准参考图与 rubric 来源 | **一切几何验收与视觉判定**；重跑 G2 后判 PASS | `OPEN`；灰模已产出（本轮 9 张：`evidence/poc-sm/round-2/views/`），等待负责人视觉审查；`04-visual-rubric.md` 判定栏全空 | ________________________________ |
-| **2** | **OQ-03 正式测量定义是否变更**：维持已签环带口径（A：扣 360/S 基线 / C：提段数），还是改为 B 跨缝口径 | 后续所有接缝验收数值的**含义**；G2 重算口径 | 已签决策**未被修改**。新实验证据：`evidence/poc-sm/round-2/cross-boundary-seam-report.md`（旧统计恒等 360/S，与真实折角无关；新统计稳定读出折角）。**AI 不代选、不宣布 Gate PASS** | ________________________________ |
+| **2** | **OQ-03 正式测量定义是否变更**：维持已签环带口径（A：扣 360/S 基线 / C：提段数），还是改为 B 跨缝口径 | 后续所有接缝验收数值的**含义**；G2 重算口径 | 已签决策**未被修改**。新实验证据：`evidence/poc-sm/round-2/cross-boundary-seam-report.md`（旧统计恒等 360/S，与真实折角无关；新统计稳定读出折角）。**输入记录**：负责人技术倾向 B 方案（尚未正式批准）。**AI 不代选、不宣布 Gate PASS、不写补充决策记录** | ________________________________ |
 | **3** | **其他产品质量决策**：`shoulderBreadthRatio` / `biacromialRatio` / `abdominalDepthRatio` 的解剖映射；OQ-27 / OQ-34 / OQ-35；独立审核人意见（OQ-06…OQ-13） | 测量字段能否进入生成链；G3 重新批准前的收口 | AL-6 差分证明这 3 个字段当前 delta 均为 0.000 mm（`evidence/poc-sm/round-2/al6-proportion-delta.csv`）；无可靠映射前**不擅自绑定控制区域** | ________________________________ |
+
+### 决策输入清单（供负责人逐项给值；AI 不代填）
+
+以上三项裁定所需的输入维度如下。负责人给出结论后，AI 才写入正式决策记录 / Canonical Acceptance Sheet；在此之前各项保持 `OPEN`。
+
+**1 — DEC-05 / Canonical Acceptance Sheet（目标人体形态）**
+- 风格定位：偏真实人体 / 半写实 / 卡通化 / 其他；
+- 身体比例与肌肉轮廓目标；
+- 肩胸、腰腹、骨盆的目标结构；
+- 视觉验收必需视角与必须合格的局部（现有 7 固定视角 + 2 局部特写见 `evidence/poc-sm/round-2/views/`）。
+- 产出：一份明确的 Canonical Acceptance Sheet，作为后续各轮视觉对比基线。当前 `04-visual-rubric.md` 判定栏全空。
+
+**2 — OQ-03 测量定义**
+- 输入事实：合同原文 `docs/foundation/03-geometry-mesh-contract.md` 描述的是"缝两侧位置误差 ≤1e-4 m、法线夹角 ≤5°"；旧 `measureShoulderRootSeam()` 实际测的是环带内部相邻 quad（恒等 360/S）；新 `CrossBoundarySeamAudit` 已在合成折角几何上验证，但**尚未在真实双 Patch（躯干—上臂）上验证**。
+- 负责人倾向 B：以真实跨边界法线夹角作为 Smooth Seam 验收定义，旧测量降级为环带离散化诊断。
+- 裁定后需：正式批准 + 独立补充决策记录（**不得覆盖已签 OQ-03 记录**）；真实肩部连接 Patch 仍须后续验证，不能凭合成测试宣布真实模型合格。
+
+**3 — 未消费测量字段的解剖映射**
+- 三字段：`shoulderBreadthRatio`（肩部外轮廓宽）、`biacromialRatio`（双肩峰骨性宽）、`abdominalDepthRatio`（腹部深度）。
+- 每个字段需给出：测量定义、数据来源、对应解剖位置、可映射到哪个生成控制量。禁止为凑测试通过而随意绑定（例如肩部外轮廓宽 ≠ 双肩峰骨性宽，不应绑到同一控制点）。
+- `headHeightRatio` 可暂保持未消费（当前生成器聚焦躯干，不强行扩到头部）。
 
 > ADR-011、ADR-012、AUTH-08、OQ-03 原决策**均已签署**，本表不再要求重复签署。
 > 第 2 项若决定变更 OQ-03，须先获负责人批准，再建立正式补充决策记录。
+> **状态更新（2026-11-24）**：PoC-SM round 2 提交 `a3f3bdb` 已 bundle 备份并正常推送至 origin；
+> PoC-A 冗余 worktree 已移除，`poc-a-g2-fair-comparison` 分支引用保留。未启动 Round 3 编码。
 
 > ⚠️ **PoC-SM 现在可以编码（AUTH-08 已签发）。**
 > 但 **DEC-05 未批准 → 几何验收与视觉判定仍不可执行**：任何 §13 指标（含 ≤5°）都只能作为
