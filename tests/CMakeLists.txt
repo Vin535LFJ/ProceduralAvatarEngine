@@ -80,3 +80,43 @@ target_link_libraries(poc_route_probe PRIVATE pae_core)
 # sampling, same camera for every route; E1/E2/E3 measured separately.
 add_executable(poc_fair_comparison_probe unit/poc_fair_comparison_probe.cpp ${PAE_POC_SHAPE_SOURCES})
 target_link_libraries(poc_fair_comparison_probe PRIVATE pae_core)
+
+# PoC-SM (AUTH-08): the v2 Shape Model slice.
+#
+# AL-2  CharacterDefinition  - the five-layer contract
+# AL-3  SharedSkinEnvelope    - one continuous outer surface
+# AL-5  SeamAuditV2           - the shoulder-root seam under the OQ-03
+#                              fixed definition
+#
+# These sources live in native/procedural/shape/v2/ and are compiled ONLY
+# into the host PoC targets. The production Android build never sees them
+# (AUTH-08 FB-5 / FB-7).
+set(PAE_POC_SHAPE_V2_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/../native/procedural/shape/v2/CharacterDefinition.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../native/procedural/shape/v2/SharedSkinEnvelope.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../native/procedural/shape/v2/SeamAuditV2.cpp
+)
+
+# The contract test needs the contract only; the v2 module is self-contained
+# and does not link against the frozen G2 shape sources.
+add_executable(pae_poc_sm_contract_tests unit/poc_sm_contract_tests.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../native/procedural/shape/v2/CharacterDefinition.cpp)
+target_include_directories(pae_poc_sm_contract_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/harness)
+target_link_libraries(pae_poc_sm_contract_tests PRIVATE pae_core)
+add_test(NAME pae_poc_sm_contract_tests COMMAND pae_poc_sm_contract_tests)
+
+add_executable(pae_poc_sm_envelope_tests unit/poc_sm_envelope_tests.cpp
+    ${PAE_POC_SHAPE_SOURCES} ${PAE_POC_SHAPE_V2_SOURCES})
+target_include_directories(pae_poc_sm_envelope_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/harness)
+target_link_libraries(pae_poc_sm_envelope_tests PRIVATE pae_core)
+add_test(NAME pae_poc_sm_envelope_tests COMMAND pae_poc_sm_envelope_tests)
+
+add_executable(pae_poc_sm_seam_tests unit/poc_sm_seam_tests.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../native/procedural/shape/v2/SeamAuditV2.cpp)
+target_include_directories(pae_poc_sm_seam_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/harness)
+target_link_libraries(pae_poc_sm_seam_tests PRIVATE pae_core)
+add_test(NAME pae_poc_sm_seam_tests COMMAND pae_poc_sm_seam_tests)
+
+add_executable(poc_sm_measure_probe unit/poc_sm_measure_probe.cpp
+    ${PAE_POC_SHAPE_SOURCES} ${PAE_POC_SHAPE_V2_SOURCES})
+target_link_libraries(poc_sm_measure_probe PRIVATE pae_core)
