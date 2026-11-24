@@ -35,6 +35,13 @@ void MotionRuntime::resetFilters() {
 
 PoseResult MotionRuntime::update(int64_t timestampNs, int actionMode) {
     if (!initialized_) return {};
+    // actionMode -1 is the bind pose: no synthetic action, no external drive.
+    // It is used by deterministic visual verification and never changes the
+    // frozen skeleton or bone-id protocol.
+    if (actionMode < 0 && !useExternal_) {
+        for (Quat& rotation : filtered_) rotation = Quat{};
+        return computePose(skeleton_, filtered_);
+    }
     PoseFrame frame;
     bool gotFrame = false;
     if (useExternal_) {

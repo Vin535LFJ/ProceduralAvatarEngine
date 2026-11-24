@@ -60,28 +60,31 @@ struct ClothingParams {
 };
 
 struct BodyParameters {
-    float height = 1.70f;
-    float headScale = 1.12f;      // enlarged cartoon head-to-body ratio (M10)
-    float headWidth = 0.20f;
-    float headHeight = 0.25f;
-    float shoulderWidth = 0.42f;
-    float chestWidth = 0.36f;
-    float waistWidth = 0.30f;
-    float hipWidth = 0.34f;
-    float torsoLength = 0.52f;
-    float neckLength = 0.10f;
-    float upperArmLength = 0.30f;
-    float lowerArmLength = 0.28f;
-    float armRadius = 0.062f;
-    float upperLegLength = 0.42f;
-    float lowerLegLength = 0.40f;
-    float legRadius = 0.082f;
-    float handScale = 1.15f;
-    float footLength = 0.24f;
-    float footWidth = 0.10f;
+    // Adult natural proportions. The M10 cartoon defaults (1.12x head,
+    // short limbs) are retained through BodyParameters overrides; these
+    // defaults target a realistic adult silhouette at ~1.75 m.
+    float height = 1.75f;
+    float headScale = 1.0f;       // natural adult head-to-body ratio
+    float headWidth = 0.168f;
+    float headHeight = 0.235f;
+    float shoulderWidth = 0.465f;  // bideltoid, natural adult male
+    float chestWidth = 0.365f;
+    float waistWidth = 0.285f;
+    float hipWidth = 0.345f;
+    float torsoLength = 0.565f;
+    float neckLength = 0.082f;
+    float upperArmLength = 0.325f;
+    float lowerArmLength = 0.295f;
+    float armRadius = 0.056f;
+    float upperLegLength = 0.455f;
+    float lowerLegLength = 0.445f;
+    float legRadius = 0.078f;
+    float handScale = 1.0f;
+    float footLength = 0.255f;
+    float footWidth = 0.095f;
     float stylization = 1.0f;
-    uint32_t detailLevel = 1;
-    uint64_t seed = 20261121;
+    uint32_t detailLevel = 2;
+    uint64_t seed = 20261124;
 
     // M11 anatomy groups — all fields drive the generators.
     TorsoShape torsoShape{};

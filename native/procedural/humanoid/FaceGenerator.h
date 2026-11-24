@@ -14,15 +14,15 @@ namespace pae::face {
 
 struct FaceParams {
     const char* headShape = "oval"; // oval | round | square
-    float jawWidth = 0.82f;         // jaw width relative to cheek width
-    float chinShape = 0.42f;        // chin prominence (0 round .. 1 pointed)
-    float cheekVolume = 0.68f;      // cheek fullness
-    float eyeSpacing = 0.92f;       // eye spacing factor on head width
-    float eyeSize = 1.0f;           // eye size multiplier
-    float browHeight = 0.56f;       // brow height fraction (0 hairline .. 1 eyes)
-    float noseWidth = 0.72f;        // nose width factor
-    float noseBridge = 0.64f;       // nose bridge prominence
-    float mouthWidth = 0.78f;       // mouth width factor
+    float jawWidth = 0.86f;         // jaw width relative to cheek width (natural)
+    float chinShape = 0.34f;        // chin prominence (0 round .. 1 pointed)
+    float cheekVolume = 0.62f;      // cheek fullness
+    float eyeSpacing = 0.95f;       // eye spacing factor on head width
+    float eyeSize = 0.78f;          // natural adult eye size, not cartoon-large
+    float browHeight = 0.52f;       // brow height fraction (0 hairline .. 1 eyes)
+    float noseWidth = 0.68f;        // nose width factor
+    float noseBridge = 0.72f;       // nose bridge prominence
+    float mouthWidth = 0.82f;       // mouth width factor
 };
 
 struct FacePiece {

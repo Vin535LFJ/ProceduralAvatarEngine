@@ -57,14 +57,14 @@ std::vector<HairPiece> generateHair(const HairParams& params,
         HairPiece cap;
         cap.center = headCenter;
         cap.mesh = translateMesh(generateEllipsoid(
-            Vec3{rx * 1.10f, ry * 1.08f, rz * 1.10f}, radial, radial),
-            headCenter + Vec3{0.0f, ry * 0.20f, -rz * 0.12f});
+            Vec3{rx * 1.04f, ry * 0.92f, rz * 1.04f}, radial, radial),
+            headCenter + Vec3{0.0f, ry * 0.28f, -rz * 0.10f});
         pieces.push_back(std::move(cap));
     }
 
     const int strandsPerLayer = std::max(6, params.strandCount);
     const float lengthByStyle[3] = {0.05f, params.backLength * 0.7f, params.backLength};
-    const float bangLength = lengthByStyle[params.style] * 0.55f;
+    const float bangLength = lengthByStyle[params.style] * 0.30f;
 
     // Layer 2: bangs across the forehead.
     for (int i = 0; i < strandsPerLayer / 2; ++i) {
@@ -72,9 +72,9 @@ std::vector<HairPiece> generateHair(const HairParams& params,
         const float angle = (-0.5f + t) * 1.9f; // across the front arc
         const Vec3 outward{std::sin(angle), -0.15f - 0.35f * params.bend,
                            std::cos(angle)};
-        const Vec3 scalp = headCenter + Vec3{std::sin(angle) * rx * 0.82f,
-                                             ry * 0.62f,
-                                             std::cos(angle) * rz * 0.80f};
+        const Vec3 scalp = headCenter + Vec3{std::sin(angle) * rx * 0.78f,
+                                             ry * 0.80f,
+                                             std::cos(angle) * rz * 0.76f};
         HairPiece piece;
         piece.center = scalp;
         piece.mesh = translateMesh(strand(scalp, outward, bangLength,
@@ -85,7 +85,7 @@ std::vector<HairPiece> generateHair(const HairParams& params,
 
     // Layer 3: side strands from the temples (medium/long).
     if (params.style >= 1) {
-        const float sideLength = lengthByStyle[params.style] * 0.8f;
+        const float sideLength = lengthByStyle[params.style] * 0.45f;
         for (int side = -1; side <= 1; side += 2) {
             for (int i = 0; i < 2; ++i) {
                 const Vec3 outward{side * 1.0f, -0.5f - 0.3f * params.bend, 0.1f};

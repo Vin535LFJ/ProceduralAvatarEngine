@@ -157,6 +157,17 @@ Java_com_pae_host_NativeBridge_nativeSetDebugView(JNIEnv*, jclass, jlong handle,
     if (auto* runtime = runtimeFromHandle(handle)) runtime->setDebugView(static_cast<int>(view));
 }
 
+// Interactive camera. This is an addition to the JNI surface, not a change
+// to it: every existing entry point keeps its signature and semantics, and
+// the frozen 22-bone / UBO[22] / 64-byte vertex contracts are untouched.
+JNIEXPORT void JNICALL
+Java_com_pae_host_NativeBridge_nativeCameraCommand(JNIEnv*, jclass, jlong handle, jint op,
+                                                   jfloat dx, jfloat dy, jfloat dz) {
+    if (auto* runtime = runtimeFromHandle(handle)) {
+        runtime->cameraCommand(static_cast<int>(op), pae::Vec3{dx, dy, dz});
+    }
+}
+
 JNIEXPORT jstring JNICALL
 Java_com_pae_host_NativeBridge_nativeGetStats(JNIEnv* env, jclass, jlong handle) {
     auto* runtime = runtimeFromHandle(handle);

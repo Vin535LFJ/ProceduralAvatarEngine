@@ -28,6 +28,7 @@ object NativeBridge {
     private external fun nativeSetPreviewMode(handle: Long, mode: Int)
     private external fun nativeSetCameraPreset(handle: Long, preset: Int)
     private external fun nativeSetDebugView(handle: Long, view: Int)
+    private external fun nativeCameraCommand(handle: Long, op: Int, dx: Float, dy: Float, dz: Float)
 
     fun create() {
         if (handle == 0L) handle = nativeCreate()
@@ -87,6 +88,15 @@ object NativeBridge {
 
     fun setDebugView(view: Int) {
         if (handle != 0L) nativeSetDebugView(handle, view)
+    }
+
+    /** Interactive camera command. op: 0 orbit, 1 zoom, 2 pan, 3 reset. */
+    fun cameraCommand(op: Int, dx: Float, dy: Float, dz: Float = 0f) {
+        if (handle != 0L) nativeCameraCommand(handle, op, dx, dy, dz)
+    }
+
+    fun resetCamera() {
+        cameraCommand(AvatarSurfaceView.CAM_RESET, 0f, 0f, 0f)
     }
 
     fun setQuality(level: Int) {

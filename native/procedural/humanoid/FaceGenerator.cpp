@@ -97,9 +97,29 @@ MeshData generateHeadMesh(const FaceParams& fp, Vec3 headCenter,
             const float fx = std::cos(phi);
             const float fz = std::sin(phi);
             const float shape = shapeFactor(fp, y, fx, fz);
+            // Continuous facial relief carved into the head surface. All
+            // terms are smooth spatial functions, so features transition
+            // naturally instead of floating as separate ellipsoids.
+            const float front = smooth(0.10f, 0.75f, fz);
+            const float symmetry = 1.0f - smooth(0.0f, 0.85f, std::fabs(fx));
+            const float browZone = smooth(0.05f, 0.28f, y) * (1.0f - smooth(0.34f, 0.55f, y));
+            const float socketZone = smooth(-0.08f, 0.04f, y) * (1.0f - smooth(0.10f, 0.22f, y));
+            const float eyeBand = smooth(0.18f, 0.34f, std::fabs(fx)) *
+                                  (1.0f - smooth(0.50f, 0.72f, std::fabs(fx)));
+            const float noseZone = smooth(-0.28f, -0.10f, y) * (1.0f - smooth(0.16f, 0.30f, y));
+            const float cheekZone = smooth(-0.34f, -0.12f, y) * (1.0f - smooth(0.04f, 0.22f, y));
+            const float lipZone = smooth(-0.44f, -0.34f, y) * (1.0f - smooth(-0.26f, -0.18f, y));
+            const float chinZone = smooth(-0.72f, -0.52f, y) * (1.0f - smooth(-0.40f, -0.28f, y));
+            float relief = 0.0f;
+            relief += 0.030f * front * browZone * eyeBand;
+            relief -= 0.026f * front * socketZone * eyeBand;
+            relief += 0.115f * front * symmetry * noseZone;
+            relief += 0.028f * front * cheekZone * eyeBand;
+            relief += 0.022f * front * symmetry * lipZone;
+            relief += 0.020f * front * symmetry * chinZone;
+            const float z = sinT * fz * rz * shape + relief * rz;
             gridAt(i, j) = headCenter + Vec3{sinT * fx * rx * shape,
-                                             y * ry * shape,
-                                             sinT * fz * rz * shape};
+                                             y * ry * shape, z};
         }
     }
 
@@ -158,53 +178,45 @@ std::vector<FacePiece> generateFaceFeatures(const FaceParams& fp,
         pieces.push_back({std::move(m), center, materialId});
     };
 
-    // Eyes: sclera + ink iris disc + highlight, driven by spacing/size.
-    const float eyeRadius = headWidth * 0.095f * fp.eyeSize;
-    const float eyeX = rx * 0.42f * fp.eyeSpacing;
-    const float eyeY = headCenter.y + ry * 0.04f;
+    // Eyes: shallow almond sclera, iris and upper/lower lids. Natural adult
+    // proportions keep the eye opening small relative to head width.
+    const float eyeRadius = headWidth * 0.072f * fp.eyeSize;
+    const float eyeX = rx * 0.40f * fp.eyeSpacing;
+    const float eyeY = headCenter.y + ry * 0.03f;
     for (int side = -1; side <= 1; side += 2) {
-        const Vec3 eyeCenter{side * eyeX, eyeY, rz * 0.86f};
-        add(translateMesh(generateUvSphere(eyeRadius, radial, rings / 2), eyeCenter), eyeCenter, 3);
+        const Vec3 eyeCenter{side * eyeX, eyeY, rz * 1.12f};
+        // Shallow sclera instead of a protruding ball.
         add(translateMesh(generateEllipsoid(
-                Vec3{eyeRadius * 0.58f, eyeRadius * 0.58f, eyeRadius * 0.35f}, radial, rings / 2),
-            eyeCenter + Vec3{0.0f, 0.0f, eyeRadius * 0.80f}), eyeCenter, 4);
-        add(translateMesh(generateUvSphere(eyeRadius * 0.18f, 10, 6),
-            eyeCenter + Vec3{-side * eyeRadius * 0.28f, eyeRadius * 0.38f, eyeRadius * 0.97f}),
-            eyeCenter, 3);
+                Vec3{eyeRadius * 1.15f, eyeRadius * 0.52f, eyeRadius * 0.30f}, radial, rings / 2),
+            eyeCenter), eyeCenter, 3);
+        // Iris/pupil: compact, dark, slightly forward.
+        add(translateMesh(generateEllipsoid(
+                Vec3{eyeRadius * 0.40f, eyeRadius * 0.40f, eyeRadius * 0.18f}, radial, rings / 2),
+            eyeCenter + Vec3{0.0f, 0.0f, eyeRadius * 0.30f}), eyeCenter, 4);
+        // Lid relief is carried by the continuous head surface; extra lid
+        // pieces previously z-fought with it and produced black patches.
 
-        // Brows in hair colour at browHeight between the eyes and hairline.
-        const float browY = headCenter.y + lerpF(ry * 0.04f, ry * 0.52f, clamp01(fp.browHeight));
+        // Brows in hair colour, thin and close to the brow ridge.
+        const float browY = headCenter.y + lerpF(ry * 0.06f, ry * 0.48f, clamp01(fp.browHeight));
         add(translateMesh(generateEllipsoid(
-                Vec3{eyeRadius * 0.90f, eyeRadius * 0.22f, eyeRadius * 0.28f}, radial, rings / 2),
-            Vec3{side * eyeX, browY, rz * 0.82f}), headCenter, 1);
+                Vec3{eyeRadius * 0.95f, eyeRadius * 0.14f, eyeRadius * 0.18f}, radial, rings / 2),
+            Vec3{side * eyeX, browY, rz * 1.06f}), headCenter, 1);
     }
 
-    // Nose: bridge sweep + tip + wings, driven by width/bridge factors.
-    const float noseW = rx * fp.noseWidth * 0.55f;
-    const float noseTop = headCenter.y + ry * (0.05f + 0.20f * fp.noseBridge);
-    const float noseTipY = headCenter.y - ry * 0.10f;
-    add(translateMesh(generateSweepSurface(
-            std::vector<Vec3>{{0.0f, noseTop, rz * 0.86f}, {0.0f, noseTipY, rz * 0.97f}},
-            std::vector<float>{noseW * 0.55f, noseW * 0.85f}, radial / 2 + 2),
-        headCenter), headCenter, 0);
+    // Nose tip and alae are now carried by the continuous head relief; only
+    // a small tip highlight and nostril hints remain as separate geometry.
+    const float noseW = rx * fp.noseWidth * 0.30f;
+    const float noseTipY = headCenter.y - ry * 0.16f;
     add(translateMesh(generateEllipsoid(
-            Vec3{noseW, noseW * 1.15f, noseW * 0.9f}, radial / 2 + 2, rings / 2),
-        Vec3{0.0f, noseTipY - noseW * 0.15f, rz * 0.99f}), headCenter, 0);
-    for (int side = -1; side <= 1; side += 2) {
-        add(translateMesh(generateEllipsoid(
-                Vec3{noseW * 0.35f, noseW * 0.45f, noseW * 0.45f}, radial / 2 + 2, rings / 2),
-            Vec3{side * noseW * 0.95f, noseTipY - noseW * 0.05f, rz * 0.93f}), headCenter, 0);
-    }
+            Vec3{noseW * 0.55f, noseW * 0.45f, noseW * 0.32f}, radial / 2 + 2, rings / 2),
+        Vec3{0.0f, noseTipY, rz * 1.14f}), headCenter, 0);
 
-    // Mouth: upper + lower lip pieces in ink, driven by mouth width.
-    const float mouthHalfW = rx * fp.mouthWidth * 0.38f;
-    const float mouthY = headCenter.y - ry * 0.26f;
+    // Mouth: a single thin dark line. Lip volume is part of the head relief.
+    const float mouthHalfW = rx * fp.mouthWidth * 0.28f;
+    const float mouthY = headCenter.y - ry * 0.36f;
     add(translateMesh(generateEllipsoid(
-            Vec3{mouthHalfW, mouthHalfW * 0.10f, mouthHalfW * 0.14f}, radial / 2 + 2, rings / 2),
-        Vec3{0.0f, mouthY + mouthHalfW * 0.05f, rz * 0.90f}), headCenter, 4);
-    add(translateMesh(generateEllipsoid(
-            Vec3{mouthHalfW * 0.92f, mouthHalfW * 0.12f, mouthHalfW * 0.12f}, radial / 2 + 2, rings / 2),
-        Vec3{0.0f, mouthY - mouthHalfW * 0.10f, rz * 0.90f}), headCenter, 4);
+            Vec3{mouthHalfW, mouthHalfW * 0.045f, mouthHalfW * 0.06f}, radial / 2 + 2, rings / 2),
+        Vec3{0.0f, mouthY, rz * 1.13f}), headCenter, 4);
 
     // Ears: flattened ellipsoids on the sides at eye height.
     for (int side = -1; side <= 1; side += 2) {

@@ -26,6 +26,8 @@ public:
     void setPreviewMode(int mode);
     void setCameraPreset(int preset);
     void setDebugView(int view);
+    // Interactive camera: op is a CameraOp value, delta carries the gesture.
+    void cameraCommand(int op, const Vec3& delta);
     std::string stats() const;
     void shutdown();
 

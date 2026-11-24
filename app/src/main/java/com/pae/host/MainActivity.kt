@@ -154,12 +154,17 @@ class MainActivity : AppCompatActivity() {
         buttons.addView(actionButton("View") {
             viewPreset = (viewPreset + 1) % 8
             NativeBridge.setCameraPreset(viewPreset)
-            Log.i("PAE_UI", "camera preset -> $viewPreset (0F/1B/2L/3R/4-5 45deg/6 shoulder/7 torso)")
+            Log.i("PAE_UI", "camera preset -> $viewPreset (0F/1B/2L/3R/4-5 45deg/6 shoulder/7 face)")
+        })
+        buttons.addView(actionButton("ResetCam") {
+            NativeBridge.resetCamera()
+            Log.i("PAE_UI", "camera reset to evidence preset $viewPreset")
         })
         buttons.addView(actionButton("DbgView") {
-            debugView = (debugView + 1) % 4
+            debugView = (debugView + 1) % 7
             NativeBridge.setDebugView(debugView)
-            Log.i("PAE_UI", "debug view -> $debugView (0 shading, 1 wireframe, 2 normals, 3 gray clay)")
+            Log.i("PAE_UI", "debug view -> $debugView (0 shading, 1 wireframe, 2 normals, " +
+                "3 gray clay, 4 material id, 5 skin weights, 6 outline study)")
         })
         buttons.addView(actionButton("Stats") {
             Log.i("PAE_UI", NativeBridge.stats())
@@ -241,11 +246,30 @@ class MainActivity : AppCompatActivity() {
                 NativeBridge.setCameraPreset(dp)
             }
             val dv = it2.getIntExtra("debug_view", -1)
-            if (dv in 0..3) {
+            if (dv in 0..6) {
                 debugView = dv
                 NativeBridge.setDebugView(dv)
             }
-            Log.i("PAE_UI", "debug extras: anatomy=$anatomyOn preset=$viewPreset view=$debugView")
+            // Deterministic camera driver for evidence captures:
+            //   --ei debug_cam_op 0|1|2|3  --ef debug_cam_x .. --ef debug_cam_z
+            // op 0 orbit (x = yaw deg, y = pitch deg), 1 zoom (x = multiplier),
+            // 2 pan (x/y = screen pixels), 3 reset.
+            val camOp = it2.getIntExtra("debug_cam_op", -1)
+            if (camOp in 0..3) {
+                NativeBridge.cameraCommand(
+                    camOp,
+                    it2.getFloatExtra("debug_cam_x", 0f),
+                    it2.getFloatExtra("debug_cam_y", 0f),
+                    it2.getFloatExtra("debug_cam_z", 0f)
+                )
+            }
+            val outfit = it2.getIntExtra("debug_outfit", -1)
+            if (outfit in 0..1) {
+                palette[2] = if (outfit == 0) floatArrayOf(0.44f, 0.43f, 0.52f)
+                             else floatArrayOf(0.52f, 0.44f, 0.40f)
+                pushAppearance()
+            }
+            Log.i("PAE_UI", "debug extras: anatomy=$anatomyOn preset=$viewPreset view=$debugView outfit=$outfit")
         }
     }
 

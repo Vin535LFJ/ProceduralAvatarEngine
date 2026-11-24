@@ -232,7 +232,16 @@ std::vector<LoftSection> computeTorsoSections(const BodyParameters& params,
         sections.push_back({{0.0f, at(0.93f) + ts.chestTilt * 0.6f, 0.0f},
                             chestW * 0.5f * (0.90f + 0.14f * ts.chestUpperCurve),
                             chestDepth * (0.80f + 0.12f * ts.chestUpperCurve), 0.0f});
-        sections.push_back({{0.0f, at(1.00f), 0.0f}, shoulderW * 0.42f, chestDepth * 0.58f, 0.0f});
+        // Shoulder-to-neck taper: the old single top ring dropped from full
+        // chest width to 0.42*shoulderWidth in one step, producing a pipe
+        // neck and an armoured shirt shoulder. Three intermediate stations
+        // make the trapezius slope continuous.
+        const float neckRx = p.neckLength * scale * p.neckShape.radiusFactor;
+        sections.push_back({{0.0f, at(1.00f), 0.0f}, shoulderW * 0.44f, chestDepth * 0.60f, 0.0f});
+        sections.push_back({{0.0f, joints.neck.y - 0.035f * scale, 0.0f},
+                            lerp(shoulderW * 0.44f, neckRx, 0.55f),
+                            lerp(chestDepth * 0.60f, neckRx, 0.55f), 0.0f});
+        sections.push_back({{0.0f, joints.neck.y, 0.0f}, neckRx * 1.10f, neckRx * 1.10f, 0.0f});
         return sections;
 }
 
@@ -320,21 +329,22 @@ HumanoidResult generateHumanoid(const BodyParameters& params, bool weightHeatmap
         }
     }
 
-    // ---- Neck: embedded spline sweep with taper (M11). ----
+    // ---- Neck: short embedded sweep. The torso now carries the trapezius
+    // taper up to the neck base, so this piece only bridges to the skull.
     {
         Part part;
         part.materialId = 0;
         const NeckShape& ns = p.neckShape;
         const float neckRadius = p.neckLength * scale * ns.radiusFactor;
-        const Vec3 chestTop = joints.chest + Vec3{0.0f, (joints.neck.y - joints.chest.y) * 0.55f, 0.0f};
-        const Vec3 headBase = joints.head - Vec3{0.0f, p.headHeight * scale * 0.30f, 0.0f};
+        const Vec3 neckBase = joints.neck - Vec3{0.0f, 0.015f * scale, 0.0f};
+        const Vec3 headBase = joints.head - Vec3{0.0f, p.headHeight * scale * 0.22f, 0.0f};
         const std::vector<SweepRing> rings = {
-            {chestTop + Vec3{0.0f, -0.01f * scale, 0.0f}, neckRadius * 1.12f, {1.0f, 1.0f}, 0.0f},
-            {joints.neck, neckRadius, {1.0f, 1.0f}, 0.0f},
+            {neckBase, neckRadius * 1.02f, {1.0f, 1.0f}, 0.0f},
+            {neckBase + (headBase - neckBase) * 0.55f, neckRadius, {1.0f, 1.0f}, 0.0f},
             {headBase, neckRadius * ns.taper, {1.0f, 1.0f}, 0.0f},
         };
         part.mesh = generateSplineSweep(rings, radial, splineSamples, false, false, false);
-        part.path = {chestTop, joints.neck, headBase};
+        part.path = {neckBase, joints.neck, headBase};
         part.pathBones = {BoneChest, BoneNeck, BoneHead};
         parts.push_back(part);
     }
@@ -388,8 +398,8 @@ HumanoidResult generateHumanoid(const BodyParameters& params, bool weightHeatmap
         const int side = left ? 1 : -1;
         Part part;
         part.materialId = 0;
-        const Vec3 radii{0.062f * scale * p.handScale, 0.092f * scale * p.handScale,
-                         0.038f * scale * p.handScale};
+        const Vec3 radii{0.050f * scale * p.handScale, 0.078f * scale * p.handScale,
+                         0.032f * scale * p.handScale};
         part.mesh = translated(generateEllipsoid(radii, radial, radial / 2), hand);
         part.path = {wrist, hand};
         part.pathBones = {left ? BoneLeftLowerArm : BoneRightLowerArm,
@@ -405,13 +415,34 @@ HumanoidResult generateHumanoid(const BodyParameters& params, bool weightHeatmap
         thumb.path = {hand};
         thumb.pathBones = {left ? BoneLeftHand : BoneRightHand};
         parts.push_back(thumb);
+
+        // Four tapered fingers. They share the existing hand bone; no new
+        // BoneId, UBO slot or vertex format is introduced.
+        for (int finger = 0; finger < 4; ++finger) {
+            const float spread = (finger - 1.5f) * 0.020f * scale * p.handScale;
+            const Vec3 base = hand + Vec3{spread, -0.066f * scale * p.handScale,
+                                          0.008f * scale};
+            const Vec3 tip = base + Vec3{spread * 0.20f, -0.050f * scale * p.handScale,
+                                         0.004f * scale};
+            Part fingerPart;
+            fingerPart.materialId = 0;
+            fingerPart.mesh = generateSplineSweep({
+                {base, 0.012f * scale * p.handScale, {1.0f, 0.85f}, 0.0f},
+                {base + (tip - base) * 0.55f, 0.010f * scale * p.handScale, {1.0f, 0.85f}, 0.0f},
+                {tip, 0.007f * scale * p.handScale, {1.0f, 0.85f}, 0.0f},
+            }, 10u, 2, true, true, false);
+            fingerPart.path = {hand, tip};
+            fingerPart.pathBones = {left ? BoneLeftHand : BoneRightHand,
+                                    left ? BoneLeftHand : BoneRightHand};
+            parts.push_back(fingerPart);
+        }
     };
     addHand(joints.leftWrist, joints.leftHand, true);
     addHand(joints.rightWrist, joints.rightHand, false);
 
     auto addFoot = [&](const Vec3& ankle, const Vec3& toe, bool left) {
         Part part;
-        part.materialId = 2;
+        part.materialId = 5; // dark shoe material, distinct from shirt
         const Vec3 center = ankle + Vec3{0.0f, -kFootHeight * scale * 0.4f,
                                         p.footLength * scale * 0.22f};
         part.mesh = translated(generateRoundedBox(

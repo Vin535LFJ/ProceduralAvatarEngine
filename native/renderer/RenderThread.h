@@ -34,8 +34,19 @@ enum class RenderCommandType : int {
     AnatomyPreview,
     SetPreviewMode,
     CameraPreset,
+    CameraOrbit, // interactive camera: orbit / zoom / pan / reset
     DebugView,
     Shutdown
+};
+
+// Interactive camera operations. The fixed evidence presets and the free
+// camera share one parameterisation (target + yaw/pitch/distance), so a preset
+// is a starting point for inspection rather than a dead end.
+enum class CameraOp : int {
+    Orbit = 0, // delta.x = yaw degrees, delta.y = pitch degrees
+    Zoom = 1,  // delta.x = multiplier (>1 zooms out)
+    Pan = 2,   // delta.x/delta.y = screen pixels
+    Reset = 3  // snap back to the active evidence preset
 };
 
 struct RenderCommand {
@@ -73,6 +84,7 @@ public:
     void postAnatomyPreview(bool on);  // M12: unified SDF upper-body preview
     void postPreviewMode(int mode);    // 0 avatar / 1 anatomy / 2 P1-A patches
     void postCameraPreset(int preset); // M12: fixed evidence camera (0..7)
+    void postCameraOrbit(int op, const Vec3& delta); // interactive camera
     void postDebugView(int view);      // M12: 0 shading / 1 wireframe / 2 normals
     std::string getStats() const;
 
@@ -85,6 +97,10 @@ private:
     void updateBonePalette(int64_t timestampNs);
     MeshData buildGroundShadow() const;
     MeshData buildAnatomyLineMesh(const MeshData& mesh) const;
+    MeshData buildGroundGrid(float spacing, float halfExtent, int mode) const;
+    void applyCameraPreset(int preset);
+    void applyCameraOp(int op, const Vec3& delta);
+    Vec3 resolveCameraEye() const;
     void drawOutline(const Mat4& viewProjection, const Mat4& model);
     void drawAnatomyPreview(const Mat4& viewProjection, const Mat4& model);
 
@@ -102,6 +118,9 @@ private:
     SkinnedGpuMesh p1aLines_;          // P1-A: wireframe edge buffer
     PatchGenerationReport patchReport_;
     SkinnedGpuMesh avatarMesh_;
+    SkinnedGpuMesh avatarLines_;  // avatar wireframe edge buffer
+    SkinnedGpuMesh gridMesh_;     // world-space reference grid (static)
+    SkinnedGpuMesh axisMesh_;     // world origin axes (static)
     SkinnedGpuMesh shadowMesh_;
     BonePaletteUbo boneUbo_;
     BonePaletteUboData paletteData_;
@@ -120,17 +139,27 @@ private:
     GlCapabilities caps_;
     RenderStats stats_;
 
+    // Natural adult palette (Asian skin, dark hair, neutral gray outfit).
     std::array<Vec3, 5> appearance_{
-        Vec3{0.98f, 0.79f, 0.66f}, Vec3{0.26f, 0.15f, 0.09f},
-        Vec3{0.32f, 0.58f, 0.88f}, Vec3{1.00f, 1.00f, 1.00f}
+        Vec3{0.76f, 0.60f, 0.50f}, Vec3{0.085f, 0.075f, 0.075f},
+        Vec3{0.44f, 0.43f, 0.42f}, Vec3{0.94f, 0.94f, 0.92f},
+        Vec3{0.30f, 0.30f, 0.31f}
     };
-    int backgroundMode_ = 2;
-    Vec3 backgroundA_{0.08f, 0.10f, 0.18f};
-    Vec3 backgroundB_{0.28f, 0.36f, 0.52f};
+    int backgroundMode_ = 0;
+    Vec3 backgroundA_{0.28f, 0.29f, 0.30f};
+    Vec3 backgroundB_{0.28f, 0.29f, 0.30f};
     int poseMode_ = -1;
     int qualityLevel_ = 1;
+    int outfitVariant_ = 0;
     int previewMode_ = 0;  // 0 off, 1 anatomy preview
     int cameraPreset_ = 0; // M12 evidence camera index
+    // Interactive camera state. Shared parameterisation with the presets so a
+    // preset can be orbited away from and snapped back to.
+    Vec3 cameraTarget_{0.0f, 0.90f, 0.0f};
+    float cameraYawDeg_ = 0.0f;   // 0 = camera on +Z looking at -Z (front)
+    float cameraPitchDeg_ = 0.0f; // positive = camera above the target
+    float cameraDistance_ = 2.05f;
+    bool cameraFree_ = false;     // true once the user has moved off a preset
     int debugView_ = 0;    // 0 shading / 1 wireframe / 2 normals / 3 gray clay (M13)
     uint64_t avatarRevision_ = 1;
     uint64_t sceneRevision_ = 1;
@@ -145,6 +174,8 @@ private:
     bool resourcesReady_ = false;
     GLint uniformViewProj_ = -1;
     GLint uniformModel_ = -1;
+    GLint uniformCameraPos_ = -1;
+    GLint uniformDebugMode_ = -1;
     GLint uniformSkin_ = -1;
     GLint uniformHair_ = -1;
     GLint uniformCloth_ = -1;

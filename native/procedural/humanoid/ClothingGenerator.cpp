@@ -89,18 +89,20 @@ std::vector<ClothingPiece> generateClothing(const BodyParameters& params,
         }
     }
 
-    // Collar: short ring band around the neck base.
+    // Collar: modest neck band. The torso shell now carries the shoulder
+    // taper, so an oversized ring is neither needed nor visually plausible.
     {
-        const float collarY = joints.neck.y - 0.01f * scale;
+        const float collarY = joints.neck.y - 0.010f * scale;
         const float neckRadius = params.neckLength * params.neckShape.radiusFactor
-                               * scale + offset * 0.8f;
+                               * scale + offset * 0.9f;
         std::vector<SweepRing> rings = {
-            {{0.0f, collarY - 0.022f * scale, 0.0f}, neckRadius * 1.06f, {1.0f, 1.0f}, 0.0f},
-            {{0.0f, collarY + 0.012f * scale, 0.0f}, neckRadius * 1.10f, {1.0f, 1.0f}, 0.0f},
+            {{0.0f, collarY - 0.030f * scale, 0.0f}, neckRadius * 1.22f, {1.0f, 0.92f}, 0.0f},
+            {{0.0f, collarY + 0.006f * scale, 0.0f}, neckRadius * 1.12f, {1.0f, 1.0f}, 0.0f},
+            {{0.0f, collarY + 0.026f * scale, 0.0f}, neckRadius * 1.05f, {1.0f, 1.0f}, 0.0f},
         };
         ClothingPiece piece;
         piece.materialId = 2;
-        piece.mesh = generateSplineSweep(rings, 20u, 2, false, false, false);
+        piece.mesh = generateSplineSweep(rings, 24u, 3, false, false, false);
         piece.path = {joints.neck, joints.chest};
         piece.pathBones = {BoneNeck, BoneChest};
         pieces.push_back(std::move(piece));

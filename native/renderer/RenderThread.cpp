@@ -12,6 +12,7 @@
 #include <chrono>
 #include <set>
 #include <cmath>
+#include <cstdio>
 #include <utility>
 
 namespace pae {
@@ -28,6 +29,9 @@ uniform mat4 uViewProj;
 uniform mat4 uModel;
 out vec3 vNormal;
 out vec4 vColor;
+out vec3 vWorldPos;
+flat out uvec4 vJoints;
+flat out vec4 vWeights;
 void main() {
     mat4 skin = uBones[aJoints.x] * aWeights.x
               + uBones[aJoints.y] * aWeights.y
@@ -36,38 +40,152 @@ void main() {
     vec4 world = uModel * skin * vec4(aPosition, 1.0);
     vNormal = normalize(mat3(uModel) * mat3(skin) * aNormal);
     vColor = aColor;
+    vWorldPos = world.xyz;
+    vJoints = aJoints;
+    vWeights = aWeights;
     gl_Position = uViewProj * world;
 }
 )GLSL";
 
+// Realistic character material shading. No toon quantisation: continuous
+// Lambert + Blinn-Phong specular, material-dependent roughness, subtle
+// procedural micro variation and a hemispheric ambient term. Texture detail
+// is derived analytically from world position so the frozen 64-byte vertex
+// layout (which carries no UV) does not need to change.
 constexpr const char* kSkinnedFragment = R"GLSL(#version 300 es
-precision mediump float;
+precision highp float;
+layout(std140) uniform BoneBlock { mat4 uBones[22]; };
 in vec3 vNormal;
 in vec4 vColor;
+in vec3 vWorldPos;
+flat in uvec4 vJoints;
+flat in vec4 vWeights;
 uniform vec3 uSkinColor;
 uniform vec3 uHairColor;
 uniform vec3 uClothColor;
 uniform vec3 uEyeColor;
 uniform vec3 uPantsColor;
 uniform vec3 uLightDir;
+uniform vec3 uCameraPos;
 uniform float uAmbient;
 uniform float uToonSteps;
 uniform float uRim;
+uniform int uDebugMode; // 0 material / 2 normals / 3 clay / 4 material id / 5 weights
 out vec4 fragColor;
+
+float hash31(vec3 p) {
+    p = fract(p * 0.1031);
+    p += dot(p, p.yzx + 33.33);
+    return fract((p.x + p.y) * p.z);
+}
+float noise3(vec3 p) {
+    vec3 i = floor(p);
+    vec3 f = fract(p);
+    f = f * f * (3.0 - 2.0 * f);
+    float n000 = hash31(i);
+    float n100 = hash31(i + vec3(1.0, 0.0, 0.0));
+    float n010 = hash31(i + vec3(0.0, 1.0, 0.0));
+    float n110 = hash31(i + vec3(1.0, 1.0, 0.0));
+    float n001 = hash31(i + vec3(0.0, 0.0, 1.0));
+    float n101 = hash31(i + vec3(1.0, 0.0, 1.0));
+    float n011 = hash31(i + vec3(0.0, 1.0, 1.0));
+    float n111 = hash31(i + vec3(1.0, 1.0, 1.0));
+    return mix(mix(mix(n000, n100, f.x), mix(n010, n110, f.x), f.y),
+               mix(mix(n001, n101, f.x), mix(n011, n111, f.x), f.y), f.z);
+}
+
+// Per-bone tint used by the skin-weight inspection view. Derived from the
+// bone index only, so it never depends on the bone palette contents.
+vec3 boneTint(uint boneIndex) {
+    float h = fract(float(boneIndex) * 0.6180339887 + 0.13);
+    vec3 k = 0.5 + 0.5 * cos(6.2831853 * (h + vec3(0.0, 0.33, 0.67)));
+    return mix(vec3(0.22), k, 0.9);
+}
+
 void main() {
+    const float mid = 5.0;
     float materialId = vColor.w;
+    vec3 n = normalize(vNormal);
+
+    // ---- Inspection views that bypass the material model entirely. ----
+    if (uDebugMode == 2) {            // world normals
+        fragColor = vec4(n * 0.5 + 0.5, 1.0);
+        return;
+    }
+    if (uDebugMode == 4) {            // material id
+        vec3 idColor = vec3(0.34, 0.34, 0.38);
+        if (materialId < 0.5)      idColor = vec3(0.86, 0.70, 0.60);
+        else if (materialId < 1.5) idColor = vec3(0.18, 0.16, 0.18);
+        else if (materialId < 2.5) idColor = vec3(0.24, 0.46, 0.76);
+        else if (materialId < 3.5) idColor = vec3(0.95, 0.95, 0.90);
+        else if (materialId < 4.5) idColor = vec3(0.05, 0.05, 0.07);
+        float lambert = 0.35 + 0.65 * max(dot(n, normalize(uLightDir)), 0.0);
+        fragColor = vec4(idColor * lambert, 1.0);
+        return;
+    }
+    if (uDebugMode == 5) {            // skin weight heatmap
+        vec3 heat = vec3(0.0);
+        heat += boneTint(vJoints.x) * vWeights.x;
+        heat += boneTint(vJoints.y) * vWeights.y;
+        heat += boneTint(vJoints.z) * vWeights.z;
+        heat += boneTint(vJoints.w) * vWeights.w;
+        float lambert = 0.55 + 0.45 * max(dot(n, normalize(uLightDir)), 0.0);
+        fragColor = vec4(heat * lambert, 1.0);
+        return;
+    }
+    if (uDebugMode == 3) {            // neutral clay, form only
+        float key = max(dot(n, normalize(vec3(0.45, 0.75, 0.48))), 0.0);
+        float fill = max(dot(n, normalize(vec3(-0.55, 0.15, 0.35))), 0.0);
+        fragColor = vec4(vec3(0.62) * (0.22 + 0.75 * key + 0.22 * fill), 1.0);
+        return;
+    }
+
     vec3 base = materialId < 0.5 ? uSkinColor
               : (materialId < 1.5 ? uHairColor
               : (materialId < 2.5 ? uClothColor
               : (materialId < 3.5 ? uEyeColor
-              : (materialId < 4.5 ? uPantsColor : vec3(0.045, 0.04, 0.06)))));
-    base *= 0.85 + 0.15 * clamp(vColor.rgb, 0.0, 1.0);
-    vec3 n = normalize(vNormal);
-    float ndl = max(dot(n, normalize(uLightDir)), 0.0);
-    float toon = floor(ndl * uToonSteps) / max(uToonSteps, 1.0);
-    float shade = mix(uAmbient, 1.0, toon);
-    float rim = pow(1.0 - abs(n.z), 3.0) * uRim;
-    fragColor = vec4(base * shade + vec3(rim), 1.0);
+              : (materialId < 4.5 ? uPantsColor : vec3(0.035, 0.032, 0.038)))));
+
+    // Real camera position: the view direction must follow the camera, while
+    // the lights stay fixed in world space.
+    vec3 viewDir = normalize(uCameraPos - vWorldPos);
+    vec3 lightDir = normalize(uLightDir);
+    vec3 halfDir = normalize(lightDir + viewDir);
+    float ndl = max(dot(n, lightDir), 0.0);
+    float ndh = max(dot(n, halfDir), 0.0);
+
+    float rough = 0.55;
+    float specStrength = 0.12;
+    if (materialId < 0.5) {
+        rough = 0.42; specStrength = 0.18;
+        float pores = noise3(vWorldPos * 320.0);
+        float tone = noise3(vWorldPos * 18.0);
+        base *= 0.92 + 0.10 * pores + 0.07 * tone;
+        float wrap = max(dot(n, lightDir) * 0.5 + 0.5, 0.0);
+        ndl = mix(ndl, wrap, 0.28);
+    } else if (materialId < 1.5) {
+        rough = 0.22; specStrength = 0.42;
+        float strands = noise3(vWorldPos * vec3(180.0, 26.0, 180.0));
+        base *= 0.78 + 0.34 * strands;
+    } else if (materialId < 2.5 || (materialId >= 4.5 && materialId < mid)) {
+        rough = 0.72; specStrength = 0.05;
+        float weave = noise3(vWorldPos * 240.0);
+        base *= 0.90 + 0.14 * weave;
+    } else if (materialId < 3.5) {
+        rough = 0.12; specStrength = 0.65;
+    }
+    base *= 0.88 + 0.12 * clamp(vColor.rgb, 0.0, 1.0);
+
+    float gloss = pow(ndh, max(4.0, 2.0 / max(rough * rough, 0.02)));
+    float hemi = 0.5 + 0.5 * n.y;
+    vec3 ambient = base * mix(uAmbient * 0.75, uAmbient * 1.30, hemi);
+    vec3 fill = base * max(dot(n, normalize(vec3(-0.6, 0.3, -0.4))), 0.0) * 0.22;
+    vec3 diffuse = base * ndl * 1.10;
+    vec3 specular = vec3(specStrength) * gloss * (0.35 + 0.65 * ndl);
+    float rim = pow(1.0 - max(dot(n, viewDir), 0.0), 3.0) * uRim;
+    vec3 color = ambient + fill + diffuse + specular + vec3(rim) * base;
+    color = pow(color, vec3(0.92));
+    fragColor = vec4(color, 1.0);
 }
 )GLSL";
 
@@ -202,10 +320,37 @@ void main() {
 }
 )GLSL";
 
+// Fixed evidence cameras. These are the reproducible capture rig; the
+// interactive camera is expressed in the same parameterisation so a preset
+// can be orbited away from and snapped back to.
+constexpr int kPresetCount = 8;
+const Vec3 kPresetEye[kPresetCount] = {
+    {0.0f, 0.98f, 2.05f},    // 0 FRONT (full body)
+    {0.0f, 0.98f, -2.05f},   // 1 BACK
+    {2.05f, 0.98f, 0.0f},    // 2 LEFT (+X side)
+    {-2.05f, 0.98f, 0.0f},   // 3 RIGHT
+    {1.45f, 0.98f, 1.45f},   // 4 45 LEFT
+    {-1.45f, 0.98f, 1.45f},  // 5 45 RIGHT
+    {0.42f, 1.55f, 0.78f},   // 6 SHOULDER CLOSEUP
+    {0.0f, 1.62f, 0.42f},    // 7 FACE CLOSEUP
+};
+const Vec3 kPresetTarget[kPresetCount] = {
+    {0.0f, 0.90f, 0.0f}, {0.0f, 0.90f, 0.0f}, {0.0f, 0.90f, 0.0f},
+    {0.0f, 0.90f, 0.0f}, {0.0f, 0.90f, 0.0f}, {0.0f, 0.90f, 0.0f},
+    {0.16f, 1.34f, 0.0f}, {0.0f, 1.61f, 0.0f},
+};
+
+constexpr float kRadToDeg = 57.2957795f;
+constexpr float kDegToRad = 0.0174532925f;
+
 } // namespace
 
 RenderThread::RenderThread(uint32_t maxQueuedCommands)
-    : maxQueuedCommands_(maxQueuedCommands) {}
+    : maxQueuedCommands_(maxQueuedCommands) {
+    // Start on evidence preset 0 (front, full body) so the first frame is
+    // reproducible before any interactive input arrives.
+    applyCameraPreset(0);
+}
 
 RenderThread::~RenderThread() {
     stop();
@@ -342,6 +487,16 @@ void RenderThread::postCameraPreset(int preset) {
     queueCv_.notify_one();
 }
 
+void RenderThread::postCameraOrbit(int op, const Vec3& delta) {
+    RenderCommand command;
+    command.type = RenderCommandType::CameraOrbit;
+    command.value = op;
+    command.vecA = delta;
+    std::lock_guard<std::mutex> lock(queueMutex_);
+    queue_.push_back(command);
+    queueCv_.notify_one();
+}
+
 void RenderThread::postDebugView(int view) {
     RenderCommand command;
     command.type = RenderCommandType::DebugView;
@@ -362,8 +517,14 @@ void RenderThread::postQuality(int level) {
 
 std::string RenderThread::getStats() const {
     std::lock_guard<std::mutex> lock(queueMutex_);
+    char camera[160];
+    std::snprintf(camera, sizeof(camera),
+                  " cam=%.1f/%.1f/%.2f yaw=%.1f pitch=%.1f dist=%.2f %s",
+                  cameraTarget_.x, cameraTarget_.y, cameraTarget_.z,
+                  cameraYawDeg_, cameraPitchDeg_, cameraDistance_,
+                  cameraFree_ ? "free" : "preset");
     return stats_.toString() + " avatar_rev=" + std::to_string(avatarRevision_) +
-           " scene_rev=" + std::to_string(sceneRevision_) + " " + startupError_;
+           " scene_rev=" + std::to_string(sceneRevision_) + camera + " " + startupError_;
 }
 
 void RenderThread::run() {
@@ -425,10 +586,34 @@ void RenderThread::processCommands() {
                 releaseGpuResources();
                 egl_.destroySurface();
                 break;
-            case RenderCommandType::SetAppearance:
+            case RenderCommandType::SetAppearance: {
+                const int previousVariant = outfitVariant_;
                 appearance_ = command.palette;
-                ++sceneRevision_; // material-only change: no geometry rebuild
+                // Outfit variant is derived from the cloth palette so the
+                // frozen JNI ABI can switch a full clothing configuration
+                // through the existing appearance command.
+                outfitVariant_ = appearance_[2].x > appearance_[2].z ? 1 : 0;
+                if (outfitVariant_ != previousVariant && hasCachedAvatar_) {
+                    BodyParameters params{};
+                    params.detailLevel = detailLevelForQuality(static_cast<QualityLevel>(qualityLevel_));
+                    if (outfitVariant_ == 1) {
+                        params.clothing.thickness = 0.018f;
+                        params.clothing.shirtHem = 0.86f;
+                        params.clothing.sleeveLength = 0.40f;
+                        params.clothing.pantsLength = 0.82f;
+                    }
+                    const HumanoidResult humanoid = generateHumanoid(params, false);
+                    if (humanoid.valid) {
+                        cachedAvatarMesh_ = humanoid.mesh;
+                        skeleton_ = humanoid.skeleton;
+                        joints_ = humanoid.joints;
+                        avatarMesh_.upload(cachedAvatarMesh_);
+                        ++avatarRevision_;
+                    }
+                }
+                ++sceneRevision_;
                 break;
+            }
             case RenderCommandType::SetBackground:
                 backgroundMode_ = command.value;
                 backgroundA_ = command.vecA;
@@ -458,7 +643,11 @@ void RenderThread::processCommands() {
                 break;
             case RenderCommandType::CameraPreset:
                 cameraPreset_ = command.value;
+                applyCameraPreset(cameraPreset_);
                 PAE_LOGI("PAE_RENDER", "applied cameraPreset=%d", cameraPreset_);
+                break;
+            case RenderCommandType::CameraOrbit:
+                applyCameraOp(command.value, command.vecA);
                 break;
             case RenderCommandType::DebugView:
                 debugView_ = command.value;
@@ -532,6 +721,15 @@ bool RenderThread::ensureResources(std::string* error) {
         if (error) *error = "ground shadow upload failed";
         return false;
     }
+    // World-space reference grid + origin axes. Static geometry, no skinning.
+    if (!gridMesh_.upload(buildGroundGrid(0.25f, 2.5f, 0))) {
+        if (error) *error = "ground grid upload failed";
+        return false;
+    }
+    if (!axisMesh_.upload(buildGroundGrid(0.25f, 2.5f, 1))) {
+        if (error) *error = "ground axes upload failed";
+        return false;
+    }
     if (!anatomyProgram_.build(kSkinnedVertex, kAnatomyNeutralFragment, error)) return false;
     if (!anatomyProgram_.bindUniformBlock("BoneBlock", 0)) {
         if (error) *error = "anatomy BoneBlock binding failed";
@@ -559,6 +757,8 @@ bool RenderThread::ensureResources(std::string* error) {
     uniformAnatomyClayFillDir_ = anatomyClayProg_.uniform("uFillDir");
     uniformViewProj_ = skinnedProgram_.uniform("uViewProj");
     uniformModel_ = skinnedProgram_.uniform("uModel");
+    uniformCameraPos_ = skinnedProgram_.uniform("uCameraPos");
+    uniformDebugMode_ = skinnedProgram_.uniform("uDebugMode");
     uniformSkin_ = skinnedProgram_.uniform("uSkinColor");
     uniformHair_ = skinnedProgram_.uniform("uHairColor");
     uniformCloth_ = skinnedProgram_.uniform("uClothColor");
@@ -591,6 +791,11 @@ bool RenderThread::ensureResources(std::string* error) {
     }
     if (!avatarMesh_.upload(cachedAvatarMesh_)) {
         if (error) *error = "skinned humanoid upload failed";
+        return false;
+    }
+    // Avatar wireframe edge buffer for the topology inspection view.
+    if (!avatarLines_.upload(buildAnatomyLineMesh(cachedAvatarMesh_))) {
+        if (error) *error = "avatar wireframe upload failed";
         return false;
     }
     stats_.setBufferBytes(static_cast<uint64_t>(
@@ -675,6 +880,9 @@ bool RenderThread::ensureResources(std::string* error) {
 
 void RenderThread::releaseGpuResources() {
     avatarMesh_.release();
+    avatarLines_.release();
+    gridMesh_.release();
+    axisMesh_.release();
     shadowMesh_.release();
     p1aMesh_.release();
     p1aLines_.release();
@@ -741,6 +949,103 @@ MeshData RenderThread::buildGroundShadow() const {
     return mesh;
 }
 
+void RenderThread::applyCameraPreset(int preset) {
+    const int index = std::clamp(preset, 0, kPresetCount - 1);
+    const Vec3 eye = kPresetEye[index];
+    const Vec3 target = kPresetTarget[index];
+    cameraTarget_ = target;
+    const Vec3 delta = eye - target;
+    cameraDistance_ = std::max(delta.length(), 0.05f);
+    cameraYawDeg_ = std::atan2(delta.x, delta.z) * kRadToDeg;
+    cameraPitchDeg_ = std::asin(std::clamp(delta.y / cameraDistance_, -1.0f, 1.0f)) * kRadToDeg;
+    cameraFree_ = false;
+}
+
+Vec3 RenderThread::resolveCameraEye() const {
+    const float yaw = cameraYawDeg_ * kDegToRad;
+    const float pitch = cameraPitchDeg_ * kDegToRad;
+    const Vec3 dir{std::sin(yaw) * std::cos(pitch),
+                   std::sin(pitch),
+                   std::cos(yaw) * std::cos(pitch)};
+    return cameraTarget_ + dir * cameraDistance_;
+}
+
+void RenderThread::applyCameraOp(int op, const Vec3& delta) {
+    switch (static_cast<CameraOp>(op)) {
+        case CameraOp::Orbit:
+            cameraYawDeg_ += delta.x;
+            cameraPitchDeg_ = std::clamp(cameraPitchDeg_ + delta.y, -85.0f, 85.0f);
+            cameraFree_ = true;
+            break;
+        case CameraOp::Zoom: {
+            const float multiplier = delta.x > 0.0f ? delta.x : 1.0f;
+            cameraDistance_ = std::clamp(cameraDistance_ / multiplier, 0.22f, 14.0f);
+            cameraFree_ = true;
+            break;
+        }
+        case CameraOp::Pan: {
+            const Vec3 eye = resolveCameraEye();
+            const Vec3 forward = (cameraTarget_ - eye).normalized({0.0f, 0.0f, -1.0f});
+            const Vec3 right = forward.cross(Vec3{0.0f, 1.0f, 0.0f}).normalized({1.0f, 0.0f, 0.0f});
+            const Vec3 up = right.cross(forward).normalized({0.0f, 1.0f, 0.0f});
+            // Screen pixels -> world units. The scale follows the orbit
+            // distance so panning feels the same at every zoom level.
+            const float scale = cameraDistance_ * 0.0019f;
+            cameraTarget_ = cameraTarget_ - right * (delta.x * scale) + up * (delta.y * scale);
+            cameraTarget_.y = std::clamp(cameraTarget_.y, -1.0f, 3.0f);
+            cameraFree_ = true;
+            break;
+        }
+        case CameraOp::Reset:
+            applyCameraPreset(cameraPreset_);
+            break;
+    }
+}
+
+MeshData RenderThread::buildGroundGrid(float spacing, float halfExtent, int mode) const {
+    // World-space reference grid: gives the character a readable ground plane
+    // and a metric sense of scale under the free camera. Drawn as GL_LINES.
+    // mode 0 = minor grid (skips the centre axes), mode 1 = the two axes.
+    MeshData lines;
+    const float y = -0.052f; // just below the avatar's model offset floor
+    auto pushVertex = [&](float x, float z) {
+        Vertex v;
+        v.position = {x, y, z};
+        v.normal = {0.0f, 1.0f, 0.0f};
+        v.joints = {0, 0, 0, 0};
+        v.weights = {1.0f, 0.0f, 0.0f, 0.0f};
+        v.color = {1.0f, 1.0f, 1.0f, 0.0f};
+        lines.vertices.push_back(v);
+    };
+    if (mode == 1) {
+        pushVertex(0.0f, -halfExtent);
+        pushVertex(0.0f, halfExtent);
+        pushVertex(-halfExtent, 0.0f);
+        pushVertex(halfExtent, 0.0f);
+    } else {
+        const int steps = static_cast<int>(std::floor(halfExtent / spacing));
+        for (int i = -steps; i <= steps; ++i) {
+            const float coordinate = static_cast<float>(i) * spacing;
+            if (std::fabs(coordinate) < 0.001f) continue; // axes drawn separately
+            pushVertex(coordinate, -halfExtent);
+            pushVertex(coordinate, halfExtent);
+            pushVertex(-halfExtent, coordinate);
+            pushVertex(halfExtent, coordinate);
+        }
+    }
+    for (size_t i = 0; i + 1 < lines.vertices.size(); i += 2) {
+        lines.indices.push_back(static_cast<uint32_t>(i));
+        lines.indices.push_back(static_cast<uint32_t>(i + 1));
+    }
+    Aabb bounds;
+    for (const Vertex& vertex : lines.vertices) bounds.expand(vertex.position);
+    lines.bounds = bounds;
+    SubMesh sub;
+    sub.indexCount = static_cast<uint32_t>(lines.indices.size());
+    lines.subMeshes.push_back(sub);
+    return lines;
+}
+
 void RenderThread::drawOutline(const Mat4& viewProjection, const Mat4& model) {
     glCullFace(GL_FRONT);
     outlineProgram_.use();
@@ -764,29 +1069,11 @@ void RenderThread::drawFrame() {
     stats_.beginFrame();
     const float aspect = height_ > 0 ? static_cast<float>(width_) / static_cast<float>(height_) : 1.0f;
     const Mat4 projection = Mat4::perspective(1.05f, aspect, 0.1f, 100.0f);
-    // M12: fixed evidence cameras (index per §8 of the anatomy preview spec).
-    // M12 upper-body framing: the anatomy mesh spans y 0.90..1.65 (hips..head
-    // top, incl. the -0.05 model offset), so presets 0-5 orbit at a distance
-    // that fills ~55% of the frame height with that 0.75 m span.
-    static const Vec3 kPresetEye[] = {
-        {0.0f, 1.28f, 1.20f},    // 0 FRONT
-        {0.0f, 1.28f, -1.20f},   // 1 BACK
-        {1.20f, 1.28f, 0.0f},    // 2 LEFT (+X side)
-        {-1.20f, 1.28f, 0.0f},   // 3 RIGHT
-        {0.90f, 1.28f, 0.90f},   // 4 45 LEFT
-        {-0.90f, 1.28f, 0.90f},  // 5 45 RIGHT
-        {0.42f, 1.55f, 0.78f},   // 6 SHOULDER CLOSEUP
-        {0.0f, 1.28f, 0.78f},    // 7 TORSO CLOSEUP
-    };
-    static const Vec3 kPresetTarget[] = {
-        {0.0f, 1.26f, 0.0f}, {0.0f, 1.26f, 0.0f}, {0.0f, 1.26f, 0.0f},
-        {0.0f, 1.26f, 0.0f}, {0.0f, 1.26f, 0.0f}, {0.0f, 1.26f, 0.0f},
-        {0.16f, 1.34f, 0.0f}, {0.0f, 1.22f, 0.0f},
-    };
-    const int preset = std::clamp(cameraPreset_, 0, 7);
-    const Mat4 view = previewMode_ != 0
-        ? Mat4::lookAt(kPresetEye[preset], kPresetTarget[preset], {0.0f, 1.0f, 0.0f})
-        : Mat4::lookAt({0.0f, 0.9f, 3.1f}, {0.0f, 0.9f, 0.0f}, {0.0f, 1.0f, 0.0f});
+    // The camera is state, not a lookup table: the evidence presets write into
+    // the same parameterisation the interactive camera uses, so a fixed
+    // capture rig and a free inspection rig are the same rig.
+    const Vec3 cameraEye = resolveCameraEye();
+    const Mat4 view = Mat4::lookAt(cameraEye, cameraTarget_, {0.0f, 1.0f, 0.0f});
     const Mat4 viewProjection = projection * view;
     const Mat4 model = Mat4::translation({0.0f, -0.05f, 0.0f});
 
@@ -831,10 +1118,25 @@ void RenderThread::drawFrame() {
     glDepthMask(GL_TRUE);
     glDisable(GL_BLEND);
 
+    // World-space reference grid. Drawn before the character so the avatar
+    // occludes it, and in world space so the free camera reads the scene in
+    // metres instead of against an empty backdrop.
+    if (previewMode_ == 0) {
+        const Mat4 identity = Mat4{};
+        shadowProgram_.use();
+        glUniformMatrix4fv(uniformShadowViewProj_, 1, GL_FALSE, viewProjection.m.data());
+        glUniformMatrix4fv(uniformShadowModel_, 1, GL_FALSE, identity.m.data());
+        glUniform4f(uniformShadowColor_, 0.32f, 0.36f, 0.42f, 1.0f);
+        gridMesh_.drawLines();
+        glUniform4f(uniformShadowColor_, 0.52f, 0.58f, 0.66f, 1.0f);
+        axisMesh_.drawLines();
+    }
+
     if (previewMode_ == 0) {
         skinnedProgram_.use();
         glUniformMatrix4fv(uniformViewProj_, 1, GL_FALSE, viewProjection.m.data());
         glUniformMatrix4fv(uniformModel_, 1, GL_FALSE, model.m.data());
+        glUniform3f(uniformCameraPos_, cameraEye.x, cameraEye.y, cameraEye.z);
         glUniform3f(uniformSkin_, appearance_[0].x, appearance_[0].y, appearance_[0].z);
         glUniform3f(uniformHair_, appearance_[1].x, appearance_[1].y, appearance_[1].z);
         glUniform3f(uniformCloth_, appearance_[2].x, appearance_[2].y, appearance_[2].z);
@@ -844,8 +1146,29 @@ void RenderThread::drawFrame() {
         glUniform1f(skinnedProgram_.uniform("uAmbient"), 0.42f);
         glUniform1f(skinnedProgram_.uniform("uToonSteps"), 3.0f);
         glUniform1f(skinnedProgram_.uniform("uRim"), 0.12f);
+        // Inspection views. The inverted-hull outline is a study mode, not the
+        // production look: the black rim reinforced the toy read of the skin.
+        const int debugMode = (debugView_ == 1) ? 3
+                            : (debugView_ == 2) ? 2
+                            : (debugView_ == 3) ? 3
+                            : (debugView_ == 4) ? 4
+                            : (debugView_ == 5) ? 5
+                            : 0;
+        glUniform1i(uniformDebugMode_, debugMode);
         avatarMesh_.draw();
-        drawOutline(viewProjection, model);
+        if (debugView_ == 1) {
+            // Wireframe over the clay shading: the triangle topology is the
+            // point of this view, so the lines are pulled to the front.
+            glDepthRangef(0.0f, 0.0f);
+            shadowProgram_.use();
+            glUniformMatrix4fv(uniformShadowViewProj_, 1, GL_FALSE, viewProjection.m.data());
+            glUniformMatrix4fv(uniformShadowModel_, 1, GL_FALSE, model.m.data());
+            glUniform4f(uniformShadowColor_, 0.10f, 0.42f, 0.16f, 1.0f);
+            avatarLines_.drawLines();
+            glDepthRangef(0.0f, 1.0f);
+        } else if (debugView_ == 6) {
+            drawOutline(viewProjection, model);
+        }
     } else if (previewMode_ == 2) {
         // P1-A patch PoC: continuous gray Lambert by default; normals and
         // wireframe are the only additional debug views. No toon, no material.

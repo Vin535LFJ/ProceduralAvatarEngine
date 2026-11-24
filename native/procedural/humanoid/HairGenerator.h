@@ -13,10 +13,10 @@ namespace pae::hair {
 
 struct HairParams {
     int style = 0;            // 0 short, 1 medium, 2 long
-    int strandCount = 14;     // bangs/side strand clumps
-    float strandWidth = 0.018f;
-    float bend = 0.5f;        // outward/downward bend strength
-    float backLength = 0.10f; // back hair drop length (m), style-dependent
+    int strandCount = 30;     // layered hair clumps (short, textured)
+    float strandWidth = 0.012f;
+    float bend = 0.42f;       // outward/downward bend strength
+    float backLength = 0.085f; // back hair drop length (m), style-dependent
 };
 
 struct HairPiece {
