@@ -11,7 +11,7 @@
 
 | ID | Parent | 问题 | Owner | Blocking Target | Evidence | Status | Closure Criteria | 负责人回复 |
 |---|---|---|---|---|---|---|---|---|
-| OQ-01 | — | DEC-05 参考体系：是否批准方案 C（外部视觉参考 + 解剖工程参考 + 自有 Canonical Acceptance Sheet），并把五 Gate 结构写入 rubric？ | 项目负责人 | 视觉 `PASS` 判定；`G-P1-GEO` / `G-FINAL-VIS` 能否判 PASS | 本轮 02 参考更新矩阵；本轮 03 Canonical Sheet v0 | **BLOCKING / OPEN** | ① 子项 OQ-28/29/30/31/32 全部关闭 ② 负责人签署 DEC-05 修订稿 | ____________________ |
+| OQ-01 | — | DEC-05 参考体系：是否批准方案 C（外部视觉参考 + 解剖工程参考 + 自有 Canonical Acceptance Sheet），并把五 Gate 结构写入 rubric？ | 项目负责人 | 视觉 `PASS` 判定；`G-P1-GEO` / `G-FINAL-VIS` 能否判 PASS | 本轮 02 参考更新矩阵；本轮 03 Canonical Sheet v0 | **BLOCKING / OPEN** —— 负责人 2026-11-24 决定**等 PoC-SM 灰模产出后再定** | ① 子项 OQ-28/29/30/31/32 全部关闭 ② 负责人签署 DEC-05 修订稿 | **等灰模**（2026-11-24）：PoC-SM 首批灰模已产出（`poc-sm` 分支 `evidence/poc-sm/`，7 视角） |
 
 > **当前唯一未关闭的独立 BLOCKING 主项。**
 > OQ-02 已于 2026-11-24 由 AUTH-08 关闭 → **PoC-SM 可以编码**。
@@ -73,7 +73,7 @@
 
 | ID | Parent | 问题 | Owner | Blocking Target | Evidence | Status | Closure Criteria |
 |---|---|---|---|---|---|---|---|
-| OQ-14 | — | 肩根接缝 ≤5° 合同失败（R1/R2 47.66°、R3 16.13°） | AI + 负责人 | `G-P1-GEO` 硬条件 | G2 §5 | **OPEN** | PoC-SM 按 OQ-03 固定口径复测 ≤5° |
+| OQ-14 | — | 肩根接缝 ≤5° 合同失败（R1/R2 47.66°、R3 16.13°） | AI + 负责人 | `G-P1-GEO` 硬条件 | G2 §5；**PoC-SM v2 首测 21.76°（32 段）**，见 `12-poc-sm-vertical-slice.md` §3/§4 | **OPEN + 新发现待裁定** | PoC-SM 按固定口径复测 ≤5°。**⚠️ 2026-11-24 新发现**：本口径测的是环带的多边形离散化（完美圆柱在 32 段下也读 11.25°，excess ≈ 370/S），与 `docs/foundation/03` "缝两侧法线夹角 ≤5°" 的跨缝语义不一致。三个出路（扣基线 / 改测跨缝 / 提段数至 ~150）**需负责人裁定**；裁定前 21.76° 不作判定依据 |
 | OQ-15 | — | R3 包络上胸缺口 13.5 cm、有效参数 7/20 且加密不收敛 | AI | 无（已暂停） | G1/G2 | **CLEAR（暂停投入）** | 保持暂停；**不阻止 PoC-SM** |
 | OQ-16 | — | 骨盆扇盖处 144 个法线翻转（ring 0–1） | AI | `G-P1-GEO` 复测 | G2 §4 | **OPEN** | PoC-SM 复测并区分 cap 伪影与真实缺陷 |
 | OQ-17 | — | 跨参数组区域影响：R2 chest 组 33 顶点 >1 mm；R3 waist 组 250 顶点 >1 mm（max 14.86 mm） | AI | `G-P1-GEO` + `G-P1-TOPO` | G2 §13 #9 | **OPEN** | 阈值批准后判定；加入逐参数差分测试（AL-6） |
@@ -99,8 +99,8 @@
 ## 8. 同步状态
 
 - 本表与全部证据/文档已在 `origin/feature/procedural-character-foundation`。
-- 本版变更（2026-11-24）：① 归并 OQ 编号，补 `Parent` / `Owner` / `Blocking Target` /
-  `Evidence` / `Closure Criteria` 列；② 同步 OQ-02/03/04/05/33 的签署状态；
-  ③ 独立 BLOCKING 主项由 5 降为 **1**（仅 OQ-01）。
+- 本版变更（2026-11-24，第 2 次）：① OQ-01 记录负责人"等灰模再定"的排期决定，并注明首批灰模已产出；
+  ② OQ-14 记录 PoC-SM v2 首测值（21.76°）与**口径与合同原文语义不一致**的待裁定发现。
+- PoC-SM 首个垂直切片见 `12-poc-sm-vertical-slice.md`（`poc-sm/shape-model-v2` 分支）。
 - 回复请直接填 ID（如 "OQ-01: xxx，OQ-28: xxx"），我会写回 SPEC register 并更新本表状态。
 - ⚠️ **文档完成 / 入库 / AI 声称完成 / Git 工作区干净，均不等于批准，也不等于任何 Gate 通过。**
