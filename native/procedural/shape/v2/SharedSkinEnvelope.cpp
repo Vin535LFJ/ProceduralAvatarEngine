@@ -12,28 +12,24 @@ namespace {
 constexpr float kPi = 3.14159265358979323846f;
 
 // ---------------------------------------------------------------------------
-// Clamped uniform cubic B-spline.
+// Interpolating natural cubic spline — the ACTUAL height interpolant.
 //
-// A uniform cubic B-spline is C2 in its interior and, when clamped, also C2 at
-// the ends. That is what lets the region contributions be combined in
-// CONTROL-POINT space and still produce a single C2 profile.
+// This is C2 everywhere AND passes exactly through its input knots. The three
+// REGION splines are built from anatomical anchors, so those measured values
+// are not approximated at that stage. The final width/depth profile is then
+// resampled onto 26 uniform control points and refit with the same interpolant
+// in buildProfileData: the delivered profile is a C2 reconstruction of the
+// combined region splines, not a literal interpolation of the anchor list.
+// anchorHalfWidths/Depths are back-computed from the delivered profile for
+// reporting, so they describe the mesh rather than the input knots.
 //
-// A cubic B-spline needs at least 4 control points; with fewer the curve is
-// not defined, so `valid()` reports it and callers must not use the result.
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// Interpolating natural cubic spline.
-//
-// This is C2 everywhere AND passes exactly through every anchor, which is
-// what the region contributions need: the anchors are MEASURED values, so a
-// spline that only approximates them would silently replace the measurement
-// with an approximation. A clamped uniform B-spline was tried first and
-// rejected for exactly that reason - it passes through its END control
-// points only, so the interior "anchors" drifted by millimetres and the
-// continuity test caught the resulting slope break.
-//
-// Natural boundary condition (second derivative = 0 at both ends). Works
-// with two or more points and with unevenly spaced heights.
+// An earlier design described this code as a "clamped uniform cubic B-spline".
+// That description is STALE and was removed: a cubic B-spline passes only
+// through its end control points, so interior anchors drifted by millimetres
+// and the continuity test caught the resulting slope break. The implementation
+// below solves for second derivatives with a natural boundary condition
+// (second derivative = 0 at both ends). It needs two or more points and works
+// with unevenly spaced heights; `valid()` reports otherwise.
 // ---------------------------------------------------------------------------
 class CubicInterpolant {
 public:

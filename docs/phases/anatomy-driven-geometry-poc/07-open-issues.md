@@ -11,7 +11,7 @@
 
 | ID | Parent | 问题 | Owner | Blocking Target | Evidence | Status | Closure Criteria | 负责人回复 |
 |---|---|---|---|---|---|---|---|---|
-| OQ-01 | — | DEC-05 参考体系：是否批准方案 C（外部视觉参考 + 解剖工程参考 + 自有 Canonical Acceptance Sheet），并把五 Gate 结构写入 rubric？ | 项目负责人 | 视觉 `PASS` 判定；`G-P1-GEO` / `G-FINAL-VIS` 能否判 PASS | 本轮 02 参考更新矩阵；本轮 03 Canonical Sheet v0 | **BLOCKING / OPEN** —— 负责人 2026-11-24 决定**等 PoC-SM 灰模产出后再定** | ① 子项 OQ-28/29/30/31/32 全部关闭 ② 负责人签署 DEC-05 修订稿 | **等灰模**（2026-11-24）：PoC-SM 首批灰模已产出（`poc-sm` 分支 `evidence/poc-sm/`，7 视角） |
+| OQ-01 | — | DEC-05 参考体系：是否批准方案 C（外部视觉参考 + 解剖工程参考 + 自有 Canonical Acceptance Sheet），并把五 Gate 结构写入 rubric？ | 项目负责人 | 视觉 `PASS` 判定；`G-P1-GEO` / `G-FINAL-VIS` 能否判 PASS | 本轮 02 参考更新矩阵；本轮 03 Canonical Sheet v0；本轮新灰模 `evidence/poc-sm/round-2/views/`（7 固定视角 + 肩胸/腋窝近景，9 张，均本轮生成） | **BLOCKING / OPEN** —— 负责人 2026-11-24 决定等灰模产出后再定；**灰模已产出，现等待负责人视觉审查及 DEC-05 决策** | ① 子项 OQ-28/29/30/31/32 全部关闭 ② 负责人签署 DEC-05 修订稿 | **等负责人视觉审查**（2026-11-24 round 2）：灰模已交付，未判视觉 PASS |
 
 > **当前唯一未关闭的独立 BLOCKING 主项。**
 > OQ-02 已于 2026-11-24 由 AUTH-08 关闭 → **PoC-SM 可以编码**。
@@ -73,14 +73,14 @@
 
 | ID | Parent | 问题 | Owner | Blocking Target | Evidence | Status | Closure Criteria |
 |---|---|---|---|---|---|---|---|
-| OQ-14 | — | 肩根接缝 ≤5° 合同失败（R1/R2 47.66°、R3 16.13°） | AI + 负责人 | `G-P1-GEO` 硬条件 | G2 §5；**PoC-SM v2 首测 21.76°（32 段）**，见 `12-poc-sm-vertical-slice.md` §3/§4 | **OPEN + 新发现待裁定** | PoC-SM 按固定口径复测 ≤5°。**⚠️ 2026-11-24 新发现**：本口径测的是环带的多边形离散化（完美圆柱在 32 段下也读 11.25°，excess ≈ 370/S），与 `docs/foundation/03` "缝两侧法线夹角 ≤5°" 的跨缝语义不一致。三个出路（扣基线 / 改测跨缝 / 提段数至 ~150）**需负责人裁定**；裁定前 21.76° 不作判定依据 |
+| OQ-14 | — | 肩根接缝 ≤5° 合同失败（R1/R2 47.66°、R3 16.13°） | AI + 负责人 | `G-P1-GEO` 硬条件 | G2 §5；PoC-SM v2 首测 **21.7622°**（32 段，见 `12-poc-sm-vertical-slice.md` §3/§4）；**round 2 新旧口径对照**：`evidence/poc-sm/round-2/cross-boundary-seam-report.md` + `cross-boundary-seam-matrix.csv`（16 组） | **OPEN + 待裁定（口径冲突已获实验证据）** | 负责人裁定正式测量定义。**VERIFIED（实验，非判定）**：旧环带统计在已知折角 0/5/15/30° 的几何上恒读 360/S（32 段 11.2500°、64 段 5.6251°、96 段 3.7501°、128 段 2.8127°），**与折角无关**；新跨缝统计读出 14.9311°→14.9958°（15° 折角，32→128 段），稳定。与 `docs/foundation/03` 跨缝语义不一致已确认。三个出路（扣基线 / 改测跨缝 / 提段数）仍**需负责人裁定**；裁定前 21.7622° 不作判定依据，B 方案也**未**被采纳为正式定义 |
 | OQ-15 | — | R3 包络上胸缺口 13.5 cm、有效参数 7/20 且加密不收敛 | AI | 无（已暂停） | G1/G2 | **CLEAR（暂停投入）** | 保持暂停；**不阻止 PoC-SM** |
-| OQ-16 | — | 骨盆扇盖处 144 个法线翻转（ring 0–1） | AI | `G-P1-GEO` 复测 | G2 §4 | **OPEN** | PoC-SM 复测并区分 cap 伪影与真实缺陷 |
-| OQ-17 | — | 跨参数组区域影响：R2 chest 组 33 顶点 >1 mm；R3 waist 组 250 顶点 >1 mm（max 14.86 mm） | AI | `G-P1-GEO` + `G-P1-TOPO` | G2 §13 #9 | **OPEN** | 阈值批准后判定；加入逐参数差分测试（AL-6） |
+| OQ-16 | — | 骨盆扇盖处 144 个法线翻转（ring 0–1） | AI | `G-P1-GEO` 复测 | G2 §4（历史缺陷，**冻结不修改**）；v2 修正：`SharedSkinEnvelope.cpp` 底盖绕序 `(center, v0, v1)` + `pae_poc_sm_envelope_tests` 的 `all_face_normals_point_outward` | **OPEN（G2 历史项） / VERIFIED（v2 修正）** | G2 历史缺陷保持记录；v2 已用真实网格法线验证外法线与底盖绕序，round 2 拓扑审计 `clean=yes`、未登记 boundary=0、sliver=0（见 `evidence/poc-sm/round-2/baseline-probe-stdout.log`）。**不得**据此宣称 G2 已关闭 |
+| OQ-17 | — | 跨参数组区域影响：R2 chest 组 33 顶点 >1 mm；R3 waist 组 250 顶点 >1 mm（max 14.86 mm） | AI | `G-P1-GEO` + `G-P1-TOPO` | G2 §13 #9；round 2 全参数差分：`evidence/poc-sm/round-2/al6-shape-parameter-delta.csv`、`al6-parameter-differential-report.md` | **OPEN（G2 判定） / VERIFIED（v2 差分已完成）** | AL-6 已测：9 个 `Wired` 参数全部产生实测顶点位移（例：`shoulder-girdle-height` max 68.20 mm、`pelvis-volume` 27.56 mm、`axilla-depth` 27.72 mm 但 mean 仅 0.19 mm，为局部凹面）；`spine-curve` = 0.000 mm。G2 阈值未批准，仍**不判 PASS** |
 | OQ-18 | — | 体积对比非同口径（R1 闭合、R2/R3 crop 开口，垂直范围不同） | AI | G2 重测 | G2 §7 注 | **OPEN** | 新 G2 之前统一测量口径 |
 | OQ-19 | — | GPU 数值 parity `[UNVERIFIED]` | AI | G4；`G-P1-ANIM` 完整判定 | G2 §6 | **OPEN** | G4 前专项完成；**CPU 侧已成立，不可替代 GPU 结论** |
 | OQ-20 | — | APK 哈希因 `SdfFusion.cpp` 改动变化（`088476fc…` → `c1cace9d…`），设备复验 NOT RUN | AI | G4 | 符号推导文档 | **OPEN** | G4 前设备复验 |
-| OQ-21 | — | 参数"声明未达顶点"仍是 PARTIALLY VERIFIED | AI | 参数语义可信度 | G2 §8 | **OPEN** | 逐参数差分测试通过后升级 VERIFIED（AL-6） |
+| OQ-21 | — | 参数"声明未达顶点"仍是 PARTIALLY VERIFIED | AI | 参数语义可信度 | G2 §8；round 2 `evidence/poc-sm/round-2/al6-proportion-delta.csv` | **OPEN（G2 项） / VERIFIED（v2 状态和字段状态已钉住）** | v2 差分证明：9 个 `Wired` ShapeParameter 全部移动顶点；`spine-curve` 声明 `DeclaredOnly` 且 delta = 0.000 mm；`shoulderBreadthRatio` / `biacromialRatio` / `abdominalDepthRatio` / `headHeightRatio` 四个比例字段即使在人体测量来源中有测量值，delta 也全部为 0.000 mm，**未进入生成链**。不为已测字段编造解剖绑定 |
 
 ## 7. 已关闭（DONE）
 
@@ -101,6 +101,10 @@
 - 本表与全部证据/文档已在 `origin/feature/procedural-character-foundation`。
 - 本版变更（2026-11-24，第 2 次）：① OQ-01 记录负责人"等灰模再定"的排期决定，并注明首批灰模已产出；
   ② OQ-14 记录 PoC-SM v2 首测值（21.76°）与**口径与合同原文语义不一致**的待裁定发现。
-- PoC-SM 首个垂直切片见 `12-poc-sm-vertical-slice.md`（`poc-sm/shape-model-v2` 分支）。
+- 本版变更（2026-11-24，round 2，**不新增编号**）：① OQ-01 灰模已产出并等待负责人视觉审查；
+  ② OQ-14 接入跨缝实验 16 组矩阵（旧口径 = 360/S，与折角无关；新口径稳定读出折角），仍待裁定；
+  ③ OQ-16 区分 G2 历史缺陷与 v2 绕序修正；④ OQ-17 / OQ-21 接入 AL-6 全参数差分实测结果。
+- PoC-SM 首个垂直切片见 `12-poc-sm-vertical-slice.md`（`poc-sm/shape-model-v2` 分支）；
+  round 2 证据在 `evidence/poc-sm/round-2/`。**本表所有未解决项保持 OPEN，无 Gate PASS。**
 - 回复请直接填 ID（如 "OQ-01: xxx，OQ-28: xxx"），我会写回 SPEC register 并更新本表状态。
 - ⚠️ **文档完成 / 入库 / AI 声称完成 / Git 工作区干净，均不等于批准，也不等于任何 Gate 通过。**

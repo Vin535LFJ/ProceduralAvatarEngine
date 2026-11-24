@@ -1,0 +1,10 @@
+[ 85%] Built target pae_core
+Consolidate compiler generated dependencies of target pae_poc_sm_cross_seam_tests
+[ 90%] Building CXX object pae_tests/CMakeFiles/pae_poc_sm_cross_seam_tests.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/v2/CrossBoundarySeamAudit.cpp.obj
+[ 95%] Linking CXX executable pae_poc_sm_cross_seam_tests.exe
+[100%] Built target pae_poc_sm_cross_seam_tests
+[ 85%] Built target pae_core
+Consolidate compiler generated dependencies of target poc_sm_cross_seam_probe
+[ 90%] Building CXX object pae_tests/CMakeFiles/poc_sm_cross_seam_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/v2/CrossBoundarySeamAudit.cpp.obj
+[ 95%] Linking CXX executable poc_sm_cross_seam_probe.exe
+[100%] Built target poc_sm_cross_seam_probe

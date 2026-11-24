@@ -31,6 +31,14 @@
 // shape/LayerAMetrics.cpp is frozen evidence and is NOT modified (AUTH-08
 // FB-11). Its numbers were produced BEFORE this definition existed, so they
 // must be recomputed under this definition before they can gate anything.
+//
+// ROUND-2 NOTE (does NOT amend the signed definition above): this statistic
+// compares adjacent quads WITHIN the crop band, so it necessarily contains
+// the ring's 360/segments polygonal faceting. It remains the historical
+// band-faceting diagnostic. The "two sides of a seam" semantic in
+// docs/foundation/03 is investigated by the separate EXPERIMENTAL module
+// CrossBoundarySeamAudit.h. Nothing here redefines the signed OQ-03 decision;
+// that is the owner's decision, not the implementation's.
 
 #include "procedural/MeshData.h"
 #include "procedural/shape/QuadTemplate.h"

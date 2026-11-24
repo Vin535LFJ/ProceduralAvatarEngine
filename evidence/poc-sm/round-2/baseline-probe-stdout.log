@@ -1,0 +1,4 @@
+seam: applicability=APPLICABLE max=21.7622 mean=11.0223 p95=21.7622 included=32 samples=32
+topology: unregisteredBoundary=0 clean=yes slivers=0
+report: evidence/poc-sm/round-2/poc-sm-shared-envelope-report.md
+images: 7

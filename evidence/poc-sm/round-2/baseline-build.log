@@ -1,0 +1,33 @@
+[ 19%] Built target pae_core
+Consolidate compiler generated dependencies of target pae_skinning_tests
+Consolidate compiler generated dependencies of target pae_core_tests
+Consolidate compiler generated dependencies of target pae_fusion_tests
+[ 21%] Built target pae_skinning_tests
+[ 23%] Built target pae_core_tests
+[ 36%] Built target pae_poc_sm_envelope_tests
+[ 38%] Built target pae_fusion_tests
+Consolidate compiler generated dependencies of target pae_poc_route_tests
+Consolidate compiler generated dependencies of target pae_geometry_tests
+Consolidate compiler generated dependencies of target pae_smooth_union_sign_tests
+[ 51%] Built target poc_sm_measure_probe
+[ 62%] Built target pae_poc_route_tests
+[ 64%] Built target pae_geometry_tests
+[ 66%] Built target pae_smooth_union_sign_tests
+Consolidate compiler generated dependencies of target poc_route_probe
+Consolidate compiler generated dependencies of target pae_face_hair_tests
+Consolidate compiler generated dependencies of target pae_anatomy_tests
+Consolidate compiler generated dependencies of target pae_humanoid_tests
+[ 67%] Built target pae_face_hair_tests
+[ 78%] Built target poc_route_probe
+[ 79%] Built target pae_anatomy_tests
+[ 81%] Built target pae_humanoid_tests
+Consolidate compiler generated dependencies of target pae_motion_tests
+Consolidate compiler generated dependencies of target pae_character_patch_tests
+Consolidate compiler generated dependencies of target pae_proportion_probe
+Consolidate compiler generated dependencies of target poc_fair_comparison_probe
+[ 82%] Built target pae_motion_tests
+[ 84%] Built target pae_character_patch_tests
+[ 85%] Built target pae_proportion_probe
+[ 95%] Built target poc_fair_comparison_probe
+[ 97%] Built target pae_poc_sm_contract_tests
+[100%] Built target pae_poc_sm_seam_tests

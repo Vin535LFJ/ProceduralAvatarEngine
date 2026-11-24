@@ -95,6 +95,7 @@ set(PAE_POC_SHAPE_V2_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/../native/procedural/shape/v2/CharacterDefinition.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../native/procedural/shape/v2/SharedSkinEnvelope.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../native/procedural/shape/v2/SeamAuditV2.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../native/procedural/shape/v2/CrossBoundarySeamAudit.cpp
 )
 
 # The contract test needs the contract only; the v2 module is self-contained
@@ -120,3 +121,40 @@ add_test(NAME pae_poc_sm_seam_tests COMMAND pae_poc_sm_seam_tests)
 add_executable(poc_sm_measure_probe unit/poc_sm_measure_probe.cpp
     ${PAE_POC_SHAPE_SOURCES} ${PAE_POC_SHAPE_V2_SOURCES})
 target_link_libraries(poc_sm_measure_probe PRIVATE pae_core)
+
+# Round 2 AL-5 experiment: independent CROSS-BOUNDARY seam audit. This is a
+# separate tool; the signed OQ-03 ring-band tool above is not modified.
+add_executable(pae_poc_sm_cross_seam_tests unit/poc_sm_cross_seam_tests.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../native/procedural/shape/v2/CrossBoundarySeamAudit.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../native/procedural/shape/v2/SeamAuditV2.cpp)
+target_include_directories(pae_poc_sm_cross_seam_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/harness)
+target_link_libraries(pae_poc_sm_cross_seam_tests PRIVATE pae_core)
+add_test(NAME pae_poc_sm_cross_seam_tests COMMAND pae_poc_sm_cross_seam_tests)
+
+add_executable(poc_sm_cross_seam_probe unit/poc_sm_cross_seam_probe.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../native/procedural/shape/v2/CrossBoundarySeamAudit.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../native/procedural/shape/v2/SeamAuditV2.cpp)
+target_link_libraries(poc_sm_cross_seam_probe PRIVATE pae_core)
+
+# Round 2 AL-6: complete single-parameter differential test and evidence probe.
+add_executable(pae_poc_sm_param_diff_tests unit/poc_sm_param_diff_tests.cpp
+    ${PAE_POC_SHAPE_V2_SOURCES})
+target_include_directories(pae_poc_sm_param_diff_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/harness)
+target_link_libraries(pae_poc_sm_param_diff_tests PRIVATE pae_core)
+add_test(NAME pae_poc_sm_param_diff_tests COMMAND pae_poc_sm_param_diff_tests)
+
+add_executable(poc_sm_param_probe unit/poc_sm_param_probe.cpp
+    ${PAE_POC_SHAPE_V2_SOURCES})
+target_link_libraries(poc_sm_param_probe PRIVATE pae_core)
+
+# Round 2: five-layer semantic contract checks (landmarks are NOT placed).
+add_executable(pae_poc_sm_semantics_tests unit/poc_sm_semantics_tests.cpp
+    ${PAE_POC_SHAPE_V2_SOURCES})
+target_include_directories(pae_poc_sm_semantics_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/harness)
+target_link_libraries(pae_poc_sm_semantics_tests PRIVATE pae_core)
+add_test(NAME pae_poc_sm_semantics_tests COMMAND pae_poc_sm_semantics_tests)
+
+# Round 2 gray-clay evidence: 7 fixed comparison views + 2 close-ups.
+add_executable(poc_sm_views_probe unit/poc_sm_views_probe.cpp
+    ${PAE_POC_SHAPE_SOURCES} ${PAE_POC_SHAPE_V2_SOURCES})
+target_link_libraries(poc_sm_views_probe PRIVATE pae_core)

@@ -150,4 +150,22 @@ JNI ABI、RenderThread 生产入口、legacy 三路径（AUTH-08 FB-1..FB-12 全
 | 测量报告 | `evidence/poc-sm/poc-sm-shared-envelope-report.md` |
 | 灰模 7 视角 | `evidence/poc-sm/shared-envelope-*.png`（front / front-45-left / side-left / side-left-30up / back / back-45-right / front-30up） |
 | 相机协议 | 复用 G2 已冻结的 `CameraProtocol::fixedViews()`，与 G2 证据同框可比 |
-| 测试 | `build-host` 下 ctest 14/14 通过 |
+| 测试 | `build-host` 下 ctest 14/14 通过（修改前基线，日志 `evidence/poc-sm/round-2/baseline-ctest.log`） |
+
+---
+
+## 9. Round 2 增量（本文件不重复完整测量数据）
+
+本轮沿用本报告，**未新建 PoC-SM 总报告**。所有原始日志、矩阵和图片放在
+`evidence/poc-sm/round-2/`，本节只给摘要与链接。
+
+| 主题 | 本轮结论（摘要） | 原始证据 |
+|---|---|---|
+| 全量回归 | 修改前 `14/14`，本轮 **`17/17 suites, 0 failures`**（新增 3 个套件：跨缝 9 例 / AL-6 9 例 / 语义 7 例） | `final-ctest.log`、`baseline-ctest.log`、`full-build.log` |
+| 历史环带测量 | 未修改 `measureShoulderRootSeam()`；复测仍为 **21.7622°**（32 段），探针按设计退出码 1 | `baseline-probe-stdout.log`、`poc-sm-shared-envelope-report.md` |
+| **B — 跨缝实验** | 16 组矩阵：旧环带统计恒为 360/S（32 段 11.2500° → 128 段 2.8127°），**与已知折角无关**；新跨缝统计稳定读出折角（15° 折角：14.9311° → 14.9958°）。绕序翻转 / 边界错位 / 缺侧均返回 `NOT_APPLICABLE`。**实验，不是验收定义** | `cross-boundary-seam-report.md`、`cross-boundary-seam-matrix.csv` |
+| **C — AL-6 差分** | 10 个 ShapeParameter 全部遍历：9 个 `Wired` 均产生非零位移（`shoulder-girdle-height` max 68.20 mm；`axilla-depth` max 27.72 mm / mean 0.19 mm，局部凹面）；`spine-curve` = 0.000 mm。9 个 ProportionProfile 字段中 `shoulderBreadthRatio` / `biacromialRatio` / `abdominalDepthRatio` / `headHeightRatio` = 0.000 mm | `al6-parameter-differential-report.md`、`al6-shape-parameter-delta.csv`、`al6-proportion-delta.csv` |
+| **D — 语义落地** | 五层契约齐全；**`AnatomicalLandmarks.placed` 仍为空**（全部 catalogue 未放置）；`JointDeformationRegions` 仍为接口；BodyJoints 仍是独立输入语义来源 | `pae_poc_sm_semantics_tests`（7 例全过） |
+| **E — 注释准确性** | 删除 `SharedSkinEnvelope` 中过时的 "Clamped B-spline" 描述，改为实际的**插值型自然三次样条**；明确当前能力边界，不宣称完整 3D 解剖场 | 源码 diff |
+| 灰模 | 本轮新生成 9 张：7 个 `fixedViews()` 视角（与上一版同框可比）+ 肩胸 / 腋窝近景；几何未改动，视觉与上一版一致 | `views/*.png`、`views/camera-manifest.csv` |
+| 状态 | 无 Gate PASS；OQ-03 定义待裁定；OQ-01 / DEC-05 待负责人视觉审查 | `docs/project-status.md`、`07-open-issues.md`、`06-owner-signoff-checklist.md` |

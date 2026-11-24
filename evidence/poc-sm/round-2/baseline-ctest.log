@@ -1,0 +1,34 @@
+Internal ctest changing into directory: E:/AI-Tools/ProceduralAvatarEngine-poc-sm/build-host
+Test project E:/AI-Tools/ProceduralAvatarEngine-poc-sm/build-host
+      Start  1: pae_core_tests
+ 1/14 Test  #1: pae_core_tests ...................   Passed    0.12 sec
+      Start  2: pae_geometry_tests
+ 2/14 Test  #2: pae_geometry_tests ...............   Passed    0.09 sec
+      Start  3: pae_fusion_tests
+ 3/14 Test  #3: pae_fusion_tests .................   Passed    0.13 sec
+      Start  4: pae_smooth_union_sign_tests
+ 4/14 Test  #4: pae_smooth_union_sign_tests ......   Passed    0.09 sec
+      Start  5: pae_face_hair_tests
+ 5/14 Test  #5: pae_face_hair_tests ..............   Passed    0.12 sec
+      Start  6: pae_anatomy_tests
+ 6/14 Test  #6: pae_anatomy_tests ................   Passed    1.48 sec
+      Start  7: pae_humanoid_tests
+ 7/14 Test  #7: pae_humanoid_tests ...............   Passed    0.14 sec
+      Start  8: pae_skinning_tests
+ 8/14 Test  #8: pae_skinning_tests ...............   Passed    0.13 sec
+      Start  9: pae_motion_tests
+ 9/14 Test  #9: pae_motion_tests .................   Passed    0.18 sec
+      Start 10: pae_character_patch_tests
+10/14 Test #10: pae_character_patch_tests ........   Passed    0.13 sec
+      Start 11: pae_poc_route_tests
+11/14 Test #11: pae_poc_route_tests ..............   Passed   14.73 sec
+      Start 12: pae_poc_sm_contract_tests
+12/14 Test #12: pae_poc_sm_contract_tests ........   Passed    0.10 sec
+      Start 13: pae_poc_sm_envelope_tests
+13/14 Test #13: pae_poc_sm_envelope_tests ........   Passed    0.12 sec
+      Start 14: pae_poc_sm_seam_tests
+14/14 Test #14: pae_poc_sm_seam_tests ............   Passed    0.09 sec
+
+100% tests passed, 0 tests failed out of 14
+
+Total Test time (real) =  17.76 sec

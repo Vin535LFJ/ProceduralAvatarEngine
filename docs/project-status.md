@@ -1,31 +1,40 @@
 # Project Status
 
-> 本文件是项目状态的**唯一**入口。不要再创建 `PROJECT_STATUS.md` 等仅大小写/下划线不同的副本。
+> 本文件是项目状态的**唯一**入口。不要再创建 `PROJECT_STATUS.md` / `STATUS.md` 等重复文件。
+> 本页是**一页式当前状态**；§A/§B/§C 为 P1-A 及更早阶段的**历史记录，原样保留**，
+> 其 Gate 结论不代表当前阶段。
 
-> ### ⚠️ 本文件已不是当前阶段的权威状态源（2026-11-24 标注）
->
-> 本文件正文描述的是 **P1-A 阶段**（截至 2026-11-23），**不包含**其后的
-> Anatomy-driven Geometry PoC 阶段进展：G0/G1/G2 证据、**G3 = `DEFER`（已签署）**、
-> **ADR-011 = `ACCEPTED`**、**ADR-012 = `ACCEPTED — RESEARCH ONLY`**、
-> **AUTH-08 = `GRANTED`**、以及 **PoC-SM** 形态 PoC 授权。
->
-> **当前阶段权威入口**（按优先级）：
->
-> | 用途 | 位置 |
-> |---|---|
-> | 决策记录（2026-11-24 签署） | `docs/phases/anatomy-driven-geometry-poc/10-decision-records/00-INDEX.md` |
-> | 待决问题单一 Register | `docs/phases/anatomy-driven-geometry-poc/07-open-issues.md` |
-> | 实施 SPEC（含 Register / 验收标准） | `docs/phases/anatomy-driven-geometry-poc/00-implementation-spec.md` |
-> | 负责人待办一页纸 | `docs/phases/anatomy-driven-geometry-poc/06-owner-signoff-checklist.md` |
-> | ADR 索引 | `docs/ADR_INDEX.md` |
->
-> 本文件正文**暂按原样保留**（作为 P1-A 阶段的历史记录），待后续统一重写。
-> 引用本文 §A/§B 的结论时请先对照上表。
+## 当前状态（2026-11-24，PoC-SM 第 2 轮）
 
-- 更新：2026-11-23（**阶段标注于 2026-11-24 追加**）
-- 当前阶段：**P1-A 视觉 Gate REJECTED，停留在 P1-A**（项目方判定效果特别差；最新代码、截图和缺陷全部保留）
-- P0 提交：`835dc71 docs+fix: freeze P0 contracts and correct shoulder bone semantics`，已推送 `feature/procedural-character-foundation`；基线提交 `399967f`。
-- 权威基线：`01_Procedural_Character_Foundation_Specification_v1.0.md`、`02_Procedural_Character_Development_Roadmap_v1.0.md`、`03_AI_Engineering_Execution_Prompt_v1.0.md`、`README.md`（位于仓库根目录；用户引用的同名子目录当前不存在，仅有 zip）。
+| 项 | 当前事实 |
+|---|---|
+| **项目方向** | Anatomy-driven Geometry PoC：以单一 `CharacterDefinition` 语义驱动几何，验证语义是否真正进入最终网格。旧 P1-A 路线视觉 `REJECTED`，仅作历史，不是当前阶段。 |
+| **工作区 / 分支** | `E:/AI-Tools/ProceduralAvatarEngine-poc-sm`，分支 `poc-sm/shape-model-v2`，本地 HEAD `8d1377e`。记录的基线 `9cdde4c` 已核实为 HEAD 的**祖先**（`git merge-base --is-ancestor` = 0）。HEAD 比记录值多 1 个仅含治理文档的提交 `8d1377e`。G2 冻结基线 `a32251b` 亦在历史中。 |
+| **远端核对** | 本地 `origin/poc-sm/shape-model-v2` 缓存 ref = 本地 HEAD = `8d1377e`。`git fetch origin` 两次失败（环境 SSL/schannel 错误），**远端实时状态 UNVERIFIED**；未做任何覆盖/恢复。 |
+| **PoC-SM 实现状态** | v2 五层契约 + 单一连续 Shared Skin Envelope + OQ-03 历史环带测量 + 新增实验性跨缝测量 + 全参数差分工具。Landmark 仅**声明未放置**（`placed` 为空）；`spine-curve` 为 `DeclaredOnly`；`shoulderBreadthRatio` / `biacromialRatio` / `abdominalDepthRatio` / `headHeightRatio` 有测量值但**未进入生成链**。 |
+| **测试状态** | 修改前基线 `14/14`；本轮 `17/17 suites, 0 failures`（新增跨缝 9 例、AL-6 差分 9 例、语义契约 7 例）。完整原文见 `evidence/poc-sm/round-2/final-ctest.log`。 |
+| **接缝口径** | OQ-03 已签署定义未改动。历史环带实测 **21.7622°**（32 段）；新实验证明该统计随段数按 360/S 变化，且不随真实跨缝折角变化。跨缝实验（0/5/15/30° × 32/64/96/128 段）读出真实折角，但**不是**正式验收定义，等待负责人裁定。 |
+| **OQ-01 / DEC-05** | `OPEN`。灰模已产出（含本轮 9 张，7 固定视角 + 2 近景），等待负责人视觉审查与 DEC-05 签署；**任何指标不得判 PASS**，无 Gate 通过。 |
+| **本轮视觉变化** | 几何生成代码未改（只改注释、加工具与测试）；本轮图像为新生成，但与上一版 PoC-SM 在几何上**一致**。未声称视觉改进。 |
+| **下一阶段** | ① 负责人裁定 OQ-03 正式测量定义；② 负责人完成 DEC-05 / Canonical Acceptance Sheet；③ 裁定 4 个测量字段的解剖映射后再决定是否接线；④ 裁定后按统一口径重算 G2 三路线。 |
+
+### 五个权威文档入口（唯一集合，不另建）
+
+| 用途 | 位置 |
+|---|---|
+| 决策记录（2026-11-24 签署） | `docs/phases/anatomy-driven-geometry-poc/10-decision-records/00-INDEX.md` |
+| 待决问题单一 Register | `docs/phases/anatomy-driven-geometry-poc/07-open-issues.md` |
+| 实施 SPEC（含 Register / 验收标准） | `docs/phases/anatomy-driven-geometry-poc/00-implementation-spec.md` |
+| 负责人待办一页纸 | `docs/phases/anatomy-driven-geometry-poc/06-owner-signoff-checklist.md` |
+| ADR 索引 | `docs/ADR_INDEX.md` |
+
+> 轮次验收契约：`AGENT.md` + ADR-013（要求本轮新代码 / 新图 / 新日志三者齐备）。
+> PoC-SM 实现与证据：`docs/phases/anatomy-driven-geometry-poc/12-poc-sm-vertical-slice.md`
+> 及 `evidence/poc-sm/`。以上是补充入口，不增加第六个状态文件。
+
+---
+
+## 历史记录（P1-A 及更早，保留不删；下列 Gate 状态不是当前阶段）
 
 ---
 

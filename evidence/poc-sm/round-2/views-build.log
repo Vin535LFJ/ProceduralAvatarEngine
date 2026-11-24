@@ -1,0 +1,19 @@
+Consolidate compiler generated dependencies of target pae_core
+[ 58%] Built target pae_core
+[ 58%] Building CXX object pae_tests/CMakeFiles/poc_sm_views_probe.dir/unit/poc_sm_views_probe.cpp.obj
+[ 62%] Building CXX object pae_tests/CMakeFiles/poc_sm_views_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/ShapeModel.cpp.obj
+[ 62%] Building CXX object pae_tests/CMakeFiles/poc_sm_views_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/QuadTemplate.cpp.obj
+[ 66%] Building CXX object pae_tests/CMakeFiles/poc_sm_views_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/PocRoutes.cpp.obj
+[ 70%] Building CXX object pae_tests/CMakeFiles/poc_sm_views_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/TopologyAudit.cpp.obj
+[ 70%] Building CXX object pae_tests/CMakeFiles/poc_sm_views_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/SurfaceMetrics.cpp.obj
+[ 75%] Building CXX object pae_tests/CMakeFiles/poc_sm_views_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/CameraProtocol.cpp.obj
+[ 79%] Building CXX object pae_tests/CMakeFiles/poc_sm_views_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/LayerAMetrics.cpp.obj
+[ 79%] Building CXX object pae_tests/CMakeFiles/poc_sm_views_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/SkinWeights.cpp.obj
+[ 83%] Building CXX object pae_tests/CMakeFiles/poc_sm_views_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/ImageWriter.cpp.obj
+[ 83%] Building CXX object pae_tests/CMakeFiles/poc_sm_views_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/ClayRenderer.cpp.obj
+[ 87%] Building CXX object pae_tests/CMakeFiles/poc_sm_views_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/v2/CharacterDefinition.cpp.obj
+[ 91%] Building CXX object pae_tests/CMakeFiles/poc_sm_views_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/v2/SharedSkinEnvelope.cpp.obj
+[ 91%] Building CXX object pae_tests/CMakeFiles/poc_sm_views_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/v2/SeamAuditV2.cpp.obj
+[ 95%] Building CXX object pae_tests/CMakeFiles/poc_sm_views_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/v2/CrossBoundarySeamAudit.cpp.obj
+[100%] Linking CXX executable poc_sm_views_probe.exe
+[100%] Built target poc_sm_views_probe

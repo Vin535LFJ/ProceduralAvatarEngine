@@ -1,0 +1,10 @@
+kind,view,azimuth_deg,elevation_deg,y_min_m,y_max_m,width,height,file
+fixed,front,0.0,0.0,0.8800,1.4250,640,640,fixed-front.png
+fixed,front-45-left,45.0,0.0,0.8800,1.4250,640,640,fixed-front-45-left.png
+fixed,side-left,90.0,0.0,0.8800,1.4250,640,640,fixed-side-left.png
+fixed,side-left-30up,90.0,30.0,0.8800,1.4250,640,640,fixed-side-left-30up.png
+fixed,back,180.0,0.0,0.8800,1.4250,640,640,fixed-back.png
+fixed,back-45-right,225.0,0.0,0.8800,1.4250,640,640,fixed-back-45-right.png
+fixed,front-30up,0.0,30.0,0.8800,1.4250,640,640,fixed-front-30up.png
+closeup,shoulder-chest-closeup,45.0,10.0,1.2900,1.4500,640,640,closeup-shoulder-chest-closeup.png
+closeup,axilla-closeup,90.0,15.0,1.3100,1.4400,640,640,closeup-axilla-closeup.png

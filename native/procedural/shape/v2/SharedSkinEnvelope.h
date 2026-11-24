@@ -21,22 +21,38 @@
 //
 //   r(u, y) = R(y) * shapeFactor(u, y)
 //
-//   R(y)        a single clamped cubic B-spline over the height range. The
-//               region contributions (thorax guide, abdomen/pelvis, shoulder
-//               girdle) are combined in CONTROL-POINT space with C2 weights,
-//               so the resulting profile is C2 by construction and there is
-//               no surface-blending step that could create a crease.
+//   R(y)        a single INTERPOLATING NATURAL CUBIC SPLINE over the height
+//               range (not a B-spline: see the note in the .cpp). The thorax,
+//               abdomen/pelvis and shoulder-girdle region splines are sampled
+//               into one shared control grid and combined with an EXACT
+//               partition of unity of C2 quintic weights, so the resulting
+//               profile is C2 by construction and there is no surface-blending
+//               step that could create a crease.
 //
 //   shapeFactor the azimuthal modulation: a superellipse exponent (the
 //               stylisation channel) and the axilla concave constraint.
 //
-// The result is measured, not asserted: the shoulder-root seam is measured
-// with the OQ-03 fixed definition (see SeamAuditV2.h) and the number is
-// reported. If it exceeds 5 deg, that is reported as a failure.
+// The result is measured, not asserted. The signed OQ-03 ring-band statistic
+// (SeamAuditV2.h) reports the polygonal faceting of the shoulder-root band.
+// A separate experimental cross-boundary tool (CrossBoundarySeamAudit.h)
+// exists for the contract's "two sides of a seam" semantic. Neither tool
+// judges a Gate (AUTH-08 FB-12), and the OQ-03 definition is unchanged.
+//
+// CURRENT CAPABILITIES (actual implementation, nothing more)
+//
+//   - interpolating cubic spline in the HEIGHT direction only;
+//   - thorax / abdomen-pelvis / shoulder-girdle section profile control;
+//   - exactly normalised region weights at every sampled height;
+//   - superellipse cross-sections;
+//   - concave axilla constraint (quartic falloff);
+//   - ONE MeshData output, with vertex normals from its own triangles;
+//   - an open shoulder-root attachment boundary (top crop ring).
 //
 // WHAT THIS IS NOT
 //
 //   - Not a replacement for the production geometry path. Host-only.
+//   - Not a full three-dimensional human anatomical field: there is no
+//     spatial landmark system, no anatomy volume field and no limb generation.
 //   - Not the full body. This slice covers the torso plus the shoulder-root
 //     attachment ring; the upper arm, forearm, neck and head are out of
 //     scope (SPEC 10.1 T1/T2, ADR-011 F-5).
