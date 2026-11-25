@@ -3,6 +3,7 @@ package com.pae.host
 import android.Manifest
 import android.app.Activity
 import android.content.ActivityNotFoundException
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -59,6 +60,7 @@ class MainActivity : AppCompatActivity() {
     private var qualityLevel = 1
     private var pantsIndex = 0
     private var anatomyOn = false
+    private var previewMode = 0
     private var viewPreset = 0
     private var debugView = 0
 
@@ -148,8 +150,15 @@ class MainActivity : AppCompatActivity() {
         })
         buttons.addView(actionButton("Anatomy") {
             anatomyOn = !anatomyOn
-            NativeBridge.setAnatomyPreview(anatomyOn)
+            previewMode = if (anatomyOn) 1 else 0
+            NativeBridge.setPreviewMode(previewMode)
             Log.i("PAE_UI", "anatomy preview -> $anatomyOn (bind pose, neutral material)")
+        })
+        buttons.addView(actionButton("BodyMode") {
+            previewMode = (previewMode + 1) % 4
+            anatomyOn = previewMode == 1
+            NativeBridge.setPreviewMode(previewMode)
+            Log.i("PAE_UI", "body mode -> $previewMode (0 avatar, 1 anatomy, 2 patch, 3 canonical)")
         })
         buttons.addView(actionButton("View") {
             viewPreset = (viewPreset + 1) % 8
@@ -161,10 +170,10 @@ class MainActivity : AppCompatActivity() {
             Log.i("PAE_UI", "camera reset to evidence preset $viewPreset")
         })
         buttons.addView(actionButton("DbgView") {
-            debugView = (debugView + 1) % 7
+            debugView = (debugView + 1) % 8
             NativeBridge.setDebugView(debugView)
             Log.i("PAE_UI", "debug view -> $debugView (0 shading, 1 wireframe, 2 normals, " +
-                "3 gray clay, 4 material id, 5 skin weights, 6 outline study)")
+                "3 gray clay, 4 material id, 5 skin weights, 6 outline study, 7 UV checker)")
         })
         buttons.addView(actionButton("Stats") {
             Log.i("PAE_UI", NativeBridge.stats())
@@ -228,13 +237,33 @@ class MainActivity : AppCompatActivity() {
         // adb-driven screenshot matrices cannot desync the UI counters.
         // P1-A deterministic driver: --ei debug_generator 2 --ei debug_pose -1
         //   --ei debug_preset 0 --ei debug_view 3
+        applyDebugExtras(intent)
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        applyDebugExtras(intent)
+    }
+
+    private fun applyDebugExtras(intent: Intent?) {
         intent?.let { it2 ->
             if (it2.getBooleanExtra("debug_anatomy", false)) {
                 anatomyOn = true
+                previewMode = 1
                 NativeBridge.setAnatomyPreview(true)
             }
+            val quality = it2.getIntExtra("debug_quality", Int.MIN_VALUE)
+            if (quality in 0..2) {
+                qualityLevel = quality
+                NativeBridge.setQuality(quality)
+            }
             val generator = it2.getIntExtra("debug_generator", -1)
-            if (generator in 0..2) NativeBridge.setPreviewMode(generator)
+            if (generator in 0..3) {
+                previewMode = generator
+                anatomyOn = generator == 1
+                NativeBridge.setPreviewMode(generator)
+            }
             val fixedPose = it2.getIntExtra("debug_pose", Int.MIN_VALUE)
             if (fixedPose != Int.MIN_VALUE) {
                 poseMode = fixedPose
@@ -246,7 +275,7 @@ class MainActivity : AppCompatActivity() {
                 NativeBridge.setCameraPreset(dp)
             }
             val dv = it2.getIntExtra("debug_view", -1)
-            if (dv in 0..6) {
+            if (dv in 0..7) {
                 debugView = dv
                 NativeBridge.setDebugView(dv)
             }

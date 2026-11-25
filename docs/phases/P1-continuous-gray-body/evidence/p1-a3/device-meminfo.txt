@@ -1,0 +1,55 @@
+Applications Memory Usage (in Kilobytes):
+Uptime: 117121017 Realtime: 117121017
+
+** MEMINFO in pid 16149 [com.pae.host] **
+                   Pss  Private  Private  SwapPss     Heap     Heap     Heap
+                 Total    Dirty    Clean    Dirty     Size    Alloc     Free
+                ------   ------   ------   ------   ------   ------   ------
+  Native Heap   175325   175168        0       21   217600   198194    19405
+  Dalvik Heap     3981     3868        0        0     5028     2514     2514
+ Dalvik Other     1785     1784        0        0                           
+        Stack       88       88        0        0                           
+       Ashmem        2        0        0        0                           
+    Other dev       14        0       12        0                           
+     .so mmap     5268      164       88      145                           
+    .apk mmap     9624      380     8988        0                           
+    .ttf mmap       63        0       20        0                           
+    .dex mmap    13564        4     9444        0                           
+    .oat mmap     1025        0       64        0                           
+    .art mmap     4624     4036        0        0                           
+   Other mmap      104        4       32        0                           
+      Unknown     1924     1884        0       12                           
+        TOTAL   217569   187380    18648      178   222628   200708    21919
+ 
+ App Summary
+                       Pss(KB)
+                        ------
+           Java Heap:     7904
+         Native Heap:   175168
+                Code:    19152
+               Stack:       88
+            Graphics:        0
+       Private Other:     3716
+              System:    11541
+ 
+               TOTAL:   217569       TOTAL SWAP PSS:      178
+ 
+ Objects
+               Views:       35         ViewRootImpl:        1
+         AppContexts:        2           Activities:        1
+              Assets:        2        AssetManagers:        3
+       Local Binders:       11        Proxy Binders:       21
+       Parcel memory:       14         Parcel count:       56
+    Death Recipients:        1      OpenSSL Sockets:        0
+            WebViews:        0
+ 
+ SQL
+         MEMORY_USED:     2340
+  PAGECACHE_OVERFLOW:     1823          MALLOC_SIZE:      117
+ 
+ DATABASES
+      pgsz     dbsz   Lookaside(b)          cache  Dbname
+         4     1384            102     384/102/11  /data/user/0/com.pae.host/databases/com.google.android.datatransport.events
+         4       96            109         7/36/9  /data/user/0/com.pae.host/no_backup/androidx.work.workdb
+         4        8                         0/0/0    (attached) temp
+         4       96             47         4/20/5  /data/user/0/com.pae.host/no_backup/androidx.work.workdb (1)

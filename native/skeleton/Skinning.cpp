@@ -18,8 +18,15 @@ PoseResult computePose(const Skeleton& skeleton,
     return result;
 }
 
+Mat3 modelNormalMatrix(const Mat4& model) {
+    Mat4 inverse;
+    model.inverse(inverse);
+    return inverse.upperLeft3x3().transpose();
+}
+
 std::vector<Vec3> cpuSkinPositions(const MeshData& mesh,
-                                   const std::array<Mat4, BoneCount>& palette) {
+                                   const std::array<Mat4, BoneCount>& palette,
+                                   const Mat4& model) {
     std::vector<Vec3> result;
     result.reserve(mesh.vertices.size());
     for (const Vertex& vertex : mesh.vertices) {
@@ -35,15 +42,19 @@ std::vector<Vec3> cpuSkinPositions(const MeshData& mesh,
             transformed.w += p.w * weights[i];
         }
         const float inv = transformed.w > 1e-8f ? 1.0f / transformed.w : 1.0f;
-        result.push_back({transformed.x * inv, transformed.y * inv, transformed.z * inv});
+        const Vec3 skinned{transformed.x * inv, transformed.y * inv, transformed.z * inv};
+        const Vec4 world = model.transform(Vec4{skinned, 1.0f});
+        result.push_back({world.x, world.y, world.z});
     }
     return result;
 }
 
 std::vector<Vec3> cpuSkinNormals(const MeshData& mesh,
-                                 const std::array<Mat4, BoneCount>& palette) {
+                                 const std::array<Mat4, BoneCount>& palette,
+                                 const Mat4& model) {
     std::vector<Vec3> result;
     result.reserve(mesh.vertices.size());
+    const Mat3 worldNormal = modelNormalMatrix(model);
     for (const Vertex& vertex : mesh.vertices) {
         const uint16_t joints[4] = {vertex.joints.x, vertex.joints.y, vertex.joints.z, vertex.joints.w};
         const float weights[4] = {vertex.weights.x, vertex.weights.y, vertex.weights.z, vertex.weights.w};
@@ -53,7 +64,15 @@ std::vector<Vec3> cpuSkinNormals(const MeshData& mesh,
             const Vec3 n = palette[joints[i]].rotateVector(vertex.normal);
             normal = normal + n * weights[i];
         }
-        result.push_back(normal.normalized({0.0f, 1.0f, 0.0f}));
+        const Vec3 transformed{
+            worldNormal.at(0, 0) * normal.x + worldNormal.at(1, 0) * normal.y +
+                worldNormal.at(2, 0) * normal.z,
+            worldNormal.at(0, 1) * normal.x + worldNormal.at(1, 1) * normal.y +
+                worldNormal.at(2, 1) * normal.z,
+            worldNormal.at(0, 2) * normal.x + worldNormal.at(1, 2) * normal.y +
+                worldNormal.at(2, 2) * normal.z
+        };
+        result.push_back(transformed.normalized({0.0f, 1.0f, 0.0f}));
     }
     return result;
 }

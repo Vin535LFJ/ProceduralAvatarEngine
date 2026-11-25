@@ -1,0 +1,21 @@
+[ RUN ] identity_pose_preserves_mesh
+[I/PAE_GEOMETRY] generateHumanoid: 31051 verts, 59588 tris, 1589.63 ms, detail=2
+[  OK ] identity_pose_preserves_mesh
+[ RUN ] single_bone_rotation_moves_expected_vertex
+[I/PAE_GEOMETRY] generateHumanoid: 31051 verts, 59588 tris, 1596.48 ms, detail=2
+[  OK ] single_bone_rotation_moves_expected_vertex
+[ RUN ] ubo_std140_layout_matches_mat4
+[  OK ] ubo_std140_layout_matches_mat4
+[ RUN ] region_weights_blend_across_hip_boundary
+[I/PAE_GEOMETRY] generateHumanoid: 31051 verts, 59588 tris, 1616.06 ms, detail=2
+[  OK ] region_weights_blend_across_hip_boundary
+[ RUN ] region_weights_keep_head_dominant
+[I/PAE_GEOMETRY] generateHumanoid: 31051 verts, 59588 tris, 1623.09 ms, detail=2
+[  OK ] region_weights_keep_head_dominant
+[ RUN ] shoulder_fix_keeps_skinning_inputs_valid
+[I/PAE_GEOMETRY] generateHumanoid: 31051 verts, 59588 tris, 1626.79 ms, detail=2
+[  OK ] shoulder_fix_keeps_skinning_inputs_valid
+[ RUN ] shoulder_region_weights_remain_anatomical
+[I/PAE_GEOMETRY] generateHumanoid: 31051 verts, 59588 tris, 1613.33 ms, detail=2
+[  OK ] shoulder_region_weights_remain_anatomical
+7 cases, 0 failures

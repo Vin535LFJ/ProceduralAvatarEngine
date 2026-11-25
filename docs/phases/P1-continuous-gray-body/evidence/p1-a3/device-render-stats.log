@@ -1,0 +1,8 @@
+--------- beginning of system
+--------- beginning of main
+11-24 19:25:05.627 I/PAE_RENDER(16149): geometry cache hit: canonical (112956 tris)
+11-24 19:25:06.830 I/PAE_RENDER(16149): applied previewMode=3
+11-24 19:25:06.830 I/PAE_RENDER(16149): applied cameraPreset=0
+11-24 19:25:06.830 I/PAE_RENDER(16149): applied debugView=3
+11-24 19:25:07.176 I/PAE_STATS(16149): frames=20880 fps=27.0 frame_ms=37.09 draw_calls=5 triangles=112956 buffer_bytes=4971344 p50_ms=22.53 p95_ms=23.20 p99_ms=23.97
+11-24 19:25:09.651 I/PAE_STATS(16149): frames=21000 fps=48.5 frame_ms=20.62 draw_calls=5 triangles=112956 buffer_bytes=4971344 p50_ms=21.94 p95_ms=23.06 p99_ms=24.03

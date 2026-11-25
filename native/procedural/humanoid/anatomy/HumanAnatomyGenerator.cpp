@@ -56,7 +56,7 @@ AnatomyResult generateAnatomyUpperBody(const HumanAnatomyParameters& params,
     volume.resolution = {std::max(16, resolution.x), std::max(24, resolution.y),
                          std::max(12, resolution.z)};
 
-    MeshData mesh = fusion::extractSurfaceNets(volume, field, &result.surfaceQuads);
+    MeshData mesh = fusion::extractSurfaceNets(volume, field, &result.surfaceQuads, true);
     if (mesh.vertices.empty() || mesh.indices.empty()) {
         PAE_LOGE("PAE_GEOMETRY", "anatomy extraction produced no geometry");
         return result;
@@ -122,7 +122,23 @@ AnatomyResult generateAnatomyUpperBody(const HumanAnatomyParameters& params,
     const double genMs = std::chrono::duration<double, std::milli>(genEnd - genStart).count();
     const TopologyReport topology = analyzeTopology(mesh);
     result.mesh = std::move(mesh);
+    // The acceptance criteria for the body are a single watertight, manifold
+    // surface. The mesh is still returned when the topology is not clean (the
+    // preview stays usable), but the failure is reported loudly and the
+    // result carries the flag, so a pretty geometry report can no longer
+    // hide a mesh that does not meet the acceptance criteria.
+    result.topologyClean = topology.components == 1 &&
+                            topology.boundaryEdges == 0 &&
+                            topology.nonManifoldEdges == 0 &&
+                            topology.invalidNormals == 0;
     result.valid = result.mesh.vertices.size() > 500 && topology.components == 1;
+    if (!result.topologyClean) {
+        PAE_LOGE("PAE_GEOMETRY",
+                 "anatomy topology NOT clean: components=%d boundary=%d nonmanifold=%d "
+                 "badnorm=%d (P1 blocker)",
+                 topology.components, topology.boundaryEdges, topology.nonManifoldEdges,
+                 topology.invalidNormals);
+    }
 
     float chestWidthSample = 0.0f, waistWidthSample = 0.0f, shoulderSample = 0.0f, pelvisSample = 0.0f;
     for (const Vertex& v : result.mesh.vertices) {

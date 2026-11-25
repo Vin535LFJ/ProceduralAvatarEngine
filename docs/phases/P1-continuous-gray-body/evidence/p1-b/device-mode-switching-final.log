@@ -1,0 +1,18 @@
+11-24 21:37:07.627 I/PAE_UI  (21638): debug extras: anatomy=false preset=0 view=3 outfit=-1
+11-24 21:37:08.189 I/PAE_RENDER(21638): applied previewMode=0
+11-24 21:37:08.189 I/PAE_RENDER(21638): applied cameraPreset=0
+11-24 21:37:08.189 I/PAE_RENDER(21638): applied debugView=3
+11-24 21:37:08.760 I/PAE_UI  (21638): debug extras: anatomy=true preset=0 view=3 outfit=-1
+11-24 21:37:09.171 I/PAE_RENDER(21638): applied previewMode=1
+11-24 21:37:09.171 I/PAE_RENDER(21638): applied cameraPreset=0
+11-24 21:37:09.171 I/PAE_RENDER(21638): applied debugView=3
+11-24 21:37:09.902 I/PAE_UI  (21638): debug extras: anatomy=false preset=0 view=3 outfit=-1
+11-24 21:37:09.939 I/PAE_RENDER(21638): applied previewMode=2
+11-24 21:37:09.939 I/PAE_RENDER(21638): applied cameraPreset=0
+11-24 21:37:09.939 I/PAE_RENDER(21638): applied debugView=3
+11-24 21:37:11.033 I/PAE_UI  (21638): debug extras: anatomy=false preset=0 view=3 outfit=-1
+11-24 21:37:11.039 I/PAE_RENDER(21638): geometry cache hit: canonical (112956 tris)
+11-24 21:37:13.831 I/PAE_RENDER(21638): applied previewMode=3
+11-24 21:37:13.831 I/PAE_RENDER(21638): applied cameraPreset=0
+11-24 21:37:13.831 I/PAE_RENDER(21638): applied debugView=3
+pid=21638

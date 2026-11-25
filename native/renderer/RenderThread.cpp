@@ -5,6 +5,7 @@
 #include "core/math/Math.h"
 #include "procedural/MeshTopology.h"
 #include "procedural/humanoid/Humanoid.h"
+#include "procedural/humanoid/canonical/ContinuousSkinGenerator.h"
 #include "procedural/humanoid/anatomy/HumanAnatomyGenerator.h"
 #include "skeleton/Skinning.h"
 
@@ -13,7 +14,10 @@
 #include <set>
 #include <cmath>
 #include <cstdio>
+#include <cstring>
+#include <limits>
 #include <utility>
+#include <vector>
 
 namespace pae {
 namespace {
@@ -27,6 +31,7 @@ layout(location = 3) in vec4 aWeights;
 layout(location = 4) in vec4 aColor;
 uniform mat4 uViewProj;
 uniform mat4 uModel;
+uniform mat3 uNormalMatrix;
 out vec3 vNormal;
 out vec4 vColor;
 out vec3 vWorldPos;
@@ -38,7 +43,7 @@ void main() {
               + uBones[aJoints.z] * aWeights.z
               + uBones[aJoints.w] * aWeights.w;
     vec4 world = uModel * skin * vec4(aPosition, 1.0);
-    vNormal = normalize(mat3(uModel) * mat3(skin) * aNormal);
+    vNormal = normalize(uNormalMatrix * mat3(skin) * aNormal);
     vColor = aColor;
     vWorldPos = world.xyz;
     vJoints = aJoints;
@@ -119,6 +124,7 @@ void main() {
         else if (materialId < 2.5) idColor = vec3(0.24, 0.46, 0.76);
         else if (materialId < 3.5) idColor = vec3(0.95, 0.95, 0.90);
         else if (materialId < 4.5) idColor = vec3(0.05, 0.05, 0.07);
+        else idColor = vec3(0.36, 0.36, 0.40);
         float lambert = 0.35 + 0.65 * max(dot(n, normalize(uLightDir)), 0.0);
         fragColor = vec4(idColor * lambert, 1.0);
         return;
@@ -140,11 +146,12 @@ void main() {
         return;
     }
 
+    // 0 skin, 1 hair, 2 shirt, 3 eye, 4 ink (iris/pupil/mouth), 5 pants/shoes.
     vec3 base = materialId < 0.5 ? uSkinColor
               : (materialId < 1.5 ? uHairColor
               : (materialId < 2.5 ? uClothColor
               : (materialId < 3.5 ? uEyeColor
-              : (materialId < 4.5 ? uPantsColor : vec3(0.035, 0.032, 0.038)))));
+              : (materialId < 4.5 ? vec3(0.035, 0.032, 0.038) : uPantsColor))));
 
     // Real camera position: the view direction must follow the camera, while
     // the lights stay fixed in world space.
@@ -167,12 +174,14 @@ void main() {
         rough = 0.22; specStrength = 0.42;
         float strands = noise3(vWorldPos * vec3(180.0, 26.0, 180.0));
         base *= 0.78 + 0.34 * strands;
-    } else if (materialId < 2.5 || (materialId >= 4.5 && materialId < mid)) {
+    } else if (materialId < 2.5 || materialId >= 4.5) {
         rough = 0.72; specStrength = 0.05;
         float weave = noise3(vWorldPos * 240.0);
         base *= 0.90 + 0.14 * weave;
     } else if (materialId < 3.5) {
         rough = 0.12; specStrength = 0.65;
+    } else {
+        rough = 0.30; specStrength = 0.30; // ink
     }
     base *= 0.88 + 0.12 * clamp(vColor.rgb, 0.0, 1.0);
 
@@ -188,6 +197,126 @@ void main() {
     fragColor = vec4(color, 1.0);
 }
 )GLSL";
+
+constexpr const char* kUvSkinnedVertex = R"GLSL(#version 300 es
+layout(std140) uniform BoneBlock { mat4 uBones[22]; };
+layout(location = 0) in vec3 aPosition;
+layout(location = 1) in vec3 aNormal;
+layout(location = 2) in uvec4 aJoints;
+layout(location = 3) in vec4 aWeights;
+layout(location = 4) in vec4 aColor;
+layout(location = 5) in vec2 aUv;
+uniform mat4 uViewProj;
+uniform mat4 uModel;
+uniform mat3 uNormalMatrix;
+out vec2 vUv;
+out vec3 vNormal;
+void main() {
+    mat4 skin = uBones[aJoints.x] * aWeights.x
+              + uBones[aJoints.y] * aWeights.y
+              + uBones[aJoints.z] * aWeights.z
+              + uBones[aJoints.w] * aWeights.w;
+    vec4 world = uModel * skin * vec4(aPosition, 1.0);
+    vUv = aUv;
+    vNormal = normalize(uNormalMatrix * mat3(skin) * aNormal);
+    gl_Position = uViewProj * world;
+}
+)GLSL";
+
+constexpr const char* kUvCheckerFragment = R"GLSL(#version 300 es
+precision highp float;
+in vec2 vUv;
+in vec3 vNormal;
+uniform vec3 uLightDir;
+uniform float uCheckerScale;
+out vec4 fragColor;
+void main() {
+    vec2 tiled = vUv * uCheckerScale;
+    float checker = mod(floor(tiled.x) + floor(tiled.y), 2.0);
+    vec3 base = mix(vec3(0.08, 0.10, 0.14), vec3(0.82, 0.84, 0.88), checker);
+    vec2 cell = fract(tiled);
+    float edgeDistance = min(min(cell.x, 1.0 - cell.x), min(cell.y, 1.0 - cell.y));
+    float edge = 1.0 - smoothstep(0.015, 0.055, edgeDistance);
+    base = mix(base, vec3(0.95, 0.20, 0.42), edge * 0.85);
+    float light = 0.38 + 0.62 * max(dot(normalize(vNormal), normalize(uLightDir)), 0.0);
+    fragColor = vec4(base * light, 1.0);
+}
+)GLSL";
+
+constexpr const char* kSkinnedValidationVertex = R"GLSL(#version 300 es
+layout(std140) uniform BoneBlock { mat4 uBones[22]; };
+layout(location = 0) in vec3 aPosition;
+layout(location = 1) in vec3 aNormal;
+layout(location = 2) in uvec4 aJoints;
+layout(location = 3) in vec4 aWeights;
+uniform mat4 uModel;
+uniform mat3 uNormalMatrix;
+out vec3 vGpuPosition;
+out vec3 vGpuNormal;
+void main() {
+    mat4 skin = uBones[aJoints.x] * aWeights.x
+              + uBones[aJoints.y] * aWeights.y
+              + uBones[aJoints.z] * aWeights.z
+              + uBones[aJoints.w] * aWeights.w;
+    vGpuPosition = (uModel * skin * vec4(aPosition, 1.0)).xyz;
+    vGpuNormal = normalize(uNormalMatrix * mat3(skin) * aNormal);
+    gl_Position = vec4(0.0);
+}
+)GLSL";
+
+constexpr const char* kValidationFragment = R"GLSL(#version 300 es
+precision mediump float;
+out vec4 fragColor;
+void main() { fragColor = vec4(0.0); }
+)GLSL";
+
+GLuint buildValidationProgram(std::string* error) {
+    const auto compile = [error](GLenum type, const char* source) {
+        const GLuint shader = glCreateShader(type);
+        if (shader == 0) return GLuint{0};
+        glShaderSource(shader, 1, &source, nullptr);
+        glCompileShader(shader);
+        GLint status = GL_FALSE;
+        glGetShaderiv(shader, GL_COMPILE_STATUS, &status);
+        if (status == GL_TRUE) return shader;
+        GLint length = 0;
+        glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &length);
+        std::vector<char> log(static_cast<size_t>(length > 1 ? length : 1));
+        glGetShaderInfoLog(shader, static_cast<GLsizei>(log.size()), nullptr, log.data());
+        if (error) *error = std::string("validation shader compile failed: ") + log.data();
+        glDeleteShader(shader);
+        return GLuint{0};
+    };
+    const GLuint vertex = compile(GL_VERTEX_SHADER, kSkinnedValidationVertex);
+    if (vertex == 0) return 0;
+    const GLuint fragment = compile(GL_FRAGMENT_SHADER, kValidationFragment);
+    if (fragment == 0) {
+        glDeleteShader(vertex);
+        return 0;
+    }
+    const GLuint program = glCreateProgram();
+    glAttachShader(program, vertex);
+    glAttachShader(program, fragment);
+    const char* varyings[] = {"vGpuPosition", "vGpuNormal"};
+    glTransformFeedbackVaryings(program, 2, varyings, GL_INTERLEAVED_ATTRIBS);
+    glLinkProgram(program);
+    glDeleteShader(vertex);
+    glDeleteShader(fragment);
+    GLint status = GL_FALSE;
+    glGetProgramiv(program, GL_LINK_STATUS, &status);
+    if (status == GL_TRUE && program != 0) return program;
+    GLint length = 0;
+    glGetProgramiv(program, GL_INFO_LOG_LENGTH, &length);
+    std::vector<char> log(static_cast<size_t>(length > 1 ? length : 1));
+    glGetProgramInfoLog(program, static_cast<GLsizei>(log.size()), nullptr, log.data());
+    if (error) *error = std::string("validation program link failed: ") + log.data();
+    if (program != 0) glDeleteProgram(program);
+    return 0;
+}
+
+constexpr float kMaxPositionErrorMeters = 5e-5f;
+constexpr float kMaxMeanPositionErrorMeters = 2e-5f;
+constexpr float kMaxNormalAngleRadians = 0.008726646f;
 
 constexpr const char* kAnatomyNeutralFragment = R"GLSL(#version 300 es
 precision mediump float;
@@ -253,6 +382,7 @@ layout(location = 3) in vec4 aWeights;
 layout(location = 4) in vec4 aColor;
 uniform mat4 uViewProj;
 uniform mat4 uModel;
+uniform mat3 uNormalMatrix;
 uniform float uOffset;
 out float vMaterial;
 void main() {
@@ -261,7 +391,7 @@ void main() {
               + uBones[aJoints.z] * aWeights.z
               + uBones[aJoints.w] * aWeights.w;
     vec4 world = uModel * skin * vec4(aPosition, 1.0);
-    vec3 worldNormal = mat3(uModel) * mat3(skin) * aNormal;
+    vec3 worldNormal = uNormalMatrix * mat3(skin) * aNormal;
     world.xyz += normalize(worldNormal) * uOffset;
     vMaterial = aColor.w;
     gl_Position = uViewProj * world;
@@ -446,7 +576,11 @@ void RenderThread::postExternalPose(const PoseFrame& pose) {
     command.pose = pose;
     std::lock_guard<std::mutex> lock(queueMutex_);
     if (queue_.size() >= maxQueuedCommands_) {
-        queue_.erase(queue_.begin()); // pose frames are stale; drop oldest
+        const auto stale = std::find_if(queue_.begin(), queue_.end(), [](const RenderCommand& queued) {
+            return queued.type == RenderCommandType::SetExternalPose;
+        });
+        if (stale == queue_.end()) return;
+        queue_.erase(stale);
     }
     queue_.push_back(command);
     queueCv_.notify_one();
@@ -472,7 +606,7 @@ void RenderThread::postAnatomyPreview(bool on) {
 void RenderThread::postPreviewMode(int mode) {
     RenderCommand command;
     command.type = RenderCommandType::SetPreviewMode;
-    command.value = std::clamp(mode, 0, 2);
+    command.value = std::clamp(mode, 0, 3);
     std::lock_guard<std::mutex> lock(queueMutex_);
     queue_.push_back(command);
     queueCv_.notify_one();
@@ -528,11 +662,25 @@ std::string RenderThread::getStats() const {
 }
 
 void RenderThread::run() {
+    const auto releasePendingWindows = [this]() {
+        {
+            std::lock_guard<std::mutex> lock(queueMutex_);
+            for (const RenderCommand& command : queue_) {
+                if (command.window) ANativeWindow_release(command.window);
+            }
+            queue_.clear();
+        }
+        for (const RenderCommand& command : deferredCommands_) {
+            if (command.window) ANativeWindow_release(command.window);
+        }
+        deferredCommands_.clear();
+    };
     std::string error;
     eglReady_ = egl_.initialize(&error);
     if (!eglReady_) {
         startupError_ = error;
         PAE_LOGE("PAE_RENDER", "EGL init failed: %s", error.c_str());
+        releasePendingWindows();
         return;
     }
     while (!stopRequested_) {
@@ -548,6 +696,7 @@ void RenderThread::run() {
     }
     releaseGpuResources();
     egl_.destroySurface();
+    releasePendingWindows();
 }
 
 void RenderThread::processCommands() {
@@ -556,7 +705,19 @@ void RenderThread::processCommands() {
         std::lock_guard<std::mutex> lock(queueMutex_);
         commands.swap(queue_);
     }
-    for (const RenderCommand& command : commands) {
+    if (resourcesReady_ && !deferredCommands_.empty()) {
+        commands.insert(commands.begin(), deferredCommands_.begin(), deferredCommands_.end());
+        deferredCommands_.clear();
+    }
+    for (size_t index = 0; index < commands.size(); ++index) {
+        const RenderCommand command = commands[index];
+        if (!resourcesReady_ &&
+            command.type != RenderCommandType::SurfaceCreated &&
+            command.type != RenderCommandType::SurfaceDestroyed &&
+            command.type != RenderCommandType::Shutdown) {
+            deferredCommands_.push_back(command);
+            continue;
+        }
         switch (command.type) {
             case RenderCommandType::SurfaceCreated: {
                 std::string error;
@@ -587,30 +748,42 @@ void RenderThread::processCommands() {
                 egl_.destroySurface();
                 break;
             case RenderCommandType::SetAppearance: {
-                const int previousVariant = outfitVariant_;
-                appearance_ = command.palette;
-                // Outfit variant is derived from the cloth palette so the
-                // frozen JNI ABI can switch a full clothing configuration
-                // through the existing appearance command.
-                outfitVariant_ = appearance_[2].x > appearance_[2].z ? 1 : 0;
-                if (outfitVariant_ != previousVariant && hasCachedAvatar_) {
+                const int nextVariant = command.palette[2].x > command.palette[2].z ? 1 : 0;
+                const bool rebuild = nextVariant != outfitVariant_ && hasCachedAvatar_;
+                SkinnedGpuMesh nextMesh;
+                SkinnedGpuMesh nextLines;
+                HumanoidResult humanoid;
+                if (rebuild) {
                     BodyParameters params{};
                     params.detailLevel = detailLevelForQuality(static_cast<QualityLevel>(qualityLevel_));
-                    if (outfitVariant_ == 1) {
+                    if (nextVariant == 1) {
                         params.clothing.thickness = 0.018f;
                         params.clothing.shirtHem = 0.86f;
                         params.clothing.sleeveLength = 0.40f;
                         params.clothing.pantsLength = 0.82f;
                     }
-                    const HumanoidResult humanoid = generateHumanoid(params, false);
-                    if (humanoid.valid) {
-                        cachedAvatarMesh_ = humanoid.mesh;
-                        skeleton_ = humanoid.skeleton;
-                        joints_ = humanoid.joints;
-                        avatarMesh_.upload(cachedAvatarMesh_);
-                        ++avatarRevision_;
+                    humanoid = generateHumanoid(params, false);
+                    if (!humanoid.valid || !nextMesh.upload(humanoid.mesh) ||
+                        !nextLines.upload(buildAnatomyLineMesh(humanoid.mesh))) {
+                        PAE_LOGE("PAE_RENDER", "appearance rebuild failed for variant %d", nextVariant);
+                        break;
                     }
                 }
+                if (rebuild) {
+                    if (!motion_.initialize(humanoid.skeleton, humanoid.joints)) {
+                        PAE_LOGE("PAE_RENDER", "motion runtime reinit failed");
+                        break;
+                    }
+                    cachedAvatarMesh_ = std::move(humanoid.mesh);
+                    skeleton_ = humanoid.skeleton;
+                    joints_ = humanoid.joints;
+                    avatarMesh_ = std::move(nextMesh);
+                    avatarLines_ = std::move(nextLines);
+                    avatarGeometryDirty_ = false;
+                    ++avatarRevision_;
+                }
+                appearance_ = command.palette;
+                outfitVariant_ = nextVariant;
                 ++sceneRevision_;
                 break;
             }
@@ -633,11 +806,27 @@ void RenderThread::processCommands() {
             case RenderCommandType::MotionReset:
                 motion_.resetFilters();
                 break;
-            case RenderCommandType::AnatomyPreview:
-                previewMode_ = command.flag ? 1 : 0;
+            case RenderCommandType::AnatomyPreview: {
+                const int target = command.flag ? 1 : 0;
+                if (!activatePreviewGpuResources(target)) {
+                    PAE_LOGE("PAE_RENDER", "preview GPU resource activation failed mode=%d", target);
+                    break;
+                }
+                previewMode_ = target;
                 PAE_LOGI("PAE_RENDER", "applied anatomyPreview=%d", previewMode_);
                 break;
+            }
             case RenderCommandType::SetPreviewMode:
+                if (command.value == 3 &&
+                    !ensureCanonicalGeometry(detailLevelForQuality(
+                        static_cast<QualityLevel>(qualityLevel_)))) {
+                    PAE_LOGE("PAE_RENDER", "canonical body generation or upload failed");
+                    break;
+                }
+                if (!activatePreviewGpuResources(command.value)) {
+                    PAE_LOGE("PAE_RENDER", "preview GPU resource activation failed mode=%d", command.value);
+                    break;
+                }
                 previewMode_ = command.value;
                 PAE_LOGI("PAE_RENDER", "applied previewMode=%d", previewMode_);
                 break;
@@ -656,36 +845,62 @@ void RenderThread::processCommands() {
             case RenderCommandType::SetQuality: {
                 const int level = command.value;
                 if (level < 0 || level > 2) break;
-                qualityLevel_ = level;
                 const QualityLevel quality = static_cast<QualityLevel>(level);
-                BodyParameters params{};
-                params.detailLevel = detailLevelForQuality(quality);
-                const HumanoidResult humanoid = generateHumanoid(params, false);
-                if (humanoid.valid && avatarMesh_.upload(humanoid.mesh)) {
-                    skeleton_ = humanoid.skeleton;
-                    joints_ = humanoid.joints;
-                    // DEF-01 (Plan B): keep the geometry cache in sync with the
-                    // rebuilt avatar so a later surface re-creation re-uploads
-                    // instead of regenerating.
-                    cachedAvatarMesh_ = humanoid.mesh;
-                    hasCachedAvatar_ = true;
-                    ++avatarRevision_; // geometry rebuilt: full avatar revision bump
-                    stats_.setBufferBytes(static_cast<uint64_t>(
-                        humanoid.mesh.vertices.size() * 64 +
-                        humanoid.mesh.indices.size() * sizeof(uint32_t) +
-                        BonePaletteUboData::kBytes));
-                    PAE_LOGI("PAE_RENDER", "quality=%s triangles=%u vertices=%zu",
-                             qualityName(quality),
-                             static_cast<uint32_t>(humanoid.mesh.indices.size() / 3),
-                             humanoid.mesh.vertices.size());
-                } else {
-                    PAE_LOGE("PAE_RENDER", "quality rebuild failed for level %d", level);
+                const int detailLevel = detailLevelForQuality(quality);
+                if (previewMode_ == 3) {
+                    if (ensureCanonicalGeometry(detailLevel)) {
+                        qualityLevel_ = level;
+                        avatarGeometryDirty_ = true;
+                        PAE_LOGI("PAE_RENDER", "quality=%s canonical triangles=%u vertices=%zu",
+                                 qualityName(quality),
+                                 static_cast<uint32_t>(cachedCanonicalMesh_.indices.size() / 3),
+                                 cachedCanonicalMesh_.vertices.size());
+                    } else {
+                        PAE_LOGE("PAE_RENDER", "canonical quality rebuild failed for level %d", level);
+                    }
+                    break;
                 }
+                BodyParameters params{};
+                params.detailLevel = detailLevel;
+                const HumanoidResult humanoid = generateHumanoid(params, false);
+                SkinnedGpuMesh nextMesh;
+                SkinnedGpuMesh nextLines;
+                if (!humanoid.valid || !nextMesh.upload(humanoid.mesh) ||
+                    !nextLines.upload(buildAnatomyLineMesh(humanoid.mesh))) {
+                    PAE_LOGE("PAE_RENDER", "quality rebuild failed for level %d", level);
+                    break;
+                }
+                if (!motion_.initialize(humanoid.skeleton, humanoid.joints)) {
+                    PAE_LOGE("PAE_RENDER", "motion runtime reinit failed");
+                    break;
+                }
+                avatarMesh_ = std::move(nextMesh);
+                avatarLines_ = std::move(nextLines);
+                skeleton_ = humanoid.skeleton;
+                joints_ = humanoid.joints;
+                qualityLevel_ = level;
+                cachedAvatarMesh_ = humanoid.mesh;
+                hasCachedAvatar_ = true;
+                avatarGeometryDirty_ = false;
+                ++avatarRevision_;
+                stats_.setBufferBytes(static_cast<uint64_t>(
+                    humanoid.mesh.vertices.size() * 64 +
+                    humanoid.mesh.indices.size() * sizeof(uint32_t) +
+                    BonePaletteUboData::kBytes));
+                PAE_LOGI("PAE_RENDER", "quality=%s triangles=%u vertices=%zu",
+                         qualityName(quality),
+                         static_cast<uint32_t>(humanoid.mesh.indices.size() / 3),
+                         humanoid.mesh.vertices.size());
                 break;
             }
             case RenderCommandType::Shutdown:
                 stopRequested_ = true;
                 break;
+        }
+        if (resourcesReady_ && !deferredCommands_.empty()) {
+            commands.insert(commands.begin() + index + 1,
+                            deferredCommands_.begin(), deferredCommands_.end());
+            deferredCommands_.clear();
         }
     }
 }
@@ -703,6 +918,19 @@ bool RenderThread::ensureResources(std::string* error) {
         if (error) *error = "BoneBlock binding failed";
         return false;
     }
+    if (!skinnedLineProgram_.build(kSkinnedVertex, kFlatColorFragment, error)) return false;
+    if (!skinnedLineProgram_.bindUniformBlock("BoneBlock", 0)) {
+        if (error) *error = "skinned line BoneBlock binding failed";
+        return false;
+    }
+    if (!uvProgram_.build(kUvSkinnedVertex, kUvCheckerFragment, error)) return false;
+    if (!uvProgram_.bindUniformBlock("BoneBlock", 0)) {
+        if (error) *error = "UV BoneBlock binding failed";
+        return false;
+    }
+    uniformLineViewProj_ = skinnedLineProgram_.uniform("uViewProj");
+    uniformLineModel_ = skinnedLineProgram_.uniform("uModel");
+    uniformLineColor_ = skinnedLineProgram_.uniform("uColor");
     if (!backgroundProgram_.build(kBackgroundVertex, kBackgroundFragment, error)) return false;
     if (!outlineProgram_.build(kOutlineVertex, kOutlineFragment, error)) return false;
     if (!outlineProgram_.bindUniformBlock("BoneBlock", 0)) {
@@ -712,6 +940,7 @@ bool RenderThread::ensureResources(std::string* error) {
     if (!shadowProgram_.build(kFlatColorVertex, kFlatColorFragment, error)) return false;
     uniformOutlineViewProj_ = outlineProgram_.uniform("uViewProj");
     uniformOutlineModel_ = outlineProgram_.uniform("uModel");
+    uniformOutlineNormalMatrix_ = outlineProgram_.uniform("uNormalMatrix");
     uniformOutlineOffset_ = outlineProgram_.uniform("uOffset");
     uniformOutlineColor_ = outlineProgram_.uniform("uColor");
     uniformShadowViewProj_ = shadowProgram_.uniform("uViewProj");
@@ -747,16 +976,20 @@ bool RenderThread::ensureResources(std::string* error) {
     }
     uniformAnatomyViewProj_ = anatomyProgram_.uniform("uViewProj");
     uniformAnatomyModel_ = anatomyProgram_.uniform("uModel");
+    uniformAnatomyNormalMatrix_ = anatomyProgram_.uniform("uNormalMatrix");
     uniformAnatomyNeutral_ = anatomyProgram_.uniform("uNeutral");
     uniformAnatomyNormalViewProj_ = anatomyNormalProg_.uniform("uViewProj");
     uniformAnatomyNormalModel_ = anatomyNormalProg_.uniform("uModel");
+    uniformAnatomyNormalNormalMatrix_ = anatomyNormalProg_.uniform("uNormalMatrix");
     uniformAnatomyClayViewProj_ = anatomyClayProg_.uniform("uViewProj");
     uniformAnatomyClayModel_ = anatomyClayProg_.uniform("uModel");
+    uniformAnatomyClayNormalMatrix_ = anatomyClayProg_.uniform("uNormalMatrix");
     uniformAnatomyClayNeutral_ = anatomyClayProg_.uniform("uNeutral");
     uniformAnatomyClayKeyDir_ = anatomyClayProg_.uniform("uKeyDir");
     uniformAnatomyClayFillDir_ = anatomyClayProg_.uniform("uFillDir");
     uniformViewProj_ = skinnedProgram_.uniform("uViewProj");
     uniformModel_ = skinnedProgram_.uniform("uModel");
+    uniformNormalMatrix_ = skinnedProgram_.uniform("uNormalMatrix");
     uniformCameraPos_ = skinnedProgram_.uniform("uCameraPos");
     uniformDebugMode_ = skinnedProgram_.uniform("uDebugMode");
     uniformSkin_ = skinnedProgram_.uniform("uSkinColor");
@@ -764,6 +997,11 @@ bool RenderThread::ensureResources(std::string* error) {
     uniformCloth_ = skinnedProgram_.uniform("uClothColor");
     uniformEye_ = skinnedProgram_.uniform("uEyeColor");
     uniformPants_ = skinnedProgram_.uniform("uPantsColor");
+    uniformUvViewProj_ = uvProgram_.uniform("uViewProj");
+    uniformUvModel_ = uvProgram_.uniform("uModel");
+    uniformUvNormalMatrix_ = uvProgram_.uniform("uNormalMatrix");
+    uniformUvLightDir_ = uvProgram_.uniform("uLightDir");
+    uniformUvCheckerScale_ = uvProgram_.uniform("uCheckerScale");
     uniformBgMode_ = backgroundProgram_.uniform("uMode");
     uniformBgA_ = backgroundProgram_.uniform("uColorA");
     uniformBgB_ = backgroundProgram_.uniform("uColorB");
@@ -874,13 +1112,360 @@ bool RenderThread::ensureResources(std::string* error) {
         }
     }
 
+    if (previewMode_ == 3 && !ensureCanonicalGeometry(
+            detailLevelForQuality(static_cast<QualityLevel>(qualityLevel_)))) {
+        if (error) *error = "canonical body generation failed";
+        return false;
+    }
+
     resourcesReady_ = true;
+    return true;
+}
+
+bool RenderThread::activatePreviewGpuResources(int mode) {
+    if (mode == 3) {
+        if (!canonicalMesh_.valid() || !canonicalLines_.valid() || !canonicalUvMesh_.hasUv()) {
+            return false;
+        }
+        avatarMesh_.release();
+        avatarLines_.release();
+        anatomyMesh_.release();
+        anatomyLines_.release();
+        p1aMesh_.release();
+        p1aLines_.release();
+        return true;
+    }
+
+    HumanoidResult humanoid;
+    const MeshData* source = nullptr;
+    if (mode == 0 && hasCachedAvatar_) {
+        if (avatarGeometryDirty_) {
+            BodyParameters params{};
+            params.detailLevel = detailLevelForQuality(static_cast<QualityLevel>(qualityLevel_));
+            humanoid = generateHumanoid(params, false);
+            if (!humanoid.valid) return false;
+            source = &humanoid.mesh;
+        } else {
+            source = &cachedAvatarMesh_;
+        }
+    } else if (mode == 1 && hasCachedAnatomy_) {
+        source = &cachedAnatomyMesh_;
+    } else if (mode == 2 && hasCachedP1a_) {
+        source = &cachedP1aMesh_;
+    } else {
+        return false;
+    }
+
+    SkinnedGpuMesh nextMesh;
+    SkinnedGpuMesh nextLines;
+    if (!nextMesh.upload(*source) ||
+        !nextLines.upload(buildAnatomyLineMesh(*source))) {
+        return false;
+    }
+    if (mode == 0 && avatarGeometryDirty_) {
+        if (!motion_.initialize(humanoid.skeleton, humanoid.joints)) return false;
+        cachedAvatarMesh_ = humanoid.mesh;
+        skeleton_ = humanoid.skeleton;
+        joints_ = humanoid.joints;
+        avatarGeometryDirty_ = false;
+        ++avatarRevision_;
+    }
+
+    canonicalMesh_.release();
+    canonicalLines_.release();
+    canonicalUvMesh_.release();
+    if (mode == 0) {
+        avatarMesh_ = std::move(nextMesh);
+        avatarLines_ = std::move(nextLines);
+    } else if (mode == 1) {
+        anatomyMesh_ = std::move(nextMesh);
+        anatomyLines_ = std::move(nextLines);
+    } else {
+        p1aMesh_ = std::move(nextMesh);
+        p1aLines_ = std::move(nextLines);
+    }
+    return true;
+}
+
+bool RenderThread::ensureCanonicalGeometry(int detailLevel) {
+    const auto started = std::chrono::steady_clock::now();
+    const bool cached = hasCachedCanonical_ && canonicalDetailLevel_ == detailLevel;
+    canonical::ContinuousSkinResult generated;
+    canonical::RenderResult render;
+    const MeshData* canonicalMesh = nullptr;
+    const MeshData* renderMesh = nullptr;
+    Skeleton nextSkeleton{};
+    BodyJoints nextJoints{};
+    uint64_t nextRevision = canonicalRevision_;
+
+    if (cached) {
+        PAE_LOGI("PAE_RENDER", "geometry cache hit: canonical (%u tris)",
+                 static_cast<unsigned>(cachedCanonicalMesh_.indices.size() / 3));
+        canonicalMesh = &cachedCanonicalMesh_;
+        renderMesh = &cachedCanonicalRenderMesh_;
+        nextSkeleton = cachedCanonicalSkeleton_;
+        nextJoints = cachedCanonicalJoints_;
+    } else {
+        BodyParameters params{};
+        params.detailLevel = static_cast<uint32_t>(detailLevel);
+        generated = canonical::generateContinuousSkin(params, false);
+        if (!generated.canonical.valid) {
+            PAE_LOGE("PAE_RENDER",
+                     "canonical body rejected: components=%d boundary=%d nonmanifold=%d "
+                     "degen=%d dup=%d badnorm=%d weights_bad=%zu intersections=%zu",
+                     generated.canonical.topology.components,
+                     generated.canonical.topology.boundaryEdges,
+                     generated.canonical.topology.nonManifoldEdges,
+                     generated.canonical.topology.degenerateTriangles,
+                     generated.canonical.topology.duplicateVertices,
+                     generated.canonical.topology.invalidNormals,
+                     generated.canonical.weights.invalidVertices,
+                     generated.canonical.selfIntersections.intersectingPairs);
+            return false;
+        }
+        nextSkeleton = generated.skeleton;
+        nextJoints = generated.joints;
+        nextRevision = canonicalRevision_ + 1;
+        render = canonical::buildRenderMesh(generated.canonical);
+        if (!render.valid) {
+            PAE_LOGE("PAE_RENDER", "canonical Render Mesh rejected: charts=%zu invalid_uv=%zu",
+                     render.uv.charts, render.uv.invalidUvVertices);
+            return false;
+        }
+        canonicalMesh = &generated.canonical.mesh;
+        renderMesh = &render.mesh;
+    }
+
+    SkinnedGpuMesh nextCanonical;
+    SkinnedGpuMesh nextUv;
+    SkinnedGpuMesh nextLines;
+    if (!nextCanonical.upload(*canonicalMesh)) {
+        PAE_LOGE("PAE_RENDER", "canonical body upload failed gl_error=0x%x",
+                 static_cast<unsigned>(nextCanonical.lastError()));
+        return false;
+    }
+    if (!nextUv.upload(*renderMesh)) {
+        PAE_LOGE("PAE_RENDER", "canonical Render Mesh base upload failed gl_error=0x%x",
+                 static_cast<unsigned>(nextUv.lastError()));
+        return false;
+    }
+    if (!nextUv.uploadUv(*renderMesh, nextRevision)) {
+        PAE_LOGE("PAE_RENDER", "canonical UV upload failed gl_error=0x%x vertices=%zu",
+                 static_cast<unsigned>(nextUv.lastError()), renderMesh->vertices.size());
+        return false;
+    }
+    if (!nextLines.upload(buildAnatomyLineMesh(*canonicalMesh))) {
+        PAE_LOGE("PAE_RENDER", "canonical wireframe upload failed");
+        return false;
+    }
+    if (validatedCanonicalRevision_ != nextRevision &&
+        !validateCanonicalGpuPath(nextUv, *renderMesh, nextSkeleton, nextRevision)) {
+        PAE_LOGE("PAE_RENDER", "canonical GPU/CPU validation failed");
+        return false;
+    }
+    if (!cached && !motion_.initialize(nextSkeleton, nextJoints)) {
+        PAE_LOGE("PAE_RENDER", "canonical motion runtime init failed");
+        return false;
+    }
+
+    canonicalMesh_ = std::move(nextCanonical);
+    canonicalUvMesh_ = std::move(nextUv);
+    canonicalLines_ = std::move(nextLines);
+    if (!cached) {
+        cachedCanonicalMesh_ = generated.canonical.mesh;
+        cachedCanonicalRenderMesh_ = std::move(render.mesh);
+        cachedCanonicalSkeleton_ = nextSkeleton;
+        cachedCanonicalJoints_ = nextJoints;
+        canonicalRenderToCanonical_ = std::move(render.renderToCanonical);
+        hasCachedCanonical_ = true;
+        canonicalRevision_ = nextRevision;
+        ++avatarRevision_;
+    }
+    skeleton_ = nextSkeleton;
+    joints_ = nextJoints;
+    canonicalDetailLevel_ = detailLevel;
+    stats_.setBufferBytes(static_cast<uint64_t>(
+        cachedCanonicalMesh_.vertices.size() * 64 +
+        cachedCanonicalMesh_.indices.size() * sizeof(uint32_t) +
+        cachedCanonicalRenderMesh_.vertices.size() * (64 + sizeof(Vec2)) +
+        cachedCanonicalRenderMesh_.indices.size() * sizeof(uint32_t) +
+        BonePaletteUboData::kBytes));
+    const double ms = std::chrono::duration<double, std::milli>(
+        std::chrono::steady_clock::now() - started).count();
+    PAE_LOGI("PAE_RENDER",
+             "canonical body ready: verts=%zu tris=%u render_verts=%zu uv_charts=%zu gen_ms=%.0f",
+             cachedCanonicalMesh_.vertices.size(),
+             static_cast<unsigned>(cachedCanonicalMesh_.indices.size() / 3),
+             cachedCanonicalRenderMesh_.vertices.size(),
+             cachedCanonicalRenderMesh_.indices.size() / 3, ms);
+    return true;
+}
+
+bool RenderThread::validateCanonicalGpuPath(const SkinnedGpuMesh& renderMesh,
+                                            const MeshData& cpuMesh,
+                                            const Skeleton& skeleton,
+                                            uint64_t revision) {
+    if (!renderMesh.hasUv() || renderMesh.vertexCount() == 0) return false;
+    if (validationProgram_ == 0) {
+        std::string error;
+        validationProgram_ = buildValidationProgram(&error);
+        if (validationProgram_ == 0) {
+            PAE_LOGE("PAE_RENDER", "P1B validation shader build failed: %s", error.c_str());
+            return false;
+        }
+        const GLuint block = glGetUniformBlockIndex(validationProgram_, "BoneBlock");
+        if (block == GL_INVALID_INDEX) {
+            PAE_LOGE("PAE_RENDER", "P1B validation BoneBlock not found");
+            return false;
+        }
+        glUniformBlockBinding(validationProgram_, block, 0);
+        uniformValidationModel_ = glGetUniformLocation(validationProgram_, "uModel");
+        uniformValidationNormalMatrix_ = glGetUniformLocation(validationProgram_, "uNormalMatrix");
+        if (uniformValidationModel_ < 0 || uniformValidationNormalMatrix_ < 0) {
+            PAE_LOGE("PAE_RENDER", "P1B validation uniforms not found");
+            return false;
+        }
+    }
+    const auto zRotation = [](float degrees) {
+        const float half = degrees * 3.14159265358979323846f / 360.0f;
+        return Quat{0.0f, 0.0f, std::sin(half), std::cos(half)};
+    };
+    const auto xRotation = [](float degrees) {
+        const float half = degrees * 3.14159265358979323846f / 360.0f;
+        return Quat{std::sin(half), 0.0f, 0.0f, std::cos(half)};
+    };
+    std::array<Quat, BoneCount> representative{};
+    representative.fill(Quat{});
+    representative[BoneLeftUpperArm] = zRotation(40.0f);
+    representative[BoneLeftLowerArm] = zRotation(-85.0f);
+    representative[BoneLeftUpperLeg] = xRotation(-25.0f);
+    representative[BoneLeftLowerLeg] = xRotation(55.0f);
+    representative[BoneRightUpperLeg] = xRotation(-25.0f);
+    representative[BoneRightLowerLeg] = xRotation(55.0f);
+
+    struct ValidationCase {
+        const char* name;
+        std::array<Quat, BoneCount> rotations;
+        Mat4 model;
+    };
+    std::array<Quat, BoneCount> bindRotations{};
+    bindRotations.fill(Quat{});
+    const ValidationCase cases[] = {
+        {"bind", bindRotations, Mat4{}},
+        {"elbow85_knee80", representative, Mat4{}},
+        {"elbow85_knee80_scale_2_0.5_3", representative,
+         Mat4::translation({0.25f, -0.5f, 0.75f}) * Mat4::scaling({2.0f, 0.5f, 3.0f})}
+    };
+
+    const uint32_t vertexCount = renderMesh.vertexCount();
+    for (const ValidationCase& test : cases) {
+        const PoseResult pose = computePose(skeleton, test.rotations);
+        for (uint16_t bone = 0; bone < BoneCount; ++bone) {
+            paletteData_.writeBone(bone, pose.palette[bone]);
+        }
+        boneUbo_.update(paletteData_);
+        const std::vector<Vec3> cpuPositions = cpuSkinPositions(
+            cpuMesh, pose.palette, test.model);
+        const std::vector<Vec3> cpuNormals = cpuSkinNormals(
+            cpuMesh, pose.palette, test.model);
+        if (cpuPositions.size() != vertexCount || cpuNormals.size() != vertexCount) return false;
+
+        while (glGetError() != GL_NO_ERROR) {}
+        GLuint feedbackBuffer = 0;
+        GLuint feedbackObject = 0;
+        glGenBuffers(1, &feedbackBuffer);
+        glGenTransformFeedbacks(1, &feedbackObject);
+        if (feedbackBuffer == 0 || feedbackObject == 0) {
+            if (feedbackBuffer != 0) glDeleteBuffers(1, &feedbackBuffer);
+            if (feedbackObject != 0) glDeleteTransformFeedbacks(1, &feedbackObject);
+            return false;
+        }
+        const GLsizeiptr feedbackBytes = static_cast<GLsizeiptr>(vertexCount) * 6 * sizeof(float);
+        glBindTransformFeedback(GL_TRANSFORM_FEEDBACK, feedbackObject);
+        glBindBuffer(GL_TRANSFORM_FEEDBACK_BUFFER, feedbackBuffer);
+        glBufferData(GL_TRANSFORM_FEEDBACK_BUFFER, feedbackBytes, nullptr, GL_STREAM_READ);
+        glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, feedbackBuffer);
+        glUseProgram(validationProgram_);
+        glUniformMatrix4fv(uniformValidationModel_, 1, GL_FALSE, test.model.m.data());
+        glUniformMatrix3fv(uniformValidationNormalMatrix_, 1, GL_FALSE,
+                           modelNormalMatrix(test.model).m.data());
+        renderMesh.bindUv();
+        glEnable(GL_RASTERIZER_DISCARD);
+        glBeginTransformFeedback(GL_POINTS);
+        glDrawArrays(GL_POINTS, 0, static_cast<GLsizei>(vertexCount));
+        glEndTransformFeedback();
+        glDisable(GL_RASTERIZER_DISCARD);
+        std::vector<float> gpuData(static_cast<size_t>(vertexCount) * 6, 0.0f);
+        void* mapped = glMapBufferRange(GL_TRANSFORM_FEEDBACK_BUFFER, 0, feedbackBytes, GL_MAP_READ_BIT);
+        if (mapped != nullptr) {
+            std::memcpy(gpuData.data(), mapped, gpuData.size() * sizeof(float));
+            glUnmapBuffer(GL_TRANSFORM_FEEDBACK_BUFFER);
+        }
+        const GLenum glError = mapped == nullptr ? GL_INVALID_OPERATION : glGetError();
+        glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, 0);
+        glBindBuffer(GL_TRANSFORM_FEEDBACK_BUFFER, 0);
+        glBindTransformFeedback(GL_TRANSFORM_FEEDBACK, 0);
+        glBindVertexArray(0);
+        glDeleteTransformFeedbacks(1, &feedbackObject);
+        glDeleteBuffers(1, &feedbackBuffer);
+        if (glError != GL_NO_ERROR) {
+            PAE_LOGE("PAE_RENDER", "P1B-GPU-CPU case=%s gl_error=0x%x",
+                     test.name, static_cast<unsigned>(glError));
+            return false;
+        }
+
+        double positionErrorSum = 0.0;
+        float maxPositionError = 0.0f;
+        float maxNormalAngle = 0.0f;
+        size_t abnormalNormals = 0;
+        size_t invalidNormals = 0;
+        size_t invalidPositions = 0;
+        for (uint32_t vertex = 0; vertex < vertexCount; ++vertex) {
+            const size_t offset = static_cast<size_t>(vertex) * 6;
+            const Vec3 gpuPosition{gpuData[offset], gpuData[offset + 1], gpuData[offset + 2]};
+            const Vec3 gpuNormal{gpuData[offset + 3], gpuData[offset + 4], gpuData[offset + 5]};
+            if (!gpuPosition.finite() || !cpuPositions[vertex].finite()) {
+                ++invalidPositions;
+            } else {
+                const float error = (gpuPosition - cpuPositions[vertex]).length();
+                maxPositionError = std::fmax(maxPositionError, error);
+                positionErrorSum += error;
+            }
+            if (!gpuNormal.finite() || !cpuNormals[vertex].finite() ||
+                std::fabs(gpuNormal.length() - 1.0f) > 1e-3f ||
+                std::fabs(cpuNormals[vertex].length() - 1.0f) > 1e-3f) {
+                ++invalidNormals;
+                continue;
+            }
+            const float dot = std::clamp(gpuNormal.dot(cpuNormals[vertex]), -1.0f, 1.0f);
+            const float angle = std::acos(dot);
+            maxNormalAngle = std::fmax(maxNormalAngle, angle);
+            if (angle > kMaxNormalAngleRadians) ++abnormalNormals;
+        }
+        const float meanPositionError = static_cast<float>(positionErrorSum / vertexCount);
+        const bool valid = invalidPositions == 0 && invalidNormals == 0 &&
+                           maxPositionError <= kMaxPositionErrorMeters &&
+                           meanPositionError <= kMaxMeanPositionErrorMeters &&
+                           maxNormalAngle <= kMaxNormalAngleRadians && abnormalNormals == 0;
+        PAE_LOGI("PAE_RENDER",
+                 "P1B-GPU-CPU case=%s vertices=%u max_pos_m=%.9g mean_pos_m=%.9g "
+                 "max_normal_deg=%.9g abnormal_normals=%zu invalid_positions=%zu "
+                 "invalid_normals=%zu result=%s",
+                 test.name, vertexCount, maxPositionError, meanPositionError,
+                 maxNormalAngle * 180.0f / 3.14159265358979323846f,
+                 abnormalNormals, invalidPositions, invalidNormals, valid ? "ok" : "failed");
+        if (!valid) return false;
+    }
+    validatedCanonicalRevision_ = revision;
     return true;
 }
 
 void RenderThread::releaseGpuResources() {
     avatarMesh_.release();
     avatarLines_.release();
+    canonicalMesh_.release();
+    canonicalLines_.release();
+    canonicalUvMesh_.release();
     gridMesh_.release();
     axisMesh_.release();
     shadowMesh_.release();
@@ -892,6 +1477,11 @@ void RenderThread::releaseGpuResources() {
     anatomyMesh_.release();
     anatomyLines_.release();
     boneUbo_.release();
+    if (validationProgram_ != 0) glDeleteProgram(validationProgram_);
+    validationProgram_ = 0;
+    uniformValidationModel_ = -1;
+    uniformValidationNormalMatrix_ = -1;
+    validatedCanonicalRevision_ = 0;
     resourcesReady_ = false;
 }
 
@@ -1051,6 +1641,7 @@ void RenderThread::drawOutline(const Mat4& viewProjection, const Mat4& model) {
     outlineProgram_.use();
     glUniformMatrix4fv(uniformOutlineViewProj_, 1, GL_FALSE, viewProjection.m.data());
     glUniformMatrix4fv(uniformOutlineModel_, 1, GL_FALSE, model.m.data());
+    glUniformMatrix3fv(uniformOutlineNormalMatrix_, 1, GL_FALSE, modelNormalMatrix(model).m.data());
     glUniform1f(uniformOutlineOffset_, 0.010f);
     glUniform4f(uniformOutlineColor_, 0.05f, 0.06f, 0.10f, 1.0f);
     avatarMesh_.draw();
@@ -1076,6 +1667,7 @@ void RenderThread::drawFrame() {
     const Mat4 view = Mat4::lookAt(cameraEye, cameraTarget_, {0.0f, 1.0f, 0.0f});
     const Mat4 viewProjection = projection * view;
     const Mat4 model = Mat4::translation({0.0f, -0.05f, 0.0f});
+    const Mat3 normalMatrix = modelNormalMatrix(model);
 
     glBindVertexArray(0);
     glDisable(GL_DEPTH_TEST);
@@ -1121,7 +1713,7 @@ void RenderThread::drawFrame() {
     // World-space reference grid. Drawn before the character so the avatar
     // occludes it, and in world space so the free camera reads the scene in
     // metres instead of against an empty backdrop.
-    if (previewMode_ == 0) {
+    if (previewMode_ == 0 || previewMode_ == 3) {
         const Mat4 identity = Mat4{};
         shadowProgram_.use();
         glUniformMatrix4fv(uniformShadowViewProj_, 1, GL_FALSE, viewProjection.m.data());
@@ -1136,6 +1728,7 @@ void RenderThread::drawFrame() {
         skinnedProgram_.use();
         glUniformMatrix4fv(uniformViewProj_, 1, GL_FALSE, viewProjection.m.data());
         glUniformMatrix4fv(uniformModel_, 1, GL_FALSE, model.m.data());
+        glUniformMatrix3fv(uniformNormalMatrix_, 1, GL_FALSE, normalMatrix.m.data());
         glUniform3f(uniformCameraPos_, cameraEye.x, cameraEye.y, cameraEye.z);
         glUniform3f(uniformSkin_, appearance_[0].x, appearance_[0].y, appearance_[0].z);
         glUniform3f(uniformHair_, appearance_[1].x, appearance_[1].y, appearance_[1].z);
@@ -1160,10 +1753,10 @@ void RenderThread::drawFrame() {
             // Wireframe over the clay shading: the triangle topology is the
             // point of this view, so the lines are pulled to the front.
             glDepthRangef(0.0f, 0.0f);
-            shadowProgram_.use();
-            glUniformMatrix4fv(uniformShadowViewProj_, 1, GL_FALSE, viewProjection.m.data());
-            glUniformMatrix4fv(uniformShadowModel_, 1, GL_FALSE, model.m.data());
-            glUniform4f(uniformShadowColor_, 0.10f, 0.42f, 0.16f, 1.0f);
+            skinnedLineProgram_.use();
+            glUniformMatrix4fv(uniformLineViewProj_, 1, GL_FALSE, viewProjection.m.data());
+            glUniformMatrix4fv(uniformLineModel_, 1, GL_FALSE, model.m.data());
+            glUniform4f(uniformLineColor_, 0.10f, 0.42f, 0.16f, 1.0f);
             avatarLines_.drawLines();
             glDepthRangef(0.0f, 1.0f);
         } else if (debugView_ == 6) {
@@ -1177,26 +1770,68 @@ void RenderThread::drawFrame() {
             glUniformMatrix4fv(uniformAnatomyNormalViewProj_, 1, GL_FALSE,
                                viewProjection.m.data());
             glUniformMatrix4fv(uniformAnatomyNormalModel_, 1, GL_FALSE, model.m.data());
+            glUniformMatrix3fv(uniformAnatomyNormalNormalMatrix_, 1, GL_FALSE, normalMatrix.m.data());
             p1aMesh_.draw();
         } else {
             anatomyClayProg_.use();
             glUniformMatrix4fv(uniformAnatomyClayViewProj_, 1, GL_FALSE,
                                viewProjection.m.data());
             glUniformMatrix4fv(uniformAnatomyClayModel_, 1, GL_FALSE, model.m.data());
+            glUniformMatrix3fv(uniformAnatomyClayNormalMatrix_, 1, GL_FALSE, normalMatrix.m.data());
             glUniform3f(uniformAnatomyClayNeutral_, 0.62f, 0.62f, 0.64f);
             glUniform3f(uniformAnatomyClayKeyDir_, 0.45f, 0.75f, 0.48f);
             glUniform3f(uniformAnatomyClayFillDir_, -0.55f, 0.15f, 0.35f);
             p1aMesh_.draw();
             if (debugView_ == 1) {
                 glDepthRangef(0.0f, 0.0f);
-                shadowProgram_.use();
-                glUniformMatrix4fv(uniformShadowViewProj_, 1, GL_FALSE,
+                skinnedLineProgram_.use();
+                glUniformMatrix4fv(uniformLineViewProj_, 1, GL_FALSE,
                                    viewProjection.m.data());
-                glUniformMatrix4fv(uniformShadowModel_, 1, GL_FALSE, model.m.data());
-                glUniform4f(uniformShadowColor_, 0.05f, 0.35f, 0.08f, 1.0f);
+                glUniformMatrix4fv(uniformLineModel_, 1, GL_FALSE, model.m.data());
+                glUniform4f(uniformLineColor_, 0.05f, 0.35f, 0.08f, 1.0f);
                 p1aLines_.drawLines();
                 glDepthRangef(0.0f, 1.0f);
             }
+        }
+    } else if (previewMode_ == 3) {
+        if (debugView_ == 7) {
+            uvProgram_.use();
+            glUniformMatrix4fv(uniformUvViewProj_, 1, GL_FALSE, viewProjection.m.data());
+            glUniformMatrix4fv(uniformUvModel_, 1, GL_FALSE, model.m.data());
+            glUniformMatrix3fv(uniformUvNormalMatrix_, 1, GL_FALSE, normalMatrix.m.data());
+            glUniform3f(uniformUvLightDir_, 0.4f, 0.8f, 0.6f);
+            glUniform1f(uniformUvCheckerScale_, 6.0f);
+            canonicalUvMesh_.drawUv();
+        } else {
+        const int debugMode = debugView_ == 2 ? 2
+                            : debugView_ == 4 ? 4
+                            : debugView_ == 5 ? 5
+                            : 3;
+        skinnedProgram_.use();
+        glUniformMatrix4fv(uniformViewProj_, 1, GL_FALSE, viewProjection.m.data());
+        glUniformMatrix4fv(uniformModel_, 1, GL_FALSE, model.m.data());
+        glUniformMatrix3fv(uniformNormalMatrix_, 1, GL_FALSE, normalMatrix.m.data());
+        glUniform3f(uniformCameraPos_, cameraEye.x, cameraEye.y, cameraEye.z);
+        glUniform3f(uniformSkin_, appearance_[0].x, appearance_[0].y, appearance_[0].z);
+        glUniform3f(uniformHair_, appearance_[1].x, appearance_[1].y, appearance_[1].z);
+        glUniform3f(uniformCloth_, appearance_[2].x, appearance_[2].y, appearance_[2].z);
+        glUniform3f(uniformEye_, appearance_[3].x, appearance_[3].y, appearance_[3].z);
+        glUniform3f(uniformPants_, appearance_[4].x, appearance_[4].y, appearance_[4].z);
+        glUniform3f(skinnedProgram_.uniform("uLightDir"), 0.4f, 0.8f, 0.6f);
+        glUniform1f(skinnedProgram_.uniform("uAmbient"), 0.42f);
+        glUniform1f(skinnedProgram_.uniform("uToonSteps"), 3.0f);
+        glUniform1f(skinnedProgram_.uniform("uRim"), 0.0f);
+        glUniform1i(uniformDebugMode_, debugMode);
+        canonicalMesh_.draw();
+        if (debugView_ == 1) {
+            glDepthRangef(0.0f, 0.0f);
+            skinnedLineProgram_.use();
+            glUniformMatrix4fv(uniformLineViewProj_, 1, GL_FALSE, viewProjection.m.data());
+            glUniformMatrix4fv(uniformLineModel_, 1, GL_FALSE, model.m.data());
+            glUniform4f(uniformLineColor_, 0.05f, 0.35f, 0.08f, 1.0f);
+            canonicalLines_.drawLines();
+            glDepthRangef(0.0f, 1.0f);
+        }
         }
     } else {
         // M12-A anatomy preview: neutral study material + optional wireframe
@@ -1207,6 +1842,7 @@ void RenderThread::drawFrame() {
             glUniformMatrix4fv(uniformAnatomyNormalViewProj_, 1, GL_FALSE,
                                viewProjection.m.data());
             glUniformMatrix4fv(uniformAnatomyNormalModel_, 1, GL_FALSE, model.m.data());
+            glUniformMatrix3fv(uniformAnatomyNormalNormalMatrix_, 1, GL_FALSE, normalMatrix.m.data());
             anatomyMesh_.draw();
         } else if (debugView_ == 3) {
             // M13 gray clay: continuous Lambert, no toon banding — the only
@@ -1215,6 +1851,7 @@ void RenderThread::drawFrame() {
             glUniformMatrix4fv(uniformAnatomyClayViewProj_, 1, GL_FALSE,
                                viewProjection.m.data());
             glUniformMatrix4fv(uniformAnatomyClayModel_, 1, GL_FALSE, model.m.data());
+            glUniformMatrix3fv(uniformAnatomyClayNormalMatrix_, 1, GL_FALSE, normalMatrix.m.data());
             glUniform3f(uniformAnatomyClayNeutral_, 0.62f, 0.62f, 0.64f);
             glUniform3f(uniformAnatomyClayKeyDir_, 0.45f, 0.75f, 0.48f);
             glUniform3f(uniformAnatomyClayFillDir_, -0.55f, 0.15f, 0.35f);
@@ -1223,6 +1860,7 @@ void RenderThread::drawFrame() {
             anatomyProgram_.use();
             glUniformMatrix4fv(uniformAnatomyViewProj_, 1, GL_FALSE, viewProjection.m.data());
             glUniformMatrix4fv(uniformAnatomyModel_, 1, GL_FALSE, model.m.data());
+            glUniformMatrix3fv(uniformAnatomyNormalMatrix_, 1, GL_FALSE, normalMatrix.m.data());
             glUniform3f(uniformAnatomyNeutral_, 0.72f, 0.66f, 0.60f);
             // Neutral study lighting: without these the shared fragment shader
             // defaults to ambient=0/steps=0 and the whole mesh renders black.
@@ -1232,11 +1870,11 @@ void RenderThread::drawFrame() {
             anatomyMesh_.draw();
             if (debugView_ == 1 || debugView_ == 3) {
                 glDepthRangef(0.0f, 0.0f); // pull lines to the front
-                shadowProgram_.use();
-                glUniformMatrix4fv(uniformShadowViewProj_, 1, GL_FALSE,
+                skinnedLineProgram_.use();
+                glUniformMatrix4fv(uniformLineViewProj_, 1, GL_FALSE,
                                    viewProjection.m.data());
-                glUniformMatrix4fv(uniformShadowModel_, 1, GL_FALSE, model.m.data());
-                glUniform4f(uniformShadowColor_, 0.05f, 0.35f, 0.08f, 1.0f);
+                glUniformMatrix4fv(uniformLineModel_, 1, GL_FALSE, model.m.data());
+                glUniform4f(uniformLineColor_, 0.05f, 0.35f, 0.08f, 1.0f);
                 anatomyLines_.drawLines();
                 glDepthRangef(0.0f, 1.0f);
             }
@@ -1244,13 +1882,22 @@ void RenderThread::drawFrame() {
     }
 
     egl_.swapBuffers();
-    const uint32_t frameDraws = previewMode_ == 0 ? 4u
-        : ((debugView_ == 1 || (previewMode_ == 1 && debugView_ == 3)) ? 3u : 2u);
+    uint32_t frameDraws = 2;
+    if (previewMode_ == 0 || previewMode_ == 3) frameDraws += 2;
+    ++frameDraws;
+    if ((previewMode_ == 0 && (debugView_ == 1 || debugView_ == 6)) ||
+        (previewMode_ == 3 && debugView_ == 1) ||
+        (previewMode_ == 2 && debugView_ == 1) ||
+        (previewMode_ == 1 && (debugView_ == 1 || debugView_ == 3))) {
+        ++frameDraws;
+    }
     const uint32_t frameTris = previewMode_ == 0
         ? static_cast<uint32_t>(avatarMesh_.indexCount() / 3)
         : (previewMode_ == 2
             ? static_cast<uint32_t>(p1aMesh_.indexCount() / 3)
-            : static_cast<uint32_t>(anatomyMesh_.indexCount() / 3));
+            : (previewMode_ == 3
+                ? static_cast<uint32_t>(canonicalMesh_.indexCount() / 3)
+                : static_cast<uint32_t>(anatomyMesh_.indexCount() / 3)));
     stats_.endFrame(frameDraws, frameTris);
     if (stats_.frameCount() % 120 == 0) {
         PAE_LOGI("PAE_STATS", "%s", stats_.toString().c_str());

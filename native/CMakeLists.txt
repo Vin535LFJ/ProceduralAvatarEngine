@@ -15,7 +15,11 @@ set(PAE_CORE_SOURCES
     procedural/surfaces/ParametricSurfaces.cpp
     procedural/fusion/SdfFusion.cpp
     procedural/humanoid/Humanoid.cpp
+    procedural/humanoid/canonical/CanonicalTopology.cpp
+    procedural/humanoid/canonical/CanonicalSkinGenerator.cpp
+    procedural/humanoid/canonical/ContinuousSkinGenerator.cpp
     procedural/humanoid/FaceGenerator.cpp
+    procedural/humanoid/HeadAnatomy.cpp
     procedural/humanoid/HairGenerator.cpp
     procedural/humanoid/ClothingGenerator.cpp
     procedural/humanoid/anatomy/AnatomyField.cpp

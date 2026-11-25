@@ -1,0 +1,25 @@
+11-24 21:37:46.266 I/PAE_UI  (21638): debug extras: anatomy=false preset=0 view=7 outfit=-1
+11-24 21:37:46.266 I/PAE_RENDER(21638): geometry cache hit: canonical (112956 tris)
+11-24 21:37:48.969 I/PAE_RENDER(21638): applied previewMode=3
+11-24 21:37:48.969 I/PAE_RENDER(21638): applied cameraPreset=0
+11-24 21:37:48.969 I/PAE_RENDER(21638): applied debugView=7
+11-24 21:37:51.655 I/PAE_SURFACE(21638): surfaceDestroyed
+11-24 21:37:59.858 I/PAE_UI  (21638): debug extras: anatomy=false preset=0 view=7 outfit=-1
+11-24 21:37:59.919 I/PAE_SURFACE(21638): surfaceCreated
+11-24 21:37:59.919 I/PAE_SURFACE(21638): surfaceChanged 1920x1008
+11-24 21:37:59.920 I/PAE_GLCAPS(21638): GL_VERSION=OpenGL ES 3.2 v1.r18p0-01rel0.16f2a2e3305581ae54dd0f9788beb400
+11-24 21:37:59.920 I/PAE_GLCAPS(21638): GL_RENDERER=Mali-T860
+11-24 21:37:59.920 I/PAE_GLCAPS(21638): GL_VENDOR=ARM
+11-24 21:37:59.920 I/PAE_GLCAPS(21638): GLSL_VERSION=OpenGL ES GLSL ES 3.20
+11-24 21:37:59.920 I/PAE_GLCAPS(21638): MAX_VERTEX_UNIFORM_BLOCKS=12 MAX_TEXTURE_SIZE=8192 MAX_VERTEX_ATTRIBS=16
+11-24 21:37:59.928 I/PAE_RENDER(21638): geometry cache hit: avatar
+11-24 21:38:00.502 I/PAE_RENDER(21638): geometry cache hit: anatomy (40844 tris)
+11-24 21:38:00.893 I/PAE_RENDER(21638): geometry cache hit: p1a
+11-24 21:38:00.913 I/PAE_RENDER(21638): P1A-REPORT (cached) verts=870 tris=1664 components=1 boundary=80 nonmanifold=0 degenerate=0 badnorm=0 gen_ms=2.376 boundaries=4
+11-24 21:38:00.924 I/PAE_RENDER(21638): geometry cache hit: canonical (112956 tris)
+11-24 21:38:03.625 I/PAE_RENDER(21638): surface ready 1920x1008
+11-24 21:38:03.626 I/PAE_RENDER(21638): geometry cache hit: canonical (112956 tris)
+11-24 21:38:06.309 I/PAE_RENDER(21638): applied previewMode=3
+11-24 21:38:06.309 I/PAE_RENDER(21638): applied cameraPreset=0
+11-24 21:38:06.309 I/PAE_RENDER(21638): applied debugView=7
+pid=21638

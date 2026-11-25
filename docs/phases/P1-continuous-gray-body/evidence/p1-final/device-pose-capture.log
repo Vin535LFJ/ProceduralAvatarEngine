@@ -1,0 +1,435 @@
+Starting: Intent { flg=0x20000000 cmp=com.pae.host/.MainActivity (has extras) }
+Warning: Activity not started, its current task has been brought to the front
+
+=== action=2 preset=0 applied=1 ===
+--------- beginning of main
+11-25 02:35:32.017   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger expire 2 lines
+11-25 02:35:32.017   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:32.027   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:32.033   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:32.034   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:32.055   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:32.067   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:32.067   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:32.081   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:32.085   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:32.085   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:32.111   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:32.117   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:32.134   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:35:32.134   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:32.139   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:32.152   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:32.152   318   318 E HWComposer: getPresentFence failed for invalid display -1
+--------- beginning of system
+11-25 02:35:32.158   462 29775 D mgtv    : com.mgtv.app.state start ActivityStackSupervisor
+11-25 02:35:32.158   462 29775 I ActivityManager: START u0 {flg=0x30000000 cmp=com.pae.host/.MainActivity (has extras)} from uid 2000
+11-25 02:35:32.161   462 29775 D mgtv    : com.mgtv.app.state start activityStack
+11-25 02:35:32.167   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:32.169   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:32.170   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:32.173  6994  6994 I PAE_UI  : debug extras: anatomy=false preset=0 view=0 outfit=-1
+11-25 02:35:32.182  6994  7013 I PAE_RENDER: geometry cache hit: canonical (115300 tris)
+11-25 02:35:32.182  6994  6994 W PAE_POSE: camera selector FRONT failed: Provided camera selector unable to resolve a camera for the given use case
+11-25 02:35:32.183  6994  6994 W PAE_POSE: camera selector BACK failed: Provided camera selector unable to resolve a camera for the given use case
+11-25 02:35:32.183  6994  6994 W PAE_POSE: camera selector ANY failed: Provided camera selector unable to resolve a camera for the given use case
+11-25 02:35:32.183  6994  6994 E PAE_POSE: no camera resolved on this device; synthetic provider stays active
+11-25 02:35:32.185   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:32.185   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:32.193   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:33.097   340 25688 I chatty  : uid=1046(mediacodec) omx_enc_input identical 10 lines
+11-25 02:35:33.197   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:34.124   969  1503 I MgtvP2pManager: 2026-11-25 02:35:34.123 [MGDS:I<1508>]-[EasyCacheManager.cpp:732<freeMemCacheIfNeeded>] > freeMemCacheIfNeeded by timing, sysSize:800/1957(MB), limitSize:160.00 MB, cachedSize:0 B
+11-25 02:35:34.128   969  1503 I MgtvP2pManager: 2026-11-25 02:35:34.128 [MGDS:I<1508>]-[EasyCacheManager.cpp:781<deleteFileIfNeeded>] > deleteFileIfNeeded by timing, sysSize:8253/11021(MB), limitSize:256.00 MB, cachedSize:83.33 MB
+11-25 02:35:34.916   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:34.916   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:34.927   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:34.950  6994  7013 I PAE_RENDER: canonical body ready: verts=57652 tris=115300 render_verts=345900 uv_charts=115300 gen_ms=2769
+11-25 02:35:34.950  6994  7013 I PAE_RENDER: applied previewMode=3
+11-25 02:35:34.950  6994  7013 I PAE_RENDER: applied cameraPreset=0
+11-25 02:35:34.950  6994  7013 I PAE_RENDER: applied debugView=0
+11-25 02:35:34.983   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:34.983   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:34.998   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:35.007   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:35.022   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:35:35.022   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:35.029   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:35.034   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:35.034   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:35.058   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:35.067   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:35.067   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:35.085   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:35.101   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:35.101   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:35.112   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:35.120   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:35.132   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:35:35.133   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:35.140   969  1503 I MgtvP2pManager: 2026-11-25 02:35:35.139 [MGDS:I<1507>]-[EasySignalHelper.cpp:297<reportUploadInfo>] > [signal], reportUploadInfo
+11-25 02:35:35.144   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:35.167   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:35.167   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:35.170   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:35.191   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:35.191   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:35.197   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:35.206   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:35.206   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:35.227   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:35.234   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:35.251   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:35:35.251   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:35.256   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:35.271   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:35.283   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:35:35.284   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:35.284   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:35.315   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:35.317   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:35.334   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:35:35.334   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:35.342   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:35.352   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:35.368   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:35:35.369   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:35.371   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:35.385   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:35.385   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:35.400   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:35.401   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:35.417   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:35:35.417   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:35.428   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:35.451   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:35.451   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:35.455   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+Starting: Intent { flg=0x20000000 cmp=com.pae.host/.MainActivity (has extras) }
+Warning: Activity not started, its current task has been brought to the front
+
+=== action=2 preset=4 applied=1 ===
+--------- beginning of main
+11-25 02:35:40.351   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:40.351   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:40.364   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:40.384   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:40.384   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:40.391   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:40.401   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:40.418   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:35:40.418   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:40.420   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:40.435   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:40.435   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:40.448   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+--------- beginning of system
+11-25 02:35:40.451   462 29775 D mgtv    : com.mgtv.app.state start ActivityStackSupervisor
+11-25 02:35:40.452   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:40.452   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:40.453   462 29775 I ActivityManager: START u0 {flg=0x30000000 cmp=com.pae.host/.MainActivity (has extras)} from uid 2000
+11-25 02:35:40.456   462 29775 D mgtv    : com.mgtv.app.state start activityStack
+11-25 02:35:40.458  6994  6994 I PAE_UI  : debug extras: anatomy=false preset=4 view=0 outfit=-1
+11-25 02:35:40.467  6994  7013 I PAE_RENDER: geometry cache hit: canonical (115300 tris)
+11-25 02:35:40.468   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:40.468   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:40.468  6994  6994 W PAE_POSE: camera selector FRONT failed: Provided camera selector unable to resolve a camera for the given use case
+11-25 02:35:40.468  6994  6994 W PAE_POSE: camera selector BACK failed: Provided camera selector unable to resolve a camera for the given use case
+11-25 02:35:40.469  6994  6994 W PAE_POSE: camera selector ANY failed: Provided camera selector unable to resolve a camera for the given use case
+11-25 02:35:40.469  6994  6994 E PAE_POSE: no camera resolved on this device; synthetic provider stays active
+11-25 02:35:40.477   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:41.380   340 25688 I chatty  : uid=1046(mediacodec) omx_enc_input identical 10 lines
+11-25 02:35:41.480   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:43.197   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:43.197   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:43.208   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:43.208   462   472 I zygote64: Background concurrent copying GC freed 170023(6MB) AllocSpace objects, 41(948KB) LOS objects, 42% free, 10MB/18MB, paused 199us total 135.290ms
+11-25 02:35:43.228  6994  7013 I PAE_RENDER: canonical body ready: verts=57652 tris=115300 render_verts=345900 uv_charts=115300 gen_ms=2761
+11-25 02:35:43.228  6994  7013 I PAE_RENDER: applied previewMode=3
+11-25 02:35:43.228  6994  7013 I PAE_RENDER: applied cameraPreset=4
+11-25 02:35:43.228  6994  7013 I PAE_RENDER: applied debugView=0
+11-25 02:35:43.266   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:43.266   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:43.279   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:43.284   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:43.300   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:35:43.300   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:43.309   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:43.316   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:43.334   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:35:43.334   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:43.338   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:43.367   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:43.367   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:43.368   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:43.383   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:43.383   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:43.398   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:43.401   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:43.419   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:35:43.419   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:43.426   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:43.433   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:43.433   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:43.454   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:43.467   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:43.467   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:43.483   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:43.486   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:43.499   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:35:43.500   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:43.510   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:43.533   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:43.533   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:43.537   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:43.550   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:43.550   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:43.565   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:43.567   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:43.584   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:35:43.584   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:43.591   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:43.601   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:43.616   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:35:43.616   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:43.618   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:43.646   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:43.650   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:43.667   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:35:43.667   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:43.673   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:43.684   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:43.684   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 1 line
+11-25 02:35:43.701   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:43.701   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:43.701   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:43.716   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 1 line
+11-25 02:35:43.716   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:43.729   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:43.750   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:43.750   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:43.756   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:43.767   318   318 E HWComposer: getPresentFence failed for invalid display -1
+Starting: Intent { flg=0x20000000 cmp=com.pae.host/.MainActivity (has extras) }
+Warning: Activity not started, its current task has been brought to the front
+
+=== action=4 preset=0 applied=1 ===
+--------- beginning of main
+11-25 02:35:48.751   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger expire 2 lines
+11-25 02:35:48.751   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:48.754   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:48.767   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:48.767   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:48.781   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:48.800   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:48.801   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:48.807   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:48.817   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:48.835   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:35:48.835   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:48.837   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:48.852   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:48.852   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:48.865   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+--------- beginning of system
+11-25 02:35:48.867   462 29775 D mgtv    : com.mgtv.app.state start ActivityStackSupervisor
+11-25 02:35:48.869   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:48.869   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:48.871   462 29775 I ActivityManager: START u0 {flg=0x30000000 cmp=com.pae.host/.MainActivity (has extras)} from uid 2000
+11-25 02:35:48.873   462 29775 D mgtv    : com.mgtv.app.state start activityStack
+11-25 02:35:48.877  6994  6994 I PAE_UI  : debug extras: anatomy=false preset=0 view=0 outfit=-1
+11-25 02:35:48.884  6994  7013 I PAE_RENDER: geometry cache hit: canonical (115300 tris)
+11-25 02:35:48.884   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:48.884   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:48.886  6994  6994 W PAE_POSE: camera selector FRONT failed: Provided camera selector unable to resolve a camera for the given use case
+11-25 02:35:48.887  6994  6994 W PAE_POSE: camera selector BACK failed: Provided camera selector unable to resolve a camera for the given use case
+11-25 02:35:48.887  6994  6994 W PAE_POSE: camera selector ANY failed: Provided camera selector unable to resolve a camera for the given use case
+11-25 02:35:48.888  6994  6994 E PAE_POSE: no camera resolved on this device; synthetic provider stays active
+11-25 02:35:48.893   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:48.994   340 25688 I chatty  : uid=1046(mediacodec) omx_enc_input identical 2 lines
+11-25 02:35:49.094   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:49.132   969  1503 I MgtvP2pManager: 2026-11-25 02:35:49.130 [MGDS:I<1508>]-[EasyCacheManager.cpp:732<freeMemCacheIfNeeded>] > freeMemCacheIfNeeded by timing, sysSize:808/1957(MB), limitSize:161.60 MB, cachedSize:0 B
+11-25 02:35:49.132   969  1503 I MgtvP2pManager: 2026-11-25 02:35:49.131 [MGDS:I<1508>]-[EasyCacheManager.cpp:781<deleteFileIfNeeded>] > deleteFileIfNeeded by timing, sysSize:8253/11021(MB), limitSize:256.00 MB, cachedSize:83.33 MB
+11-25 02:35:49.194   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:49.796   340 25688 I chatty  : uid=1046(mediacodec) omx_enc_input identical 6 lines
+11-25 02:35:49.896   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:51.632   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:51.632   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:51.643   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:51.656  6994  7013 I PAE_RENDER: canonical body ready: verts=57652 tris=115300 render_verts=345900 uv_charts=115300 gen_ms=2772
+11-25 02:35:51.656  6994  7013 I PAE_RENDER: applied previewMode=3
+11-25 02:35:51.656  6994  7013 I PAE_RENDER: applied cameraPreset=0
+11-25 02:35:51.656  6994  7013 I PAE_RENDER: applied debugView=0
+11-25 02:35:51.684   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:51.684   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:51.707   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:51.712   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:51.732   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:35:51.732   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:51.739   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:51.744   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:51.759   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:35:51.760   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:51.772   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:51.783   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:51.783   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:51.800   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:51.818   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:51.818   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:51.826   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:51.836   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:51.850   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:35:51.850   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:51.856   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:51.867   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:51.867   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:51.887   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:51.903   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:51.903   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:51.914   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:51.920   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:51.934   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:35:51.934   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:51.947   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:51.968   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:51.968   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:51.973   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:51.984   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:51.985   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:52.001   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:52.002   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:52.018   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:35:52.018   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:52.029   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:52.034   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:52.034   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:52.056   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:52.067   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:52.067   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:52.083   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:52.084   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:52.102   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:35:52.102   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:52.111   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:52.118   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:52.134   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:35:52.134   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:52.138   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:52.167   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:52.167   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:52.167   318   318 E HWComposer: getPresentFence failed for invalid display -1
+Starting: Intent { flg=0x20000000 cmp=com.pae.host/.MainActivity (has extras) }
+Warning: Activity not started, its current task has been brought to the front
+
+=== action=4 preset=4 applied=1 ===
+--------- beginning of main
+11-25 02:35:57.083   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger expire 2 lines
+11-25 02:35:57.084   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:57.093   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:57.117   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:57.117   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:57.119   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:57.136   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:57.137   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:57.147   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:57.152   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:57.170   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:35:57.170   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:57.177   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:57.183   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:57.184   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:57.205   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:57.217   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:57.218   318   318 E HWComposer: getPresentFence failed for invalid display -1
+--------- beginning of system
+11-25 02:35:57.230   462  1425 D mgtv    : com.mgtv.app.state start ActivityStackSupervisor
+11-25 02:35:57.230   462  1425 I ActivityManager: START u0 {flg=0x30000000 cmp=com.pae.host/.MainActivity (has extras)} from uid 2000
+11-25 02:35:57.231   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:57.234   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:57.234   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:57.239   462  1425 D mgtv    : com.mgtv.app.state start activityStack
+11-25 02:35:57.245  6994  6994 I PAE_UI  : debug extras: anatomy=false preset=4 view=0 outfit=-1
+11-25 02:35:57.250   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:57.250   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:57.254  6994  7013 I PAE_RENDER: geometry cache hit: canonical (115300 tris)
+11-25 02:35:57.257  6994  6994 W PAE_POSE: camera selector FRONT failed: Provided camera selector unable to resolve a camera for the given use case
+11-25 02:35:57.257  6994  6994 W PAE_POSE: camera selector BACK failed: Provided camera selector unable to resolve a camera for the given use case
+11-25 02:35:57.257  6994  6994 W PAE_POSE: camera selector ANY failed: Provided camera selector unable to resolve a camera for the given use case
+11-25 02:35:57.258  6994  6994 E PAE_POSE: no camera resolved on this device; synthetic provider stays active
+11-25 02:35:57.260   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:57.862   340 25688 I chatty  : uid=1046(mediacodec) omx_enc_input identical 7 lines
+11-25 02:35:57.962   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:58.023   969   969 I YouthModeManager: refreshClockTime-1
+11-25 02:35:58.062   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:58.163   340 25688 I chatty  : uid=1046(mediacodec) omx_enc_input identical 1 line
+11-25 02:35:58.263   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:35:59.999   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:35:59.999   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:36:00.004   969   969 I Launcher-MguiDataManager:: onReceive: android.intent.action.TIME_TICK
+11-25 02:36:00.010   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:36:00.039  6994  7013 I PAE_RENDER: canonical body ready: verts=57652 tris=115300 render_verts=345900 uv_charts=115300 gen_ms=2785
+11-25 02:36:00.039  6994  7013 I PAE_RENDER: applied previewMode=3
+11-25 02:36:00.039  6994  7013 I PAE_RENDER: applied cameraPreset=4
+11-25 02:36:00.039  6994  7013 I PAE_RENDER: applied debugView=0
+11-25 02:36:00.066   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:36:00.066   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:36:00.079   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:36:00.099   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:36:00.100   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:36:00.107   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:36:00.119   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:36:00.133   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:36:00.133   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:36:00.136   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:36:00.167   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:36:00.168   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:36:00.193   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:36:00.193   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:36:00.195   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:36:00.202   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:36:00.216   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:36:00.216   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:36:00.226   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:36:00.252   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:36:00.252   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:36:00.257   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:36:00.266   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:36:00.266   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:36:00.286   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:36:00.301   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:36:00.301   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:36:00.312   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:36:00.316   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:36:00.316   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:36:00.339   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:36:00.349   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:36:00.369   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:36:00.369   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:36:00.369   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:36:00.382   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:36:00.383   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:36:00.399   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:36:00.399   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:36:00.399   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:36:00.426   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:36:00.435   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:36:00.449   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:36:00.450   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:36:00.455   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:36:00.466   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:36:00.466   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:36:00.482   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:36:00.499   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:36:00.499   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:36:00.509   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:36:00.516   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:36:00.533   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:36:00.533   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:36:00.537   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:36:00.549   318   318 E HWComposer: getPresentFence failed for invalid display -1
+Starting: Intent { flg=0x20000000 cmp=com.pae.host/.MainActivity (has extras) }
+Warning: Activity not started, its current task has been brought to the front
+3067f571048adf887cdd992a8682d0257f6a93ebb80b02aae945dbe5cc1dd028 *docs/phases/P1-continuous-gray-body/evidence/p1-final/visual-pose2-preset0.png
+cefe089f0167e0d6154d5b14a67329b653eabf2bd366fd96d779c3beeb6caa6d *docs/phases/P1-continuous-gray-body/evidence/p1-final/visual-pose2-preset4.png
+5dc86b9dad3d1eea6c9f044995e7ba40dea74c30e907fb20aa2ccc16b3250c04 *docs/phases/P1-continuous-gray-body/evidence/p1-final/visual-pose4-preset0.png
+6c07e3dd7a5b0ce74841c946cc840e1eb82dd0d2df07d0f953934391459091cc *docs/phases/P1-continuous-gray-body/evidence/p1-final/visual-pose4-preset4.png

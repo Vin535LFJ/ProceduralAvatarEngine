@@ -17,10 +17,13 @@ PoseResult computePose(const Skeleton& skeleton,
                        const std::array<Quat, BoneCount>& localRotations);
 
 // CPU reference used to validate the GLSL linear blend skinning formula.
+Mat3 modelNormalMatrix(const Mat4& model);
 std::vector<Vec3> cpuSkinPositions(const MeshData& mesh,
-                                   const std::array<Mat4, BoneCount>& palette);
+                                   const std::array<Mat4, BoneCount>& palette,
+                                   const Mat4& model = Mat4{});
 std::vector<Vec3> cpuSkinNormals(const MeshData& mesh,
-                                 const std::array<Mat4, BoneCount>& palette);
+                                 const std::array<Mat4, BoneCount>& palette,
+                                 const Mat4& model = Mat4{});
 
 // std140 layout helper: mat4[22], 64 bytes each, column-major.
 class BonePaletteUboData {

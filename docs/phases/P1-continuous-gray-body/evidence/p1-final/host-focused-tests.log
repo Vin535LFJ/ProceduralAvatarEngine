@@ -1,0 +1,10 @@
+Internal ctest changing into directory: E:/AI-Tools/ProceduralAvatarEngine-poc-sm/build-host
+Test project E:/AI-Tools/ProceduralAvatarEngine-poc-sm/build-host
+    Start 7: pae_canonical_skin_tests
+1/2 Test #7: pae_canonical_skin_tests .........   Passed   53.21 sec
+    Start 9: pae_skinning_tests
+2/2 Test #9: pae_skinning_tests ...............   Passed   10.52 sec
+
+100% tests passed, 0 tests failed out of 2
+
+Total Test time (real) =  63.74 sec

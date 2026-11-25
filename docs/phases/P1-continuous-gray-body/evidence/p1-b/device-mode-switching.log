@@ -1,0 +1,5 @@
+11-24 20:36:48.999 19837 19855 I PAE_RENDER: applied previewMode=0
+11-24 20:36:49.410 19837 19855 I PAE_RENDER: applied previewMode=1
+11-24 20:36:49.425 19837 19855 I PAE_RENDER: applied previewMode=2
+11-24 20:36:49.426 19837 19855 I PAE_RENDER: geometry cache hit: canonical (112956 tris)
+11-24 20:36:52.134 19837 19855 I PAE_RENDER: applied previewMode=3

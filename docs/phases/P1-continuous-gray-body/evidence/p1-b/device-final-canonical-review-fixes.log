@@ -1,0 +1,22 @@
+--------- beginning of system
+--------- beginning of main
+11-24 21:55:08.052 I/PAE_UI  (22343): debug extras: anatomy=false preset=0 view=7 outfit=-1
+11-24 21:55:08.265 I/PAE_SURFACE(22343): surfaceCreated
+11-24 21:55:08.266 I/PAE_SURFACE(22343): surfaceChanged 1920x1008
+11-24 21:55:08.267 I/PAE_GLCAPS(22343): GL_VERSION=OpenGL ES 3.2 v1.r18p0-01rel0.16f2a2e3305581ae54dd0f9788beb400
+11-24 21:55:08.267 I/PAE_GLCAPS(22343): GL_RENDERER=Mali-T860
+11-24 21:55:08.267 I/PAE_GLCAPS(22343): GL_VENDOR=ARM
+11-24 21:55:08.267 I/PAE_GLCAPS(22343): GLSL_VERSION=OpenGL ES GLSL ES 3.20
+11-24 21:55:08.267 I/PAE_GLCAPS(22343): MAX_VERTEX_UNIFORM_BLOCKS=12 MAX_TEXTURE_SIZE=8192 MAX_VERTEX_ATTRIBS=16
+11-24 21:55:13.381 I/PAE_RENDER(22343): geometry generated: avatar
+11-24 21:55:18.113 I/PAE_RENDER(22343): anatomy preview ready: 40844 tris, 4114 ms
+11-24 21:55:18.537 I/PAE_RENDER(22343): P1A-REPORT verts=870 tris=1664 components=1 boundary=80 nonmanifold=0 degenerate=0 badnorm=0 gen_ms=2.369 boundaries=4
+11-24 21:55:18.548 I/PAE_RENDER(22343): surface ready 1920x1008
+11-24 21:55:23.808 I/PAE_RENDER(22343): quality=Medium triangles=53756 vertices=27898
+11-24 21:55:43.936 I/PAE_RENDER(22343): canonical body ready: verts=56476 tris=112956 boundary=0 nonmanifold=0 degen=0 weights_bad=0 render_verts=338868 uv_charts=112956 gen_ms=20123
+11-24 21:55:47.699 I/PAE_RENDER(22343): P1B-GPU-CPU case=bind vertices=338868 max_pos_m=5.96235566e-07 mean_pos_m=7.92283785e-08 max_normal_deg=0.0279764533 abnormal_normals=0 invalid_positions=0 invalid_normals=0 result=ok
+11-24 21:55:49.037 I/PAE_RENDER(22343): P1B-GPU-CPU case=elbow85_knee80 vertices=338868 max_pos_m=5.96235566e-07 mean_pos_m=8.24018827e-08 max_normal_deg=0.0395646803 abnormal_normals=0 invalid_positions=0 invalid_normals=0 result=ok
+11-24 21:55:50.378 I/PAE_RENDER(22343): P1B-GPU-CPU case=elbow85_knee80_scale_2_0.5_3 vertices=338868 max_pos_m=5.17050978e-07 mean_pos_m=8.71766943e-08 max_normal_deg=0.0395646803 abnormal_normals=0 invalid_positions=0 invalid_normals=0 result=ok
+11-24 21:55:50.439 I/PAE_RENDER(22343): applied previewMode=3
+11-24 21:55:50.439 I/PAE_RENDER(22343): applied cameraPreset=0
+11-24 21:55:50.439 I/PAE_RENDER(22343): applied debugView=7

@@ -1,0 +1,16 @@
+.workbuddy-ai/memory/2026-11-24.md
+docs/phases/P1-continuous-gray-body/evidence/p0/branch.txt
+docs/phases/P1-continuous-gray-body/evidence/p0/commit.txt
+docs/phases/P1-continuous-gray-body/evidence/p0/diff-stat.txt
+docs/phases/P1-continuous-gray-body/evidence/p0/head.txt
+docs/phases/P1-continuous-gray-body/evidence/p0/snapshot-time.txt
+docs/phases/P1-continuous-gray-body/evidence/p0/staged.patch
+docs/phases/P1-continuous-gray-body/evidence/p0/status.txt
+docs/phases/P1-continuous-gray-body/evidence/p0/untracked.txt
+docs/phases/P1-continuous-gray-body/evidence/p0/working-tree.patch
+evidence/character-v6/anatomy-clay.png
+evidence/character-v6/anatomy-shoulder.png
+evidence/character-v7/face.png
+evidence/character-v7/front.png
+native/procedural/humanoid/HeadAnatomy.cpp
+native/procedural/humanoid/HeadAnatomy.h

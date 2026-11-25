@@ -1,0 +1,24 @@
+[ RUN ] p1a1_different_density_boundaries_resample_by_arc_length
+[  OK ] p1a1_different_density_boundaries_resample_by_arc_length
+[ RUN ] p1a1_intersecting_regions_weld_to_one_component
+[  OK ] p1a1_intersecting_regions_weld_to_one_component
+[ RUN ] p1a1_seam_weights_merge_by_bone_and_top4
+[  OK ] p1a1_seam_weights_merge_by_bone_and_top4
+[ RUN ] p1a1_uv_seam_render_mapping_preserves_canonical_id
+[  OK ] p1a1_uv_seam_render_mapping_preserves_canonical_id
+[ RUN ] p1a1_curved_surface_has_ordered_boundaries_and_valid_weights
+[  OK ] p1a1_curved_surface_has_ordered_boundaries_and_valid_weights
+[ RUN ] p1a2_full_body_is_one_closed_canonical_shell
+[I/PAE_GEOMETRY] P1 continuous skin: verts=44508 tris=89020 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 weights_bad=0 holes=0 extraction_ms=2252.1 weight_ms=44.8 total_ms=2671.0
+P1A2-TOPO verts=44508 tris=89020 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 weights_bad=0 total_ms=2671.0
+P1A2-HEAD vertices=506 failures=0 min_weight=0.7417
+[  OK ] p1a2_full_body_is_one_closed_canonical_shell
+[ RUN ] p1a2_quality_levels_are_closed
+[I/PAE_GEOMETRY] P1 continuous skin: verts=44508 tris=89020 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 weights_bad=0 holes=0 extraction_ms=2754.3 weight_ms=46.1 total_ms=3222.2
+P1A2-QUALITY detail=0 verts=44508 tris=89020 components=1 boundary=0 nonmanifold=0 degen=0 total_ms=3222.2
+[I/PAE_GEOMETRY] P1 continuous skin: verts=56476 tris=112956 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 weights_bad=0 holes=2 extraction_ms=3638.7 weight_ms=78.7 total_ms=4277.9
+P1A2-QUALITY detail=1 verts=56476 tris=112956 components=1 boundary=0 nonmanifold=0 degen=0 total_ms=4277.9
+[I/PAE_GEOMETRY] P1 continuous skin: verts=70390 tris=140784 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 weights_bad=0 holes=4 extraction_ms=4952.7 weight_ms=74.0 total_ms=5738.2
+P1A2-QUALITY detail=2 verts=70390 tris=140784 components=1 boundary=0 nonmanifold=0 degen=0 total_ms=5738.2
+[  OK ] p1a2_quality_levels_are_closed
+7 cases, 0 failures

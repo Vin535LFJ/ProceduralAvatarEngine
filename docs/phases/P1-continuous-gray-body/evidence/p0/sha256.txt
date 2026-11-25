@@ -1,0 +1,4 @@
+8660f9731017767c6d2151dffcf05862272eddb22463837aac9cd0219ce1c2d6 *E:/AI-Tools/ProceduralAvatarEngine-poc-sm/docs/phases/P1-continuous-gray-body/evidence/p0/working-tree.patch
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 *E:/AI-Tools/ProceduralAvatarEngine-poc-sm/docs/phases/P1-continuous-gray-body/evidence/p0/staged.patch
+51e90a059c491a0d8a40954da1254b7c93018edc87a80fa61ad598f1d08d2923 *E:/AI-Tools/ProceduralAvatarEngine-poc-sm/docs/phases/P1-continuous-gray-body/evidence/p0/status.txt
+04b79c7267036aa5302ae7e848142c3531bd12a371f7bcf58f83e7dba23481f3 *E:/AI-Tools/ProceduralAvatarEngine-poc-sm/docs/phases/P1-continuous-gray-body/evidence/p0/untracked.txt

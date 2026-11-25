@@ -1,0 +1,894 @@
+Starting: Intent { flg=0x20000000 cmp=com.pae.host/.MainActivity (has extras) }
+Warning: Activity not started, its current task has been brought to the front
+
+=== previewMode=0 applied=1 ===
+--------- beginning of main
+11-25 02:33:19.222   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:19.247   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:19.250   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:19.250   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:19.274   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:19.283   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:19.300   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:33:19.300   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:19.300   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:19.316   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:19.316   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:19.331   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:19.337   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:19.350   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:33:19.350   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:19.359   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+--------- beginning of system
+11-25 02:33:19.381   462  1425 D mgtv    : com.mgtv.app.state start ActivityStackSupervisor
+11-25 02:33:19.381   462  1425 I ActivityManager: START u0 {flg=0x30000000 cmp=com.pae.host/.MainActivity (has extras)} from uid 2000
+11-25 02:33:19.383   462  1425 D mgtv    : com.mgtv.app.state start activityStack
+11-25 02:33:19.383   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:19.383   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:19.385  6994  6994 I PAE_UI  : debug extras: anatomy=false preset=0 view=0 outfit=-1
+11-25 02:33:19.385   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:19.400   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:19.400   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:19.411  6994  6994 W PAE_POSE: camera selector FRONT failed: Provided camera selector unable to resolve a camera for the given use case
+11-25 02:33:19.411  6994  6994 W PAE_POSE: camera selector BACK failed: Provided camera selector unable to resolve a camera for the given use case
+11-25 02:33:19.412  6994  6994 W PAE_POSE: camera selector ANY failed: Provided camera selector unable to resolve a camera for the given use case
+11-25 02:33:19.412  6994  6994 E PAE_POSE: no camera resolved on this device; synthetic provider stays active
+11-25 02:33:19.414   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:20.316   340 25688 I chatty  : uid=1046(mediacodec) omx_enc_input identical 10 lines
+11-25 02:33:20.417   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:22.134   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:22.134   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:22.146   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:23.048   340 25688 I chatty  : uid=1046(mediacodec) omx_enc_input identical 9 lines
+11-25 02:33:23.149   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:25.109  6994  7013 I PAE_GEOMETRY: generateHumanoid: 30961 verts, 59408 tris, 5722.36 ms, detail=2
+11-25 02:33:25.721  6994  7013 I PAE_RENDER: applied previewMode=0
+11-25 02:33:25.721  6994  7013 I PAE_RENDER: applied cameraPreset=0
+11-25 02:33:25.721  6994  7013 I PAE_RENDER: applied debugView=0
+11-25 02:33:25.766   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:25.767   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:25.784   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:25.791   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:25.801   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:33:25.801   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:25.815   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:25.817   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:25.817   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:25.841   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:25.852   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:25.865   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:33:25.866   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:25.869   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:25.899   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:25.900   318   318 E HWComposer: getPresentFence failed for invalid display -1
+WINDOW MANAGER WINDOWS (dumpsys window windows)
+  Window #0 Window{21998c5 u0 com.pae.host/com.pae.host.MainActivity}:
+    mDisplayId=0 stackId=1 mSession=Session{d63030e 6994:u0a10033} mClient=android.os.BinderProxy@c2ac33c
+    mOwnerUid=10033 mShowToOwnerOnly=true package=com.pae.host appop=NONE
+    mAttrs=WM.LayoutParams{(0,0)(fillxfill) sim=#120 ty=1 fl=#81810100 pfl=0x20000 fmt=-3 wanim=0x10302f6 vsysui=0x600 needsMenuKey=2 colorMode=0}
+    Requested w=1920 h=1080 mLayoutSeq=6403
+    mBaseLayer=21000 mSubLayer=0 mAnimLayer=21015+0=21015 mLastLayer=21015
+    mToken=AppWindowToken{cd8a3a4 token=Token{16a465e ActivityRecord{7ebb399 u0 com.pae.host/.MainActivity t811}}}
+    mAppToken=AppWindowToken{cd8a3a4 token=Token{16a465e ActivityRecord{7ebb399 u0 com.pae.host/.MainActivity t811}}}
+     isAnimatingWithSavedSurface()=false mAppDied=false    drawnStateEvaluated=true    mightAffectAllDrawn=true
+    mViewVisibility=0x0 mHaveFrame=true mObscured=false
+    mSeq=0 mSystemUiVisibility=0x600
+    mGivenContentInsets=[0,0][0,0] mGivenVisibleInsets=[0,0][0,0]
+    mFullConfiguration={1.0 ?mcc?mnc [zh_CN] ldltr sw720dp w1280dp h720dp 240dpi xlrg long land television -touch -keyb/v/h dpad/v appBounds=Rect(0, 0 - 1920, 1080) s.3}
+    mLastReportedConfiguration={1.0 ?mcc?mnc [zh_CN] ldltr sw720dp w1280dp h720dp 240dpi xlrg long land television -touch -keyb/v/h dpad/v appBounds=Rect(0, 0 - 1920, 1080) s.3}
+    mHasSurface=true mShownPosition=[0,0] isReadyForDisplay()=true hasSavedSurface()=false mWindowRemovalAllowed=false
+    mFrame=[0,0][1920,1080] last=[0,0][1920,1080]
+    Frames: containing=[0,0][1920,1080] parent=[0,0][1920,1080]
+        display=[0,0][1920,1080] overscan=[0,0][1920,1080]
+        content=[0,0][1920,1080] visible=[0,0][1920,1080]
+        decor=[0,0][1920,1080]
+        outset=[0,0][0,0]
+    Cur insets: overscan=[0,0][0,0] content=[0,0][0,0] visible=[0,0][0,0] stable=[0,0][0,0] surface=[0,0][0,0] outsets=[0,0][0,0]
+    Lst insets: overscan=[0,0][0,0] content=[0,0][0,0] visible=[0,0][0,0] stable=[0,0][0,0] physical=[0,0][0,0] outset=[0,0][0,0]
+    WindowStateAnimator{7318ec3 com.pae.host/com.pae.host.MainActivity}:
+      mSurface=Surface(name=com.pae.host/com.pae.host.MainActivity)
+      Surface: shown=true layer=21015 alpha=1.0 rect=(0.0,0.0) 1920.0 x 1080.0 transform=(1.0, 0.0, 1.0, 0.0)
+      mDrawState=HAS_DRAWN       mLastHidden=false
+      mSystemDecorRect=[0,0][1920,1080] last=[0,0][0,0] mHasClipRect=false mLastClipRect=[0,0][1920,1080]
+    isOnScreen=true
+    isVisible=true
+  Window #1 Window{d42df80 u0 com.mgtv.mgui/com.mgtv.mgui.ChannelHomeActivity}:
+    mDisplayId=0 stackId=1 mSession=Session{70b76a8 969:u0a10043} mClient=android.os.BinderProxy@e845403
+    mOwnerUid=10043 mShowToOwnerOnly=true package=com.mgtv.mgui appop=NONE
+    mAttrs=WM.LayoutParams{(0,0)(fillxfill) sim=#20 ty=1 fl=#1810580 pfl=0x20000 fmt=-3 vsysui=0x400 needsMenuKey=2 colorMode=0}
+    Requested w=1920 h=1080 mLayoutSeq=6393
+    mBaseLayer=21000 mSubLayer=0 mAnimLayer=21010+0=21010 mLastLayer=21010
+    mToken=AppWindowToken{bcfca6f token=Token{ea45f02 ActivityRecord{af9f84d u0 com.mgtv.mgui/.ChannelHomeActivity t664}}}
+    mAppToken=AppWindowToken{bcfca6f token=Token{ea45f02 ActivityRecord{af9f84d u0 com.mgtv.mgui/.ChannelHomeActivity t664}}}
+     isAnimatingWithSavedSurface()=false mAppDied=false    drawnStateEvaluated=true    mightAffectAllDrawn=true
+    mViewVisibility=0x8 mHaveFrame=true mObscured=false
+    mSeq=0 mSystemUiVisibility=0x400
+    mGivenContentInsets=[0,0][0,0] mGivenVisibleInsets=[0,0][0,0]
+    mFullConfiguration={1.0 ?mcc?mnc [zh_CN] ldltr sw720dp w1280dp h720dp 240dpi xlrg long land television -touch -keyb/v/h dpad/v appBounds=Rect(0, 0 - 1920, 1080) s.3}
+    mLastReportedConfiguration={1.0 ?mcc?mnc [zh_CN] ldltr sw720dp w1280dp h720dp 240dpi xlrg long land television -touch -keyb/v/h dpad/v appBounds=Rect(0, 0 - 1920, 1080) s.3}
+    mHasSurface=false mShownPosition=[0,0] isReadyForDisplay()=false hasSavedSurface()=false mWindowRemovalAllowed=false
+    mFrame=[0,0][1920,1080] last=[0,0][1920,1080]
+    Frames: containing=[0,0][1920,1080] parent=[0,0][1920,1080]
+        display=[0,0][1920,1080] overscan=[0,0][1920,1080]
+        content=[0,0][1920,1080] visible=[0,0][1920,1080]
+        decor=[0,0][1920,1080]
+        outset=[0,0][1920,1080]
+    Cur insets: overscan=[0,0][0,0] content=[0,0][0,0] visible=[0,0][0,0] stable=[0,0][0,0] surface=[0,0][0,0] outsets=[0,0][0,0]
+    Lst insets: overscan=[0,0][0,0] content=[0,0][0,0] visible=[0,0][0,0] stable=[0,0][0,0] physical=[0,0][0,0] outset=[0,0][0,0]
+    WindowStateAnimator{4ac7580 com.mgtv.mgui/com.mgtv.mgui.ChannelHomeActivity}:
+      mDrawState=NO_SURFACE       mLastHidden=true
+      mSystemDecorRect=[0,0][1920,1080] last=[0,0][0,0] mHasClipRect=false mLastClipRect=[0,0][1920,1080]
+    isOnScreen=false
+    isVisible=false
+  Window #2 Window{e3378f7 u0 com.mgtv.myapp/com.mgtv.myapp.view.activity.AppManagerActivity}:
+    mDisplayId=0 stackId=1 mSession=Session{bbd53b8 1047:1000} mClient=android.os.BinderProxy@3501cf6
+    mOwnerUid=1000 mShowToOwnerOnly=true package=com.mgtv.myapp appop=NONE
+    mAttrs=WM.LayoutParams{(0,0)(fillxfill) sim=#20 ty=1 fl=#1810500 wanim=0x1030001 needsMenuKey=2 colorMode=0}
+    Requested w=1920 h=1080 mLayoutSeq=1759
+    mBaseLayer=21000 mSubLayer=0 mAnimLayer=21005+0=21005 mLastLayer=21010
+    mToken=AppWindowToken{fc210a0 token=Token{da6b888 ActivityRecord{4eb4c2b u0 com.mgtv.myapp/.view.activity.AppManagerActivity t666}}}
+    mAppToken=AppWindowToken{fc210a0 token=Token{da6b888 ActivityRecord{4eb4c2b u0 com.mgtv.myapp/.view.activity.AppManagerActivity t666}}}
+     isAnimatingWithSavedSurface()=false mAppDied=false    drawnStateEvaluated=true    mightAffectAllDrawn=true
+    mViewVisibility=0x8 mHaveFrame=true mObscured=false
+    mSeq=0 mSystemUiVisibility=0x0
+    mGivenContentInsets=[0,0][0,0] mGivenVisibleInsets=[0,0][0,0]
+    mFullConfiguration={1.0 ?mcc?mnc [zh_CN] ldltr sw720dp w1280dp h720dp 240dpi xlrg long land television -touch -keyb/v/h dpad/v appBounds=Rect(0, 0 - 1920, 1080) s.3}
+    mLastReportedConfiguration={1.0 ?mcc?mnc [zh_CN] ldltr sw720dp w1280dp h720dp 240dpi xlrg long land television -touch -keyb/v/h dpad/v appBounds=Rect(0, 0 - 1920, 1080) s.3}
+    mHasSurface=false mShownPosition=[0,0] isReadyForDisplay()=false hasSavedSurface()=false mWindowRemovalAllowed=false
+    mFrame=[0,0][1920,1080] last=[0,0][1920,1080]
+    Frames: containing=[0,0][1920,1080] parent=[0,0][1920,1080]
+        display=[0,0][1920,1080] overscan=[0,0][1920,1080]
+        content=[0,0][1920,1080] visible=[0,0][1920,1080]
+        decor=[0,0][1920,1080]
+        outset=[0,0][1920,1080]
+    Cur insets: overscan=[0,0][0,0] content=[0,0][0,0] visible=[0,0][0,0] stable=[0,0][0,0] surface=[0,0][0,0] outsets=[0,0][0,0]
+    Lst insets: overscan=[0,0][0,0] content=[0,0][0,0] visible=[0,0][0,0] stable=[0,0][0,0] physical=[0,0][0,0] outset=[0,0][0,0]
+    WindowStateAnimator{dde8203 com.mgtv.myapp/com.mgtv.myapp.view.activity.AppManagerActivity}:
+      mDrawState=NO_SURFACE       mLastHidden=true
+      mSystemDecorRect=[0,0][1920,1080] last=[0,0][0,0] mHasClipRect=false mLastClipRect=[0,0][1920,1080]
+    isOnScreen=false
+    isVisible=false
+  Window #3 Window{d4a6ca7 u0 com.mgtv.mgui/com.mgtv.mui.home.HomeActivity}:
+    mDisplayId=0 stackId=0 mSession=Session{70b76a8 969:u0a10043} mClient=android.os.BinderProxy@340d166
+    mOwnerUid=10043 mShowToOwnerOnly=true package=com.mgtv.mgui appop=NONE
+    mAttrs=WM.LayoutParams{(0,0)(fillxfill) sim=#120 ty=1 fl=#1810500 fmt=-2 wanim=0x1030001 vsysui=0x1006 needsMenuKey=2 colorMode=0}
+    Requested w=1920 h=1080 mLayoutSeq=6383
+    mBaseLayer=21000 mSubLayer=0 mAnimLayer=21000+0=21000 mLastLayer=21000
+    mToken=AppWindowToken{db9a091 token=Token{3ba9815 ActivityRecord{bddedcc u0 com.mgtv.mgui/com.mgtv.mui.home.HomeActivity t663}}}
+    mAppToken=AppWindowToken{db9a091 token=Token{3ba9815 ActivityRecord{bddedcc u0 com.mgtv.mgui/com.mgtv.mui.home.HomeActivity t663}}}
+     isAnimatingWithSavedSurface()=false mAppDied=false    drawnStateEvaluated=true    mightAffectAllDrawn=true
+    mViewVisibility=0x8 mHaveFrame=true mObscured=false
+    mSeq=0 mSystemUiVisibility=0x1006
+    mGivenContentInsets=[0,0][0,0] mGivenVisibleInsets=[0,0][0,0]
+    mFullConfiguration={1.0 ?mcc?mnc [zh_CN] ldltr sw720dp w1280dp h720dp 240dpi xlrg long land television -touch -keyb/v/h dpad/v appBounds=Rect(0, 0 - 1920, 1080) s.3}
+    mLastReportedConfiguration={1.0 ?mcc?mnc [zh_CN] ldltr sw720dp w1280dp h720dp 240dpi xlrg long land television -touch -keyb/v/h dpad/v appBounds=Rect(0, 0 - 1920, 1080) s.3}
+    mHasSurface=false mShownPosition=[0,0] isReadyForDisplay()=false hasSavedSurface()=false mWindowRemovalAllowed=false
+    mFrame=[0,0][1920,1080] last=[0,0][1920,1080]
+    Frames: containing=[0,0][1920,1080] parent=[0,0][1920,1080]
+        display=[0,0][1920,1080] overscan=[0,0][1920,1080]
+        content=[0,0][1920,1080] visible=[0,0][1920,1080]
+        decor=[0,0][1920,1080]
+        outset=[0,0][1920,1080]
+    Cur insets: overscan=[0,0][0,0] content=[0,0][0,0] visible=[0,0][0,0] stable=[0,0][0,0] surface=[0,0][0,0] outsets=[0,0][0,0]
+    Lst insets: overscan=[0,0][0,0] content=[0,0][0,0] visible=[0,0][0,0] stable=[0,0][0,0] physical=[0,0][0,0] outset=[0,0][0,0]
+    WindowStateAnimator{4c4b2b2 com.mgtv.mgui/com.mgtv.mui.home.HomeActivity}:
+      mDrawState=NO_SURFACE       mLastHidden=true
+      mSystemDecorRect=[0,0][1920,1080] last=[0,0][0,0] mHasClipRect=false mLastClipRect=[0,0][1920,1080]
+      mShownAlpha=1.0 mAlpha=1.0 mLastAlpha=0.0
+    isOnScreen=false
+    isVisible=false
+
+  mGlobalConfiguration={1.0 ?mcc?mnc [zh_CN] ldltr sw720dp w1280dp h720dp 240dpi xlrg long land television -touch -keyb/v/h dpad/v appBounds=Rect(0, 0 - 1920, 1080) s.3}
+  mHasPermanentDpad=true
+  mCurrentFocus=Window{21998c5 u0 com.pae.host/com.pae.host.MainActivity}
+  mFocusedApp=AppWindowToken{cd8a3a4 token=Token{16a465e ActivityRecord{7ebb399 u0 com.pae.host/.MainActivity t811}}}
+  mInTouchMode=true mLayoutSeq=6403
+  mLastDisplayFreezeDuration=0 due to Window{ceacd33 u0 com.mgtv.remote/com.mgtv.remote.system.FallbackHome}
+  mLastWakeLockHoldingWindow=null mLastWakeLockObscuringWindow=null
+  SnapshotCache
+  mSystemDecorLayer=0 mScreenRect=[0,0][1920,1080]
+  mTraversalScheduled=false
+  mHoldScreenWindow=null
+  mObscuringWindow=null
+  mWallpaperTarget=null
+  mLastWallpaperX=-1.0 mLastWallpaperY=-1.0
+  mSystemBooted=true mDisplayEnabled=true
+  mTransactionSequence=8063
+  mDisplayFrozen=false windows=0 client=false apps=0 waitingForConfig=false
+  mRotation=0 mAltOrientation=false
+  mLastWindowForcedOrientation=-1 mLastOrientation=-1
+  mDeferredRotationPauseCount=0
+  Animation settings: disabled=false window=1.0 transition=1.0 animator=1.0
+  mSkipAppTransitionAnimation=false
+  mLayoutToAnim:
+    mNextAppTransition=TRANSIT_UNSET
+    mAppTransitionState=APP_STATE_IDLE
+    mLastUsedAppTransition=TRANSIT_TASK_TO_FRONT
+    mLastOpeningApp=AppWindowToken{cd8a3a4 token=Token{16a465e ActivityRecord{7ebb399 u0 com.pae.host/.MainActivity t811}}}
+    mLastClosingApp=AppWindowToken{bcfca6f token=Token{ea45f02 ActivityRecord{af9f84d u0 com.mgtv.mgui/.ChannelHomeActivity t664}}}
+Starting: Intent { flg=0x20000000 cmp=com.pae.host/.MainActivity (has extras) }
+Warning: Activity not started, its current task has been brought to the front
+
+=== previewMode=1 applied=1 ===
+--------- beginning of main
+11-25 02:33:30.987   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.000   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:33:31.000   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.004   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:31.017   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.017   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.033   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:31.051   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.051   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.059   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:31.069   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.086   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:33:31.086   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.088   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+--------- beginning of system
+11-25 02:33:31.093   462  1425 D mgtv    : com.mgtv.app.state start ActivityStackSupervisor
+11-25 02:33:31.093   462  1425 I ActivityManager: START u0 {flg=0x30000000 cmp=com.pae.host/.MainActivity (has extras)} from uid 2000
+11-25 02:33:31.095   462  1425 D mgtv    : com.mgtv.app.state start activityStack
+11-25 02:33:31.102   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.103   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.107  6994  6994 I PAE_UI  : debug extras: anatomy=true preset=0 view=0 outfit=-1
+11-25 02:33:31.116   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:31.123  6994  6994 W PAE_POSE: camera selector FRONT failed: Provided camera selector unable to resolve a camera for the given use case
+11-25 02:33:31.124  6994  6994 W PAE_POSE: camera selector BACK failed: Provided camera selector unable to resolve a camera for the given use case
+11-25 02:33:31.124  6994  6994 W PAE_POSE: camera selector ANY failed: Provided camera selector unable to resolve a camera for the given use case
+11-25 02:33:31.124  6994  6994 E PAE_POSE: no camera resolved on this device; synthetic provider stays active
+11-25 02:33:31.134   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.134   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.142   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:31.343   340 25688 I chatty  : uid=1046(mediacodec) omx_enc_input identical 3 lines
+11-25 02:33:31.443   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:31.480  6994  7013 I PAE_RENDER: applied previewMode=1
+11-25 02:33:31.480  6994  7013 I PAE_RENDER: applied cameraPreset=0
+11-25 02:33:31.480  6994  7013 I PAE_RENDER: applied debugView=0
+11-25 02:33:31.501   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.501   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.512   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:31.518   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.535   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:33:31.535   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.539   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:31.552   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.552   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.568   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:31.584   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.584   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.595   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:31.601   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.617   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:33:31.617   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.623   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:31.650   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:31.651   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.668   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:33:31.668   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.678   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:31.684   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.700   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:33:31.701   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.706   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:31.717   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.717   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.733   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:31.751   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.751   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.760   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:31.767   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.784   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:33:31.784   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.786   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:31.801   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.801   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.813   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:31.817   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.818   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.839   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:31.851   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.851   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.866   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:31.867   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.884   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:33:31.884   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.891   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:31.900   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.917   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:33:31.918   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:31.918   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+WINDOW MANAGER WINDOWS (dumpsys window windows)
+  Window #0 Window{21998c5 u0 com.pae.host/com.pae.host.MainActivity}:
+    mDisplayId=0 stackId=1 mSession=Session{d63030e 6994:u0a10033} mClient=android.os.BinderProxy@c2ac33c
+    mOwnerUid=10033 mShowToOwnerOnly=true package=com.pae.host appop=NONE
+    mAttrs=WM.LayoutParams{(0,0)(fillxfill) sim=#120 ty=1 fl=#81810100 pfl=0x20000 fmt=-3 wanim=0x10302f6 vsysui=0x600 needsMenuKey=2 colorMode=0}
+    Requested w=1920 h=1080 mLayoutSeq=6404
+    mBaseLayer=21000 mSubLayer=0 mAnimLayer=21015+0=21015 mLastLayer=21015
+    mToken=AppWindowToken{cd8a3a4 token=Token{16a465e ActivityRecord{7ebb399 u0 com.pae.host/.MainActivity t811}}}
+    mAppToken=AppWindowToken{cd8a3a4 token=Token{16a465e ActivityRecord{7ebb399 u0 com.pae.host/.MainActivity t811}}}
+     isAnimatingWithSavedSurface()=false mAppDied=false    drawnStateEvaluated=true    mightAffectAllDrawn=true
+    mViewVisibility=0x0 mHaveFrame=true mObscured=false
+    mSeq=0 mSystemUiVisibility=0x600
+    mGivenContentInsets=[0,0][0,0] mGivenVisibleInsets=[0,0][0,0]
+    mFullConfiguration={1.0 ?mcc?mnc [zh_CN] ldltr sw720dp w1280dp h720dp 240dpi xlrg long land television -touch -keyb/v/h dpad/v appBounds=Rect(0, 0 - 1920, 1080) s.3}
+    mLastReportedConfiguration={1.0 ?mcc?mnc [zh_CN] ldltr sw720dp w1280dp h720dp 240dpi xlrg long land television -touch -keyb/v/h dpad/v appBounds=Rect(0, 0 - 1920, 1080) s.3}
+    mHasSurface=true mShownPosition=[0,0] isReadyForDisplay()=true hasSavedSurface()=false mWindowRemovalAllowed=false
+    mFrame=[0,0][1920,1080] last=[0,0][1920,1080]
+    Frames: containing=[0,0][1920,1080] parent=[0,0][1920,1080]
+        display=[0,0][1920,1080] overscan=[0,0][1920,1080]
+        content=[0,0][1920,1080] visible=[0,0][1920,1080]
+        decor=[0,0][1920,1080]
+        outset=[0,0][0,0]
+    Cur insets: overscan=[0,0][0,0] content=[0,0][0,0] visible=[0,0][0,0] stable=[0,0][0,0] surface=[0,0][0,0] outsets=[0,0][0,0]
+    Lst insets: overscan=[0,0][0,0] content=[0,0][0,0] visible=[0,0][0,0] stable=[0,0][0,0] physical=[0,0][0,0] outset=[0,0][0,0]
+    WindowStateAnimator{7318ec3 com.pae.host/com.pae.host.MainActivity}:
+      mSurface=Surface(name=com.pae.host/com.pae.host.MainActivity)
+      Surface: shown=true layer=21015 alpha=1.0 rect=(0.0,0.0) 1920.0 x 1080.0 transform=(1.0, 0.0, 1.0, 0.0)
+      mDrawState=HAS_DRAWN       mLastHidden=false
+      mSystemDecorRect=[0,0][1920,1080] last=[0,0][0,0] mHasClipRect=false mLastClipRect=[0,0][1920,1080]
+    isOnScreen=true
+    isVisible=true
+  Window #1 Window{d42df80 u0 com.mgtv.mgui/com.mgtv.mgui.ChannelHomeActivity}:
+    mDisplayId=0 stackId=1 mSession=Session{70b76a8 969:u0a10043} mClient=android.os.BinderProxy@e845403
+    mOwnerUid=10043 mShowToOwnerOnly=true package=com.mgtv.mgui appop=NONE
+    mAttrs=WM.LayoutParams{(0,0)(fillxfill) sim=#20 ty=1 fl=#1810580 pfl=0x20000 fmt=-3 vsysui=0x400 needsMenuKey=2 colorMode=0}
+    Requested w=1920 h=1080 mLayoutSeq=6393
+    mBaseLayer=21000 mSubLayer=0 mAnimLayer=21010+0=21010 mLastLayer=21010
+    mToken=AppWindowToken{bcfca6f token=Token{ea45f02 ActivityRecord{af9f84d u0 com.mgtv.mgui/.ChannelHomeActivity t664}}}
+    mAppToken=AppWindowToken{bcfca6f token=Token{ea45f02 ActivityRecord{af9f84d u0 com.mgtv.mgui/.ChannelHomeActivity t664}}}
+     isAnimatingWithSavedSurface()=false mAppDied=false    drawnStateEvaluated=true    mightAffectAllDrawn=true
+    mViewVisibility=0x8 mHaveFrame=true mObscured=false
+    mSeq=0 mSystemUiVisibility=0x400
+    mGivenContentInsets=[0,0][0,0] mGivenVisibleInsets=[0,0][0,0]
+    mFullConfiguration={1.0 ?mcc?mnc [zh_CN] ldltr sw720dp w1280dp h720dp 240dpi xlrg long land television -touch -keyb/v/h dpad/v appBounds=Rect(0, 0 - 1920, 1080) s.3}
+    mLastReportedConfiguration={1.0 ?mcc?mnc [zh_CN] ldltr sw720dp w1280dp h720dp 240dpi xlrg long land television -touch -keyb/v/h dpad/v appBounds=Rect(0, 0 - 1920, 1080) s.3}
+    mHasSurface=false mShownPosition=[0,0] isReadyForDisplay()=false hasSavedSurface()=false mWindowRemovalAllowed=false
+    mFrame=[0,0][1920,1080] last=[0,0][1920,1080]
+    Frames: containing=[0,0][1920,1080] parent=[0,0][1920,1080]
+        display=[0,0][1920,1080] overscan=[0,0][1920,1080]
+        content=[0,0][1920,1080] visible=[0,0][1920,1080]
+        decor=[0,0][1920,1080]
+        outset=[0,0][1920,1080]
+    Cur insets: overscan=[0,0][0,0] content=[0,0][0,0] visible=[0,0][0,0] stable=[0,0][0,0] surface=[0,0][0,0] outsets=[0,0][0,0]
+    Lst insets: overscan=[0,0][0,0] content=[0,0][0,0] visible=[0,0][0,0] stable=[0,0][0,0] physical=[0,0][0,0] outset=[0,0][0,0]
+    WindowStateAnimator{4ac7580 com.mgtv.mgui/com.mgtv.mgui.ChannelHomeActivity}:
+      mDrawState=NO_SURFACE       mLastHidden=true
+      mSystemDecorRect=[0,0][1920,1080] last=[0,0][0,0] mHasClipRect=false mLastClipRect=[0,0][1920,1080]
+    isOnScreen=false
+    isVisible=false
+  Window #2 Window{e3378f7 u0 com.mgtv.myapp/com.mgtv.myapp.view.activity.AppManagerActivity}:
+    mDisplayId=0 stackId=1 mSession=Session{bbd53b8 1047:1000} mClient=android.os.BinderProxy@3501cf6
+    mOwnerUid=1000 mShowToOwnerOnly=true package=com.mgtv.myapp appop=NONE
+    mAttrs=WM.LayoutParams{(0,0)(fillxfill) sim=#20 ty=1 fl=#1810500 wanim=0x1030001 needsMenuKey=2 colorMode=0}
+    Requested w=1920 h=1080 mLayoutSeq=1759
+    mBaseLayer=21000 mSubLayer=0 mAnimLayer=21005+0=21005 mLastLayer=21010
+    mToken=AppWindowToken{fc210a0 token=Token{da6b888 ActivityRecord{4eb4c2b u0 com.mgtv.myapp/.view.activity.AppManagerActivity t666}}}
+    mAppToken=AppWindowToken{fc210a0 token=Token{da6b888 ActivityRecord{4eb4c2b u0 com.mgtv.myapp/.view.activity.AppManagerActivity t666}}}
+     isAnimatingWithSavedSurface()=false mAppDied=false    drawnStateEvaluated=true    mightAffectAllDrawn=true
+    mViewVisibility=0x8 mHaveFrame=true mObscured=false
+    mSeq=0 mSystemUiVisibility=0x0
+    mGivenContentInsets=[0,0][0,0] mGivenVisibleInsets=[0,0][0,0]
+    mFullConfiguration={1.0 ?mcc?mnc [zh_CN] ldltr sw720dp w1280dp h720dp 240dpi xlrg long land television -touch -keyb/v/h dpad/v appBounds=Rect(0, 0 - 1920, 1080) s.3}
+    mLastReportedConfiguration={1.0 ?mcc?mnc [zh_CN] ldltr sw720dp w1280dp h720dp 240dpi xlrg long land television -touch -keyb/v/h dpad/v appBounds=Rect(0, 0 - 1920, 1080) s.3}
+    mHasSurface=false mShownPosition=[0,0] isReadyForDisplay()=false hasSavedSurface()=false mWindowRemovalAllowed=false
+    mFrame=[0,0][1920,1080] last=[0,0][1920,1080]
+    Frames: containing=[0,0][1920,1080] parent=[0,0][1920,1080]
+        display=[0,0][1920,1080] overscan=[0,0][1920,1080]
+        content=[0,0][1920,1080] visible=[0,0][1920,1080]
+        decor=[0,0][1920,1080]
+        outset=[0,0][1920,1080]
+    Cur insets: overscan=[0,0][0,0] content=[0,0][0,0] visible=[0,0][0,0] stable=[0,0][0,0] surface=[0,0][0,0] outsets=[0,0][0,0]
+    Lst insets: overscan=[0,0][0,0] content=[0,0][0,0] visible=[0,0][0,0] stable=[0,0][0,0] physical=[0,0][0,0] outset=[0,0][0,0]
+    WindowStateAnimator{dde8203 com.mgtv.myapp/com.mgtv.myapp.view.activity.AppManagerActivity}:
+      mDrawState=NO_SURFACE       mLastHidden=true
+      mSystemDecorRect=[0,0][1920,1080] last=[0,0][0,0] mHasClipRect=false mLastClipRect=[0,0][1920,1080]
+    isOnScreen=false
+    isVisible=false
+  Window #3 Window{d4a6ca7 u0 com.mgtv.mgui/com.mgtv.mui.home.HomeActivity}:
+    mDisplayId=0 stackId=0 mSession=Session{70b76a8 969:u0a10043} mClient=android.os.BinderProxy@340d166
+    mOwnerUid=10043 mShowToOwnerOnly=true package=com.mgtv.mgui appop=NONE
+    mAttrs=WM.LayoutParams{(0,0)(fillxfill) sim=#120 ty=1 fl=#1810500 fmt=-2 wanim=0x1030001 vsysui=0x1006 needsMenuKey=2 colorMode=0}
+    Requested w=1920 h=1080 mLayoutSeq=6383
+    mBaseLayer=21000 mSubLayer=0 mAnimLayer=21000+0=21000 mLastLayer=21000
+    mToken=AppWindowToken{db9a091 token=Token{3ba9815 ActivityRecord{bddedcc u0 com.mgtv.mgui/com.mgtv.mui.home.HomeActivity t663}}}
+    mAppToken=AppWindowToken{db9a091 token=Token{3ba9815 ActivityRecord{bddedcc u0 com.mgtv.mgui/com.mgtv.mui.home.HomeActivity t663}}}
+     isAnimatingWithSavedSurface()=false mAppDied=false    drawnStateEvaluated=true    mightAffectAllDrawn=true
+    mViewVisibility=0x8 mHaveFrame=true mObscured=false
+    mSeq=0 mSystemUiVisibility=0x1006
+    mGivenContentInsets=[0,0][0,0] mGivenVisibleInsets=[0,0][0,0]
+    mFullConfiguration={1.0 ?mcc?mnc [zh_CN] ldltr sw720dp w1280dp h720dp 240dpi xlrg long land television -touch -keyb/v/h dpad/v appBounds=Rect(0, 0 - 1920, 1080) s.3}
+    mLastReportedConfiguration={1.0 ?mcc?mnc [zh_CN] ldltr sw720dp w1280dp h720dp 240dpi xlrg long land television -touch -keyb/v/h dpad/v appBounds=Rect(0, 0 - 1920, 1080) s.3}
+    mHasSurface=false mShownPosition=[0,0] isReadyForDisplay()=false hasSavedSurface()=false mWindowRemovalAllowed=false
+    mFrame=[0,0][1920,1080] last=[0,0][1920,1080]
+    Frames: containing=[0,0][1920,1080] parent=[0,0][1920,1080]
+        display=[0,0][1920,1080] overscan=[0,0][1920,1080]
+        content=[0,0][1920,1080] visible=[0,0][1920,1080]
+        decor=[0,0][1920,1080]
+        outset=[0,0][1920,1080]
+    Cur insets: overscan=[0,0][0,0] content=[0,0][0,0] visible=[0,0][0,0] stable=[0,0][0,0] surface=[0,0][0,0] outsets=[0,0][0,0]
+    Lst insets: overscan=[0,0][0,0] content=[0,0][0,0] visible=[0,0][0,0] stable=[0,0][0,0] physical=[0,0][0,0] outset=[0,0][0,0]
+    WindowStateAnimator{4c4b2b2 com.mgtv.mgui/com.mgtv.mui.home.HomeActivity}:
+      mDrawState=NO_SURFACE       mLastHidden=true
+      mSystemDecorRect=[0,0][1920,1080] last=[0,0][0,0] mHasClipRect=false mLastClipRect=[0,0][1920,1080]
+      mShownAlpha=1.0 mAlpha=1.0 mLastAlpha=0.0
+    isOnScreen=false
+    isVisible=false
+
+  mGlobalConfiguration={1.0 ?mcc?mnc [zh_CN] ldltr sw720dp w1280dp h720dp 240dpi xlrg long land television -touch -keyb/v/h dpad/v appBounds=Rect(0, 0 - 1920, 1080) s.3}
+  mHasPermanentDpad=true
+  mCurrentFocus=Window{21998c5 u0 com.pae.host/com.pae.host.MainActivity}
+  mFocusedApp=AppWindowToken{cd8a3a4 token=Token{16a465e ActivityRecord{7ebb399 u0 com.pae.host/.MainActivity t811}}}
+  mInTouchMode=true mLayoutSeq=6404
+  mLastDisplayFreezeDuration=0 due to Window{ceacd33 u0 com.mgtv.remote/com.mgtv.remote.system.FallbackHome}
+  mLastWakeLockHoldingWindow=null mLastWakeLockObscuringWindow=null
+  SnapshotCache
+  mSystemDecorLayer=0 mScreenRect=[0,0][1920,1080]
+  mTraversalScheduled=false
+  mHoldScreenWindow=null
+  mObscuringWindow=null
+  mWallpaperTarget=null
+  mLastWallpaperX=-1.0 mLastWallpaperY=-1.0
+  mSystemBooted=true mDisplayEnabled=true
+  mTransactionSequence=8064
+  mDisplayFrozen=false windows=0 client=false apps=0 waitingForConfig=false
+  mRotation=0 mAltOrientation=false
+  mLastWindowForcedOrientation=-1 mLastOrientation=-1
+  mDeferredRotationPauseCount=0
+  Animation settings: disabled=false window=1.0 transition=1.0 animator=1.0
+  mSkipAppTransitionAnimation=false
+  mLayoutToAnim:
+    mNextAppTransition=TRANSIT_UNSET
+    mAppTransitionState=APP_STATE_IDLE
+    mLastUsedAppTransition=TRANSIT_TASK_TO_FRONT
+    mLastOpeningApp=AppWindowToken{cd8a3a4 token=Token{16a465e ActivityRecord{7ebb399 u0 com.pae.host/.MainActivity t811}}}
+    mLastClosingApp=AppWindowToken{bcfca6f token=Token{ea45f02 ActivityRecord{af9f84d u0 com.mgtv.mgui/.ChannelHomeActivity t664}}}
+Starting: Intent { flg=0x20000000 cmp=com.pae.host/.MainActivity (has extras) }
+Warning: Activity not started, its current task has been brought to the front
+
+=== previewMode=2 applied=1 ===
+--------- beginning of main
+11-25 02:33:36.784   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger expire 2 lines
+11-25 02:33:36.784   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:36.792   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:36.801   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:36.817   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:33:36.817   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:36.818   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:36.834   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:36.834   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:36.844   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:36.851   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:36.867   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:33:36.867   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:36.870   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+--------- beginning of system
+11-25 02:33:36.873   462  1425 D mgtv    : com.mgtv.app.state start ActivityStackSupervisor
+11-25 02:33:36.873   462  1425 I ActivityManager: START u0 {flg=0x30000000 cmp=com.pae.host/.MainActivity (has extras)} from uid 2000
+11-25 02:33:36.876   462  1425 D mgtv    : com.mgtv.app.state start activityStack
+11-25 02:33:36.878  6994  6994 I PAE_UI  : debug extras: anatomy=false preset=0 view=0 outfit=-1
+11-25 02:33:36.884   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:36.884   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:36.887  6994  6994 W PAE_POSE: camera selector FRONT failed: Provided camera selector unable to resolve a camera for the given use case
+11-25 02:33:36.887  6994  6994 W PAE_POSE: camera selector BACK failed: Provided camera selector unable to resolve a camera for the given use case
+11-25 02:33:36.887  6994  6994 W PAE_POSE: camera selector ANY failed: Provided camera selector unable to resolve a camera for the given use case
+11-25 02:33:36.887  6994  6994 E PAE_POSE: no camera resolved on this device; synthetic provider stays active
+11-25 02:33:36.896   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:36.904  6994  7013 I PAE_RENDER: applied previewMode=2
+11-25 02:33:36.904  6994  7013 I PAE_RENDER: applied cameraPreset=0
+11-25 02:33:36.904  6994  7013 I PAE_RENDER: applied debugView=0
+11-25 02:33:36.917   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:36.918   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:36.922   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:36.934   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:36.934   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:36.948   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:36.951   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:36.967   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:33:36.967   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:36.974   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:37.001   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:37.001   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:37.001   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:37.018   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 1 line
+11-25 02:33:37.018   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:37.027   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:37.035   318   318 E HWComposer: getPresentFence failed for invalid display -1
+WINDOW MANAGER WINDOWS (dumpsys window windows)
+  Window #0 Window{21998c5 u0 com.pae.host/com.pae.host.MainActivity}:
+    mDisplayId=0 stackId=1 mSession=Session{d63030e 6994:u0a10033} mClient=android.os.BinderProxy@c2ac33c
+    mOwnerUid=10033 mShowToOwnerOnly=true package=com.pae.host appop=NONE
+    mAttrs=WM.LayoutParams{(0,0)(fillxfill) sim=#120 ty=1 fl=#81810100 pfl=0x20000 fmt=-3 wanim=0x10302f6 vsysui=0x600 needsMenuKey=2 colorMode=0}
+    Requested w=1920 h=1080 mLayoutSeq=6405
+    mBaseLayer=21000 mSubLayer=0 mAnimLayer=21015+0=21015 mLastLayer=21015
+    mToken=AppWindowToken{cd8a3a4 token=Token{16a465e ActivityRecord{7ebb399 u0 com.pae.host/.MainActivity t811}}}
+    mAppToken=AppWindowToken{cd8a3a4 token=Token{16a465e ActivityRecord{7ebb399 u0 com.pae.host/.MainActivity t811}}}
+     isAnimatingWithSavedSurface()=false mAppDied=false    drawnStateEvaluated=true    mightAffectAllDrawn=true
+    mViewVisibility=0x0 mHaveFrame=true mObscured=false
+    mSeq=0 mSystemUiVisibility=0x600
+    mGivenContentInsets=[0,0][0,0] mGivenVisibleInsets=[0,0][0,0]
+    mFullConfiguration={1.0 ?mcc?mnc [zh_CN] ldltr sw720dp w1280dp h720dp 240dpi xlrg long land television -touch -keyb/v/h dpad/v appBounds=Rect(0, 0 - 1920, 1080) s.3}
+    mLastReportedConfiguration={1.0 ?mcc?mnc [zh_CN] ldltr sw720dp w1280dp h720dp 240dpi xlrg long land television -touch -keyb/v/h dpad/v appBounds=Rect(0, 0 - 1920, 1080) s.3}
+    mHasSurface=true mShownPosition=[0,0] isReadyForDisplay()=true hasSavedSurface()=false mWindowRemovalAllowed=false
+    mFrame=[0,0][1920,1080] last=[0,0][1920,1080]
+    Frames: containing=[0,0][1920,1080] parent=[0,0][1920,1080]
+        display=[0,0][1920,1080] overscan=[0,0][1920,1080]
+        content=[0,0][1920,1080] visible=[0,0][1920,1080]
+        decor=[0,0][1920,1080]
+        outset=[0,0][0,0]
+    Cur insets: overscan=[0,0][0,0] content=[0,0][0,0] visible=[0,0][0,0] stable=[0,0][0,0] surface=[0,0][0,0] outsets=[0,0][0,0]
+    Lst insets: overscan=[0,0][0,0] content=[0,0][0,0] visible=[0,0][0,0] stable=[0,0][0,0] physical=[0,0][0,0] outset=[0,0][0,0]
+    WindowStateAnimator{7318ec3 com.pae.host/com.pae.host.MainActivity}:
+      mSurface=Surface(name=com.pae.host/com.pae.host.MainActivity)
+      Surface: shown=true layer=21015 alpha=1.0 rect=(0.0,0.0) 1920.0 x 1080.0 transform=(1.0, 0.0, 1.0, 0.0)
+      mDrawState=HAS_DRAWN       mLastHidden=false
+      mSystemDecorRect=[0,0][1920,1080] last=[0,0][0,0] mHasClipRect=false mLastClipRect=[0,0][1920,1080]
+    isOnScreen=true
+    isVisible=true
+  Window #1 Window{d42df80 u0 com.mgtv.mgui/com.mgtv.mgui.ChannelHomeActivity}:
+    mDisplayId=0 stackId=1 mSession=Session{70b76a8 969:u0a10043} mClient=android.os.BinderProxy@e845403
+    mOwnerUid=10043 mShowToOwnerOnly=true package=com.mgtv.mgui appop=NONE
+    mAttrs=WM.LayoutParams{(0,0)(fillxfill) sim=#20 ty=1 fl=#1810580 pfl=0x20000 fmt=-3 vsysui=0x400 needsMenuKey=2 colorMode=0}
+    Requested w=1920 h=1080 mLayoutSeq=6393
+    mBaseLayer=21000 mSubLayer=0 mAnimLayer=21010+0=21010 mLastLayer=21010
+    mToken=AppWindowToken{bcfca6f token=Token{ea45f02 ActivityRecord{af9f84d u0 com.mgtv.mgui/.ChannelHomeActivity t664}}}
+    mAppToken=AppWindowToken{bcfca6f token=Token{ea45f02 ActivityRecord{af9f84d u0 com.mgtv.mgui/.ChannelHomeActivity t664}}}
+     isAnimatingWithSavedSurface()=false mAppDied=false    drawnStateEvaluated=true    mightAffectAllDrawn=true
+    mViewVisibility=0x8 mHaveFrame=true mObscured=false
+    mSeq=0 mSystemUiVisibility=0x400
+    mGivenContentInsets=[0,0][0,0] mGivenVisibleInsets=[0,0][0,0]
+    mFullConfiguration={1.0 ?mcc?mnc [zh_CN] ldltr sw720dp w1280dp h720dp 240dpi xlrg long land television -touch -keyb/v/h dpad/v appBounds=Rect(0, 0 - 1920, 1080) s.3}
+    mLastReportedConfiguration={1.0 ?mcc?mnc [zh_CN] ldltr sw720dp w1280dp h720dp 240dpi xlrg long land television -touch -keyb/v/h dpad/v appBounds=Rect(0, 0 - 1920, 1080) s.3}
+    mHasSurface=false mShownPosition=[0,0] isReadyForDisplay()=false hasSavedSurface()=false mWindowRemovalAllowed=false
+    mFrame=[0,0][1920,1080] last=[0,0][1920,1080]
+    Frames: containing=[0,0][1920,1080] parent=[0,0][1920,1080]
+        display=[0,0][1920,1080] overscan=[0,0][1920,1080]
+        content=[0,0][1920,1080] visible=[0,0][1920,1080]
+        decor=[0,0][1920,1080]
+        outset=[0,0][1920,1080]
+    Cur insets: overscan=[0,0][0,0] content=[0,0][0,0] visible=[0,0][0,0] stable=[0,0][0,0] surface=[0,0][0,0] outsets=[0,0][0,0]
+    Lst insets: overscan=[0,0][0,0] content=[0,0][0,0] visible=[0,0][0,0] stable=[0,0][0,0] physical=[0,0][0,0] outset=[0,0][0,0]
+    WindowStateAnimator{4ac7580 com.mgtv.mgui/com.mgtv.mgui.ChannelHomeActivity}:
+      mDrawState=NO_SURFACE       mLastHidden=true
+      mSystemDecorRect=[0,0][1920,1080] last=[0,0][0,0] mHasClipRect=false mLastClipRect=[0,0][1920,1080]
+    isOnScreen=false
+    isVisible=false
+  Window #2 Window{e3378f7 u0 com.mgtv.myapp/com.mgtv.myapp.view.activity.AppManagerActivity}:
+    mDisplayId=0 stackId=1 mSession=Session{bbd53b8 1047:1000} mClient=android.os.BinderProxy@3501cf6
+    mOwnerUid=1000 mShowToOwnerOnly=true package=com.mgtv.myapp appop=NONE
+    mAttrs=WM.LayoutParams{(0,0)(fillxfill) sim=#20 ty=1 fl=#1810500 wanim=0x1030001 needsMenuKey=2 colorMode=0}
+    Requested w=1920 h=1080 mLayoutSeq=1759
+    mBaseLayer=21000 mSubLayer=0 mAnimLayer=21005+0=21005 mLastLayer=21010
+    mToken=AppWindowToken{fc210a0 token=Token{da6b888 ActivityRecord{4eb4c2b u0 com.mgtv.myapp/.view.activity.AppManagerActivity t666}}}
+    mAppToken=AppWindowToken{fc210a0 token=Token{da6b888 ActivityRecord{4eb4c2b u0 com.mgtv.myapp/.view.activity.AppManagerActivity t666}}}
+     isAnimatingWithSavedSurface()=false mAppDied=false    drawnStateEvaluated=true    mightAffectAllDrawn=true
+    mViewVisibility=0x8 mHaveFrame=true mObscured=false
+    mSeq=0 mSystemUiVisibility=0x0
+    mGivenContentInsets=[0,0][0,0] mGivenVisibleInsets=[0,0][0,0]
+    mFullConfiguration={1.0 ?mcc?mnc [zh_CN] ldltr sw720dp w1280dp h720dp 240dpi xlrg long land television -touch -keyb/v/h dpad/v appBounds=Rect(0, 0 - 1920, 1080) s.3}
+    mLastReportedConfiguration={1.0 ?mcc?mnc [zh_CN] ldltr sw720dp w1280dp h720dp 240dpi xlrg long land television -touch -keyb/v/h dpad/v appBounds=Rect(0, 0 - 1920, 1080) s.3}
+    mHasSurface=false mShownPosition=[0,0] isReadyForDisplay()=false hasSavedSurface()=false mWindowRemovalAllowed=false
+    mFrame=[0,0][1920,1080] last=[0,0][1920,1080]
+    Frames: containing=[0,0][1920,1080] parent=[0,0][1920,1080]
+        display=[0,0][1920,1080] overscan=[0,0][1920,1080]
+        content=[0,0][1920,1080] visible=[0,0][1920,1080]
+        decor=[0,0][1920,1080]
+        outset=[0,0][1920,1080]
+    Cur insets: overscan=[0,0][0,0] content=[0,0][0,0] visible=[0,0][0,0] stable=[0,0][0,0] surface=[0,0][0,0] outsets=[0,0][0,0]
+    Lst insets: overscan=[0,0][0,0] content=[0,0][0,0] visible=[0,0][0,0] stable=[0,0][0,0] physical=[0,0][0,0] outset=[0,0][0,0]
+    WindowStateAnimator{dde8203 com.mgtv.myapp/com.mgtv.myapp.view.activity.AppManagerActivity}:
+      mDrawState=NO_SURFACE       mLastHidden=true
+      mSystemDecorRect=[0,0][1920,1080] last=[0,0][0,0] mHasClipRect=false mLastClipRect=[0,0][1920,1080]
+    isOnScreen=false
+    isVisible=false
+  Window #3 Window{d4a6ca7 u0 com.mgtv.mgui/com.mgtv.mui.home.HomeActivity}:
+    mDisplayId=0 stackId=0 mSession=Session{70b76a8 969:u0a10043} mClient=android.os.BinderProxy@340d166
+    mOwnerUid=10043 mShowToOwnerOnly=true package=com.mgtv.mgui appop=NONE
+    mAttrs=WM.LayoutParams{(0,0)(fillxfill) sim=#120 ty=1 fl=#1810500 fmt=-2 wanim=0x1030001 vsysui=0x1006 needsMenuKey=2 colorMode=0}
+    Requested w=1920 h=1080 mLayoutSeq=6383
+    mBaseLayer=21000 mSubLayer=0 mAnimLayer=21000+0=21000 mLastLayer=21000
+    mToken=AppWindowToken{db9a091 token=Token{3ba9815 ActivityRecord{bddedcc u0 com.mgtv.mgui/com.mgtv.mui.home.HomeActivity t663}}}
+    mAppToken=AppWindowToken{db9a091 token=Token{3ba9815 ActivityRecord{bddedcc u0 com.mgtv.mgui/com.mgtv.mui.home.HomeActivity t663}}}
+     isAnimatingWithSavedSurface()=false mAppDied=false    drawnStateEvaluated=true    mightAffectAllDrawn=true
+    mViewVisibility=0x8 mHaveFrame=true mObscured=false
+    mSeq=0 mSystemUiVisibility=0x1006
+    mGivenContentInsets=[0,0][0,0] mGivenVisibleInsets=[0,0][0,0]
+    mFullConfiguration={1.0 ?mcc?mnc [zh_CN] ldltr sw720dp w1280dp h720dp 240dpi xlrg long land television -touch -keyb/v/h dpad/v appBounds=Rect(0, 0 - 1920, 1080) s.3}
+    mLastReportedConfiguration={1.0 ?mcc?mnc [zh_CN] ldltr sw720dp w1280dp h720dp 240dpi xlrg long land television -touch -keyb/v/h dpad/v appBounds=Rect(0, 0 - 1920, 1080) s.3}
+    mHasSurface=false mShownPosition=[0,0] isReadyForDisplay()=false hasSavedSurface()=false mWindowRemovalAllowed=false
+    mFrame=[0,0][1920,1080] last=[0,0][1920,1080]
+    Frames: containing=[0,0][1920,1080] parent=[0,0][1920,1080]
+        display=[0,0][1920,1080] overscan=[0,0][1920,1080]
+        content=[0,0][1920,1080] visible=[0,0][1920,1080]
+        decor=[0,0][1920,1080]
+        outset=[0,0][1920,1080]
+    Cur insets: overscan=[0,0][0,0] content=[0,0][0,0] visible=[0,0][0,0] stable=[0,0][0,0] surface=[0,0][0,0] outsets=[0,0][0,0]
+    Lst insets: overscan=[0,0][0,0] content=[0,0][0,0] visible=[0,0][0,0] stable=[0,0][0,0] physical=[0,0][0,0] outset=[0,0][0,0]
+    WindowStateAnimator{4c4b2b2 com.mgtv.mgui/com.mgtv.mui.home.HomeActivity}:
+      mDrawState=NO_SURFACE       mLastHidden=true
+      mSystemDecorRect=[0,0][1920,1080] last=[0,0][0,0] mHasClipRect=false mLastClipRect=[0,0][1920,1080]
+      mShownAlpha=1.0 mAlpha=1.0 mLastAlpha=0.0
+    isOnScreen=false
+    isVisible=false
+
+  mGlobalConfiguration={1.0 ?mcc?mnc [zh_CN] ldltr sw720dp w1280dp h720dp 240dpi xlrg long land television -touch -keyb/v/h dpad/v appBounds=Rect(0, 0 - 1920, 1080) s.3}
+  mHasPermanentDpad=true
+  mCurrentFocus=Window{21998c5 u0 com.pae.host/com.pae.host.MainActivity}
+  mFocusedApp=AppWindowToken{cd8a3a4 token=Token{16a465e ActivityRecord{7ebb399 u0 com.pae.host/.MainActivity t811}}}
+  mInTouchMode=true mLayoutSeq=6405
+  mLastDisplayFreezeDuration=0 due to Window{ceacd33 u0 com.mgtv.remote/com.mgtv.remote.system.FallbackHome}
+  mLastWakeLockHoldingWindow=null mLastWakeLockObscuringWindow=null
+  SnapshotCache
+  mSystemDecorLayer=0 mScreenRect=[0,0][1920,1080]
+  mTraversalScheduled=false
+  mHoldScreenWindow=null
+  mObscuringWindow=null
+  mWallpaperTarget=null
+  mLastWallpaperX=-1.0 mLastWallpaperY=-1.0
+  mSystemBooted=true mDisplayEnabled=true
+  mTransactionSequence=8065
+  mDisplayFrozen=false windows=0 client=false apps=0 waitingForConfig=false
+  mRotation=0 mAltOrientation=false
+  mLastWindowForcedOrientation=-1 mLastOrientation=-1
+  mDeferredRotationPauseCount=0
+  Animation settings: disabled=false window=1.0 transition=1.0 animator=1.0
+  mSkipAppTransitionAnimation=false
+  mLayoutToAnim:
+    mNextAppTransition=TRANSIT_UNSET
+    mAppTransitionState=APP_STATE_IDLE
+    mLastUsedAppTransition=TRANSIT_TASK_TO_FRONT
+    mLastOpeningApp=AppWindowToken{cd8a3a4 token=Token{16a465e ActivityRecord{7ebb399 u0 com.pae.host/.MainActivity t811}}}
+    mLastClosingApp=AppWindowToken{bcfca6f token=Token{ea45f02 ActivityRecord{af9f84d u0 com.mgtv.mgui/.ChannelHomeActivity t664}}}
+Starting: Intent { flg=0x20000000 cmp=com.pae.host/.MainActivity (has extras) }
+Warning: Activity not started, its current task has been brought to the front
+
+=== previewMode=3 applied=1 ===
+--------- beginning of main
+11-25 02:33:41.966   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:41.979   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:41.983   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:41.999   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:33:41.999   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:42.005   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:42.016   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:42.016   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:42.030   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:42.050   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:42.050   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:42.057   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+--------- beginning of system
+11-25 02:33:42.065   462  1425 D mgtv    : com.mgtv.app.state start ActivityStackSupervisor
+11-25 02:33:42.066   462  1425 I ActivityManager: START u0 {flg=0x30000000 cmp=com.pae.host/.MainActivity (has extras)} from uid 2000
+11-25 02:33:42.066   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:42.066   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:42.074   462  1425 D mgtv    : com.mgtv.app.state start activityStack
+11-25 02:33:42.076  6994  6994 I PAE_UI  : debug extras: anatomy=false preset=0 view=0 outfit=-1
+11-25 02:33:42.081  6994  7013 I PAE_RENDER: geometry cache hit: canonical (115300 tris)
+11-25 02:33:42.083   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:42.083   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:42.083   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:42.097  6994  6994 W PAE_POSE: camera selector FRONT failed: Provided camera selector unable to resolve a camera for the given use case
+11-25 02:33:42.099  6994  6994 W PAE_POSE: camera selector BACK failed: Provided camera selector unable to resolve a camera for the given use case
+11-25 02:33:42.100  6994  6994 W PAE_POSE: camera selector ANY failed: Provided camera selector unable to resolve a camera for the given use case
+11-25 02:33:42.100  6994  6994 E PAE_POSE: no camera resolved on this device; synthetic provider stays active
+11-25 02:33:42.109   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:43.015   340 25688 I chatty  : uid=1046(mediacodec) omx_enc_input identical 10 lines
+11-25 02:33:43.115   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:44.832   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:44.833   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:44.843   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:44.848  6994  7013 I PAE_RENDER: canonical body ready: verts=57652 tris=115300 render_verts=345900 uv_charts=115300 gen_ms=2767
+11-25 02:33:44.848  6994  7013 I PAE_RENDER: applied previewMode=3
+11-25 02:33:44.849  6994  7013 I PAE_RENDER: applied cameraPreset=0
+11-25 02:33:44.849  6994  7013 I PAE_RENDER: applied debugView=0
+11-25 02:33:44.883   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:44.883   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:44.897   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:44.902   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:44.919   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:33:44.919   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:44.927   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:44.933   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:44.950   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:33:44.950   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:44.957   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:44.983   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:44.983   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:44.984   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:45.015   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:45.016   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:45.034   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:33:45.034   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:45.043   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:45.050   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:45.066   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:33:45.066   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:45.072   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:45.101   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:45.102   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:45.103   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:45.115   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:45.116   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:45.132   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:45.149   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:45.149   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:45.158   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:45.167   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:45.184   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:33:45.185   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:45.186   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:45.201   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:45.201   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:45.212   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:45.216   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:45.233   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:33:45.233   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:45.242   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:45.250   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:45.250   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:45.270   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:45.285   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:45.285   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:45.296   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:45.302   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:45.302   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:45.326   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:45.333   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:45.350   318   318 I chatty  : uid=1000(system) /system/bin/surfaceflinger identical 2 lines
+11-25 02:33:45.350   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:45.354   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:45.367   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:45.367   318   318 E HWComposer: getPresentFence failed for invalid display -1
+11-25 02:33:45.383   340 25688 W omx_venc_ctl: Input Buffer Full, Check input buffer size! allocSize:8, dataLen:8
+11-25 02:33:45.384   318   318 E HWComposer: getPresentFence failed for invalid display -1
+WINDOW MANAGER WINDOWS (dumpsys window windows)
+  Window #0 Window{21998c5 u0 com.pae.host/com.pae.host.MainActivity}:
+    mDisplayId=0 stackId=1 mSession=Session{d63030e 6994:u0a10033} mClient=android.os.BinderProxy@c2ac33c
+    mOwnerUid=10033 mShowToOwnerOnly=true package=com.pae.host appop=NONE
+    mAttrs=WM.LayoutParams{(0,0)(fillxfill) sim=#120 ty=1 fl=#81810100 pfl=0x20000 fmt=-3 wanim=0x10302f6 vsysui=0x600 needsMenuKey=2 colorMode=0}
+    Requested w=1920 h=1080 mLayoutSeq=6406
+    mBaseLayer=21000 mSubLayer=0 mAnimLayer=21015+0=21015 mLastLayer=21015
+    mToken=AppWindowToken{cd8a3a4 token=Token{16a465e ActivityRecord{7ebb399 u0 com.pae.host/.MainActivity t811}}}
+    mAppToken=AppWindowToken{cd8a3a4 token=Token{16a465e ActivityRecord{7ebb399 u0 com.pae.host/.MainActivity t811}}}
+     isAnimatingWithSavedSurface()=false mAppDied=false    drawnStateEvaluated=true    mightAffectAllDrawn=true
+    mViewVisibility=0x0 mHaveFrame=true mObscured=false
+    mSeq=0 mSystemUiVisibility=0x600
+    mGivenContentInsets=[0,0][0,0] mGivenVisibleInsets=[0,0][0,0]
+    mFullConfiguration={1.0 ?mcc?mnc [zh_CN] ldltr sw720dp w1280dp h720dp 240dpi xlrg long land television -touch -keyb/v/h dpad/v appBounds=Rect(0, 0 - 1920, 1080) s.3}
+    mLastReportedConfiguration={1.0 ?mcc?mnc [zh_CN] ldltr sw720dp w1280dp h720dp 240dpi xlrg long land television -touch -keyb/v/h dpad/v appBounds=Rect(0, 0 - 1920, 1080) s.3}
+    mHasSurface=true mShownPosition=[0,0] isReadyForDisplay()=true hasSavedSurface()=false mWindowRemovalAllowed=false
+    mFrame=[0,0][1920,1080] last=[0,0][1920,1080]
+    Frames: containing=[0,0][1920,1080] parent=[0,0][1920,1080]
+        display=[0,0][1920,1080] overscan=[0,0][1920,1080]
+        content=[0,0][1920,1080] visible=[0,0][1920,1080]
+        decor=[0,0][1920,1080]
+        outset=[0,0][0,0]
+    Cur insets: overscan=[0,0][0,0] content=[0,0][0,0] visible=[0,0][0,0] stable=[0,0][0,0] surface=[0,0][0,0] outsets=[0,0][0,0]
+    Lst insets: overscan=[0,0][0,0] content=[0,0][0,0] visible=[0,0][0,0] stable=[0,0][0,0] physical=[0,0][0,0] outset=[0,0][0,0]
+    WindowStateAnimator{7318ec3 com.pae.host/com.pae.host.MainActivity}:
+      mSurface=Surface(name=com.pae.host/com.pae.host.MainActivity)
+      Surface: shown=true layer=21015 alpha=1.0 rect=(0.0,0.0) 1920.0 x 1080.0 transform=(1.0, 0.0, 1.0, 0.0)
+      mDrawState=HAS_DRAWN       mLastHidden=false
+      mSystemDecorRect=[0,0][1920,1080] last=[0,0][0,0] mHasClipRect=false mLastClipRect=[0,0][1920,1080]
+    isOnScreen=true
+    isVisible=true
+  Window #1 Window{d42df80 u0 com.mgtv.mgui/com.mgtv.mgui.ChannelHomeActivity}:
+    mDisplayId=0 stackId=1 mSession=Session{70b76a8 969:u0a10043} mClient=android.os.BinderProxy@e845403
+    mOwnerUid=10043 mShowToOwnerOnly=true package=com.mgtv.mgui appop=NONE
+    mAttrs=WM.LayoutParams{(0,0)(fillxfill) sim=#20 ty=1 fl=#1810580 pfl=0x20000 fmt=-3 vsysui=0x400 needsMenuKey=2 colorMode=0}
+    Requested w=1920 h=1080 mLayoutSeq=6393
+    mBaseLayer=21000 mSubLayer=0 mAnimLayer=21010+0=21010 mLastLayer=21010
+    mToken=AppWindowToken{bcfca6f token=Token{ea45f02 ActivityRecord{af9f84d u0 com.mgtv.mgui/.ChannelHomeActivity t664}}}
+    mAppToken=AppWindowToken{bcfca6f token=Token{ea45f02 ActivityRecord{af9f84d u0 com.mgtv.mgui/.ChannelHomeActivity t664}}}
+     isAnimatingWithSavedSurface()=false mAppDied=false    drawnStateEvaluated=true    mightAffectAllDrawn=true
+    mViewVisibility=0x8 mHaveFrame=true mObscured=false
+    mSeq=0 mSystemUiVisibility=0x400
+    mGivenContentInsets=[0,0][0,0] mGivenVisibleInsets=[0,0][0,0]
+    mFullConfiguration={1.0 ?mcc?mnc [zh_CN] ldltr sw720dp w1280dp h720dp 240dpi xlrg long land television -touch -keyb/v/h dpad/v appBounds=Rect(0, 0 - 1920, 1080) s.3}
+    mLastReportedConfiguration={1.0 ?mcc?mnc [zh_CN] ldltr sw720dp w1280dp h720dp 240dpi xlrg long land television -touch -keyb/v/h dpad/v appBounds=Rect(0, 0 - 1920, 1080) s.3}
+    mHasSurface=false mShownPosition=[0,0] isReadyForDisplay()=false hasSavedSurface()=false mWindowRemovalAllowed=false
+    mFrame=[0,0][1920,1080] last=[0,0][1920,1080]
+    Frames: containing=[0,0][1920,1080] parent=[0,0][1920,1080]
+        display=[0,0][1920,1080] overscan=[0,0][1920,1080]
+        content=[0,0][1920,1080] visible=[0,0][1920,1080]
+        decor=[0,0][1920,1080]
+        outset=[0,0][1920,1080]
+    Cur insets: overscan=[0,0][0,0] content=[0,0][0,0] visible=[0,0][0,0] stable=[0,0][0,0] surface=[0,0][0,0] outsets=[0,0][0,0]
+    Lst insets: overscan=[0,0][0,0] content=[0,0][0,0] visible=[0,0][0,0] stable=[0,0][0,0] physical=[0,0][0,0] outset=[0,0][0,0]
+    WindowStateAnimator{4ac7580 com.mgtv.mgui/com.mgtv.mgui.ChannelHomeActivity}:
+      mDrawState=NO_SURFACE       mLastHidden=true
+      mSystemDecorRect=[0,0][1920,1080] last=[0,0][0,0] mHasClipRect=false mLastClipRect=[0,0][1920,1080]
+    isOnScreen=false
+    isVisible=false
+  Window #2 Window{e3378f7 u0 com.mgtv.myapp/com.mgtv.myapp.view.activity.AppManagerActivity}:
+    mDisplayId=0 stackId=1 mSession=Session{bbd53b8 1047:1000} mClient=android.os.BinderProxy@3501cf6
+    mOwnerUid=1000 mShowToOwnerOnly=true package=com.mgtv.myapp appop=NONE
+    mAttrs=WM.LayoutParams{(0,0)(fillxfill) sim=#20 ty=1 fl=#1810500 wanim=0x1030001 needsMenuKey=2 colorMode=0}
+    Requested w=1920 h=1080 mLayoutSeq=1759
+    mBaseLayer=21000 mSubLayer=0 mAnimLayer=21005+0=21005 mLastLayer=21010
+    mToken=AppWindowToken{fc210a0 token=Token{da6b888 ActivityRecord{4eb4c2b u0 com.mgtv.myapp/.view.activity.AppManagerActivity t666}}}
+    mAppToken=AppWindowToken{fc210a0 token=Token{da6b888 ActivityRecord{4eb4c2b u0 com.mgtv.myapp/.view.activity.AppManagerActivity t666}}}
+     isAnimatingWithSavedSurface()=false mAppDied=false    drawnStateEvaluated=true    mightAffectAllDrawn=true
+    mViewVisibility=0x8 mHaveFrame=true mObscured=false
+    mSeq=0 mSystemUiVisibility=0x0
+    mGivenContentInsets=[0,0][0,0] mGivenVisibleInsets=[0,0][0,0]
+    mFullConfiguration={1.0 ?mcc?mnc [zh_CN] ldltr sw720dp w1280dp h720dp 240dpi xlrg long land television -touch -keyb/v/h dpad/v appBounds=Rect(0, 0 - 1920, 1080) s.3}
+    mLastReportedConfiguration={1.0 ?mcc?mnc [zh_CN] ldltr sw720dp w1280dp h720dp 240dpi xlrg long land television -touch -keyb/v/h dpad/v appBounds=Rect(0, 0 - 1920, 1080) s.3}
+    mHasSurface=false mShownPosition=[0,0] isReadyForDisplay()=false hasSavedSurface()=false mWindowRemovalAllowed=false
+    mFrame=[0,0][1920,1080] last=[0,0][1920,1080]
+    Frames: containing=[0,0][1920,1080] parent=[0,0][1920,1080]
+        display=[0,0][1920,1080] overscan=[0,0][1920,1080]
+        content=[0,0][1920,1080] visible=[0,0][1920,1080]
+        decor=[0,0][1920,1080]
+        outset=[0,0][1920,1080]
+    Cur insets: overscan=[0,0][0,0] content=[0,0][0,0] visible=[0,0][0,0] stable=[0,0][0,0] surface=[0,0][0,0] outsets=[0,0][0,0]
+    Lst insets: overscan=[0,0][0,0] content=[0,0][0,0] visible=[0,0][0,0] stable=[0,0][0,0] physical=[0,0][0,0] outset=[0,0][0,0]
+    WindowStateAnimator{dde8203 com.mgtv.myapp/com.mgtv.myapp.view.activity.AppManagerActivity}:
+      mDrawState=NO_SURFACE       mLastHidden=true
+      mSystemDecorRect=[0,0][1920,1080] last=[0,0][0,0] mHasClipRect=false mLastClipRect=[0,0][1920,1080]
+    isOnScreen=false
+    isVisible=false
+  Window #3 Window{d4a6ca7 u0 com.mgtv.mgui/com.mgtv.mui.home.HomeActivity}:
+    mDisplayId=0 stackId=0 mSession=Session{70b76a8 969:u0a10043} mClient=android.os.BinderProxy@340d166
+    mOwnerUid=10043 mShowToOwnerOnly=true package=com.mgtv.mgui appop=NONE
+    mAttrs=WM.LayoutParams{(0,0)(fillxfill) sim=#120 ty=1 fl=#1810500 fmt=-2 wanim=0x1030001 vsysui=0x1006 needsMenuKey=2 colorMode=0}
+    Requested w=1920 h=1080 mLayoutSeq=6383
+    mBaseLayer=21000 mSubLayer=0 mAnimLayer=21000+0=21000 mLastLayer=21000
+    mToken=AppWindowToken{db9a091 token=Token{3ba9815 ActivityRecord{bddedcc u0 com.mgtv.mgui/com.mgtv.mui.home.HomeActivity t663}}}
+    mAppToken=AppWindowToken{db9a091 token=Token{3ba9815 ActivityRecord{bddedcc u0 com.mgtv.mgui/com.mgtv.mui.home.HomeActivity t663}}}
+     isAnimatingWithSavedSurface()=false mAppDied=false    drawnStateEvaluated=true    mightAffectAllDrawn=true
+    mViewVisibility=0x8 mHaveFrame=true mObscured=false
+    mSeq=0 mSystemUiVisibility=0x1006
+    mGivenContentInsets=[0,0][0,0] mGivenVisibleInsets=[0,0][0,0]
+    mFullConfiguration={1.0 ?mcc?mnc [zh_CN] ldltr sw720dp w1280dp h720dp 240dpi xlrg long land television -touch -keyb/v/h dpad/v appBounds=Rect(0, 0 - 1920, 1080) s.3}
+    mLastReportedConfiguration={1.0 ?mcc?mnc [zh_CN] ldltr sw720dp w1280dp h720dp 240dpi xlrg long land television -touch -keyb/v/h dpad/v appBounds=Rect(0, 0 - 1920, 1080) s.3}
+    mHasSurface=false mShownPosition=[0,0] isReadyForDisplay()=false hasSavedSurface()=false mWindowRemovalAllowed=false
+    mFrame=[0,0][1920,1080] last=[0,0][1920,1080]
+    Frames: containing=[0,0][1920,1080] parent=[0,0][1920,1080]
+        display=[0,0][1920,1080] overscan=[0,0][1920,1080]
+        content=[0,0][1920,1080] visible=[0,0][1920,1080]
+        decor=[0,0][1920,1080]
+        outset=[0,0][1920,1080]
+    Cur insets: overscan=[0,0][0,0] content=[0,0][0,0] visible=[0,0][0,0] stable=[0,0][0,0] surface=[0,0][0,0] outsets=[0,0][0,0]
+    Lst insets: overscan=[0,0][0,0] content=[0,0][0,0] visible=[0,0][0,0] stable=[0,0][0,0] physical=[0,0][0,0] outset=[0,0][0,0]
+    WindowStateAnimator{4c4b2b2 com.mgtv.mgui/com.mgtv.mui.home.HomeActivity}:
+      mDrawState=NO_SURFACE       mLastHidden=true
+      mSystemDecorRect=[0,0][1920,1080] last=[0,0][0,0] mHasClipRect=false mLastClipRect=[0,0][1920,1080]
+      mShownAlpha=1.0 mAlpha=1.0 mLastAlpha=0.0
+    isOnScreen=false
+    isVisible=false
+
+  mGlobalConfiguration={1.0 ?mcc?mnc [zh_CN] ldltr sw720dp w1280dp h720dp 240dpi xlrg long land television -touch -keyb/v/h dpad/v appBounds=Rect(0, 0 - 1920, 1080) s.3}
+  mHasPermanentDpad=true
+  mCurrentFocus=Window{21998c5 u0 com.pae.host/com.pae.host.MainActivity}
+  mFocusedApp=AppWindowToken{cd8a3a4 token=Token{16a465e ActivityRecord{7ebb399 u0 com.pae.host/.MainActivity t811}}}
+  mInTouchMode=true mLayoutSeq=6406
+  mLastDisplayFreezeDuration=0 due to Window{ceacd33 u0 com.mgtv.remote/com.mgtv.remote.system.FallbackHome}
+  mLastWakeLockHoldingWindow=null mLastWakeLockObscuringWindow=null
+  SnapshotCache
+  mSystemDecorLayer=0 mScreenRect=[0,0][1920,1080]
+  mTraversalScheduled=false
+  mHoldScreenWindow=null
+  mObscuringWindow=null
+  mWallpaperTarget=null
+  mLastWallpaperX=-1.0 mLastWallpaperY=-1.0
+  mSystemBooted=true mDisplayEnabled=true
+  mTransactionSequence=8066
+  mDisplayFrozen=false windows=0 client=false apps=0 waitingForConfig=false
+  mRotation=0 mAltOrientation=false
+  mLastWindowForcedOrientation=-1 mLastOrientation=-1
+  mDeferredRotationPauseCount=0
+  Animation settings: disabled=false window=1.0 transition=1.0 animator=1.0
+  mSkipAppTransitionAnimation=false
+  mLayoutToAnim:
+    mNextAppTransition=TRANSIT_UNSET
+    mAppTransitionState=APP_STATE_IDLE
+    mLastUsedAppTransition=TRANSIT_TASK_TO_FRONT
+    mLastOpeningApp=AppWindowToken{cd8a3a4 token=Token{16a465e ActivityRecord{7ebb399 u0 com.pae.host/.MainActivity t811}}}
+    mLastClosingApp=AppWindowToken{bcfca6f token=Token{ea45f02 ActivityRecord{af9f84d u0 com.mgtv.mgui/.ChannelHomeActivity t664}}}
+Starting: Intent { flg=0x20000000 cmp=com.pae.host/.MainActivity (has extras) }
+Warning: Activity not started, its current task has been brought to the front
+52186db137ba16402d6d661585bc4f7687f4202c756cf8f8b7d93228ad090da7 *docs/phases/P1-continuous-gray-body/evidence/p1-final/visual-mode0-confirmed.png
+3a833e97598575383c333950c4a30401675bf560336668970f2b4bffda340619 *docs/phases/P1-continuous-gray-body/evidence/p1-final/visual-mode1-confirmed.png
+a75bf98a7a89b8cc26d30bae89edcef5375677961de3b5496c0fc136fb11baba *docs/phases/P1-continuous-gray-body/evidence/p1-final/visual-mode2-confirmed.png
+5dec1c5112f26c793a608099f2bf801810ab78a29e990b23eb6f1efd227559d5 *docs/phases/P1-continuous-gray-body/evidence/p1-final/visual-mode3-confirmed.png

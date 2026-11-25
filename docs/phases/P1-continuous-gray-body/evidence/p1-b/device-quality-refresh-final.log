@@ -1,0 +1,15 @@
+11-24 21:38:43.064 I/PAE_UI  (21638): debug extras: anatomy=false preset=0 view=3 outfit=-1
+11-24 21:38:55.174 I/PAE_UI  (21638): debug extras: anatomy=false preset=0 view=3 outfit=-1
+11-24 21:38:57.721 I/PAE_RENDER(21638): canonical body ready: verts=44508 tris=89020 boundary=0 nonmanifold=0 degen=0 weights_bad=0 render_verts=267060 uv_charts=89020 gen_ms=14643
+11-24 21:39:00.628 I/PAE_RENDER(21638): P1B-GPU-CPU case=bind vertices=267060 max_pos_m=5.97209464e-07 mean_pos_m=7.96628044e-08 max_normal_deg=0.0279764533 abnormal_normals=0 invalid_positions=0 invalid_normals=0 result=ok
+11-24 21:39:01.678 I/PAE_RENDER(21638): P1B-GPU-CPU case=elbow85_knee80 vertices=267060 max_pos_m=5.96279222e-07 mean_pos_m=8.29807547e-08 max_normal_deg=0.0395646803 abnormal_normals=0 invalid_positions=0 invalid_normals=0 result=ok
+11-24 21:39:02.729 I/PAE_RENDER(21638): P1B-GPU-CPU case=elbow85_knee80_scale_2_0.5_3 vertices=267060 max_pos_m=5.09262293e-07 mean_pos_m=8.77497826e-08 max_normal_deg=0.0395646803 abnormal_normals=0 invalid_positions=0 invalid_normals=0 result=ok
+11-24 21:39:02.778 I/PAE_RENDER(21638): quality=Low canonical triangles=89020 vertices=44508
+11-24 21:39:02.778 I/PAE_RENDER(21638): geometry cache hit: canonical (89020 tris)
+11-24 21:39:04.889 I/PAE_RENDER(21638): applied previewMode=3
+11-24 21:39:04.889 I/PAE_RENDER(21638): applied cameraPreset=0
+11-24 21:39:04.889 I/PAE_RENDER(21638): applied debugView=3
+11-24 21:39:10.162 I/PAE_RENDER(21638): applied previewMode=0
+11-24 21:39:10.162 I/PAE_RENDER(21638): applied cameraPreset=0
+11-24 21:39:10.162 I/PAE_RENDER(21638): applied debugView=3
+pid=21638

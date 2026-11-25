@@ -1,0 +1,243 @@
+[ 15%] Built target pae_core
+[35m[1mConsolidate compiler generated dependencies of target pae_poc_sm_envelope_tests[0m
+[ 15%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_sm_cross_seam_tests.dir/unit/poc_sm_cross_seam_tests.cpp.obj[0m
+[ 16%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_core_tests.dir/unit/core_tests.cpp.obj[0m
+[ 16%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_fusion_tests.dir/unit/fusion_tests.cpp.obj[0m
+[ 17%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_sm_envelope_tests.dir/unit/poc_sm_envelope_tests.cpp.obj[0m
+[ 18%] [32m[1mLinking CXX executable pae_core_tests.exe[0m
+[ 18%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_sm_envelope_tests.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/ShapeModel.cpp.obj[0m
+[ 19%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_sm_cross_seam_tests.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/v2/CrossBoundarySeamAudit.cpp.obj[0m
+[ 20%] [32m[1mLinking CXX executable pae_fusion_tests.exe[0m
+[ 20%] Built target pae_fusion_tests
+[ 20%] Built target pae_core_tests
+[ 21%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_sm_envelope_tests.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/QuadTemplate.cpp.obj[0m
+[ 22%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_sm_envelope_tests.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/PocRoutes.cpp.obj[0m
+[ 22%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_sm_cross_seam_tests.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/v2/SeamAuditV2.cpp.obj[0m
+[ 22%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_sm_envelope_tests.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/TopologyAudit.cpp.obj[0m
+[35m[1mConsolidate compiler generated dependencies of target poc_sm_measure_probe[0m
+[ 23%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_sm_measure_probe.dir/unit/poc_sm_measure_probe.cpp.obj[0m
+[ 24%] [32m[1mLinking CXX executable pae_poc_sm_cross_seam_tests.exe[0m
+[35m[1mConsolidate compiler generated dependencies of target pae_poc_route_tests[0m
+[ 24%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_route_tests.dir/unit/poc_routes_tests.cpp.obj[0m
+[ 25%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_sm_envelope_tests.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/SurfaceMetrics.cpp.obj[0m
+[ 25%] Built target pae_poc_sm_cross_seam_tests
+[ 26%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_sm_measure_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/ShapeModel.cpp.obj[0m
+[ 26%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_sm_envelope_tests.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/CameraProtocol.cpp.obj[0m
+[ 27%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_route_tests.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/ShapeModel.cpp.obj[0m
+[ 27%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_sm_measure_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/QuadTemplate.cpp.obj[0m
+[ 28%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_geometry_tests.dir/unit/geometry_tests.cpp.obj[0m
+[ 29%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_sm_envelope_tests.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/LayerAMetrics.cpp.obj[0m
+[ 29%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_route_tests.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/QuadTemplate.cpp.obj[0m
+[ 30%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_sm_measure_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/PocRoutes.cpp.obj[0m
+[ 30%] [32m[1mLinking CXX executable pae_geometry_tests.exe[0m
+[ 30%] Built target pae_geometry_tests
+[ 31%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_route_tests.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/PocRoutes.cpp.obj[0m
+[ 32%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_sm_envelope_tests.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/SkinWeights.cpp.obj[0m
+[ 33%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_sm_envelope_tests.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/ClayRenderer.cpp.obj[0m
+[ 34%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_sm_measure_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/TopologyAudit.cpp.obj[0m
+[35m[1mConsolidate compiler generated dependencies of target pae_character_patch_tests[0m
+[ 35%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_character_patch_tests.dir/unit/character_patch_tests.cpp.obj[0m
+[ 35%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_sm_envelope_tests.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/v2/CharacterDefinition.cpp.obj[0m
+[ 36%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_route_tests.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/TopologyAudit.cpp.obj[0m
+[ 36%] [32m[1mLinking CXX executable pae_character_patch_tests.exe[0m
+[ 36%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_sm_measure_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/SurfaceMetrics.cpp.obj[0m
+[ 37%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_sm_envelope_tests.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/v2/SharedSkinEnvelope.cpp.obj[0m
+[ 37%] Built target pae_character_patch_tests
+[ 38%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_sm_measure_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/CameraProtocol.cpp.obj[0m
+[ 38%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_route_tests.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/SurfaceMetrics.cpp.obj[0m
+[ 39%] Built target pae_canonical_skin_tests
+[ 40%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_route_tests.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/CameraProtocol.cpp.obj[0m
+[ 41%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_sm_envelope_tests.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/v2/SeamAuditV2.cpp.obj[0m
+[ 41%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_sm_measure_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/LayerAMetrics.cpp.obj[0m
+[ 42%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_smooth_union_sign_tests.dir/unit/smooth_union_sign_tests.cpp.obj[0m
+[ 42%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_route_tests.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/LayerAMetrics.cpp.obj[0m
+[ 43%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_sm_measure_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/SkinWeights.cpp.obj[0m
+[ 44%] [32m[1mLinking CXX executable pae_smooth_union_sign_tests.exe[0m
+[ 44%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_sm_envelope_tests.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/v2/CrossBoundarySeamAudit.cpp.obj[0m
+[ 44%] Built target pae_smooth_union_sign_tests
+[ 45%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_route_tests.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/SkinWeights.cpp.obj[0m
+[35m[1mConsolidate compiler generated dependencies of target poc_route_probe[0m
+[ 45%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_sm_measure_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/ClayRenderer.cpp.obj[0m
+[ 45%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_route_probe.dir/unit/poc_route_probe.cpp.obj[0m
+[ 46%] [32m[1mLinking CXX executable pae_poc_sm_envelope_tests.exe[0m
+[ 46%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_route_tests.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/ClayRenderer.cpp.obj[0m
+[ 47%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_sm_measure_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/v2/CharacterDefinition.cpp.obj[0m
+[ 47%] Built target pae_poc_sm_envelope_tests
+[ 48%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_route_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/ShapeModel.cpp.obj[0m
+[ 48%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_sm_measure_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/v2/SharedSkinEnvelope.cpp.obj[0m
+[ 49%] [32m[1mLinking CXX executable pae_poc_route_tests.exe[0m
+[ 50%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_route_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/QuadTemplate.cpp.obj[0m
+[ 51%] Built target pae_poc_route_tests
+[ 52%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_sm_measure_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/v2/SeamAuditV2.cpp.obj[0m
+[ 52%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_face_hair_tests.dir/unit/face_hair_tests.cpp.obj[0m
+[ 52%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_anatomy_tests.dir/unit/anatomy_tests.cpp.obj[0m
+[ 52%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_route_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/PocRoutes.cpp.obj[0m
+[ 53%] [32m[1mLinking CXX executable pae_face_hair_tests.exe[0m
+[ 54%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_sm_measure_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/v2/CrossBoundarySeamAudit.cpp.obj[0m
+[ 55%] [32m[1mLinking CXX executable pae_anatomy_tests.exe[0m
+[ 55%] Built target pae_face_hair_tests
+[ 56%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_humanoid_tests.dir/unit/humanoid_tests.cpp.obj[0m
+[ 56%] Built target pae_anatomy_tests
+[ 57%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_route_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/TopologyAudit.cpp.obj[0m
+[ 57%] [32m[1mLinking CXX executable poc_sm_measure_probe.exe[0m
+[ 58%] Built target pae_skinning_tests
+[ 58%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_route_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/SurfaceMetrics.cpp.obj[0m
+[ 58%] [32m[1mLinking CXX executable pae_humanoid_tests.exe[0m
+[ 59%] Built target poc_sm_measure_probe
+[ 60%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_route_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/CameraProtocol.cpp.obj[0m
+[ 60%] Built target pae_humanoid_tests
+[ 61%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_route_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/LayerAMetrics.cpp.obj[0m
+[ 62%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_motion_tests.dir/unit/motion_tests.cpp.obj[0m
+[ 63%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_sm_semantics_tests.dir/unit/poc_sm_semantics_tests.cpp.obj[0m
+[ 63%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_sm_param_diff_tests.dir/unit/poc_sm_param_diff_tests.cpp.obj[0m
+[ 63%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_route_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/SkinWeights.cpp.obj[0m
+[ 64%] [32m[1mLinking CXX executable pae_motion_tests.exe[0m
+[ 64%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_sm_semantics_tests.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/v2/CharacterDefinition.cpp.obj[0m
+[ 64%] Built target pae_motion_tests
+[ 64%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_route_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/ClayRenderer.cpp.obj[0m
+[ 65%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_sm_param_diff_tests.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/v2/CharacterDefinition.cpp.obj[0m
+[ 66%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_sm_param_diff_tests.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/v2/SharedSkinEnvelope.cpp.obj[0m
+[ 67%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_sm_semantics_tests.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/v2/SharedSkinEnvelope.cpp.obj[0m
+[ 68%] [32m[1mLinking CXX executable poc_route_probe.exe[0m
+[ 69%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_sm_semantics_tests.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/v2/SeamAuditV2.cpp.obj[0m
+[ 69%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_sm_param_diff_tests.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/v2/SeamAuditV2.cpp.obj[0m
+[ 70%] Built target poc_route_probe
+[ 71%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_sm_param_diff_tests.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/v2/CrossBoundarySeamAudit.cpp.obj[0m
+[ 72%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_sm_cross_seam_probe.dir/unit/poc_sm_cross_seam_probe.cpp.obj[0m
+[ 72%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_proportion_probe.dir/unit/proportion_probe.cpp.obj[0m
+[ 72%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_sm_semantics_tests.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/v2/CrossBoundarySeamAudit.cpp.obj[0m
+[ 72%] [32m[1mLinking CXX executable pae_poc_sm_param_diff_tests.exe[0m
+[ 72%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_sm_cross_seam_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/v2/CrossBoundarySeamAudit.cpp.obj[0m
+[ 72%] Built target pae_poc_sm_param_diff_tests
+[ 73%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_sm_cross_seam_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/v2/SeamAuditV2.cpp.obj[0m
+[ 74%] [32m[1mLinking CXX executable pae_proportion_probe.exe[0m
+[ 75%] [32m[1mLinking CXX executable pae_poc_sm_semantics_tests.exe[0m
+[ 75%] Built target pae_proportion_probe
+[35m[1mConsolidate compiler generated dependencies of target poc_fair_comparison_probe[0m
+[ 75%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_fair_comparison_probe.dir/unit/poc_fair_comparison_probe.cpp.obj[0m
+[ 75%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_sm_contract_tests.dir/unit/poc_sm_contract_tests.cpp.obj[0m
+[ 75%] Built target pae_poc_sm_semantics_tests
+[ 76%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_sm_contract_tests.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/v2/CharacterDefinition.cpp.obj[0m
+[ 76%] [32m[1mLinking CXX executable poc_sm_cross_seam_probe.exe[0m
+[ 76%] Built target poc_sm_cross_seam_probe
+[ 77%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_fair_comparison_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/ShapeModel.cpp.obj[0m
+[ 78%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_sm_seam_tests.dir/unit/poc_sm_seam_tests.cpp.obj[0m
+[ 79%] [32m[1mLinking CXX executable pae_poc_sm_contract_tests.exe[0m
+[ 79%] Built target pae_poc_sm_contract_tests
+[ 79%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_fair_comparison_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/QuadTemplate.cpp.obj[0m
+[35m[1mConsolidate compiler generated dependencies of target poc_sm_views_probe[0m
+[ 80%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_sm_param_probe.dir/unit/poc_sm_param_probe.cpp.obj[0m
+[ 80%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_sm_views_probe.dir/unit/poc_sm_views_probe.cpp.obj[0m
+[ 81%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_poc_sm_seam_tests.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/v2/SeamAuditV2.cpp.obj[0m
+[ 81%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_sm_param_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/v2/CharacterDefinition.cpp.obj[0m
+[ 82%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_fair_comparison_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/PocRoutes.cpp.obj[0m
+[ 83%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_sm_views_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/ShapeModel.cpp.obj[0m
+[ 83%] [32m[1mLinking CXX executable pae_poc_sm_seam_tests.exe[0m
+[ 84%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_sm_views_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/QuadTemplate.cpp.obj[0m
+[ 84%] Built target pae_poc_sm_seam_tests
+[ 84%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_sm_views_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/PocRoutes.cpp.obj[0m
+[ 85%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_sm_param_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/v2/SharedSkinEnvelope.cpp.obj[0m
+[ 86%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_fair_comparison_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/TopologyAudit.cpp.obj[0m
+[ 86%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_fair_comparison_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/SurfaceMetrics.cpp.obj[0m
+[ 87%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_sm_param_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/v2/SeamAuditV2.cpp.obj[0m
+[ 88%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_sm_views_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/TopologyAudit.cpp.obj[0m
+[ 88%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_sm_views_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/SurfaceMetrics.cpp.obj[0m
+[ 89%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_fair_comparison_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/CameraProtocol.cpp.obj[0m
+[ 89%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_sm_param_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/v2/CrossBoundarySeamAudit.cpp.obj[0m
+[ 89%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_fair_comparison_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/LayerAMetrics.cpp.obj[0m
+[ 90%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_sm_views_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/CameraProtocol.cpp.obj[0m
+[ 91%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_fair_comparison_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/SkinWeights.cpp.obj[0m
+[ 92%] [32m[1mLinking CXX executable poc_sm_param_probe.exe[0m
+[ 93%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_sm_views_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/LayerAMetrics.cpp.obj[0m
+[ 93%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_sm_views_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/SkinWeights.cpp.obj[0m
+[ 93%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_fair_comparison_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/ClayRenderer.cpp.obj[0m
+[ 93%] Built target poc_sm_param_probe
+[ 93%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_sm_views_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/ClayRenderer.cpp.obj[0m
+[ 94%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_sm_views_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/v2/CharacterDefinition.cpp.obj[0m
+[ 95%] [32m[1mLinking CXX executable poc_fair_comparison_probe.exe[0m
+[ 96%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_sm_views_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/v2/SharedSkinEnvelope.cpp.obj[0m
+[ 96%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_sm_views_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/v2/SeamAuditV2.cpp.obj[0m
+[ 97%] Built target poc_fair_comparison_probe
+[ 98%] [32mBuilding CXX object pae_tests/CMakeFiles/poc_sm_views_probe.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/native/procedural/shape/v2/CrossBoundarySeamAudit.cpp.obj[0m
+[ 99%] [32m[1mLinking CXX executable poc_sm_views_probe.exe[0m
+[100%] Built target poc_sm_views_probe
+Internal ctest changing into directory: E:/AI-Tools/ProceduralAvatarEngine-poc-sm/build-host
+Test project E:/AI-Tools/ProceduralAvatarEngine-poc-sm/build-host
+      Start  1: pae_core_tests
+ 1/18 Test  #1: pae_core_tests ...................   Passed    3.30 sec
+      Start  2: pae_geometry_tests
+ 2/18 Test  #2: pae_geometry_tests ...............   Passed    0.03 sec
+      Start  3: pae_fusion_tests
+ 3/18 Test  #3: pae_fusion_tests .................   Passed    0.07 sec
+      Start  4: pae_smooth_union_sign_tests
+ 4/18 Test  #4: pae_smooth_union_sign_tests ......   Passed    0.03 sec
+      Start  5: pae_face_hair_tests
+ 5/18 Test  #5: pae_face_hair_tests ..............   Passed   11.81 sec
+      Start  6: pae_anatomy_tests
+ 6/18 Test  #6: pae_anatomy_tests ................***Failed    1.38 sec
+[ RUN ] anatomy_field_regions_own_their_volume
+[DBG-C] chestField=-0.1151
+[DBG-F] upperBodySdf(probe)=0.2559
+[DBG-F]   RibCage=0.2329
+[DBG-F]   Abdomen=0.2530
+[DBG-F]   Pelvis=0.2469
+[DBG-F]   Clavicle=0.4699
+[DBG-F]   Deltoid=0.5405
+[DBG-F]   UpperArm=0.5605
+[DBG-F]   Forearm=0.5710
+[DBG-F]   Neck=0.4596
+[DBG-F]   Head=0.5156
+[  OK ] anatomy_field_regions_own_their_volume
+[ RUN ] anatomy_mesh_is_single_watertight_surface
+[E/PAE_GEOMETRY] anatomy topology NOT clean: components=1 boundary=0 nonmanifold=2 badnorm=0 (P1 blocker)
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=6536 tris=13072 components=1 boundary=0 nonmanifold=2 degen=0 dup=0 badnorm=0 gen_ms=242 res=48x72x32 | chest=0.600 waist=0.653 shoulder_x=0.308 pelvis=0.676
+[DBG-TOP] components=1 boundary=0 nonmanifold=2 degen=0 dup=0 tris=13072
+FAIL E:/AI-Tools/ProceduralAvatarEngine-poc-sm/tests/unit/anatomy_tests.cpp:96: topology.nonManifoldEdges == 0
+[DBG] mesh bounds: x[-0.339,0.339] y[0.719,1.783] z[-0.104,0.136] tris=13072
+[E/PAE_GEOMETRY] anatomy topology NOT clean: components=1 boundary=0 nonmanifold=2 badnorm=0 (P1 blocker)
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=6536 tris=13072 components=1 boundary=0 nonmanifold=2 degen=0 dup=0 badnorm=0 gen_ms=263 res=48x72x32 | chest=0.600 waist=0.653 shoulder_x=0.308 pelvis=0.676
+[FAIL ] anatomy_mesh_is_single_watertight_surface
+[ RUN ] anatomy_parameters_change_body_shape
+[E/PAE_GEOMETRY] anatomy topology NOT clean: components=1 boundary=0 nonmanifold=2 badnorm=0 (P1 blocker)
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=6200 tris=12400 components=1 boundary=0 nonmanifold=2 degen=0 dup=0 badnorm=0 gen_ms=229 res=48x72x32 | chest=0.581 waist=0.653 shoulder_x=0.278 pelvis=0.676
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=7450 tris=14896 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 gen_ms=265 res=48x72x32 | chest=0.691 waist=0.653 shoulder_x=0.356 pelvis=0.676
+[DBG-P] chest silhouette small=0.1500 large=0.3550 | shoulder small=0.2873 large=0.3564 | valid s=1 l=1
+[  OK ] anatomy_parameters_change_body_shape
+[ RUN ] anatomy_mesh_supports_skinning
+[E/PAE_GEOMETRY] anatomy topology NOT clean: components=1 boundary=0 nonmanifold=2 badnorm=0 (P1 blocker)
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=6536 tris=13072 components=1 boundary=0 nonmanifold=2 degen=0 dup=0 badnorm=0 gen_ms=242 res=48x72x32 | chest=0.600 waist=0.653 shoulder_x=0.308 pelvis=0.676
+[  OK ] anatomy_mesh_supports_skinning
+4 cases, 1 failures
+
+      Start  7: pae_canonical_skin_tests
+ 7/18 Test  #7: pae_canonical_skin_tests .........   Passed   16.94 sec
+      Start  8: pae_humanoid_tests
+ 8/18 Test  #8: pae_humanoid_tests ...............   Passed    9.83 sec
+      Start  9: pae_skinning_tests
+ 9/18 Test  #9: pae_skinning_tests ...............   Passed    9.85 sec
+      Start 10: pae_motion_tests
+10/18 Test #10: pae_motion_tests .................   Passed   11.40 sec
+      Start 11: pae_character_patch_tests
+11/18 Test #11: pae_character_patch_tests ........   Passed    8.12 sec
+      Start 12: pae_poc_route_tests
+12/18 Test #12: pae_poc_route_tests ..............   Passed   12.59 sec
+      Start 13: pae_poc_sm_contract_tests
+13/18 Test #13: pae_poc_sm_contract_tests ........   Passed    0.03 sec
+      Start 14: pae_poc_sm_envelope_tests
+14/18 Test #14: pae_poc_sm_envelope_tests ........   Passed    0.06 sec
+      Start 15: pae_poc_sm_seam_tests
+15/18 Test #15: pae_poc_sm_seam_tests ............   Passed    0.03 sec
+      Start 16: pae_poc_sm_cross_seam_tests
+16/18 Test #16: pae_poc_sm_cross_seam_tests ......   Passed    0.04 sec
+      Start 17: pae_poc_sm_param_diff_tests
+17/18 Test #17: pae_poc_sm_param_diff_tests ......   Passed    0.05 sec
+      Start 18: pae_poc_sm_semantics_tests
+18/18 Test #18: pae_poc_sm_semantics_tests .......   Passed    0.03 sec
+
+94% tests passed, 1 tests failed out of 18
+
+Total Test time (real) =  85.62 sec
+
+The following tests FAILED:
+	  6 - pae_anatomy_tests (Failed)
+Errors while running CTest

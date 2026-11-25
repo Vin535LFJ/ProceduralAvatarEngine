@@ -1,0 +1,254 @@
+=== APK and process ===
+Activity Resolver Table:
+  Non-Data Actions:
+      android.intent.action.MAIN:
+        d16e4e1 com.pae.host/.MainActivity filter 3ba9375
+          Action: "android.intent.action.MAIN"
+          Category: "android.intent.category.LAUNCHER"
+          Category: "android.intent.category.LEANBACK_LAUNCHER"
+
+Receiver Resolver Table:
+  Non-Data Actions:
+      android.intent.action.BATTERY_OKAY:
+        3823206 com.pae.host/androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy filter 2326
+          Action: "android.intent.action.BATTERY_OKAY"
+          Action: "android.intent.action.BATTERY_LOW"
+      android.intent.action.ACTION_POWER_DISCONNECTED:
+        5150c7 com.pae.host/androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy filter 73f6681
+          Action: "android.intent.action.ACTION_POWER_CONNECTED"
+          Action: "android.intent.action.ACTION_POWER_DISCONNECTED"
+      androidx.profileinstaller.action.SAVE_PROFILE:
+        a2636f4 com.pae.host/androidx.profileinstaller.ProfileInstallReceiver filter d8e70fe
+          Action: "androidx.profileinstaller.action.SAVE_PROFILE"
+      android.intent.action.DEVICE_STORAGE_LOW:
+        bbbee1d com.pae.host/androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy filter 28bb67
+          Action: "android.intent.action.DEVICE_STORAGE_LOW"
+          Action: "android.intent.action.DEVICE_STORAGE_OK"
+      android.net.conn.CONNECTIVITY_CHANGE:
+        8ff6892 com.pae.host/androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy filter 31b5d14
+          Action: "android.net.conn.CONNECTIVITY_CHANGE"
+      android.intent.action.DEVICE_STORAGE_OK:
+        bbbee1d com.pae.host/androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy filter 28bb67
+          Action: "android.intent.action.DEVICE_STORAGE_LOW"
+          Action: "android.intent.action.DEVICE_STORAGE_OK"
+      androidx.profileinstaller.action.INSTALL_PROFILE:
+        a2636f4 com.pae.host/androidx.profileinstaller.ProfileInstallReceiver filter 4db3680
+          Action: "androidx.profileinstaller.action.INSTALL_PROFILE"
+      android.intent.action.BATTERY_LOW:
+        3823206 com.pae.host/androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy filter 2326
+          Action: "android.intent.action.BATTERY_OKAY"
+          Action: "android.intent.action.BATTERY_LOW"
+      android.intent.action.TIMEZONE_CHANGED:
+        9883263 com.pae.host/androidx.work.impl.background.systemalarm.RescheduleReceiver filter a7ae9bd
+          Action: "android.intent.action.BOOT_COMPLETED"
+          Action: "android.intent.action.TIME_SET"
+          Action: "android.intent.action.TIMEZONE_CHANGED"
+      android.intent.action.TIME_SET:
+        9883263 com.pae.host/androidx.work.impl.background.systemalarm.RescheduleReceiver filter a7ae9bd
+          Action: "android.intent.action.BOOT_COMPLETED"
+          Action: "android.intent.action.TIME_SET"
+          Action: "android.intent.action.TIMEZONE_CHANGED"
+      androidx.profileinstaller.action.SKIP_FILE:
+        a2636f4 com.pae.host/androidx.profileinstaller.ProfileInstallReceiver filter 2f164b9
+          Action: "androidx.profileinstaller.action.SKIP_FILE"
+      androidx.profileinstaller.action.BENCHMARK_OPERATION:
+        a2636f4 com.pae.host/androidx.profileinstaller.ProfileInstallReceiver filter e87b05f
+          Action: "androidx.profileinstaller.action.BENCHMARK_OPERATION"
+      android.intent.action.BOOT_COMPLETED:
+        9883263 com.pae.host/androidx.work.impl.background.systemalarm.RescheduleReceiver filter a7ae9bd
+          Action: "android.intent.action.BOOT_COMPLETED"
+          Action: "android.intent.action.TIME_SET"
+          Action: "android.intent.action.TIMEZONE_CHANGED"
+      android.intent.action.ACTION_POWER_CONNECTED:
+        5150c7 com.pae.host/androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy filter 73f6681
+          Action: "android.intent.action.ACTION_POWER_CONNECTED"
+          Action: "android.intent.action.ACTION_POWER_DISCONNECTED"
+      androidx.work.diagnostics.REQUEST_DIAGNOSTICS:
+        9e9ce60 com.pae.host/androidx.work.impl.diagnostics.DiagnosticsReceiver filter 47ba703
+          Action: "androidx.work.diagnostics.REQUEST_DIAGNOSTICS"
+      androidx.work.impl.background.systemalarm.UpdateProxies:
+        3ae4f19 com.pae.host/androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver filter ebb4bb2
+          Action: "androidx.work.impl.background.systemalarm.UpdateProxies"
+
+Permissions:
+  Permission [com.pae.host.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION] (90ac5d2):
+    sourcePackage=com.pae.host
+    uid=10033 gids=null type=0 prot=signature
+    perm=Permission{3a77bde com.pae.host.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION}
+    packageSetting=PackageSetting{72b8da0 com.pae.host/10033}
+
+Registered ContentProviders:
+  com.pae.host/com.google.mlkit.common.internal.MlKitInitProvider:
+    Provider{1c191bf com.pae.host/com.google.mlkit.common.internal.MlKitInitProvider}
+  com.pae.host/androidx.startup.InitializationProvider:
+    Provider{28d708c com.pae.host/androidx.startup.InitializationProvider}
+
+ContentProvider Authorities:
+  [com.pae.host.androidx-startup]:
+    Provider{28d708c com.pae.host/androidx.startup.InitializationProvider}
+      applicationInfo=ApplicationInfo{6cbc3d5 com.pae.host}
+  [com.pae.host.mlkitinitprovider]:
+    Provider{1c191bf com.pae.host/com.google.mlkit.common.internal.MlKitInitProvider}
+      applicationInfo=ApplicationInfo{6cbc3d5 com.pae.host}
+
+Key Set Manager:
+  [com.pae.host]
+      Signing KeySets: 25
+
+Packages:
+  Package [com.pae.host] (72b8da0):
+    userId=10033
+    pkg=Package{62b77ea com.pae.host}
+    codePath=/data/app/com.pae.host-E9xpBJgyRBMVE3FfKxbdDA==
+    resourcePath=/data/app/com.pae.host-E9xpBJgyRBMVE3FfKxbdDA==
+    legacyNativeLibraryDir=/data/app/com.pae.host-E9xpBJgyRBMVE3FfKxbdDA==/lib
+    primaryCpuAbi=arm64-v8a
+    secondaryCpuAbi=null
+    versionCode=1 minSdk=23 targetSdk=33
+    versionName=0.1.0-m1
+    splits=[base]
+    apkSigningVersion=2
+    applicationInfo=ApplicationInfo{6cbc3d5 com.pae.host}
+    flags=[ DEBUGGABLE HAS_CODE ALLOW_CLEAR_USER_DATA ]
+    privateFlags=[ PARTIALLY_DIRECT_BOOT_AWARE PRIVATE_FLAG_ACTIVITIES_RESIZE_MODE_RESIZEABLE_VIA_SDK_VERSION ]
+    dataDir=/data/user/0/com.pae.host
+    supportsScreens=[small, medium, large, xlarge, resizeable, anyDensity]
+    timeStamp=2026-11-25 02:21:58
+    firstInstallTime=2026-11-21 11:46:05
+    lastUpdateTime=2026-11-25 02:22:01
+    signatures=PackageSignatures{4805615 [2117cbc1]}
+    installPermissionsFixed=true installStatus=1
+    pkgFlags=[ DEBUGGABLE HAS_CODE ALLOW_CLEAR_USER_DATA ]
+    declared permissions:
+      com.pae.host.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION: prot=signature, INSTALLED
+    requested permissions:
+      android.permission.CAMERA
+      android.permission.READ_EXTERNAL_STORAGE
+      android.permission.ACCESS_NETWORK_STATE
+      android.permission.INTERNET
+      android.permission.WAKE_LOCK
+      android.permission.RECEIVE_BOOT_COMPLETED
+      android.permission.FOREGROUND_SERVICE
+      com.pae.host.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+    install permissions:
+      android.permission.RECEIVE_BOOT_COMPLETED: granted=true
+      android.permission.INTERNET: granted=true
+      com.pae.host.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION: granted=true
+      android.permission.ACCESS_NETWORK_STATE: granted=true
+      android.permission.WAKE_LOCK: granted=true
+    User 0: ceDataInode=400142 installed=true hidden=false suspended=false stopped=false notLaunched=false enabled=0 instant=false virtual=false
+      gids=[3003]
+      runtime permissions:
+        android.permission.READ_EXTERNAL_STORAGE: granted=true
+        android.permission.CAMERA: granted=true
+      disabledComponents:
+        androidx.work.impl.background.systemalarm.RescheduleReceiver
+      enabledComponents:
+        androidx.work.impl.background.systemjob.SystemJobService
+
+Package Changes:
+  Sequence number=52
+  User 0:
+    seq=45, package=com.mgtv.tvos.datareportor
+    seq=51, package=com.pae.host
+
+
+Dexopt state:
+  [com.pae.host]
+    path: /data/app/com.pae.host-E9xpBJgyRBMVE3FfKxbdDA==/base.apk
+      arm64: /data/app/com.pae.host-E9xpBJgyRBMVE3FfKxbdDA==/oat/arm64/base.odex[status=kOatUpToDate, compilation_filter
+      =quicken]
+
+
+Compiler stats:
+  [com.pae.host]
+     base.apk - 1975
+6994
+
+=== Memory ===
+Applications Memory Usage (in Kilobytes):
+Uptime: 143213598 Realtime: 143213598
+
+** MEMINFO in pid 6994 [com.pae.host] **
+                   Pss  Private  Private  SwapPss     Heap     Heap     Heap
+                 Total    Dirty    Clean    Dirty     Size    Alloc     Free
+                ------   ------   ------   ------   ------   ------   ------
+  Native Heap   204549   204472        0       84   246272   226462    19809
+  Dalvik Heap     2494     2412        0       30     5002     2501     2501
+ Dalvik Other     1941     1940        0        0                           
+        Stack       88       88        0        0                           
+       Ashmem        2        0        0        0                           
+    Other dev       14        0       12        0                           
+     .so mmap     4347      168       32      157                           
+    .apk mmap     9867      376     9248        0                           
+    .ttf mmap       83        0       40        0                           
+    .dex mmap    13488        4     9740        0                           
+    .oat mmap     1045        0      108        0                           
+    .art mmap     4558     4052        4        0                           
+   Other mmap       99        4       32        0                           
+      Unknown     1932     1900        0        7                           
+        TOTAL   244785   215416    19216      278   251274   228963    22310
+ 
+ App Summary
+                       Pss(KB)
+                        ------
+           Java Heap:     6468
+         Native Heap:   204472
+                Code:    19716
+               Stack:       88
+            Graphics:        0
+       Private Other:     3888
+              System:    10153
+ 
+               TOTAL:   244785       TOTAL SWAP PSS:      278
+ 
+ Objects
+               Views:       35         ViewRootImpl:        1
+         AppContexts:        2           Activities:        1
+              Assets:        2        AssetManagers:        3
+       Local Binders:       11        Proxy Binders:       19
+       Parcel memory:        9         Parcel count:       40
+    Death Recipients:        1      OpenSSL Sockets:        0
+            WebViews:        0
+ 
+ SQL
+         MEMORY_USED:     2560
+  PAGECACHE_OVERFLOW:     2043          MALLOC_SIZE:      117
+ 
+ DATABASES
+      pgsz     dbsz   Lookaside(b)          cache  Dbname
+         4       96            109         7/36/9  /data/user/0/com.pae.host/no_backup/androidx.work.workdb
+         4        8                         0/0/0    (attached) temp
+         4       96             47         4/20/5  /data/user/0/com.pae.host/no_backup/androidx.work.workdb (1)
+         4     1560            103     384/102/11  /data/user/0/com.pae.host/databases/com.google.android.datatransport.events
+
+=== Battery ===
+Current Battery Service state:
+  AC powered: true
+  USB powered: true
+  Wireless powered: false
+  Max charging current: 0
+  Max charging voltage: 0
+  Charge counter: 0
+  status: 3
+  health: 2
+  present: true
+  level: 50
+  scale: 100
+  voltage: 3
+  temperature: 26
+  technology: Li-ion
+
+=== Device ===
+nunai_max
+nunai_max
+8.1.0
+27
+Physical size: 1920x1080
+Physical density: 240
+
+=== Thermal zones ===
+/sys/class/thermal/thermal_zone*/temp cat: /sys/class/thermal/thermal_zone*/temp: No such file or directory
+/sys/class/thermal/thermal_zone0/temp 63125
+/sys/class/thermal/thermal_zone1/temp 63125
+/sys/class/thermal/thermal_zone2/temp 2600

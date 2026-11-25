@@ -34,6 +34,10 @@ struct AnatomyResult {
     // quad-ness / edge flow.
     std::vector<std::array<uint32_t, 4>> surfaceQuads;
     bool valid = false;
+    // True only when the surface is a single watertight, manifold body with
+    // valid normals. This is the body acceptance criterion; `valid` alone
+    // only says the extraction produced something renderable.
+    bool topologyClean = false;
 };
 
 // Generates the unified upper body (hips -> head, arms to the wrists) as a

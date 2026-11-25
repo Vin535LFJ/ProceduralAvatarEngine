@@ -1,0 +1,21 @@
+P1-B2 GPU/CPU validation thresholds (predeclared before device execution)
+Date: 2026-11-24
+
+Fixed method:
+- ES 3.0 transform feedback reads every Render Mesh vertex.
+- Interleaved outputs: world position xyz, normalized world normal xyz.
+- CPU reference uses the same 22-bone palette, LBS order and inverse-transpose model normal matrix.
+- Bind case: identity local rotations, identity model matrix.
+- Representative case: left upper arm +40 deg Z, left lower arm -85 deg Z; left/right upper leg -25 deg X, left/right lower leg +55 deg X; identity model matrix.
+- Non-uniform case: representative rotations; model = translation(0.25,-0.5,0.75) * scale(2,0.5,3).
+
+Predeclared thresholds:
+- Maximum position error <= 0.00005 m.
+- Mean position error <= 0.00002 m.
+- Maximum normal angle error <= 0.5 deg.
+- Abnormal normal count (> 0.5 deg) = 0.
+- Invalid position count (non-finite) = 0.
+- Invalid normal count (non-finite or unit-length error > 0.001) = 0.
+- Any GL error fails the case.
+
+Thresholds are not to be adjusted in response to observed device results.

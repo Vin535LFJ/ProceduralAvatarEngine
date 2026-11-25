@@ -1,12 +1,16 @@
 #pragma once
 
-// M11-E: parametric head + face feature generation. The head is a profile-
-// modulated sphere (forehead/temple/cheek/jaw/chin/back-head shape functions)
-// instead of a bare ellipsoid; features are procedural geometry driven by
-// FaceParams. Every parameter participates in generation.
+// M11-E: facial feature generation. The features are separate pieces (eyes,
+// brows, nose tip, mouth) anchored to the head bone.
+//
+// R4 change: the features are no longer placed at assumed depths relative to
+// an ellipsoid. They are projected onto the *actual* extracted head surface
+// (see HeadAnatomy.h), so an eye can no longer float in front of the face or
+// sink behind the brow ridge.
 
 #include "core/math/Math.h"
 #include "procedural/MeshData.h"
+#include "procedural/humanoid/HeadAnatomy.h"
 
 #include <vector>
 
@@ -31,15 +35,10 @@ struct FacePiece {
     uint16_t materialId = 0;       // 0 skin, 1 hair, 3 eye, 4 ink
 };
 
-// Profile-modulated head mesh (radial ring grid, analytic-ish normals).
-MeshData generateHeadMesh(const FaceParams& params, Vec3 headCenter,
-                          float headWidth, float headHeight,
-                          uint32_t radialSegments, uint32_t rings);
-
-// Facial features assembled as independent pieces (eyes, brows, nose,
-// mouth, ears) anchored to the head bone.
+// Facial features assembled as independent pieces (eyes, brows, mouth)
+// placed on the landmarks resolved from the extracted head surface.
 std::vector<FacePiece> generateFaceFeatures(const FaceParams& params,
-                                            Vec3 headCenter, float headWidth,
-                                            float headHeight, uint32_t radial);
+                                            const head::HeadLandmarks& landmarks,
+                                            uint32_t radial);
 
 } // namespace pae::face

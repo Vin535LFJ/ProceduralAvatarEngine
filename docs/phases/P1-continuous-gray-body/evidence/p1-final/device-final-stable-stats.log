@@ -1,0 +1,11 @@
+--------- beginning of main
+11-25 02:40:57.828  6994  7013 I PAE_STATS: frames=37200 fps=46.9 frame_ms=21.32 draw_calls=5 triangles=115300 buffer_bytes=31363136 p50_ms=21.33 p95_ms=23.22 p99_ms=24.78
+--------- beginning of system
+11-25 02:40:57.947  6994  7013 I PAE_RENDER: geometry cache hit: canonical (115300 tris)
+11-25 02:41:00.831  6994  7013 I PAE_RENDER: canonical body ready: verts=57652 tris=115300 render_verts=345900 uv_charts=115300 gen_ms=2885
+11-25 02:41:00.831  6994  7013 I PAE_RENDER: applied previewMode=3
+11-25 02:41:00.831  6994  7013 I PAE_RENDER: applied cameraPreset=0
+11-25 02:41:00.831  6994  7013 I PAE_RENDER: applied debugView=0
+11-25 02:41:03.309  6994  7013 I PAE_STATS: frames=37320 fps=46.1 frame_ms=21.69 draw_calls=5 triangles=115300 buffer_bytes=31363136 p50_ms=21.29 p95_ms=23.38 p99_ms=24.78
+11-25 02:41:05.930  6994  7013 I PAE_STATS: frames=37440 fps=46.4 frame_ms=21.57 draw_calls=5 triangles=115300 buffer_bytes=31363136 p50_ms=21.41 p95_ms=23.85 p99_ms=31.36
+11-25 02:41:08.558  6994  7013 I PAE_STATS: frames=37560 fps=45.5 frame_ms=21.97 draw_calls=5 triangles=115300 buffer_bytes=31363136 p50_ms=21.46 p95_ms=24.32 p99_ms=25.48

@@ -4,6 +4,7 @@
 #include "procedural/geometry/CatmullRom.h"
 #include "skeleton/weights/WeightGenerator.h"
 #include "procedural/humanoid/FaceGenerator.h"
+#include "procedural/humanoid/HeadAnatomy.h"
 #include "procedural/humanoid/HairGenerator.h"
 #include "procedural/humanoid/ClothingGenerator.h"
 #include "procedural/primitives/Primitives.h"
@@ -34,6 +35,11 @@ struct Part {
     std::vector<Vec3> path;
     std::vector<uint16_t> pathBones;
     uint16_t materialId = 0;
+    // The head and neck are one continuous surface, so the generic path
+    // weighting cannot separate the two bones: the transition segment would
+    // be shared by both and give them identical influence. Those parts carry
+    // an authored neck->head ramp instead.
+    bool neckHeadRamp = false;
 };
 
 Vec3 materialColor(uint16_t materialId) {
@@ -68,23 +74,22 @@ BodyJoints deriveJoints(const BodyParameters& p, float scale) {
     const float shoulderX = p.shoulderWidth * scale * 0.5f;
     const float upperArm = p.upperArmLength * scale;
     const float lowerArm = p.lowerArmLength * scale;
-    // M12-A: relaxed standing pose. Arms hang near-vertical (a natural ~10 deg
-    // abduction) so the silhouette is widest at the deltoids, not at the
-    // wrists — 24 deg read as an A-pose and made the figure look squat.
-    const float armAngle = 10.0f * kPi / 180.0f;
-    const float forearmAngle = 6.0f * kPi / 180.0f;
+    // Keep the acromion below the neck base and leave a visible gap between
+    // the hanging hand and the outer thigh in the bind pose.
+    const float armAngle = 20.0f * kPi / 180.0f;
+    const float forearmAngle = 14.0f * kPi / 180.0f;
 
-    j.leftShoulder = {shoulderX, j.chest.y, 0.0f};
+    j.leftShoulder = {shoulderX, j.chest.y - 0.050f * scale, 0.0f};
     j.leftElbow = j.leftShoulder + Vec3{std::sin(armAngle) * upperArm, -std::cos(armAngle) * upperArm, 0.0f};
     j.leftWrist = j.leftElbow + Vec3{std::sin(forearmAngle) * lowerArm, -std::cos(forearmAngle) * lowerArm, 0.0f};
     j.leftHand = j.leftWrist + Vec3{0.02f * scale, -0.06f * scale, 0.0f};
 
-    j.rightShoulder = {-shoulderX, j.chest.y, 0.0f};
+    j.rightShoulder = {-shoulderX, j.chest.y - 0.050f * scale, 0.0f};
     j.rightElbow = j.rightShoulder + Vec3{-std::sin(armAngle) * upperArm, -std::cos(armAngle) * upperArm, 0.0f};
     j.rightWrist = j.rightElbow + Vec3{-std::sin(forearmAngle) * lowerArm, -std::cos(forearmAngle) * lowerArm, 0.0f};
     j.rightHand = j.rightWrist + Vec3{-0.02f * scale, -0.06f * scale, 0.0f};
 
-    const float hipX = p.hipWidth * scale * 0.5f;
+    const float hipX = p.hipWidth * scale * 0.58f;
     const float upperLeg = p.upperLegLength * scale;
     const float lowerLeg = p.lowerLegLength * scale;
     j.leftHip = {hipX, hipY, 0.0f};
@@ -108,6 +113,26 @@ MeshData translated(const MeshData& source, const Vec3& offset) {
     for (const Vertex& vertex : result.vertices) bounds.expand(vertex.position);
     result.bounds = bounds;
     return result;
+}
+
+// Authored neck->head weight ramp for the continuous head/neck surface.
+// Below the jaw the surface is neck-driven, above it head-driven, and the
+// transition is a smoothstep so the skull does not tear when the head turns.
+void applyNeckHeadRamp(MeshData& mesh, float neckBaseY, float jawY) {
+    const float span = std::max(jawY - neckBaseY, 1e-4f);
+    for (Vertex& vertex : mesh.vertices) {
+        const float t = clampParam((vertex.position.y - neckBaseY) / span, 0.0f, 1.0f);
+        const float s = t * t * (3.0f - 2.0f * t);
+        vertex.joints = {BoneNeck, BoneHead, 0, 0};
+        vertex.weights = {1.0f - s, s, 0.0f, 0.0f};
+    }
+}
+
+// The neck radius shared by the torso loft and the head/neck surface. The
+// factor raises the old radiusFactor-derived value to a real adult neck
+// diameter (~11 cm) instead of the ~7 cm stalk it produced before.
+float neckRingRadius(const BodyParameters& p, float scale) {
+    return p.neckLength * scale * p.neckShape.radiusFactor * 1.60f;
 }
 
 } // namespace
@@ -232,16 +257,20 @@ std::vector<LoftSection> computeTorsoSections(const BodyParameters& params,
         sections.push_back({{0.0f, at(0.93f) + ts.chestTilt * 0.6f, 0.0f},
                             chestW * 0.5f * (0.90f + 0.14f * ts.chestUpperCurve),
                             chestDepth * (0.80f + 0.12f * ts.chestUpperCurve), 0.0f});
-        // Shoulder-to-neck taper: the old single top ring dropped from full
-        // chest width to 0.42*shoulderWidth in one step, producing a pipe
-        // neck and an armoured shirt shoulder. Three intermediate stations
-        // make the trapezius slope continuous.
-        const float neckRx = p.neckLength * scale * p.neckShape.radiusFactor;
-        sections.push_back({{0.0f, at(1.00f), 0.0f}, shoulderW * 0.44f, chestDepth * 0.60f, 0.0f});
-        sections.push_back({{0.0f, joints.neck.y - 0.035f * scale, 0.0f},
-                            lerp(shoulderW * 0.44f, neckRx, 0.55f),
-                            lerp(chestDepth * 0.60f, neckRx, 0.55f), 0.0f});
-        sections.push_back({{0.0f, joints.neck.y, 0.0f}, neckRx * 1.10f, neckRx * 1.10f, 0.0f});
+        // Shoulder-to-neck taper. The stations descend monotonically from the
+        // shoulder line to the neck ring: the previous version placed the
+        // neck-base ring *below* the shoulder ring and the final neck ring
+        // back at the shoulder height, so the spline doubled back on itself
+        // and produced the armoured-shoulder step.
+        const float neckRingR = neckRingRadius(p, scale);
+        sections.push_back({{0.0f, joints.neck.y - 0.045f * T, 0.0f},
+                            shoulderW * 0.40f, chestDepth * 0.56f, 0.0f});
+        sections.push_back({{0.0f, joints.neck.y - 0.020f * T, 0.0f},
+                            lerp(shoulderW * 0.40f, neckRingR * 1.12f, 0.62f),
+                            lerp(chestDepth * 0.56f, neckRingR * 1.12f, 0.62f), 0.0f});
+        sections.push_back({{0.0f, joints.neck.y - 0.006f * T, 0.0f},
+                            neckRingR * 1.10f, neckRingR * 1.10f, 0.0f});
+        sections.push_back({{0.0f, joints.neck.y, 0.0f}, neckRingR, neckRingR, 0.0f});
         return sections;
 }
 
@@ -294,19 +323,50 @@ HumanoidResult generateHumanoid(const BodyParameters& params, bool weightHeatmap
         parts.push_back(part);
     }
 
-    // ---- Head + face (M11-E FaceGenerator) and hair (HairGenerator). ----
-    {
-        Part head;
-        head.materialId = 0;
-        head.mesh = face::generateHeadMesh(p.face, joints.head, p.headWidth,
-                                           p.headHeight, radial, rings);
-        head.path = {joints.head};
-        head.pathBones = {BoneHead};
-        parts.push_back(head);
+    // ---- Head + neck: one continuous anatomical surface (R4). ----
+    // The previous implementation was a latitude/longitude ellipsoid whose
+    // bottom pole converged to a point (the "cone chin"), with the facial
+    // features floating in front of it at assumed depths. The head is now an
+    // SDF extracted with the project's own Surface Nets extractor, and every
+    // feature is projected onto the extracted surface.
+    head::HeadParams headParams;
+    headParams.width = p.headWidth;
+    headParams.height = p.headHeight;
+    headParams.depth = p.headHeight * 0.80f;
+    headParams.jawWidth = p.face.jawWidth;
+    headParams.chinShape = p.face.chinShape;
+    headParams.cheekVolume = p.face.cheekVolume;
+    headParams.noseWidth = p.face.noseWidth;
+    headParams.noseBridge = p.face.noseBridge;
+    headParams.eyeSpacing = p.face.eyeSpacing;
+    headParams.eyeSize = p.face.eyeSize;
+    headParams.browHeight = p.face.browHeight;
+    headParams.mouthWidth = p.face.mouthWidth;
+    headParams.neckRadius = neckRingRadius(p, scale);
 
-        auto facePieces = face::generateFaceFeatures(p.face, joints.head,
-                                                     p.headWidth, p.headHeight,
-                                                     radial);
+    // The neck surface ends exactly at the torso's neck ring so it plugs the
+    // open top of the torso loft instead of leaving a gap.
+    const float headNeckBaseY = joints.neck.y;
+    head::HeadLandmarks landmarks;
+    {
+        Part part;
+        part.materialId = 0;
+        part.mesh = head::generateHeadMesh(headParams, joints.head, headNeckBaseY,
+                                            &landmarks, 0);
+        // Two anchors so the weight falls off from the jaw into the neck
+        // instead of the whole surface being pulled by one bone. The head
+        // segment runs from the jaw up to the crown, so skull vertices stay
+        // head-dominant while the neck root keeps neck influence.
+        const Vec3 jawAnchor = joints.head - Vec3{0.0f, p.headHeight * scale * 0.45f, 0.0f};
+        const Vec3 crownAnchor = joints.head + Vec3{0.0f, p.headHeight * scale * 0.50f, 0.0f};
+        part.path = {joints.neck, jawAnchor, crownAnchor};
+        part.pathBones = {BoneNeck, BoneHead, BoneHead};
+        part.neckHeadRamp = true;
+        parts.push_back(part);
+    }
+
+    {
+        auto facePieces = face::generateFaceFeatures(p.face, landmarks, radial);
         for (auto& piece : facePieces) {
             Part part;
             part.materialId = piece.materialId;
@@ -315,39 +375,39 @@ HumanoidResult generateHumanoid(const BodyParameters& params, bool weightHeatmap
             part.pathBones = {BoneHead};
             parts.push_back(part);
         }
-
-        auto hairPieces = hair::generateHair(p.hair, joints.head, p.headWidth,
-                                             p.headHeight,
-                                             p.headWidth * 0.84f, radial);
-        for (auto& piece : hairPieces) {
-            Part part;
-            part.materialId = piece.materialId;
-            part.mesh = std::move(piece.mesh);
-            part.path = {piece.center};
-            part.pathBones = {BoneHead};
-            parts.push_back(part);
-        }
     }
 
-    // ---- Neck: short embedded sweep. The torso now carries the trapezius
-    // taper up to the neck base, so this piece only bridges to the skull.
+    // ---- Hair: a shell derived from the same field as the skull, so it can
+    // neither float above the head nor leave a brim ring around it. ----
     {
-        Part part;
-        part.materialId = 0;
-        const NeckShape& ns = p.neckShape;
-        const float neckRadius = p.neckLength * scale * ns.radiusFactor;
-        const Vec3 neckBase = joints.neck - Vec3{0.0f, 0.015f * scale, 0.0f};
-        const Vec3 headBase = joints.head - Vec3{0.0f, p.headHeight * scale * 0.22f, 0.0f};
-        const std::vector<SweepRing> rings = {
-            {neckBase, neckRadius * 1.02f, {1.0f, 1.0f}, 0.0f},
-            {neckBase + (headBase - neckBase) * 0.55f, neckRadius, {1.0f, 1.0f}, 0.0f},
-            {headBase, neckRadius * ns.taper, {1.0f, 1.0f}, 0.0f},
-        };
-        part.mesh = generateSplineSweep(rings, radial, splineSamples, false, false, false);
-        part.path = {neckBase, joints.neck, headBase};
-        part.pathBones = {BoneChest, BoneNeck, BoneHead};
-        parts.push_back(part);
+        Part shell;
+        shell.materialId = 1;
+        shell.mesh = head::generateHairShell(headParams, joints.head, headNeckBaseY,
+                                              0.010f, 0);
+        const Vec3 shellJaw = joints.head - Vec3{0.0f, p.headHeight * scale * 0.45f, 0.0f};
+        const Vec3 shellCrown = joints.head + Vec3{0.0f, p.headHeight * scale * 0.50f, 0.0f};
+        shell.path = {joints.neck, shellJaw, shellCrown};
+        shell.pathBones = {BoneNeck, BoneHead, BoneHead};
+        shell.neckHeadRamp = true;
+        parts.push_back(shell);
+
+        // Strand clumps on top of the shell give the hair a directional
+        // silhouette instead of a smooth cap. They are projected onto the
+        // skull so they lie on the head; the previous generator placed them
+        // at fixed ellipsoid coordinates and they floated above it.
+        Part strands;
+        strands.materialId = 1;
+        strands.mesh = head::generateHairStrands(headParams, joints.head, headNeckBaseY,
+                                                  p.hair.strandCount, p.hair.strandWidth, radial);
+        strands.path = {joints.head};
+        strands.pathBones = {BoneHead};
+        strands.neckHeadRamp = true;
+        parts.push_back(strands);
     }
+
+    // ---- Neck: the head/neck SDF surface above now carries the neck, so the
+    // separate cylindrical neck sweep is gone. Its old radius (~7 cm) was the
+    // main reason the figure read as a stalk with a ball on top.
 
     // ---- Arms: 6-ring embedded spline sweeps with anatomy profile (M11). ----
     auto addArm = [&](bool left) {
@@ -477,6 +537,10 @@ HumanoidResult generateHumanoid(const BodyParameters& params, bool weightHeatmap
         spec.pathBones = &part.pathBones;
         spec.materialId = part.materialId;
         weights::assignWeights(spec, result.skeleton, weightHeatmap);
+        if (part.neckHeadRamp) {
+            applyNeckHeadRamp(part.mesh, joints.neck.y,
+                               joints.head.y - p.headHeight * scale * 0.45f);
+        }
     }
 
     MeshData combined;

@@ -1,0 +1,17 @@
+## poc-sm/shape-model-v2...origin/poc-sm/shape-model-v2
+ M native/CMakeLists.txt
+ M native/procedural/humanoid/FaceGenerator.cpp
+ M native/procedural/humanoid/FaceGenerator.h
+ M native/procedural/humanoid/Humanoid.cpp
+ M native/procedural/humanoid/anatomy/HumanAnatomyGenerator.cpp
+ M native/procedural/humanoid/anatomy/HumanAnatomyGenerator.h
+ M native/renderer/RenderThread.cpp
+ M tests/unit/anatomy_tests.cpp
+ M tests/unit/face_hair_tests.cpp
+?? .workbuddy-ai/
+?? docs/phases/P1-continuous-gray-body/
+?? evidence/character-v6/anatomy-clay.png
+?? evidence/character-v6/anatomy-shoulder.png
+?? evidence/character-v7/
+?? native/procedural/humanoid/HeadAnatomy.cpp
+?? native/procedural/humanoid/HeadAnatomy.h

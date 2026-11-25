@@ -1,0 +1,3 @@
+f3e3bc2970e9c4844929d632077c765890c6b2b7
+2026-11-24 17:31:57 +0800
+docs: record the character route change and round-3 evidence

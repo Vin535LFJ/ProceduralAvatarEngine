@@ -1,0 +1,23 @@
+nunai_max
+8.1.0
+27
+Physical size: 1920x1080
+Physical density: 240
+Current Battery Service state:
+  AC powered: true
+  USB powered: true
+  Wireless powered: false
+  Max charging current: 0
+  Max charging voltage: 0
+  Charge counter: 0
+  status: 3
+  health: 2
+  present: true
+  level: 50
+  scale: 100
+  voltage: 3
+  temperature: 26
+  technology: Li-ion
+/sys/class/thermal/thermal_zone0 66666
+/sys/class/thermal/thermal_zone1 66666
+/sys/class/thermal/thermal_zone2 2600

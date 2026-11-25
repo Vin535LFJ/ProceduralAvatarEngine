@@ -1,0 +1,80 @@
+Internal ctest changing into directory: E:/AI-Tools/ProceduralAvatarEngine-poc-sm/build-host
+Test project E:/AI-Tools/ProceduralAvatarEngine-poc-sm/build-host
+      Start  1: pae_core_tests
+ 1/18 Test  #1: pae_core_tests ...................   Passed    3.48 sec
+      Start  2: pae_geometry_tests
+ 2/18 Test  #2: pae_geometry_tests ...............   Passed    0.15 sec
+      Start  3: pae_fusion_tests
+ 3/18 Test  #3: pae_fusion_tests .................   Passed    0.19 sec
+      Start  4: pae_smooth_union_sign_tests
+ 4/18 Test  #4: pae_smooth_union_sign_tests ......   Passed    0.14 sec
+      Start  5: pae_face_hair_tests
+ 5/18 Test  #5: pae_face_hair_tests ..............   Passed   11.97 sec
+      Start  6: pae_anatomy_tests
+ 6/18 Test  #6: pae_anatomy_tests ................***Failed    1.55 sec
+[ RUN ] anatomy_field_regions_own_their_volume
+[DBG-C] chestField=-0.1151
+[DBG-F] upperBodySdf(probe)=0.2559
+[DBG-F]   RibCage=0.2329
+[DBG-F]   Abdomen=0.2530
+[DBG-F]   Pelvis=0.2469
+[DBG-F]   Clavicle=0.4699
+[DBG-F]   Deltoid=0.5405
+[DBG-F]   UpperArm=0.5605
+[DBG-F]   Forearm=0.5710
+[DBG-F]   Neck=0.4596
+[DBG-F]   Head=0.5156
+[  OK ] anatomy_field_regions_own_their_volume
+[ RUN ] anatomy_mesh_is_single_watertight_surface
+[E/PAE_GEOMETRY] anatomy topology NOT clean: components=1 boundary=0 nonmanifold=2 badnorm=0 (P1 blocker)
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=6536 tris=13072 components=1 boundary=0 nonmanifold=2 degen=0 dup=0 badnorm=0 gen_ms=246 res=48x72x32 | chest=0.600 waist=0.653 shoulder_x=0.308 pelvis=0.676
+[DBG-TOP] components=1 boundary=0 nonmanifold=2 degen=0 dup=0 tris=13072
+FAIL E:/AI-Tools/ProceduralAvatarEngine-poc-sm/tests/unit/anatomy_tests.cpp:96: topology.nonManifoldEdges == 0
+[DBG] mesh bounds: x[-0.339,0.339] y[0.719,1.783] z[-0.104,0.136] tris=13072
+[E/PAE_GEOMETRY] anatomy topology NOT clean: components=1 boundary=0 nonmanifold=2 badnorm=0 (P1 blocker)
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=6536 tris=13072 components=1 boundary=0 nonmanifold=2 degen=0 dup=0 badnorm=0 gen_ms=249 res=48x72x32 | chest=0.600 waist=0.653 shoulder_x=0.308 pelvis=0.676
+[FAIL ] anatomy_mesh_is_single_watertight_surface
+[ RUN ] anatomy_parameters_change_body_shape
+[E/PAE_GEOMETRY] anatomy topology NOT clean: components=1 boundary=0 nonmanifold=2 badnorm=0 (P1 blocker)
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=6200 tris=12400 components=1 boundary=0 nonmanifold=2 degen=0 dup=0 badnorm=0 gen_ms=233 res=48x72x32 | chest=0.581 waist=0.653 shoulder_x=0.278 pelvis=0.676
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=7450 tris=14896 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 gen_ms=269 res=48x72x32 | chest=0.691 waist=0.653 shoulder_x=0.356 pelvis=0.676
+[DBG-P] chest silhouette small=0.1500 large=0.3550 | shoulder small=0.2873 large=0.3564 | valid s=1 l=1
+[  OK ] anatomy_parameters_change_body_shape
+[ RUN ] anatomy_mesh_supports_skinning
+[E/PAE_GEOMETRY] anatomy topology NOT clean: components=1 boundary=0 nonmanifold=2 badnorm=0 (P1 blocker)
+[I/PAE_GEOMETRY] Human Anatomy Report: verts=6536 tris=13072 components=1 boundary=0 nonmanifold=2 degen=0 dup=0 badnorm=0 gen_ms=247 res=48x72x32 | chest=0.600 waist=0.653 shoulder_x=0.308 pelvis=0.676
+[  OK ] anatomy_mesh_supports_skinning
+4 cases, 1 failures
+
+      Start  7: pae_canonical_skin_tests
+ 7/18 Test  #7: pae_canonical_skin_tests .........   Passed   17.00 sec
+      Start  8: pae_humanoid_tests
+ 8/18 Test  #8: pae_humanoid_tests ...............   Passed    9.93 sec
+      Start  9: pae_skinning_tests
+ 9/18 Test  #9: pae_skinning_tests ...............   Passed    9.99 sec
+      Start 10: pae_motion_tests
+10/18 Test #10: pae_motion_tests .................   Passed   11.58 sec
+      Start 11: pae_character_patch_tests
+11/18 Test #11: pae_character_patch_tests ........   Passed   10.20 sec
+      Start 12: pae_poc_route_tests
+12/18 Test #12: pae_poc_route_tests ..............   Passed   12.83 sec
+      Start 13: pae_poc_sm_contract_tests
+13/18 Test #13: pae_poc_sm_contract_tests ........   Passed    0.31 sec
+      Start 14: pae_poc_sm_envelope_tests
+14/18 Test #14: pae_poc_sm_envelope_tests ........   Passed    0.28 sec
+      Start 15: pae_poc_sm_seam_tests
+15/18 Test #15: pae_poc_sm_seam_tests ............   Passed    0.19 sec
+      Start 16: pae_poc_sm_cross_seam_tests
+16/18 Test #16: pae_poc_sm_cross_seam_tests ......   Passed    0.09 sec
+      Start 17: pae_poc_sm_param_diff_tests
+17/18 Test #17: pae_poc_sm_param_diff_tests ......   Passed    0.10 sec
+      Start 18: pae_poc_sm_semantics_tests
+18/18 Test #18: pae_poc_sm_semantics_tests .......   Passed    0.09 sec
+
+94% tests passed, 1 tests failed out of 18
+
+Total Test time (real) =  90.10 sec
+
+The following tests FAILED:
+	  6 - pae_anatomy_tests (Failed)
+Errors while running CTest

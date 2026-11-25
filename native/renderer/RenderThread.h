@@ -82,10 +82,10 @@ public:
     void postMotionReset(); // clear filters/smoothing (video seek, replay, speed change)
     void postQuality(int level); // Low=0 / Medium=1 / High=2 -> geometry detail rebuild
     void postAnatomyPreview(bool on);  // M12: unified SDF upper-body preview
-    void postPreviewMode(int mode);    // 0 avatar / 1 anatomy / 2 P1-A patches
+    void postPreviewMode(int mode);    // 0 avatar / 1 anatomy / 2 P1-A / 3 canonical body
     void postCameraPreset(int preset); // M12: fixed evidence camera (0..7)
     void postCameraOrbit(int op, const Vec3& delta); // interactive camera
-    void postDebugView(int view);      // M12: 0 shading / 1 wireframe / 2 normals
+    void postDebugView(int view);      // 0 shading / 1 wireframe / 2 normals / 3 clay / 4 material / 5 weights / 6 outline / 7 UV
     std::string getStats() const;
 
 private:
@@ -93,6 +93,12 @@ private:
     void processCommands();
     void drawFrame();
     bool ensureResources(std::string* error);
+    bool ensureCanonicalGeometry(int detailLevel);
+    bool validateCanonicalGpuPath(const SkinnedGpuMesh& renderMesh,
+                                  const MeshData& cpuMesh,
+                                  const Skeleton& skeleton,
+                                  uint64_t revision);
+    bool activatePreviewGpuResources(int mode);
     void releaseGpuResources();
     void updateBonePalette(int64_t timestampNs);
     MeshData buildGroundShadow() const;
@@ -106,6 +112,9 @@ private:
 
     EglContextManager egl_;
     ShaderProgram skinnedProgram_;
+    ShaderProgram skinnedLineProgram_;
+    ShaderProgram uvProgram_;
+    GLuint validationProgram_ = 0;
     ShaderProgram backgroundProgram_;
     ShaderProgram outlineProgram_; // inverted-hull cartoon outline (M10)
     ShaderProgram shadowProgram_;  // ground contact shadow disc (M10)
@@ -116,6 +125,9 @@ private:
     SkinnedGpuMesh anatomyLines_;     // M12: wireframe edge buffer
     SkinnedGpuMesh p1aMesh_;           // P1-A: surface-patch torso/shoulder/arm
     SkinnedGpuMesh p1aLines_;          // P1-A: wireframe edge buffer
+    SkinnedGpuMesh canonicalMesh_;     // P1-A3: continuous full-body canonical shell
+    SkinnedGpuMesh canonicalLines_;    // P1-A3: skinned topology wireframe
+    SkinnedGpuMesh canonicalUvMesh_;   // P1-B: split Render Mesh with parallel UV VBO
     PatchGenerationReport patchReport_;
     SkinnedGpuMesh avatarMesh_;
     SkinnedGpuMesh avatarLines_;  // avatar wireframe edge buffer
@@ -133,9 +145,19 @@ private:
     MeshData cachedAvatarMesh_;
     MeshData cachedAnatomyMesh_;
     MeshData cachedP1aMesh_;
+    MeshData cachedCanonicalMesh_;
+    MeshData cachedCanonicalRenderMesh_;
+    Skeleton cachedCanonicalSkeleton_{};
+    BodyJoints cachedCanonicalJoints_{};
+    std::vector<uint32_t> canonicalRenderToCanonical_;
     bool hasCachedAvatar_ = false;
+    bool avatarGeometryDirty_ = false;
     bool hasCachedAnatomy_ = false;
     bool hasCachedP1a_ = false;
+    bool hasCachedCanonical_ = false;
+    int canonicalDetailLevel_ = -1;
+    uint64_t canonicalRevision_ = 0;
+    uint64_t validatedCanonicalRevision_ = 0;
     GlCapabilities caps_;
     RenderStats stats_;
 
@@ -151,7 +173,7 @@ private:
     int poseMode_ = -1;
     int qualityLevel_ = 1;
     int outfitVariant_ = 0;
-    int previewMode_ = 0;  // 0 off, 1 anatomy preview
+    int previewMode_ = 0;  // 0 avatar / 1 anatomy / 2 P1-A / 3 canonical body
     int cameraPreset_ = 0; // M12 evidence camera index
     // Interactive camera state. Shared parameterisation with the presets so a
     // preset can be orbited away from and snapped back to.
@@ -165,6 +187,7 @@ private:
     uint64_t sceneRevision_ = 1;
 
     std::vector<RenderCommand> queue_;
+    std::vector<RenderCommand> deferredCommands_;
     mutable std::mutex queueMutex_;
     std::condition_variable queueCv_;
     std::thread thread_;
@@ -174,6 +197,10 @@ private:
     bool resourcesReady_ = false;
     GLint uniformViewProj_ = -1;
     GLint uniformModel_ = -1;
+    GLint uniformNormalMatrix_ = -1;
+    GLint uniformLineViewProj_ = -1;
+    GLint uniformLineModel_ = -1;
+    GLint uniformLineColor_ = -1;
     GLint uniformCameraPos_ = -1;
     GLint uniformDebugMode_ = -1;
     GLint uniformSkin_ = -1;
@@ -187,6 +214,7 @@ private:
     GLint uniformResolution_ = -1;
     GLint uniformOutlineViewProj_ = -1;
     GLint uniformOutlineModel_ = -1;
+    GLint uniformOutlineNormalMatrix_ = -1;
     GLint uniformOutlineOffset_ = -1;
     GLint uniformOutlineColor_ = -1;
     GLint uniformShadowViewProj_ = -1;
@@ -194,14 +222,24 @@ private:
     GLint uniformShadowColor_ = -1;
     GLint uniformAnatomyViewProj_ = -1;
     GLint uniformAnatomyModel_ = -1;
+    GLint uniformAnatomyNormalMatrix_ = -1;
     GLint uniformAnatomyNeutral_ = -1;
     GLint uniformAnatomyNormalViewProj_ = -1;
     GLint uniformAnatomyNormalModel_ = -1;
+    GLint uniformAnatomyNormalNormalMatrix_ = -1;
 GLint uniformAnatomyClayViewProj_ = -1;
 GLint uniformAnatomyClayModel_ = -1;
+GLint uniformAnatomyClayNormalMatrix_ = -1;
 GLint uniformAnatomyClayNeutral_ = -1;
 GLint uniformAnatomyClayKeyDir_ = -1;
 GLint uniformAnatomyClayFillDir_ = -1;
+    GLint uniformUvViewProj_ = -1;
+    GLint uniformUvModel_ = -1;
+    GLint uniformUvNormalMatrix_ = -1;
+    GLint uniformUvLightDir_ = -1;
+    GLint uniformUvCheckerScale_ = -1;
+    GLint uniformValidationModel_ = -1;
+    GLint uniformValidationNormalMatrix_ = -1;
     int width_ = 0;
     int height_ = 0;
     uint32_t maxQueuedCommands_ = 64;

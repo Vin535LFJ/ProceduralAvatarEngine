@@ -29,6 +29,17 @@ target_include_directories(pae_anatomy_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}
 target_link_libraries(pae_anatomy_tests PRIVATE pae_core)
 add_test(NAME pae_anatomy_tests COMMAND pae_anatomy_tests)
 
+add_executable(pae_canonical_skin_tests unit/p1_continuous_gray_body_tests.cpp)
+target_include_directories(pae_canonical_skin_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/harness)
+target_link_libraries(pae_canonical_skin_tests PRIVATE pae_core)
+add_test(NAME pae_canonical_skin_tests COMMAND pae_canonical_skin_tests)
+
+add_executable(pae_render_data_tests unit/p1_render_data_tests.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../native/renderer/gl/SkinnedGpuMesh.cpp)
+target_include_directories(pae_render_data_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/harness)
+target_link_libraries(pae_render_data_tests PRIVATE pae_core)
+add_test(NAME pae_render_data_tests COMMAND pae_render_data_tests)
+
 add_executable(pae_humanoid_tests unit/humanoid_tests.cpp)
 target_include_directories(pae_humanoid_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/harness)
 target_link_libraries(pae_humanoid_tests PRIVATE pae_core)

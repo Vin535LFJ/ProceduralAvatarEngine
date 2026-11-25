@@ -1,0 +1,24 @@
+--------- beginning of main
+--------- beginning of system
+11-24 21:56:53.753 I/PAE_SURFACE(22343): surfaceDestroyed
+11-24 21:57:01.966 I/PAE_UI  (22343): debug extras: anatomy=false preset=0 view=7 outfit=-1
+11-24 21:57:02.002 I/PAE_SURFACE(22343): surfaceCreated
+11-24 21:57:02.002 I/PAE_SURFACE(22343): surfaceChanged 1920x1008
+11-24 21:57:02.004 I/PAE_GLCAPS(22343): GL_VERSION=OpenGL ES 3.2 v1.r18p0-01rel0.16f2a2e3305581ae54dd0f9788beb400
+11-24 21:57:02.004 I/PAE_GLCAPS(22343): GL_RENDERER=Mali-T860
+11-24 21:57:02.004 I/PAE_GLCAPS(22343): GL_VENDOR=ARM
+11-24 21:57:02.004 I/PAE_GLCAPS(22343): GLSL_VERSION=OpenGL ES GLSL ES 3.20
+11-24 21:57:02.004 I/PAE_GLCAPS(22343): MAX_VERTEX_UNIFORM_BLOCKS=12 MAX_TEXTURE_SIZE=8192 MAX_VERTEX_ATTRIBS=16
+11-24 21:57:02.009 I/PAE_RENDER(22343): geometry cache hit: avatar
+11-24 21:57:02.600 I/PAE_RENDER(22343): geometry cache hit: anatomy (40844 tris)
+11-24 21:57:02.999 I/PAE_RENDER(22343): geometry cache hit: p1a
+11-24 21:57:03.019 I/PAE_RENDER(22343): P1A-REPORT (cached) verts=870 tris=1664 components=1 boundary=80 nonmanifold=0 degenerate=0 badnorm=0 gen_ms=2.369 boundaries=4
+11-24 21:57:03.031 I/PAE_RENDER(22343): geometry cache hit: canonical (112956 tris)
+11-24 21:57:07.031 I/PAE_RENDER(22343): P1B-GPU-CPU case=bind vertices=338868 max_pos_m=5.96235566e-07 mean_pos_m=7.92283785e-08 max_normal_deg=0.0279764533 abnormal_normals=0 invalid_positions=0 invalid_normals=0 result=ok
+11-24 21:57:08.374 I/PAE_RENDER(22343): P1B-GPU-CPU case=elbow85_knee80 vertices=338868 max_pos_m=5.96235566e-07 mean_pos_m=8.24018827e-08 max_normal_deg=0.0395646803 abnormal_normals=0 invalid_positions=0 invalid_normals=0 result=ok
+11-24 21:57:09.705 I/PAE_RENDER(22343): P1B-GPU-CPU case=elbow85_knee80_scale_2_0.5_3 vertices=338868 max_pos_m=5.17050978e-07 mean_pos_m=8.71766943e-08 max_normal_deg=0.0395646803 abnormal_normals=0 invalid_positions=0 invalid_normals=0 result=ok
+11-24 21:57:09.766 I/PAE_RENDER(22343): surface ready 1920x1008
+11-24 21:57:09.766 I/PAE_RENDER(22343): geometry cache hit: canonical (112956 tris)
+11-24 21:57:12.476 I/PAE_RENDER(22343): applied previewMode=3
+11-24 21:57:12.476 I/PAE_RENDER(22343): applied cameraPreset=0
+11-24 21:57:12.476 I/PAE_RENDER(22343): applied debugView=7

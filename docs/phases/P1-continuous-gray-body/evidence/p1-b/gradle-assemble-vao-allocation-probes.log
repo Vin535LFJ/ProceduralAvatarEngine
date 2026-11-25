@@ -1,0 +1,84 @@
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :app:compileDebugAidl NO-SOURCE
+> Task :app:compileDebugRenderscript NO-SOURCE
+> Task :app:generateDebugBuildConfig UP-TO-DATE
+> Task :app:checkDebugAarMetadata UP-TO-DATE
+> Task :app:generateDebugResValues UP-TO-DATE
+> Task :app:mapDebugSourceSetPaths UP-TO-DATE
+> Task :app:generateDebugResources UP-TO-DATE
+> Task :app:mergeDebugResources UP-TO-DATE
+> Task :app:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksDebug UP-TO-DATE
+> Task :app:processDebugMainManifest UP-TO-DATE
+> Task :app:processDebugManifest UP-TO-DATE
+> Task :app:processDebugManifestForPackage UP-TO-DATE
+> Task :app:processDebugResources UP-TO-DATE
+> Task :app:javaPreCompileDebug UP-TO-DATE
+> Task :app:mergeDebugShaders UP-TO-DATE
+> Task :app:compileDebugShaders NO-SOURCE
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :app:mergeDebugAssets UP-TO-DATE
+> Task :app:compressDebugAssets UP-TO-DATE
+> Task :app:processDebugJavaRes NO-SOURCE
+> Task :app:checkDebugDuplicateClasses UP-TO-DATE
+> Task :app:desugarDebugFileDependencies UP-TO-DATE
+> Task :app:mergeExtDexDebug UP-TO-DATE
+> Task :app:mergeLibDexDebug UP-TO-DATE
+> Task :app:configureCMakeDebug[arm64-v8a]
+> Task :app:buildCMakeDebug[arm64-v8a]
+> Task :app:externalNativeBuildDebug
+> Task :app:mergeDebugJniLibFolders UP-TO-DATE
+> Task :app:mergeDebugNativeLibs UP-TO-DATE
+> Task :app:stripDebugDebugSymbols UP-TO-DATE
+> Task :app:validateSigningDebug UP-TO-DATE
+> Task :app:writeDebugAppMetadata UP-TO-DATE
+> Task :app:writeDebugSigningConfigVersions UP-TO-DATE
+
+> Task :app:compileDebugKotlin
+w: file:///E:/AI-Tools/ProceduralAvatarEngine-poc-sm/app/src/main/java/com/pae/host/PoseProviderAdapter.kt:115:5 Annotation 'androidx.camera.core.ExperimentalGetImage' is not an opt-in requirement marker, therefore its usage in @OptIn is ignored
+w: file:///E:/AI-Tools/ProceduralAvatarEngine-poc-sm/app/src/main/java/com/pae/host/VideoPoseSource.kt:15:29 'Allocation' is deprecated. Deprecated in Java
+w: file:///E:/AI-Tools/ProceduralAvatarEngine-poc-sm/app/src/main/java/com/pae/host/VideoPoseSource.kt:16:29 'Element' is deprecated. Deprecated in Java
+w: file:///E:/AI-Tools/ProceduralAvatarEngine-poc-sm/app/src/main/java/com/pae/host/VideoPoseSource.kt:17:29 'RenderScript' is deprecated. Deprecated in Java
+w: file:///E:/AI-Tools/ProceduralAvatarEngine-poc-sm/app/src/main/java/com/pae/host/VideoPoseSource.kt:18:29 'ScriptIntrinsicYuvToRGB' is deprecated. Deprecated in Java
+w: file:///E:/AI-Tools/ProceduralAvatarEngine-poc-sm/app/src/main/java/com/pae/host/VideoPoseSource.kt:19:29 'Type' is deprecated. Deprecated in Java
+w: file:///E:/AI-Tools/ProceduralAvatarEngine-poc-sm/app/src/main/java/com/pae/host/VideoPoseSource.kt:323:30 'destroy(): Unit' is deprecated. Deprecated in Java
+w: file:///E:/AI-Tools/ProceduralAvatarEngine-poc-sm/app/src/main/java/com/pae/host/VideoPoseSource.kt:398:28 'RenderScript' is deprecated. Deprecated in Java
+w: file:///E:/AI-Tools/ProceduralAvatarEngine-poc-sm/app/src/main/java/com/pae/host/VideoPoseSource.kt:399:27 'ScriptIntrinsicYuvToRGB' is deprecated. Deprecated in Java
+w: file:///E:/AI-Tools/ProceduralAvatarEngine-poc-sm/app/src/main/java/com/pae/host/VideoPoseSource.kt:400:26 'Allocation' is deprecated. Deprecated in Java
+w: file:///E:/AI-Tools/ProceduralAvatarEngine-poc-sm/app/src/main/java/com/pae/host/VideoPoseSource.kt:401:27 'Allocation' is deprecated. Deprecated in Java
+w: file:///E:/AI-Tools/ProceduralAvatarEngine-poc-sm/app/src/main/java/com/pae/host/VideoPoseSource.kt:443:19 'copyFrom(ByteArray!): Unit' is deprecated. Deprecated in Java
+w: file:///E:/AI-Tools/ProceduralAvatarEngine-poc-sm/app/src/main/java/com/pae/host/VideoPoseSource.kt:444:24 'setInput(Allocation!): Unit' is deprecated. Deprecated in Java
+w: file:///E:/AI-Tools/ProceduralAvatarEngine-poc-sm/app/src/main/java/com/pae/host/VideoPoseSource.kt:445:24 'forEach(Allocation!): Unit' is deprecated. Deprecated in Java
+w: file:///E:/AI-Tools/ProceduralAvatarEngine-poc-sm/app/src/main/java/com/pae/host/VideoPoseSource.kt:447:24 'copyTo(Bitmap!): Unit' is deprecated. Deprecated in Java
+w: file:///E:/AI-Tools/ProceduralAvatarEngine-poc-sm/app/src/main/java/com/pae/host/VideoPoseSource.kt:492:48 'equals(Any?): Boolean' is deprecated. Deprecated in Java
+w: file:///E:/AI-Tools/ProceduralAvatarEngine-poc-sm/app/src/main/java/com/pae/host/VideoPoseSource.kt:494:22 'RenderScript' is deprecated. Deprecated in Java
+w: file:///E:/AI-Tools/ProceduralAvatarEngine-poc-sm/app/src/main/java/com/pae/host/VideoPoseSource.kt:494:35 'create(Context!): RenderScript!' is deprecated. Deprecated in Java
+w: file:///E:/AI-Tools/ProceduralAvatarEngine-poc-sm/app/src/main/java/com/pae/host/VideoPoseSource.kt:495:29 'Type' is deprecated. Deprecated in Java
+w: file:///E:/AI-Tools/ProceduralAvatarEngine-poc-sm/app/src/main/java/com/pae/host/VideoPoseSource.kt:495:34 'createX(RenderScript!, Element!, Int): Type!' is deprecated. Deprecated in Java
+w: file:///E:/AI-Tools/ProceduralAvatarEngine-poc-sm/app/src/main/java/com/pae/host/VideoPoseSource.kt:495:46 'Element' is deprecated. Deprecated in Java
+w: file:///E:/AI-Tools/ProceduralAvatarEngine-poc-sm/app/src/main/java/com/pae/host/VideoPoseSource.kt:495:54 'U8(RenderScript!): Element!' is deprecated. Deprecated in Java
+w: file:///E:/AI-Tools/ProceduralAvatarEngine-poc-sm/app/src/main/java/com/pae/host/VideoPoseSource.kt:496:30 'Type' is deprecated. Deprecated in Java
+w: file:///E:/AI-Tools/ProceduralAvatarEngine-poc-sm/app/src/main/java/com/pae/host/VideoPoseSource.kt:496:35 'createXY(RenderScript!, Element!, Int, Int): Type!' is deprecated. Deprecated in Java
+w: file:///E:/AI-Tools/ProceduralAvatarEngine-poc-sm/app/src/main/java/com/pae/host/VideoPoseSource.kt:496:48 'Element' is deprecated. Deprecated in Java
+w: file:///E:/AI-Tools/ProceduralAvatarEngine-poc-sm/app/src/main/java/com/pae/host/VideoPoseSource.kt:496:56 'RGBA_8888(RenderScript!): Element!' is deprecated. Deprecated in Java
+w: file:///E:/AI-Tools/ProceduralAvatarEngine-poc-sm/app/src/main/java/com/pae/host/VideoPoseSource.kt:498:24 'ScriptIntrinsicYuvToRGB' is deprecated. Deprecated in Java
+w: file:///E:/AI-Tools/ProceduralAvatarEngine-poc-sm/app/src/main/java/com/pae/host/VideoPoseSource.kt:498:48 'create(RenderScript!, Element!): ScriptIntrinsicYuvToRGB!' is deprecated. Deprecated in Java
+w: file:///E:/AI-Tools/ProceduralAvatarEngine-poc-sm/app/src/main/java/com/pae/host/VideoPoseSource.kt:498:59 'Element' is deprecated. Deprecated in Java
+w: file:///E:/AI-Tools/ProceduralAvatarEngine-poc-sm/app/src/main/java/com/pae/host/VideoPoseSource.kt:498:67 'U8_4(RenderScript!): Element!' is deprecated. Deprecated in Java
+w: file:///E:/AI-Tools/ProceduralAvatarEngine-poc-sm/app/src/main/java/com/pae/host/VideoPoseSource.kt:499:23 'Allocation' is deprecated. Deprecated in Java
+w: file:///E:/AI-Tools/ProceduralAvatarEngine-poc-sm/app/src/main/java/com/pae/host/VideoPoseSource.kt:499:34 'createTyped(RenderScript!, Type!): Allocation!' is deprecated. Deprecated in Java
+w: file:///E:/AI-Tools/ProceduralAvatarEngine-poc-sm/app/src/main/java/com/pae/host/VideoPoseSource.kt:500:24 'Allocation' is deprecated. Deprecated in Java
+w: file:///E:/AI-Tools/ProceduralAvatarEngine-poc-sm/app/src/main/java/com/pae/host/VideoPoseSource.kt:500:35 'createTyped(RenderScript!, Type!): Allocation!' is deprecated. Deprecated in Java
+
+> Task :app:compileDebugJavaWithJavac
+> Task :app:mergeDebugJavaResource UP-TO-DATE
+> Task :app:dexBuilderDebug
+> Task :app:mergeProjectDexDebug
+> Task :app:packageDebug
+> Task :app:createDebugApkListingFileRedirect UP-TO-DATE
+> Task :app:assembleDebug
+
+BUILD SUCCESSFUL in 4s
+35 actionable tasks: 8 executed, 27 up-to-date

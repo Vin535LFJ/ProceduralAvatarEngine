@@ -32,7 +32,8 @@ using SdfField = std::function<float(Vec3)>;
 // can optionally be captured for topology analysis (edge flow / quad-ness),
 // which the triangulated output alone cannot express.
 MeshData extractSurfaceNets(const FusionVolume& volume, const SdfField& sdf,
-                            std::vector<std::array<uint32_t, 4>>* quadIndices = nullptr);
+                            std::vector<std::array<uint32_t, 4>>* quadIndices = nullptr,
+                            bool discardDegenerateQuads = false);
 
 // SDF primitives (world-space).
 float sdSphere(Vec3 p, Vec3 center, float radius);

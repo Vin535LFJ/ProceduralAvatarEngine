@@ -1,0 +1,18 @@
+Device: MAX0019111000104
+Model: nunai_max
+Android: 8.1.0
+API: 27
+Display: 1920x1080
+Density: 240
+App surface: 1920x1008
+PID: 21638
+GL renderer: Mali-T860
+GL version: OpenGL ES 3.2 v1.r18p0-01rel0.16f2a2e3305581ae54dd0f9788beb400
+GLSL version: OpenGL ES GLSL ES 3.20
+Battery temperature: 26 C
+thermal_zone0: 61250
+thermal_zone1: 61250
+thermal_zone2: 2600
+APK versionName: 0.1.0-m1
+APK versionCode: 1
+APK lastUpdateTime: 2026-11-24 21:27:11

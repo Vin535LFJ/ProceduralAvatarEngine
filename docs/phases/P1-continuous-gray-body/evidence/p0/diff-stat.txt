@@ -1,0 +1,10 @@
+ native/CMakeLists.txt                              |   1 +
+ native/procedural/humanoid/FaceGenerator.cpp       | 203 +++----------------
+ native/procedural/humanoid/FaceGenerator.h         |  25 ++-
+ native/procedural/humanoid/Humanoid.cpp            | 167 +++++++++++-----
+ .../humanoid/anatomy/HumanAnatomyGenerator.cpp     |  16 ++
+ .../humanoid/anatomy/HumanAnatomyGenerator.h       |   4 +
+ native/renderer/RenderThread.cpp                   |   8 +-
+ tests/unit/anatomy_tests.cpp                       |   1 +
+ tests/unit/face_hair_tests.cpp                     | 214 +++++++++++++++------
+ 9 files changed, 342 insertions(+), 297 deletions(-)

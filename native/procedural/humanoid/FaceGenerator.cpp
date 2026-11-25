@@ -32,198 +32,53 @@ MeshData translateMesh(const MeshData& source, const Vec3& offset) {
     return result;
 }
 
-MeshData finalize(MeshData& mesh) {
-    Aabb bounds;
-    for (const Vertex& v : mesh.vertices) bounds.expand(v.position);
-    mesh.bounds = bounds;
-    if (mesh.subMeshes.empty()) {
-        SubMesh sub;
-        sub.indexCount = static_cast<uint32_t>(mesh.indices.size());
-        mesh.subMeshes.push_back(sub);
-    }
-    return mesh;
-}
-
-// Shape factor per direction: jaw taper, chin, cheek, forehead, temple and
-// back-head modulations. y = cos(polar) in [-1, 1] (up +); fx = cos(azimuth),
-// fz = sin(azimuth) with fz > 0 = face front.
-float shapeFactor(const FaceParams& fp, float y, float fx, float fz) {
-    float s = 1.0f;
-    const float squareness = std::strcmp(fp.headShape, "square") == 0 ? 1.0f : 0.0f;
-    const float roundness = std::strcmp(fp.headShape, "round") == 0 ? 1.0f : 0.0f;
-
-    const float jawStart = -0.05f + roundness * 0.15f;
-    const float jawT = smooth(jawStart, -0.85f, y);
-    const float jawX = fp.jawWidth * (1.0f - squareness * 0.15f);
-    s *= 1.0f - jawT * (1.0f - jawX);
-
-    const float chinZone = smooth(-0.55f, -0.95f, y) * smooth(0.0f, 0.55f, fz);
-    s *= 1.0f + fp.chinShape * 0.18f * chinZone;
-
-    const float cheekZone = smooth(-0.35f, -0.05f, y) * (1.0f - smooth(0.15f, 0.45f, y));
-    s *= 1.0f + fp.cheekVolume * 0.10f * cheekZone * std::fabs(fx);
-
-    const float foreheadZone = smooth(0.25f, 0.62f, y) * smooth(-0.1f, 0.5f, fz);
-    s *= 1.0f + 0.05f * foreheadZone;
-
-    const float templeZone = smooth(0.35f, 0.65f, y) * std::fabs(fx);
-    s *= 1.0f - 0.05f * templeZone * (1.0f - squareness);
-
-    s *= 1.0f + 0.06f * smooth(-0.1f, -0.6f, fz) * (1.0f - squareness * 0.6f);
-    return s;
-}
-
 } // namespace
 
-MeshData generateHeadMesh(const FaceParams& fp, Vec3 headCenter,
-                          float headWidth, float headHeight,
-                          uint32_t radialSegments, uint32_t rings) {
-    MeshData mesh;
-    const uint32_t S = std::max(radialSegments, 6u);
-    const uint32_t R = std::max(rings, 6u);
-    const float rx = headWidth * 0.5f;
-    const float ry = headHeight * 0.5f;
-    const float rz = headWidth * 0.42f;
-
-    // Pass 1: shaped positions on the (R+1) x (S+1) grid (face front = +Z).
-    std::vector<Vec3> grid((R + 1) * (S + 1));
-    auto gridAt = [&](uint32_t i, uint32_t j) -> Vec3& { return grid[i * (S + 1) + j]; };
-    for (uint32_t i = 0; i <= R; ++i) {
-        const float theta = kPi * static_cast<float>(i) / static_cast<float>(R);
-        const float y = std::cos(theta);
-        const float sinT = std::sin(theta);
-        for (uint32_t j = 0; j <= S; ++j) {
-            const float phi = kTwoPi * static_cast<float>(j) / static_cast<float>(S);
-            const float fx = std::cos(phi);
-            const float fz = std::sin(phi);
-            const float shape = shapeFactor(fp, y, fx, fz);
-            // Continuous facial relief carved into the head surface. All
-            // terms are smooth spatial functions, so features transition
-            // naturally instead of floating as separate ellipsoids.
-            const float front = smooth(0.10f, 0.75f, fz);
-            const float symmetry = 1.0f - smooth(0.0f, 0.85f, std::fabs(fx));
-            const float browZone = smooth(0.05f, 0.28f, y) * (1.0f - smooth(0.34f, 0.55f, y));
-            const float socketZone = smooth(-0.08f, 0.04f, y) * (1.0f - smooth(0.10f, 0.22f, y));
-            const float eyeBand = smooth(0.18f, 0.34f, std::fabs(fx)) *
-                                  (1.0f - smooth(0.50f, 0.72f, std::fabs(fx)));
-            const float noseZone = smooth(-0.28f, -0.10f, y) * (1.0f - smooth(0.16f, 0.30f, y));
-            const float cheekZone = smooth(-0.34f, -0.12f, y) * (1.0f - smooth(0.04f, 0.22f, y));
-            const float lipZone = smooth(-0.44f, -0.34f, y) * (1.0f - smooth(-0.26f, -0.18f, y));
-            const float chinZone = smooth(-0.72f, -0.52f, y) * (1.0f - smooth(-0.40f, -0.28f, y));
-            float relief = 0.0f;
-            relief += 0.030f * front * browZone * eyeBand;
-            relief -= 0.026f * front * socketZone * eyeBand;
-            relief += 0.115f * front * symmetry * noseZone;
-            relief += 0.028f * front * cheekZone * eyeBand;
-            relief += 0.022f * front * symmetry * lipZone;
-            relief += 0.020f * front * symmetry * chinZone;
-            const float z = sinT * fz * rz * shape + relief * rz;
-            gridAt(i, j) = headCenter + Vec3{sinT * fx * rx * shape,
-                                             y * ry * shape, z};
-        }
-    }
-
-    // Pass 2: normals from grid neighbours (tangent cross product), seam-safe.
-    mesh.vertices.reserve(grid.size());
-    for (uint32_t i = 0; i <= R; ++i) {
-        for (uint32_t j = 0; j <= S; ++j) {
-            const Vec3& p = gridAt(i, j);
-            const Vec3& right = gridAt(i, (j + 1) % (S + 1));
-            const Vec3& left = gridAt(i, (j + S) % (S + 1));
-            const Vec3& up = gridAt(i > 0 ? i - 1 : 0, j);
-            const Vec3& down = gridAt(i < R ? i + 1 : R, j);
-            Vec3 normal = (right - left).cross(down - up);
-            // Orient outward: away from the head center.
-            const Vec3 outward = p - headCenter;
-            if (normal.dot(outward) < 0.0f) normal = normal * -1.0f;
-            Vertex vertex;
-            vertex.position = p;
-            vertex.normal = normal.normalized({0.0f, 1.0f, 0.0f});
-            vertex.uv = {static_cast<float>(j) / static_cast<float>(S),
-                         static_cast<float>(i) / static_cast<float>(R)};
-            mesh.vertices.push_back(vertex);
-        }
-    }
-    for (uint32_t i = 0; i < R; ++i) {
-        for (uint32_t j = 0; j < S; ++j) {
-            const uint32_t a = i * (S + 1) + j;
-            const uint32_t b = i * (S + 1) + j + 1;
-            const uint32_t c = (i + 1) * (S + 1) + j;
-            const uint32_t d = (i + 1) * (S + 1) + j + 1;
-            // Winding: outward relative to the head center.
-            const Vec3& pa = mesh.vertices[a].position;
-            const Vec3& pb = mesh.vertices[b].position;
-            const Vec3& pc = mesh.vertices[c].position;
-            const Vec3 faceNormal = (pb - pa).cross(pc - pa);
-            const Vec3 outward = pa - headCenter;
-            if (faceNormal.dot(outward) >= 0.0f) {
-                mesh.indices.insert(mesh.indices.end(), {a, b, c, b, d, c});
-            } else {
-                mesh.indices.insert(mesh.indices.end(), {a, c, b, b, c, d});
-            }
-        }
-    }
-    return finalize(mesh);
-}
-
 std::vector<FacePiece> generateFaceFeatures(const FaceParams& fp,
-                                            Vec3 headCenter, float headWidth,
-                                            float headHeight, uint32_t radial) {
+                                            const head::HeadLandmarks& lm,
+                                            uint32_t radial) {
     std::vector<FacePiece> pieces;
-    const float rx = headWidth * 0.5f;
-    const float ry = headHeight * 0.5f;
-    const float rz = headWidth * 0.42f;
-    const uint32_t rings = radial;
     auto add = [&pieces](MeshData m, Vec3 center, uint16_t materialId) {
         pieces.push_back({std::move(m), center, materialId});
     };
 
-    // Eyes: shallow almond sclera, iris and upper/lower lids. Natural adult
-    // proportions keep the eye opening small relative to head width.
-    const float eyeRadius = headWidth * 0.072f * fp.eyeSize;
-    const float eyeX = rx * 0.40f * fp.eyeSpacing;
-    const float eyeY = headCenter.y + ry * 0.03f;
-    for (int side = -1; side <= 1; side += 2) {
-        const Vec3 eyeCenter{side * eyeX, eyeY, rz * 1.12f};
-        // Shallow sclera instead of a protruding ball.
+    // The eye opening is an almond hole in the skull surface; the sclera is
+    // placed inside it and the iris just behind the front of the sclera.
+    const float eyeRadius = lm.eyeRadius;
+    for (int i = 0; i < 2; ++i) {
+        const Vec3 surface = lm.eyeCenter[i];
+        // Recess the eyeball into the socket: the front of the sclera sits a
+        // little behind the surrounding surface, not in front of it.
+        const Vec3 scleraCenter = surface - Vec3{0.0f, 0.0f, eyeRadius * 0.30f};
         add(translateMesh(generateEllipsoid(
-                Vec3{eyeRadius * 1.15f, eyeRadius * 0.52f, eyeRadius * 0.30f}, radial, rings / 2),
-            eyeCenter), eyeCenter, 3);
-        // Iris/pupil: compact, dark, slightly forward.
+                Vec3{eyeRadius * 1.10f, eyeRadius * 0.46f, eyeRadius * 0.34f}, radial, radial / 2),
+            scleraCenter), scleraCenter, 3);
         add(translateMesh(generateEllipsoid(
-                Vec3{eyeRadius * 0.40f, eyeRadius * 0.40f, eyeRadius * 0.18f}, radial, rings / 2),
-            eyeCenter + Vec3{0.0f, 0.0f, eyeRadius * 0.30f}), eyeCenter, 4);
-        // Lid relief is carried by the continuous head surface; extra lid
-        // pieces previously z-fought with it and produced black patches.
+                Vec3{eyeRadius * 0.38f, eyeRadius * 0.38f, eyeRadius * 0.16f}, radial, radial / 2),
+            scleraCenter + Vec3{0.0f, 0.0f, eyeRadius * 0.26f}), scleraCenter, 4);
 
-        // Brows in hair colour, thin and close to the brow ridge.
-        const float browY = headCenter.y + lerpF(ry * 0.06f, ry * 0.48f, clamp01(fp.browHeight));
+        // Brow: a thin arc of hair colour sitting on the brow ridge.
+        const Vec3 brow = lm.browCenter[i];
         add(translateMesh(generateEllipsoid(
-                Vec3{eyeRadius * 0.95f, eyeRadius * 0.14f, eyeRadius * 0.18f}, radial, rings / 2),
-            Vec3{side * eyeX, browY, rz * 1.06f}), headCenter, 1);
+                Vec3{eyeRadius * 1.05f, eyeRadius * 0.12f, eyeRadius * 0.16f}, radial, radial / 2),
+            brow + Vec3{0.0f, 0.0f, eyeRadius * 0.10f}), brow, 1);
     }
 
-    // Nose tip and alae are now carried by the continuous head relief; only
-    // a small tip highlight and nostril hints remain as separate geometry.
-    const float noseW = rx * fp.noseWidth * 0.30f;
-    const float noseTipY = headCenter.y - ry * 0.16f;
+    // Nose: the tip is already modelled in the head field; only a small
+    // cartilage highlight is added, placed on the resolved tip landmark.
+    const float noseW = lm.rx * fp.noseWidth * 0.30f;
     add(translateMesh(generateEllipsoid(
-            Vec3{noseW * 0.55f, noseW * 0.45f, noseW * 0.32f}, radial / 2 + 2, rings / 2),
-        Vec3{0.0f, noseTipY, rz * 1.14f}), headCenter, 0);
+            Vec3{noseW * 0.42f, noseW * 0.34f, noseW * 0.26f}, radial / 2 + 2, radial / 2),
+        lm.noseTip + Vec3{0.0f, 0.0f, noseW * 0.10f}), lm.noseTip, 0);
 
-    // Mouth: a single thin dark line. Lip volume is part of the head relief.
-    const float mouthHalfW = rx * fp.mouthWidth * 0.28f;
-    const float mouthY = headCenter.y - ry * 0.36f;
+    // Mouth: a single thin dark line in the carved slot.
+    const float mouthHalfW = lm.rx * fp.mouthWidth * 0.26f;
     add(translateMesh(generateEllipsoid(
-            Vec3{mouthHalfW, mouthHalfW * 0.045f, mouthHalfW * 0.06f}, radial / 2 + 2, rings / 2),
-        Vec3{0.0f, mouthY, rz * 1.13f}), headCenter, 4);
+            Vec3{mouthHalfW, mouthHalfW * 0.035f, mouthHalfW * 0.05f}, radial / 2 + 2, radial / 2),
+        lm.mouthCenter + Vec3{0.0f, 0.0f, mouthHalfW * 0.03f}), lm.mouthCenter, 4);
 
-    // Ears: flattened ellipsoids on the sides at eye height.
-    for (int side = -1; side <= 1; side += 2) {
-        add(translateMesh(generateEllipsoid(
-                Vec3{rx * 0.10f, ry * 0.24f, rz * 0.20f}, radial / 2 + 2, rings / 2),
-            Vec3{side * rx * 0.98f, headCenter.y + ry * 0.02f, -rz * 0.05f}), headCenter, 0);
-    }
+    // Ears are part of the head field now; the landmarks are kept for the
+    // hair generator so sideburns can start at the correct place.
     return pieces;
 }
 

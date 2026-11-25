@@ -231,7 +231,7 @@ RegionPrimitives buildPrimitives(const HumanAnatomyParameters& q, const BodyJoin
     // Back flatten: a huge sphere centered far behind slices the torso back
     // flat at z ~= -0.13 (roundness shifts the plane slightly forward).
     m.backCarveC = Vec3{0.0f, m.ribCageC.y, -1.95f + q.backDepth * 0.05f};
-    m.backCarveR = 1.87f;
+    m.backCarveR = 1.80f;
 
     // Left clavicle ridge: sternum -> shoulder.
     m.clavicleA = Vec3{0.02f * t, j.chest.y + 0.045f * t, 0.048f * t};

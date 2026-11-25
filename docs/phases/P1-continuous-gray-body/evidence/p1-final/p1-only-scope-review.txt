@@ -1,0 +1,57 @@
+PAE P1-only scope review (read-only, no staging)
+Date: 2026-11-25
+Superseded decision: on 2026-11-25 the owner explicitly authorized one commit and push to origin/poc-sm/shape-model-v2, and chose to include all current P0+P1 character code. This file remains the historical P1-only dependency review; the final commit scope is broader by owner authorization.
+Repository: E:/AI-Tools/ProceduralAvatarEngine-poc-sm
+Branch: poc-sm/shape-model-v2
+HEAD: f3e3bc2970e9c4844929d632077c765890c6b2b7
+Index state: no staged changes
+Commit state: no commit created by this review
+
+P1 candidate tracked files (whitelist-aligned, still require per-file review):
+- app/src/main/java/com/pae/host/MainActivity.kt
+- native/CMakeLists.txt
+- native/procedural/fusion/SdfFusion.cpp
+- native/procedural/fusion/SdfFusion.h
+- native/procedural/humanoid/Humanoid.cpp
+- native/procedural/humanoid/anatomy/AnatomyField.cpp
+- native/procedural/humanoid/anatomy/HumanAnatomyGenerator.cpp
+- native/procedural/humanoid/anatomy/HumanAnatomyGenerator.h
+- native/renderer/RenderThread.cpp
+- native/renderer/RenderThread.h
+- native/renderer/gl/SkinnedGpuMesh.cpp
+- native/renderer/gl/SkinnedGpuMesh.h
+- native/skeleton/Skinning.cpp
+- native/skeleton/Skinning.h
+- tests/CMakeLists.txt
+
+P1 candidate untracked files/directories:
+- native/procedural/humanoid/canonical/
+- tests/harness/GLES3/
+- tests/unit/p1_continuous_gray_body_tests.cpp
+- tests/unit/p1_render_data_tests.cpp
+- docs/phases/P1-continuous-gray-body/
+
+Excluded P0-only tracked modifications:
+- native/procedural/humanoid/FaceGenerator.cpp
+- native/procedural/humanoid/FaceGenerator.h
+- tests/unit/face_hair_tests.cpp
+
+Protected / excluded untracked content:
+- native/procedural/humanoid/HeadAnatomy.cpp
+- native/procedural/humanoid/HeadAnatomy.h
+- evidence/character-v6/**
+- evidence/character-v7/**
+- .workbuddy-ai/
+
+Dependency caveats:
+1. native/CMakeLists.txt contains three P1 Canonical source entries and one P0-only HeadAnatomy.cpp entry. A P1-only commit must not accidentally include the P0-only entry.
+2. native/procedural/humanoid/canonical/ContinuousSkinGenerator.cpp:5 includes procedural/humanoid/HeadAnatomy.h.
+3. Therefore the clean-HEAD P1-only scratch tree that excludes protected HeadAnatomy.cpp/.h is not self-contained and has not been compiled.
+4. build-host/p1-only-tracked.patch is outdated and must not be used without regeneration and audit.
+5. No index changes, staging, commit, push, merge, or rebase were performed.
+
+Decision:
+- Technical implementation and device evidence are complete.
+- Visual acceptance remains BLOCKED.
+- P1-only commit scope remains BLOCKED by the protected HeadAnatomy dependency and pending independent scope review.
+- No commit should be created until those blockers are explicitly resolved.

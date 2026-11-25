@@ -1,0 +1,40 @@
+[ RUN ] p1a1_different_density_boundaries_resample_by_arc_length
+[  OK ] p1a1_different_density_boundaries_resample_by_arc_length
+[ RUN ] p1a1_intersecting_regions_weld_to_one_component
+[  OK ] p1a1_intersecting_regions_weld_to_one_component
+[ RUN ] p1a1_seam_weights_merge_by_bone_and_top4
+[  OK ] p1a1_seam_weights_merge_by_bone_and_top4
+[ RUN ] p1a1_uv_seam_render_mapping_preserves_canonical_id
+[  OK ] p1a1_uv_seam_render_mapping_preserves_canonical_id
+[ RUN ] p1a1_curved_surface_has_ordered_boundaries_and_valid_weights
+[  OK ] p1a1_curved_surface_has_ordered_boundaries_and_valid_weights
+[ RUN ] p1b_cpu_normal_matrix_handles_nonuniform_scale
+[  OK ] p1b_cpu_normal_matrix_handles_nonuniform_scale
+[ RUN ] p1b_render_mesh_uv_atlas_preserves_canonical_seams
+[  OK ] p1b_render_mesh_uv_atlas_preserves_canonical_seams
+[ RUN ] p1a2_self_intersection_disjoint_triangles
+[  OK ] p1a2_self_intersection_disjoint_triangles
+[ RUN ] p1a2_self_intersection_crossing_triangles
+[  OK ] p1a2_self_intersection_crossing_triangles
+[ RUN ] p1a2_self_intersection_excludes_shared_vertices
+[  OK ] p1a2_self_intersection_excludes_shared_vertices
+[ RUN ] p1a2_full_body_is_one_closed_canonical_shell
+[I/PAE_GEOMETRY] P1 continuous skin: verts=44508 tris=89020 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 weights_bad=0 holes=0 extraction_ms=2170.5 weight_ms=40.1 total_ms=2569.5
+P1A2-TOPO verts=44508 tris=89020 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 weights_bad=0 total_ms=2569.5
+P1A2-HEAD vertices=506 failures=0 min_weight=0.7417
+[  OK ] p1a2_full_body_is_one_closed_canonical_shell
+[ RUN ] p1a2_quality_levels_are_closed
+[I/PAE_GEOMETRY] P1 continuous skin: verts=44508 tris=89020 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 weights_bad=0 holes=0 extraction_ms=2206.8 weight_ms=40.5 total_ms=2618.3
+P1A2-QUALITY detail=0 verts=44508 tris=89020 components=1 boundary=0 nonmanifold=0 degen=0 total_ms=2618.3
+P1A2-INTERSECTIONS detail=0 candidates=2501119 intersecting=0 samples=0
+P1B-UV detail=0 charts=89020 atlas=299x298 render_verts=267060 split=222552 invalid=0 out_of_range=0 zero_area=0 min_area=3.95944016e-06 max_area=3.95952429e-06
+[I/PAE_GEOMETRY] P1 continuous skin: verts=56476 tris=112956 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 weights_bad=0 holes=2 extraction_ms=3081.5 weight_ms=50.9 total_ms=3598.5
+P1A2-QUALITY detail=1 verts=56476 tris=112956 components=1 boundary=0 nonmanifold=0 degen=0 total_ms=3598.5
+P1A2-INTERSECTIONS detail=1 candidates=3806215 intersecting=0 samples=0
+P1B-UV detail=1 charts=112956 atlas=337x336 render_verts=338868 split=282392 invalid=0 out_of_range=0 zero_area=0 min_area=3.11568078e-06 max_area=3.11575991e-06
+[I/PAE_GEOMETRY] P1 continuous skin: verts=70390 tris=140784 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 weights_bad=0 holes=4 extraction_ms=4275.0 weight_ms=65.1 total_ms=4921.9
+P1A2-QUALITY detail=2 verts=70390 tris=140784 components=1 boundary=0 nonmanifold=0 degen=0 total_ms=4921.9
+P1A2-INTERSECTIONS detail=2 candidates=4131872 intersecting=0 samples=0
+P1B-UV detail=2 charts=140784 atlas=376x375 render_verts=422352 split=351962 invalid=0 out_of_range=0 zero_area=0 min_area=2.50211247e-06 max_area=2.50217909e-06
+[  OK ] p1a2_quality_levels_are_closed
+12 cases, 0 failures

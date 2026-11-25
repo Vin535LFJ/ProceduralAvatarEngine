@@ -1,0 +1,5 @@
+nunai_max
+8.1.0
+27
+Physical size: 1920x1080
+Physical density: 240

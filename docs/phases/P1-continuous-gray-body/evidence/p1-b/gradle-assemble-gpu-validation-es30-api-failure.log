@@ -1,0 +1,81 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. See https://docs.gradle.org/7.6.1/userguide/gradle_daemon.html#sec:disabling_the_daemon.
+Daemon will be stopped at the end of the build 
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :app:compileDebugAidl NO-SOURCE
+> Task :app:compileDebugRenderscript NO-SOURCE
+> Task :app:generateDebugBuildConfig UP-TO-DATE
+> Task :app:checkDebugAarMetadata UP-TO-DATE
+> Task :app:generateDebugResValues UP-TO-DATE
+> Task :app:mapDebugSourceSetPaths UP-TO-DATE
+> Task :app:generateDebugResources UP-TO-DATE
+> Task :app:mergeDebugResources UP-TO-DATE
+> Task :app:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksDebug UP-TO-DATE
+> Task :app:processDebugMainManifest UP-TO-DATE
+> Task :app:processDebugManifest UP-TO-DATE
+> Task :app:processDebugManifestForPackage UP-TO-DATE
+> Task :app:processDebugResources UP-TO-DATE
+> Task :app:compileDebugKotlin UP-TO-DATE
+> Task :app:javaPreCompileDebug UP-TO-DATE
+> Task :app:compileDebugJavaWithJavac UP-TO-DATE
+> Task :app:mergeDebugShaders UP-TO-DATE
+> Task :app:compileDebugShaders NO-SOURCE
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :app:mergeDebugAssets UP-TO-DATE
+> Task :app:compressDebugAssets UP-TO-DATE
+> Task :app:processDebugJavaRes NO-SOURCE
+> Task :app:mergeDebugJavaResource UP-TO-DATE
+> Task :app:checkDebugDuplicateClasses UP-TO-DATE
+> Task :app:desugarDebugFileDependencies UP-TO-DATE
+> Task :app:mergeExtDexDebug UP-TO-DATE
+> Task :app:mergeLibDexDebug UP-TO-DATE
+> Task :app:dexBuilderDebug UP-TO-DATE
+> Task :app:mergeProjectDexDebug UP-TO-DATE
+> Task :app:configureCMakeDebug[arm64-v8a]
+
+> Task :app:buildCMakeDebug[arm64-v8a] FAILED
+C/C++: ninja: Entering directory `E:\AI-Tools\ProceduralAvatarEngine-poc-sm\app\.cxx\Debug\1j58291d\arm64-v8a'
+C/C++: E:/AI-Tools/ProceduralAvatarEngine-poc-sm/native/renderer/RenderThread.cpp:1179:9: error: use of undeclared identifier 'glGetBufferSubData'; did you mean 'glBufferSubData'?
+C/C++: E:/AndroidSdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/GLES3/gl3.h:539:29: note: 'glBufferSubData' declared here
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:buildCMakeDebug[arm64-v8a]'.
+> com.android.ide.common.process.ProcessException: ninja: Entering directory `E:\AI-Tools\ProceduralAvatarEngine-poc-sm\app\.cxx\Debug\1j58291d\arm64-v8a'
+  [1/6] Building CXX object CMakeFiles/pae_native.dir/renderer/gl/ShaderProgram.cpp.o
+  [2/6] Building CXX object CMakeFiles/pae_native.dir/renderer/gl/SkinnedGpuMesh.cpp.o
+  [3/6] Building CXX object CMakeFiles/pae_native.dir/runtime/EngineRuntime.cpp.o
+  [4/6] Building CXX object CMakeFiles/pae_native.dir/E_/AI-Tools/ProceduralAvatarEngine-poc-sm/app/src/main/cpp/jni_bridge.cpp.o
+  [5/6] Building CXX object CMakeFiles/pae_native.dir/renderer/RenderThread.cpp.o
+  FAILED: CMakeFiles/pae_native.dir/renderer/RenderThread.cpp.o 
+  E:\AndroidSdk\ndk\25.1.8937393\toolchains\llvm\prebuilt\windows-x86_64\bin\clang++.exe --target=aarch64-none-linux-android23 --sysroot=E:/AndroidSdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DPAE_ANDROID=1 -Dpae_native_EXPORTS -IE:/AI-Tools/ProceduralAvatarEngine-poc-sm/native -IE:/AI-Tools/ProceduralAvatarEngine-poc-sm/native/renderer -IE:/AI-Tools/ProceduralAvatarEngine-poc-sm/native/runtime -IE:/AI-Tools/ProceduralAvatarEngine-poc-sm/native/core -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -std=c++17 -fno-limit-debug-info  -fPIC -std=c++17 -MD -MT CMakeFiles/pae_native.dir/renderer/RenderThread.cpp.o -MF CMakeFiles\pae_native.dir\renderer\RenderThread.cpp.o.d -o CMakeFiles/pae_native.dir/renderer/RenderThread.cpp.o -c E:/AI-Tools/ProceduralAvatarEngine-poc-sm/native/renderer/RenderThread.cpp
+  E:/AI-Tools/ProceduralAvatarEngine-poc-sm/native/renderer/RenderThread.cpp:1179:9: error: use of undeclared identifier 'glGetBufferSubData'; did you mean 'glBufferSubData'?
+          glGetBufferSubData(GL_TRANSFORM_FEEDBACK_BUFFER, 0, feedbackBytes, gpuData.data());
+          ^~~~~~~~~~~~~~~~~~
+          glBufferSubData
+  E:/AndroidSdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/GLES3/gl3.h:539:29: note: 'glBufferSubData' declared here
+  GL_APICALL void GL_APIENTRY glBufferSubData (GLenum target, GLintptr offset, GLsizeiptr size, const void *data);
+                              ^
+  1 error generated.
+  ninja: build stopped: subcommand failed.
+  
+  C++ build system [build] failed while executing:
+      @echo off
+      "E:\\AndroidSdk\\cmake\\3.22.1\\bin\\ninja.exe" ^
+        -C ^
+        "E:\\AI-Tools\\ProceduralAvatarEngine-poc-sm\\app\\.cxx\\Debug\\1j58291d\\arm64-v8a" ^
+        pae_native
+    from E:\AI-Tools\ProceduralAvatarEngine-poc-sm\app
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+
+* Get more help at https://help.gradle.org
+
+BUILD FAILED in 7s
+26 actionable tasks: 2 executed, 24 up-to-date

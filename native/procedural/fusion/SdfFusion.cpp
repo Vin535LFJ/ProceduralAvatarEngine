@@ -77,7 +77,8 @@ float sdSmoothSubtraction(float a, float b, float k) {
 }
 
 MeshData extractSurfaceNets(const FusionVolume& volume, const SdfField& sdf,
-                           std::vector<std::array<uint32_t, 4>>* quadIndices) {
+                           std::vector<std::array<uint32_t, 4>>* quadIndices,
+                           bool discardDegenerateQuads) {
     MeshData mesh;
     // M13: per-axis resolution — a body-wide X and a thin Z are no longer
     // forced onto the same lattice density.
@@ -186,7 +187,7 @@ MeshData extractSurfaceNets(const FusionVolume& volume, const SdfField& sdf,
     // Emit quads on lattice edges that straddle the surface. Quads reference
     // the shared dual vertices, then a BFS pass orients every quad so the
     // whole patch has one consistent outward winding.
-    struct QuadRecord { uint32_t v[4]; };
+    struct QuadRecord { uint32_t v[4]; bool alternate = false; };
     std::vector<QuadRecord> quads;
 
     auto cellVertexAt = [&](int x, int y, int z) -> int {
@@ -225,8 +226,34 @@ MeshData extractSurfaceNets(const FusionVolume& volume, const SdfField& sdf,
                     const int ic = cellVertexAt(cellC[0], cellC[1], cellC[2]);
                     const int id = cellVertexAt(cellD[0], cellD[1], cellD[2]);
                     if (ia < 0 || ib < 0 || ic < 0 || id < 0) continue;
+                    if (discardDegenerateQuads &&
+                        (ia == ib || ia == ic || ia == id || ib == ic || ib == id || ic == id)) {
+                        continue;
+                    }
+                    if (!discardDegenerateQuads) {
+                        quads.push_back({{static_cast<uint32_t>(ia), static_cast<uint32_t>(ib),
+                                          static_cast<uint32_t>(ic), static_cast<uint32_t>(id)}});
+                        continue;
+                    }
+                    const Vec3 qa = mesh.vertices[ia].position;
+                    const Vec3 qb = mesh.vertices[ib].position;
+                    const Vec3 qc = mesh.vertices[ic].position;
+                    const Vec3 qd = mesh.vertices[id].position;
+                    const float quadScaleSq = std::max({
+                        (qb - qa).lengthSq(), (qc - qb).lengthSq(),
+                        (qd - qc).lengthSq(), (qa - qd).lengthSq()});
+                    const float minimumAreaSq = 5e-16f * quadScaleSq * quadScaleSq;
+                    const float ac0 = (qb - qa).cross(qc - qa).lengthSq();
+                    const float ac1 = (qd - qa).cross(qc - qa).lengthSq();
+                    const float bd0 = (qc - qb).cross(qd - qb).lengthSq();
+                    const float bd1 = (qa - qb).cross(qd - qb).lengthSq();
+                    const bool validAc = ac0 >= minimumAreaSq && ac1 >= minimumAreaSq;
+                    const bool validBd = bd0 >= minimumAreaSq && bd1 >= minimumAreaSq;
+                    if (!validAc && !validBd) continue;
+                    const bool alternate = validBd &&
+                        (!validAc || std::fmin(bd0, bd1) > std::fmin(ac0, ac1));
                     quads.push_back({{static_cast<uint32_t>(ia), static_cast<uint32_t>(ib),
-                                      static_cast<uint32_t>(ic), static_cast<uint32_t>(id)}});
+                                      static_cast<uint32_t>(ic), static_cast<uint32_t>(id)}, alternate});
                 }
             }
         }
@@ -243,11 +270,21 @@ MeshData extractSurfaceNets(const FusionVolume& volume, const SdfField& sdf,
         const Vec3 faceNormal = (b - a).cross(c - a);
         const Vec3 grad = gradient((a + b + c) * (1.0f / 3.0f));
         if (faceNormal.dot(grad) >= 0.0f) {
-            mesh.indices.insert(mesh.indices.end(), {quad.v[0], quad.v[1], quad.v[2],
-                                                     quad.v[0], quad.v[2], quad.v[3]});
+            if (quad.alternate) {
+                mesh.indices.insert(mesh.indices.end(), {quad.v[0], quad.v[1], quad.v[3],
+                                                         quad.v[1], quad.v[2], quad.v[3]});
+            } else {
+                mesh.indices.insert(mesh.indices.end(), {quad.v[0], quad.v[1], quad.v[2],
+                                                         quad.v[0], quad.v[2], quad.v[3]});
+            }
         } else {
-            mesh.indices.insert(mesh.indices.end(), {quad.v[0], quad.v[2], quad.v[1],
-                                                     quad.v[0], quad.v[3], quad.v[2]});
+            if (quad.alternate) {
+                mesh.indices.insert(mesh.indices.end(), {quad.v[0], quad.v[3], quad.v[1],
+                                                         quad.v[1], quad.v[3], quad.v[2]});
+            } else {
+                mesh.indices.insert(mesh.indices.end(), {quad.v[0], quad.v[2], quad.v[1],
+                                                         quad.v[0], quad.v[3], quad.v[2]});
+            }
         }
         if (quadIndices) {
             quadIndices->push_back({quad.v[0], quad.v[1], quad.v[2], quad.v[3]});
