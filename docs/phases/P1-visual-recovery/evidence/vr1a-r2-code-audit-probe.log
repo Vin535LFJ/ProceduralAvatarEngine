@@ -1,0 +1,42 @@
+ANTH stature=1.754900 shoulder=0.508921 biacromial=0.415911 chest=0.290611 chest_depth=0.252706 waist=0.329489 waist_depth=0.263591 hip=0.343960 upper_arm=0.324656
+JOINTS hips=0.931572 spine=1.119499 chest=1.350381 neck=1.468507 left_shoulder=(0.241821,1.302865,0.000000) left_elbow=(0.347344,1.012941,0.000000)
+LANDMARK hip-center               (0.000000,0.931572,0.000000) confidence=DERIVED bone=1
+LANDMARK waist-center             (0.000000,1.025535,0.000000) confidence=DERIVED bone=2
+LANDMARK costal-margin            (0.000000,1.119499,0.070758) confidence=DERIVED bone=2
+LANDMARK chest-center             (0.000000,1.350381,0.085920) confidence=DERIVED bone=3
+LANDMARK neck-base                (0.000000,1.468507,0.000000) confidence=DERIVED bone=3
+LANDMARK left-acromion            (0.263821,1.314865,0.000000) confidence=DERIVED bone=6
+LANDMARK left-shoulder-joint      (0.241821,1.302865,0.000000) confidence=DERIVED bone=6
+LANDMARK left-axilla              (0.267821,1.247865,0.004000) confidence=DERIVED bone=7
+LANDMARK left-elbow               (0.347344,1.012941,0.000000) confidence=DERIVED bone=7
+LANDMARK right-acromion           (-0.263821,1.314865,0.000000) confidence=DERIVED bone=10
+LANDMARK right-shoulder-joint     (-0.241821,1.302865,0.000000) confidence=DERIVED bone=10
+LANDMARK right-axilla             (-0.267821,1.247865,0.004000) confidence=DERIVED bone=11
+LANDMARK right-elbow              (-0.347344,1.012941,0.000000) confidence=DERIVED bone=11
+BASE valid=1 verts=524 tris=1028 gen_ms=1.159 y_bounds=(0.941572,1.403381) mesh_fnv64=638a9cf368577940
+RING 0 width=0.305368 depth=0.207756 y_min=0.941572 y_max=0.941572 y_mean=0.941572
+RING 3 width=0.289261 depth=0.265256 y_min=1.077715 y_max=1.077715 y_mean=1.077715
+RING 5 width=0.283431 depth=0.258950 y_min=1.168476 y_max=1.168476 y_mean=1.168476
+RING 6 width=0.280745 depth=0.257690 y_min=1.213857 y_max=1.213857 y_mean=1.213857
+RING 8 width=0.368289 depth=0.261055 y_min=1.300258 y_max=1.304619 y_mean=1.301852
+RING 10 width=0.472039 depth=0.256853 y_min=1.373381 y_max=1.395381 y_mean=1.381421
+TOP_CAP center_index=353 position=(0.000000,1.403381,0.000000)
+DELTA ribcage    verts=524 tris=1028 max_all=0.020312 max_torso=0.020312 max_left=0.016797 max_right=0.016623
+DELTA depth      verts=524 tris=1028 max_all=0.020075 max_torso=0.020075 max_left=0.013404 max_right=0.013514
+DELTA waist      verts=524 tris=1028 max_all=0.017332 max_torso=0.017332 max_left=0.000410 max_right=0.000403
+DELTA girdle     verts=524 tris=1028 max_all=0.037627 max_torso=0.037627 max_left=0.037627 max_right=0.037627
+DELTA clavicle   verts=524 tris=1028 max_all=0.000669 max_torso=0.000669 max_left=0.000450 max_right=0.000450
+DELTA axilla     verts=524 tris=1028 max_all=0.018023 max_torso=0.018023 max_left=0.018023 max_right=0.018023
+DELTA leftwidth  verts=524 tris=1028 max_all=0.006889 max_torso=0.000000 max_left=0.006889 max_right=0.000000
+DELTA deltoid    verts=524 tris=1028 max_all=0.003097 max_torso=0.000000 max_left=0.003097 max_right=0.003095
+DELTA leftradius verts=524 tris=1028 max_all=0.018372 max_torso=0.000000 max_left=0.018372 max_right=0.000000
+DELTA rightdelta verts=524 tris=1028 max_all=0.018360 max_torso=0.000000 max_left=0.000000 max_right=0.018360
+DELTA acromion   verts=524 tris=1028 max_all=0.000000 max_torso=0.000000 max_left=0.000000 max_right=0.000000
+DELTA table-ribcage verts=524 tris=1028 max_all=0.000000 max_torso=0.000000 max_left=0.000000 max_right=0.000000
+DELTA table-depth verts=524 tris=1028 max_all=0.000000 max_torso=0.000000 max_left=0.000000 max_right=0.000000
+DELTA table-waist verts=524 tris=1028 max_all=0.000000 max_torso=0.000000 max_left=0.000000 max_right=0.000000
+DELTA table-girdle verts=524 tris=1028 max_all=0.000000 max_torso=0.000000 max_left=0.000000 max_right=0.000000
+DELTA table-axilla verts=524 tris=1028 max_all=0.000000 max_torso=0.000000 max_left=0.000000 max_right=0.000000
+DELTA detail0    verts=524 tris=1028 max_all=0.000000 max_torso=0.000000 max_left=0.000000 max_right=0.000000
+DELTA detail2    verts=524 tris=1028 max_all=0.000000 max_torso=0.000000 max_left=0.000000 max_right=0.000000
+CACHE base=0:2:1:1:8849779482416134771:2:4294967295 clavicle=0:2:1:1:8849779482416134771:2:4294967295 acromion_override=0:2:1:1:8849779482416134771:2:4294967295 right_radius_delta=0:2:1:1:8849779482416134771:2:4294967295
