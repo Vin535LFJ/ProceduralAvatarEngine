@@ -1,0 +1,56 @@
+Starting: Intent { flg=0x20000000 cmp=com.pae.host/.MainActivity (has extras) }
+Warning: Activity not started, its current task has been brought to the front
+Status: ok
+Activity: com.pae.host/.MainActivity
+ThisTime: 0
+TotalTime: 0
+WaitTime: 7
+Complete
+Starting: Intent { flg=0x20000000 cmp=com.pae.host/.MainActivity (has extras) }
+Warning: Activity not started, its current task has been brought to the front
+Status: ok
+Activity: com.pae.host/.MainActivity
+ThisTime: 0
+TotalTime: 0
+WaitTime: 4
+Complete
+Starting: Intent { flg=0x20000000 cmp=com.pae.host/.MainActivity (has extras) }
+Warning: Activity not started, its current task has been brought to the front
+Status: ok
+Activity: com.pae.host/.MainActivity
+ThisTime: 0
+TotalTime: 0
+WaitTime: 4
+Complete
+Starting: Intent { flg=0x20000000 cmp=com.pae.host/.MainActivity (has extras) }
+Warning: Activity not started, its current task has been brought to the front
+Status: ok
+Activity: com.pae.host/.MainActivity
+ThisTime: 0
+TotalTime: 0
+WaitTime: 7
+Complete
+Starting: Intent { flg=0x20000000 cmp=com.pae.host/.MainActivity (has extras) }
+Warning: Activity not started, its current task has been brought to the front
+Status: ok
+Activity: com.pae.host/.MainActivity
+ThisTime: 0
+TotalTime: 0
+WaitTime: 8
+Complete
+Starting: Intent { flg=0x20000000 cmp=com.pae.host/.MainActivity (has extras) }
+Warning: Activity not started, its current task has been brought to the front
+Status: ok
+Activity: com.pae.host/.MainActivity
+ThisTime: 0
+TotalTime: 0
+WaitTime: 12
+Complete
+Starting: Intent { flg=0x20000000 cmp=com.pae.host/.MainActivity (has extras) }
+Warning: Activity not started, its current task has been brought to the front
+Status: ok
+Activity: com.pae.host/.MainActivity
+ThisTime: 96
+TotalTime: 96
+WaitTime: 111
+Complete

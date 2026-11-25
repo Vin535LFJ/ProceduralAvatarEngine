@@ -60,6 +60,12 @@ target_include_directories(pae_character_patch_tests PRIVATE ${CMAKE_CURRENT_SOU
 target_link_libraries(pae_character_patch_tests PRIVATE pae_core)
 add_test(NAME pae_character_patch_tests COMMAND pae_character_patch_tests)
 
+add_executable(pae_vr_torso_shoulder_tests unit/vr_torso_shoulder_tests.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../native/procedural/shape/v2/CharacterDefinition.cpp)
+target_include_directories(pae_vr_torso_shoulder_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/harness)
+target_link_libraries(pae_vr_torso_shoulder_tests PRIVATE pae_core)
+add_test(NAME pae_vr_torso_shoulder_tests COMMAND pae_vr_torso_shoulder_tests)
+
 add_executable(pae_proportion_probe unit/proportion_probe.cpp)
 target_link_libraries(pae_proportion_probe PRIVATE pae_core)
 

@@ -1,0 +1,39 @@
+--------- beginning of system
+--------- beginning of main
+11-25 18:39:21.120 31300 31330 I PAE_RENDER: P1-VR-1A ready: verts=524 tris=1028 components=1 boundary=0 nonmanifold=0 gen_ms=24.7 cache=0:2:1:1:8849779482416134771:2:4294967295
+11-25 18:39:21.132 31300 31330 I PAE_RENDER: P1-VR-1A-REPORT verts=524 tris=1028 components=1 boundary=0 nonmanifold=0 degenerate=0 badnorm=0 gen_ms=24.606 state_ms=0.189 geometry_ms=1.441 assembly_ms=12.742 weight_ms=0.780 boundaries=4
+11-25 18:39:21.139 31300 31330 I PAE_RENDER: P1-VR-1A-UPLOAD mesh_ms=2.487 wire_ms=6.605 cpu_mesh_bytes=50064 gpu_buffer_bytes=51472
+11-25 18:39:21.139 31300 31330 I PAE_RENDER: P1-VR-1A-MEMORY peak_rss_kb=288668
+11-25 18:39:21.139 31300 31330 I PAE_RENDER: surface ready 1920x1008
+11-25 18:39:21.148 31300 31330 I PAE_RENDER: applied previewMode=2
+11-25 18:39:21.148 31300 31330 I PAE_RENDER: applied cameraPreset=0
+11-25 18:39:21.148 31300 31330 I PAE_RENDER: applied debugView=0
+11-25 18:39:21.163 31300 31330 I PAE_STATS: frames=0 fps=0.0 frame_ms=0.00 draw_calls=2 triangles=1028 buffer_bytes=51472 p50_ms=0.00 p95_ms=0.00 p99_ms=0.00
+11-25 18:39:23.620 31300 31330 I PAE_STATS: frames=120 fps=49.1 frame_ms=20.36 draw_calls=2 triangles=1028 buffer_bytes=51472 p50_ms=20.13 p95_ms=22.27 p99_ms=31.32
+11-25 18:39:26.053 31300 31330 I PAE_STATS: frames=240 fps=49.2 frame_ms=20.33 draw_calls=2 triangles=1028 buffer_bytes=51472 p50_ms=20.14 p95_ms=22.26 p99_ms=28.97
+11-25 18:39:27.816 31300 31300 I PAE_UI  : debug extras: anatomy=false preset=0 view=0 outfit=-1
+11-25 18:39:27.862 31300 31330 I PAE_RENDER: P1-VR-1A ready: verts=524 tris=1028 components=1 boundary=0 nonmanifold=0 gen_ms=41.0 cache=0:2:0:1:8849779482416134771:2:4294967295
+11-25 18:39:27.875 31300 31330 I PAE_RENDER: quality=Low P1-VR-1A triangles=1028 vertices=524
+11-25 18:39:27.884 31300 31330 I PAE_RENDER: applied previewMode=2
+11-25 18:39:27.884 31300 31330 I PAE_RENDER: applied cameraPreset=0
+11-25 18:39:27.884 31300 31330 I PAE_RENDER: applied debugView=0
+11-25 18:39:27.891 31300 31300 I PAE_UI  : debug extras: anatomy=false preset=0 view=0 outfit=-1
+11-25 18:39:27.928 31300 31330 I PAE_RENDER: P1-VR-1A ready: verts=524 tris=1028 components=1 boundary=0 nonmanifold=0 gen_ms=25.6 cache=0:2:2:1:8849779482416134771:2:4294967295
+11-25 18:39:27.937 31300 31330 I PAE_RENDER: quality=High P1-VR-1A triangles=1028 vertices=524
+11-25 18:39:27.947 31300 31330 I PAE_RENDER: applied previewMode=2
+11-25 18:39:27.947 31300 31330 I PAE_RENDER: applied cameraPreset=0
+11-25 18:39:27.947 31300 31330 I PAE_RENDER: applied debugView=0
+11-25 18:39:27.978 31300 31300 I PAE_UI  : debug extras: anatomy=false preset=0 view=0 outfit=-1
+11-25 18:39:28.051 31300 31300 I PAE_UI  : debug extras: anatomy=true preset=0 view=0 outfit=-1
+11-25 18:39:28.132 31300 31300 I PAE_UI  : debug extras: anatomy=false preset=0 view=0 outfit=-1
+11-25 18:39:28.214 31300 31300 I PAE_UI  : debug extras: anatomy=false preset=0 view=0 outfit=-1
+11-25 18:39:28.588 31300 31330 I PAE_RENDER: applied previewMode=0
+11-25 18:39:28.588 31300 31330 I PAE_RENDER: applied cameraPreset=0
+11-25 18:39:28.588 31300 31330 I PAE_RENDER: applied debugView=0
+11-25 18:39:29.021 31300 31300 I PAE_UI  : debug extras: anatomy=false preset=0 view=0 outfit=-1
+11-25 18:39:29.144 31300 31330 I PAE_RENDER: applied previewMode=1
+11-25 18:39:29.144 31300 31330 I PAE_RENDER: applied cameraPreset=0
+11-25 18:39:29.144 31300 31330 I PAE_RENDER: applied debugView=0
+11-25 18:39:29.154 31300 31330 I PAE_RENDER: applied previewMode=2
+11-25 18:39:29.154 31300 31330 I PAE_RENDER: applied cameraPreset=0
+11-25 18:39:29.154 31300 31330 I PAE_RENDER: applied debugView=0

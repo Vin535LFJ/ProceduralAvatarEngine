@@ -1,0 +1,21 @@
+--------- beginning of system
+--------- beginning of main
+11-25 19:10:04.154  1872  1906 I PAE_STATS: frames=2280 fps=49.1 frame_ms=20.38 draw_calls=5 triangles=93344 buffer_bytes=25391104 p50_ms=20.21 p95_ms=20.49 p99_ms=21.10
+11-25 19:10:06.585  1872  1906 I PAE_STATS: frames=2400 fps=49.4 frame_ms=20.23 draw_calls=5 triangles=93344 buffer_bytes=25391104 p50_ms=20.25 p95_ms=20.62 p99_ms=21.23
+11-25 19:10:09.007  1872  1906 I PAE_STATS: frames=2520 fps=49.3 frame_ms=20.29 draw_calls=5 triangles=93344 buffer_bytes=25391104 p50_ms=20.25 p95_ms=20.65 p99_ms=21.23
+11-25 19:10:11.438  1872  1906 I PAE_STATS: frames=2640 fps=49.4 frame_ms=20.25 draw_calls=5 triangles=93344 buffer_bytes=25391104 p50_ms=20.23 p95_ms=20.58 p99_ms=20.81
+11-25 19:10:12.862  1872  1872 I PAE_UI  : debug extras: anatomy=false preset=0 view=0 outfit=-1
+11-25 19:10:12.953  1872  1872 I PAE_UI  : debug extras: anatomy=true preset=0 view=0 outfit=-1
+11-25 19:10:13.029  1872  1872 I PAE_UI  : debug extras: anatomy=false preset=0 view=0 outfit=-1
+11-25 19:10:13.129  1872  1872 I PAE_UI  : debug extras: anatomy=false preset=0 view=0 outfit=-1
+11-25 19:10:13.503  1872  1906 I PAE_RENDER: applied previewMode=0
+11-25 19:10:13.503  1872  1906 I PAE_RENDER: applied cameraPreset=0
+11-25 19:10:13.503  1872  1906 I PAE_RENDER: applied debugView=0
+11-25 19:10:13.852  1872  1872 I PAE_UI  : debug extras: anatomy=false preset=0 view=0 outfit=-1
+11-25 19:10:13.995  1872  1906 I PAE_RENDER: applied previewMode=1
+11-25 19:10:13.995  1872  1906 I PAE_RENDER: applied cameraPreset=0
+11-25 19:10:13.995  1872  1906 I PAE_RENDER: applied debugView=0
+11-25 19:10:14.005  1872  1906 I PAE_RENDER: applied previewMode=2
+11-25 19:10:14.005  1872  1906 I PAE_RENDER: applied cameraPreset=0
+11-25 19:10:14.005  1872  1906 I PAE_RENDER: applied debugView=0
+11-25 19:10:14.005  1872  1906 I PAE_RENDER: geometry cache hit: canonical (93344 tris)

@@ -6,6 +6,7 @@
 #include "procedural/MeshTopology.h"
 #include "procedural/humanoid/Humanoid.h"
 #include "procedural/humanoid/canonical/ContinuousSkinGenerator.h"
+#include "procedural/character/TorsoShoulderPatchGenerator.h"
 #include "procedural/humanoid/anatomy/HumanAnatomyGenerator.h"
 #include "skeleton/Skinning.h"
 
@@ -18,6 +19,10 @@
 #include <limits>
 #include <utility>
 #include <vector>
+
+#if defined(__ANDROID__)
+#include <sys/resource.h>
+#endif
 
 namespace pae {
 namespace {
@@ -470,6 +475,22 @@ const Vec3 kPresetTarget[kPresetCount] = {
     {0.16f, 1.34f, 0.0f}, {0.0f, 1.61f, 0.0f},
 };
 
+// P1-VR-1A is a local torso/shoulder patch, not a full body. These cameras
+// keep the patch at roughly 50–65% of viewport height and avoid the detached
+// full-body ground shadow.
+const Vec3 kP1aPresetEye[kPresetCount] = {
+    {0.0f, 1.12f, 0.62f}, {0.0f, 1.12f, -0.62f},
+    {0.62f, 1.12f, 0.0f}, {-0.62f, 1.12f, 0.0f},
+    {0.44f, 1.12f, 0.44f}, {-0.44f, 1.12f, 0.44f},
+    {0.30f, 1.25f, 0.33f}, {0.38f, 1.22f, 0.30f},
+};
+const Vec3 kP1aPresetTarget[kPresetCount] = {
+    {0.0f, 1.12f, 0.0f}, {0.0f, 1.12f, 0.0f},
+    {0.0f, 1.12f, 0.0f}, {0.0f, 1.12f, 0.0f},
+    {0.0f, 1.12f, 0.0f}, {0.0f, 1.12f, 0.0f},
+    {0.16f, 1.25f, 0.0f}, {0.27f, 1.24f, 0.02f},
+};
+
 constexpr float kRadToDeg = 57.2957795f;
 constexpr float kDegToRad = 0.0174532925f;
 
@@ -860,6 +881,22 @@ void RenderThread::processCommands() {
                     }
                     break;
                 }
+                if (previewMode_ == 2) {
+                    hasCachedP1a_ = false;
+                    cachedP1aCacheKey_.clear();
+                    if (ensureP1aGeometry(detailLevel) &&
+                        p1aMesh_.upload(cachedP1aMesh_) &&
+                        p1aLines_.upload(buildAnatomyLineMesh(cachedP1aMesh_))) {
+                        qualityLevel_ = level;
+                        PAE_LOGI("PAE_RENDER", "quality=%s P1-VR-1A triangles=%u vertices=%u",
+                                 qualityName(quality),
+                                 static_cast<uint32_t>(cachedP1aMesh_.indices.size() / 3),
+                                 static_cast<uint32_t>(cachedP1aMesh_.vertices.size()));
+                    } else {
+                        PAE_LOGE("PAE_RENDER", "P1-VR-1A quality rebuild failed for level %d", level);
+                    }
+                    break;
+                }
                 BodyParameters params{};
                 params.detailLevel = detailLevel;
                 const HumanoidResult humanoid = generateHumanoid(params, false);
@@ -1076,40 +1113,56 @@ bool RenderThread::ensureResources(std::string* error) {
         }
     }
 
-    // P1-A: surface-patch torso + shoulder bridge + arm PoC. SDF anatomy
-    // preview above is preserved as a research/contrast path.
+    // P1-VR-1A: structured bilateral torso/shoulder patch. The legacy P1-A
+    // generator remains available as the baseline implementation.
     {
-        bool p1aRegenerated = false;
-        if (!hasCachedP1a_) {
-            CharacterDefinition definition;
-            MeshData patchMesh;
-            if (!BodyPatchGenerator::generate(definition, joints_, skeleton_,
-                                              patchMesh, patchReport_)) {
-                PAE_LOGE("PAE_RENDER", "P1-A patch generation failed");
-            } else {
-                cachedP1aMesh_ = patchMesh;
-                hasCachedP1a_ = true;
-                p1aRegenerated = true;
-            }
-        } else {
-            PAE_LOGI("PAE_RENDER", "geometry cache hit: p1a");
+        if (!ensureP1aGeometry(detailLevelForQuality(
+                static_cast<QualityLevel>(qualityLevel_)))) {
+            PAE_LOGE("PAE_RENDER", "P1-VR-1A patch generation failed");
         }
-        if (hasCachedP1a_ && !p1aMesh_.upload(cachedP1aMesh_)) {
-            PAE_LOGE("PAE_RENDER", "P1-A patch mesh upload failed");
-        } else if (hasCachedP1a_) {
+        const auto uploadStarted = std::chrono::steady_clock::now();
+        const bool meshUploaded = hasCachedP1a_ && p1aMesh_.upload(cachedP1aMesh_);
+        const double meshUploadMs = std::chrono::duration<double, std::milli>(
+            std::chrono::steady_clock::now() - uploadStarted).count();
+        if (!meshUploaded) {
+            PAE_LOGE("PAE_RENDER", "P1-VR-1A patch mesh upload failed");
+        } else {
             const TopologyReport topology = analyzeTopology(cachedP1aMesh_);
             PAE_LOGI("PAE_RENDER",
-                     "P1A-REPORT%s verts=%u tris=%u components=%d boundary=%d nonmanifold=%d "
-                     "degenerate=%d badnorm=%d gen_ms=%.3f boundaries=%zu",
-                     p1aRegenerated ? "" : " (cached)",
+                     "P1-VR-1A-REPORT verts=%u tris=%u components=%d boundary=%d nonmanifold=%d "
+                     "degenerate=%d badnorm=%d gen_ms=%.3f state_ms=%.3f geometry_ms=%.3f "
+                     "assembly_ms=%.3f weight_ms=%.3f boundaries=%zu",
                      patchReport_.vertexCount, patchReport_.triangleCount,
                      topology.components, topology.boundaryEdges, topology.nonManifoldEdges,
                      topology.degenerateTriangles, topology.invalidNormals,
-                     patchReport_.generationMs, patchReport_.boundaries.size());
+                     patchReport_.generationMs, p1aTimings_.stateResolutionMs,
+                     p1aTimings_.geometryMs, p1aTimings_.assemblyMs, p1aTimings_.weightMs,
+                     patchReport_.boundaries.size());
         }
-        if (hasCachedP1a_ && !p1aLines_.upload(buildAnatomyLineMesh(cachedP1aMesh_))) {
-            PAE_LOGE("PAE_RENDER", "P1-A wireframe upload failed");
+        const auto lineUploadStarted = std::chrono::steady_clock::now();
+        const bool linesUploaded = hasCachedP1a_ &&
+                                  p1aLines_.upload(buildAnatomyLineMesh(cachedP1aMesh_));
+        const double lineUploadMs = std::chrono::duration<double, std::milli>(
+            std::chrono::steady_clock::now() - lineUploadStarted).count();
+        if (!linesUploaded) {
+            PAE_LOGE("PAE_RENDER", "P1-VR-1A wireframe upload failed");
         }
+        const uint64_t cpuMeshBytes = static_cast<uint64_t>(
+            cachedP1aMesh_.vertices.size() * sizeof(Vertex) +
+            cachedP1aMesh_.indices.size() * sizeof(uint32_t));
+        const uint64_t gpuBufferBytes = cpuMeshBytes + BonePaletteUboData::kBytes;
+        stats_.setBufferBytes(gpuBufferBytes);
+        PAE_LOGI("PAE_RENDER",
+                 "P1-VR-1A-UPLOAD mesh_ms=%.3f wire_ms=%.3f cpu_mesh_bytes=%llu gpu_buffer_bytes=%llu",
+                 meshUploadMs, lineUploadMs,
+                 static_cast<unsigned long long>(cpuMeshBytes),
+                 static_cast<unsigned long long>(gpuBufferBytes));
+#if defined(__ANDROID__)
+        struct rusage usage {};
+        if (getrusage(RUSAGE_SELF, &usage) == 0) {
+            PAE_LOGI("PAE_RENDER", "P1-VR-1A-MEMORY peak_rss_kb=%ld", usage.ru_maxrss);
+        }
+#endif
     }
 
     if (previewMode_ == 3 && !ensureCanonicalGeometry(
@@ -1162,6 +1215,11 @@ bool RenderThread::activatePreviewGpuResources(int mode) {
         !nextLines.upload(buildAnatomyLineMesh(*source))) {
         return false;
     }
+    if (mode == 2) {
+        skeleton_ = cachedP1aSkeleton_;
+        joints_ = cachedP1aJoints_;
+        if (!motion_.initialize(skeleton_, joints_)) return false;
+    }
     if (mode == 0 && avatarGeometryDirty_) {
         if (!motion_.initialize(humanoid.skeleton, humanoid.joints)) return false;
         cachedAvatarMesh_ = humanoid.mesh;
@@ -1184,6 +1242,46 @@ bool RenderThread::activatePreviewGpuResources(int mode) {
         p1aMesh_ = std::move(nextMesh);
         p1aLines_ = std::move(nextLines);
     }
+    return true;
+}
+
+bool RenderThread::ensureP1aGeometry(int detailLevel) {
+    const shape::v2::CharacterDefinition definition = shape::v2::defaultCharacterDefinition();
+    const character::GeometryBuildRequest request = character::makeGeometryBuildRequest(
+        definition, static_cast<uint32_t>(detailLevel), 2);
+    const std::string cacheKey = request.cacheKey();
+    if (hasCachedP1a_ && cachedP1aCacheKey_ == cacheKey) {
+        skeleton_ = cachedP1aSkeleton_;
+        joints_ = cachedP1aJoints_;
+        if (!motion_.initialize(skeleton_, joints_)) return false;
+        PAE_LOGI("PAE_RENDER", "geometry cache hit: p1a-vr (%s)", cacheKey.c_str());
+        return true;
+    }
+
+    const auto started = std::chrono::steady_clock::now();
+    const character::TorsoShoulderResult generated =
+        character::TorsoShoulderPatchGenerator::generate(definition, request);
+    if (!generated.valid) {
+        PAE_LOGE("PAE_RENDER", "P1-VR-1A generation failed: %s", generated.error.c_str());
+        return false;
+    }
+    cachedP1aMesh_ = generated.mesh;
+    cachedP1aSkeleton_ = generated.state.skeleton;
+    cachedP1aJoints_ = generated.state.joints;
+    cachedP1aCacheKey_ = cacheKey;
+    hasCachedP1a_ = true;
+    patchReport_ = generated.report;
+    p1aTimings_ = generated.timings;
+    skeleton_ = cachedP1aSkeleton_;
+    joints_ = cachedP1aJoints_;
+    if (!motion_.initialize(skeleton_, joints_)) return false;
+    const double ms = std::chrono::duration<double, std::milli>(
+        std::chrono::steady_clock::now() - started).count();
+    PAE_LOGI("PAE_RENDER",
+             "P1-VR-1A ready: verts=%u tris=%u components=%d boundary=%d nonmanifold=%d gen_ms=%.1f cache=%s",
+             patchReport_.vertexCount, patchReport_.triangleCount,
+             generated.topology.components, generated.topology.boundaryEdges,
+             generated.topology.nonManifoldEdges, ms, cacheKey.c_str());
     return true;
 }
 
@@ -1263,7 +1361,7 @@ bool RenderThread::ensureCanonicalGeometry(int detailLevel) {
         PAE_LOGE("PAE_RENDER", "canonical GPU/CPU validation failed");
         return false;
     }
-    if (!cached && !motion_.initialize(nextSkeleton, nextJoints)) {
+    if (!motion_.initialize(nextSkeleton, nextJoints)) {
         PAE_LOGE("PAE_RENDER", "canonical motion runtime init failed");
         return false;
     }
@@ -1663,8 +1761,14 @@ void RenderThread::drawFrame() {
     // The camera is state, not a lookup table: the evidence presets write into
     // the same parameterisation the interactive camera uses, so a fixed
     // capture rig and a free inspection rig are the same rig.
-    const Vec3 cameraEye = resolveCameraEye();
-    const Mat4 view = Mat4::lookAt(cameraEye, cameraTarget_, {0.0f, 1.0f, 0.0f});
+    Vec3 cameraEye = resolveCameraEye();
+    Vec3 cameraTarget = cameraTarget_;
+    if (previewMode_ == 2) {
+        const int index = std::clamp(cameraPreset_, 0, kPresetCount - 1);
+        cameraEye = kP1aPresetEye[index];
+        cameraTarget = kP1aPresetTarget[index];
+    }
+    const Mat4 view = Mat4::lookAt(cameraEye, cameraTarget, {0.0f, 1.0f, 0.0f});
     const Mat4 viewProjection = projection * view;
     const Mat4 model = Mat4::translation({0.0f, -0.05f, 0.0f});
     const Mat3 normalMatrix = modelNormalMatrix(model);
@@ -1697,18 +1801,21 @@ void RenderThread::drawFrame() {
 
 
     // Ground contact shadow (M10): blended disc under the feet, drawn before
-    // the character so the avatar occludes it.
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glDepthMask(GL_FALSE);
-    shadowProgram_.use();
-    glUniformMatrix4fv(uniformShadowViewProj_, 1, GL_FALSE, viewProjection.m.data());
-    glUniformMatrix4fv(uniformShadowModel_, 1, GL_FALSE,
-                       Mat4::translation({0.0f, -0.046f, 0.02f}).m.data());
-    glUniform4f(uniformShadowColor_, 0.0f, 0.0f, 0.05f, 0.35f);
-    shadowMesh_.draw();
-    glDepthMask(GL_TRUE);
-    glDisable(GL_BLEND);
+    // the character so the avatar occludes it. The local P1-VR patch has no
+    // feet/ground relationship, so its evidence camera omits the disc.
+    if (previewMode_ != 2) {
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glDepthMask(GL_FALSE);
+        shadowProgram_.use();
+        glUniformMatrix4fv(uniformShadowViewProj_, 1, GL_FALSE, viewProjection.m.data());
+        glUniformMatrix4fv(uniformShadowModel_, 1, GL_FALSE,
+                           Mat4::translation({0.0f, -0.046f, 0.02f}).m.data());
+        glUniform4f(uniformShadowColor_, 0.0f, 0.0f, 0.05f, 0.35f);
+        shadowMesh_.draw();
+        glDepthMask(GL_TRUE);
+        glDisable(GL_BLEND);
+    }
 
     // World-space reference grid. Drawn before the character so the avatar
     // occludes it, and in world space so the free camera reads the scene in
@@ -1771,6 +1878,22 @@ void RenderThread::drawFrame() {
                                viewProjection.m.data());
             glUniformMatrix4fv(uniformAnatomyNormalModel_, 1, GL_FALSE, model.m.data());
             glUniformMatrix3fv(uniformAnatomyNormalNormalMatrix_, 1, GL_FALSE, normalMatrix.m.data());
+            p1aMesh_.draw();
+        } else if (debugView_ == 5) {
+            skinnedProgram_.use();
+            glUniformMatrix4fv(uniformViewProj_, 1, GL_FALSE, viewProjection.m.data());
+            glUniformMatrix4fv(uniformModel_, 1, GL_FALSE, model.m.data());
+            glUniformMatrix3fv(uniformNormalMatrix_, 1, GL_FALSE, normalMatrix.m.data());
+            glUniform3f(skinnedProgram_.uniform("uLightDir"), 0.4f, 0.8f, 0.6f);
+            glUniform1i(uniformDebugMode_, 5);
+            p1aMesh_.draw();
+        } else if (debugView_ == 4) {
+            skinnedProgram_.use();
+            glUniformMatrix4fv(uniformViewProj_, 1, GL_FALSE, viewProjection.m.data());
+            glUniformMatrix4fv(uniformModel_, 1, GL_FALSE, model.m.data());
+            glUniformMatrix3fv(uniformNormalMatrix_, 1, GL_FALSE, normalMatrix.m.data());
+            glUniform3f(skinnedProgram_.uniform("uLightDir"), 0.4f, 0.8f, 0.6f);
+            glUniform1i(uniformDebugMode_, 4);
             p1aMesh_.draw();
         } else {
             anatomyClayProg_.use();
@@ -1882,9 +2005,8 @@ void RenderThread::drawFrame() {
     }
 
     egl_.swapBuffers();
-    uint32_t frameDraws = 2;
+    uint32_t frameDraws = previewMode_ == 2 ? 2u : 3u;
     if (previewMode_ == 0 || previewMode_ == 3) frameDraws += 2;
-    ++frameDraws;
     if ((previewMode_ == 0 && (debugView_ == 1 || debugView_ == 6)) ||
         (previewMode_ == 3 && debugView_ == 1) ||
         (previewMode_ == 2 && debugView_ == 1) ||

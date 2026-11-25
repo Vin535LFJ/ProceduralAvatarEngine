@@ -26,6 +26,19 @@ set(PAE_CORE_SOURCES
     procedural/humanoid/anatomy/HumanAnatomyGenerator.cpp
     procedural/MeshTopology.cpp
     procedural/character/BodyPatchGenerator.cpp
+    procedural/character/Anthropometry.cpp
+    procedural/character/AnatomicalLandmarks.cpp
+    procedural/character/AnatomicalRegions.cpp
+    procedural/character/ResolvedCharacterState.cpp
+    procedural/character/GeometryBuildRequest.cpp
+    procedural/character/TopologyTemplate.cpp
+    procedural/character/SurfacePatch.cpp
+    procedural/character/VariableProfileSweep.cpp
+    procedural/character/LocalShapeBasis.cpp
+    procedural/character/PatchAssembler.cpp
+    procedural/character/LodCorrespondence.cpp
+    procedural/character/RegionWeightGenerator.cpp
+    procedural/character/TorsoShoulderPatchGenerator.cpp
     skeleton/Skeleton.cpp
     skeleton/Skinning.cpp
     skeleton/weights/WeightGenerator.cpp
@@ -34,6 +47,14 @@ set(PAE_CORE_SOURCES
     motion/retargeting/Retargeting.cpp
     motion/MotionRuntime.cpp
 )
+
+if(NOT PAE_HOST)
+    # P1-VR-01: Android production needs the accepted v2 CharacterDefinition
+    # implementation. Host PoC targets continue to compile it explicitly.
+    list(APPEND PAE_CORE_SOURCES
+        procedural/shape/v2/CharacterDefinition.cpp
+    )
+endif()
 
 add_library(pae_core STATIC ${PAE_CORE_SOURCES})
 target_include_directories(pae_core PUBLIC

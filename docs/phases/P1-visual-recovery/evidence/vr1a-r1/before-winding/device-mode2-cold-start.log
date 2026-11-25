@@ -1,0 +1,13 @@
+--------- beginning of main
+--------- beginning of system
+11-25 16:46:21.060 25020 25020 I PAE_UI  : debug extras: anatomy=false preset=0 view=3 outfit=-1
+11-25 16:46:27.465 25020 25046 I PAE_GEOMETRY: generateHumanoid: 30961 verts, 59408 tris, 5766.97 ms, detail=2
+11-25 16:46:27.476 25020 25046 I PAE_RENDER: geometry generated: avatar
+11-25 16:46:31.973 25020 25046 I PAE_GEOMETRY: Human Anatomy Report: verts=18394 tris=36784 components=1 boundary=0 nonmanifold=0 degen=0 dup=0 badnorm=0 gen_ms=3452 res=88x132x52 | chest=0.622 waist=0.762 shoulder_x=0.309 pelvis=0.794
+11-25 16:46:31.975 25020 25046 I PAE_RENDER: anatomy preview ready: 36784 tris, 3891 ms
+11-25 16:46:32.359 25020 25046 I PAE_RENDER: P1-VR-1A ready: verts=780 tris=1556 components=1 boundary=0 nonmanifold=0 gen_ms=26.6 cache=0:2:1:1:8849779482416134771:2:4294967295
+11-25 16:46:32.377 25020 25046 I PAE_RENDER: P1-VR-1A-REPORT verts=780 tris=1556 components=1 boundary=0 nonmanifold=0 degenerate=0 badnorm=0 gen_ms=26.552 boundaries=4
+11-25 16:46:32.387 25020 25046 I PAE_RENDER: surface ready 1920x1008
+11-25 16:46:32.401 25020 25046 I PAE_RENDER: applied previewMode=2
+11-25 16:46:32.401 25020 25046 I PAE_RENDER: applied cameraPreset=0
+11-25 16:46:32.401 25020 25046 I PAE_RENDER: applied debugView=3

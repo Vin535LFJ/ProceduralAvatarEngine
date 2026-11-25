@@ -1,0 +1,52 @@
+Starting: Intent { flg=0x20000000 cmp=com.pae.host/.MainActivity (has extras) }
+Starting: Intent { flg=0x20000000 cmp=com.pae.host/.MainActivity (has extras) }
+Warning: Activity not started, its current task has been brought to the front
+Starting: Intent { flg=0x20000000 cmp=com.pae.host/.MainActivity (has extras) }
+Warning: Activity not started, its current task has been brought to the front
+Starting: Intent { flg=0x20000000 cmp=com.pae.host/.MainActivity (has extras) }
+Warning: Activity not started, its current task has been brought to the front
+Starting: Intent { flg=0x20000000 cmp=com.pae.host/.MainActivity (has extras) }
+Warning: Activity not started, its current task has been brought to the front
+Starting: Intent { flg=0x20000000 cmp=com.pae.host/.MainActivity (has extras) }
+Warning: Activity not started, its current task has been brought to the front
+Starting: Intent { flg=0x20000000 cmp=com.pae.host/.MainActivity (has extras) }
+Warning: Activity not started, its current task has been brought to the front
+Starting: Intent { flg=0x20000000 cmp=com.pae.host/.MainActivity (has extras) }
+Warning: Activity not started, its current task has been brought to the front
+Starting: Intent { flg=0x20000000 cmp=com.pae.host/.MainActivity (has extras) }
+Warning: Activity not started, its current task has been brought to the front
+Starting: Intent { flg=0x20000000 cmp=com.pae.host/.MainActivity (has extras) }
+Warning: Activity not started, its current task has been brought to the front
+Starting: Intent { flg=0x20000000 cmp=com.pae.host/.MainActivity (has extras) }
+Warning: Activity not started, its current task has been brought to the front
+Starting: Intent { flg=0x20000000 cmp=com.pae.host/.MainActivity (has extras) }
+Warning: Activity not started, its current task has been brought to the front
+Starting: Intent { flg=0x20000000 cmp=com.pae.host/.MainActivity (has extras) }
+Warning: Activity not started, its current task has been brought to the front
+Starting: Intent { flg=0x20000000 cmp=com.pae.host/.MainActivity (has extras) }
+Warning: Activity not started, its current task has been brought to the front
+Starting: Intent { flg=0x20000000 cmp=com.pae.host/.MainActivity (has extras) }
+Warning: Activity not started, its current task has been brought to the front
+Starting: Intent { flg=0x20000000 cmp=com.pae.host/.MainActivity (has extras) }
+Warning: Activity not started, its current task has been brought to the front
+eb9eeee87db3ef1ab4c4a0bcd935f7712aeae85f099cb6ee963d9de2aaa4e3c1 *docs/phases/P1-visual-recovery/evidence/vr1a-r1/visual-vr1a-action1-preset0.png
+65c1f49ef253348ff40a90b09df34b01374fe31d77cacc98d89dc2abd5ef95df *docs/phases/P1-visual-recovery/evidence/vr1a-r1/visual-vr1a-action1-preset4.png
+9091e56f369af9fdb4819dc4f7cb203b27c0ff87b5f52119401e7e2fc0adfd07 *docs/phases/P1-visual-recovery/evidence/vr1a-r1/visual-vr1a-action3-preset0.png
+2470b021291cb33459fafaef9f625a69b8892937bbe66e4058f1969f1c7e9feb *docs/phases/P1-visual-recovery/evidence/vr1a-r1/visual-vr1a-action3-preset4.png
+6ac4b464644294fee43e5f408e0ed5eb45c85f033794c81c01e6484df9017543 *docs/phases/P1-visual-recovery/evidence/vr1a-r1/visual-vr1a-front-clay.png
+14a268cb675db24e117db3fab4ddee38942068d9427bfaf47f5a7e6518c88194 *docs/phases/P1-visual-recovery/evidence/vr1a-r1/visual-vr1a-front-view1.png
+6a65bcb6932ad0309bb7a56135ed707099f901e55d895363bd4472daf0204a48 *docs/phases/P1-visual-recovery/evidence/vr1a-r1/visual-vr1a-front-view2.png
+db82e0bba1fcf0dcff8be04f13b2b921dc1c1832aa0a3d896c77a583dec65bdc *docs/phases/P1-visual-recovery/evidence/vr1a-r1/visual-vr1a-front-view5.png
+a0f7632617cb38dfe8993af711449cbf42a1f2a558b9022dd0eaed2854d18ac3 *docs/phases/P1-visual-recovery/evidence/vr1a-r1/visual-vr1a-mode0.png
+40b98c305900eac32951ce9388ef19282006472df50e78105054487985830688 *docs/phases/P1-visual-recovery/evidence/vr1a-r1/visual-vr1a-mode1.png
+6ac4b464644294fee43e5f408e0ed5eb45c85f033794c81c01e6484df9017543 *docs/phases/P1-visual-recovery/evidence/vr1a-r1/visual-vr1a-mode2.png
+02e43078dc0dd9666509be4739909f61c1ca0fdbaa358d48b3b88a26b56ee762 *docs/phases/P1-visual-recovery/evidence/vr1a-r1/visual-vr1a-preset0-clay.png
+dfcead9c5b3c53e82dbd53efa6f0c5919f63c21e54ee966773ad2da39d27e528 *docs/phases/P1-visual-recovery/evidence/vr1a-r1/visual-vr1a-preset1-clay.png
+1c9ab6c28454331504fe0491f4fca0912997fef4ee6e644ca62d706c9f793672 *docs/phases/P1-visual-recovery/evidence/vr1a-r1/visual-vr1a-preset2-clay.png
+a4fdf3090d7bb389f746acd59aa2d77867d29127a260457742d1a2df78c0f1ff *docs/phases/P1-visual-recovery/evidence/vr1a-r1/visual-vr1a-preset3-clay.png
+54e9fe7888ba74e4f567b1bddf9ba17c16bf22618b767268d79f82ca58e30ee8 *docs/phases/P1-visual-recovery/evidence/vr1a-r1/visual-vr1a-preset4-clay.png
+702d0837603989afcbf260d90e26d12aa9df1cafac60798828a9c65c413d42b2 *docs/phases/P1-visual-recovery/evidence/vr1a-r1/visual-vr1a-preset5-clay.png
+69826e1c78993a99dfedb272e113ce37a4c8b9a8d267c0bcb38b749263eca377 *docs/phases/P1-visual-recovery/evidence/vr1a-r1/visual-vr1a-preset6-clay.png
+64e524187367353663032e9932be24ab8328170e4b7caa11dadcdf025f360cbd *docs/phases/P1-visual-recovery/evidence/vr1a-r1/visual-vr1a-preset7-clay.png
+6ac4b464644294fee43e5f408e0ed5eb45c85f033794c81c01e6484df9017543 *docs/phases/P1-visual-recovery/evidence/vr1a-r1/visual-vr1a-quality0.png
+6ac4b464644294fee43e5f408e0ed5eb45c85f033794c81c01e6484df9017543 *docs/phases/P1-visual-recovery/evidence/vr1a-r1/visual-vr1a-quality2.png

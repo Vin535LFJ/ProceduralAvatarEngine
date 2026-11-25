@@ -1,0 +1,18 @@
+--------- beginning of system
+--------- beginning of main
+11-25 19:03:19.018   510   587 I PAE_STATS: frames=16440 fps=53.9 frame_ms=18.54 draw_calls=2 triangles=1028 buffer_bytes=51472 p50_ms=18.17 p95_ms=19.92 p99_ms=21.04
+11-25 19:04:20.643  1246  1246 I PAE_UI  : debug extras: anatomy=false preset=0 view=0 outfit=-1
+11-25 19:04:27.081  1246  1288 I PAE_RENDER: geometry generated: avatar
+11-25 19:04:31.533  1246  1288 I PAE_RENDER: anatomy preview ready: 36784 tris, 3850 ms
+11-25 19:04:31.896  1246  1288 I PAE_RENDER: P1-VR-1A ready: verts=524 tris=1028 components=1 boundary=0 nonmanifold=0 gen_ms=7.6 cache=0:2:1:1:8849779482416134771:2:4294967295
+11-25 19:04:31.908  1246  1288 I PAE_RENDER: P1-VR-1A-REPORT verts=524 tris=1028 components=1 boundary=0 nonmanifold=0 degenerate=0 badnorm=0 gen_ms=7.524 state_ms=0.196 geometry_ms=1.474 assembly_ms=4.996 weight_ms=0.808 boundaries=4
+11-25 19:04:31.915  1246  1288 I PAE_RENDER: P1-VR-1A-UPLOAD mesh_ms=2.490 wire_ms=6.633 cpu_mesh_bytes=50064 gpu_buffer_bytes=51472
+11-25 19:04:31.915  1246  1288 I PAE_RENDER: P1-VR-1A-MEMORY peak_rss_kb=290140
+11-25 19:04:31.915  1246  1288 I PAE_RENDER: surface ready 1920x1008
+11-25 19:04:31.924  1246  1288 I PAE_RENDER: applied previewMode=2
+11-25 19:04:31.924  1246  1288 I PAE_RENDER: applied cameraPreset=0
+11-25 19:04:31.924  1246  1288 I PAE_RENDER: applied debugView=0
+11-25 19:04:31.939  1246  1288 I PAE_STATS: frames=0 fps=0.0 frame_ms=0.00 draw_calls=2 triangles=1028 buffer_bytes=51472 p50_ms=0.00 p95_ms=0.00 p99_ms=0.00
+11-25 19:04:34.362  1246  1288 I PAE_STATS: frames=120 fps=49.4 frame_ms=20.23 draw_calls=2 triangles=1028 buffer_bytes=51472 p50_ms=19.98 p95_ms=22.38 p99_ms=31.80
+11-25 19:04:36.801  1246  1288 I PAE_STATS: frames=240 fps=49.2 frame_ms=20.32 draw_calls=2 triangles=1028 buffer_bytes=51472 p50_ms=20.04 p95_ms=22.10 p99_ms=29.63
+11-25 19:04:39.234  1246  1288 I PAE_STATS: frames=360 fps=49.1 frame_ms=20.37 draw_calls=2 triangles=1028 buffer_bytes=51472 p50_ms=20.11 p95_ms=22.02 p99_ms=22.48

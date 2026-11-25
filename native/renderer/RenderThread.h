@@ -7,6 +7,7 @@
 #include "renderer/gl/SkinnedGpuMesh.h"
 #include "renderer/stats/RenderStats.h"
 #include "procedural/character/BodyPatchGenerator.h"
+#include "procedural/character/TorsoShoulderPatchGenerator.h"
 #include "motion/MotionRuntime.h"
 #include "skeleton/Skeleton.h"
 
@@ -93,6 +94,7 @@ private:
     void processCommands();
     void drawFrame();
     bool ensureResources(std::string* error);
+    bool ensureP1aGeometry(int detailLevel);
     bool ensureCanonicalGeometry(int detailLevel);
     bool validateCanonicalGpuPath(const SkinnedGpuMesh& renderMesh,
                                   const MeshData& cpuMesh,
@@ -129,6 +131,7 @@ private:
     SkinnedGpuMesh canonicalLines_;    // P1-A3: skinned topology wireframe
     SkinnedGpuMesh canonicalUvMesh_;   // P1-B: split Render Mesh with parallel UV VBO
     PatchGenerationReport patchReport_;
+    character::TorsoShoulderTimings p1aTimings_{};
     SkinnedGpuMesh avatarMesh_;
     SkinnedGpuMesh avatarLines_;  // avatar wireframe edge buffer
     SkinnedGpuMesh gridMesh_;     // world-space reference grid (static)
@@ -145,6 +148,9 @@ private:
     MeshData cachedAvatarMesh_;
     MeshData cachedAnatomyMesh_;
     MeshData cachedP1aMesh_;
+    Skeleton cachedP1aSkeleton_{};
+    BodyJoints cachedP1aJoints_{};
+    std::string cachedP1aCacheKey_;
     MeshData cachedCanonicalMesh_;
     MeshData cachedCanonicalRenderMesh_;
     Skeleton cachedCanonicalSkeleton_{};

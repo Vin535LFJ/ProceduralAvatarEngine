@@ -1,0 +1,6 @@
+--------- beginning of system
+--------- beginning of main
+11-25 18:50:30.648 32190 32218 I PAE_STATS: frames=3000 fps=49.5 frame_ms=20.21 draw_calls=2 triangles=1028 buffer_bytes=51472 p50_ms=20.16 p95_ms=20.46 p99_ms=21.11
+11-25 18:50:33.038 32190 32218 I PAE_STATS: frames=3120 fps=49.9 frame_ms=20.06 draw_calls=2 triangles=1028 buffer_bytes=51472 p50_ms=20.11 p95_ms=20.44 p99_ms=20.88
+11-25 18:50:35.448 32190 32218 I PAE_STATS: frames=3240 fps=49.6 frame_ms=20.17 draw_calls=2 triangles=1028 buffer_bytes=51472 p50_ms=20.09 p95_ms=20.43 p99_ms=20.66
+11-25 18:50:37.859 32190 32218 I PAE_STATS: frames=3360 fps=49.4 frame_ms=20.26 draw_calls=2 triangles=1028 buffer_bytes=51472 p50_ms=20.12 p95_ms=20.43 p99_ms=20.67

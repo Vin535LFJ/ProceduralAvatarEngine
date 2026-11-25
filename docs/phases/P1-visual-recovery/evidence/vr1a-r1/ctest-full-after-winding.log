@@ -1,0 +1,46 @@
+Internal ctest changing into directory: E:/AI-Tools/ProceduralAvatarEngine-poc-sm/build-host
+Test project E:/AI-Tools/ProceduralAvatarEngine-poc-sm/build-host
+      Start  1: pae_core_tests
+ 1/20 Test  #1: pae_core_tests ...................   Passed    3.96 sec
+      Start  2: pae_geometry_tests
+ 2/20 Test  #2: pae_geometry_tests ...............   Passed    0.02 sec
+      Start  3: pae_fusion_tests
+ 3/20 Test  #3: pae_fusion_tests .................   Passed    0.07 sec
+      Start  4: pae_smooth_union_sign_tests
+ 4/20 Test  #4: pae_smooth_union_sign_tests ......   Passed    0.02 sec
+      Start  5: pae_face_hair_tests
+ 5/20 Test  #5: pae_face_hair_tests ..............   Passed   13.93 sec
+      Start  6: pae_anatomy_tests
+ 6/20 Test  #6: pae_anatomy_tests ................   Passed    1.22 sec
+      Start  7: pae_canonical_skin_tests
+ 7/20 Test  #7: pae_canonical_skin_tests .........   Passed   46.83 sec
+      Start  8: pae_render_data_tests
+ 8/20 Test  #8: pae_render_data_tests ............   Passed    0.02 sec
+      Start  9: pae_humanoid_tests
+ 9/20 Test  #9: pae_humanoid_tests ...............   Passed   11.76 sec
+      Start 10: pae_skinning_tests
+10/20 Test #10: pae_skinning_tests ...............   Passed   11.83 sec
+      Start 11: pae_motion_tests
+11/20 Test #11: pae_motion_tests .................   Passed   13.88 sec
+      Start 12: pae_character_patch_tests
+12/20 Test #12: pae_character_patch_tests ........   Passed   10.03 sec
+      Start 13: pae_vr_torso_shoulder_tests
+13/20 Test #13: pae_vr_torso_shoulder_tests ......   Passed    0.20 sec
+      Start 14: pae_poc_route_tests
+14/20 Test #14: pae_poc_route_tests ..............   Passed   11.68 sec
+      Start 15: pae_poc_sm_contract_tests
+15/20 Test #15: pae_poc_sm_contract_tests ........   Passed    0.19 sec
+      Start 16: pae_poc_sm_envelope_tests
+16/20 Test #16: pae_poc_sm_envelope_tests ........   Passed    0.49 sec
+      Start 17: pae_poc_sm_seam_tests
+17/20 Test #17: pae_poc_sm_seam_tests ............   Passed    0.22 sec
+      Start 18: pae_poc_sm_cross_seam_tests
+18/20 Test #18: pae_poc_sm_cross_seam_tests ......   Passed    0.21 sec
+      Start 19: pae_poc_sm_param_diff_tests
+19/20 Test #19: pae_poc_sm_param_diff_tests ......   Passed    0.27 sec
+      Start 20: pae_poc_sm_semantics_tests
+20/20 Test #20: pae_poc_sm_semantics_tests .......   Passed    0.31 sec
+
+100% tests passed, 0 tests failed out of 20
+
+Total Test time (real) = 127.19 sec

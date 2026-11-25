@@ -1,0 +1,4 @@
+--------- beginning of system
+--------- beginning of main
+11-25 18:46:17.645 31531 31562 I PAE_STATS: frames=10440 fps=48.1 frame_ms=20.80 draw_calls=5 triangles=93344 buffer_bytes=25391104 p50_ms=20.40 p95_ms=22.51 p99_ms=22.69
+11-25 18:46:20.098 31531 31562 I PAE_STATS: frames=10560 fps=47.8 frame_ms=20.91 draw_calls=5 triangles=93344 buffer_bytes=25391104 p50_ms=20.41 p95_ms=22.49 p99_ms=22.71

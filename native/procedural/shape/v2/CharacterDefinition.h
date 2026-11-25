@@ -88,6 +88,16 @@ struct ProportionProfile {
     // that closes the system. It is ASSUMED, not measured.
     float waistAspectRatio = 1.25f;
 
+    // P1-VR segment length ratios (metres per metre of stature). These are
+    // explicit Assumed inputs until the Canonical Acceptance Sheet fixes the
+    // measured adult values.
+    float upperArmLengthRatio = 0.185f;
+    float forearmLengthRatio = 0.168f;
+    float upperLegLengthRatio = 0.259f;
+    float lowerLegLengthRatio = 0.254f;
+    float handLengthRatio = 0.108f;
+    float footLengthRatio = 0.152f;
+
     float stature() const { return statureM; }
     float shoulderBreadthM() const { return statureM * shoulderBreadthRatio; }
     float biacromialM() const { return statureM * biacromialRatio; }
@@ -241,13 +251,52 @@ struct JointDeformationRegion {
 };
 
 // ---------------------------------------------------------------------------
+// P1-VR-1A torso/shoulder parameters. These are semantic shape inputs, not a
+// second body definition. Values are normalized unless stated in metres.
+// ---------------------------------------------------------------------------
+struct TorsoShapeParameters {
+    float ribcageWidthScale = 1.0f;
+    float chestDepthScale = 1.0f;
+    float waistPinch = 0.45f;
+    float upperPelvisWidthScale = 1.0f;
+    float shoulderGirdleMass = 1.0f;
+    float axillaDepth = 0.028f;
+    float clavicleRelief = 0.010f;
+};
+
+struct ShoulderShapeParameters {
+    float leftWidthScale = 1.0f;
+    float rightWidthScale = 1.0f;
+    float deltoidVolume = 1.0f;
+};
+
+struct UpperArmShapeParameters {
+    float leftRadiusScale = 1.0f;
+    float rightRadiusScale = 1.0f;
+    float elbowRadiusScale = 0.72f;
+};
+
+struct AsymmetryParameters {
+    float leftShoulderWidthDelta = 0.0f;
+    float rightShoulderWidthDelta = 0.0f;
+    float leftUpperArmRadiusDelta = 0.0f;
+    float rightUpperArmRadiusDelta = 0.0f;
+};
+
+// ---------------------------------------------------------------------------
 // The contract itself.
 // ---------------------------------------------------------------------------
 struct CharacterDefinition {
+    uint32_t schemaVersion = 2;
+    uint64_t seed = 20261125;
     ProportionProfile proportions{};
     AnatomicalLandmarks landmarks{};
     AnatomicalRegions regions{};
     ShapeParameters parameters{};
+    TorsoShapeParameters torso{};
+    ShoulderShapeParameters shoulders{};
+    UpperArmShapeParameters upperArms{};
+    AsymmetryParameters asymmetry{};
     std::vector<JointDeformationRegion> jointDeformations{};
 };
 
