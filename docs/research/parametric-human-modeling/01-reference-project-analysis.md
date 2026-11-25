@@ -13,6 +13,7 @@
 - SMPL-X / FLAME / MANO / GHUM：固定拓扑 + 学习到的 shape/pose basis + joint predictor/regressor + LBS。
 - MB-Lab：Blender 数据库 + 固定模板 + JSON morph + 配置驱动生成流程。
 - OpenSim：骨骼/关节/标志点/测量语义，不是人体皮肤生成模型。
+- GNM Head：固定统计头部拓扑 + identity/expression/pose 参数 + 眼球/牙齿/舌头内部结构。
 
 PAE 应吸收的是：参数分层、固定自有拓扑、局部形态基、shape/pose 分离、区域 mask、关节中心与解剖标志点语义。不能直接搬用模型、网格、morph 或受限训练数据。
 
@@ -29,6 +30,7 @@ PAE 应吸收的是：参数分层、固定自有拓扑、局部形态基、shap
 | MB-Lab | 1.8.1 `063bff04e60f3e7c651fda628c30f5d83f3f3078` |
 | OpenSim core | `c594ccb9c789ac1451ce4961ecd563b6712b2d93` |
 | OpenSim models | `d9b05d470b1a481c222372c85b75772faf8f7792` |
+| GNM Head | repo HEAD `25aafd3bf310c2a50eb0347602a023af2eb09ae4`；arXiv `2607.23687v3` |
 
 ## 3. MakeHuman / MPFB2
 
@@ -280,7 +282,25 @@ X=LBS(X_{shape}(\beta_b)+\Delta X_{pose}(\theta)+\Delta X_{face}(\beta_f), C(X_{
 - 不导入 OpenSim skeleton、model 或 multibody tree；
 - OpenSim 不提供 skin weights 或表面 falloff，PAE 必须自行定义。
 
-## 10. 五类技术归纳
+## 10. GNM Head（专家补充参考）
+
+核查版本：`google/GNM` HEAD `25aafd3bf310c2a50eb0347602a023af2eb09ae4`；技术报告 arXiv `2607.23687v3`（2026-09-11）。
+
+已核实：
+
+- 模型覆盖 head、face、neck、eyeballs、teeth、tongue。
+- v3.x identity 253 维：head 170、eyeball 3、teeth 80。
+- expression 维度存在来源差异：官方 README 为 383（100+100+150+32+1，tongue/iris）；arXiv v3 §3.9 Table 1 为 382（100+100+150+31+1，最后一项称 pupil）。未裁定前同时记录，不把 383 称为两来源共同核实值。
+- head pose/eyeball orientation 使用 joint axis-angle + global translation。
+- model data 包含 template shape、identity basis、expression basis、skinning weights、UV layout。
+- 同时提供 quad 与 triangulated topology；UDIM 1001–1007 按 skin/eye/teeth/tongue 分区。
+- 官方明确训练数据使用二元性别分类和四个宽泛人口群组，代表性有限。
+
+PAE 用法：VR-2 的面部拓扑、内部结构和参数分区参考；不导入网格、basis、weights、textures、semantic sampler 或训练数据，不推迟 VR-1A。
+
+许可证：仓库整体 Apache-2.0；LICENSE 另有 tongue animation mesh 的 MIT 第三方条款；模型/训练数据/第三方资产仍须逐项核查。
+
+## 11. 五类技术归纳
 
 | 类别 | 成熟项目做法 | PAE 自主实现 |
 |---|---|---|
@@ -290,7 +310,7 @@ X=LBS(X_{shape}(\beta_b)+\Delta X_{pose}(\theta)+\Delta X_{face}(\beta_f), C(X_{
 | D 几何拓扑 | 固定 hm08/SMPL/FLAME/MANO/GHUM/MB-Lab 模板 | PAE 自有 `TopologyTemplate` + `SurfacePatch` |
 | E 姿势形变 | pose blendshape、joint hierarchy、LBS、region mask | 现有 22-bone LBS + `JointDeformationRegions`，后续局部 corrective |
 
-## 11. 对 PAE 架构的最终修正
+## 12. 对 PAE 架构的最终修正
 
 1. 保留负责人提出的 `P(s,φ)` 可变截面作为躯干/四肢主体。
 2. 为每个区域建立 PAE 自有固定拓扑模板，获得稳定 ID 和局部形态基。
@@ -300,7 +320,7 @@ X=LBS(X_{shape}(\beta_b)+\Delta X_{pose}(\theta)+\Delta X_{face}(\beta_f), C(X_{
 6. 用区域 mask 和参数影响测试替代“最近骨骼距离”单一权重逻辑。
 7. 不导入任何外部模型、morph、训练数据或受限资产。
 
-## 12. 来源
+## 13. 来源
 
 ### MakeHuman / MPFB2
 
@@ -325,6 +345,13 @@ X=LBS(X_{shape}(\beta_b)+\Delta X_{pose}(\theta)+\Delta X_{face}(\beta_f), C(X_{
 - [MANO official](https://mano.is.tue.mpg.de/)
 - [GHUM paper](https://openaccess.thecvf.com/content_CVPR_2020/papers/Xu_GHUM__GHUML_Generative_3D_Human_Shape_and_Articulated_Pose_CVPR_2020_paper.pdf)
 - [GHUM README](https://github.com/google-research/google-research/blob/20fadc5c985631044ccc047815cbd0300918e690/ghum/README.md)
+
+### GNM Head
+
+- [GNM repository](https://github.com/google/GNM)
+- [GNM Head shape README](https://github.com/google/GNM/blob/main/gnm/shape/README.md)
+- [GNM Head technical report](https://arxiv.org/abs/2607.23687)
+- [GNM LICENSE](https://github.com/google/GNM/blob/main/LICENSE)
 
 ### MB-Lab / OpenSim
 

@@ -31,23 +31,44 @@
 
 ## 3. 推荐数据模型
 
-唯一语义权威是现有 `pae::shape::v2::CharacterDefinition`。本设计不新增第二个同职责的 `HumanShapeDefinition` struct；`HumanShapeParameters`、`Anthropometry`、`AsymmetryParameters` 和 `TopologyPolicy` 是它的组成子契约。`native/procedural/character/CharacterDefinition.h` 与 `BodyParameters` 仅作为 legacy patch/适配输入，不再是人体形态权威。
+唯一语义权威是现有 `pae::shape::v2::CharacterDefinition`。本设计不新增第二个同职责的 `HumanShapeDefinition` struct；`HumanShapeParameters`、`AsymmetryParameters` 和 `TopologyPolicyRef` 是它的组成子契约。实际 `TopologyPolicy` 属于 `GeometryBuildRequest`。`native/procedural/character/CharacterDefinition.h` 与 `BodyParameters` 仅作为 legacy patch/适配输入，不再是人体形态权威。
+
+人体输入、派生状态和生成请求必须分层，不能都作为可写权威：
 
 ```cpp
-// Extends pae::shape::v2::CharacterDefinition in place.
+// Editable semantic input: pae::shape::v2::CharacterDefinition.
 struct CharacterDefinition {
     uint32_t schemaVersion = 1;
-    uint32_t generatorVersion = 1;
     uint64_t seed = 0;
 
     ProportionProfile proportions;
-    Anthropometry anthropometry;          // 由 proportions 派生并可审计
-    AnatomicalLandmarks landmarks;        // 由 proportions/joints/表面曲线解析
-    AnatomicalRegions regions;
+    AnatomicalLandmarkInput explicitLandmarks; // overrides/constraints only
+    AnatomicalRegions regions;                 // semantic adjacency/masks
     HumanShapeParameters shape;
     AsymmetryParameters asymmetry;
-    JointDeformationRegions jointDeformations;
+    JointDeformationRegions jointDeformations; // constraints, not evaluated state
+    ParameterConfig config;
+    TopologyPolicyRef topologyRef;             // versioned generation policy
+};
+
+// Immutable derived result.
+struct ResolvedCharacterState {
+    Anthropometry anthropometry;
+    AnatomicalLandmarks landmarks;
+    AnatomicalRegions resolvedRegions;
+    BodyJoints joints;
+    std::array<JointFrame, BoneCount> jointFrames;
+    Skeleton skeleton;
+    ValueConfidence confidence;
+};
+
+// Generation strategy, not a second body definition.
+struct GeometryBuildRequest {
+    uint32_t generatorVersion;
     TopologyPolicy topology;
+    uint32_t detailLevel;
+    uint32_t templateVersion;
+    RegionMask regionMask;
 };
 ```
 
@@ -70,7 +91,6 @@ struct CharacterDefinition {
 ### 3.2 Anthropometry
 
 保存绝对量和派生量，例如：
-
 - shoulderBreadthM；
 - chestDepthM；
 - waistCircumferenceM；
@@ -80,7 +100,7 @@ struct CharacterDefinition {
 - handLengthM；
 - footLengthM。
 
-`Anthropometry` 由 `ProportionProfile` 解析产生。测试必须验证：只改变身高时，比例不变；只改变肩髋比时，只有声明区域和相邻边界受影响。
+`Anthropometry` 由 `ProportionProfile` 解析产生，属于不可变 `ResolvedCharacterState`，不得回写 CharacterDefinition。测试必须验证：只改变身高时，比例不变；只改变肩髋比时，只有声明区域和相邻边界受影响。
 
 ### 3.3 AnatomicalLandmarks
 
@@ -92,7 +112,7 @@ struct CharacterDefinition {
 - 头部点：glabella、nasion、nose tip、alar base、columella、mouth corner、upper/lower vermilion border、gonion、chin；
 - 手足点：MCP row、thenar、hypothenar、thumb CMC、metatarsal heads、hallux、calcaneus。
 
-每个 landmark 记录 `name`、`kind`、`position`、`side`、`confidence`、`frameId`、`unit` 和可选的 `boneId`/`BodyJoints` 绑定。坐标遵循 ADR-002：右手系、米、+Y 上、+Z 角色正面、+X 角色左侧。resolver 优先级固定为：显式 landmark → 由 `BodyJoints` 派生 → 由 proportion/anthropometry 解析 → Undetermined；冲突时保留显式值并记录 confidence 降级，不得静默覆盖。`PoseFrame::PoseLandmark` 是相机/动作输入，不是这套建模 landmark，两者不得混用。
+每个 landmark 记录 `name`、`kind`、`position`、`side`、`confidence`、`frameId`、`unit` 和可选的 `boneId`/`BodyJoints` 绑定。坐标遵循 ADR-002：右手系、米、+Y 上、+Z 角色正面、+X 角色左侧。resolver 优先级固定为：显式 landmark → legacy `BodyJoints` 一次性适配 → proportion/anthropometry 解析 → Undetermined；冲突时保留显式值并记录 confidence 降级，不得静默覆盖。`BodyJoints` 本身由 resolved joint centers 派生，不得与 CharacterDefinition 同时成为权威输入。`PoseFrame::PoseLandmark` 是相机/动作输入，不是这套建模 landmark，两者不得混用。
 
 ### 3.4 AnatomicalRegions
 
@@ -263,6 +283,7 @@ PAE 自己实现三类基函数：
 - 同一 `CharacterDefinition` 在 Host 与 Android 生成相同 Canonical hash；
 - topology template ID 和 local vertex ID 在参数变化时保持稳定。
 - 区分持久 `stableId` 与单次构建的 Canonical index；跨 detail level 必须通过 template version + local ID 重映射，禁止把数组下标当作长期 ID。
+- LOD 新顶点记录 parent face/edge/vertex、barycentric、refinement path 和 LOD level，并建立 LOD0↔LOD1↔LOD2 correspondence map。
 - landmark 的 frame/unit/side/BoneId 绑定和 resolver 优先级有确定性测试。
 
 ## 7. 明确边界

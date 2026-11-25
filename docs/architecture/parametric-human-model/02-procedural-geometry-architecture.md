@@ -8,14 +8,10 @@
 ## 1. 架构总览
 
 ```text
-CharacterDefinition
-  ├─ ProportionProfile / Anthropometry
-  ├─ AnatomicalLandmarks
-  ├─ AnatomicalRegions
-  ├─ HumanShapeParameters / AsymmetryParameters
-  └─ JointDeformationRegions
-          ↓
-Procedural Surface Construction
+CharacterDefinition（唯一可编辑人体语义输入）
+  → ResolvedCharacterState（不可变派生 Anthropometry/Landmarks/BodyJoints/Skeleton）
+  → GeometryBuildRequest（generator/topology/detail/template/region mask）
+  → Procedural Surface Construction
   ├─ Variable-profile Sweep
   ├─ SurfacePatch / TopologyTemplate
   ├─ Local Shape Basis
@@ -79,6 +75,15 @@ P'=P+\sum_i a_i\phi_i(s,\phi)n(s,\phi)
 - 局部形态函数有有限支撑域和 C1 边界，未声明区域位移为零。
 - seam 两侧调用同一个 boundary evaluator，不允许分别近似。
 
+Frame 与数值稳定性约束：
+
+- 初始 frame 由解剖标志点和关节局部坐标系确定；
+- 使用 Parallel Transport / Rotation-Minimizing Frame；
+- 明确 tangent 反向、近零曲率、重复点和急弯的处理；
+- 左右侧使用统一 side convention；
+- 检查 frame orthonormality、相邻 tangent 点积和 Jacobian 符号；
+- frame 翻转或 Jacobian 退化立即停止，不得只靠最终 mesh 自交检查兜底。
+
 ### 3.2 中心线与截面锚点
 
 每个区域至少定义：
@@ -92,6 +97,8 @@ P'=P+\sum_i a_i\phi_i(s,\phi)n(s,\phi)
 
 `crotch/hip → iliac crest → waist → costal margin → sternal angle → chest → clavicle → neck base`。
 
+复杂区域不能强制使用单值径向椭圆：肩带、腋窝、胸廓与上臂交界使用独立 Surface Patch 和闭合周期样条/二维控制曲线。VR-1A 的 12–16 个语义控制点只是原型起点，必须通过光滑性、细节分辨率和截面自交实验后才能成为正式拓扑分辨率。
+
 ### 3.3 局部形态基函数
 
 使用 PAE 自己定义的解析基函数：
@@ -102,6 +109,8 @@ P'=P+\sum_i a_i\phi_i(s,\phi)n(s,\phi)
 - `CouplingBasis`：跨相邻区域的低幅连续修正，必须声明影响区域。
 
 不导入外部 `.target`、blendshape 或顶点 delta。若未来使用数据驱动形态基，必须绑定 PAE 自有 topology template 和 local vertex ID。
+
+每个局部 basis 必须声明 support、amplitude、边界值/一阶导数连续性和允许组合集合。组合测试必须覆盖曲面翻转、局部折叠、过度凸起、曲率突变、自相交和 Jacobian 符号变化。
 
 ## 4. 局部 SDF 使用政策
 
@@ -130,6 +139,10 @@ SDF 不再是全身形态来源。只允许以下用途：
 - `native/procedural/character/AsymmetryParameters.h/.cpp`
 - `native/procedural/character/TopologyPolicy.h/.cpp`
 - `native/procedural/character/HumanShapeParameters.h/.cpp`
+- `native/procedural/character/ResolvedCharacterState.h/.cpp`
+- `native/procedural/character/GeometryBuildRequest.h/.cpp`
+- `native/procedural/character/LodCorrespondence.h/.cpp`
+- `native/procedural/character/SkinShellContract.h/.cpp`
 - `native/procedural/character/AnatomicalLandmarks.h/.cpp`
 - `native/procedural/character/AnatomicalRegions.h/.cpp`
 - `native/procedural/character/TopologyTemplate.h/.cpp`
@@ -145,7 +158,7 @@ SDF 不再是全身形态来源。只允许以下用途：
 
 | 现有文件/类 | 处理 |
 |---|---|
-| `native/procedural/shape/v2/CharacterDefinition.*` | 唯一人体语义权威；原地升级 schema version，吸收 Anthropometry/Regional Shape/Asymmetry/TopologyPolicy |
+| `native/procedural/shape/v2/CharacterDefinition.*` | 唯一人体语义权威；原地升级 schema version，吸收 Anthropometry/Regional Shape/Asymmetry 与 TopologyPolicyRef；实际 TopologyPolicy 属于 GeometryBuildRequest |
 | `native/procedural/shape/v2/SharedSkinEnvelope.cpp` | 复用 C2 比例曲线、区域权重和凹面约束思想；不直接作为全身生成器 |
 | `native/procedural/character/CharacterDefinition.h` | legacy P1-A patch parameters；明确 legacy-only，后续改名，不形成第二人体语义权威 |
 | `native/procedural/character/BodyPatchGenerator.cpp` | VR-1A 改造点；旧实现保留为可选 baseline；新实现必须真正生成左右两侧 |
@@ -227,6 +240,19 @@ SDF 不再是全身形态来源。只允许以下用途：
 - 踝部与小腿共享边界；
 - 22 骨骼限制下使用 Foot/Toe 权重，不新增 toe bones。
 
+### 6.7 Canonical Skin Shell 边界规则
+
+VR-2/VR-3 前必须固定：
+
+- Skin Shell 包含哪些连续皮肤区域；
+- eyeball/iris/cornea、teeth、tongue 等为辅助几何，不计入 Skin Shell 封闭性；
+- eyelid 必须与面部皮肤保持真实拓扑连接；
+- nostril、oral fissure、ear canal、nasal/oral cavity 明确为封闭凹陷、显式开放边界或独立内部几何；
+- 所有开放边界登记 `BoundaryId`、用途、相邻组件和验收规则；
+- 禁止局部 SDF 负向操作产生未管理裂口；
+- 手指/脚趾是独立分支拓扑，不是在掌面/足面贴圆管；
+- 独立 digit 几何不代表独立 digit 骨骼动画。
+
 ## 7. Patch 组装与统一 Canonical
 
 ### 7.1 Boundary Contract
@@ -248,7 +274,8 @@ SDF 不再是全身形态来源。只允许以下用途：
 - 不同密度边界通过共享弧长重采样；
 - 最终 Skin Shell 除显式注册 crop 外无开放边界；
 - 普通 smooth seam 报告法线/切平面连续性，但不能替代肩根 OQ-03 口径；
-- **肩根 crop 环**必须按 OQ-03 固定口径：相邻 quad 的外法线夹角，定义域 `[0°,180°]`，先验证 winding，再统计 max/mean/p95、纳入 quad 数和角度样本数；硬条件使用 max `<=5°`；
+- **肩根 crop 环**同时记录两类研究诊断：现有 OQ-03 相邻 quad 外法线夹角，以及专家建议的 seam 两侧对应采样点法线夹角；定义域 `[0°,180°]`，先验证 winding，再统计 max/mean/p95、纳入 quad 数和角度样本数；
+- OQ-03 口径/阈值存在治理冲突，5° 暂不作为 VR-1A 硬验收；负责人确认前不得标记 PASS；
 - 肩根角度必须从最终 mesh 的 face/triangle winding 独立计算，不能复用 `BodyPatchGenerator::BoundaryReport` 中硬编码的 0；
 - 无 shoulder-root crop ring 时记 `NOT APPLICABLE`，不得记 PASS；
 - 若未来要改为“seam 两侧”或其他 cross-boundary 指标，必须由负责人另行决定，不能由实现侧替换 OQ-03。
@@ -285,6 +312,17 @@ struct CanonicalVertexMetadata {
 
 Render Mesh 通过 `renderToCanonical` 继承 metadata。`stableId` 是跨参数/细节等级的持久语义 ID；单次 `MeshData.vertices` 下标只是 build-local Canonical index，两者不得混用。跨 detail level 使用 `templateVersion + templateId + localVertexId` 重映射，并测试 ID 稳定性。
 
+LOD 新顶点必须记录 refinement lineage：
+
+```text
+ParentFaceStableId / ParentEdgeStableId / ParentVertexStableId
++ BarycentricCoordinates
++ RefinementPath
++ LODLevel
+```
+
+建立 LOD0 ↔ LOD1 ↔ LOD2 correspondence map；不兼容 topology version 必须生成显式迁移映射，禁止假装旧 ID 仍有效。
+
 ## 8. 权重与变形
 
 - 使用 `JointDeformationRegions` 限制每个区域允许的骨骼 mask。
@@ -296,12 +334,14 @@ Render Mesh 通过 `renderToCanonical` 继承 metadata。`stableId` 是跨参数
 - Shape basis 与 pose corrective 分离；VR-1 不实现完整 corrective。
 - VR-4 验证 Bind、arm raise、shoulder abduction、elbow、hip、knee、wrist rotation、ankle rotation。
 
+验收分为三层：①权重合法性；②明确角度/轴/坐标系的基础动作；③局部形变质量（肩部体积、腋窝凹陷、关节塌陷、异常凸包、穿插、左右一致性）。Top-4 合法不得替代动作和局部形变验证。
+
 ## 9. Render Mesh、UV 与 Android
 
 - 保留当前每三角形独立 UV chart，先证明新 Canonical 可走既有 GPU 路径。
 - 保留 `renderToCanonical`、base 64B VBO、UV attribute 5、独立 UV VAO。
 - 保留 transform-feedback GPU/CPU 校验。
-- `RenderThread::ensureCanonicalGeometry` 的接入点保持不变，但输入改为内部 `CanonicalBuildRequest`。
+- `RenderThread::ensureCanonicalGeometry` 的接入点保持不变，但输入改为内部 `GeometryBuildRequest`。
 - cache key 从 detail level 扩展为 `schemaVersion + generatorVersion + definitionHash + detailLevel`。
 - mode-2 P1-A cache 同样需要 definition/detail key；质量变化必须失效对应 cache，不能继续上传旧 patch。
 - mode-2 per-mode cache 由 RenderThread 持有，payload 必须包含 matching definition/hash、mesh、`Skeleton` 和 `BodyJoints`；cache hit 时原子恢复并重新初始化/校验 `MotionRuntime`，不能只恢复 mesh。
@@ -342,7 +382,7 @@ PAE 的对应方案是：**自己用代码定义固定区域拓扑模板**，参
 
 当前 P1 基线：约 45.5–46.9 FPS、p95 23.22–24.32 ms、115,300 triangles、TOTAL PSS 244,785 KB、Canonical 总生成约 83.8 s。新方案应优先减少高成本全局 SDF 采样，但结构化细分和自交检查可能增加成本。
 
-VR-1 前需负责人批准性能 stop guardrail。建议以同设备基线下降不超过 20% 作为临时工程停止线，不作为 Gate 阈值；超过时先优化采样/细分/自交宽相位，不降低视觉要求。
+负责人已批准同设备基线下降不超过 20% 的临时工程 stop guardrail，并要求分项记录生成、组装、权重、GPU、帧时间和内存；该 guardrail 不是 Gate 阈值，也不替代正式产品预算。超过时先优化采样/细分/自交宽相位，不降低视觉要求。
 
 主要风险：
 
@@ -365,7 +405,15 @@ VR-1 前需负责人批准性能 stop guardrail。建议以同设备基线下降
 - 局部方案仍读作球/管拼接；
 - 真机与 Host 明显不一致；
 - 性能超过批准的 stop guardrail；
-- 授权文件未正式签发或超出白名单。
+- 授权文件未正式签发或超出白名单；
+- CharacterDefinition 与 BodyJoints 出现双向或多重权威；
+- LOD Stable ID 无法建立可靠映射；
+- frame 翻转或局部 Jacobian 退化；
+- 结构化 Patch 必须依靠大量重叠 SDF 才能融合；
+- 基准人体参数未批准，或性能超过已批准的临时 guardrail；
+- OQ-03 阈值/口径未确认却被当作硬验收；
+- Weight Heatmap 与实际权重不一致；
+- cache mesh 与 Skeleton/BodyJoints 不匹配。
 
 ## 14. 外部方法依据
 
@@ -377,6 +425,7 @@ VR-1 前需负责人批准性能 stop guardrail。建议以同设备基线下降
 - GHUM：区域 mask、非负 Top-4 权重、非线性区域耦合；
 - MakeHuman/MPFB2：语义参数 → 局部形态目标的组织方式；
 - MB-Lab：参数配置与生成流程分离；
-- OpenSim：关节中心、解剖标志点和关节区域语义。
+- OpenSim：关节中心、解剖标志点和关节区域语义；
+- GNM Head：面部/内部结构分区、identity/expression/pose 分离、UDIM 区域组织。
 
 具体源码、版本和许可证见 R1/R2 报告。

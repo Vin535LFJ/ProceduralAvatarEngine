@@ -31,8 +31,9 @@ PAE 当前 P1 已完成连续 Canonical 身体、Render Mesh、UV、GPU skinning
 ## 三、修订后的架构
 
 ```text
-CharacterDefinition（唯一人体语义权威）
-  → Anthropometry / Shape Parameters / Anatomical Landmarks / Regional Shape
+CharacterDefinition（唯一可编辑人体语义输入）
+  → ResolvedCharacterState（不可变派生 Anthropometry/Landmarks/BodyJoints/Skeleton）
+  → GeometryBuildRequest（generator/topology/detail/template/region mask）
   → Procedural Surface Construction
       - Variable-profile Sweep
       - SurfacePatch / TopologyTemplate
@@ -61,12 +62,13 @@ P'=P+\sum_i a_i\phi_i(s,\phi)n(s,\phi)
 
 ## 四、外部成熟模型研究结论
 
-实际核查了 MakeHuman、MPFB2、SMPL-X、FLAME、MANO、GHUM、MB-Lab、OpenSim 的官方源码/论文/许可：
+实际核查了 MakeHuman、MPFB2、SMPL-X、FLAME、MANO、GHUM、MB-Lab、OpenSim，以及专家补充的 GNM Head 官方源码/论文/许可：
 
 - MakeHuman/MPFB2：固定 hm08 基础网格 + 语义参数 + 顶点 target delta。
 - SMPL-X/FLAME/MANO/GHUM：固定拓扑 + shape/pose basis + joint predictor/regressor + LBS。
 - MB-Lab：Blender 固定模板 + JSON morph + 配置驱动。
 - OpenSim：关节中心、解剖标志点、人体测量和关节区域语义。
+- GNM Head：面部/眼球/牙齿/舌头内部结构、identity/expression/pose 分区和 UDIM 组织；仅作 VR-2 参考，不导入资产。
 
 PAE 只借鉴数学/参数化思想，不导入任何外部网格、morph、blendshape、训练数据或运行时。许可证矩阵已区分代码、模型、训练数据、形态数据和论文/算法；不明确项均标记法律复核。
 
@@ -86,13 +88,13 @@ PAE 只借鉴数学/参数化思想，不导入任何外部网格、morph、blen
 - 旧 P1-A 保留为可选 baseline；
 - 新实现必须真正生成左右两侧；
 - 增加 mode-2 `debugView=5` Weight Heatmap；
-- per-mode cache 保存 matching definition/hash、mesh、Skeleton/BodyJoints，并原子恢复 MotionRuntime。
+- per-mode cache 保存 matching definition/hash、mesh、Skeleton/BodyJoints；模式切换事务式恢复，并重置/同步 MotionRuntime/Pose/SkinPalette，不把动态运动状态当几何缓存。
 
 验收：
 
 - C0 `<=1e-4 m`；
-- 肩根 crop 环按 OQ-03：相邻 quad 外法线夹角 `[0°,180°]`，先验证 winding，输出 max/mean/p95/count，硬条件 max `<=5°`；
-- 无 crop ring 记 `NOT APPLICABLE`，不得记 PASS；
+- 肩根 crop 环记录相邻 quad 外法线与 seam 两侧采样法线两类诊断，先验证 winding，输出 max/mean/p95/count；
+- OQ-03 口径/阈值存在治理冲突，5° 暂不作为 VR-1A 硬验收；无 crop ring 记 `NOT APPLICABLE`，不得记 PASS；
 - 无 T-junction；
 - Top-4 合法、无跨区串扰；
 - Android Clay/Wireframe/Normal/Weight 多视角证据；
@@ -117,6 +119,8 @@ PAE 只借鉴数学/参数化思想，不导入任何外部网格、morph、blen
 
 - 负责人已选择新签 P1-VR 补充授权。
 - 负责人已确认 P0 Gate 与 ADR-010 生效。
+- 负责人已确认自然半写实成人目标替代旧目标。
+- 负责人已决定 OQ-03 暂缓硬阈值，采用临时 20% 性能 guardrail。
 - AI 未代签授权文件，未修改治理文件。
 - 当前只完成 VR-0 研究/设计，未修改生产代码，未开始 VR-1。
 - 正式补充授权签发前，VR-1 生产写入保持 BLOCKED。
@@ -131,3 +135,4 @@ PAE 只借鉴数学/参数化思想，不导入任何外部网格、morph、blen
 - R4 几何架构：`docs/architecture/parametric-human-model/02-procedural-geometry-architecture.md`
 - R5 路线修订：`docs/phases/P1-visual-recovery/00-architecture-revision.md`
 - R6 最小原型：`docs/phases/P1-visual-recovery/01-minimal-torso-shoulder-prototype-plan.md`
+- 专家意见修订附录：`docs/phases/P1-visual-recovery/03-design-review-addendum.md`

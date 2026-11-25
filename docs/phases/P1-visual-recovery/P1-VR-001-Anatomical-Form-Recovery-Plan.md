@@ -24,7 +24,7 @@
 
 | 分支 | HEAD | 说明 |
 |---|---|---|
-| `poc-sm/shape-model-v2` | `6e004b2b1e5cf6c6cd60efeb15cc48d16a3a9d2d` | P1 当前实现与证据，参考提交仍是最新 |
+| `poc-sm/shape-model-v2` | `8151e01d812b21ba2ad6c5cfde7a657df68ea3c6` | P1-VR VR-0 材料与专家复核文案 |
 | `main` | `c539afbec299ed4a066429ea09f9d3d36e67f74d` | M12-A，未包含 P1 |
 | `feature/procedural-character-foundation` | `2ac101fd40e533d2f08776cb6f4e9356cd1b25d1` | 治理/round contract |
 | `m11-anatomy-visual-rebuild` | `67ccb3940950623b1a24d6b3e843750c5c4a99b3` | M11 历史 |
@@ -36,14 +36,18 @@
 
 - 路径：`E:/AI-Tools/ProceduralAvatarEngine-poc-sm`。
 - 分支：`poc-sm/shape-model-v2`。
-- HEAD：`6e004b2b1e5cf6c6cd60efeb15cc48d16a3a9d2d`。
-- 已跟踪修改：无。
-- 未跟踪：`.workbuddy-ai/`、v6/v7 evidence，以及本轮新增 `docs/research/`、`docs/architecture/parametric-human-model/`、`docs/phases/P1-visual-recovery/`。
+- HEAD：`8151e01d812b21ba2ad6c5cfde7a657df68ea3c6`。
+- 已跟踪修改：本轮新增 `03-design-review-addendum.md` 并更新 R1–R6/主计划；基线材料已提交推送。
+- 未跟踪：`.workbuddy-ai/`、v6/v7 evidence，以及本轮新增修订附录。
 - P1-VR 生产代码修改：无。
 - VR-1：未开始。
 - 本轮 VR-0 性质：纯审计/研究轮，按 ADR-013 为 process note / 治理记录，不是工程里程碑。
 
-### 2.3 P1 已保留成果
+### 2.3 专家复核状态
+
+专家有条件认可主路线，明确赞成 mode-2 双侧躯干—肩部原型；要求 VR-1A 前完成小规模技术修订。逐项处理见 `docs/phases/P1-visual-recovery/03-design-review-addendum.md`。本计划已吸收 ResolvedCharacterState、GeometryBuildRequest、LOD lineage、Skin Shell 边界和新增停止条件；OQ-03 5° 暂不作为硬验收。
+
+### 2.4 P1 已保留成果
 
 - Host CTest 19/19；
 - Android `assembleDebug` 成功；
@@ -71,7 +75,10 @@
 负责人已明确选择：
 
 - 新签 P1-VR 补充授权；
-- 确认 P0 Gate 与 ADR-010 生效。
+- 确认 P0 Gate 与 ADR-010 生效；
+- OQ-03 暂缓硬阈值，两类角度只作研究诊断；
+- 确认自然半写实成人目标替代历史自然卡通目标；
+- 采用临时 20% 同设备基线性能 guardrail，并分项记录生成/组装/权重/GPU/帧时间/内存。
 
 AI 不代签，不修改 AUTH/ADR/DEC/CAS/Gate 文件。正式补充授权签发前，VR-1 生产写入保持 BLOCKED。
 
@@ -80,7 +87,7 @@ AI 不代签，不修改 AUTH/ADR/DEC/CAS/Gate 文件。正式补充授权签发
 补充授权须以精确路径/函数清单 supersede AUTH-08 的 FB-5/FB-6/FB-7/FB-11，至少覆盖：
 
 - 原地扩展 `native/procedural/shape/v2/CharacterDefinition.h/.cpp`；
-- 新增 `native/procedural/character/` 下 Anthropometry、AsymmetryParameters、TopologyPolicy、HumanShapeParameters、AnatomicalLandmarks、AnatomicalRegions、TopologyTemplate、SurfacePatch、VariableProfileSweep、LocalShapeBasis、PatchAssembler、TorsoShoulderPatchGenerator、CanonicalBodyGenerator；
+- 新增 `native/procedural/character/` 下 Anthropometry、AsymmetryParameters、TopologyPolicy、HumanShapeParameters、ResolvedCharacterState、GeometryBuildRequest、LodCorrespondence、SkinShellContract、AnatomicalLandmarks、AnatomicalRegions、TopologyTemplate、SurfacePatch、VariableProfileSweep、LocalShapeBasis、PatchAssembler、TorsoShoulderPatchGenerator、CanonicalBodyGenerator；
 - 修改 `BodyPatchGenerator.h/.cpp`、`ContinuousSkinGenerator.cpp`、`CanonicalSkinGenerator.cpp/.h`、`HeadAnatomy.cpp/.h`、`FaceGenerator.cpp/.h`、`native/skeleton/weights/**`；
 - 修改 `RenderThread.cpp/.h` 的 mode-2 生成、cache key、per-mode skeleton 恢复和 `debugView=5` weight 分支；
 - 修改 `native/CMakeLists.txt`、`tests/CMakeLists.txt`，新增 `tests/unit/vr_*`；
@@ -177,14 +184,10 @@ Smooth union 的 `-k*h*(1-h)` 会在重合表面外推约 `k/4`，大 blend 直�
 ## 7. 修订后的 PAE 架构
 
 ```text
-CharacterDefinition
-  ├─ ProportionProfile / Anthropometry
-  ├─ AnatomicalLandmarks
-  ├─ AnatomicalRegions
-  ├─ HumanShapeParameters / AsymmetryParameters
-  └─ JointDeformationRegions
-          ↓
-Procedural Surface Construction
+CharacterDefinition（唯一可编辑人体语义输入）
+  → ResolvedCharacterState（不可变 Anthropometry/Landmarks/BodyJoints/Skeleton）
+  → GeometryBuildRequest（generator/topology/detail/template/region mask）
+  → Procedural Surface Construction
   ├─ Variable-profile Sweep
   ├─ SurfacePatch / TopologyTemplate
   └─ Local Shape Basis
@@ -220,6 +223,8 @@ P'=P+\sum_i a_i\phi_i(s,\phi)n(s,\phi)
 - `φ_i`：胸肌、三角肌、臀大肌、股四头肌、腓肠肌等局部影响函数；
 - `n`：局部法线。
 
+Frame 与曲面约束：初始 frame 由解剖标志点/关节坐标系固定，使用 Parallel Transport / Rotation-Minimizing Frame；明确 tangent 反向、近零曲率、重复点和急弯处理；检查 orthonormality 与 Jacobian 符号。复杂肩带/腋窝使用独立 Surface Patch 与闭合周期截面，12–16 控制点仅为 VR-1A 起点。局部 basis 必须声明 support/amplitude/边界连续性，并组合测试翻转、折叠、曲率突变和自交。
+
 ### 7.2 面部、手部、足部
 
 使用独立结构化 `SurfacePatch` / `TopologyTemplate`：
@@ -229,6 +234,8 @@ P'=P+\sum_i a_i\phi_i(s,\phi)n(s,\phi)
 - Foot：heel、arch、metatarsal、forefoot、hallux、四个 toe。
 
 不把全身截面公式套到所有区域。
+
+Canonical Skin Shell 规则：eyeball/iris/cornea、teeth、tongue 为辅助几何；eyelid 与皮肤保持拓扑连接；nostril、oral fissure、ear/nasal/oral cavity 明确封闭凹陷、显式开放边界或独立内部几何；所有开放边界登记用途和验收；禁止局部 SDF 产生未管理裂口；digit 必须是独立分支拓扑而非贴圆管。
 
 ### 7.3 局部 SDF
 
@@ -240,6 +247,10 @@ P'=P+\sum_i a_i\phi_i(s,\phi)n(s,\phi)
 - before/after 研究对照。
 
 禁止再次用全身椭球/胶囊 SDF 作为最终唯一形态来源。
+
+### 7.4 Stable ID 与 LOD Correspondence
+
+持久语义 ID：`TemplateUUID + TopologyVersion + RegionId + Side + LocalVertexId`。LOD 新顶点记录 `ParentFace/Edge/VertexStableId + BarycentricCoordinates + RefinementPath + LODLevel`，建立 LOD0↔LOD1↔LOD2 映射。不兼容拓扑版本必须显式迁移，禁止把 build-local index 当持久 ID。
 
 ## 8. 代码保留、替换、新增
 
@@ -262,7 +273,7 @@ P'=P+\sum_i a_i\phi_i(s,\phi)n(s,\phi)
 
 ### 8.3 新增
 
-- 在 `shape::v2::CharacterDefinition` 原地扩展 `Anthropometry`、`AsymmetryParameters`、`TopologyPolicy`、`HumanShapeParameters`，不新增并行 `HumanShapeDefinition`；
+- 在 `shape::v2::CharacterDefinition` 原地扩展 `Anthropometry`、`AsymmetryParameters`、`TopologyPolicyRef`、`HumanShapeParameters`，实际 `TopologyPolicy` 放入 `GeometryBuildRequest`，不新增并行 `HumanShapeDefinition`；
 - landmark resolver、region graph；
 - `TopologyTemplate`、`SurfacePatch`、`VariableProfileSweep`；
 - `LocalShapeBasis`、`PatchAssembler`；
@@ -306,15 +317,17 @@ P'=P+\sum_i a_i\phi_i(s,\phi)n(s,\phi)
 交付：
 
 - 新 bilateral generator；
+- CharacterDefinition → ResolvedCharacterState → GeometryBuildRequest 数据层；
 - landmark/region/shape basis；
-- Host boundary/weight/parameter tests；
-- mode-2 `debugView=5` Weight Heatmap 实现；
-- per-mode cache key、质量失效和 skeleton/joints 恢复；mode-2 cache payload 必须包含 matching definition/hash、mesh、Skeleton/BodyJoints，并由 RenderThread 原子激活；
+- Host boundary/weight/parameter/LOD-lineage/Jacobian/action/deformation tests；
+- 先左右完全对称，再测试左肩略宽/右肩略窄，证明独立参数/区域/顶点/BoneId mask；
+- mode-2 `debugView=5` Weight Heatmap 显示实际 BoneId/权重/主导骨骼，而非仅颜色；
+- per-mode cache key、质量失效和 skeleton/joints 恢复；cache payload 包含 matching definition/hash、mesh、Skeleton/BodyJoints，由 RenderThread 原子激活并重置/同步 MotionRuntime/Pose/SkinPalette；
 - Android Clay/Wireframe/Normal/Weight 截图；
 - `0→1→2→3`、quality refresh、Surface recreation 回归；
 - 与旧 P1-A/P1 Canonical 同机位对比。
 
-验收：C0 `<=1e-4 m`；肩根 crop 环按 OQ-03 固定口径独立测量，max `<=5°`，无 crop ring 时 `NOT APPLICABLE`；Top-4 合法；无 T-junction；视觉不再读作躯干+肩球。
+验收：C0 `<=1e-4 m`；肩根两类研究诊断（相邻 quad 外法线 / seam 两侧采样法线）完整记录，OQ-03 5° 未获负责人确认前不作为硬验收；Top-4 合法；无 T-junction；视觉不再读作躯干+肩球。
 
 ### VR-1B：躯干与四肢完整轮廓
 
@@ -333,7 +346,8 @@ P'=P+\sum_i a_i\phi_i(s,\phi)n(s,\phi)
 - Canonical Skin Shell 保持封闭；
 - eyeball/iris 为辅助几何；
 - 不增加 eye/eyelid 骨骼；
-- 使用现有 Neck/Head 权重和局部 corrective 入口。
+- 使用现有 Neck/Head 权重和局部 corrective 入口；
+- VR-2 前补充 GNM Head 官方源码/技术报告中的内部结构、参数分区和 UDIM 组织研究；不导入模型/数据。
 
 验收：面部正面/侧面/眼睛/鼻子/嘴部近景具有空间结构，不再是椭球和附着球。
 
@@ -373,7 +387,9 @@ P'=P+\sum_i a_i\phi_i(s,\phi)n(s,\phi)
 - invalid normals=0；
 - bind-pose severe self-intersection=0；
 - weights：BoneId 0–21、Top-4、非负、和 `1±1e-3`；
-- seam C0 `<=1e-4 m`；肩根 crop 环按 OQ-03 从最终 face/triangle winding 独立测量，先验证 winding，输出 max/mean/p95、纳入 quad 数和角度样本数，硬条件用 max `<=5°`；无 crop ring 时 `NOT APPLICABLE`，不得复用硬编码 0 的 `BoundaryReport`；
+- 权重验证分三层：合法性、明确角度/轴/坐标系的基础动作、局部形变质量（体积、腋窝、塌陷、凸包、穿插、左右一致性）；
+- Stable ID 与 LOD lineage：parent face/edge/vertex、barycentric、refinement path、LOD0↔LOD1↔LOD2 映射；
+- seam C0 `<=1e-4 m`；肩根两类研究诊断从最终 face/triangle winding 独立计算，先验证 winding，输出 max/mean/p95、纳入 quad 数和角度样本数；OQ-03 5° 未获负责人确认前不作为硬验收，无 crop ring 时 `NOT APPLICABLE`，不得复用硬编码 0 的 `BoundaryReport`；
 - VR-1A mode-2 Weight Heatmap、cache 失效、per-mode skeleton 恢复和模式切换回归通过；
 - renderToCanonical 合法；
 - UV 无 NaN/越界/零面积；
@@ -401,7 +417,7 @@ P'=P+\sum_i a_i\phi_i(s,\phi)n(s,\phi)
 - TOTAL PSS 244,785 KB；
 - Canonical total generation 约 83.8 s。
 
-VR-1 前由负责人批准 stop guardrail。建议临时工程线：同设备关键指标不差于基线 20%；这不是 Gate 阈值。
+负责人已批准临时 20% 同设备基线 guardrail。必须分别记录初始形态生成、Patch 组装、权重生成、GPU 上传、稳态帧时间和峰值内存，不能把 83.8 s 与 23–24 ms 混为一个指标。该 guardrail 不是 Gate 阈值，也不替代正式产品预算。
 
 ## 11. 每轮交付要求
 
@@ -424,14 +440,22 @@ VR-1 前由负责人批准 stop guardrail。建议临时工程线：同设备关
 ## 12. 停止条件
 
 - 补充授权未签发或超白名单；
+- 基准人体参数未批准，或性能超过已批准的临时 guardrail；
+- OQ-03 口径/阈值未确认却被当作硬验收；
+- CharacterDefinition 与 BodyJoints 出现多重权威；
+- LOD Stable ID 无法可靠映射；
+- frame 翻转或局部 Jacobian 退化；
 - 需要修改冻结 ABI/骨骼/UBO/packing；
 - 需要替换 RenderThread；
 - 新方案无法保持统一 Canonical；
 - 新拓扑无法映射现有 22 骨骼；
-- seam 无法满足 C0 `<=1e-4 m` 或肩根 OQ-03 max `<=5°`；
+- seam 无法满足 C0 `<=1e-4 m`；
 - 真机与 Host 明显不一致；
 - 性能超过批准 guardrail；
 - 局部方案仍无法满足基本解剖结构；
+- 结构化 Patch 必须依靠大量重叠 SDF 才能融合；
+- Weight Heatmap 与实际权重不一致；
+- cache mesh 与 Skeleton/BodyJoints 不匹配；
 - 需要导入外部模型/数据才能继续。
 
 ## 13. 主要风险与缓解
@@ -440,7 +464,8 @@ VR-1 前由负责人批准 stop guardrail。建议临时工程线：同设备关
 |---|---|
 | 局部 SDF 再次产生 blobs | 严格 AABB/RegionId/k 上限，只做局部修正 |
 | Patch 边界 T-junction | 共享 BoundaryEvaluator、统一弧长采样、禁止 T-junction |
-| 稳定 ID 丢失 | PAE 自有 templateId/localVertexId，参数只改位置 |
+| 稳定 ID 丢失 | PAE 自有 template UUID/version/local ID + LOD lineage/correspondence map |
+| frame/Jacobian 退化 | RMF、解剖初始 frame、逐段正交/点积/Jacobian 检查 |
 | 面部/手足复杂度过高 | 分阶段，先固定语义模板，再增加细分 |
 | 22 骨骼限制 | 明确 digit 整体权重，独立关节运动不在本阶段宣称 |
 | 权重跨区 | region mask + joint-aware falloff + 隔离测试 |
@@ -456,12 +481,18 @@ VR-1 前由负责人批准 stop guardrail。建议临时工程线：同设备关
 - R4：`docs/architecture/parametric-human-model/02-procedural-geometry-architecture.md`
 - R5：`docs/phases/P1-visual-recovery/00-architecture-revision.md`
 - R6：`docs/phases/P1-visual-recovery/01-minimal-torso-shoulder-prototype-plan.md`
+- 专家修订附录：`docs/phases/P1-visual-recovery/03-design-review-addendum.md`
 
 ## 15. 当前完成状态
 
 - VR-0 仓库/治理/代码/外部研究：完成。
 - R1–R6：完成。
+- 专家意见与 Design Review Addendum：已整合。
+- GNM Head：已核查官方仓库/技术报告并加入 VR-2 研究索引；未导入资产。
 - 生产代码：未修改。
 - VR-1：未开始。
-- 补充授权：负责人已选择新签，但 AI 未代签，正式文件待签发。
+- 补充授权：负责人已选择新签，但 AI 未代签，正式文件待签发；这是唯一剩余的生产写入前置条件。
+- 视觉目标：负责人已确认自然半写实成人目标替代旧目标。
+- 性能：采用临时 20% 同设备基线 guardrail，并分项记录；不替代产品预算。
+- OQ-03：暂缓硬阈值，两类角度只作研究诊断。
 - Gate：无 PASS 声明。
