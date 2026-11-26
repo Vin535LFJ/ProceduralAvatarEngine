@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 option(PAE_HOST "Build host-side unit tests instead of Android targets" OFF)
+option(PAE_VR_R1_BASELINE "Build the mode-2 R1 generator baseline for controlled evidence" OFF)
 
 set(PAE_CORE_SOURCES
     core/diagnostics/Log.cpp
@@ -61,6 +62,9 @@ target_include_directories(pae_core PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/core
 )
+if(PAE_VR_R1_BASELINE)
+    target_compile_definitions(pae_core PUBLIC PAE_VR_R1_BASELINE=1)
+endif()
 
 if(PAE_HOST)
     target_compile_definitions(pae_core PUBLIC PAE_HOST_BUILD=1)

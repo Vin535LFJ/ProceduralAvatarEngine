@@ -2,6 +2,7 @@
 
 #include "AnatomicalRegions.h"
 #include "procedural/MeshData.h"
+#include "procedural/MeshTopology.h"
 
 #include <cstdint>
 #include <string>
@@ -30,6 +31,7 @@ struct SurfacePatch {
 
 struct PatchAssemblyResult {
     MeshData mesh;
+    TopologyReport topology;
     std::vector<uint64_t> stableIds;
     std::vector<RegionId> vertexRegions;
     std::vector<PatchBoundary> boundaries;

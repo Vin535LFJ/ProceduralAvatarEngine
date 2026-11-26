@@ -1246,7 +1246,11 @@ bool RenderThread::activatePreviewGpuResources(int mode) {
 }
 
 bool RenderThread::ensureP1aGeometry(int detailLevel) {
+#if defined(PAE_VR_R1_BASELINE)
+    const shape::v2::CharacterDefinition definition = shape::v2::defaultR1CharacterDefinition();
+#else
     const shape::v2::CharacterDefinition definition = shape::v2::defaultCharacterDefinition();
+#endif
     const character::GeometryBuildRequest request = character::makeGeometryBuildRequest(
         definition, static_cast<uint32_t>(detailLevel), 2);
     const std::string cacheKey = request.cacheKey();

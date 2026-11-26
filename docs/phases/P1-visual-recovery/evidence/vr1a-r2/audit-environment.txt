@@ -1,0 +1,34 @@
+Audit date: 2026-11-25
+Branch: poc-sm/shape-model-v2
+R1 production commit: 299ae3bf3fcb6d76be563f815aa52380e018d50b
+R2 planning commit: 66a7e5905dde407b46df1e76074cd8b9ea94ab79
+Working tree state: see audit-git-state.txt
+Production code changed by R2 planning: no
+
+CMake configure command:
+cmake -S native -B build-host -DPAE_HOST=ON
+
+CMake build command:
+cmake --build build-host --target pae_core -j 8
+
+Compiler:
+c++ (GCC) 11.5.0
+
+libpae_core.a SHA-256:
+c3ec16c27c96f2ea8db3999576a311d9f39a28228266ee0cb47724cd24c4fd51
+
+Probe compile exit: 0
+Probe run exit: 0
+R1 mesh FNV-64: 638a9cf368577940
+
+Evidence files:
+- audit_probe.cpp
+- audit-command.txt
+- vr1a-r2-code-audit-probe.log
+- probe-compile-run.log
+- cmake-configure.log
+- cmake-build-pae-core.log
+- compiler-version.txt
+- libpae_core.sha256.txt
+- audit-git-state.txt
+- evidence-sha256.txt

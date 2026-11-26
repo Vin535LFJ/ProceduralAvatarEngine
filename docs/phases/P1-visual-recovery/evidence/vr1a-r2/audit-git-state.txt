@@ -1,0 +1,19 @@
+66a7e5905dde407b46df1e76074cd8b9ea94ab79
+poc-sm/shape-model-v2
+ M docs/phases/P1-visual-recovery/07-vr1a-r2-shape-target.md
+ M docs/phases/P1-visual-recovery/08-vr1a-r2-anatomical-shape-revision-plan.md
+ M docs/phases/P1-visual-recovery/09-vr1a-r2-supplemental-authorization-draft.md
+ M docs/phases/P1-visual-recovery/10-vr1a-r2-implementation-whitelist-draft.md
+ M docs/phases/P1-visual-recovery/evidence/vr1a-r2/audit-command.txt
+ M docs/phases/P1-visual-recovery/evidence/vr1a-r2/evidence-sha256.txt
+?? .workbuddy-ai/
+?? docs/phases/P1-visual-recovery/evidence/vr1a-r2/audit-environment.txt
+?? docs/phases/P1-visual-recovery/evidence/vr1a-r2/audit-git-state.txt
+?? docs/phases/P1-visual-recovery/evidence/vr1a-r2/cmake-build-pae-core.log
+?? docs/phases/P1-visual-recovery/evidence/vr1a-r2/cmake-configure.log
+?? docs/phases/P1-visual-recovery/evidence/vr1a-r2/compiler-version.txt
+?? docs/phases/P1-visual-recovery/evidence/vr1a-r2/libpae_core.sha256.txt
+?? docs/phases/P1-visual-recovery/evidence/vr1a-r2/probe-compile-run.log
+?? evidence/character-v6/anatomy-clay.png
+?? evidence/character-v6/anatomy-shoulder.png
+?? evidence/character-v7/

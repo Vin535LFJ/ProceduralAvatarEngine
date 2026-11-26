@@ -1,153 +1,118 @@
-# P1-VR-1A-R2 补充授权书草稿
+# P1-VR-1A-R2 补充授权书
 
 文件：`docs/phases/P1-visual-recovery/09-vr1a-r2-supplemental-authorization-draft.md`
 任务：`P1-VR-1A-R2 — Anatomical Silhouette & Shoulder Form Reconstruction`
 日期：2026-11-25
-状态：**`DRAFT — NOT EFFECTIVE`**
+状态：**`APPROVED FOR P1-VR-1A-R2 ONLY`**
 
-本文件仅为授权草稿，不代表负责人已签署。`AUTH-P1-VR-01` 只覆盖 VR-1A-R1，不自动覆盖 R2。草稿签发前不得修改生产代码。
+决定来源：负责人 2026-11-25 明确授权文本。
+记录方式：AI 仅转录负责人决定，不代签、不扩大范围、不宣布 Gate PASS。
 
-## 1. 基线事实
+## 1. 授权任务与基线
 
-- 仓库：`https://github.com/Vin535LFJ/ProceduralAvatarEngine`。
+本人批准启动 `P1-VR-1A-R2` 生产代码实施。
+
+基线：
+
+- R1：`299ae3bf3fcb6d76be563f815aa52380e018d50b`。
+- R2 设计基线：`66a7e5905dde407b46df1e76074cd8b9ea94ab79`。
 - 分支：`poc-sm/shape-model-v2`。
-- R1 提交：`299ae3bf3fcb6d76be563f815aa52380e018d50b`。
-- R1 状态：`IMPLEMENTED / TECHNICAL CHECK PARTIAL / VISUAL BLOCKED`。
-- 当前未跟踪保护文件：`.workbuddy-ai/`、`evidence/character-v6/**`、`evidence/character-v7/**`。
-- R2 目标定义：`07-vr1a-r2-shape-target.md`。
-- R2 实施计划：`08-vr1a-r2-anatomical-shape-revision-plan.md`。
+- 绑定白名单：`10-vr1a-r2-implementation-whitelist-draft.md`。
 
-## 2. 拟批准范围
+本授权只覆盖 R2，不自动授权 VR-1B、完整 Canonical 重建或其他后续阶段。
 
-仅批准：
+## 2. 目标形态决定
 
-- Thorax。
-- Abdomen。
-- Upper Pelvis。
-- Shoulder Girdle。
-- Axilla。
-- Left/Right Upper-arm Root。
-- Android mode-2 局部预览。
-- Host tests。
-- R2 真机证据。
+- [x] 批准以 `Natural Semi-Realistic Adult Asian Human` 作为项目长期视觉方向。
+- [x] 批准 R2 文档中的候选人体比例和解剖控制数据，作为本轮几何实验的初始目标参数。
+- [x] 这些候选数据属于项目形态设计参数，不代表亚洲成年人的普遍人体测量标准。
+- [x] 允许在 R2 实施过程中根据多视角视觉结果进行有记录的调整；调整必须记录原因、参数变化和视觉结果，不得未经记录地修改基准。
 
-明确不批准：
+## 3. Neck Base 决定
 
-- Head/Face/Hand/Foot/Full Legs。
-- mode-3 full Canonical 重建。
-- 新骨骼或骨骼层级变化。
-- JNI、UBO[22]、64B vertex packing。
-- PBR/SSS、外部模型、morph、blendshape、训练数据。
-- VR-1B 生产实现。
+- [x] 批准方案 A：保留一个明确的 `neck-base-interface` 外部 crop loop。
+- [x] 本阶段不生成完整头部、颈部或头颈动画。
+- [x] 肩胸、腋窝和上臂根的内部连接必须保持真实连续，不得将内部断口登记为 crop boundary。
 
-## 3. 对 R1 授权的有限扩展
+## 4. R1/R2 对照决定
 
-| 区域 | 拟允许 | 明确不允许 |
-|---|---|---|
-| `CharacterDefinition` | 新增 typed torso control stations、shoulder form、landmark 曲线；schemaVersion=3；landmark confidence/provenance | 第二个人体定义、双数值权威、Assumed 伪标 Measured |
-| `ResolvedCharacterState` | 解析并输出 control stations/landmarks 供生成器消费 | 回写可编辑定义 |
-| `GeometryBuildRequest` | 完整 definition hash、detail/LOD 策略 | 修改 JNI/UI extra |
-| `LocalShapeBasis` | 方向性、station/angular support、continuity 元数据 | 球形/椭球堆叠肌肉 |
-| `VariableProfileSweep` | 多控制截面、曲率/特征驱动采样 | 新运行时技术栈 |
-| `SurfacePatch/PatchAssembler/TopologyTemplate` | 实际接入肩带/腋窝 patch 和共享 BoundaryId | 新建同职责第二套模块 |
-| `TorsoShoulderPatchGenerator` | R1/R2 version dispatch、R2 解剖曲面 | 修改 mode-3 Canonical |
-| `LodCorrespondence` | parent/edge/vertex/barycentric/refinement lineage | 破坏 Stable ID 稳定性 |
-| `RenderThread` | generator version 选择、mode-2 cache/诊断日志 | camera/lighting/mode-3/JNI/lifecycle 修改 |
-| Tests/CMake/Evidence | R2 测试、构建和真机证据 | 删除或降低 R1 测试 |
+- [x] 批准方案 A：采用 build-time generator version 分别构建 R1 baseline APK 和 R2 APK。
+- [x] 两个版本必须使用相同 `CharacterDefinition`、相机参数、灯光、姿态、设备和分辨率。
+- [x] 不授权新增 JNI、UI extra 或运行时切换入口。
 
-## 4. 负责人必须单独确认的决策
+## 5. 性能决定
 
-### 4.1 目标形态
+- [x] 沿用此前已批准的临时 20% 同设备性能 Guardrail。
+- [x] 只对相同设备、相同工作量和相同测量口径的数据进行直接比较。
+- [x] 无法形成等价工作量的指标只记录实际数据和归一化结果，不得据此宣称 Guardrail PASS。
+- [x] 必须分别记录生成、Patch 组装、权重、GPU 上传、帧时间和峰值内存。
 
-- [ ] 批准 `07-vr1a-r2-shape-target.md` 的候选比例和形态方向。
-- [ ] 修改后再批准：________________________________。
+## 6. 动作验证决定
 
-未确认前不得把目标值写入生产默认值。
+- [x] 本轮接受右臂单侧抬起测试保持 `NOT VERIFIED`。
+- [x] 不授权修改 `SyntheticPoseProvider` 增加新的右臂动作。
+- [x] 使用已批准的双臂外展、左臂抬起及左右权重隔离测试进行本轮验证。
 
-### 4.2 Neck Base / Trapezius 接口
+## 7. 技术前置条件
 
-- [ ] 方案 A（推荐）：只生成显式 `neck-base-interface` crop loop，不生成头颈动画；内部肩胸边界仍必须连续。
-- [ ] 方案 B：允许最小 neck/trapezius transition ring，以保持 neck interface 封闭；不包含 Head/Neck 骨骼动画。
-- [ ] 其他：________________________________。
+R2 必须明确区分：
 
-### 4.3 R1/R2 对照方式
+- `Acromion Surface Landmark`：表面解剖标志点。
+- `Shoulder Joint Center`：骨骼关节中心。
+- `Upper-arm Root`：几何连接位置。
+- `Deltoid Surface`：软组织外轮廓。
 
-- [ ] 方案 A（推荐）：同一源码、同一 `CharacterDefinition`、同一 camera/lighting，以 build-time generator version 生成 R1/R2 两个证据 APK；`generatorVersion` 与 schema version 解耦，R1 显式 pin 基线版本。
-- [ ] 方案 B：同一 APK 内运行时切换；需额外明确选择入口和 JNI/UI 授权。
-- [ ] 其他：________________________________。
+不得将表面标志点直接当作骨骼关节中心。必须验证肩部几何、现有 `Shoulder Bone`、Top-4 权重和基础动作之间的兼容性。任何需要修改冻结 `Skeleton` 或 `BoneId` 的情况必须停止并重新申请授权。
 
-### 4.4 性能预算
+## 8. 实施范围
 
-R2 实验密度可能从 524/1,028 增至 2,000–4,000 vertices，不能继续把 R1 绝对时间当同工作量 20% 基线。
+仅批准 `10-vr1a-r2-implementation-whitelist-draft.md` 中明确列出的文件和功能。
 
-- [ ] 批准按相同 detail/workload 比较，并记录 `ms/1k vertices`、`ms/1k triangles`、FPS、P50/P95/P99、PSS/peak RSS。
-- [ ] 批准 R2 各 LOD 的临时预算：________________________________。
-- [ ] 暂不设硬预算，只记录研究数据：________________________________。
+禁止修改：
 
-### 4.5 动作验证范围
-
-当前 synthetic actions 只有左臂抬起、左臂弯曲和双臂外展，没有右臂单侧抬起。
-
-- [ ] 接受右臂单侧动作 `NOT VERIFIED`，使用双臂外展和左右权重测试覆盖右侧。
-- [ ] 额外授权最小 deterministic 右臂单侧动作驱动：________________________________。
-
-### 4.6 Git 权限
-
-- [ ] R2 验证完成后允许一个本地 commit。
-- [ ] R2 验证完成后允许 push 到 `origin/poc-sm/shape-model-v2`。
-- [ ] 不允许 commit/push，仅交付工作区文档/代码。
-
-任何 merge、rebase、force push、reset、clean 或覆盖未提交工作均不在本授权内。
-
-## 5. 冻结区域
-
-始终禁止修改：
-
-- `native/skeleton/**`。
-- BoneId 0–21 与骨骼层级。
+- BoneId 0–21。
+- Skeleton 层级。
 - `UBO[22]`。
-- 64-byte GPU vertex packing。
-- JNI ABI 与 `app/src/main/cpp/jni_bridge.cpp`。
+- 64-byte GPU Vertex Packing。
+- JNI ABI。
 - `native/procedural/humanoid/**`。
 - `native/renderer/gl/**`。
-- `AGENT.md`、ADR、DEC、CAS、Gate。
-- `.workbuddy-ai/`。
-- `evidence/character-v6/**`、`evidence/character-v7/**`。
+- mode-3 完整 Canonical 路径。
+- Head/Face/Hand/Foot/Full Legs 生产实现。
 
-## 6. 验收要求
+不得导入外部人体模型、morph、blendshape、训练数据或运行时依赖。
 
-- R2 必须相对 R1 在胸廓、腰腹、肩带、腋窝、上臂根和曲面质量上有可测量改善。
-- 至少八视角、Shoulder/Chest/Axilla 近景、Clay/Wireframe/Normal/Weight。
-- Bind、左臂抬起、双臂外展；右臂单侧动作按 §4.5 决策，未授权时保持 `NOT VERIFIED`。
-- components/boundary/non-manifold/winding/normal/self-intersection/Top-4/Stable ID/LOD。
-- 全局二面角、BoundaryId seam、曲率、sliver、triangle quality 分开报告。
-- detail 0/1/2 必须产生不同且有效的网格。
-- cache hash 必须覆盖所有 shape/landmark 字段。
-- mode-3 无回归。
-- 性能按 §4.4 决策记录，不自动宣称 guardrail PASS。
-- AI 不宣布 Gate PASS 或视觉验收通过。
+## 9. Git 权限
 
-## 7. 停止条件
+- [x] 本授权只允许在指定分支开展实施。
+- [x] 本授权不自动授予 commit、push、merge、rebase 或 force push 权限。
+- [x] 所有修改保留在工作区；完成代码、测试和真机证据审查后，由负责人单独决定提交与推送。
+- [x] 禁止 reset、clean 或覆盖未提交工作。
 
-- 本授权未正式签发。
-- 目标形态未确认。
-- 需要修改冻结区域。
-- 参数/landmark 仍不控制 mesh。
-- 肩带/腋窝 patch 折叠、自交或 Jacobian 退化。
-- LOD/Stable ID 失配。
-- 权重串扰或腋窝动作塌陷。
-- cache/skeleton 不一致。
-- 视觉仍为桶状躯干、平板肩盖或圆管。
-- 性能超出负责人确认的预算。
+## 10. 验收与停止
 
-## 8. 签署
+本轮必须提供：
 
-授权状态：**`DRAFT — NOT EFFECTIVE`**
+1. 实际代码实现。
+2. Host 测试。
+3. Android 真机证据。
+4. R1/R2 同条件对比。
+5. Mesh、Topology、Weight 和 LOD 报告。
+6. 性能与内存报告。
+7. 完整 Git Diff。
+8. 未解决问题和失败项。
 
-负责人确认：________________________________
-日期：________________________________
+视觉验收由负责人独立确认。AI 不得自行宣布视觉 Gate PASS 或 P1-VR 完成。
 
-AI 转录/草拟：QoderCN
-日期：2026-11-25
+停止条件包括：授权范围外修改、Skeleton/BoneId 变化、肩部几何与权重/动作不兼容、内部边界伪装为 crop、性能超预算、视觉仍为桶状躯干/平板肩盖/圆管。
 
-本授权草稿不修改、不替代、不扩大既有 `AUTH-P1-VR-01`。
+## 11. 授权记录
+
+授权状态：**`APPROVED FOR P1-VR-1A-R2 ONLY`**。
+负责人决定来源：2026-11-25 明确授权文本。
+AI 转录：QoderCN，仅转录，不代签。
+
+负责人签署（如项目流程需要线下签署）：________________________________
+签署日期：________________________________
+
+本授权不修改、不替代、不扩大既有 `AUTH-P1-VR-01`，也不授权 VR-1B。

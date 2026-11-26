@@ -1,0 +1,10 @@
+Authorization status: APPROVED FOR P1-VR-1A-R2 ONLY
+Decision date: 2026-11-25
+Branch: poc-sm/shape-model-v2
+R1 production baseline: 299ae3bf3fcb6d76be563f815aa52380e018d50b
+R2 design baseline commit: 66a7e5905dde407b46df1e76074cd8b9ea94ab79
+Authorization document: docs/phases/P1-visual-recovery/09-vr1a-r2-supplemental-authorization-draft.md
+Whitelist document: docs/phases/P1-visual-recovery/10-vr1a-r2-implementation-whitelist-draft.md
+Design hash manifest: docs/phases/P1-visual-recovery/evidence/vr1a-r2/r2-design-baseline.sha256
+Git permission: worktree implementation only; no automatic commit/push/merge/rebase.
+Target adjustments: allowed only with recorded reason, parameter delta, and visual result.

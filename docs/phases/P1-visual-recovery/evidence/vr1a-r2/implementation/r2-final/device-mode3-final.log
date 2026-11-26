@@ -1,0 +1,26 @@
+--------- beginning of system
+--------- beginning of main
+11-26 01:48:09.566 24715 24743 I PAE_STATS: frames=8160 fps=49.6 frame_ms=20.17 draw_calls=2 triangles=3648 buffer_bytes=179032 p50_ms=20.18 p95_ms=20.50 p99_ms=20.64
+11-26 01:48:11.976 24715 24743 I PAE_STATS: frames=8280 fps=49.8 frame_ms=20.09 draw_calls=2 triangles=3648 buffer_bytes=179032 p50_ms=20.19 p95_ms=20.53 p99_ms=20.82
+11-26 01:48:13.147 25174 25174 I PAE_UI  : debug extras: anatomy=false preset=0 view=0 outfit=-1
+11-26 01:48:19.233 25174 25209 I PAE_RENDER: geometry generated: avatar
+11-26 01:48:23.725 25174 25209 I PAE_RENDER: anatomy preview ready: 36784 tris, 3895 ms
+11-26 01:48:24.127 25174 25209 I PAE_RENDER: P1-VR-1A ready: verts=1795 tris=3520 components=1 boundary=32 nonmanifold=0 gen_ms=50.6 cache=0:3:1:1:7791505080318327151:2:4294967295
+11-26 01:48:24.171 25174 25209 I PAE_RENDER: P1-VR-1A-REPORT verts=1795 tris=3520 components=1 boundary=32 nonmanifold=0 degenerate=0 badnorm=0 gen_ms=49.672 state_ms=0.200 geometry_ms=10.157 assembly_ms=36.379 weight_ms=2.796 boundaries=3
+11-26 01:48:24.195 25174 25209 I PAE_RENDER: P1-VR-1A-UPLOAD mesh_ms=8.181 wire_ms=23.884 cpu_mesh_bytes=171480 gpu_buffer_bytes=172888
+11-26 01:48:24.195 25174 25209 I PAE_RENDER: P1-VR-1A-MEMORY peak_rss_kb=289612
+11-26 01:48:24.195 25174 25209 I PAE_RENDER: surface ready 1920x1008
+11-26 01:49:24.501 25174 25209 I PAE_RENDER: P1B-GPU-CPU case=bind vertices=280032 max_pos_m=5.98138229e-07 mean_pos_m=7.51625109e-08 max_normal_deg=0.0342640206 abnormal_normals=0 invalid_positions=0 invalid_normals=0 result=ok
+11-26 01:49:25.556 25174 25209 I PAE_RENDER: P1B-GPU-CPU case=elbow85_knee80 vertices=280032 max_pos_m=5.98138229e-07 mean_pos_m=7.88901033e-08 max_normal_deg=0.0395646803 abnormal_normals=0 invalid_positions=0 invalid_normals=0 result=ok
+11-26 01:49:26.608 25174 25209 I PAE_RENDER: P1B-GPU-CPU case=elbow85_knee80_scale_2_0.5_3 vertices=280032 max_pos_m=5.031211e-07 mean_pos_m=8.93034553e-08 max_normal_deg=0.0395646803 abnormal_normals=0 invalid_positions=0 invalid_normals=0 result=ok
+11-26 01:49:26.662 25174 25209 I PAE_RENDER: canonical body ready: verts=46674 tris=93344 render_verts=280032 uv_charts=93344 gen_ms=62467
+11-26 01:49:26.670 25174 25209 I PAE_RENDER: applied previewMode=3
+11-26 01:49:26.670 25174 25209 I PAE_RENDER: applied cameraPreset=0
+11-26 01:49:26.670 25174 25209 I PAE_RENDER: applied debugView=0
+11-26 01:49:26.688 25174 25209 I PAE_STATS: frames=0 fps=0.0 frame_ms=0.00 draw_calls=5 triangles=93344 buffer_bytes=25391104 p50_ms=0.00 p95_ms=0.00 p99_ms=0.00
+11-26 01:49:29.122 25174 25209 I PAE_STATS: frames=120 fps=50.2 frame_ms=19.92 draw_calls=5 triangles=93344 buffer_bytes=25391104 p50_ms=20.19 p95_ms=21.12 p99_ms=36.87
+11-26 01:49:31.548 25174 25209 I PAE_STATS: frames=240 fps=49.4 frame_ms=20.24 draw_calls=5 triangles=93344 buffer_bytes=25391104 p50_ms=20.19 p95_ms=20.66 p99_ms=33.78
+11-26 01:49:33.961 25174 25209 I PAE_STATS: frames=360 fps=49.3 frame_ms=20.30 draw_calls=5 triangles=93344 buffer_bytes=25391104 p50_ms=20.20 p95_ms=20.66 p99_ms=21.11
+11-26 01:49:36.390 25174 25209 I PAE_STATS: frames=480 fps=49.4 frame_ms=20.22 draw_calls=5 triangles=93344 buffer_bytes=25391104 p50_ms=20.21 p95_ms=20.69 p99_ms=21.00
+11-26 01:49:38.797 25174 25209 I PAE_STATS: frames=600 fps=49.4 frame_ms=20.25 draw_calls=5 triangles=93344 buffer_bytes=25391104 p50_ms=20.21 p95_ms=20.64 p99_ms=20.97
+11-26 01:49:41.231 25174 25209 I PAE_STATS: frames=720 fps=49.4 frame_ms=20.24 draw_calls=5 triangles=93344 buffer_bytes=25391104 p50_ms=20.23 p95_ms=20.60 p99_ms=21.17

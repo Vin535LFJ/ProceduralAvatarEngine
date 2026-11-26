@@ -5,6 +5,7 @@
 #include "GeometryBuildRequest.h"
 #include "RegionWeightGenerator.h"
 #include "ResolvedCharacterState.h"
+#include "SurfacePatch.h"
 #include "VariableProfileSweep.h"
 #include "procedural/MeshTopology.h"
 
@@ -30,6 +31,7 @@ struct TorsoShoulderResult {
     GeometryBuildRequest request;
     std::vector<RegionId> vertexRegions;
     std::vector<uint64_t> stableIds;
+    std::vector<PatchBoundary> boundaryLoops;
     SweepDiagnostics frameDiagnostics;
     TorsoShoulderTimings timings;
     bool oq03Applicable = false;

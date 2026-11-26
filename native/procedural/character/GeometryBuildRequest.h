@@ -11,6 +11,9 @@ enum class TopologyPolicy : uint8_t {
     FixedTemplate = 0
 };
 
+constexpr uint32_t kR1GeneratorVersion = 2;
+constexpr uint32_t kR2GeneratorVersion = 3;
+
 struct GeometryBuildRequest {
     TopologyPolicy topology = TopologyPolicy::FixedTemplate;
     uint32_t generatorVersion = 1;

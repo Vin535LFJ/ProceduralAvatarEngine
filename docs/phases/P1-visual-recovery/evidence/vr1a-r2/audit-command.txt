@@ -1,2 +1,9 @@
+git rev-parse HEAD
+git branch --show-current
+git status --short
+cmake -S native -B build-host -DPAE_HOST=ON
+cmake --build build-host --target pae_core -j 8
+C:/cygwin64/bin/c++.exe --version
+sha256sum build-host/libpae_core.a
 C:/cygwin64/bin/c++.exe -std=c++17 -DPAE_HOST_BUILD=1 -IE:/AI-Tools/ProceduralAvatarEngine-poc-sm/native -IE:/AI-Tools/ProceduralAvatarEngine-poc-sm/native/core docs/phases/P1-visual-recovery/evidence/vr1a-r2/audit_probe.cpp native/procedural/shape/v2/CharacterDefinition.cpp build-host/libpae_core.a -o build-host/vr1a_r2_audit_probe.exe
 ./build-host/vr1a_r2_audit_probe.exe

@@ -1,6 +1,7 @@
 #include "TorsoShoulderPatchGenerator.h"
 
 #include "LocalShapeBasis.h"
+#include "PatchAssembler.h"
 #include "TopologyTemplate.h"
 #include "procedural/humanoid/canonical/CanonicalSkinGenerator.h"
 
@@ -652,12 +653,514 @@ bool capBoundaryLoops(MeshData& mesh, std::vector<RegionId>& regions,
     return true;
 }
 
+Vec3 stationControl(const std::vector<shape::v2::TorsoControlStation>& stations,
+                    size_t index, Vec3 shape::v2::TorsoAngularControls::*member) {
+    return stations[index].controls.*member;
+}
+
+Vec3 stationSlope(const std::vector<shape::v2::TorsoControlStation>& stations,
+                  size_t index, Vec3 shape::v2::TorsoAngularControls::*member) {
+    if (index == 0) {
+        return (stationControl(stations, 1, member) - stationControl(stations, 0, member)) *
+               (1.0f / std::max(stations[1].height - stations[0].height, 1e-4f));
+    }
+    if (index + 1 == stations.size()) {
+        return (stationControl(stations, index, member) - stationControl(stations, index - 1, member)) *
+               (1.0f / std::max(stations[index].height - stations[index - 1].height, 1e-4f));
+    }
+    return (stationControl(stations, index + 1, member) - stationControl(stations, index - 1, member)) *
+           (1.0f / std::max(stations[index + 1].height - stations[index - 1].height, 1e-4f));
+}
+
+Vec3 hermite(const Vec3& p0, const Vec3& p1, const Vec3& m0, const Vec3& m1, float t) {
+    const float t2 = t * t;
+    const float t3 = t2 * t;
+    return p0 * (2.0f * t3 - 3.0f * t2 + 1.0f) +
+           m0 * (t3 - 2.0f * t2 + t) +
+           p1 * (-2.0f * t3 + 3.0f * t2) +
+           m1 * (t3 - t2);
+}
+
+shape::v2::TorsoAngularControls interpolateAngularControls(
+        const std::vector<shape::v2::TorsoControlStation>& stations, float s) {
+    shape::v2::TorsoAngularControls result;
+    size_t segment = 0;
+    while (segment + 1 < stations.size() && s > stations[segment + 1].height) ++segment;
+    segment = std::min(segment, stations.size() - 2);
+    const float span = std::max(stations[segment + 1].height - stations[segment].height, 1e-4f);
+    const float t = std::clamp((s - stations[segment].height) / span, 0.0f, 1.0f);
+    const auto sample = [&](Vec3 shape::v2::TorsoAngularControls::*member) {
+        return hermite(stationControl(stations, segment, member),
+                       stationControl(stations, segment + 1, member),
+                       stationSlope(stations, segment, member) * span,
+                       stationSlope(stations, segment + 1, member) * span, t);
+    };
+    result.front = sample(&shape::v2::TorsoAngularControls::front);
+    result.frontLeft = sample(&shape::v2::TorsoAngularControls::frontLeft);
+    result.left = sample(&shape::v2::TorsoAngularControls::left);
+    result.backLeft = sample(&shape::v2::TorsoAngularControls::backLeft);
+    result.back = sample(&shape::v2::TorsoAngularControls::back);
+    result.backRight = sample(&shape::v2::TorsoAngularControls::backRight);
+    result.right = sample(&shape::v2::TorsoAngularControls::right);
+    result.frontRight = sample(&shape::v2::TorsoAngularControls::frontRight);
+    return result;
+}
+
+Vec3 sampleR2Section(const shape::v2::TorsoAngularControls& controls, float u) {
+    const Vec3 points[8] = {controls.front, controls.frontLeft, controls.left, controls.backLeft,
+                            controls.back, controls.backRight, controls.right, controls.frontRight};
+    std::vector<float> x(8);
+    std::vector<float> z(8);
+    for (size_t i = 0; i < 8; ++i) {
+        x[i] = points[i].x;
+        z[i] = points[i].z;
+    }
+    return {periodicCatmullRom(x, u), 0.0f, periodicCatmullRom(z, u)};
+}
+
+std::vector<DirectionalShapeBasis> buildR2TorsoBases(
+        const shape::v2::CharacterDefinition& definition,
+        const ResolvedCharacterState& state) {
+    std::vector<DirectionalShapeBasis> bases;
+    const auto chest = state.landmarks.find(LandmarkId::ChestCenter);
+    const auto costal = state.landmarks.find(LandmarkId::CostalMargin);
+    const Vec3 chestAnchor = chest ? chest->position : Vec3{0.0f, 1.36f, 0.14f};
+    const Vec3 costalAnchor = costal ? costal->position : Vec3{0.0f, 1.27f, 0.12f};
+    bases.push_back({RegionId::Thorax, chestAnchor, 0.80f, 0.13f, 0.125f, 0.10f,
+                     {0.35f, 0.0f, 1.0f}, definition.torso.pectoralRelief, 1});
+    bases.push_back({RegionId::Thorax, chestAnchor, 0.80f, 0.13f, 0.875f, 0.10f,
+                     {-0.35f, 0.0f, 1.0f}, definition.torso.pectoralRelief, 2});
+    bases.push_back({RegionId::Thorax, costalAnchor, 0.70f, 0.16f, 0.25f, 0.12f,
+                     {1.0f, 0.0f, 0.25f}, definition.torso.ribcageRelief, 1});
+    bases.push_back({RegionId::Thorax, costalAnchor, 0.70f, 0.16f, 0.75f, 0.12f,
+                     {-1.0f, 0.0f, 0.25f}, definition.torso.ribcageRelief, 2});
+    bases.push_back({RegionId::Abdomen, {0.0f, 1.16f, 0.10f}, 0.55f, 0.16f, 0.0f, 0.12f,
+                     {0.0f, 0.0f, 1.0f}, definition.torso.abdominalContour, 3});
+    bases.push_back({RegionId::Abdomen, {0.12f, 1.14f, 0.08f}, 0.46f, 0.14f, 0.18f, 0.10f,
+                     {0.45f, 0.0f, 1.0f}, definition.torso.obliqueRelief, 1});
+    bases.push_back({RegionId::Abdomen, {-0.12f, 1.14f, 0.08f}, 0.46f, 0.14f, 0.82f, 0.10f,
+                     {-0.45f, 0.0f, 1.0f}, definition.torso.obliqueRelief, 2});
+    bases.push_back({RegionId::Thorax, {0.0f, 1.34f, -0.11f}, 0.78f, 0.17f, 0.5f, 0.13f,
+                     {0.0f, 0.0f, -1.0f}, definition.torso.thoracicBackContour, 3});
+    bases.push_back({RegionId::ShoulderGirdleLeft, {0.09f, 1.35f, -0.10f}, 0.84f, 0.11f, 0.43f, 0.08f,
+                     {0.15f, 0.0f, -1.0f}, definition.torso.scapularRelief, 1});
+    bases.push_back({RegionId::ShoulderGirdleRight, {-0.09f, 1.35f, -0.10f}, 0.84f, 0.11f, 0.57f, 0.08f,
+                     {-0.15f, 0.0f, -1.0f}, definition.torso.scapularRelief, 2});
+    bases.push_back({RegionId::ShoulderGirdleLeft, {0.12f, 1.42f, -0.07f}, 0.93f, 0.08f, 0.40f, 0.08f,
+                     {0.15f, 0.8f, -0.6f}, definition.torso.trapeziusTransition, 1});
+    bases.push_back({RegionId::ShoulderGirdleRight, {-0.12f, 1.42f, -0.07f}, 0.93f, 0.08f, 0.60f, 0.08f,
+                     {-0.15f, 0.8f, -0.6f}, definition.torso.trapeziusTransition, 2});
+    bases.push_back({RegionId::Thorax, chestAnchor, 0.88f, 0.08f, 0.06f, 0.16f,
+                     {0.0f, 0.4f, 1.0f}, definition.torso.clavicleRelief * 3.0f, 3});
+    return bases;
+}
+
+uint32_t addPatchVertex(SurfacePatch& patch, const Vec3& position, RegionId region,
+                        uint8_t side, uint32_t localId) {
+    Vertex vertex;
+    vertex.position = position;
+    vertex.normal = {0.0f, 1.0f, 0.0f};
+    vertex.color = {0.72f, 0.72f, 0.72f, 1.0f};
+    const uint32_t index = static_cast<uint32_t>(patch.mesh.vertices.size());
+    patch.mesh.vertices.push_back(vertex);
+    patch.vertexRegions.push_back(region);
+    patch.stableIds.push_back(makeStableVertexId(region, side, localId));
+    return index;
+}
+
+float sampleKeyProfile(const std::vector<float>& keys, float t) {
+    if (keys.empty()) return 1.0f;
+    const float position = std::clamp(t, 0.0f, 1.0f) * static_cast<float>(keys.size() - 1);
+    const size_t index = std::min(static_cast<size_t>(position), keys.size() - 2);
+    return mix(keys[index], keys[index + 1], position - static_cast<float>(index));
+}
+
+SurfacePatch buildR2ArmPatch(const SurfacePatch& torso,
+                             const std::vector<uint32_t>& rootRing,
+                             const ResolvedCharacterState& state,
+                             const shape::v2::CharacterDefinition& definition,
+                             bool left, uint32_t sampleCount, uint32_t bridgeRingCount,
+                             uint32_t& localCounter, SweepDiagnostics* diagnostics) {
+    SurfacePatch patch;
+    patch.id = left ? "upper-arm-root-left" : "upper-arm-root-right";
+    patch.region = left ? RegionId::UpperArmRootLeft : RegionId::UpperArmRootRight;
+    patch.side = left ? 1 : 2;
+    const uint8_t side = patch.side;
+    const RegionId armRegion = patch.region;
+    const RegionId bridgeRegion = left ? RegionId::BridgeLeft : RegionId::BridgeRight;
+    const Vec3 outward{left ? 1.0f : -1.0f, 0.0f, 0.0f};
+    const LandmarkPoint* rootLandmark = state.landmarks.find(
+        left ? LandmarkId::LeftUpperArmRoot : LandmarkId::RightUpperArmRoot);
+    const LandmarkPoint* acromionLandmark = state.landmarks.find(
+        left ? LandmarkId::LeftAcromion : LandmarkId::RightAcromion);
+    const LandmarkPoint* deltoidLandmark = state.landmarks.find(
+        left ? LandmarkId::LeftDeltoidSurface : LandmarkId::RightDeltoidSurface);
+    const LandmarkPoint* axillaLandmark = state.landmarks.find(
+        left ? LandmarkId::LeftAxilla : LandmarkId::RightAxilla);
+    const LandmarkPoint* elbowLandmark = state.landmarks.find(
+        left ? LandmarkId::LeftElbow : LandmarkId::RightElbow);
+    if (!rootLandmark || !acromionLandmark || !deltoidLandmark || !axillaLandmark || !elbowLandmark) return patch;
+
+    Vec3 rootCenter{};
+    for (uint32_t local : rootRing) rootCenter = rootCenter + torso.mesh.vertices[local].position;
+    rootCenter = rootCenter * (1.0f / static_cast<float>(rootRing.size()));
+    const Vec3 p0 = rootLandmark->position;
+    const Vec3 p1 = deltoidLandmark->position;
+    const Vec3 defaultAcromion{outward.x * definition.shoulders.biacromialWidth * 0.5f,
+                               definition.shoulders.acromionY, 0.0f};
+    const Vec3 acromionDelta = acromionLandmark->position - defaultAcromion;
+    const Vec3 p3 = elbowLandmark->position;
+    const Vec3 p2 = (p0 + p3) * 0.5f + Vec3{0.0f, -0.008f, 0.006f};
+    std::vector<Vec3> path;
+    path.reserve(sampleCount);
+    for (uint32_t i = 0; i < sampleCount; ++i) {
+        const float t = static_cast<float>(i) / static_cast<float>(sampleCount - 1);
+        const float u = 1.0f - t;
+        path.push_back(p0 * (u * u * u) + p1 * (3.0f * u * u * t) +
+                       p2 * (3.0f * u * t * t) + p3 * (t * t * t));
+    }
+    const std::vector<SweepFrame> frames = computeRmfFrames(path, {0.0f, 0.0f, 1.0f}, diagnostics);
+    if (frames.size() != path.size()) return patch;
+
+    std::vector<uint32_t> orderedRoot = rootRing;
+    double area2 = 0.0;
+    for (size_t i = 0; i < orderedRoot.size(); ++i) {
+        const Vec3 a = torso.mesh.vertices[orderedRoot[i]].position - rootCenter;
+        const Vec3 b = torso.mesh.vertices[orderedRoot[(i + 1) % orderedRoot.size()]].position - rootCenter;
+        area2 += static_cast<double>(a.dot(frames[0].u)) * b.dot(frames[0].v) -
+                 static_cast<double>(b.dot(frames[0].u)) * a.dot(frames[0].v);
+    }
+    if (area2 < 0.0) std::reverse(orderedRoot.begin(), orderedRoot.end());
+
+    const uint32_t ringSegments = static_cast<uint32_t>(orderedRoot.size());
+    std::vector<uint32_t> rootVertices;
+    std::vector<std::vector<uint32_t>> bridgeRings;
+    rootVertices.reserve(ringSegments);
+    bridgeRings.reserve(bridgeRingCount);
+    for (uint32_t local : orderedRoot) {
+        rootVertices.push_back(addPatchVertex(patch, torso.mesh.vertices[local].position,
+                                              bridgeRegion, side, localCounter++));
+        patch.stableIds.back() = torso.stableIds[local];
+    }
+    for (uint32_t step = 1; step <= bridgeRingCount; ++step) {
+        const float t = static_cast<float>(step) / static_cast<float>(bridgeRingCount + 1);
+        std::vector<uint32_t> bridgeRing;
+        bridgeRing.reserve(ringSegments);
+        for (uint32_t s = 0; s < ringSegments; ++s) {
+            const Vec3 rootPosition = torso.mesh.vertices[orderedRoot[s]].position;
+            Vec3 bridge = rootPosition * (1.0f - t) + path[0] * t +
+                          outward * (0.015f * std::sin(kPi * t)) +
+                          Vec3{0.0f, 0.025f * std::sin(kPi * t), 0.0f} +
+                          acromionDelta * (0.25f * std::sin(kPi * t));
+            const float axillaWeight = compactFalloff((bridge - axillaLandmark->position).length(), 0.090f);
+            bridge = bridge - outward * definition.torso.axillaDepth * axillaWeight;
+            bridgeRing.push_back(addPatchVertex(patch, bridge, bridgeRegion, side, localCounter++));
+        }
+        bridgeRings.push_back(std::move(bridgeRing));
+    }
+
+    const std::vector<float> widthKeys = {0.058f, 0.066f, 0.060f, 0.052f, 0.044f, 0.038f};
+    const std::vector<float> depthKeys = {0.052f, 0.058f, 0.054f, 0.048f, 0.042f, 0.036f};
+    const std::vector<float> frontKeys = {0.000f, 0.006f, 0.010f, 0.008f, 0.003f, 0.000f};
+    const std::vector<float> backKeys = {0.000f, 0.002f, 0.000f, 0.006f, 0.005f, 0.002f};
+    const std::vector<float> radialProfile = {0.98f, 1.00f, 1.02f, 1.035f, 1.015f, 0.99f,
+                                              0.98f, 0.99f, 1.01f, 1.02f, 1.00f, 0.98f};
+    Vec3 phaseRadial = torso.mesh.vertices[orderedRoot.front()].position - rootCenter;
+    phaseRadial = phaseRadial - frames[0].tangent * phaseRadial.dot(frames[0].tangent);
+    const float phase = std::atan2(phaseRadial.dot(frames[0].v),
+                                   phaseRadial.dot(frames[0].u)) / 6.2831853f;
+    std::vector<std::vector<uint32_t>> rings;
+    rings.reserve(sampleCount);
+    for (uint32_t i = 0; i < sampleCount; ++i) {
+        const float t = static_cast<float>(i) / static_cast<float>(sampleCount - 1);
+        const float width = sampleKeyProfile(widthKeys, t);
+        const float depth = sampleKeyProfile(depthKeys, t);
+        const float frontRelief = sampleKeyProfile(frontKeys, t);
+        const float backRelief = sampleKeyProfile(backKeys, t);
+        std::vector<uint32_t> ring;
+        ring.reserve(ringSegments);
+        for (uint32_t s = 0; s < ringSegments; ++s) {
+            const float u = phase + static_cast<float>(s) / static_cast<float>(ringSegments);
+            const Vec2 section = sampleClosedProfile(radialProfile, u, width, depth);
+            Vec3 position = path[i] + frames[i].u * section.x + frames[i].v * section.y;
+            const float deltoidWeight = compactFalloff(std::fabs(t - 0.08f), 0.30f);
+            position = position + outward * definition.shoulders.deltoidLateral * deltoidWeight;
+            position = position + Vec3{0.0f, 0.0f, 1.0f} *
+                       definition.shoulders.deltoidAnterior * deltoidWeight *
+                       (section.y >= 0.0f ? 1.0f : 0.0f);
+            position = position - Vec3{0.0f, 0.0f, 1.0f} *
+                       definition.shoulders.deltoidPosterior * deltoidWeight *
+                       (section.y < 0.0f ? 1.0f : 0.0f);
+            position = position + Vec3{0.0f, 0.0f, 1.0f} * frontRelief *
+                       (section.y >= 0.0f ? 1.0f : 0.0f);
+            position = position - Vec3{0.0f, 0.0f, 1.0f} * backRelief *
+                       (section.y < 0.0f ? 1.0f : 0.0f);
+            ring.push_back(addPatchVertex(patch, position, armRegion, side, localCounter++));
+        }
+        rings.push_back(std::move(ring));
+    }
+
+    for (uint32_t s = 0; s < ringSegments; ++s) {
+        const uint32_t sn = (s + 1) % ringSegments;
+        addQuadOriented(patch.mesh, rootVertices[s], bridgeRings[0][s], rootVertices[sn],
+                        bridgeRings[0][sn], outward);
+        for (uint32_t row = 0; row + 1 < bridgeRings.size(); ++row) {
+            addQuadOriented(patch.mesh, bridgeRings[row][s], bridgeRings[row + 1][s],
+                            bridgeRings[row][sn], bridgeRings[row + 1][sn], outward);
+        }
+        addQuadOriented(patch.mesh, bridgeRings.back()[s], rings[0][s],
+                        bridgeRings.back()[sn], rings[0][sn], outward);
+    }
+    for (uint32_t i = 0; i + 1 < rings.size(); ++i) {
+        for (uint32_t s = 0; s < ringSegments; ++s) {
+            const uint32_t sn = (s + 1) % ringSegments;
+            const Vec3 hint = patch.mesh.vertices[rings[i][s]].position - path[i];
+            addQuadOriented(patch.mesh, rings[i][s], rings[i][sn], rings[i + 1][s],
+                            rings[i + 1][sn], hint);
+        }
+    }
+    const uint32_t capCenter = addPatchVertex(patch, path.back(), armRegion, side, localCounter++);
+    for (uint32_t s = 0; s < ringSegments; ++s) {
+        const uint32_t sn = (s + 1) % ringSegments;
+        addTriangleOriented(patch.mesh, capCenter, rings.back()[s], rings.back()[sn],
+                            path.back() - path[path.size() - 2]);
+    }
+    patch.boundaries.push_back({left ? "arm-root-left" : "arm-root-right", armRegion,
+                                rootVertices, true, false});
+    patch.valid = !patch.mesh.vertices.empty() && !patch.mesh.indices.empty();
+    return patch;
+}
+
+TorsoShoulderResult generateR2Torso(const shape::v2::CharacterDefinition& definition,
+                                    const GeometryBuildRequest& request,
+                                    const BodyJoints* legacyJoints) {
+    const auto started = std::chrono::steady_clock::now();
+    TorsoShoulderResult result;
+    result.request = request;
+    result.state = resolveCharacterState(definition, legacyJoints);
+    result.timings.stateResolutionMs = std::chrono::duration<double, std::milli>(
+        std::chrono::steady_clock::now() - started).count();
+    if (!result.state.valid || result.state.torsoStations.size() < 2) {
+        result.error = "R2 control stations are invalid";
+        return result;
+    }
+    const auto geometryStarted = std::chrono::steady_clock::now();
+    const uint32_t stationSteps = request.detailLevel == 0 ? 2u : 4u;
+    const uint32_t armSamples = request.detailLevel == 0 ? 6u : 8u;
+    const uint32_t bridgeRingCount = request.detailLevel >= 2 ? 5u : 3u;
+    MeshData& mesh = result.mesh;
+    std::vector<RegionId>& vertexRegions = result.vertexRegions;
+    std::vector<uint64_t>& stableIds = result.stableIds;
+    uint32_t localCounter = 0;
+    const float yBottom = result.state.joints.hips.y + 0.010f;
+    const float yNeck = result.state.joints.neck.y;
+    const std::vector<DirectionalShapeBasis> bases = buildR2TorsoBases(definition, result.state);
+
+    std::vector<float> heights{0.0f};
+    for (size_t i = 0; i + 1 < result.state.torsoStations.size(); ++i) {
+        const float a = result.state.torsoStations[i].height;
+        const float b = result.state.torsoStations[i + 1].height;
+        for (uint32_t step = 1; step <= stationSteps; ++step) {
+            heights.push_back(mix(a, b, static_cast<float>(step) / static_cast<float>(stationSteps)));
+        }
+    }
+    const auto ringIndexForHeight = [&heights](float height) {
+        size_t best = 0;
+        float bestError = 1e9f;
+        for (size_t i = 0; i < heights.size(); ++i) {
+            const float error = std::fabs(heights[i] - height);
+            if (error < bestError) {
+                bestError = error;
+                best = i;
+            }
+        }
+        return best;
+    };
+    const size_t holeStart = ringIndexForHeight(0.88f);
+    const size_t holeEnd = ringIndexForHeight(0.90f);
+    std::vector<std::vector<uint32_t>> rings;
+    rings.reserve(heights.size());
+    for (float s : heights) {
+        const shape::v2::TorsoAngularControls controls = interpolateAngularControls(
+            result.state.torsoStations, s);
+        std::vector<uint32_t> ring;
+        ring.reserve(kTorsoSegments);
+        for (uint32_t segment = 0; segment < kTorsoSegments; ++segment) {
+            const float u = static_cast<float>(segment) / static_cast<float>(kTorsoSegments);
+            Vec3 position = sampleR2Section(controls, u);
+            position.y = mix(yBottom, yNeck, s);
+            if (s < 0.20f) position.x *= definition.torso.upperPelvisWidthScale;
+            if (s > 0.36f && s < 0.52f) {
+                const float waistScale = std::clamp(1.0f - 0.20f * (definition.torso.waistPinch - 0.45f),
+                                                    0.75f, 1.25f);
+                position.x *= waistScale;
+                position.z *= waistScale;
+            }
+            if (s > 0.58f && s < 0.90f) {
+                position.x *= definition.torso.ribcageWidthScale;
+                position.z *= definition.torso.chestDepthScale;
+            }
+            if (s > 0.86f) {
+                if (position.x > 0.0f) {
+                    position.x *= definition.shoulders.leftWidthScale *
+                                  (1.0f + definition.asymmetry.leftShoulderWidthDelta) *
+                                  definition.torso.shoulderGirdleMass;
+                } else if (position.x < 0.0f) {
+                    position.x *= definition.shoulders.rightWidthScale *
+                                  (1.0f + definition.asymmetry.rightShoulderWidthDelta) *
+                                  definition.torso.shoulderGirdleMass;
+                }
+            }
+            for (const DirectionalShapeBasis& basis : bases) {
+                position = position + evaluateDirectional(basis, s, u);
+            }
+            RegionId region = s < 0.20f ? RegionId::UpperPelvis
+                             : s < 0.55f ? RegionId::Abdomen : RegionId::Thorax;
+            if (s > 0.86f && std::fabs(position.x) > 0.10f) {
+                region = position.x > 0.0f ? RegionId::ShoulderGirdleLeft
+                                           : RegionId::ShoulderGirdleRight;
+            }
+            const uint8_t side = region == RegionId::ShoulderGirdleLeft ? 1
+                               : region == RegionId::ShoulderGirdleRight ? 2 : 0;
+            ring.push_back(addTrackedVertex(mesh, vertexRegions, stableIds, position, region, side,
+                                            localCounter++));
+        }
+        rings.push_back(std::move(ring));
+    }
+    auto isR2ArmOpening = [holeStart, holeEnd](size_t ring, uint32_t segment) {
+        if (ring < holeStart || ring >= holeEnd) return false;
+        return (segment >= 6 && segment <= 9) || (segment >= 22 && segment <= 25);
+    };
+    for (size_t ring = 0; ring + 1 < rings.size(); ++ring) {
+        for (uint32_t segment = 0; segment < kTorsoSegments; ++segment) {
+            if (isR2ArmOpening(ring, segment)) continue;
+            const uint32_t next = (segment + 1) % kTorsoSegments;
+            const Vec3 hint = mesh.vertices[rings[ring][segment]].position -
+                              mesh.vertices[rings[ring + 1][segment]].position;
+            addQuadOriented(mesh, rings[ring][segment], rings[ring][next],
+                            rings[ring + 1][segment], rings[ring + 1][next], hint);
+        }
+    }
+    const uint32_t bottomCenter = addTrackedVertex(
+        mesh, vertexRegions, stableIds, {0.0f, yBottom, 0.0f}, RegionId::UpperPelvis, 0,
+        localCounter++);
+    for (uint32_t segment = 0; segment < kTorsoSegments; ++segment) {
+        const uint32_t next = (segment + 1) % kTorsoSegments;
+        addTriangleOriented(mesh, bottomCenter, rings.front()[next], rings.front()[segment],
+                            Vec3{0.0f, -1.0f, 0.0f});
+    }
+
+    auto r2SideOpening = [&rings, holeStart, holeEnd](uint32_t center) {
+        const uint32_t c0 = center - 2;
+        const uint32_t c4 = center + 2;
+        std::vector<uint32_t> loop;
+        for (uint32_t c = c0; c <= c4; ++c) loop.push_back(rings[holeStart][c]);
+        for (size_t r = holeStart + 1; r <= holeEnd; ++r) loop.push_back(rings[r][c4]);
+        for (uint32_t c = c4; c-- > c0;) loop.push_back(rings[holeEnd][c]);
+        for (size_t r = holeEnd - 1; r > holeStart; --r) loop.push_back(rings[r][c0]);
+        return loop;
+    };
+    const std::vector<uint32_t> leftRoot = r2SideOpening(8);
+    const std::vector<uint32_t> rightRoot = r2SideOpening(24);
+
+    result.timings.geometryMs = std::chrono::duration<double, std::milli>(
+        std::chrono::steady_clock::now() - geometryStarted).count();
+    const auto assemblyStarted = std::chrono::steady_clock::now();
+    SurfacePatch torsoPatch;
+    torsoPatch.id = "torso";
+    torsoPatch.region = RegionId::Thorax;
+    torsoPatch.mesh = std::move(result.mesh);
+    torsoPatch.stableIds = std::move(result.stableIds);
+    torsoPatch.vertexRegions = std::move(result.vertexRegions);
+    torsoPatch.boundaries.push_back({"arm-root-left", RegionId::ShoulderGirdleLeft,
+                                     leftRoot, true, false});
+    torsoPatch.boundaries.push_back({"arm-root-right", RegionId::ShoulderGirdleRight,
+                                     rightRoot, true, false});
+    torsoPatch.boundaries.push_back({"neck-base-interface", RegionId::Thorax,
+                                     rings.back(), true, true});
+    torsoPatch.valid = !torsoPatch.mesh.vertices.empty() && !torsoPatch.mesh.indices.empty();
+
+    SweepDiagnostics leftDiagnostics;
+    SweepDiagnostics rightDiagnostics;
+    SurfacePatch leftArm = buildR2ArmPatch(torsoPatch, leftRoot, result.state, definition,
+                                           true, armSamples, bridgeRingCount, localCounter,
+                                           &leftDiagnostics);
+    SurfacePatch rightArm = buildR2ArmPatch(torsoPatch, rightRoot, result.state, definition,
+                                            false, armSamples, bridgeRingCount, localCounter,
+                                            &rightDiagnostics);
+    if (!leftArm.valid || !rightArm.valid) {
+        result.error = "R2 arm patch generation failed";
+        return result;
+    }
+    const PatchAssemblyResult assembled = assemblePatches({torsoPatch, leftArm, rightArm});
+    if (!assembled.valid) {
+        result.error = "R2 patch assembly failed: " + assembled.error +
+                       " patch_vertices=" + std::to_string(torsoPatch.mesh.vertices.size()) + "," +
+                       std::to_string(leftArm.mesh.vertices.size()) + "," +
+                       std::to_string(rightArm.mesh.vertices.size());
+        return result;
+    }
+    result.mesh = std::move(assembled.mesh);
+    result.stableIds = std::move(assembled.stableIds);
+    result.vertexRegions = std::move(assembled.vertexRegions);
+    result.boundaryLoops = assembled.boundaries;
+    result.topology = assembled.topology;
+    recomputeNormals(result.mesh);
+    for (const Vertex& vertex : result.mesh.vertices) {
+        if (!std::isfinite(vertex.normal.x) || !std::isfinite(vertex.normal.y) ||
+            !std::isfinite(vertex.normal.z) ||
+            std::fabs(vertex.normal.lengthSq() - 1.0f) > 1e-2f) {
+            ++result.topology.invalidNormals;
+        }
+    }
+    result.timings.assemblyMs = std::chrono::duration<double, std::milli>(
+        std::chrono::steady_clock::now() - assemblyStarted).count();
+    const auto weightStarted = std::chrono::steady_clock::now();
+    result.weights = assignRegionWeights(result.mesh, result.vertexRegions, result.state.skeleton, false);
+    result.timings.weightMs = std::chrono::duration<double, std::milli>(
+        std::chrono::steady_clock::now() - weightStarted).count();
+    for (const Vertex& vertex : result.mesh.vertices) result.mesh.bounds.expand(vertex.position);
+    result.mesh.subMeshes.push_back({0, static_cast<uint32_t>(result.mesh.indices.size()), 0});
+    result.report.vertexCount = static_cast<uint32_t>(result.mesh.vertices.size());
+    result.report.triangleCount = static_cast<uint32_t>(result.mesh.indices.size() / 3);
+    std::set<std::string> reportedBoundaries;
+    for (const PatchBoundary& boundary : assembled.boundaries) {
+        if (!reportedBoundaries.insert(boundary.id).second) continue;
+        result.report.boundaries.push_back(
+            {boundary.id, static_cast<uint32_t>(boundary.vertexIds.size()), 0.0f, 0.0f,
+             !boundary.crop, true});
+    }
+    result.report.valid = !result.mesh.vertices.empty() && !result.mesh.indices.empty();
+    result.report.generationMs = std::chrono::duration<double, std::milli>(
+        std::chrono::steady_clock::now() - started).count();
+    result.timings.totalMs = result.report.generationMs;
+    result.frameDiagnostics.valid = leftDiagnostics.valid && rightDiagnostics.valid;
+    result.frameDiagnostics.minOrthonormality = std::fmin(
+        leftDiagnostics.minOrthonormality, rightDiagnostics.minOrthonormality);
+    result.frameDiagnostics.minTangentDot = std::fmin(
+        leftDiagnostics.minTangentDot, rightDiagnostics.minTangentDot);
+    result.frameDiagnostics.minHandedness = std::fmin(
+        leftDiagnostics.minHandedness, rightDiagnostics.minHandedness);
+    result.oq03Applicable = false;
+    result.valid = result.report.valid && result.topology.components == 1 &&
+                   result.topology.boundaryEdges == static_cast<int>(kTorsoSegments) &&
+                   result.topology.nonManifoldEdges == 0 &&
+                   result.topology.degenerateTriangles == 0 &&
+                   result.topology.invalidNormals == 0 && result.weights.valid &&
+                   result.frameDiagnostics.valid;
+    if (!result.valid) result.error = "R2 patch topology, weights, or frames failed";
+    return result;
+}
+
 } // namespace
 
 TorsoShoulderResult TorsoShoulderPatchGenerator::generate(
     const shape::v2::CharacterDefinition& definition,
     const GeometryBuildRequest& request,
     const BodyJoints* legacyJoints) {
+    if (request.generatorVersion >= kR2GeneratorVersion) {
+        return generateR2Torso(definition, request, legacyJoints);
+    }
     const auto started = std::chrono::steady_clock::now();
     TorsoShoulderResult result;
     result.request = request;

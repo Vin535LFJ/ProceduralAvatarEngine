@@ -214,11 +214,20 @@ R2 应复用并接入这些模块，而不是再创建一套同职责模块。
 
 R1 默认 mesh 的确定性 FNV-64（positions/joints/weights/indices/stableIds）为 `638a9cf368577940`。R2 必须用该 golden hash 或逐顶点 parity 固定 R1 baseline，防止算法重构悄悄改变对照基线。
 
-可复现探针源码与命令：
+可复现探针源码、命令和环境证据：
 
 - `docs/phases/P1-visual-recovery/evidence/vr1a-r2/audit_probe.cpp`
 - `docs/phases/P1-visual-recovery/evidence/vr1a-r2/audit-command.txt`
+- `docs/phases/P1-visual-recovery/evidence/vr1a-r2/audit-environment.txt`
+- `docs/phases/P1-visual-recovery/evidence/vr1a-r2/audit-git-state.txt`
+- `docs/phases/P1-visual-recovery/evidence/vr1a-r2/cmake-configure.log`
+- `docs/phases/P1-visual-recovery/evidence/vr1a-r2/cmake-build-pae-core.log`
+- `docs/phases/P1-visual-recovery/evidence/vr1a-r2/compiler-version.txt`
+- `docs/phases/P1-visual-recovery/evidence/vr1a-r2/libpae_core.sha256.txt`
+- `docs/phases/P1-visual-recovery/evidence/vr1a-r2/probe-compile-run.log`
 - `docs/phases/P1-visual-recovery/evidence/vr1a-r2-code-audit-probe.log`
+
+复现环境使用 GCC 11.5.0；`libpae_core.a` SHA-256 为 `c3ec16c27c96f2ea8db3999576a311d9f39a28228266ee0cb47724cd24c4fd51`；探针编译和运行退出状态均为 0。
 
 默认关节与 landmark：
 
@@ -237,7 +246,7 @@ R1 默认 mesh 的确定性 FNV-64（positions/joints/weights/indices/stableIds�
 | 腰宽 | 语义 0.3295 m；实际约 0.283 m | 0.264 m | 必须低于胸宽 |
 | 腰深 | 语义 0.2636 m；实际约 0.259 m | 0.200 m | 当前甚至深于胸廓 |
 | 肩峰间距 | landmark 0.4159 m，未接入 | 0.416 m | 保持尺度，但必须控制 mesh |
-| 可见肩盖上缘 | 约 0.472 m | 约 0.432 m 最大 | 去除平板和过宽帽檐 |
+| 可见肩盖上缘 | 约 0.472 m | 肩带 yoke 约 0.432 m；最终外肩宽候选 0.460 m | yoke 与含三角肌外肩宽必须分开测量 |
 | 锁骨 relief | 参数极差仅 0.669 mm | 3–4 mm | 需要曲线型形态基 |
 | 三角肌外侧 | 参数极差仅 3.097 mm | 12–16 mm | 需要方向性体积 |
 | 腋窝 | 单球形负向凹陷 | 四边界 10–14 mm 凹面 | 需要独立 patch |
@@ -252,6 +261,7 @@ R1 默认 mesh 的确定性 FNV-64（positions/joints/weights/indices/stableIds�
 
 推荐方案：
 
+- R2 候选比例仅作为第一版几何构建目标，不是最终人体统计标准；长期亚洲成年审美方向保留，但统计来源不能自动证明其符合该方向。最终性别/基础比例口径由授权 §4.1 确认。
 - `CharacterDefinition` 继续作为唯一可编辑人体语义输入。
 - 新增 typed `TorsoControlStation` 和 `ShoulderFormParameters`，放入现有 `TorsoShapeParameters/ShoulderShapeParameters` 职责范围。
 - `ShapeParameters` 不再保存同义数值；只保留 metadata/legacy adapter，且明确 `DeclaredOnly`，或由 typed 字段生成只读视图。
@@ -282,6 +292,13 @@ R1 默认 mesh 的确定性 FNV-64（positions/joints/weights/indices/stableIds�
 - `Axilla` 控制腋窝 patch 的顶/后边界和 concavity anchor。
 - `NeckBase` 只控制接口环；是否允许生成短 neck/trapezius transition 由授权勾选决定。
 
+技术前置检查：
+
+- `Acromion Surface Landmark`、`Shoulder Joint Center`、`Upper-arm Root`、`Deltoid Surface` 必须保持四种语义和独立测量。
+- R1 Shoulder Joint `(±0.241821,1.302865,0)` 与 R2 Acromion `(±0.208,1.415,0)` 相距约 `117.1 mm`，不得直接绑定为同一点。
+- 必须验证肩带 patch、现有 Shoulder Bone、Top-4 权重、左臂抬起和双臂外展的兼容性。
+- 任何 Skeleton/BoneId 修改需求立即停止并重新申请授权。
+
 ### 5.3 多站点躯干截面
 
 纵向使用单调 cubic Hermite 或 monotone cubic interpolation：
@@ -299,14 +316,13 @@ C(s) = Hermite(Ci, Ci+1, ...)
 - 每个站点有独立 width/depth/center/front/back/side controls。
 - waist pinch 同时作用于腰宽和腰深，并有独立 station support。
 
-角向不再使用单一椭圆半径，而使用 12 个解剖方向的周期控制：
+角向不再使用单一椭圆半径，而统一采用 8 个解剖控制方向：
 
 ```text
-front-center, anterolateral-left, lateral-left, posterolateral-left,
-back-center, posterolateral-right, lateral-right, anterolateral-right
+F, FL, L, BL, B, BR, R, FR
 ```
 
-使用 periodic cubic B-spline/Catmull-Rom 生成闭合 `Q(s,φ)`。肩带和腋窝可使用 transfinite Coons patch，将四条独立边界连续拼接。
+权威 `Station × AngularControl × Side` 坐标见 `07-vr1a-r2-shape-target.md §4.1`。左右默认镜像；非对称时只允许显式左右参数分别控制左侧 `L/FL/BL` 与右侧 `R/FR/BR`，中线 `F/B` 独立。使用 periodic cubic B-spline/Catmull-Rom 生成闭合 `Q(s,φ)`。肩带和腋窝可使用 transfinite Coons patch，将四条独立边界连续拼接。
 
 ### 5.4 方向性 LocalShapeBasis
 
@@ -343,6 +359,21 @@ back-center, posterolateral-right, lateral-right, anterolateral-right
 
 基础方案推荐显式 `neck-base-interface` crop loop，不生成头颈动画。若负责人要求 boundary=0，则需单独授权最小 neck/trapezius transition ring；不得直接扩大 R2 范围。R1 baseline 路径仍保持 boundary=0；R2 若采用 crop loop，只允许一个注册外部接口边界，内部肩胸/腋窝/臂根边界必须为 0，并使用独立断言，不修改或降低 R1 baseline 测试。
 
+#### 5.5.1 PatchAssembler 共享边界契约
+
+现有 `assemblePatches()` 只追加顶点和偏移索引，不具备共享边界连接能力。R2 必须扩展现有模块，按以下顺序事务式组装：
+
+1. **边界索引**：以 `BoundaryId + Side + ParameterDirection` 建立边界表；内部接缝必须恰好由两个 patch 声明，外部 crop 必须显式标记为单 patch。
+2. **对应关系**：优先按 Stable ID 一一对应；若使用参数对应，必须按弧长/参数采样生成唯一映射，禁止模糊最近点匹配。
+3. **方向对齐**：比较端点、Stable ID 和参数方向，允许整体正向或反向，但不允许局部扭转或循环移位。
+4. **几何校验**：检查顶点数、Stable ID、位置 C0 `<=1e-4 m`、重复顶点、T-junction、边界参数单调性。
+5. **索引合并**：第一个 patch 创建最终顶点，第二个 patch 的同边界顶点映射到同一最终 index；所有三角形索引重映射。
+6. **拓扑校验**：内部边恰好两面、外部 crop 边恰好一面；检查 directed-edge winding、重复面、退化、sliver、self-intersection 和 quad Jacobian。
+7. **拒绝组装**：任一校验失败时丢弃候选 mesh，返回带 BoundaryId/顶点/参数位置的错误，不提交部分结果。
+8. **真实报告**： continuity/deviation/normal 必须从最终 mesh 计算，禁止硬编码 0。
+
+不得使用 merge-by-distance 或位置接近来伪造共享边界。
+
 ### 5.6 腋窝 patch
 
 腋窝由四条边界构成：
@@ -374,11 +405,27 @@ B3 = elbow interface
 
 ### 5.8 特征驱动细分
 
-初始控制网格之外，按以下误差估计局部细分：
+初始控制网格之外，使用无量纲归一化误差决定局部细分：
 
 ```text
-e = max(|κ| h^2, normal deviation, profile second derivative, basis curvature)
+E_position = predicted_position_error / epsilon_p
+E_normal   = normal_angle_error / epsilon_n
+E_curvature = normalized_curvature_error / epsilon_c
+E = max(E_position, E_normal, E_curvature)
+refine if E > 1
 ```
+
+单位与定义：
+
+- `predicted_position_error`：米；由粗/细预测或局部二阶展开估计，不使用带量纲的 curvature 原值直接比较。
+- `epsilon_p`：米。
+- `normal_angle_error`：弧度；由对应采样法线计算。
+- `epsilon_n`：弧度。
+- `normalized_curvature_error`：`1/m`，按明确参数化和局部尺度计算。
+- `epsilon_c`：`1/m`。
+- profile second derivative 和 basis curvature 必须先转换为预测位置误差或归一化曲率误差，不能直接与角度/长度取最大值。
+
+`epsilon_p/epsilon_n/epsilon_c` 必须在固定标定场景中记录，包括平面、圆柱、肩峰样条、锁骨曲线、腋窝四边界和上臂变截面。标定结果作为研究配置保存，不作为未批准的硬 Gate；OQ-03 的 5° 暂缓决定继续适用。
 
 优先细分：
 
@@ -472,7 +519,10 @@ OQ-03 继续暂缓硬阈值，不自行引入 5° Gate。
 - `ClavicleRelief` 产生目标量级且 cache key 改变。
 - waist width/depth 独立且均低于 chest。
 - pectoral/ribcage/abdominal/oblique/back/scapular/trapezius 分向测试。
+- PatchAssembler 同 BoundaryId 映射、方向对齐、Stable ID/C0/T-junction/winding/拒绝组装测试。
+- 自适应细分 `E_position/E_normal/E_curvature` 量纲与阈值标定场景测试。
 - deltoid anterior/lateral/posterior 不同时变化。
+- Acromion/Shoulder Joint/Upper-arm Root/Deltoid Surface 四点语义、距离、权重和动作兼容测试。
 - 腋窝四边界和 Bind/Action concavity。
 - detail 0/1/2 不同且 LOD lineage 有效。
 - BoundaryId seam 对应采样，不复用全局角分布。
@@ -593,6 +643,8 @@ R2 不实现 VR-1B，但完成后必须提交以下实施计划：
 
 VR-1B 必须重新授权和独立验收，不能把 R1/R2 mode-2 局部 Patch 直接视为完整人体。
 
+R2 是最后一轮专门集中修复局部躯干—肩带形态的迭代。R2 完成后直接进入 VR-1B 完整人体连续形态规划；除非负责人明确要求，不再新增以肩部为中心的 R3/R4/R5 局部修补轮次。
+
 ## 13. 实施里程碑
 
 1. M0：负责人确认 `07-vr1a-r2-shape-target.md` 与授权草稿。
@@ -604,7 +656,27 @@ VR-1B 必须重新授权和独立验收，不能把 R1/R2 mode-2 局部 Patch �
 7. M6：性能/内存、动作、Surface/mode-3 回归和最终报告。
 8. M7：提出 VR-1B 完整实施计划，等待独立授权。
 
-## 14. 当前结论
+## 14. Design Review Addendum
+
+针对 `66a7e59` 的专家复核，本轮不推翻 R2 路线，只修订以下六项：
+
+| 复核项 | 修订结果 | 仍需负责人确认 |
+|---|---|---|
+| 人体比例与亚洲成人视觉方向 | 07 §2.1 明确 R2 数值只是第一版几何目标，不自动代表亚洲成人审美或最终统计标准 | 授权 §4.1 选择基础比例/性别口径 |
+| 三类肩宽定义 | 07 §3.1 区分 biacromial 0.416 m、shoulder-yoke 0.432 m、final external shoulder 0.460 m 候选，并绑定测量区域 | 批准 final external shoulder 候选值 |
+| 角向控制不完整 | 07 §4.1 提供 12 个 station × 8 个 angular control × 左右 side 的权威坐标；08 同步取消“12 方向”表述 | 批准角向目标数据 |
+| PatchAssembler 只拼接不共享 | 08 §5.5.1 定义 BoundaryId 匹配、方向对齐、Stable ID/C0/T-junction/winding 校验、统一 index 和拒绝组装；10 §3.3 同步白名单 | 无额外范围扩张 |
+| 自适应细分量纲不一致 | 08 §5.8 改为 `E=max(E_position,E_normal,E_curvature)`，各项除以带单位 epsilon，并增加标定场景 | 批准各 LOD epsilon 标定配置 |
+| 审计证据不可完全复现 | 补齐 Git SHA/status、CMake 配置/构建日志、GCC 11.5.0、静态库 SHA-256、探针编译/运行退出状态 | 无 |
+| 肩部四类点可能混用 | 07 §6.1.1、08 §5.2、10 §6.1 区分 Acromion/Shoulder Joint/Root/Deltoid，并增加权重/动作兼容检查 | 无 Skeleton 修改授权 |
+
+授权同时明确：
+
+- 既有 20% guardrail 默认继续适用于同 workload/detail；不同密度需单独预算或明确 supersede。
+- Neck Base 推荐方案 A，只允许显式外部接口边界，内部肩胸/腋窝/臂根不得伪装为 crop。
+- R2 是最后一轮局部肩带集中修复，完成后直接进入 VR-1B 规划。
+
+## 15. 当前结论
 
 R1 的技术结果有效，但代码审计表明其形态参数大多是全局插值、固定半径或未接入 landmark。R2 必须把重点从“增加参数”转为“建立可测量的解剖控制站点、方向性表面和真实肩带拓扑”，同时修复 detail、cache hash、参数双权威和诊断口径。
 

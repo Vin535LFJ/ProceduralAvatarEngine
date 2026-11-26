@@ -141,6 +141,8 @@ struct LandmarkDecl {
 struct LandmarkPoint {
     std::string name;
     Vec3 position{};  // metres, project coordinates
+    ValueConfidence confidence = ValueConfidence::Assumed;
+    std::string source;
 };
 
 struct AnatomicalLandmarks {
@@ -251,9 +253,27 @@ struct JointDeformationRegion {
 };
 
 // ---------------------------------------------------------------------------
-// P1-VR-1A torso/shoulder parameters. These are semantic shape inputs, not a
-// second body definition. Values are normalized unless stated in metres.
+// P1-VR-1A-R2 torso control profile. Coordinates are metres at the reference
+// stature; ResolvedCharacterState scales them for other statures.
 // ---------------------------------------------------------------------------
+struct TorsoAngularControls {
+    Vec3 front{};
+    Vec3 frontLeft{};
+    Vec3 left{};
+    Vec3 backLeft{};
+    Vec3 back{};
+    Vec3 backRight{};
+    Vec3 right{};
+    Vec3 frontRight{};
+};
+
+struct TorsoControlStation {
+    std::string id;
+    float height = 0.0f;  // normalized between lower pelvis and neck-base interface
+    TorsoAngularControls controls{};
+    ValueConfidence confidence = ValueConfidence::Assumed;
+};
+
 struct TorsoShapeParameters {
     float ribcageWidthScale = 1.0f;
     float chestDepthScale = 1.0f;
@@ -262,12 +282,29 @@ struct TorsoShapeParameters {
     float shoulderGirdleMass = 1.0f;
     float axillaDepth = 0.028f;
     float clavicleRelief = 0.010f;
+    float pectoralRelief = 0.010f;
+    float ribcageRelief = 0.005f;
+    float abdominalContour = 0.004f;
+    float obliqueRelief = 0.003f;
+    float thoracicBackContour = 0.006f;
+    float scapularRelief = 0.004f;
+    float trapeziusTransition = 0.005f;
+    std::vector<TorsoControlStation> controlStations;
 };
 
 struct ShoulderShapeParameters {
     float leftWidthScale = 1.0f;
     float rightWidthScale = 1.0f;
     float deltoidVolume = 1.0f;
+    float biacromialWidth = 0.416f;
+    float yokeWidth = 0.432f;
+    float externalWidth = 0.460f;
+    float acromionY = 1.415f;
+    float rootY = 1.330f;
+    float deltoidSurfaceY = 1.350f;
+    float deltoidAnterior = 0.010f;
+    float deltoidLateral = 0.014f;
+    float deltoidPosterior = 0.012f;
 };
 
 struct UpperArmShapeParameters {
@@ -287,7 +324,7 @@ struct AsymmetryParameters {
 // The contract itself.
 // ---------------------------------------------------------------------------
 struct CharacterDefinition {
-    uint32_t schemaVersion = 2;
+    uint32_t schemaVersion = 3;
     uint64_t seed = 20261125;
     ProportionProfile proportions{};
     AnatomicalLandmarks landmarks{};
@@ -304,6 +341,7 @@ struct CharacterDefinition {
 // values recorded in the Canonical Acceptance Sheet v0. Every value carries
 // its confidence; nothing here is a number picked to look right.
 CharacterDefinition defaultCharacterDefinition();
+CharacterDefinition defaultR1CharacterDefinition();
 
 // The full parameter table of the default definition.
 const std::vector<ShapeParameterDecl>& defaultShapeParameterTable();

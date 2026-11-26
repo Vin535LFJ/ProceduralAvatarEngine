@@ -1,0 +1,14 @@
+--------- beginning of system
+--------- beginning of main
+11-26 01:23:52.291 23197 23225 I PAE_RENDER: geometry generated: avatar
+11-26 01:23:56.773 23197 23225 I PAE_RENDER: anatomy preview ready: 36784 tris, 3885 ms
+11-26 01:23:57.134 23197 23225 I PAE_RENDER: P1-VR-1A ready: verts=524 tris=1028 components=1 boundary=0 nonmanifold=0 gen_ms=7.7 cache=0:2:1:1:8849779482416134771:2:4294967295
+11-26 01:23:57.146 23197 23225 I PAE_RENDER: P1-VR-1A-REPORT verts=524 tris=1028 components=1 boundary=0 nonmanifold=0 degenerate=0 badnorm=0 gen_ms=7.651 state_ms=0.210 geometry_ms=1.580 assembly_ms=5.001 weight_ms=0.809 boundaries=4
+11-26 01:23:57.153 23197 23225 I PAE_RENDER: P1-VR-1A-UPLOAD mesh_ms=2.464 wire_ms=6.550 cpu_mesh_bytes=50064 gpu_buffer_bytes=51472
+11-26 01:23:57.153 23197 23225 I PAE_RENDER: P1-VR-1A-MEMORY peak_rss_kb=286576
+11-26 01:23:57.153 23197 23225 I PAE_RENDER: surface ready 1920x1008
+11-26 01:23:57.162 23197 23225 I PAE_RENDER: applied previewMode=2
+11-26 01:23:57.162 23197 23225 I PAE_RENDER: applied cameraPreset=0
+11-26 01:23:57.162 23197 23225 I PAE_RENDER: applied debugView=0
+11-26 01:23:57.177 23197 23225 I PAE_STATS: frames=0 fps=0.0 frame_ms=0.00 draw_calls=2 triangles=1028 buffer_bytes=51472 p50_ms=0.00 p95_ms=0.00 p99_ms=0.00
+11-26 01:23:59.580 23197 23225 I PAE_STATS: frames=120 fps=49.8 frame_ms=20.09 draw_calls=2 triangles=1028 buffer_bytes=51472 p50_ms=19.91 p95_ms=20.63 p99_ms=31.61

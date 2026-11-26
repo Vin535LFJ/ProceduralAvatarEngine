@@ -2,14 +2,15 @@
 
 文件：`docs/phases/P1-visual-recovery/10-vr1a-r2-implementation-whitelist-draft.md`
 关联授权：`09-vr1a-r2-supplemental-authorization-draft.md`
-状态：**`DRAFT — NOT EFFECTIVE`**
+状态：**`EFFECTIVE — BOUND TO APPROVED R2 AUTHORIZATION`**
 
-本白名单只有与正式签发的 R2 补充授权一起使用才有效。当前 R2 生产代码修改保持 `BLOCKED`。
+本白名单与已批准的 `09-vr1a-r2-supplemental-authorization-draft.md` 绑定生效。仅允许 R2 范围；VR-1B 和完整 Canonical 仍未授权。
 
 ## 1. 基线
 
 - 分支：`poc-sm/shape-model-v2`。
 - 提交：`299ae3bf3fcb6d76be563f815aa52380e018d50b`。
+- R2 规划提交：`66a7e5905dde407b46df1e76074cd8b9ea94ab79`。
 - 目标：`07-vr1a-r2-shape-target.md`。
 - 计划：`08-vr1a-r2-anatomical-shape-revision-plan.md`。
 
@@ -20,7 +21,8 @@
 允许：
 
 - `schemaVersion` 升级到 3。
-- 在现有 torso/shoulder/upper-arm 职责内增加 typed control stations 和 directional form 字段。
+- 在现有 torso/shoulder/upper-arm 职责内增加 typed control stations、8 个角向控制和 directional form 字段。
+- 明确 biacromial/shoulder-yoke/final external shoulder 三类宽度及测量区域。
 - 增加 clavicle/acromion/axilla/costal margin 等 landmark 曲线定义。
 - 为显式 landmark override 增加 confidence/provenance；无来源时保持 `Assumed`。
 - 消除 `ShapeParameters` 与 typed 字段的同义双数值权威。
@@ -91,8 +93,8 @@
 
 允许：
 
-- 从标量 radial profile 扩展为多方向闭合截面控制。
-- 增加曲率/特征驱动采样。
+- 从标量 radial profile 扩展为 8 方向闭合截面控制。
+- 使用归一化 `E_position/E_normal/E_curvature` 和带单位的 epsilon 进行曲率/特征驱动采样。
 - 保持 RMF/parallel transport 和 Jacobian 诊断。
 
 禁止：
@@ -105,8 +107,11 @@
 允许：
 
 - 实际接入肩带、腋窝和上臂根 patch。
-- 保存 BoundaryId 与共享 vertex IDs。
-- 事务式组装和边界校验。
+- 按 `BoundaryId + Side + ParameterDirection` 匹配两个 patch 的共享边界。
+- 按 Stable ID/唯一参数映射对齐顶点和循环方向。
+- 校验 C0、Stable ID、T-junction、winding、重复面、退化、sliver、self-intersection 和 Jacobian。
+- 将共享边界映射为同一最终 index，并在任何校验失败时拒绝提交候选 mesh。
+- 事务式组装和真实 continuity 报告。
 
 禁止：
 
@@ -206,6 +211,9 @@
 - landmark→mesh 因果测试。
 - control station 测量。
 - directional basis 局部性。
+- Acromion/Shoulder Joint/Upper-arm Root/Deltoid Surface 四点语义、权重和动作兼容。
+- PatchAssembler 共享边界映射/方向/C0/Stable ID/T-junction/winding/拒绝组装。
+- 自适应细分归一化误差、单位、epsilon 标定场景。
 - detail 0/1/2 不同网格。
 - LOD lineage。
 - BoundaryId seam 与全局二面角分离。
@@ -232,10 +240,16 @@
 
 ## 6. Boundary 与 Neck Interface 规则
 
-- 肩胸、腋窝、上臂根内部边界必须共享 indexed vertices，C0 `<=1e-4 m`。
-- 不得把内部肩胸交界注册为 Preview Crop Boundary。
+- 肩胸、腋窝、上臂根内部边界必须由 PatchAssembler 映射为同一 indexed vertices，C0 `<=1e-4 m`，且不得登记为 Preview Crop Boundary。
 - 若采用方案 A，只允许一个显式 `neck-base-interface` crop loop，并单独报告。
 - 若采用方案 B，最小 neck/trapezius transition 必须在授权中单独勾选；不包含头颈动画。
+
+### 6.1 肩部四类点与动作兼容
+
+- Acromion 是 surface landmark；Shoulder Joint 是 bone joint center；Upper-arm Root 是几何连接点；Deltoid Surface 是软组织外轮廓。
+- 不得把 Acromion 直接绑定为 Shoulder Joint。
+- 必须验证现有 Shoulder Bone、Top-4 权重、左臂抬起和双臂外展下无异常拉扯/塌陷。
+- 需要修改 Skeleton 或 BoneId 时立即停止并重新申请授权。
 
 ## 7. 证据与性能
 
@@ -249,7 +263,7 @@
 - 失败项与未验证项。
 - 分项生成/组装/权重/上传/帧时间/内存。
 
-R2 性能预算按授权 §4.4 执行；未确认前不宣称 20% guardrail PASS。
+R2 性能预算按授权 §4.4 执行。既有 20% guardrail 默认继续适用于同 workload/detail；不同密度必须记录归一化成本，未明确 supersede 前不宣称 guardrail PASS。
 
 ## 8. 允许写入的文档与证据
 
@@ -262,7 +276,8 @@ R2 性能预算按授权 §4.4 执行；未确认前不宣称 20% guardrail PASS
 
 ## 9. 当前状态
 
-- R2 授权草稿：已准备，未生效。
-- R2 白名单草稿：已准备，未生效。
-- 生产代码：本轮未修改。
-- R2：`BLOCKED — WAITING FOR AUTHORIZATION`。
+- R2 授权：`APPROVED FOR P1-VR-1A-R2 ONLY`。
+- R2 白名单：`EFFECTIVE`。
+- 生产代码：R2 实施已解锁，限于本白名单。
+- Git：不自动 commit/push，修改保留在工作区。
+- 视觉 Gate：未授权 AI 自行宣布 PASS。

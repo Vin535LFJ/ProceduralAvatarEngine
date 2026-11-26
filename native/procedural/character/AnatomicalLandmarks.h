@@ -22,6 +22,27 @@ enum class LandmarkId : uint16_t {
     RightAxilla,
     LeftElbow,
     RightElbow,
+    IliacCrestCenter,
+    Umbilicus,
+    LowerRibCageCenter,
+    UpperRibCageCenter,
+    JugularNotch,
+    SternalAngle,
+    LeftClavicleMedial,
+    RightClavicleMedial,
+    LeftClavicleLateral,
+    RightClavicleLateral,
+    LeftScapulaMedial,
+    RightScapulaMedial,
+    LeftScapulaLateral,
+    RightScapulaLateral,
+    LeftTrapezius,
+    RightTrapezius,
+    LeftUpperArmRoot,
+    RightUpperArmRoot,
+    LeftDeltoidSurface,
+    RightDeltoidSurface,
+    NeckBaseInterface,
     Count
 };
 
@@ -33,6 +54,7 @@ struct LandmarkPoint {
     Vec3 position{};
     LandmarkSide side = LandmarkSide::Center;
     shape::v2::ValueConfidence confidence = shape::v2::ValueConfidence::Derived;
+    std::string provenance;
     uint16_t boneId = BoneCount;
 };
 

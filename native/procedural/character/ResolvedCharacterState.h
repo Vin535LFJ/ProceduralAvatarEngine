@@ -14,6 +14,7 @@ namespace pae::character {
 struct ResolvedCharacterState {
     Anthropometry anthropometry;
     AnatomicalLandmarkSet landmarks;
+    std::vector<shape::v2::TorsoControlStation> torsoStations;
     std::vector<RegionInfo> regions;
     BodyJoints joints;
     Skeleton skeleton;

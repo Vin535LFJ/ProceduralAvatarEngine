@@ -1,3 +1,13 @@
+b8bdc875565e809989ca713fe10232d380d0a59b671cd902f03f70ad3a91da6e *docs/phases/P1-visual-recovery/evidence/vr1a-r2/audit-command.txt
+1d7a530afc078973155e6fca56e0e13a7b3f09159f37521fa5c356afdb3af6ad *docs/phases/P1-visual-recovery/evidence/vr1a-r2/audit-environment.txt
+e7bea60afb1127b8f623097944ed43189d6f0e08c84f1839bc36ca5182cb0d51 *docs/phases/P1-visual-recovery/evidence/vr1a-r2/audit-git-state.txt
 90af82d9890a8a1fd06e2c9a8be1a3dd6c2167e15029c19edf08f1542a02401c *docs/phases/P1-visual-recovery/evidence/vr1a-r2/audit_probe.cpp
-00a9314f0c840d4b737f002b4b19b32136b6c6e4e10608d44e03d6466ccfaabc *docs/phases/P1-visual-recovery/evidence/vr1a-r2/audit-command.txt
+15e5957954fc69cc9754b49d9ce9d05cd00bb27020a925120aaf130e8a8baded *docs/phases/P1-visual-recovery/evidence/vr1a-r2/cmake-build-pae-core.log
+4dc26b8f5387b8253caec8ab3de315a925953717aa06cd1b93f9030f0ff66493 *docs/phases/P1-visual-recovery/evidence/vr1a-r2/cmake-configure.log
+ccb4c5ca633f99e07e6c81fb4347f2ca037064d3e9d26da187219b2bddc71c87 *docs/phases/P1-visual-recovery/evidence/vr1a-r2/compiler-version.txt
+aaf77b5aa938c4b065f9bb33db080398bbee42efef3e5feb25025549178ad7fc *docs/phases/P1-visual-recovery/evidence/vr1a-r2/gradle-assemble-r2-first-visual.log
+0bcc0c7c928447be6949c57e6f0dfe1c4d31626c1953021a9acca278de8236e8 *docs/phases/P1-visual-recovery/evidence/vr1a-r2/libpae_core.sha256.txt
+c90f59ca485550fd32196e4e72ea650acbf86fddb629b8091a0909a5e1412566 *docs/phases/P1-visual-recovery/evidence/vr1a-r2/probe-compile-run.log
+c076b731e0abdbb2f8575ed4f3d3d8fcd918624e2aedc6a989464c3edf94fb32 *docs/phases/P1-visual-recovery/evidence/vr1a-r2/r2-authorization-baseline.txt
+fce94103020d23e9eec8db9b6ceddced58bbd5ed86885a2f8e3d0ea3f8321f6c *docs/phases/P1-visual-recovery/evidence/vr1a-r2/r2-design-baseline.sha256
 406def6a757fbb589e64ddf407e7c9425ab4771cef3c2b7cf907204ec9627f70 *docs/phases/P1-visual-recovery/evidence/vr1a-r2-code-audit-probe.log

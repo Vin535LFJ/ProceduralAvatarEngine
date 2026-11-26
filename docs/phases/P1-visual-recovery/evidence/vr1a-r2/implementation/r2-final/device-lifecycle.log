@@ -1,0 +1,19 @@
+--------- beginning of system
+--------- beginning of main
+11-26 01:47:48.668 24715 24743 I PAE_STATS: frames=7200 fps=47.3 frame_ms=21.14 draw_calls=2 triangles=3520 buffer_bytes=172888 p50_ms=20.91 p95_ms=22.93 p99_ms=23.05
+11-26 01:47:51.182 24715 24743 I PAE_STATS: frames=7320 fps=47.8 frame_ms=20.93 draw_calls=2 triangles=3520 buffer_bytes=172888 p50_ms=20.89 p95_ms=22.80 p99_ms=23.02
+11-26 01:47:53.700 24715 24743 I PAE_STATS: frames=7440 fps=47.3 frame_ms=21.13 draw_calls=2 triangles=3520 buffer_bytes=172888 p50_ms=20.90 p95_ms=22.91 p99_ms=23.13
+11-26 01:47:53.844 24715 24715 I PAE_UI  : debug extras: anatomy=false preset=0 view=0 outfit=-1
+11-26 01:47:53.899 24715 24743 I PAE_RENDER: P1-VR-1A ready: verts=955 tris=1864 components=1 boundary=32 nonmanifold=0 gen_ms=38.1 cache=0:3:0:1:7791505080318327151:2:4294967295
+11-26 01:47:53.917 24715 24743 I PAE_RENDER: quality=Low P1-VR-1A triangles=1864 vertices=955
+11-26 01:47:53.929 24715 24715 I PAE_UI  : debug extras: anatomy=false preset=0 view=0 outfit=-1
+11-26 01:47:53.937 24715 24743 I PAE_RENDER: applied previewMode=2
+11-26 01:47:53.937 24715 24743 I PAE_RENDER: applied cameraPreset=0
+11-26 01:47:53.937 24715 24743 I PAE_RENDER: applied debugView=0
+11-26 01:47:54.010 24715 24743 I PAE_RENDER: P1-VR-1A ready: verts=1859 tris=3648 components=1 boundary=32 nonmanifold=0 gen_ms=54.5 cache=0:3:2:1:7791505080318327151:2:4294967295
+11-26 01:47:54.043 24715 24743 I PAE_RENDER: quality=High P1-VR-1A triangles=3648 vertices=1859
+11-26 01:47:54.076 24715 24743 I PAE_RENDER: applied previewMode=2
+11-26 01:47:54.076 24715 24743 I PAE_RENDER: applied cameraPreset=0
+11-26 01:47:54.076 24715 24743 I PAE_RENDER: applied debugView=0
+11-26 01:47:54.557 24715 24715 I PAE_UI  : debug extras: anatomy=false preset=0 view=0 outfit=-1
+11-26 01:47:54.630 24715 24743 I PAE_RENDER: geometry cache hit: avatar

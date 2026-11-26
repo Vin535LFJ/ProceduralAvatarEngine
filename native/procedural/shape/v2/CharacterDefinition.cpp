@@ -11,6 +11,39 @@ namespace {
 
 constexpr float kPi = 3.14159265358979323846f;
 
+std::vector<TorsoControlStation> defaultTorsoControlStations() {
+    auto station = [](const char* id, float height, float centerZ, float lateralX,
+                      float frontZ, float backZ, float diagonalX,
+                      float frontDiagonalZ, float backDiagonalZ) {
+        TorsoControlStation value;
+        value.id = id;
+        value.height = height;
+        value.controls.left = {lateralX, 0.0f, centerZ};
+        value.controls.right = {-lateralX, 0.0f, centerZ};
+        value.controls.front = {0.0f, 0.0f, frontZ};
+        value.controls.back = {0.0f, 0.0f, backZ};
+        value.controls.frontLeft = {diagonalX, 0.0f, frontDiagonalZ};
+        value.controls.frontRight = {-diagonalX, 0.0f, frontDiagonalZ};
+        value.controls.backLeft = {diagonalX, 0.0f, backDiagonalZ};
+        value.controls.backRight = {-diagonalX, 0.0f, backDiagonalZ};
+        return value;
+    };
+    return {
+        station("upper-pelvis", 0.00f, 0.000f, 0.166f, 0.128f, -0.122f, 0.150f, 0.098f, -0.092f),
+        station("iliac-crest", 0.16f, -0.002f, 0.174f, 0.126f, -0.122f, 0.156f, 0.096f, -0.092f),
+        station("lower-abdomen", 0.32f, 0.004f, 0.148f, 0.114f, -0.104f, 0.132f, 0.088f, -0.078f),
+        station("waist", 0.44f, 0.002f, 0.134f, 0.108f, -0.096f, 0.118f, 0.082f, -0.070f),
+        station("umbilicus", 0.50f, 0.006f, 0.140f, 0.114f, -0.100f, 0.124f, 0.086f, -0.074f),
+        station("costal-margin", 0.62f, 0.004f, 0.154f, 0.122f, -0.108f, 0.136f, 0.092f, -0.080f),
+        station("lower-rib-cage", 0.72f, 0.006f, 0.168f, 0.137f, -0.116f, 0.150f, 0.104f, -0.088f),
+        station("chest", 0.80f, 0.012f, 0.174f, 0.142f, -0.118f, 0.156f, 0.112f, -0.098f),
+        station("upper-rib-cage", 0.88f, 0.008f, 0.170f, 0.136f, -0.114f, 0.152f, 0.106f, -0.094f),
+        station("shoulder-girdle", 0.90f, 0.000f, 0.216f, 0.098f, -0.098f, 0.190f, 0.072f, -0.074f),
+        station("clavicle-level", 0.94f, 0.004f, 0.196f, 0.096f, -0.086f, 0.174f, 0.070f, -0.064f),
+        station("neck-base-interface", 1.00f, 0.000f, 0.060f, 0.052f, -0.052f, 0.045f, 0.040f, -0.040f),
+    };
+}
+
 } // namespace
 
 const char* confidenceName(ValueConfidence c) {
@@ -84,6 +117,23 @@ const std::vector<LandmarkDecl>& standardLandmarkCatalogue() {
         {"linea-alba",           LandmarkKind::Curve,    false, ValueConfidence::Measured},
         {"jugular-notch-to-sternal-angle", LandmarkKind::Curve, false, ValueConfidence::Measured},
         {"midline",              LandmarkKind::Curve,    false, ValueConfidence::Measured},
+        {"lower-rib-cage",       LandmarkKind::Surface,  false, ValueConfidence::Assumed},
+        {"upper-rib-cage",       LandmarkKind::Surface,  false, ValueConfidence::Assumed},
+        {"left-clavicle-medial", LandmarkKind::Surface,  false, ValueConfidence::Assumed},
+        {"right-clavicle-medial",LandmarkKind::Surface,  false, ValueConfidence::Assumed},
+        {"left-clavicle-lateral",LandmarkKind::Surface,  false, ValueConfidence::Assumed},
+        {"right-clavicle-lateral",LandmarkKind::Surface, false, ValueConfidence::Assumed},
+        {"left-scapula-medial",  LandmarkKind::Surface,  false, ValueConfidence::Assumed},
+        {"right-scapula-medial", LandmarkKind::Surface,  false, ValueConfidence::Assumed},
+        {"left-scapula-lateral", LandmarkKind::Surface,  false, ValueConfidence::Assumed},
+        {"right-scapula-lateral",LandmarkKind::Surface,  false, ValueConfidence::Assumed},
+        {"left-trapezius",       LandmarkKind::Surface,  false, ValueConfidence::Assumed},
+        {"right-trapezius",      LandmarkKind::Surface,  false, ValueConfidence::Assumed},
+        {"left-upper-arm-root",  LandmarkKind::Surface,  false, ValueConfidence::Assumed},
+        {"right-upper-arm-root", LandmarkKind::Surface,  false, ValueConfidence::Assumed},
+        {"left-deltoid-surface", LandmarkKind::Surface,  false, ValueConfidence::Assumed},
+        {"right-deltoid-surface",LandmarkKind::Surface,  false, ValueConfidence::Assumed},
+        {"neck-base-interface",  LandmarkKind::Curve,    false, ValueConfidence::Assumed},
     };
     return kCatalogue;
 }
@@ -148,48 +198,48 @@ const std::vector<ShapeParameterDecl>& defaultShapeParameterTable() {
         {"thorax-ribcage-volume", "ratio",
          "Scales the rib-cage volume of the thorax guide, widening and deepening the chest.",
          0.85f, 1.15f, 1.00f,
-         {RegionId::Thorax}, ParameterStatus::Wired, ValueConfidence::Assumed},
+         {RegionId::Thorax}, ParameterStatus::DeclaredOnly, ValueConfidence::Assumed},
 
         {"thorax-depth-ratio", "ratio",
          "Scales chest depth relative to chest width.",
          0.85f, 1.15f, 1.00f,
-         {RegionId::Thorax}, ParameterStatus::Wired, ValueConfidence::Assumed},
+         {RegionId::Thorax}, ParameterStatus::DeclaredOnly, ValueConfidence::Assumed},
 
         {"abdomen-volume", "ratio",
          "Scales the abdominal section volume between the costal margin and the iliac crest.",
          0.85f, 1.15f, 1.00f,
-         {RegionId::Abdomen}, ParameterStatus::Wired, ValueConfidence::Assumed},
+         {RegionId::Abdomen}, ParameterStatus::DeclaredOnly, ValueConfidence::Assumed},
 
         {"waist-pinch", "ratio",
          "Controls how strongly the waist narrows between the rib cage and the pelvis.",
          0.0f, 1.0f, 0.5f,
-         {RegionId::Abdomen}, ParameterStatus::Wired, ValueConfidence::Assumed},
+         {RegionId::Abdomen}, ParameterStatus::DeclaredOnly, ValueConfidence::Assumed},
 
         {"pelvis-volume", "ratio",
          "Scales the pelvic section volume at the hip breadth.",
          0.85f, 1.15f, 1.00f,
-         {RegionId::Pelvis}, ParameterStatus::Wired, ValueConfidence::Assumed},
+         {RegionId::Pelvis}, ParameterStatus::DeclaredOnly, ValueConfidence::Assumed},
 
         {"shoulder-girdle-mass", "ratio",
          "Scales the shoulder-girdle mass that forms the deltoid and clavicle region above the thorax.",
          0.85f, 1.15f, 1.00f,
-         {RegionId::ShoulderGirdle}, ParameterStatus::Wired, ValueConfidence::Assumed},
+         {RegionId::ShoulderGirdle}, ParameterStatus::DeclaredOnly, ValueConfidence::Assumed},
 
         {"shoulder-girdle-height", "m",
          "Sets the vertical extent over which the shoulder girdle rises above the thorax.",
          0.03f, 0.14f, 0.075f,
-         {RegionId::ShoulderGirdle}, ParameterStatus::Wired, ValueConfidence::Assumed},
+         {RegionId::ShoulderGirdle}, ParameterStatus::DeclaredOnly, ValueConfidence::Assumed},
 
         {"axilla-depth", "m",
          "Depth of the concave armpit constraint carved into the shared envelope.",
          0.0f, 0.06f, 0.028f,
-         {RegionId::Axilla}, ParameterStatus::Wired, ValueConfidence::Assumed},
+         {RegionId::Axilla}, ParameterStatus::DeclaredOnly, ValueConfidence::Assumed},
 
         {"stylization", "ratio",
          "Global exaggeration of the section shape away from a pure ellipse.",
          0.0f, 1.0f, 0.25f,
          {RegionId::Thorax, RegionId::Abdomen, RegionId::Pelvis},
-         ParameterStatus::Wired, ValueConfidence::Assumed},
+         ParameterStatus::DeclaredOnly, ValueConfidence::Assumed},
 
         {"spine-curve", "m",
          "Lateral (sagittal) offset of the body centreline at the top of the thorax.",
@@ -204,6 +254,7 @@ CharacterDefinition defaultCharacterDefinition() {
     CharacterDefinition def;
 
     def.proportions = ProportionProfile{};
+    def.torso.controlStations = defaultTorsoControlStations();
 
     def.landmarks.catalogue = standardLandmarkCatalogue();
 
@@ -240,6 +291,13 @@ CharacterDefinition defaultCharacterDefinition() {
     };
 
     return def;
+}
+
+CharacterDefinition defaultR1CharacterDefinition() {
+    CharacterDefinition definition = defaultCharacterDefinition();
+    definition.schemaVersion = 2;
+    definition.torso.controlStations.clear();
+    return definition;
 }
 
 } // namespace v2

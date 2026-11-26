@@ -1,6 +1,7 @@
 #pragma once
 
 #include "core/math/Math.h"
+#include "procedural/MeshData.h"
 
 #include <cstdint>
 #include <vector>
@@ -25,10 +26,13 @@ struct LodMap {
     std::vector<uint64_t> fromStableIds;
     std::vector<uint64_t> toStableIds;
     std::vector<uint32_t> toIndices;
+    std::vector<RefinementVertex> vertices;
 };
 
 LodMap buildLodMap(const std::vector<uint64_t>& fromStableIds,
                    const std::vector<uint64_t>& toStableIds,
+                   uint32_t fromLevel, uint32_t toLevel);
+LodMap buildLodMap(const MeshData& fromMesh, const MeshData& toMesh,
                    uint32_t fromLevel, uint32_t toLevel);
 
 } // namespace pae::character
