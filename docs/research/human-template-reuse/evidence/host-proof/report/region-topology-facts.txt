@@ -1,0 +1,33 @@
+﻿OBJECTIVE REGION TOPOLOGY FACTS (region_topology_facts.py, numpy 2.5.4; metres)
+body vertices 13380, body quads 13378
+
+[1] local mesh density around joints: quads with at least one vertex within 40 mm of the joint centre
+    upperarm01.L____head   joint [0.186 0.503 0.015]  quads within 40 mm: 0
+    lowerarm01.L____head   joint [0.328 0.336 0.033]  quads within 40 mm: 55
+    wrist.L____head        joint [0.432 0.24  0.177]  quads within 40 mm: 159
+    upperleg01.L____head   joint [ 0.116 -0.003  0.015]  quads within 40 mm: 0
+    lowerleg01.L____head   joint [ 0.166 -0.416  0.028]  quads within 40 mm: 13
+    foot.L____head         joint [ 0.216 -0.752  0.016]  quads within 40 mm: 44
+    neck01____head         joint [-0.005  0.608  0.026]  quads within 40 mm: 4
+    head____head           joint [0.015 0.679 0.02 ]  quads within 40 mm: 69
+    eye.L____head          joint [0.027 0.719 0.118]  quads within 40 mm: 767
+
+[2] vertices per digit (nearest digit bone; vertices within 3 cm of the digit skeleton)
+    finger.L: 15 bones; finger1=276, finger2=324, finger3=321, finger4=317, finger5=337; vertices in the box 1575
+    toe.L: 14 bones; toe1=154, toe2=175, toe3=165, toe4=160, toe5=193; vertices in the box 847
+
+[3] face landmarks
+    vertices within 25 mm of eye.L____head [0.027 0.719 0.118]: 380
+    vertices within 40 mm of eye.L____head [0.027 0.719 0.118]: 727
+    vertices within 30 mm of jaw____head [0.    0.684 0.065]: 55
+
+[4] MakeHuman weights versus the non-facial skeleton
+    weight groups 139, of which facial/breast groups 61
+    body vertices with ANY weight: 13380 of 13380
+    body vertices with NO non-facial weight (unweighted once facial bones are dropped): 175
+      bbox x -0.025..0.025  y 0.661..0.687  z 0.138..0.160 m, quads touching them 226
+
+[5] OBJ groups
+    faces per group class: {np.str_('body'): 13378, 'helper': 4358, 'joint': 750}
+    helper groups: genital, hair, l-eye, l-eyelashes-1, l-eyelashes-2, lower-teeth, r-eye, r-eyelashes-1, r-eyelashes-2, skirt, tights, tongue, upper-teeth
+    joint groups: 125

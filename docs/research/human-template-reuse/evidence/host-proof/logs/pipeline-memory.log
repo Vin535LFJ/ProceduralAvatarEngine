@@ -1,0 +1,4 @@
+chain: A (pae_ht_pipeline, full run incl. 84 images and the template write -> read -> write round trip)
+wall_seconds=13.861104 cpu_seconds=11.359 peak_working_set_bytes=69021696 peak_working_set_mib=65.82
+measured_by=powershell_stopwatch_and_get-process_sampling_30ms
+note: host tool memory only. This is NOT the Android runtime footprint of the template.

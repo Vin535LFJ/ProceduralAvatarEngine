@@ -1,0 +1,14 @@
+﻿-- Configuring done
+-- Generating done
+-- Build files have been written to: E:/AI-Tools/ProceduralAvatarEngine-poc-sm/build-host/human-template-poc
+[35m[1mConsolidate compiler generated dependencies of target pae_evidence[0m
+[ 21%] Built target pae_evidence
+[35m[1mConsolidate compiler generated dependencies of target pae_ht[0m
+[ 78%] Built target pae_ht
+[35m[1mConsolidate compiler generated dependencies of target pae_ht_pipeline[0m
+[35m[1mConsolidate compiler generated dependencies of target pae_ht_tests[0m
+[ 84%] [32mBuilding CXX object CMakeFiles/pae_ht_pipeline.dir/src/pipeline_main.cpp.obj[0m
+[ 94%] Built target pae_ht_tests
+[100%] [32m[1mLinking CXX executable pae_ht_pipeline.exe[0m
+[100%] Built target pae_ht_pipeline
+built: E:\AI-Tools\ProceduralAvatarEngine-poc-sm\build-host\human-template-poc\pae_ht_tests.exe, E:\AI-Tools\ProceduralAvatarEngine-poc-sm\build-host\human-template-poc\pae_ht_pipeline.exe
