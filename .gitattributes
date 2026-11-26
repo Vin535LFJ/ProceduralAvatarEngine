@@ -18,3 +18,14 @@ docs/phases/anatomy-driven-geometry-poc/08-dec05-visual-direction-review/*.txt t
 docs/phases/anatomy-driven-geometry-poc/09-blocker-closure-auth08/*.md text eol=lf
 docs/phases/anatomy-driven-geometry-poc/09-blocker-closure-auth08/*.txt text eol=lf
 docs/phases/anatomy-driven-geometry-poc/10-decision-records/*.md text eol=lf
+
+# P1-VR-ARCH-1 host-only tools and evidence (2026-11-26).
+#
+# docs/research/human-template-reuse/evidence/host-proof/SHA256SUMS.txt and its
+# tooling-manifest.md record SHA-256 over exact bytes (logs, reports and PNGs).
+# `-text` switches end-of-line conversion off in both directions for these two
+# new folders only, so the recorded hashes verify on every platform and no
+# pre-existing file changes its checkout behaviour. The folder mixes text and
+# PNG, which is why it uses `-text` rather than the `text eol=lf` used above.
+tools/human-template-poc/** -text
+docs/research/human-template-reuse/evidence/host-proof/** -text
