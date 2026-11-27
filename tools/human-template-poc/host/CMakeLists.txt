@@ -110,6 +110,36 @@ if(PAE_REPO)
   target_include_directories(pae_wp3_tests PRIVATE "${PAE_NATIVE}")
   target_link_libraries(pae_wp3_tests PRIVATE pae_ht)
   add_test(NAME pae_wp3_tests COMMAND pae_wp3_tests)
+
+  # WP4-HOST-RIG-01: PAE-owned Rig V2 + joint resolver + weights + CPU LBS.
+  # Reuses PAE's topology / self-intersection checkers read-only (pae_evidence
+  # pattern); no native/ source is modified, no Android path is touched.
+  set(PAE_WP4_SOURCES
+    src/wp4_rig.cpp
+    src/wp4_skin.cpp
+    src/wp4_weights.cpp
+    src/wp4_poses.cpp
+    src/wp4_quality.cpp
+    src/wp3_quality.cpp
+    ${PAE_WP3_CHECKER_SOURCES}
+  )
+  add_executable(pae_wp4_experiment
+    src/wp4_main.cpp
+    ${PAE_WP4_SOURCES}
+  )
+  target_include_directories(pae_wp4_experiment PRIVATE "${PAE_NATIVE}")
+  target_link_libraries(pae_wp4_experiment PRIVATE pae_ht)
+
+  add_executable(pae_wp4_tests
+    src/wp4_tests.cpp
+    src/wp4_rig.cpp
+    src/wp4_skin.cpp
+    src/wp4_weights.cpp
+    src/wp4_quality.cpp
+  )
+  target_include_directories(pae_wp4_tests PRIVATE "${PAE_NATIVE}")
+  target_link_libraries(pae_wp4_tests PRIVATE pae_ht)
+  add_test(NAME pae_wp4_tests COMMAND pae_wp4_tests)
 else()
   message(STATUS "PAE_REPO not set: PNG output and PAE clay cross-check are disabled")
 endif()
