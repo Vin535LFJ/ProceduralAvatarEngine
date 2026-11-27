@@ -81,6 +81,35 @@ if(PAE_REPO)
   )
   target_include_directories(pae_wp3_shape_study PRIVATE "${PAE_NATIVE}")
   target_link_libraries(pae_wp3_shape_study PRIVATE pae_ht)
+
+  # VR-1B-WP3-HOST-01: full parameterization experiment. Reuses PAE's own
+  # topology / self-intersection checkers read-only (compiled directly, the
+  # pae_evidence pattern); no native/ source is modified.
+  set(PAE_WP3_CHECKER_SOURCES
+    "${PAE_NATIVE}/procedural/MeshTopology.cpp"
+    "${PAE_NATIVE}/procedural/humanoid/canonical/CanonicalTopology.cpp"
+  )
+  add_executable(pae_wp3_experiment
+    src/wp3_experiment_main.cpp
+    src/wp3_measure.cpp
+    src/wp3_quality.cpp
+    "${PAE_NATIVE}/procedural/human_template/PAEHumanTemplateFormat.cpp"
+    "${PAE_NATIVE}/procedural/human_template/HumanTemplateLoader.cpp"
+    ${PAE_WP3_CHECKER_SOURCES}
+  )
+  target_include_directories(pae_wp3_experiment PRIVATE "${PAE_NATIVE}")
+  target_link_libraries(pae_wp3_experiment PRIVATE pae_ht)
+  if(WIN32)
+    target_link_libraries(pae_wp3_experiment PRIVATE psapi)
+  endif()
+
+  add_executable(pae_wp3_tests
+    src/wp3_tests.cpp
+    src/wp3_measure.cpp
+  )
+  target_include_directories(pae_wp3_tests PRIVATE "${PAE_NATIVE}")
+  target_link_libraries(pae_wp3_tests PRIVATE pae_ht)
+  add_test(NAME pae_wp3_tests COMMAND pae_wp3_tests)
 else()
   message(STATUS "PAE_REPO not set: PNG output and PAE clay cross-check are disabled")
 endif()
