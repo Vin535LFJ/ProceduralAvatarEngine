@@ -1,7 +1,8 @@
 # PAE 仓库收敛执行清单（PAE-REPO-CONSOLIDATION-01）
 
 > 记录 2026-11-26 本轮**实际执行过**的动作，以及**待负责人批准**的操作。
-> 本轮没有删除任何目录或分支，没有 merge / cherry-pick / rebase / reset / clean，没有修改 origin，没有 commit / push。
+> 2026-11-26 当轮没有删除任何目录或分支，没有 merge / cherry-pick / rebase / reset / clean，没有修改 origin，没有 commit / push。
+> **2026-11-27 更新**：按负责人指示，B2–B4 已执行（文档入库并推送），见 [03-remote-sync-note.md](03-remote-sync-note.md)。其余各项仍未执行。
 > 评审结论见 [00-consolidation-review.md](00-consolidation-review.md)。
 
 ## A. 已执行（全部可回退）
@@ -18,22 +19,28 @@
 | 20:02–20:05 | 归档收尾 | 修正汇总格式、写入干净的 bundle verify 日志、追加远端事实与审计证据、重算 `SHA256SUMS.txt`（自校验 0 不符） | `inventory/FINALIZATION-NOTES.txt` |
 | 20:15 | 写入归档 `README.txt` 并最终重算清单 | 2,859 个文件 / 761.8 MB；`SHA256SUMS.txt` 2,858 条，自校验 0 不符 | `SHA256SUMS.txt` |
 | 20:06–20:10 | 新建本目录三份文档 | 在 poc-sm 中为未跟踪状态 | 本文件 |
+| 11-27 09:50 | 同步前核对 | 5 条有上游的分支与远端逐 SHA 一致；两个工作区已跟踪改动为空；本地没有未提交的代码 | [03-remote-sync-note.md](03-remote-sync-note.md) §2 |
+| 11-27 09:51 | 文档入库（B2 + B3） | 提交 `6df3872`：交接说明 1 份 + 治理文档 3 份，4 个文件 +553 行；暂存内容与工作区逐字节一致 | `git show --stat 6df3872` |
+| 11-27 | 新增本说明所在的 `03`，并更新 `00`、`01` 的状态 | 紧随 `6df3872` 的一笔 `docs:` 提交 | `git log --oneline -3` |
+| 11-27 | 推送（B4） | `git push origin poc-sm/shape-model-v2`；结果以 `ls-remote` 核对为准 | [03-remote-sync-note.md](03-remote-sync-note.md) §3 |
 
 验证性构建只写入了 poc-sm 里被 Git 忽略的 `build-host/human-template-poc/`，其余输出都在仓库外的临时目录。两个工作区的已跟踪文件在整轮结束后仍是零改动。
 
-## B. 待负责人批准（均未执行）
+## B. 待负责人批准
+
+（B2–B4 已于 2026-11-27 执行；其余均未执行。）
 
 | # | 操作 | 建议 | 批准后的做法 | 影响面 |
 |---|---|---|---|---|
 | B1 | 迁入 `bf7f854` 的 8 行 AUTH-08 执行记录 | 建议执行 | 在 poc-sm 上 `git cherry-pick -x bf7f854`（或 `git apply` 同一补丁），单独一笔提交 | 1 个文档，+8 行；预检已通过 |
-| B2 | `07-handover-note.md` 加入 Git | 建议执行 | `git add docs/research/human-template-reuse/07-handover-note.md`，单独一笔 `docs:` 提交 | 1 个文档 |
-| B3 | 本目录三份治理文档入库 | 建议执行，可与 B2 合为一笔 | `git add docs/operations/repository-consolidation/` | 3 个文档 |
-| B4 | commit / push 上述提交 | 待 B1–B3 | 推送到 `origin/poc-sm/shape-model-v2` | 快进 |
+| B2 | `07-handover-note.md` 加入 Git | **已执行** | 与 B3 合为提交 `6df3872` | 1 个文档 |
+| B3 | 本目录治理文档入库 | **已执行** | 提交 `6df3872` | 3 个文档 |
+| B4 | commit / push 上述提交 | **已执行** | 推送到 `origin/poc-sm/shape-model-v2` | 快进 |
 | B5 | 主仓目录处置方式 | 见下 | — | — |
 | B6 | 删除远端 `m11-anatomy-visual-rebuild` | 条件满足后可删 | 先确认无 open PR、无其他 Agent 使用，再 `git push origin --delete m11-anatomy-visual-rebuild` | 独有提交 0，已在 bundle |
 | B7 | 删除远端 `m12-unified-human-geometry` | 条件满足后可删 | 同上 | 与 `main` 同一提交 |
 | B8 | 删除本地分支 `m13-procedural-retopology`、`poc-a-g2-fair-comparison` | 可选 | `git branch -d`（两者均无上游、独有提交 0） | 仅本地 |
-| B9 | 桌面副本 `07-handover-note.md` 移入回收站 | B2 入库后再做 | 走系统回收站，不直接删除 | 1 个展示副本 |
+| B9 | 桌面副本 `07-handover-note.md` 移入回收站 | 原件已入库，可以执行 | 走系统回收站，不直接删除 | 1 个展示副本 |
 | B10 | 签署 ADR-014 | 需负责人决定 | 修订 `project-charter.md`、ADR-004、product-scope | 治理文件 |
 | B11 | Rig / Weights 两个文件的许可 | 需负责人或法务决定 | 确认许可，或决定由 PAE 自建 Rig V2 与权重 | 运行时路线 |
 | B12 | 人眼视觉验收 | 需负责人亲自看 | `evidence/host-proof/images/` 的 `closeup-*.png`、`pose-finger-curl-*`，`images-proof-b/` 17 张 | 验收记录 |

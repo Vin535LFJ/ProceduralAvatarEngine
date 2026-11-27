@@ -1,6 +1,7 @@
 # PAE 仓库收敛评审（PAE-REPO-CONSOLIDATION-01）
 
-> 状态：**只读审计、完整备份、Host proof 重建验证已完成**。目录归档、分支删除、提交迁移、commit/push **均未执行**，等负责人批准。
+> 状态：**只读审计、完整备份、Host proof 重建验证已完成**。目录归档、分支删除、提交迁移**均未执行**，等负责人批准。
+> **2026-11-27 更新**：交接说明与治理文档已经入库并推送到 `poc-sm/shape-model-v2`（提交 `6df3872` 及其后一笔），见 [03-remote-sync-note.md](03-remote-sync-note.md)。下文凡写“未入库”“未 push”之处，均指 2026-11-26 评审当时的状态。
 > 生成时间：2026-11-26 20:10 +08:00
 > 仓库：`https://github.com/Vin535LFJ/ProceduralAvatarEngine`（默认分支 `main`，tag 数 0）
 > 配套文件：[01-execution-checklist.md](01-execution-checklist.md)（实际执行记录与待批操作）、[02-local-workspace-inventory.md](02-local-workspace-inventory.md)（目录盘点表）
@@ -10,7 +11,7 @@
 
 | 状态项 | 结论 | 依据 |
 |---|---|---|
-| `WORKSPACE_CONSOLIDATION` | **PARTIAL** | 唯一活动工作区已确认，10 项条件全部成立；但 feature 有 8 行独有记录未迁入，交接说明未入库 |
+| `WORKSPACE_CONSOLIDATION` | **PARTIAL** | 唯一活动工作区已确认，10 项条件全部成立；交接说明与治理文档已入库；但 feature 有 8 行独有记录未迁入 |
 | `LOCAL_CLONE_ARCHIVE` | **NOT READY** | 主仓目录持有两个工作区共用的 `.git`，移走或删除会让 poc-sm 工作树失效 |
 | `REMOTE_BRANCH_PRUNE` | **NOT READY** | m11/m12 的技术条件满足；是否被 PR 或其他 Agent 占用未核实，且需批准 |
 | `FEATURE_COMMIT_MIGRATION` | **REQUIRED** | 仅 1 笔：`bf7f854`，1 个文件 +8 行，可干净落到 poc-sm |
@@ -193,7 +194,7 @@ A 类 1 笔，B 类 8 笔，补丁等价 2 笔；C、D、E 类均为 0。
 | 原件 | `E:\AI-Tools\ProceduralAvatarEngine-poc-sm\docs\research\human-template-reuse\07-handover-note.md`，存在，未跟踪 |
 | 副本 | `C:\Users\Giant\Desktop\GITCODE\Procedural Avatar Engine\07-handover-note.md`，存在 |
 | SHA-256 | 两份均为 `8bfa6e4d847ed97db056a06763740ac85344248d91e76b5a7c54b03c34be959a`，一致 |
-| 处理 | 原件保留并已备份；副本未删除；是否入库待批准 |
+| 处理 | 原件保留并已备份，已于 2026-11-27 入库（提交 `6df3872`）；桌面副本未删除，是否移入回收站待批准 |
 
 ## 11. ADR-014 状态
 
@@ -225,7 +226,7 @@ A 类 1 笔，B 类 8 笔，补丁等价 2 笔；C、D、E 类均为 0。
 ## 15. 未完成事项
 
 - `bf7f854` 的 8 行未迁入 poc-sm。
-- `07-handover-note.md` 和本目录下的三份文档都未入库。
+- 交接说明与本目录文档已入库（2026-11-27）；主仓根目录的展示副本未清理。
 - 主仓目录未归档（见 §9）。
 - 远端 m11 / m12 未删除；open PR 与其他 Agent 占用情况未核实。
 - ADR-014 未签署；Rig / Weights 许可未确认；人眼验收未做。
@@ -240,7 +241,7 @@ A 类 1 笔，B 类 8 笔，补丁等价 2 笔；C、D、E 类均为 0。
 | 误动主仓目录 | 会让 poc-sm 工作树失效 | 本轮未动；执行任何目录操作前先确认 §9 的选择 |
 | 网络抖动 | 本轮 `ls-remote` 失败过一次 | 远端事实已在归档 `inventory/remote-refs.txt` 留档 |
 
-本轮没有不可逆操作：没有删除任何目录或分支，没有 merge、cherry-pick、rebase、reset、clean，没有修改 origin，没有 commit/push。
+2026-11-26 当轮没有不可逆操作：没有删除任何目录或分支，没有 merge、cherry-pick、rebase、reset、clean，没有修改 origin，没有 commit/push。2026-11-27 的文档入库与推送是负责人指示后执行的，见 [03-remote-sync-note.md](03-remote-sync-note.md)。
 
 ## 17. 对任务书 11 个问题的回答
 
@@ -252,6 +253,6 @@ A 类 1 笔，B 类 8 笔，补丁等价 2 笔；C、D、E 类均为 0。
 6. **是否有理由完整合并？** 没有。
 7. **m11 / m12 能否安全删除？** 技术上可以；还需确认没有 open PR 和其他 Agent 占用。
 8. **main 是否保留为稳定基线？** 是，它是默认分支，且两条开发分支都领先于它。
-9. **交接说明是否应加入 Git？** 建议加入，它只有一份原件。
+9. **交接说明是否应加入 Git？** 建议加入，它只有一份原件。（已于 2026-11-27 入库。）
 10. **ADR-014 和 Rig/Weights 许可还差什么？** 都差负责人的决定。
 11. **VR-1B 最小 Android 验证如何启动？** 见 §14。

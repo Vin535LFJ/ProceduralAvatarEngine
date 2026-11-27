@@ -84,7 +84,7 @@ evidence/character-v7/face.png
 evidence/character-v7/front.png
 ```
 
-盘点之后新增的未跟踪文件：`docs/operations/repository-consolidation/` 下本轮的三份治理文档。
+盘点之后的变化（2026-11-27）：交接说明原件和 `docs/operations/repository-consolidation/` 下的治理文档已入库并推送；poc-sm 的未跟踪文件剩 6 个。
 
 重要忽略文件的构成：
 
