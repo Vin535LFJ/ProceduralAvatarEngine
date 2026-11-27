@@ -1,0 +1,44 @@
+[load] body=13380 full=19158 params=9
+[anchor] root head vertex id=4223 pos=(0.00000,0.05639,-0.07609)
+[rig] full92 bones=92 valid=1 minLen=0.00847 | core20 bones=20 valid=1
+[symmetry] L/R pairs=55 maxAsymmetry=0.000000 m
+[deviation] vs PENDING research reference: 26 shared bones, max joint dev=0.34088 m
+[weights] distance unbound=0 crossSide=34.8568 farBound=1077 smooth=0.1106 genMs=23
+[weights] heat     unbound=0 crossSide=0.0814 farBound=29 smooth=0.1261 genMs=334
+[weights] region   unbound=0 crossSide=0.0000 farBound=0 smooth=0.1195 genMs=23
+[bind] recovery max error=3.675e-08 m (must ~0)
+[pose] bind                       flips=0 selfInt=0 edgeP99=1.000 vol=1.000 cpu=0.5ms
+[pose] neutral_standing           flips=0 selfInt=0 edgeP99=1.000 vol=1.000 cpu=0.3ms
+[pose] shoulder_forward_flexion   flips=18 selfInt=88 edgeP99=1.062 vol=0.999 cpu=0.3ms
+[pose] shoulder_abduction_30      flips=8 selfInt=0 edgeP99=1.028 vol=1.001 cpu=0.2ms
+[pose] shoulder_abduction_60      flips=24 selfInt=22 edgeP99=1.047 vol=1.000 cpu=0.3ms
+[pose] shoulder_abduction_90      flips=64 selfInt=122 edgeP99=1.079 vol=0.999 cpu=0.3ms
+[pose] elbow_0                    flips=0 selfInt=0 edgeP99=1.000 vol=1.000 cpu=0.3ms
+[pose] elbow_45                   flips=0 selfInt=0 edgeP99=1.076 vol=0.998 cpu=0.2ms
+[pose] elbow_90                   flips=28 selfInt=0 edgeP99=1.268 vol=0.993 cpu=0.3ms
+[pose] elbow_120                  flips=3138 selfInt=0 edgeP99=1.376 vol=0.989 cpu=0.3ms
+[pose] hip_flexion                flips=19 selfInt=24 edgeP99=1.000 vol=1.015 cpu=0.3ms
+[pose] hip_abduction              flips=12 selfInt=1 edgeP99=1.000 vol=1.011 cpu=0.3ms
+[pose] knee_45                    flips=0 selfInt=0 edgeP99=1.108 vol=0.991 cpu=0.2ms
+[pose] knee_90                    flips=32 selfInt=0 edgeP99=1.346 vol=0.977 cpu=0.2ms
+[pose] wrist_flexion              flips=16 selfInt=14 edgeP99=1.000 vol=1.000 cpu=0.2ms
+[pose] wrist_extension            flips=20 selfInt=34 edgeP99=1.000 vol=1.000 cpu=0.3ms
+[pose] finger_curl                flips=34 selfInt=0 edgeP99=1.300 vol=1.000 cpu=0.5ms
+[pose] fist                       flips=1056 selfInt=130 edgeP99=1.675 vol=1.000 cpu=0.4ms
+[pose] arms_raised                flips=3112 selfInt=248 edgeP99=1.132 vol=0.995 cpu=0.3ms
+[pose] one_arm_raised             flips=1556 selfInt=124 edgeP99=1.000 vol=0.998 cpu=0.2ms
+[pose] basic_squat                flips=1517 selfInt=433 edgeP99=1.435 vol=0.991 cpu=0.2ms
+[pose] asymmetric                 flips=53 selfInt=69 edgeP99=1.129 vol=1.000 cpu=0.2ms
+[shape] baseline           joints=1 rig=1 bindErr=3.67e-08 unbound=0
+[shape] broader-shoulder   joints=1 rig=1 bindErr=3.67e-08 unbound=0
+[shape] broader-ribcage    joints=1 rig=1 bindErr=3.67e-08 unbound=0
+[shape] narrower-waist     joints=1 rig=1 bindErr=3.67e-08 unbound=0
+[shape] wider-hip          joints=1 rig=1 bindErr=3.67e-08 unbound=0
+[shape] taller             joints=1 rig=1 bindErr=3.69e-08 unbound=0
+[shape] shorter            joints=1 rig=1 bindErr=3.67e-08 unbound=0
+[shape] combo-athletic     joints=1 rig=1 bindErr=3.67e-08 unbound=0
+[shape] combo-pear         joints=1 rig=1 bindErr=3.67e-08 unbound=0
+[extra-suite] combo-athletic rendered 22 poses
+[extra-suite] wider-hip rendered 22 poses
+[compare] core20 vs full92 done
+[done] assertions failed=0 bindErr=3.67e-08 maxDev=0.34088

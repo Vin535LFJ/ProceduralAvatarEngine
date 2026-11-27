@@ -1,0 +1,13 @@
+profile,pose,bones,flipped,edgeP99,volumeRatio,cpuMs,weightDiscarded,fistExpressible
+core20,neutral_standing,20,0,1.0000,1.0000,0.09,0.04231,0
+full92,neutral_standing,92,0,1.0000,1.0000,0.13,0.11186,1
+core20,shoulder_abduction_90,20,34,1.0000,1.0012,0.08,0.04231,0
+full92,shoulder_abduction_90,92,64,1.0787,0.9989,0.11,0.11186,1
+core20,elbow_90,20,28,1.2689,0.9927,0.10,0.04231,0
+full92,elbow_90,92,28,1.2680,0.9927,0.12,0.11186,1
+core20,hip_flexion,20,24,1.0000,0.9960,0.08,0.04231,0
+full92,hip_flexion,92,19,1.0000,1.0145,0.11,0.11186,1
+core20,knee_90,20,32,1.3474,0.9782,0.09,0.04231,0
+full92,knee_90,92,32,1.3458,0.9769,0.13,0.11186,1
+core20,fist,20,0,1.0000,1.0000,0.10,0.04231,0
+full92,fist,92,1056,1.6748,0.9999,0.14,0.11186,1

@@ -38,3 +38,13 @@ docs/research/human-template-reuse/evidence/host-proof/** -text
 # numbers byte-identical for a reviewer who re-runs the same comparison on
 # Linux or macOS, and keeps the PNG bytes untouched.
 docs/phases/P1-visual-recovery/evidence/vr1b-wp3-host-01/** -text
+
+# WP4-HOST-RIG-01 plan/report + evidence folder (2026-11-28).
+#
+# Same rationale as the folders above: the folder mixes text (CSV deformation /
+# region / weight tables, markdown reports, run logs) with PNG renders, so
+# `-text` switches end-of-line conversion off in both directions. This keeps the
+# measured numbers byte-identical for a reviewer who re-runs the comparison on
+# Linux or macOS, and keeps the PNG bytes untouched. Scope is limited to this
+# new folder; no pre-existing file changes its checkout behaviour.
+docs/phases/P1-visual-recovery/wp4-host-rig-01/** -text
