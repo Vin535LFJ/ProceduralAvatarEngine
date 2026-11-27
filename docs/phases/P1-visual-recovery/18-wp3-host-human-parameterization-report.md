@@ -6,7 +6,8 @@
 > 工具：`tools/human-template-poc/host/` 新增 `wp3_measure.*`、`wp3_quality.*`、`wp3_experiment_main.cpp`、`wp3_tests.cpp`（`pae_wp3_experiment` / `pae_wp3_tests`）。
 > 证据：`evidence/vr1b-wp3-host-01/`（150 张图 + 13 份数据/报告 + 运行/测试日志）。
 > 前序初步研究：`18a-wp3-preliminary-shape-study.md`（本轮取代其口径；历史数值不改，差异见 §6）。
-> **本轮未 commit/push（授权要求），等负责人审查。**
+> **Git 状态（2026-11-27 修订）：已提交并推送。Host 工具代码 `d7e83ee`；报告与证据 `56c5f9f`；远端 `poc-sm/shape-model-v2` 与本地一致。本轮生产 Android 代码未修改。**
+> **审查修正：本报告部分口径已由 `19-wp3-host-r1-audit-correction-report.md`（WP3-H-R1）复测取代——身高缩放锚点（§5B）、联动矩阵语义（§4）、shorter-pae 质量列读法（§7）、截面解剖验证（§6）。历史数值原样保留，R1 复测数据在 `evidence/vr1b-wp3-host-01/r1/`。**
 
 ## 0. 状态
 
@@ -52,6 +53,8 @@ WP3_HOST_PROOF = IMPLEMENTED / MEASURED
 
 `data/linkage-matrix.csv/.md`。非目标区域联动（实测，必须列入参数响应表）：
 
+> **R1 更正**：本表“平均位移”是 **affected-only mean**（仅 target 实际移动的顶点），不是 whole-region mean。修正后的 meanAll/meanAffected/coverage 见 `19` 报告 §7 与 `r1/data/linkage-matrix.*`。下表历史数值保留。
+
 | 参数 | 主要联动 |
 |---|---|
 | shoulderWidth | 上臂/前臂/手 ~24.9 mm 外移，肩带 18.2，helper 22.3 |
@@ -69,6 +72,8 @@ WP3_HOST_PROOF = IMPLEMENTED / MEASURED
 - **B. PAE 自有均匀缩放**（绕足底平面，full OBJ 含 helper 同步）：1.55/1.6659/1.7549/1.85 m **精确达成**；肢段比例恒定（0.13188/0.24984）；关节高度精确随 k 缩放（1.3197→1.3902 @1.7549）；0 翻面/0 自交/边比 1.0。**推荐为 WP3-Production 的身高方法。**
 - **C. 仅垂直缩放**：对照记录，改变头身比例，不推荐。
 
+> **R1 更正**：B 节均匀缩放原实现误用 `D3{sole,sole,sole}` 作缩放中心，引入 ~5.68 cm 水平漂移（1.55 m）。已修正为 pivot=(rootX=0 矢状对称面, soleY, rootZ=root 骨 head)，9 项锚点检查全过；缩放变体图已重生成。见 `19` 报告 §5 与 `r1/data/anchor-study.*`。身高/比例/关节同步结论不变。
+
 ## 6. 测量协议与本轮修正
 
 `data/measurements-protocol.md`：每项测量的平面位置/采样/区域/方向/公式/单位/精度全部定义。**所有值为 PAE 自定义曲面测量，不是 ANSUR/MakeHuman 官方值。**
@@ -78,6 +83,8 @@ WP3_HOST_PROOF = IMPLEMENTED / MEASURED
 ## 7. 体型变体（10 个，参数向量显式，同一基础模板，无叠加）
 
 `data/variants.csv`、`variants-quality.csv`、`variants.md`。
+
+> **R1 澄清**：`variants-quality.csv` 中 shorter-pae 的 `2` 在 **degenerate** 列（退化三角形），**flipped_faces 列实为 0**（与本表一致）。2 个退化三角形（face 320/6947）源于检查器绝对阈值 + 缩小 k²，非翻面、非几何缺陷。见 `19` 报告 §6 与 `r1/data/flip-investigation.md`。
 
 | 变体 | 参数向量 | stature | waist 围 | hip 围 | 翻面 | 自交 |
 |---|---|---:|---:|---:|---:|---:|

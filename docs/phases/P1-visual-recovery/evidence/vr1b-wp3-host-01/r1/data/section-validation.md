@@ -1,0 +1,69 @@
+# WP3-H-R1 cross-section anatomical validation (generated)
+
+largestArea() is the candidate strategy; the selected loop is CONFIRMED as torso only when its centroid lies near the sagittal centreline (|x| <= 0.10 m) and the section has no open chains. Arm/thigh loops (A-pose) sit at |x| ~ 0.4 m and are rejected. NOT VERIFIED rows must not be read as anatomical circumferences.
+
+| Variant | Section | loops | closed | open | selected | centroid.x | torso? | circ (m) |
+|---|---|---:|---:|---:|---:|---:|---|---:|
+| base | chest | 3 | 3 | 0 | 1 | -0.0005 | YES | 0.7987 |
+| base | waist | 5 | 5 | 0 | 2 | +0.0005 | YES | 0.7911 |
+| base | hip | 1 | 1 | 0 | 0 | -0.0000 | YES | 1.0036 |
+| baseline | chest | 3 | 3 | 0 | 1 | -0.0005 | YES | 0.7987 |
+| baseline | waist | 5 | 5 | 0 | 2 | +0.0005 | YES | 0.7911 |
+| baseline | hip | 1 | 1 | 0 | 0 | -0.0000 | YES | 1.0036 |
+| broader-shoulder | chest | 3 | 3 | 0 | 1 | -0.0005 | YES | 0.8033 |
+| broader-shoulder | waist | 5 | 5 | 0 | 2 | +0.0005 | YES | 0.7911 |
+| broader-shoulder | hip | 1 | 1 | 0 | 0 | -0.0000 | YES | 1.0036 |
+| broader-ribcage | chest | 3 | 3 | 0 | 1 | -0.0006 | YES | 0.8923 |
+| broader-ribcage | waist | 5 | 5 | 0 | 2 | +0.0005 | YES | 0.7912 |
+| broader-ribcage | hip | 1 | 1 | 0 | 0 | -0.0000 | YES | 1.0036 |
+| narrower-waist | chest | 3 | 3 | 0 | 1 | -0.0005 | YES | 0.7947 |
+| narrower-waist | waist | 5 | 5 | 0 | 2 | +0.0005 | YES | 0.6941 |
+| narrower-waist | hip | 1 | 1 | 0 | 0 | -0.0000 | YES | 1.0036 |
+| wider-hip | chest | 3 | 3 | 0 | 1 | -0.0005 | YES | 0.7987 |
+| wider-hip | waist | 5 | 5 | 0 | 2 | +0.0005 | YES | 0.8042 |
+| wider-hip | hip | 1 | 1 | 0 | 0 | +0.0000 | YES | 1.1877 |
+| taller-pae | chest | 3 | 3 | 0 | 1 | -0.0006 | YES | 0.8413 |
+| taller-pae | waist | 5 | 5 | 0 | 2 | +0.0006 | YES | 0.8334 |
+| taller-pae | hip | 1 | 1 | 0 | 0 | +0.0000 | YES | 1.0573 |
+| shorter-pae | chest | 3 | 3 | 0 | 1 | -0.0005 | YES | 0.7431 |
+| shorter-pae | waist | 5 | 5 | 0 | 2 | +0.0005 | YES | 0.7361 |
+| shorter-pae | hip | 1 | 1 | 0 | 0 | -0.0000 | YES | 0.9338 |
+| combo-athletic | chest | 3 | 3 | 0 | 1 | -0.0005 | YES | 0.8001 |
+| combo-athletic | waist | 5 | 5 | 0 | 2 | +0.0005 | YES | 0.7421 |
+| combo-athletic | hip | 1 | 1 | 0 | 0 | -0.0000 | YES | 1.0036 |
+| combo-pear | chest | 3 | 3 | 0 | 1 | -0.0005 | YES | 0.7929 |
+| combo-pear | waist | 5 | 5 | 0 | 2 | +0.0005 | YES | 0.7763 |
+| combo-pear | hip | 1 | 1 | 0 | 0 | +0.0000 | YES | 1.1416 |
+| combo-tall-heavy | chest | 3 | 3 | 0 | 1 | -0.0006 | YES | 0.8445 |
+| combo-tall-heavy | waist | 5 | 5 | 0 | 2 | +0.0006 | YES | 0.9223 |
+| combo-tall-heavy | hip | 1 | 1 | 0 | 0 | +0.0000 | YES | 1.2026 |
+| shoulderWidth-1 | chest | 3 | 3 | 0 | 1 | -0.0005 | YES | 0.7894 |
+| shoulderWidth-1 | waist | 5 | 5 | 0 | 2 | +0.0005 | YES | 0.7911 |
+| shoulderWidth-1 | hip | 1 | 1 | 0 | 0 | -0.0000 | YES | 1.0036 |
+| shoulderWidth+1 | chest | 3 | 3 | 0 | 1 | -0.0005 | YES | 0.8033 |
+| shoulderWidth+1 | waist | 5 | 5 | 0 | 2 | +0.0005 | YES | 0.7911 |
+| shoulderWidth+1 | hip | 1 | 1 | 0 | 0 | -0.0000 | YES | 1.0036 |
+| ribcageWidth-1 | chest | 3 | 3 | 0 | 1 | -0.0004 | YES | 0.7076 |
+| ribcageWidth-1 | waist | 5 | 5 | 0 | 2 | +0.0004 | YES | 0.7016 |
+| ribcageWidth-1 | hip | 1 | 1 | 0 | 0 | -0.0000 | YES | 1.0036 |
+| ribcageWidth+1 | chest | 3 | 3 | 0 | 1 | -0.0006 | YES | 0.8923 |
+| ribcageWidth+1 | waist | 5 | 5 | 0 | 2 | +0.0005 | YES | 0.7912 |
+| ribcageWidth+1 | hip | 1 | 1 | 0 | 0 | -0.0000 | YES | 1.0036 |
+| chestDepth-1 | chest | 3 | 3 | 0 | 1 | -0.0005 | YES | 0.7490 |
+| chestDepth-1 | waist | 5 | 5 | 0 | 2 | +0.0005 | YES | 0.7736 |
+| chestDepth-1 | hip | 1 | 1 | 0 | 0 | -0.0000 | YES | 1.0036 |
+| chestDepth+1 | chest | 3 | 3 | 0 | 1 | -0.0005 | YES | 0.8940 |
+| chestDepth+1 | waist | 5 | 5 | 0 | 2 | +0.0005 | YES | 0.8069 |
+| chestDepth+1 | hip | 1 | 1 | 0 | 0 | -0.0000 | YES | 1.0036 |
+| waistWidth-1 | chest | 3 | 3 | 0 | 1 | -0.0005 | YES | 0.7947 |
+| waistWidth-1 | waist | 5 | 5 | 0 | 2 | +0.0005 | YES | 0.6941 |
+| waistWidth-1 | hip | 1 | 1 | 0 | 0 | -0.0000 | YES | 1.0036 |
+| waistWidth+1 | chest | 3 | 3 | 0 | 1 | -0.0005 | YES | 0.8027 |
+| waistWidth+1 | waist | 5 | 5 | 0 | 2 | +0.0006 | YES | 0.8913 |
+| waistWidth+1 | hip | 1 | 1 | 0 | 0 | -0.0000 | YES | 1.0036 |
+| hipWidth-1 | chest | 3 | 3 | 0 | 1 | -0.0005 | YES | 0.7987 |
+| hipWidth-1 | waist | 5 | 5 | 0 | 2 | +0.0005 | YES | 0.7842 |
+| hipWidth-1 | hip | 1 | 1 | 0 | 0 | +0.0000 | YES | 0.9118 |
+| hipWidth+1 | chest | 3 | 3 | 0 | 1 | -0.0005 | YES | 0.7987 |
+| hipWidth+1 | waist | 5 | 5 | 0 | 2 | +0.0005 | YES | 0.8042 |
+| hipWidth+1 | hip | 1 | 1 | 0 | 0 | +0.0000 | YES | 1.1877 |
