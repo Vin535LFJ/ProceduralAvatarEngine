@@ -7,7 +7,7 @@
 | ADR-001 | GLES3 自研 Renderer | Accepted |
 | ADR-002 | 坐标系统与 Skeleton | Accepted（P0 复核中） |
 | ADR-003 | Pose Provider / ML Kit | Accepted（P4 复核坐标/镜像语义） |
-| ADR-004 | 程序化 Humanoid 几何 | Accepted（历史 M 路线） |
+| ADR-004 | 程序化 Humanoid 几何 | Accepted（历史 M 路线；"外部模型"限定解释见 ADR-014） |
 | ADR-005 | GPU Skinning UBO | Accepted |
 | ADR-006 | 视频时间同步 | Accepted（P5 复核 PlaybackEpoch） |
 | ADR-007 | 文件选择器回退 | Accepted |
@@ -17,6 +17,7 @@
 | ADR-011 | CharacterDefinition 分层 Shape Model 契约 | **Accepted**（2026-11-24；仅批准契约结构 + 冻结边界 F-1..F-6，不构成任何 Gate 的 PASS） |
 | ADR-012 | Saltline 程序化资源生成方法独立模块研究 | **Accepted — Research Only**（2026-11-24；不引入 Three.js / 网页运行时；非 PoC-SM 强制前置） |
 | ADR-013 | AI 开发轮次的验收契约 | **Accepted**（2026-11-24；每轮必须交代码 + 视觉证据 + 验收结果，缺一不计工程里程碑；权威正文 `AGENT.md`） |
+| ADR-014 | 离线编译的人体基础拓扑模板 | **Accepted**（2026-11-27；仅限逐文件 CC0 核实的 MakeHuman Base Mesh + Targets 离线编译为 PAE 自有 `.paht`；Rig/Weights 采用 PAE 自建；运行时资产政策不变；不构成任何 Gate 的 PASS） |
 
 详见 `docs/architecture-decisions/ADR-010-p1-surface-patch-mainline.md`。
 ADR-011 / ADR-012 见 `docs/architecture-decisions/ADR-011-shape-model-contract.md`、
