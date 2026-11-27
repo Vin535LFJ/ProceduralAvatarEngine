@@ -20,7 +20,7 @@
 | 仓库 | `https://github.com/makehumancommunity/makehuman` |
 | Commit | `a8bc2d54ff0ac92e78ff71431b1023eda42bf482`（GitHub API：提交时间 2024-06-26T08:28:37Z） |
 | 固定 URL 形式 | `https://github.com/makehumancommunity/makehuman/blob/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/<仓库路径>` |
-| 归档 | `codeload.github.com/.../zip/<commit>`，45,251,153 字节，SHA-256 `1604d6b35925c8b1c0a7a5e8be8d1f01a53ca8dd80e07dea951c1ba84b192e9b5` |
+| 归档 | `codeload.github.com/.../zip/<commit>`，45,251,153 字节，SHA-256 `1604d6b35925c8b1c0a7a5e8be8d1f01a53ca8dd80e07dea95c1ba84b192e9b5`（2026-11-27 更正：原记录多抄一位 "1"，以实算 64 位为准） |
 | 本地位置（仓库外） | `E:\AI-Tools\PAE-human-template-poc\assets\makehuman-a8bc2d54\` |
 | 参考文档 | `makehumancommunity/mpfb2` @ `650c5c53bd6989a8ac264f31fa1d11d4a0c7bd8a`（2026-11-22），仅 `docs/fileformats/{rig,weights,target}.md` 三份文档 |
 
