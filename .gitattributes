@@ -29,3 +29,12 @@ docs/phases/anatomy-driven-geometry-poc/10-decision-records/*.md text eol=lf
 # PNG, which is why it uses `-text` rather than the `text eol=lf` used above.
 tools/human-template-poc/** -text
 docs/research/human-template-reuse/evidence/host-proof/** -text
+
+# VR-1B WP3-HOST-01 evidence folder (2026-11-27).
+#
+# Same rationale as the folder above: the folder mixes text (CSV measurement
+# tables, markdown reports, run logs) with PNG renders, so `-text` is used to
+# switch end-of-line conversion off in both directions. This keeps the measured
+# numbers byte-identical for a reviewer who re-runs the same comparison on
+# Linux or macOS, and keeps the PNG bytes untouched.
+docs/phases/P1-visual-recovery/evidence/vr1b-wp3-host-01/** -text

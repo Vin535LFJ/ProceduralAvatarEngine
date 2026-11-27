@@ -1,0 +1,15 @@
+﻿[PASS] box_mid_perimeter
+[PASS] box_mid_closed_loop
+[PASS] box_mid_breadth_depth
+[PASS] box_mid_area
+[PASS] box_high_perimeter
+[PASS] box_no_intersection
+[PASS] box_oblique_perimeter
+[PASS] box_oblique_closed
+[PASS] two_box_loop_count
+[PASS] two_box_largest_area
+[PASS] two_box_nearest
+[PASS] linkage_thorax_mean
+[PASS] linkage_arm_max
+[PASS] linkage_helper_mean
+== summary: 14 passed, 0 failed ==
