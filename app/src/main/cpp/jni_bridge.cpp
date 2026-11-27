@@ -1,5 +1,7 @@
 #include <jni.h>
 
+#include <android/asset_manager.h>
+#include <android/asset_manager_jni.h>
 #include <android/native_window.h>
 #include <android/native_window_jni.h>
 
@@ -166,6 +168,46 @@ Java_com_pae_host_NativeBridge_nativeCameraCommand(JNIEnv*, jclass, jlong handle
     if (auto* runtime = runtimeFromHandle(handle)) {
         runtime->cameraCommand(static_cast<int>(op), pae::Vec3{dx, dy, dz});
     }
+}
+
+// VR-1B WP2.1 (owner-authorized additive entry): read the .paht human template
+// from APK assets and deliver the bytes to the render thread. Like
+// nativeCameraCommand, this is an addition to the JNI surface, not a change:
+// all existing signatures and the frozen contracts are untouched. The asset
+// is read on the calling thread; no AAssetManager handle is retained, so there
+// is no cross-thread lifetime concern.
+JNIEXPORT jboolean JNICALL
+Java_com_pae_host_NativeBridge_nativeLoadTemplateAsset(JNIEnv* env, jclass, jlong handle,
+                                                       jobject assetManager, jstring assetPath) {
+    auto* runtime = runtimeFromHandle(handle);
+    if (!runtime || !assetManager || !assetPath) return JNI_FALSE;
+    AAssetManager* manager = AAssetManager_fromJava(env, assetManager);
+    if (!manager) {
+        PAE_LOGE("PAE_JNI", "AAssetManager_fromJava returned null");
+        return JNI_FALSE;
+    }
+    const char* pathChars = env->GetStringUTFChars(assetPath, nullptr);
+    if (!pathChars) return JNI_FALSE;
+    const std::string path(pathChars);
+    env->ReleaseStringUTFChars(assetPath, pathChars);
+    AAsset* asset = AAssetManager_open(manager, path.c_str(), AASSET_MODE_BUFFER);
+    if (!asset) {
+        PAE_LOGE("PAE_JNI", "template asset open failed: %s", path.c_str());
+        return JNI_FALSE;
+    }
+    const void* buffer = AAsset_getBuffer(asset);
+    const off_t length = AAsset_getLength(asset);
+    if (!buffer || length <= 0) {
+        PAE_LOGE("PAE_JNI", "template asset buffer invalid: %s", path.c_str());
+        AAsset_close(asset);
+        return JNI_FALSE;
+    }
+    std::string bytes(static_cast<const char*>(buffer), static_cast<size_t>(length));
+    AAsset_close(asset);
+    runtime->setTemplateBytes(std::move(bytes));
+    PAE_LOGI("PAE_JNI", "template asset loaded: %s bytes=%zu", path.c_str(),
+             static_cast<size_t>(length));
+    return JNI_TRUE;
 }
 
 JNIEXPORT jstring JNICALL

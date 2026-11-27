@@ -1,0 +1,44 @@
+﻿--------- beginning of system
+--------- beginning of main
+11-27 13:49:18.251 23926 23926 I PAE_JNI : runtime created
+11-27 13:49:18.298 23926 23926 I PAE_JNI : template asset loaded: human_template/pae-human-base-mh-a8bc2d54.paht bytes=4054264
+11-27 13:49:24.695 23926 23948 I PAE_RENDER: geometry generated: avatar
+11-27 13:49:29.206 23926 23948 I PAE_RENDER: anatomy preview ready: 36784 tris, 3900 ms
+11-27 13:49:29.618 23926 23948 I PAE_RENDER: P1-VR-1A ready: verts=1795 tris=3520 components=1 boundary=32 nonmanifold=0 gen_ms=50.7 cache=0:3:1:1:7791505080318327151:2:4294967295
+11-27 13:49:29.662 23926 23948 I PAE_RENDER: P1-VR-1A-REPORT verts=1795 tris=3520 components=1 boundary=32 nonmanifold=0 degenerate=0 badnorm=0 gen_ms=49.834 state_ms=0.204 geometry_ms=10.726 assembly_ms=36.029 weight_ms=2.727 boundaries=3
+11-27 13:49:29.686 23926 23948 I PAE_RENDER: P1-VR-1A-UPLOAD mesh_ms=8.188 wire_ms=24.424 cpu_mesh_bytes=171480 gpu_buffer_bytes=172888
+11-27 13:49:29.686 23926 23948 I PAE_RENDER: P1-VR-1A-MEMORY peak_rss_kb=225532
+11-27 13:49:29.686 23926 23948 I PAE_RENDER: surface ready 1920x1008
+11-27 13:49:29.697 23926 23948 I PAE_RENDER: template asset bytes received: 4054264
+11-27 13:49:31.427 23926 23948 I PAE_RENDER: human template ready: source=asset verts=13380 tris=26756 quads=13378 degenerate=0 ground_offset=0.8168 load_ms=987 sha256=d3bcbbece3db11c0df79cb7202fdf1730b325108509d60ad9faa209a8a5e417b
+11-27 13:49:31.446 23926 23948 I PAE_RENDER: applied previewMode=4
+11-27 13:49:31.446 23926 23948 I PAE_RENDER: applied cameraPreset=4
+11-27 13:49:31.446 23926 23948 I PAE_RENDER: applied debugView=3
+11-27 13:49:37.639 24054 24054 I PAE_JNI : runtime created
+11-27 13:49:37.683 24054 24054 I PAE_JNI : template asset loaded: human_template/pae-human-base-mh-a8bc2d54.paht bytes=4054264
+11-27 13:49:44.161 24054 24073 I PAE_RENDER: geometry generated: avatar
+11-27 13:49:48.658 24054 24073 I PAE_RENDER: anatomy preview ready: 36784 tris, 3891 ms
+11-27 13:49:49.069 24054 24073 I PAE_RENDER: P1-VR-1A ready: verts=1795 tris=3520 components=1 boundary=32 nonmanifold=0 gen_ms=50.6 cache=0:3:1:1:7791505080318327151:2:4294967295
+11-27 13:49:49.113 24054 24073 I PAE_RENDER: P1-VR-1A-REPORT verts=1795 tris=3520 components=1 boundary=32 nonmanifold=0 degenerate=0 badnorm=0 gen_ms=49.674 state_ms=0.200 geometry_ms=10.512 assembly_ms=36.092 weight_ms=2.717 boundaries=3
+11-27 13:49:49.137 24054 24073 I PAE_RENDER: P1-VR-1A-UPLOAD mesh_ms=8.152 wire_ms=24.445 cpu_mesh_bytes=171480 gpu_buffer_bytes=172888
+11-27 13:49:49.137 24054 24073 I PAE_RENDER: P1-VR-1A-MEMORY peak_rss_kb=226192
+11-27 13:49:49.137 24054 24073 I PAE_RENDER: surface ready 1920x1008
+11-27 13:49:49.147 24054 24073 I PAE_RENDER: template asset bytes received: 4054264
+11-27 13:49:50.873 24054 24073 I PAE_RENDER: human template ready: source=asset verts=13380 tris=26756 quads=13378 degenerate=0 ground_offset=0.8168 load_ms=984 sha256=d3bcbbece3db11c0df79cb7202fdf1730b325108509d60ad9faa209a8a5e417b
+11-27 13:49:50.892 24054 24073 I PAE_RENDER: applied previewMode=4
+11-27 13:49:50.892 24054 24073 I PAE_RENDER: applied cameraPreset=0
+11-27 13:49:50.892 24054 24073 I PAE_RENDER: applied debugView=1
+11-27 13:49:57.507 24183 24183 I PAE_JNI : runtime created
+11-27 13:49:57.553 24183 24183 I PAE_JNI : template asset loaded: human_template/pae-human-base-mh-a8bc2d54.paht bytes=4054264
+11-27 13:50:03.917 24183 24202 I PAE_RENDER: geometry generated: avatar
+11-27 13:50:08.423 24183 24202 I PAE_RENDER: anatomy preview ready: 36784 tris, 3899 ms
+11-27 13:50:08.835 24183 24202 I PAE_RENDER: P1-VR-1A ready: verts=1795 tris=3520 components=1 boundary=32 nonmanifold=0 gen_ms=50.9 cache=0:3:1:1:7791505080318327151:2:4294967295
+11-27 13:50:08.879 24183 24202 I PAE_RENDER: P1-VR-1A-REPORT verts=1795 tris=3520 components=1 boundary=32 nonmanifold=0 degenerate=0 badnorm=0 gen_ms=50.019 state_ms=0.200 geometry_ms=10.450 assembly_ms=36.505 weight_ms=2.711 boundaries=3
+11-27 13:50:08.903 24183 24202 I PAE_RENDER: P1-VR-1A-UPLOAD mesh_ms=8.153 wire_ms=24.616 cpu_mesh_bytes=171480 gpu_buffer_bytes=172888
+11-27 13:50:08.904 24183 24202 I PAE_RENDER: P1-VR-1A-MEMORY peak_rss_kb=222248
+11-27 13:50:08.904 24183 24202 I PAE_RENDER: surface ready 1920x1008
+11-27 13:50:08.914 24183 24202 I PAE_RENDER: template asset bytes received: 4054264
+11-27 13:50:09.248 24183 24202 E PAE_RENDER: human template rejected: payload hash mismatch source=file
+11-27 13:50:09.249 24183 24202 E PAE_RENDER: human template load or upload failed: template=rejected (payload hash mismatch) source=file
+11-27 13:50:09.249 24183 24202 I PAE_RENDER: applied cameraPreset=0
+11-27 13:50:09.249 24183 24202 I PAE_RENDER: applied debugView=3

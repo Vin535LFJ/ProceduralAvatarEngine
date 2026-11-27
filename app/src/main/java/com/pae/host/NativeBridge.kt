@@ -1,5 +1,6 @@
 package com.pae.host
 
+import android.content.res.AssetManager
 import android.view.Surface
 
 object NativeBridge {
@@ -29,6 +30,7 @@ object NativeBridge {
     private external fun nativeSetCameraPreset(handle: Long, preset: Int)
     private external fun nativeSetDebugView(handle: Long, view: Int)
     private external fun nativeCameraCommand(handle: Long, op: Int, dx: Float, dy: Float, dz: Float)
+    private external fun nativeLoadTemplateAsset(handle: Long, assets: AssetManager, path: String): Boolean
 
     fun create() {
         if (handle == 0L) handle = nativeCreate()
@@ -98,6 +100,10 @@ object NativeBridge {
     fun resetCamera() {
         cameraCommand(AvatarSurfaceView.CAM_RESET, 0f, 0f, 0f)
     }
+
+    /** VR-1B WP2.1: load the .paht human template from APK assets (additive JNI). */
+    fun loadTemplateAsset(assets: AssetManager, path: String): Boolean =
+        handle != 0L && nativeLoadTemplateAsset(handle, assets, path)
 
     fun setQuality(level: Int) {
         if (handle != 0L) nativeSetQuality(handle, level)

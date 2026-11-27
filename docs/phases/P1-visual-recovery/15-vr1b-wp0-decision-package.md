@@ -1,7 +1,7 @@
 # VR-1B WP0 决策包（PAE-CONSOLIDATION-02 起草，03 落定）
 
-> 日期：2026-11-27（03 轮更新）
-> 状态：**WP0 各项已由负责人决定**（批准依据见下）；WP1/WP2 授权范围已生效，生产实现尚未开始。
+> 日期：2026-11-27（03 轮更新；同日 WP1/WP2 实施并通过负责人真机验收）
+> 状态：**WP0 各项已由负责人决定**；**WP1/WP2 = DEVICE_STATIC_RENDER_ACCEPTED**（负责人 2026-11-27 人眼验收，见 16 号报告 §5）；WP2.1（APK 内置模板加载，加法 AAssetManager JNI）已授权；WP3–WP8 仍须另行批准。
 > **批准依据（转录，非代签）**：负责人 2026-11-27 会话提交 PAE-CONSOLIDATION-03 计划并指示"按照以上计划执行"；
 > 该计划 §二/§十一 批准限定范围的 ADR-014，§十二 决定 Rig/Weights 采用 PAE 自建，§三/§六/§十三 记录基础拓扑验收为 `ACCEPTED_FOR_VR1B`，§十四 授权 WP1/WP2。
 > ADR-014 正式文本：`docs/architecture-decisions/ADR-014-offline-compiled-human-base-topology.md`（ACCEPTED，2026-11-27）。

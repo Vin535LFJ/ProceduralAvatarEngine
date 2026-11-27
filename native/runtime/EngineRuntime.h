@@ -26,6 +26,8 @@ public:
     void setPreviewMode(int mode);
     void setCameraPreset(int preset);
     void setDebugView(int view);
+    // VR-1B WP2.1: .paht bytes read from APK assets (additive JNI entry).
+    void setTemplateBytes(std::string bytes);
     // Interactive camera: op is a CameraOp value, delta carries the gesture.
     void cameraCommand(int op, const Vec3& delta);
     std::string stats() const;

@@ -37,6 +37,7 @@ enum class RenderCommandType : int {
     CameraPreset,
     CameraOrbit, // interactive camera: orbit / zoom / pan / reset
     DebugView,
+    SetTemplateBytes, // VR-1B WP2.1: APK asset bytes for the static human template
     Shutdown
 };
 
@@ -61,6 +62,7 @@ struct RenderCommand {
     std::array<Vec3, 5> palette{};
     PoseFrame pose{};
     bool flag = false; // preview/debug toggles ride on the generic flag
+    std::string text;  // SetTemplateBytes payload (VR-1B WP2.1)
 };
 
 class RenderThread {
@@ -87,6 +89,7 @@ public:
     void postCameraPreset(int preset); // M12: fixed evidence camera (0..7)
     void postCameraOrbit(int op, const Vec3& delta); // interactive camera
     void postDebugView(int view);      // 0 shading / 1 wireframe / 2 normals / 3 clay / 4 material / 5 weights / 6 outline / 7 UV
+    void postTemplateBytes(std::string bytes); // VR-1B WP2.1: .paht bytes read from APK assets
     std::string getStats() const;
 
 private:
@@ -139,6 +142,10 @@ private:
     MeshData cachedTemplateMesh_;
     bool hasCachedTemplate_ = false;
     std::string templateStatus_ = "template=not-loaded";
+    // WP2.1: template bytes delivered from the APK assets via the additive JNI
+    // entry. A pushed dev file (kTemplatePath) overrides them when present.
+    std::string templateAssetBytes_;
+    bool hasTemplateAssetBytes_ = false;
     PatchGenerationReport patchReport_;
     character::TorsoShoulderTimings p1aTimings_{};
     SkinnedGpuMesh avatarMesh_;

@@ -88,6 +88,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         NativeBridge.create()
+        // VR-1B WP2.1: the static human template ships inside the APK; no
+        // external file is required. A pushed dev file still overrides it.
+        val templateAssetOk = NativeBridge.loadTemplateAsset(
+            assets, "human_template/pae-human-base-mh-a8bc2d54.paht"
+        )
+        Log.i("PAE_UI", "template asset load -> $templateAssetOk")
 
         val root = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
         val surface = AvatarSurfaceView(this)

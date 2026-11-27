@@ -62,6 +62,10 @@ void EngineRuntime::setDebugView(int view) {
     if (renderThread_) renderThread_->postDebugView(view);
 }
 
+void EngineRuntime::setTemplateBytes(std::string bytes) {
+    if (renderThread_) renderThread_->postTemplateBytes(std::move(bytes));
+}
+
 void EngineRuntime::cameraCommand(int op, const Vec3& delta) {
     if (renderThread_) renderThread_->postCameraOrbit(op, delta);
 }

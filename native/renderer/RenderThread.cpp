@@ -663,6 +663,15 @@ void RenderThread::postDebugView(int view) {
     queueCv_.notify_one();
 }
 
+void RenderThread::postTemplateBytes(std::string bytes) {
+    RenderCommand command;
+    command.type = RenderCommandType::SetTemplateBytes;
+    command.text = std::move(bytes);
+    std::lock_guard<std::mutex> lock(queueMutex_);
+    queue_.push_back(command);
+    queueCv_.notify_one();
+}
+
 void RenderThread::postQuality(int level) {
     RenderCommand command;
     command.type = RenderCommandType::SetQuality;
@@ -869,6 +878,12 @@ void RenderThread::processCommands() {
             case RenderCommandType::DebugView:
                 debugView_ = command.value;
                 PAE_LOGI("PAE_RENDER", "applied debugView=%d", debugView_);
+                break;
+            case RenderCommandType::SetTemplateBytes:
+                templateAssetBytes_ = command.text;
+                hasTemplateAssetBytes_ = !templateAssetBytes_.empty();
+                PAE_LOGI("PAE_RENDER", "template asset bytes received: %zu",
+                         templateAssetBytes_.size());
                 break;
             case RenderCommandType::SetQuality: {
                 const int level = command.value;
@@ -1440,9 +1455,11 @@ bool RenderThread::ensureCanonicalGeometry(int detailLevel) {
 }
 
 bool RenderThread::ensureTemplateGeometry() {
-    // VR-1B WP2: read-only static human template. The file is pushed to the
-    // device (adb) or bundled later via AAssetManager (needs additive JNI
-    // authorization, out of WP2 scope). No new JNI function is used here.
+    // VR-1B WP2/WP2.1: read-only static human template. Normal operation loads
+    // the .paht from APK assets (bytes delivered by the additive JNI entry
+    // nativeLoadTemplateAsset). A pushed dev file at kTemplatePath overrides
+    // the asset when present (rejection testing). No new JNI signature was
+    // added to the frozen surface; the asset entry is purely additive.
     constexpr const char* kTemplatePath = "/data/local/tmp/pae-human-base.paht";
     const auto started = std::chrono::steady_clock::now();
 
@@ -1464,11 +1481,38 @@ bool RenderThread::ensureTemplateGeometry() {
         return true;
     }
 
+    // Source selection (WP2.1): a pushed dev file overrides the APK asset so
+    // rejection tests can inject corrupted bytes; otherwise the asset bytes
+    // delivered by the additive JNI entry are used. No external file is
+    // required for normal operation.
+    std::string bytes;
+    const char* source = nullptr;
+    if (std::FILE* f = std::fopen(kTemplatePath, "rb")) {
+        char buffer[65536];
+        size_t n = 0;
+        while ((n = std::fread(buffer, 1, sizeof(buffer), f)) > 0) bytes.append(buffer, n);
+        const bool readError = std::ferror(f) != 0;
+        std::fclose(f);
+        if (readError) {
+            templateStatus_ = "template=file-read-error";
+            PAE_LOGE("PAE_RENDER", "human template dev-file read error: %s", kTemplatePath);
+            return false;
+        }
+        source = "file";
+    } else if (hasTemplateAssetBytes_) {
+        bytes = templateAssetBytes_;
+        source = "asset";
+    } else {
+        templateStatus_ = "template=no-source";
+        PAE_LOGE("PAE_RENDER", "human template has no source: asset not loaded and no dev file");
+        return false;
+    }
+
     human_template::HumanTemplate t;
     std::string error;
-    if (!human_template::loadTemplateFile(kTemplatePath, t, error)) {
-        templateStatus_ = "template=rejected (" + error + ")";
-        PAE_LOGE("PAE_RENDER", "human template rejected: %s path=%s", error.c_str(), kTemplatePath);
+    if (!human_template::loadTemplateBytes(bytes, t, error)) {
+        templateStatus_ = std::string("template=rejected (") + error + ") source=" + source;
+        PAE_LOGE("PAE_RENDER", "human template rejected: %s source=%s", error.c_str(), source);
         return false;
     }
     MeshData mesh;
@@ -1511,14 +1555,15 @@ bool RenderThread::ensureTemplateGeometry() {
         BonePaletteUboData::kBytes));
     const double ms = std::chrono::duration<double, std::milli>(
         std::chrono::steady_clock::now() - started).count();
-    templateStatus_ = "template=loaded verts=" + std::to_string(report.vertexCount) +
+    templateStatus_ = std::string("template=loaded source=") + source +
+                      " verts=" + std::to_string(report.vertexCount) +
                       " tris=" + std::to_string(report.triangleCount);
     // v3 is deterministic, so re-serializing reproduces the exact file bytes:
     // this hash identifies the loaded asset in the device log.
     const std::string assetSha = human_template::sha256Hex(human_template::serializeTemplate(t));
     PAE_LOGI("PAE_RENDER",
-             "human template ready: verts=%u tris=%u quads=%u degenerate=%u ground_offset=%.4f load_ms=%.0f sha256=%s",
-             report.vertexCount, report.triangleCount, report.quadCount, report.degenerateTriangles,
+             "human template ready: source=%s verts=%u tris=%u quads=%u degenerate=%u ground_offset=%.4f load_ms=%.0f sha256=%s",
+             source, report.vertexCount, report.triangleCount, report.quadCount, report.degenerateTriangles,
              groundOffset, ms, assetSha.c_str());
     return true;
 }
