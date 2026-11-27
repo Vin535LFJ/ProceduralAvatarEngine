@@ -72,6 +72,15 @@ if(PAE_REPO)
   )
   target_include_directories(pae_ht_compiler PRIVATE "${PAE_NATIVE}")
   target_link_libraries(pae_ht_compiler PRIVATE pae_ht)
+
+  # WP3 host-only shape study: parameter calibration + named body types.
+  add_executable(pae_wp3_shape_study
+    src/wp3_shape_study_main.cpp
+    "${PAE_NATIVE}/procedural/human_template/PAEHumanTemplateFormat.cpp"
+    "${PAE_NATIVE}/procedural/human_template/HumanTemplateLoader.cpp"
+  )
+  target_include_directories(pae_wp3_shape_study PRIVATE "${PAE_NATIVE}")
+  target_link_libraries(pae_wp3_shape_study PRIVATE pae_ht)
 else()
   message(STATUS "PAE_REPO not set: PNG output and PAE clay cross-check are disabled")
 endif()

@@ -1,0 +1,7 @@
+﻿cmake : make: *** No rule to make target 'pae_wp3_shape_study'.  Stop.
+At line:1 char:82
++ ... lewarning'; cmake --build "$ws\build-host\human-template-poc" -j 8 -- ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (make: *** No ru..._study'.  Stop.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
