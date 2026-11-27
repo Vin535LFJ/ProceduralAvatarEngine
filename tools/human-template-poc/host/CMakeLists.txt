@@ -62,6 +62,16 @@ if(PAE_REPO)
   target_include_directories(pae_evidence PUBLIC "${PAE_NATIVE}")
   target_compile_definitions(pae_evidence PUBLIC PAE_HT_WITH_PAE_EVIDENCE=1)
   target_link_libraries(pae_ht PUBLIC pae_evidence)
+
+  # WP1 compiler: emits the productized PAHT v3 container. The v3 format module
+  # is compiled directly from native/ (same read-only pattern as pae_evidence);
+  # it is also part of pae_core for the Android loader and host unit tests.
+  add_executable(pae_ht_compiler
+    src/wp1_compiler_main.cpp
+    "${PAE_NATIVE}/procedural/human_template/PAEHumanTemplateFormat.cpp"
+  )
+  target_include_directories(pae_ht_compiler PRIVATE "${PAE_NATIVE}")
+  target_link_libraries(pae_ht_compiler PRIVATE pae_ht)
 else()
   message(STATUS "PAE_REPO not set: PNG output and PAE clay cross-check are disabled")
 endif()

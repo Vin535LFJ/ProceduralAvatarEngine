@@ -1,0 +1,53 @@
+﻿[ 21%] Built target pae_core
+[ 23%] Built target pae_poc_sm_cross_seam_tests
+[ 24%] Built target pae_core_tests
+[ 25%] Built target pae_fusion_tests
+[ 33%] Built target pae_poc_sm_envelope_tests
+[ 39%] Built target pae_poc_route_tests
+[ 40%] Built target pae_character_patch_tests
+[ 48%] Built target poc_sm_measure_probe
+[ 49%] Built target pae_geometry_tests
+[35m[1mConsolidate compiler generated dependencies of target pae_human_template_views_probe[0m
+[ 50%] Built target pae_canonical_skin_tests
+[ 56%] Built target poc_route_probe
+[ 57%] Built target pae_smooth_union_sign_tests
+[ 59%] Built target pae_human_template_views_probe
+[35m[1mConsolidate compiler generated dependencies of target pae_render_data_tests[0m
+[35m[1mConsolidate compiler generated dependencies of target pae_anatomy_tests[0m
+[ 60%] Built target pae_face_hair_tests
+[35m[1mConsolidate compiler generated dependencies of target pae_humanoid_tests[0m
+[ 61%] Built target pae_render_data_tests
+[ 62%] Built target pae_anatomy_tests
+[ 64%] Built target pae_humanoid_tests
+[35m[1mConsolidate compiler generated dependencies of target pae_skinning_tests[0m
+[35m[1mConsolidate compiler generated dependencies of target pae_motion_tests[0m
+[35m[1mConsolidate compiler generated dependencies of target pae_vr_torso_shoulder_tests[0m
+[ 65%] Built target pae_skinning_tests
+[35m[1mConsolidate compiler generated dependencies of target pae_poc_sm_semantics_tests[0m
+[ 67%] Built target pae_vr_torso_shoulder_tests
+[ 68%] Built target pae_motion_tests
+[ 71%] Built target pae_poc_sm_semantics_tests
+[35m[1mConsolidate compiler generated dependencies of target pae_poc_sm_param_diff_tests[0m
+[35m[1mConsolidate compiler generated dependencies of target poc_sm_cross_seam_probe[0m
+[35m[1mConsolidate compiler generated dependencies of target pae_proportion_probe[0m
+[35m[1mConsolidate compiler generated dependencies of target poc_fair_comparison_probe[0m
+[ 72%] Built target pae_proportion_probe
+[ 78%] Built target poc_fair_comparison_probe
+[ 80%] Built target poc_sm_cross_seam_probe
+[ 83%] Built target pae_poc_sm_param_diff_tests
+[35m[1mConsolidate compiler generated dependencies of target pae_poc_sm_contract_tests[0m
+[35m[1mConsolidate compiler generated dependencies of target pae_poc_sm_seam_tests[0m
+[35m[1mConsolidate compiler generated dependencies of target poc_sm_param_probe[0m
+[35m[1mConsolidate compiler generated dependencies of target poc_sm_views_probe[0m
+[ 84%] Built target pae_poc_sm_contract_tests
+[ 86%] Built target pae_poc_sm_seam_tests
+[ 95%] Built target poc_sm_views_probe
+[ 98%] Built target poc_sm_param_probe
+[35m[1mConsolidate compiler generated dependencies of target pae_human_template_format_tests[0m
+[35m[1mConsolidate compiler generated dependencies of target pae_base_human_canonical_tests[0m
+[ 98%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_human_template_format_tests.dir/unit/human_template_format_tests.cpp.obj[0m
+[ 98%] [32mBuilding CXX object pae_tests/CMakeFiles/pae_base_human_canonical_tests.dir/unit/base_human_canonical_tests.cpp.obj[0m
+[ 99%] [32m[1mLinking CXX executable pae_base_human_canonical_tests.exe[0m
+[ 99%] Built target pae_base_human_canonical_tests
+[100%] [32m[1mLinking CXX executable pae_human_template_format_tests.exe[0m
+[100%] Built target pae_human_template_format_tests

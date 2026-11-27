@@ -1,0 +1,16 @@
+﻿pae_human_template_views_probe.exe : [error] write failed: C:\Users\Giant\AppData\Local\Temp\qwenwork\pae-wp1\views2/te
+mplate-front.png
+At line:1 char:1238
++ ... probe log"; & "$ws\build-host-ws\pae_tests\pae_human_template_views_p ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([error] write f...plate-front.png:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[error] write failed: C:\Users\Giant\AppData\Local\Temp\qwenwork\pae-wp1\views2/template-front-45-left.png
+[error] write failed: C:\Users\Giant\AppData\Local\Temp\qwenwork\pae-wp1\views2/template-side-left.png
+[error] write failed: C:\Users\Giant\AppData\Local\Temp\qwenwork\pae-wp1\views2/template-side-left-30up.png
+[error] write failed: C:\Users\Giant\AppData\Local\Temp\qwenwork\pae-wp1\views2/template-back.png
+[error] write failed: C:\Users\Giant\AppData\Local\Temp\qwenwork\pae-wp1\views2/template-back-45-right.png
+[error] write failed: C:\Users\Giant\AppData\Local\Temp\qwenwork\pae-wp1\views2/template-front-30up.png
+[probe] verts=13380 tris=26756 quads=13378 degenerate=0
+[done] 0/7 views written

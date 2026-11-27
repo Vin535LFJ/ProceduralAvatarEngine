@@ -1,0 +1,24 @@
+﻿[load] base.obj: v=19158 vt=21334 f=18486 groups=139 sha256=8e761e6624b8f54536409135d1636da63b32486a90d4897f84e121d144f6fb4c (75 ms)
+[load] body group: 13380 stable vertex ids (0..13379, contiguous prefix = yes), 13378 quads
+[targets] index base probe on targets/head/head-trans-up.target: spread(0-based)=0.458 m spread(1-based)=1.872 m -> using 0-based indices
+[targets] shoulderWidth incr=measure-shoulder-dist-incr.target rows=5568 moved=5568 (helper/joint 1044) | decr=measure-shoulder-dist-decr.target rows=5920 moved=5920
+[targets] ribcageWidth  incr=torso-scale-horiz-incr.target rows=7196 moved=7196 (helper/joint 1670) | decr=torso-scale-horiz-decr.target rows=7836 moved=7836
+[targets] chestDepth    incr=torso-scale-depth-incr.target rows=2651 moved=2651 (helper/joint 1061) | decr=torso-scale-depth-decr.target rows=2831 moved=2831
+[targets] waistWidth    incr=measure-waist-circ-incr.target rows=1518 moved=1518 (helper/joint 656) | decr=measure-waist-circ-decr.target rows=1518 moved=1518
+[targets] hipWidth      incr=measure-hips-circ-incr.target rows=1418 moved=1418 (helper/joint 711) | decr=measure-hips-circ-decr.target rows=1387 moved=1387
+[targets] armShape      incr=r-upperarm-muscle-incr.target rows=638 moved=638 (helper/joint 220) | decr=r-upperarm-muscle-decr.target rows=642 moved=642
+[targets] legShape      incr=r-upperleg-muscle-incr.target rows=948 moved=948 (helper/joint 424) | decr=r-upperleg-muscle-decr.target rows=862 moved=862
+[targets] headShape     incr=head-scale-horiz-incr.target rows=5240 moved=5240 (helper/joint 1080) | decr=head-scale-horiz-decr.target rows=5210 moved=5210
+[targets] stature       incr=male-young-averagemuscle-averageweight-maxheight.target rows=19150 moved=19150 (helper/joint 5770) | decr=male-young-averagemuscle-averageweight-minheight.target rows=19150 moved=19150
+[rig] MakeHuman default skeleton v110 license=CC0 bones=163 joints=326 planes=163 unresolvedJoints=0
+[rig] PAE Rig V2 deform skeleton: 102 bones; core variant: 20 bones
+[regions] head=2723 neck=1502 thorax=741 abdomen=333 pelvis=463 shoulder-girdle=374 upper-arm=603 forearm=398 hand=3136 thigh=644 lower-leg=311 foot=2152
+[load] done in 217 ms
+[compiler] body verts=13380 quads=13378 aux=5778 core bones=20
+[weights] pae-distance core rig: vertices=19158 meanInfluences=1.989 minSum=1.0000 maxSum=1.0000 unweighted=0 ms=12
+[template-v3] 4054264 bytes sha256 d3bcbbece3db11c0df79cb7202fdf1730b325108509d60ad9faa209a8a5e417b roundtrip=byte-identical
+[template-v3] body=13380 quads=13378 aux=5778 landmarks=46 targets=18 bones=20 regions=13380
+[template-v3] convertedAtUtc (log only, NOT in file): 2026-11-27T05:34:22Z
+[done] C:\Users\Giant\AppData\Local\Temp\qwenwork\pae-wp1\run3.paht
+
+[reproducibility] run1=d3bcbbece3db11c0df79cb7202fdf1730b325108509d60ad9faa209a8a5e417b run3=d3bcbbece3db11c0df79cb7202fdf1730b325108509d60ad9faa209a8a5e417b identical=True

@@ -8,6 +8,8 @@
 #include "procedural/humanoid/canonical/ContinuousSkinGenerator.h"
 #include "procedural/character/TorsoShoulderPatchGenerator.h"
 #include "procedural/humanoid/anatomy/HumanAnatomyGenerator.h"
+#include "procedural/human_template/BaseHumanRenderMeshBuilder.h"
+#include "procedural/human_template/HumanTemplateLoader.h"
 #include "skeleton/Skinning.h"
 
 #include <algorithm>
@@ -627,7 +629,7 @@ void RenderThread::postAnatomyPreview(bool on) {
 void RenderThread::postPreviewMode(int mode) {
     RenderCommand command;
     command.type = RenderCommandType::SetPreviewMode;
-    command.value = std::clamp(mode, 0, 3);
+    command.value = std::clamp(mode, 0, 4);
     std::lock_guard<std::mutex> lock(queueMutex_);
     queue_.push_back(command);
     queueCv_.notify_one();
@@ -679,7 +681,7 @@ std::string RenderThread::getStats() const {
                   cameraYawDeg_, cameraPitchDeg_, cameraDistance_,
                   cameraFree_ ? "free" : "preset");
     return stats_.toString() + " avatar_rev=" + std::to_string(avatarRevision_) +
-           " scene_rev=" + std::to_string(sceneRevision_) + camera + " " + startupError_;
+           " scene_rev=" + std::to_string(sceneRevision_) + camera + " " + templateStatus_ + " " + startupError_;
 }
 
 void RenderThread::run() {
@@ -844,6 +846,11 @@ void RenderThread::processCommands() {
                     PAE_LOGE("PAE_RENDER", "canonical body generation or upload failed");
                     break;
                 }
+                if (command.value == 4 && !ensureTemplateGeometry()) {
+                    PAE_LOGE("PAE_RENDER", "human template load or upload failed: %s",
+                             templateStatus_.c_str());
+                    break;
+                }
                 if (!activatePreviewGpuResources(command.value)) {
                     PAE_LOGE("PAE_RENDER", "preview GPU resource activation failed mode=%d", command.value);
                     break;
@@ -868,6 +875,13 @@ void RenderThread::processCommands() {
                 if (level < 0 || level > 2) break;
                 const QualityLevel quality = static_cast<QualityLevel>(level);
                 const int detailLevel = detailLevelForQuality(quality);
+                if (previewMode_ == 4) {
+                    // Static template: quality levels do not rebuild it.
+                    qualityLevel_ = level;
+                    PAE_LOGI("PAE_RENDER", "quality=%s static human template (no rebuild)",
+                             qualityName(quality));
+                    break;
+                }
                 if (previewMode_ == 3) {
                     if (ensureCanonicalGeometry(detailLevel)) {
                         qualityLevel_ = level;
@@ -1171,11 +1185,29 @@ bool RenderThread::ensureResources(std::string* error) {
         return false;
     }
 
+    if (previewMode_ == 4 && !ensureTemplateGeometry()) {
+        if (error) *error = "human template load failed";
+        return false;
+    }
+
     resourcesReady_ = true;
     return true;
 }
 
 bool RenderThread::activatePreviewGpuResources(int mode) {
+    if (mode == 4) {
+        if (!templateMesh_.valid()) return false;
+        avatarMesh_.release();
+        avatarLines_.release();
+        anatomyMesh_.release();
+        anatomyLines_.release();
+        p1aMesh_.release();
+        p1aLines_.release();
+        canonicalMesh_.release();
+        canonicalLines_.release();
+        canonicalUvMesh_.release();
+        return true;
+    }
     if (mode == 3) {
         if (!canonicalMesh_.valid() || !canonicalLines_.valid() || !canonicalUvMesh_.hasUv()) {
             return false;
@@ -1186,6 +1218,8 @@ bool RenderThread::activatePreviewGpuResources(int mode) {
         anatomyLines_.release();
         p1aMesh_.release();
         p1aLines_.release();
+        templateMesh_.release();
+        templateLines_.release();
         return true;
     }
 
@@ -1232,6 +1266,8 @@ bool RenderThread::activatePreviewGpuResources(int mode) {
     canonicalMesh_.release();
     canonicalLines_.release();
     canonicalUvMesh_.release();
+    templateMesh_.release();
+    templateLines_.release();
     if (mode == 0) {
         avatarMesh_ = std::move(nextMesh);
         avatarLines_ = std::move(nextLines);
@@ -1400,6 +1436,90 @@ bool RenderThread::ensureCanonicalGeometry(int detailLevel) {
              static_cast<unsigned>(cachedCanonicalMesh_.indices.size() / 3),
              cachedCanonicalRenderMesh_.vertices.size(),
              cachedCanonicalRenderMesh_.indices.size() / 3, ms);
+    return true;
+}
+
+bool RenderThread::ensureTemplateGeometry() {
+    // VR-1B WP2: read-only static human template. The file is pushed to the
+    // device (adb) or bundled later via AAssetManager (needs additive JNI
+    // authorization, out of WP2 scope). No new JNI function is used here.
+    constexpr const char* kTemplatePath = "/data/local/tmp/pae-human-base.paht";
+    const auto started = std::chrono::steady_clock::now();
+
+    if (hasCachedTemplate_) {
+        SkinnedGpuMesh nextMesh;
+        SkinnedGpuMesh nextLines;
+        if (!nextMesh.upload(cachedTemplateMesh_) ||
+            !nextLines.upload(buildAnatomyLineMesh(cachedTemplateMesh_))) {
+            templateStatus_ = "template=reupload-failed";
+            PAE_LOGE("PAE_RENDER", "template re-upload failed gl_error=0x%x",
+                     static_cast<unsigned>(nextMesh.lastError()));
+            return false;
+        }
+        templateMesh_ = std::move(nextMesh);
+        templateLines_ = std::move(nextLines);
+        templateStatus_ = "template=cached verts=" + std::to_string(cachedTemplateMesh_.vertices.size());
+        PAE_LOGI("PAE_RENDER", "geometry cache hit: human template (%u tris)",
+                 static_cast<unsigned>(cachedTemplateMesh_.indices.size() / 3));
+        return true;
+    }
+
+    human_template::HumanTemplate t;
+    std::string error;
+    if (!human_template::loadTemplateFile(kTemplatePath, t, error)) {
+        templateStatus_ = "template=rejected (" + error + ")";
+        PAE_LOGE("PAE_RENDER", "human template rejected: %s path=%s", error.c_str(), kTemplatePath);
+        return false;
+    }
+    MeshData mesh;
+    human_template::StaticRenderMeshReport report;
+    if (!human_template::buildStaticRenderMesh(t, mesh, report, error)) {
+        templateStatus_ = "template=mesh-failed (" + error + ")";
+        PAE_LOGE("PAE_RENDER", "human template mesh failed: %s", error.c_str());
+        return false;
+    }
+    // Ground the body: the source mesh is centred on the origin; the scene
+    // convention (all other modes) is feet at y~0. Pure translation.
+    const float groundOffset = -mesh.bounds.min.y;
+    Aabb grounded;
+    for (Vertex& v : mesh.vertices) {
+        v.position.y += groundOffset;
+        grounded.expand(v.position);
+    }
+    mesh.bounds = grounded;
+
+    SkinnedGpuMesh nextMesh;
+    SkinnedGpuMesh nextLines;
+    if (!nextMesh.upload(mesh)) {
+        templateStatus_ = "template=upload-failed";
+        PAE_LOGE("PAE_RENDER", "human template upload failed gl_error=0x%x",
+                 static_cast<unsigned>(nextMesh.lastError()));
+        return false;
+    }
+    if (!nextLines.upload(buildAnatomyLineMesh(mesh))) {
+        templateStatus_ = "template=wire-upload-failed";
+        PAE_LOGE("PAE_RENDER", "human template wireframe upload failed");
+        return false;
+    }
+    templateMesh_ = std::move(nextMesh);
+    templateLines_ = std::move(nextLines);
+    cachedTemplateMesh_ = std::move(mesh);
+    hasCachedTemplate_ = true;
+    stats_.setBufferBytes(static_cast<uint64_t>(
+        cachedTemplateMesh_.vertices.size() * 64 +
+        cachedTemplateMesh_.indices.size() * sizeof(uint32_t) +
+        BonePaletteUboData::kBytes));
+    const double ms = std::chrono::duration<double, std::milli>(
+        std::chrono::steady_clock::now() - started).count();
+    templateStatus_ = "template=loaded verts=" + std::to_string(report.vertexCount) +
+                      " tris=" + std::to_string(report.triangleCount);
+    // v3 is deterministic, so re-serializing reproduces the exact file bytes:
+    // this hash identifies the loaded asset in the device log.
+    const std::string assetSha = human_template::sha256Hex(human_template::serializeTemplate(t));
+    PAE_LOGI("PAE_RENDER",
+             "human template ready: verts=%u tris=%u quads=%u degenerate=%u ground_offset=%.4f load_ms=%.0f sha256=%s",
+             report.vertexCount, report.triangleCount, report.quadCount, report.degenerateTriangles,
+             groundOffset, ms, assetSha.c_str());
     return true;
 }
 
@@ -1578,6 +1698,8 @@ void RenderThread::releaseGpuResources() {
     // CPU-side mesh stays in the geometry cache for a fast re-upload.
     anatomyMesh_.release();
     anatomyLines_.release();
+    templateMesh_.release();
+    templateLines_.release();
     boneUbo_.release();
     if (validationProgram_ != 0) glDeleteProgram(validationProgram_);
     validationProgram_ = 0;
@@ -1792,8 +1914,9 @@ void RenderThread::drawFrame() {
 
     const int64_t nowNs = std::chrono::duration_cast<std::chrono::nanoseconds>(
         std::chrono::steady_clock::now().time_since_epoch()).count();
-    if (previewMode_ == 1) {
-        // SDF anatomy preview shows raw bind-pose geometry: identity palette.
+    if (previewMode_ == 1 || previewMode_ == 4) {
+        // SDF anatomy preview and the static human template both show raw
+        // bind-pose geometry: identity palette.
         for (uint16_t bone = 0; bone < BoneCount; ++bone) {
             paletteData_.writeBone(bone, Mat4{});
         }
@@ -1824,7 +1947,7 @@ void RenderThread::drawFrame() {
     // World-space reference grid. Drawn before the character so the avatar
     // occludes it, and in world space so the free camera reads the scene in
     // metres instead of against an empty backdrop.
-    if (previewMode_ == 0 || previewMode_ == 3) {
+    if (previewMode_ == 0 || previewMode_ == 3 || previewMode_ == 4) {
         const Mat4 identity = Mat4{};
         shadowProgram_.use();
         glUniformMatrix4fv(uniformShadowViewProj_, 1, GL_FALSE, viewProjection.m.data());
@@ -1960,6 +2083,34 @@ void RenderThread::drawFrame() {
             glDepthRangef(0.0f, 1.0f);
         }
         }
+    } else if (previewMode_ == 4) {
+        // VR-1B WP2: static full-body human template. Gray clay by default
+        // (the morphology acceptance view), normals and wireframe as debug.
+        if (debugView_ == 2) {
+            anatomyNormalProg_.use();
+            glUniformMatrix4fv(uniformAnatomyNormalViewProj_, 1, GL_FALSE, viewProjection.m.data());
+            glUniformMatrix4fv(uniformAnatomyNormalModel_, 1, GL_FALSE, model.m.data());
+            glUniformMatrix3fv(uniformAnatomyNormalNormalMatrix_, 1, GL_FALSE, normalMatrix.m.data());
+            templateMesh_.draw();
+        } else {
+            anatomyClayProg_.use();
+            glUniformMatrix4fv(uniformAnatomyClayViewProj_, 1, GL_FALSE, viewProjection.m.data());
+            glUniformMatrix4fv(uniformAnatomyClayModel_, 1, GL_FALSE, model.m.data());
+            glUniformMatrix3fv(uniformAnatomyClayNormalMatrix_, 1, GL_FALSE, normalMatrix.m.data());
+            glUniform3f(uniformAnatomyClayNeutral_, 0.62f, 0.62f, 0.64f);
+            glUniform3f(uniformAnatomyClayKeyDir_, 0.45f, 0.75f, 0.48f);
+            glUniform3f(uniformAnatomyClayFillDir_, -0.55f, 0.15f, 0.35f);
+            templateMesh_.draw();
+            if (debugView_ == 1) {
+                glDepthRangef(0.0f, 0.0f);
+                skinnedLineProgram_.use();
+                glUniformMatrix4fv(uniformLineViewProj_, 1, GL_FALSE, viewProjection.m.data());
+                glUniformMatrix4fv(uniformLineModel_, 1, GL_FALSE, model.m.data());
+                glUniform4f(uniformLineColor_, 0.05f, 0.35f, 0.08f, 1.0f);
+                templateLines_.drawLines();
+                glDepthRangef(0.0f, 1.0f);
+            }
+        }
     } else {
         // M12-A anatomy preview: neutral study material + optional wireframe
         // / normals debug views; bind pose; no outline, no clothing.
@@ -2010,10 +2161,11 @@ void RenderThread::drawFrame() {
 
     egl_.swapBuffers();
     uint32_t frameDraws = previewMode_ == 2 ? 2u : 3u;
-    if (previewMode_ == 0 || previewMode_ == 3) frameDraws += 2;
+    if (previewMode_ == 0 || previewMode_ == 3 || previewMode_ == 4) frameDraws += 2;
     if ((previewMode_ == 0 && (debugView_ == 1 || debugView_ == 6)) ||
         (previewMode_ == 3 && debugView_ == 1) ||
         (previewMode_ == 2 && debugView_ == 1) ||
+        (previewMode_ == 4 && debugView_ == 1) ||
         (previewMode_ == 1 && (debugView_ == 1 || debugView_ == 3))) {
         ++frameDraws;
     }
@@ -2023,7 +2175,9 @@ void RenderThread::drawFrame() {
             ? static_cast<uint32_t>(p1aMesh_.indexCount() / 3)
             : (previewMode_ == 3
                 ? static_cast<uint32_t>(canonicalMesh_.indexCount() / 3)
-                : static_cast<uint32_t>(anatomyMesh_.indexCount() / 3)));
+                : (previewMode_ == 4
+                    ? static_cast<uint32_t>(templateMesh_.indexCount() / 3)
+                    : static_cast<uint32_t>(anatomyMesh_.indexCount() / 3))));
     stats_.endFrame(frameDraws, frameTris);
     if (stats_.frameCount() % 120 == 0) {
         PAE_LOGI("PAE_STATS", "%s", stats_.toString().c_str());

@@ -1,0 +1,35 @@
+﻿pae_human_template_format_tests.exe : [ RUN ] v3_sha256_known_vector
+At line:1 char:794
++ ... counts"; $f=& "$ws\build-host-ws\pae_tests\pae_human_template_format_ ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([ RUN ] v3_sha256_known_vector:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[  OK ] v3_sha256_known_vector
+[ RUN ] v3_roundtrip_byte_identical
+[  OK ] v3_roundtrip_byte_identical
+[ RUN ] v3_serialize_deterministic
+[  OK ] v3_serialize_deterministic
+[ RUN ] v3_reject_bad_magic
+[  OK ] v3_reject_bad_magic
+[ RUN ] v3_reject_bad_version
+[  OK ] v3_reject_bad_version
+[ RUN ] v3_reject_payload_tamper
+[  OK ] v3_reject_payload_tamper
+[ RUN ] v3_reject_truncated
+[  OK ] v3_reject_truncated
+[ RUN ] v3_reject_trailing_bytes
+[  OK ] v3_reject_trailing_bytes
+[ RUN ] v3_reject_bad_face_index
+[  OK ] v3_reject_bad_face_index
+[ RUN ] v3_reject_bad_region
+[  OK ] v3_reject_bad_region
+[ RUN ] v3_reject_weights_not_covering
+[  OK ] v3_reject_weights_not_covering
+[ RUN ] v3_reject_unknown_weight_bone
+[  OK ] v3_reject_unknown_weight_bone
+[ RUN ] v3_load_missing_file
+[  OK ] v3_load_missing_file
+[ RUN ] v3_real_asset_load_and_counts
+[  OK ] v3_real_asset_load_and_counts
+14 cases, 0 failures

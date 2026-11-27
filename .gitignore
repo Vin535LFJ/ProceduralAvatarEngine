@@ -16,3 +16,5 @@ captures/
 .cxx/
 .zcode/
 *.hprof
+build-host-ws/
+

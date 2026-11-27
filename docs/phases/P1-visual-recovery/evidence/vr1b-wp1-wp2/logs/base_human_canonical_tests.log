@@ -1,0 +1,22 @@
+﻿pae_base_human_canonical_tests.exe : [ RUN ] static_mesh_two_quads_become_four_triangles
+At line:1 char:871
++ ... e" 2>&1; $r=& "$ws\build-host-ws\pae_tests\pae_base_human_canonical_t ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([ RUN ] static_..._four_triangles:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[  OK ] static_mesh_two_quads_become_four_triangles
+[ RUN ] static_mesh_normals_unit_and_outward
+[  OK ] static_mesh_normals_unit_and_outward
+[ RUN ] static_mesh_static_skinning_fields
+[  OK ] static_mesh_static_skinning_fields
+[ RUN ] static_mesh_uv_and_bounds
+[  OK ] static_mesh_uv_and_bounds
+[ RUN ] static_mesh_deterministic
+[  OK ] static_mesh_deterministic
+[ RUN ] static_mesh_rejects_empty
+[  OK ] static_mesh_rejects_empty
+[ RUN ] static_mesh_real_asset_full_body
+[info] real asset mesh: verts=13380 tris=26756 degenerate=0 boundsY=[-0.8168, 0.8491]
+[  OK ] static_mesh_real_asset_full_body
+7 cases, 0 failures

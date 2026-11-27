@@ -40,6 +40,9 @@ set(PAE_CORE_SOURCES
     procedural/character/LodCorrespondence.cpp
     procedural/character/RegionWeightGenerator.cpp
     procedural/character/TorsoShoulderPatchGenerator.cpp
+    procedural/human_template/PAEHumanTemplateFormat.cpp
+    procedural/human_template/HumanTemplateLoader.cpp
+    procedural/human_template/BaseHumanRenderMeshBuilder.cpp
     skeleton/Skeleton.cpp
     skeleton/Skinning.cpp
     skeleton/weights/WeightGenerator.cpp

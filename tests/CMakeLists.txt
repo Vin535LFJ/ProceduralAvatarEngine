@@ -175,3 +175,26 @@ add_test(NAME pae_poc_sm_semantics_tests COMMAND pae_poc_sm_semantics_tests)
 add_executable(poc_sm_views_probe unit/poc_sm_views_probe.cpp
     ${PAE_POC_SHAPE_SOURCES} ${PAE_POC_SHAPE_V2_SOURCES})
 target_link_libraries(poc_sm_views_probe PRIVATE pae_core)
+
+# VR-1B WP1/WP2: PAHT v3 format + static render mesh tests, and the host
+# seven-view evidence probe for the distributed human template asset.
+set(PAE_TEMPLATE_ASSET_PATH
+    "${CMAKE_CURRENT_SOURCE_DIR}/../app/src/main/assets/human_template/pae-human-base-mh-a8bc2d54.paht")
+
+add_executable(pae_human_template_format_tests unit/human_template_format_tests.cpp)
+target_include_directories(pae_human_template_format_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/harness)
+target_compile_definitions(pae_human_template_format_tests PRIVATE PAE_TEMPLATE_ASSET_PATH="${PAE_TEMPLATE_ASSET_PATH}")
+target_link_libraries(pae_human_template_format_tests PRIVATE pae_core)
+add_test(NAME pae_human_template_format_tests COMMAND pae_human_template_format_tests)
+
+add_executable(pae_base_human_canonical_tests unit/base_human_canonical_tests.cpp)
+target_include_directories(pae_base_human_canonical_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/harness)
+target_compile_definitions(pae_base_human_canonical_tests PRIVATE PAE_TEMPLATE_ASSET_PATH="${PAE_TEMPLATE_ASSET_PATH}")
+target_link_libraries(pae_base_human_canonical_tests PRIVATE pae_core)
+add_test(NAME pae_base_human_canonical_tests COMMAND pae_base_human_canonical_tests)
+
+add_executable(pae_human_template_views_probe unit/human_template_views_probe.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../native/procedural/shape/CameraProtocol.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../native/procedural/shape/ClayRenderer.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../native/procedural/shape/ImageWriter.cpp)
+target_link_libraries(pae_human_template_views_probe PRIVATE pae_core)

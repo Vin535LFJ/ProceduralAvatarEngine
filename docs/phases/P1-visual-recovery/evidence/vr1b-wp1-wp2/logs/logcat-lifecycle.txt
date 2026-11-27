@@ -1,0 +1,74 @@
+﻿--------- beginning of main
+11-27 13:28:37.850 22375 22395 I PAE_STATS: frames=360 fps=50.4 frame_ms=19.84 draw_calls=5 triangles=26756 buffer_bytes=1178800 p50_ms=19.70 p95_ms=22.33 p99_ms=23.10
+11-27 13:28:39.861 22511 22511 I PAE_JNI : runtime created
+11-27 13:28:39.881 22511 22530 I PAE_EGL : EGL initialized version 1.4
+11-27 13:28:39.884 22511 22530 I PAE_EGL : GLES 3.0 EGL context created
+11-27 13:28:40.314 22511 22511 I PAE_UI  : debug extras: anatomy=false preset=0 view=3 outfit=-1
+11-27 13:28:40.544 22511 22511 I PAE_SURFACE: surfaceCreated
+11-27 13:28:40.545 22511 22511 I PAE_SURFACE: surfaceChanged 1920x1008
+11-27 13:28:46.256 22511 22530 I PAE_RENDER: geometry generated: avatar
+11-27 13:28:50.677 22511 22530 I PAE_RENDER: anatomy preview ready: 36784 tris, 3815 ms
+11-27 13:28:51.089 22511 22530 I PAE_RENDER: P1-VR-1A ready: verts=1795 tris=3520 components=1 boundary=32 nonmanifold=0 gen_ms=51.2 cache=0:3:1:1:7791505080318327151:2:4294967295
+11-27 13:28:51.132 22511 22530 I PAE_RENDER: P1-VR-1A-REPORT verts=1795 tris=3520 components=1 boundary=32 nonmanifold=0 degenerate=0 badnorm=0 gen_ms=50.303 state_ms=0.209 geometry_ms=10.595 assembly_ms=36.565 weight_ms=2.799 boundaries=3
+11-27 13:28:51.157 22511 22530 I PAE_RENDER: P1-VR-1A-UPLOAD mesh_ms=8.164 wire_ms=24.383 cpu_mesh_bytes=171480 gpu_buffer_bytes=172888
+11-27 13:28:51.157 22511 22530 I PAE_RENDER: P1-VR-1A-MEMORY peak_rss_kb=288696
+11-27 13:28:51.157 22511 22530 I PAE_RENDER: surface ready 1920x1008
+11-27 13:28:51.491 22511 22530 E PAE_RENDER: human template rejected: payload hash mismatch path=/data/local/tmp/pae-human-base.paht
+11-27 13:28:51.491 22511 22530 E PAE_RENDER: human template load or upload failed: template=rejected (payload hash mismatch)
+11-27 13:28:51.491 22511 22530 I PAE_RENDER: applied cameraPreset=0
+11-27 13:28:51.491 22511 22530 I PAE_RENDER: applied debugView=3
+11-27 13:28:51.518 22511 22530 I PAE_STATS: frames=0 fps=0.0 frame_ms=0.00 draw_calls=5 triangles=59408 buffer_bytes=172888 p50_ms=0.00 p95_ms=0.00 p99_ms=0.00
+11-27 13:28:53.934 22511 22530 I PAE_STATS: frames=120 fps=48.3 frame_ms=20.70 draw_calls=5 triangles=59408 buffer_bytes=172888 p50_ms=20.29 p95_ms=23.06 p99_ms=36.81
+11-27 13:28:56.383 22511 22530 I PAE_STATS: frames=240 fps=48.7 frame_ms=20.54 draw_calls=5 triangles=59408 buffer_bytes=172888 p50_ms=20.32 p95_ms=23.05 p99_ms=36.21
+--------- beginning of system
+11-27 13:28:59.023 22639 22639 I PAE_JNI : runtime created
+11-27 13:28:59.042 22639 22658 I PAE_EGL : EGL initialized version 1.4
+11-27 13:28:59.046 22639 22658 I PAE_EGL : GLES 3.0 EGL context created
+11-27 13:28:59.496 22639 22639 I PAE_UI  : debug extras: anatomy=false preset=0 view=3 outfit=-1
+11-27 13:28:59.644 22639 22639 I PAE_SURFACE: surfaceCreated
+11-27 13:28:59.645 22639 22639 I PAE_SURFACE: surfaceChanged 1920x1008
+11-27 13:29:04.442 22639 22639 I PAE_SURFACE: surfaceDestroyed
+11-27 13:29:07.127 22639 22658 I PAE_RENDER: geometry generated: avatar
+11-27 13:29:07.522 22639 22639 I PAE_SURFACE: surfaceCreated
+11-27 13:29:07.522 22639 22639 I PAE_SURFACE: surfaceChanged 1920x1008
+11-27 13:29:11.727 22639 22658 I PAE_RENDER: anatomy preview ready: 36784 tris, 3817 ms
+11-27 13:29:12.138 22639 22658 I PAE_RENDER: P1-VR-1A ready: verts=1795 tris=3520 components=1 boundary=32 nonmanifold=0 gen_ms=52.1 cache=0:3:1:1:7791505080318327151:2:4294967295
+11-27 13:29:12.182 22639 22658 I PAE_RENDER: P1-VR-1A-REPORT verts=1795 tris=3520 components=1 boundary=32 nonmanifold=0 degenerate=0 badnorm=0 gen_ms=51.171 state_ms=0.206 geometry_ms=10.691 assembly_ms=37.332 weight_ms=2.797 boundaries=3
+11-27 13:29:12.207 22639 22658 I PAE_RENDER: P1-VR-1A-UPLOAD mesh_ms=8.162 wire_ms=24.529 cpu_mesh_bytes=171480 gpu_buffer_bytes=172888
+11-27 13:29:12.207 22639 22658 I PAE_RENDER: P1-VR-1A-MEMORY peak_rss_kb=217060
+11-27 13:29:12.207 22639 22658 I PAE_RENDER: surface ready 1920x1008
+11-27 13:29:13.950 22639 22658 I PAE_RENDER: human template ready: verts=13380 tris=26756 quads=13378 degenerate=0 ground_offset=0.8168 load_ms=1000 sha256=d3bcbbece3db11c0df79cb7202fdf1730b325108509d60ad9faa209a8a5e417b
+11-27 13:29:13.969 22639 22658 I PAE_RENDER: applied previewMode=4
+11-27 13:29:13.969 22639 22658 I PAE_RENDER: applied cameraPreset=0
+11-27 13:29:13.969 22639 22658 I PAE_RENDER: applied debugView=3
+11-27 13:29:14.000 22639 22658 I PAE_STATS: frames=0 fps=0.0 frame_ms=0.00 draw_calls=5 triangles=26756 buffer_bytes=1178800 p50_ms=0.00 p95_ms=0.00 p99_ms=0.00
+11-27 13:29:14.017 22639 22658 I PAE_EGL : EGLSurface destroyed
+11-27 13:29:14.022 22639 22658 I PAE_RENDER: geometry cache hit: avatar
+11-27 13:29:14.656 22639 22658 I PAE_RENDER: geometry cache hit: anatomy (36784 tris)
+11-27 13:29:15.013 22639 22658 I PAE_RENDER: geometry cache hit: p1a-vr (0:3:1:1:7791505080318327151:2:4294967295)
+11-27 13:29:15.057 22639 22658 I PAE_RENDER: P1-VR-1A-REPORT verts=1795 tris=3520 components=1 boundary=32 nonmanifold=0 degenerate=0 badnorm=0 gen_ms=51.171 state_ms=0.206 geometry_ms=10.691 assembly_ms=37.332 weight_ms=2.797 boundaries=3
+11-27 13:29:15.081 22639 22658 I PAE_RENDER: P1-VR-1A-UPLOAD mesh_ms=8.067 wire_ms=24.082 cpu_mesh_bytes=171480 gpu_buffer_bytes=172888
+11-27 13:29:15.081 22639 22658 I PAE_RENDER: P1-VR-1A-MEMORY peak_rss_kb=232696
+11-27 13:29:15.343 22639 22658 I PAE_RENDER: geometry cache hit: human template (26756 tris)
+11-27 13:29:15.343 22639 22658 I PAE_RENDER: surface ready 1920x1008
+11-27 13:29:17.669 22639 22658 I PAE_STATS: frames=120 fps=49.8 frame_ms=20.10 draw_calls=5 triangles=26756 buffer_bytes=172888 p50_ms=19.64 p95_ms=20.22 p99_ms=36.60
+11-27 13:29:20.720 22755 22755 I PAE_JNI : runtime created
+11-27 13:29:20.738 22755 22774 I PAE_EGL : EGL initialized version 1.4
+11-27 13:29:20.741 22755 22774 I PAE_EGL : GLES 3.0 EGL context created
+11-27 13:29:21.127 22755 22755 I PAE_UI  : debug extras: anatomy=false preset=0 view=3 outfit=-1
+11-27 13:29:21.278 22755 22755 I PAE_SURFACE: surfaceCreated
+11-27 13:29:21.278 22755 22755 I PAE_SURFACE: surfaceChanged 1920x1008
+11-27 13:29:27.002 22755 22774 I PAE_RENDER: geometry generated: avatar
+11-27 13:29:31.420 22755 22774 I PAE_RENDER: anatomy preview ready: 36784 tris, 3812 ms
+11-27 13:29:31.831 22755 22774 I PAE_RENDER: P1-VR-1A ready: verts=1795 tris=3520 components=1 boundary=32 nonmanifold=0 gen_ms=51.2 cache=0:3:1:1:7791505080318327151:2:4294967295
+11-27 13:29:31.875 22755 22774 I PAE_RENDER: P1-VR-1A-REPORT verts=1795 tris=3520 components=1 boundary=32 nonmanifold=0 degenerate=0 badnorm=0 gen_ms=50.252 state_ms=0.211 geometry_ms=10.586 assembly_ms=36.512 weight_ms=2.792 boundaries=3
+11-27 13:29:31.899 22755 22774 I PAE_RENDER: P1-VR-1A-UPLOAD mesh_ms=8.151 wire_ms=24.591 cpu_mesh_bytes=171480 gpu_buffer_bytes=172888
+11-27 13:29:31.899 22755 22774 I PAE_RENDER: P1-VR-1A-MEMORY peak_rss_kb=217020
+11-27 13:29:31.900 22755 22774 I PAE_RENDER: surface ready 1920x1008
+11-27 13:29:33.633 22755 22774 I PAE_RENDER: human template ready: verts=13380 tris=26756 quads=13378 degenerate=0 ground_offset=0.8168 load_ms=990 sha256=d3bcbbece3db11c0df79cb7202fdf1730b325108509d60ad9faa209a8a5e417b
+11-27 13:29:33.651 22755 22774 I PAE_RENDER: applied previewMode=4
+11-27 13:29:33.651 22755 22774 I PAE_RENDER: applied cameraPreset=0
+11-27 13:29:33.651 22755 22774 I PAE_RENDER: applied debugView=3
+11-27 13:29:33.668 22755 22774 I PAE_STATS: frames=0 fps=0.0 frame_ms=0.00 draw_calls=5 triangles=26756 buffer_bytes=1178800 p50_ms=0.00 p95_ms=0.00 p99_ms=0.00
+11-27 13:29:36.039 22755 22774 I PAE_STATS: frames=120 fps=54.1 frame_ms=18.47 draw_calls=5 triangles=26756 buffer_bytes=1178800 p50_ms=19.49 p95_ms=21.96 p99_ms=33.22
+11-27 13:29:38.405 22755 22774 I PAE_STATS: frames=240 fps=49.8 frame_ms=20.10 draw_calls=5 triangles=26756 buffer_bytes=1178800 p50_ms=19.67 p95_ms=22.11 p99_ms=30.55

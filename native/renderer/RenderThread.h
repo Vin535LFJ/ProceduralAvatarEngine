@@ -83,7 +83,7 @@ public:
     void postMotionReset(); // clear filters/smoothing (video seek, replay, speed change)
     void postQuality(int level); // Low=0 / Medium=1 / High=2 -> geometry detail rebuild
     void postAnatomyPreview(bool on);  // M12: unified SDF upper-body preview
-    void postPreviewMode(int mode);    // 0 avatar / 1 anatomy / 2 P1-A / 3 canonical body
+    void postPreviewMode(int mode);    // 0 avatar / 1 anatomy / 2 P1-A / 3 canonical body / 4 static human template
     void postCameraPreset(int preset); // M12: fixed evidence camera (0..7)
     void postCameraOrbit(int op, const Vec3& delta); // interactive camera
     void postDebugView(int view);      // 0 shading / 1 wireframe / 2 normals / 3 clay / 4 material / 5 weights / 6 outline / 7 UV
@@ -96,6 +96,7 @@ private:
     bool ensureResources(std::string* error);
     bool ensureP1aGeometry(int detailLevel);
     bool ensureCanonicalGeometry(int detailLevel);
+    bool ensureTemplateGeometry();  // VR-1B WP2: static .paht human template (mode 4)
     bool validateCanonicalGpuPath(const SkinnedGpuMesh& renderMesh,
                                   const MeshData& cpuMesh,
                                   const Skeleton& skeleton,
@@ -130,6 +131,14 @@ private:
     SkinnedGpuMesh canonicalMesh_;     // P1-A3: continuous full-body canonical shell
     SkinnedGpuMesh canonicalLines_;    // P1-A3: skinned topology wireframe
     SkinnedGpuMesh canonicalUvMesh_;   // P1-B: split Render Mesh with parallel UV VBO
+    // VR-1B WP2 (additive): static full-body human template loaded from a .paht
+    // file. Rendered under an identity bone palette (mode-1 precedent); no
+    // LegacyRigV1 / UBO[22] / packing change. CPU cache survives surface recreate.
+    SkinnedGpuMesh templateMesh_;
+    SkinnedGpuMesh templateLines_;
+    MeshData cachedTemplateMesh_;
+    bool hasCachedTemplate_ = false;
+    std::string templateStatus_ = "template=not-loaded";
     PatchGenerationReport patchReport_;
     character::TorsoShoulderTimings p1aTimings_{};
     SkinnedGpuMesh avatarMesh_;
@@ -179,7 +188,7 @@ private:
     int poseMode_ = -1;
     int qualityLevel_ = 1;
     int outfitVariant_ = 0;
-    int previewMode_ = 0;  // 0 avatar / 1 anatomy / 2 P1-A / 3 canonical body
+    int previewMode_ = 0;  // 0 avatar / 1 anatomy / 2 P1-A / 3 canonical body / 4 static human template
     int cameraPreset_ = 0; // M12 evidence camera index
     // Interactive camera state. Shared parameterisation with the presets so a
     // preset can be orbited away from and snapped back to.

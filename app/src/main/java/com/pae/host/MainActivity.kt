@@ -155,10 +155,10 @@ class MainActivity : AppCompatActivity() {
             Log.i("PAE_UI", "anatomy preview -> $anatomyOn (bind pose, neutral material)")
         })
         buttons.addView(actionButton("BodyMode") {
-            previewMode = (previewMode + 1) % 4
+            previewMode = (previewMode + 1) % 5
             anatomyOn = previewMode == 1
             NativeBridge.setPreviewMode(previewMode)
-            Log.i("PAE_UI", "body mode -> $previewMode (0 avatar, 1 anatomy, 2 patch, 3 canonical)")
+            Log.i("PAE_UI", "body mode -> $previewMode (0 avatar, 1 anatomy, 2 patch, 3 canonical, 4 human template)")
         })
         buttons.addView(actionButton("View") {
             viewPreset = (viewPreset + 1) % 8
@@ -259,7 +259,7 @@ class MainActivity : AppCompatActivity() {
                 NativeBridge.setQuality(quality)
             }
             val generator = it2.getIntExtra("debug_generator", -1)
-            if (generator in 0..3) {
+            if (generator in 0..4) {
                 previewMode = generator
                 anatomyOn = generator == 1
                 NativeBridge.setPreviewMode(generator)
