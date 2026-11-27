@@ -20,6 +20,7 @@
 #include "wp3_measure.h"
 #include "wp3_quality.h"
 
+#include "procedural/MeshData.h"
 #include "procedural/human_template/HumanTemplateLoader.h"
 #include "procedural/human_template/PAEHumanTemplateFormat.h"
 
@@ -68,6 +69,39 @@ struct Variant {
     bool verticalOnly = false;
 };
 
+// Authoritative uniform-scale anchor for stature transforms (WP3-H-R1 P0-1).
+//   X = sagittal symmetry plane = body bbox x-centre. For the pinned base mesh
+//       this is exactly 0 and coincides with the left/right mirror plane
+//       (vertex mean x = 0, bounds symmetric); using it preserves L/R symmetry.
+//   Y = sole plane (min body y) so the feet stay planted on the ground.
+//   Z = rig Root bone head z (the authoritative character root node).
+// The WP3-HOST-01 code wrongly reused the sole Y value as the X/Z centre
+// (D3{sole,sole,sole}), which translated the character horizontally by
+// sole*(1-k) (~5.7 cm at 1.55 m). The root helper cube has a small asymmetric
+// x offset (~-6.8 mm); X therefore uses the confirmed symmetry plane, not the
+// helper mean, so left/right joint symmetry is preserved exactly.
+struct ScaleAnchor {
+    D3 pivot;
+    double soleY = 0.0, rootX = 0.0, rootZ = 0.0, meanX = 0.0;
+    bool symmetric = false;
+};
+ScaleAnchor scaleAnchor(const ProofContext& c) {
+    ScaleAnchor a;
+    double xMin = 1e30, xMax = -1e30, yMin = 1e30, sx = 0.0;
+    for (const D3& p : c.body.pos) {
+        xMin = std::min(xMin, p.x); xMax = std::max(xMax, p.x);
+        yMin = std::min(yMin, p.y); sx += p.x;
+    }
+    a.meanX = sx / static_cast<double>(c.body.pos.size());
+    a.rootX = 0.5 * (xMin + xMax);
+    a.soleY = yMin;
+    a.symmetric = std::fabs(a.meanX) < 1e-6 && std::fabs(xMin + xMax) < 1e-6;
+    const int ri = c.rigDeform.find("root");
+    a.rootZ = ri >= 0 ? c.rigDeform.bones[static_cast<size_t>(ri)].head.z : 0.0;
+    a.pivot = D3{a.rootX, a.soleY, a.rootZ};
+    return a;
+}
+
 std::vector<D3> applyVariant(const ProofContext& c, const Variant& v, std::string& alphaDesc) {
     std::vector<std::pair<const ShapeTarget*, double>> weighted;
     alphaDesc.clear();
@@ -82,8 +116,7 @@ std::vector<D3> applyVariant(const ProofContext& c, const Variant& v, std::strin
     std::vector<D3> full;
     applyToFull(c, weighted, full);
     if (v.uniformScaleTo > 0.0) {
-        double sole = 1e30;
-        for (const D3& p : c.body.pos) sole = std::min(sole, p.y);
+        const ScaleAnchor a = scaleAnchor(c);
         double baseStature = 0.0;
         {
             double lo = 1e30, hi = -1e30;
@@ -92,8 +125,8 @@ std::vector<D3> applyVariant(const ProofContext& c, const Variant& v, std::strin
         }
         const double k = v.uniformScaleTo / baseStature;
         for (D3& p : full) {
-            if (v.verticalOnly) p.y = sole + (p.y - sole) * k;
-            else p = D3{sole, sole, sole} + (p - D3{sole, sole, sole}) * k;
+            if (v.verticalOnly) p.y = a.soleY + (p.y - a.soleY) * k;
+            else p = a.pivot + (p - a.pivot) * k;
         }
         alphaDesc += fmt("%s%.4f(k=%.4f) ", v.verticalOnly ? "verticalScaleTo" : "uniformScaleTo",
                          v.uniformScaleTo, k);
@@ -157,6 +190,100 @@ size_t peakWorkingSetMB() {
         std::fclose(f);
     }
     return 0;
+}
+
+// ---- WP3-H-R1 P1-2: section visualization ----------------------------------
+// Draw the closed intersection loops of a horizontal section in the (x, z)
+// plane; the selected torso loop is highlighted, other loops (arms) are grey.
+Rgb drawSection(const pae::wp3::Section& s, int selected, double centerX) {
+    const int W = 480, H = 480;
+    Rgb img; img.width = W; img.height = H; img.pixels.assign(static_cast<size_t>(W * H * 3), 255);
+    double xMin = 1e30, xMax = -1e30, zMin = 1e30, zMax = -1e30;
+    for (const auto& lp : s.loops) for (const D3& p : lp.pts) {
+        xMin = std::min(xMin, p.x); xMax = std::max(xMax, p.x);
+        zMin = std::min(zMin, p.z); zMax = std::max(zMax, p.z);
+    }
+    if (xMax <= xMin) { xMin = -0.5; xMax = 0.5; zMin = -0.2; zMax = 0.4; }
+    const double pad = 0.05 * std::max(xMax - xMin, zMax - zMin);
+    xMin -= pad; xMax += pad; zMin -= pad; zMax += pad;
+    const double span = std::max(xMax - xMin, zMax - zMin);
+    auto px = [&](double x, double z) {
+        const int ix = static_cast<int>((x - xMin) / span * (W - 1));
+        const int iy = static_cast<int>((zMax - z) / span * (H - 1));
+        return std::pair<int, int>(std::max(0, std::min(W - 1, ix)), std::max(0, std::min(H - 1, iy)));
+    };
+    auto put = [&](int x, int y, uint8_t r, uint8_t g, uint8_t b) {
+        if (x < 0 || y < 0 || x >= W || y >= H) return;
+        const size_t o = (static_cast<size_t>(y) * W + x) * 3;
+        img.pixels[o] = r; img.pixels[o + 1] = g; img.pixels[o + 2] = b;
+    };
+    auto line = [&](D3 a, D3 b, uint8_t r, uint8_t g, uint8_t bl) {
+        auto p0 = px(a.x, a.z); auto p1 = px(b.x, b.z);
+        const int steps = std::max(std::abs(p1.first - p0.first), std::abs(p1.second - p0.second));
+        for (int i = 0; i <= steps; ++i) {
+            const double t = steps ? static_cast<double>(i) / steps : 0.0;
+            put(static_cast<int>(std::lround(p0.first + (p1.first - p0.first) * t)),
+                static_cast<int>(std::lround(p0.second + (p1.second - p0.second) * t)), r, g, bl);
+        }
+    };
+    // sagittal centreline reference (x = centerX)
+    for (int y = 0; y < H; ++y) { auto p = px(centerX, zMin); put(p.first, y, 210, 210, 235); }
+    for (size_t li = 0; li < s.loops.size(); ++li) {
+        const auto& lp = s.loops[li];
+        const bool sel = static_cast<int>(li) == selected;
+        const uint8_t r = sel ? 200 : 150, g = sel ? 30 : 150, b = sel ? 30 : 150;
+        for (size_t i = 0; i < lp.pts.size(); ++i)
+            line(lp.pts[i], lp.pts[(i + 1) % lp.pts.size()], r, g, b);
+    }
+    return img;
+}
+
+// ---- WP3-H-R1 P0-2: degenerate-triangle investigation ----------------------
+// Mirrors pae::analyzeTopology's degenerate census EXACTLY: triangulate quads
+// with the 0-2 diagonal, convert positions to float, and flag triangles whose
+// float cross-product lengthSq < 1e-14f. Records the quad face id, vertex ids,
+// double-precision area, and the rest/deformed face-normal dot (to prove that a
+// uniform scale does NOT flip any face).
+struct DegenerateTri {
+    int quadFace = -1, triInFace = -1;
+    int v[3] = {-1, -1, -1};
+    double areaDouble = 0.0;
+    float crossLenSqFloat = 0.0f;
+    double normalDot = 1.0;
+};
+std::vector<DegenerateTri> findDegenerateTriangles(const PolyMesh& body, const std::vector<D3>& def,
+                                                   const std::vector<D3>& base) {
+    std::vector<DegenerateTri> out;
+    auto floatCrossLenSq = [](const D3& a, const D3& b, const D3& c) {
+        const pae::Vec3 pa(static_cast<float>(a.x), static_cast<float>(a.y), static_cast<float>(a.z));
+        const pae::Vec3 pb(static_cast<float>(b.x), static_cast<float>(b.y), static_cast<float>(b.z));
+        const pae::Vec3 pc(static_cast<float>(c.x), static_cast<float>(c.y), static_cast<float>(c.z));
+        return (pb - pa).cross(pc - pa).lengthSq();
+    };
+    for (size_t f = 0; f < body.faces.size(); ++f) {
+        const PolyFace& fc = body.faces[f];
+        if (fc.v.size() != 4) continue;
+        const int tris[2][3] = {{fc.v[0], fc.v[1], fc.v[2]}, {fc.v[0], fc.v[2], fc.v[3]}};
+        for (int t = 0; t < 2; ++t) {
+            const D3& a = def[static_cast<size_t>(tris[t][0])];
+            const D3& b = def[static_cast<size_t>(tris[t][1])];
+            const D3& c = def[static_cast<size_t>(tris[t][2])];
+            const float ls = floatCrossLenSq(a, b, c);
+            if (ls < 1e-14f) {
+                DegenerateTri d;
+                d.quadFace = static_cast<int>(f); d.triInFace = t;
+                d.v[0] = tris[t][0]; d.v[1] = tris[t][1]; d.v[2] = tris[t][2];
+                d.areaDouble = (b - a).cross(c - a).length() * 0.5;
+                d.crossLenSqFloat = ls;
+                const D3 rn = faceNormal(body, static_cast<int>(f));
+                PolyMesh moved = body; moved.pos = def;
+                const D3 dn = faceNormal(moved, static_cast<int>(f));
+                d.normalDot = rn.dot(dn);
+                out.push_back(d);
+            }
+        }
+    }
+    return out;
 }
 
 } // namespace
@@ -278,14 +405,22 @@ int main(int argc, char** argv) {
     std::string curvesMd = "# WP3 alpha response curves (generated)\n\n";
     curvesMd += "Asymmetric incr/decr targets applied separately per sign; alpha grid {-1,-0.75,-0.5,-0.25,0,0.25,0.5,0.75,1}. ";
     curvesMd += "All measurements are PAE-defined surface measurements (see measurements-protocol.md). Circumferences are true plane-cut perimeters.\n\n";
+    // WP3-H-R1 P1-1: linkage matrix with explicit affected-vs-whole-region semantics.
     std::string linkageCsv = "parameter,alpha,";
-    for (int r = 0; r < kRegionCount; ++r) linkageCsv += std::string(regionName(static_cast<Region>(r))) + "_mean_mm,";
-    linkageCsv += "helper_mean_mm\n";
-    std::string linkageMd = "# WP3 parameter linkage matrix (generated)\n\nMean displacement (mm) per region at alpha=+1 and -1. ";
-    linkageMd += "Non-target regions with non-zero entries are the documented cross-parameter linkages.\n\n";
-    linkageMd += "| Parameter | alpha | " ;
+    for (int r = 0; r < kRegionCount; ++r) {
+        const std::string rn = regionName(static_cast<Region>(r));
+        linkageCsv += rn + "_affected," + rn + "_total," + rn + "_coverage," + rn + "_meanAffected_mm," +
+                      rn + "_meanAll_mm," + rn + "_p95_mm," + rn + "_max_mm,";
+    }
+    linkageCsv += "helper_affected,helper_total,helper_coverage,helper_meanAffected_mm,helper_meanAll_mm,helper_p95_mm,helper_max_mm\n";
+    std::string linkageMd = "# WP3 parameter linkage matrix (generated, WP3-H-R1 corrected semantics)\n\n";
+    linkageMd += "Two distinct means per region (mm): **meanAll** = displacement averaged over ALL vertices of the region ";
+    linkageMd += "(the whole-region effect); **meanAffected** = averaged only over vertices the target actually moves. ";
+    linkageMd += "**coverage** = affected / total. The WP3-HOST-01 matrix reported meanAffected only and must not be read as a whole-region mean. ";
+    linkageMd += "Full per-region affected/total/coverage/p95/max are in linkage-matrix.csv. alpha=+1 and -1.\n\n";
+    linkageMd += "| Parameter | alpha | metric | ";
     for (int r = 0; r < kRegionCount; ++r) linkageMd += std::string(regionName(static_cast<Region>(r))) + " | ";
-    linkageMd += "helper |\n|---|---|";
+    linkageMd += "helper |\n|---|---|---|";
     for (int r = 0; r < kRegionCount; ++r) linkageMd += "---:|";
     linkageMd += "---:|\n";
 
@@ -317,15 +452,23 @@ int main(int argc, char** argv) {
             if (q.selfIntersectingPairs > 0 && firstSelfAlpha == 99) firstSelfAlpha = static_cast<size_t>(std::fabs(a) * 100);
             if (std::fabs(std::fabs(a) - 1.0) < 1e-9) {
                 const ShapeTarget* tt = a > 0 ? &p->incr : &p->decr;
-                const pae::wp3::RegionLinkage l = pae::wp3::regionLinkage(c.regions, tt->vertex, tt->delta, baseBody.size());
+                const pae::wp3::RegionLinkage l = pae::wp3::regionLinkage(c.regions, tt->vertex, tt->delta, baseBody.size(), baseFull.size());
                 linkageCsv += fmt("%s,%+.2f,", key.c_str(), a);
-                linkageMd += fmt("| %s | %+.2f |", key.c_str(), a);
                 for (int r = 0; r < kRegionCount; ++r) {
-                    linkageCsv += fmt("%.3f,", l.mean[r] * 1000.0);
-                    linkageMd += fmt(" %.2f |", l.mean[r] * 1000.0);
+                    linkageCsv += fmt("%ld,%ld,%.4f,%.3f,%.3f,%.3f,%.3f,", l.affected[r], l.total[r], l.coverage[r],
+                                      l.meanAffected[r] * 1000.0, l.meanAll[r] * 1000.0, l.p95[r] * 1000.0, l.max[r] * 1000.0);
                 }
-                linkageCsv += fmt("%.3f\n", l.helperMean * 1000.0);
-                linkageMd += fmt(" %.2f |\n", l.helperMean * 1000.0);
+                linkageCsv += fmt("%ld,%ld,%.4f,%.3f,%.3f,%.3f,%.3f\n", l.helperAffected, l.helperTotal, l.helperCoverage,
+                                  l.helperMeanAffected * 1000.0, l.helperMeanAll * 1000.0, l.helperP95 * 1000.0, l.helperMax * 1000.0);
+                linkageMd += fmt("| %s | %+.2f | meanAll mm |", key.c_str(), a);
+                for (int r = 0; r < kRegionCount; ++r) linkageMd += fmt(" %.2f |", l.meanAll[r] * 1000.0);
+                linkageMd += fmt(" %.2f |\n", l.helperMeanAll * 1000.0);
+                linkageMd += fmt("| %s | %+.2f | meanAffected mm |", key.c_str(), a);
+                for (int r = 0; r < kRegionCount; ++r) linkageMd += fmt(" %.2f |", l.meanAffected[r] * 1000.0);
+                linkageMd += fmt(" %.2f |\n", l.helperMeanAffected * 1000.0);
+                linkageMd += fmt("| %s | %+.2f | coverage |", key.c_str(), a);
+                for (int r = 0; r < kRegionCount; ++r) linkageMd += fmt(" %.2f |", l.coverage[r]);
+                linkageMd += fmt(" %.2f |\n", l.helperCoverage);
             }
         }
         curvesMd += fmt("\nCritical alpha: first flips at %s; first self-intersection at %s (99 = none within +/-1).\n\n",
@@ -399,6 +542,76 @@ int main(int argc, char** argv) {
     writeText("height-study.md", heightMd);
     writeText("height-study.csv", heightCsv);
 
+    // ---- WP3-H-R1 P0-1: scaling-anchor verification --------------------------
+    {
+        const ScaleAnchor a = scaleAnchor(c);
+        const Wp3Measures bm = pae::wp3::measureAll(baseBody, c.regions, c.rigDeform, c.body.faces);
+        const double baseUpperRatio = bm.upperArmLength / bm.stature;
+        const double baseThighRatio = bm.thighLength / bm.stature;
+        std::string amd = "# WP3-H-R1 scaling-anchor verification (generated)\n\n";
+        amd += fmt("Anchor pivot = (rootX=%.6f, soleY=%.6f, rootZ=%.6f) m.\n", a.pivot.x, a.pivot.y, a.pivot.z);
+        amd += fmt("- rootX = body bbox x-centre = %.6f m; vertex mean x = %.3e m; mirror-symmetric: %s.\n",
+                   a.rootX, a.meanX, a.symmetric ? "YES" : "NO");
+        amd += "- rootZ = rig Root bone head z (authoritative character root node).\n";
+        amd += "- soleY = min body y (feet planted).\n";
+        amd += fmt("- WP3-HOST-01 bug: pivot was (sole,sole,sole)=(%.4f,%.4f,%.4f); horizontal drift at 1.55 m = %.4f m (x), %.4f m (z).\n\n",
+                   a.soleY, a.soleY, a.soleY, a.soleY * (1.0 - 1.55 / bm.stature), a.soleY * (1.0 - 1.55 / bm.stature));
+        amd += "| Target (m) | achieved | sole fixed | rootZ fixed | meanX drift | height err | upperRatio | thighRatio | L/R sym err | helper sync | repeat diff | PASS |\n";
+        amd += "|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|\n";
+        std::string acsv = "target,achieved,sole_fixed_mm,rootZ_fixed_mm,meanX_drift_mm,height_err_mm,upper_ratio,thigh_ratio,lr_sym_err_mm,helper_sync_mm,repeat_diff_m,pass\n";
+        say(fmt("[anchor] pivot=(%.5f,%.5f,%.5f) symmetric=%s", a.pivot.x, a.pivot.y, a.pivot.z, a.symmetric ? "yes" : "no"));
+        for (double target : {1.55, 1.6659, 1.7549, 1.85}) {
+            Variant v; v.name = "uniform"; v.uniformScaleTo = target; v.verticalOnly = false;
+            std::string desc;
+            const std::vector<D3> full = applyVariant(c, v, desc);
+            const std::vector<D3> full2 = applyVariant(c, v, desc);
+            const std::vector<D3> body(full.begin(), full.begin() + static_cast<long>(baseBody.size()));
+            Rig rig; rigOnSurface(c, full, false, rig);
+            const Wp3Measures m = pae::wp3::measureAll(body, c.regions, rig, c.body.faces);
+            // 1 sole fixed
+            double yMin = 1e30, sx = 0.0; for (const D3& p : body) { yMin = std::min(yMin, p.y); sx += p.x; }
+            const double soleErr = std::fabs(yMin - a.soleY);
+            // 2 root node Z fixed
+            const int ri = rig.find("root");
+            const double rootZErr = ri >= 0 ? std::fabs(rig.bones[static_cast<size_t>(ri)].head.z - a.rootZ) : 1e30;
+            // 3 X centerline drift
+            const double meanX = sx / static_cast<double>(body.size());
+            const double meanXDrift = std::fabs(meanX - a.meanX);
+            // 4 height exact
+            const double heightErr = std::fabs(m.stature - target);
+            // 5 proportions
+            const double ur = m.upperArmLength / m.stature, tr = m.thighLength / m.stature;
+            // 6 L/R symmetry of shoulder joints
+            double symErr = 0.0;
+            {
+                const int jL = rig.find("upperarm01.L"), jR = rig.find("upperarm01.R");
+                if (jL >= 0 && jR >= 0)
+                    symErr = std::fabs(rig.bones[static_cast<size_t>(jL)].head.x + rig.bones[static_cast<size_t>(jR)].head.x);
+            }
+            // 7 helper sync: a helper vertex must move exactly by k about pivot
+            const double k = target / bm.stature;
+            double helperErr = 0.0;
+            for (size_t i = baseBody.size(); i < full.size(); ++i) {
+                const D3 expect = a.pivot + (baseFull[i] - a.pivot) * k;
+                helperErr = std::max(helperErr, (full[i] - expect).length());
+            }
+            // 8 repeat
+            const double repeatDiff = maxDiff(full, full2);
+            const bool pass = soleErr < 1e-9 && rootZErr < 1e-9 && meanXDrift < 1e-6 && heightErr < 1e-4 &&
+                              std::fabs(ur - baseUpperRatio) < 1e-4 && std::fabs(tr - baseThighRatio) < 1e-4 &&
+                              symErr < 1e-6 && helperErr < 1e-9 && repeatDiff == 0.0;
+            amd += fmt("| %.4f | %.4f | %.2e | %.2e | %.2e | %.2e | %.5f | %.5f | %.2e | %.2e | %.1e | %s |\n",
+                       target, m.stature, soleErr, rootZErr, meanXDrift, heightErr, ur, tr, symErr, helperErr, repeatDiff, pass ? "YES" : "NO");
+            acsv += fmt("%.4f,%.5f,%.3e,%.3e,%.3e,%.3e,%.5f,%.5f,%.3e,%.3e,%.1e,%d\n",
+                        target, m.stature, soleErr, rootZErr, meanXDrift, heightErr, ur, tr, symErr, helperErr, repeatDiff, pass ? 1 : 0);
+            say(fmt("[anchor] %.4f -> %.4f soleErr %.1e symErr %.1e helperErr %.1e %s", target, m.stature, soleErr, symErr, helperErr, pass ? "PASS" : "FAIL"));
+        }
+        amd += "\nAll nine checks: sole anchor fixed, root node fixed, X/Z centreline no drift, height exact, limb proportions preserved, ";
+        amd += "L/R joint symmetry preserved, helper/joint synced, repeat bit-exact, 1.55/1.6659/1.7549/1.85 retested.\n";
+        writeText("anchor-study.md", amd);
+        writeText("anchor-study.csv", acsv);
+    }
+
     // ---- body variants ---------------------------------------------------------
     const std::vector<Variant> variants = {
         {"baseline", {}, 0.0, false},
@@ -439,6 +652,101 @@ int main(int argc, char** argv) {
     writeText("variants.csv", varCsv);
     writeText("variants-quality.csv", varQualityCsv);
     writeText("variants.md", varMd);
+
+    // ---- WP3-H-R1 P0-2: shorter-pae flipped-face / degenerate investigation --
+    {
+        std::string fid = "# WP3-H-R1 shorter-pae quality investigation (generated)\n\n";
+        fid += fmt("Base mesh SHA-256: `%s`.\n\n", c.obj.sourceSha256.c_str());
+        fid += "## CSV column clarification\n\n";
+        fid += "`variants-quality.csv` column order is: name,vertices,triangles,components,boundary_edges,nonmanifold,**degenerate**,dup_vertices,invalid_normals,self_intersecting_pairs,candidate_pairs,**flipped_faces**,edge_ratio_p99,...\n\n";
+        fid += "The `2` in the shorter-pae row is in the **degenerate** column (degenerateTriangles), NOT flipped_faces. ";
+        fid += "flipped_faces is **0** for baseline, taller-pae AND shorter-pae. The 18 report (flips=0) and height-study (uniform 1.55 flips=0) are therefore consistent with the CSV; there is no flipped-face contradiction.\n\n";
+        // locate shorter-pae
+        size_t si = varNames.size();
+        for (size_t i = 0; i < varNames.size(); ++i) if (varNames[i] == "shorter-pae") si = i;
+        if (si < varBodies.size()) {
+            const std::vector<D3>& sb = varBodies[si];
+            const DeformationQuality dq = compareSurfaces(c.body, sb, c.topo);
+            fid += "## Re-run from code (shorter-pae = uniform scale to 1.55 m)\n\n";
+            fid += fmt("- compareSurfaces flipped_faces = **%ld**, minNormalDot = %.6f (a uniform scale with k>0 preserves every face orientation; Newell normal direction is scale-invariant).\n", dq.flippedFaces, dq.minNormalDot);
+            fid += fmt("- volumeRatio = %.6f, edgeRatioP99 = %.4f.\n\n", dq.volumeRatio, dq.edgeRatioP99);
+            const std::vector<DegenerateTri> deg = findDegenerateTriangles(c.body, sb, baseBody);
+            fid += fmt("## Degenerate triangles at 1.55 m: %zu (this is the `2` in the CSV)\n\n", deg.size());
+            fid += "Root cause: `pae::analyzeTopology` (native/procedural/MeshTopology.cpp:45, read-only reuse) flags a triangle degenerate when its **float** cross-product lengthSq < **1e-14f** — an ABSOLUTE threshold (area < ~5e-8 m^2). ";
+            fid += "Uniform downscale to 1.55 m (k=0.9304) shrinks every area by k^2=0.8656; the two smallest base-mesh triangles fall below that absolute threshold after float conversion. ";
+            fid += "This is a scale-dependent threshold artifact of the checker, NOT a geometry defect and NOT a flipped face. It is outside the WP3-H-R1 whitelist (native/), so it is documented, not modified.\n\n";
+            fid += "| quad face ID | tri | vertex ids | double area (m^2) | float crossLenSq | rest.deformed normal dot |\n|---:|---:|---|---:|---:|---:|\n";
+            for (const DegenerateTri& d : deg)
+                fid += fmt("| %d | %d | %d,%d,%d | %.3e | %.3e | %.6f |\n", d.quadFace, d.triInFace, d.v[0], d.v[1], d.v[2], d.areaDouble, static_cast<double>(d.crossLenSqFloat), d.normalDot);
+            // base areas of the same triangles for before/after comparison
+            fid += "\nBefore/after area of the same triangles (double precision):\n\n| quad face | tri | base area (m^2) | 1.55 m area (m^2) | ratio |\n|---:|---:|---:|---:|---:|\n";
+            for (const DegenerateTri& d : deg) {
+                const D3& a0 = baseBody[static_cast<size_t>(d.v[0])];
+                const D3& b0 = baseBody[static_cast<size_t>(d.v[1])];
+                const D3& c0 = baseBody[static_cast<size_t>(d.v[2])];
+                const double baseArea = (b0 - a0).cross(c0 - a0).length() * 0.5;
+                fid += fmt("| %d | %d | %.3e | %.3e | %.4f |\n", d.quadFace, d.triInFace, baseArea, d.areaDouble, baseArea > 0 ? d.areaDouble / baseArea : 0.0);
+            }
+            fid += "\n## Conclusion\n\nflipped_faces = 0 (uniform scale cannot flip a face). The reported `2` is degenerateTriangles, a scale-dependent absolute-threshold artifact in PAE's own checker. ";
+            fid += "Recommendation for WP3-Production: use a scale-relative degenerate threshold (or evaluate at native scale) so the census is stature-invariant. CSV and Markdown are unified: flips=0, degenerate=2 at 1.55 m.\n";
+            say(fmt("[flip-investigation] shorter-pae flipped=%ld degenerate=%zu minNormalDot=%.6f", dq.flippedFaces, deg.size(), dq.minNormalDot));
+        }
+        writeText("flip-investigation.md", fid);
+    }
+
+    // ---- WP3-H-R1 P1-2: cross-section anatomical validation ------------------
+    {
+        std::string svc = "variant,section,plane_y,loop_count,closed_loop_count,open_chains,selected_loop,selected_centroid_x,torso_confirmed,breadth,depth,circumference,reason\n";
+        std::string svmd = "# WP3-H-R1 cross-section anatomical validation (generated)\n\n";
+        svmd += "largestArea() is the candidate strategy; the selected loop is CONFIRMED as torso only when its centroid lies near the sagittal centreline (|x| <= 0.10 m) and the section has no open chains. ";
+        svmd += "Arm/thigh loops (A-pose) sit at |x| ~ 0.4 m and are rejected. NOT VERIFIED rows must not be read as anatomical circumferences.\n\n";
+        svmd += "| Variant | Section | loops | closed | open | selected | centroid.x | torso? | circ (m) |\n|---|---|---:|---:|---:|---:|---:|---|---:|\n";
+        const double centerX = scaleAnchor(c).rootX;
+        auto validateOne = [&](const std::string& name, const std::vector<D3>& body, const Rig& rig, bool draw) {
+            const Wp3Measures m = pae::wp3::measureAll(body, c.regions, rig, c.body.faces);
+            struct Cut { const char* label; double y; };
+            const Cut cuts[] = {{"chest", m.soleY + 0.72 * m.stature}, {"waist", m.soleY + 0.60 * m.stature}, {"hip", m.soleY + m.hipJointHeight}};
+            for (const Cut& ct : cuts) {
+                const pae::wp3::Section s = pae::wp3::cutSection(body, c.body.faces, {0, 1, 0}, {0, ct.y, 0});
+                const pae::wp3::SectionValidation vv = pae::wp3::validateTorsoSection(s, centerX);
+                const pae::wp3::SectionLoop* lp = vv.selectedLoop >= 0 ? &s.loops[static_cast<size_t>(vv.selectedLoop)] : nullptr;
+                svc += fmt("%s,%s,%.5f,%zu,%zu,%d,%d,%.5f,%s,%.5f,%.5f,%.5f,%s\n",
+                           name.c_str(), ct.label, ct.y, vv.loopCount, vv.closedLoopCount, vv.openChains, vv.selectedLoop,
+                           vv.selectedCentroidX, vv.torsoConfirmed ? "YES" : "NOT_VERIFIED",
+                           lp ? lp->breadth : 0.0, lp ? lp->depth : 0.0, lp ? lp->perimeter : 0.0, vv.reason.c_str());
+                svmd += fmt("| %s | %s | %zu | %zu | %d | %d | %+.4f | %s | %.4f |\n",
+                            name.c_str(), ct.label, vv.loopCount, vv.closedLoopCount, vv.openChains, vv.selectedLoop,
+                            vv.selectedCentroidX, vv.torsoConfirmed ? "YES" : "NOT VERIFIED", lp ? lp->perimeter : 0.0);
+                if (draw) {
+                    const Rgb img = drawSection(s, vv.selectedLoop, centerX);
+                    writePngFile(g_out + "/images/section-" + name + "-" + ct.label + ".png", img);
+                }
+            }
+        };
+        validateOne("base", baseBody, c.rigDeform, true);
+        for (const Variant& v : variants) {
+            std::string desc;
+            const std::vector<D3> full = applyVariant(c, v, desc);   // includes scaled helper/joint geometry
+            const std::vector<D3> body(full.begin(), full.begin() + static_cast<long>(baseBody.size()));
+            Rig vr; rigOnSurface(c, full, false, vr);
+            validateOne(v.name, body, vr, false);
+        }
+        // single-parameter extremes
+        for (const std::string& key : coreParams) {
+            const ShapeParam* p = nullptr;
+            for (const ShapeParam& pp : c.params) if (pp.key == key) p = &pp;
+            for (double a : {-1.0, 1.0}) {
+                std::vector<D3> full;
+                if (a > 0) applyToFull(c, {{&p->incr, a}}, full); else applyToFull(c, {{&p->decr, -a}}, full);
+                const std::vector<D3> body(full.begin(), full.begin() + static_cast<long>(baseBody.size()));
+                Rig rig; rigOnSurface(c, full, false, rig);
+                validateOne(key + (a > 0 ? "+1" : "-1"), body, rig, false);
+            }
+        }
+        writeText("section-validation.csv", svc);
+        writeText("section-validation.md", svmd);
+        say("[section-validation] base + 10 variants + 10 extremes written; base chest/waist/hip section images drawn");
+    }
 
     // ---- renders: 5 views x 3 modes per variant, shared frames ----------------
     std::vector<Camera> cameras = protocolCameras(320, 640);

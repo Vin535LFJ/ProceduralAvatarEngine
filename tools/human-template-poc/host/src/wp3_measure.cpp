@@ -130,6 +130,7 @@ Section cutSection(const std::vector<D3>& pos, const std::vector<PolyFace>& face
         SectionLoop lp;
         lp.perimeter = loopPerimeter;
         lp.points = loopPts.size();
+        lp.pts = loopPts;
         double uMin = 1e30, uMax = -1e30, vMin = 1e30, vMax = -1e30;
         D3 cent;
         double area2 = 0.0;
@@ -263,27 +264,70 @@ Wp3Measures measureAll(const std::vector<D3>& bodyPos, const std::vector<Region>
 }
 
 RegionLinkage regionLinkage(const std::vector<Region>& regions, const std::vector<int>& vertex,
-                            const std::vector<D3>& delta, size_t bodyCount) {
+                            const std::vector<D3>& delta, size_t bodyCount, size_t fullCount) {
     RegionLinkage l;
-    double sum[14] = {0}, mx[14] = {0};
-    long cnt[14] = {0};
+    // Total region census over ALL body vertices (denominator for meanAll/coverage).
+    for (size_t v = 0; v < bodyCount && v < regions.size(); ++v) {
+        const int r = static_cast<int>(regions[v]);
+        if (r >= 0 && r < 14) ++l.total[r];
+    }
+    if (fullCount > bodyCount) l.helperTotal = static_cast<long>(fullCount - bodyCount);
+
+    double sum[14] = {0};
+    std::vector<double> vals[14];
+    std::vector<double> helperVals;
     double helperSum = 0.0;
-    long helperCnt = 0;
     for (size_t i = 0; i < vertex.size() && i < delta.size(); ++i) {
         const double len = delta[i].length();
         if (len <= 1e-9) continue;
         const int v = vertex[i];
-        if (v < 0 || static_cast<size_t>(v) >= bodyCount) { helperSum += len; ++helperCnt; continue; }
+        if (v < 0 || static_cast<size_t>(v) >= bodyCount) {
+            helperSum += len; ++l.helperAffected; helperVals.push_back(len);
+            l.helperMax = std::max(l.helperMax, len);
+            continue;
+        }
         const int r = static_cast<int>(regions[static_cast<size_t>(v)]);
         if (r < 0 || r >= 14) continue;
-        sum[r] += len; mx[r] = std::max(mx[r], len); ++cnt[r];
+        sum[r] += len; ++l.affected[r]; vals[r].push_back(len);
+        l.max[r] = std::max(l.max[r], len);
     }
+    auto p95of = [](std::vector<double>& v) {
+        if (v.empty()) return 0.0;
+        std::sort(v.begin(), v.end());
+        const size_t i = std::min(v.size() - 1, static_cast<size_t>(0.95 * static_cast<double>(v.size() - 1)));
+        return v[i];
+    };
     for (int r = 0; r < 14; ++r) {
-        l.mean[r] = cnt[r] ? sum[r] / static_cast<double>(cnt[r]) : 0.0;
-        l.max[r] = mx[r];
+        l.meanAffected[r] = l.affected[r] ? sum[r] / static_cast<double>(l.affected[r]) : 0.0;
+        l.meanAll[r] = l.total[r] ? sum[r] / static_cast<double>(l.total[r]) : 0.0;
+        l.coverage[r] = l.total[r] ? static_cast<double>(l.affected[r]) / static_cast<double>(l.total[r]) : 0.0;
+        l.p95[r] = p95of(vals[r]);
+        l.mean[r] = l.meanAffected[r];
     }
-    l.helperMean = helperCnt ? helperSum / static_cast<double>(helperCnt) : 0.0;
+    l.helperMeanAffected = l.helperAffected ? helperSum / static_cast<double>(l.helperAffected) : 0.0;
+    l.helperMeanAll = l.helperTotal ? helperSum / static_cast<double>(l.helperTotal) : 0.0;
+    l.helperCoverage = l.helperTotal ? static_cast<double>(l.helperAffected) / static_cast<double>(l.helperTotal) : 0.0;
+    l.helperP95 = p95of(helperVals);
+    l.helperMean = l.helperMeanAffected;
     return l;
+}
+
+SectionValidation validateTorsoSection(const Section& s, double centerX, double torsoHalfWidth) {
+    SectionValidation v;
+    v.loopCount = s.loops.size();
+    v.closedLoopCount = s.loops.size();   // Section only stores closed loops
+    v.openChains = s.openChains;
+    const SectionLoop* best = s.largestArea();
+    if (!best) { v.reason = "no closed loop"; return v; }
+    for (size_t i = 0; i < s.loops.size(); ++i)
+        if (&s.loops[i] == best) { v.selectedLoop = static_cast<int>(i); break; }
+    v.selectedCentroidX = best->centroid.x;
+    const bool nearCentre = std::fabs(best->centroid.x - centerX) <= torsoHalfWidth;
+    v.torsoConfirmed = nearCentre && s.openChains == 0;
+    v.reason = fmt("largest-area loop #%d centroid.x=%+.4f m (|x-center|=%.4f <= %.2f: %s); openChains=%d",
+                   v.selectedLoop, best->centroid.x, std::fabs(best->centroid.x - centerX),
+                   torsoHalfWidth, nearCentre ? "torso" : "NOT torso (arm/thigh?)", s.openChains);
+    return v;
 }
 
 } // namespace pae::wp3
