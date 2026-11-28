@@ -1,0 +1,71 @@
+examples:
+  - id: plan-new-feature
+    title:
+      zh: 规划 PAE 新功能
+      en: Plan a PAE New Feature
+    description:
+      zh: 按 EL 生命周期把新功能需求拆到可执行 Task
+      en: Decompose a new-feature request into executable tasks via the EL lifecycle
+    prompt:
+      zh: |-
+        按 PAE 工程工作流规划这个新功能：{{需求描述}}。
+        先核对仓库与权威文件，做需求规格、阶段归属、WP 与 Task 拆分，不要直接改代码。
+      en: |-
+        Plan this new feature using the PAE engineering workflow: {{requirement}}.
+        Verify the repo and authority files first, then produce the requirement spec, phase mapping, WP and task breakdown. Do not jump to code.
+  - id: fix-deformation-bug
+    title:
+      zh: 修复人体变形 Bug
+      en: Fix a Human Deformation Bug
+    description:
+      zh: 先复现建基线、分离变量、最小修复、Before/After 回归
+      en: Reproduce baseline, isolate variables, minimal fix, Before/After regression
+    prompt:
+      zh: |-
+        PAE 出现这个问题：{{问题描述}}。
+        按 Bug 修复工作流：先复现并建 Before 基线，区分坐标/权重/关节/LBS/网格根因，最小修复并跑 Before/After 回归。
+      en: |-
+        PAE has this issue: {{problem}}.
+        Follow the bug-fix workflow: reproduce and build a Before baseline, separate coordinate/weight/joint/LBS/mesh root causes, apply a minimal fix and run Before/After regression.
+  - id: rig-skinning-research
+    title:
+      zh: 骨骼蒙皮研究
+      en: Rig / Skinning Research
+    description:
+      zh: 矩阵审计 + 非轴对齐测试 + 单变量验证
+      en: Matrix audit + non-axis-aligned tests + single-variable validation
+    prompt:
+      zh: |-
+        在 PAE Host 白名单内研究：{{研究主题}}。
+        先查负结果库，做矩阵/坐标审计与非轴对齐测试，单变量验证，生成本轮真实证据，负结果保存。
+      en: |-
+        Research within the PAE host whitelist: {{topic}}.
+        Check the known-failures library first, do matrix/frame audit and non-axis-aligned tests, validate one variable at a time, produce real evidence, preserve negative results.
+  - id: review-and-commit
+    title:
+      zh: 审查并提交 PAE 成果
+      en: Review and Commit PAE Work
+    description:
+      zh: 独立审查 + 按任务分组提交 + ls-remote 核实
+      en: Independent review + task-grouped commit + ls-remote verification
+    prompt:
+      zh: |-
+        审查 PAE 当前工作区成果并按任务分组提交推送：{{范围}}。
+        核对被审 SHA/Diff/测试/证据/白名单/冻结边界，noreply 身份，快进推送后 ls-remote 核实。需我明确授权才推送。
+      en: |-
+        Review the current PAE working-tree work and commit/push grouped by task: {{scope}}.
+        Verify reviewed SHA/diff/tests/evidence/whitelist/frozen boundaries, noreply identity, ls-remote after fast-forward push. Push only with my explicit authorization.
+  - id: android-gate-check
+    title:
+      zh: Android 动态实现前置检查
+      en: Android Dynamic Pre-flight
+    description:
+      zh: 检查 M3 Gate 与 M4 授权，未授权停止生产修改
+      en: Check M3 gate and M4 authorization; stop production changes if unauthorized
+    prompt:
+      zh: |-
+        我想把 Rig V2 接入 Android：{{目标}}。
+        按 Android 工作流先检查 M1/M2/M3 Gate 与 M4 授权、设备能力；未授权则停止生产修改并输出前置条件与授权提案。
+      en: |-
+        I want to integrate Rig V2 into Android: {{goal}}.
+        Follow the Android workflow: check M1/M2/M3 gates and M4 authorization and device capability first; if unauthorized, stop production changes and output prerequisites and an authorization proposal.
