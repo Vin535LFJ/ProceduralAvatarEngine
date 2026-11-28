@@ -1,0 +1,5 @@
+pose,mesh,verts,faces,globalFlips,selfIntPairs,finger.01.L,finger.01.R,finger.02.L,finger.02.R,finger.03.L,finger.03.R,finger.04.L,finger.04.R,finger.05.L,finger.05.R
+fist,base,13380,13378,1056,130,79,79,121,121,126,126,108,108,94,94
+fist,subdiv,53514,53512,4278,260,312,312,487,487,509,509,456,456,375,375
+finger_curl,base,13380,13378,34,0,1,1,4,4,2,2,4,4,6,6
+finger_curl,subdiv,53514,53512,164,0,4,4,16,16,15,15,20,20,27,27

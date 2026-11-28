@@ -1,0 +1,7 @@
+[load] body verts=13380 faces=13378
+[topology] per-finger vertex/face counts written
+[subdiv] verts 13380 -> 53514, faces 13378 -> 53512, 51 ms
+[purity] subdiv finger vertices=10930 weight purity=0.9279 (base Region purity was ~1.00)
+[pose] fist         base flips=1056 selfInt=130 | subdiv flips=4278 selfInt=260
+[pose] finger_curl  base flips=34 selfInt=0 | subdiv flips=164 selfInt=0
+[done] M6 finger refinement study complete
