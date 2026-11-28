@@ -151,6 +151,16 @@ if(PAE_REPO)
   target_include_directories(pae_wp4_tests PRIVATE "${PAE_NATIVE}")
   target_link_libraries(pae_wp4_tests PRIVATE pae_ht)
   add_test(NAME pae_wp4_tests COMMAND pae_wp4_tests)
+
+  # M2 deformation-quality improvement: shoulder joint-center offset sweep +
+  # extreme-pose flip attribution. Reuses wp4 modules + PAE self-intersection
+  # checker read-only; no native/ source modified, no Android, no DQS.
+  add_executable(pae_wp4_q2
+    src/wp4_q2_main.cpp
+    ${PAE_WP4_SOURCES}
+  )
+  target_include_directories(pae_wp4_q2 PRIVATE "${PAE_NATIVE}")
+  target_link_libraries(pae_wp4_q2 PRIVATE pae_ht)
 else()
   message(STATUS "PAE_REPO not set: PNG output and PAE clay cross-check are disabled")
 endif()
