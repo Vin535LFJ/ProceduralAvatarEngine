@@ -89,6 +89,7 @@ CC0 Base Topology/Targets（逐文件许可证确认）→ 离线编译 → PAE 
 | Android | [workflows/android-workflow.md](workflows/android-workflow.md) | authorization-and-safety, architecture-map |
 | 集成 | [workflows/integration-workflow.md](workflows/integration-workflow.md) | agent-collaboration, lifecycle |
 | 发布/交接 | [workflows/release-workflow.md](workflows/release-workflow.md) | agent-collaboration, lifecycle |
+| 工程轮自动化 | [workflows/engineering-round-workflow.md](workflows/engineering-round-workflow.md) | tool-and-mcp-integration, test-and-evidence |
 
 模板见 [templates/](templates/)（requirement-intake、requirements-specification、project-breakdown、phase-development-plan、work-package-specification、task-checklist、experiment-plan、implementation-report、integration-report、review-report、gate-assessment、agent-handoff、replanning-record、status-reconciliation 等）。
 
@@ -113,3 +114,7 @@ CC0 Base Topology/Targets（逐文件许可证确认）→ 离线编译 → PAE 
 ## 10. 跨 AI 入口
 
 不支持自动加载 Skill 的 AI：读根目录 `PAE_AI_WORKFLOW.md`（引导）与 `AGENTS.md`（精简入口），再读本 SKILL.md。`AGENT.md` 是已批准 Round Acceptance Contract，不可动。既有 `.workbuddy-ai/skills/round-acceptance/`（若存在）保留、引用、不覆盖。
+
+## 11. 工具与 MCP 集成（可运行工作流）
+
+Skill 定规则、Tools 执行、MCP 扩展产出。机械、确定性、可重复的工程轮环节由编排脚本 `scripts/pae_round.ps1` 固化（baseline/build/test/boundary/recompress/verify-staged/commit/push/verify-remote）。**写操作（commit/push）需显式 `-AllowWrite`，push 仅快进**；脚本是代理获授权后调用的工具，不替代授权判断、单变量、不降标准、人工视觉 Gate。MCP（当前 qwoffice）可把 Gate/指标/汇报产出为 Word/Excel/PPT 交付物。详见 [references/tool-and-mcp-integration.md](references/tool-and-mcp-integration.md)、[workflows/engineering-round-workflow.md](workflows/engineering-round-workflow.md)。
