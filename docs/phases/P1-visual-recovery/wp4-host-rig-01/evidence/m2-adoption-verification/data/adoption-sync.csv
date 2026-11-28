@@ -1,0 +1,10 @@
+shape,jointsResolved,rigValid,version,bindErr,unbound,lrAsym,shoulderOffsetMag,offsetCorrect
+baseline,1,1,pae-rig-v2.2,3.67e-08,0,0.000000,0.01000,1
+broader-shoulder,1,1,pae-rig-v2.2,3.67e-08,0,0.000000,0.01000,1
+broader-ribcage,1,1,pae-rig-v2.2,3.67e-08,0,0.000000,0.01000,1
+narrower-waist,1,1,pae-rig-v2.2,3.67e-08,0,0.000000,0.01000,1
+wider-hip,1,1,pae-rig-v2.2,3.67e-08,0,0.000000,0.01000,1
+taller,1,1,pae-rig-v2.2,3.69e-08,0,0.000000,0.01000,1
+shorter,1,1,pae-rig-v2.2,3.67e-08,0,0.000000,0.01000,1
+combo-athletic,1,1,pae-rig-v2.2,3.67e-08,0,0.000000,0.01000,1
+combo-pear,1,1,pae-rig-v2.2,3.67e-08,0,0.000000,0.01000,1

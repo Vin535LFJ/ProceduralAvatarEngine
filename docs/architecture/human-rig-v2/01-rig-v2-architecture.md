@@ -68,7 +68,9 @@ Shape Target 应用 → Full Geometry → Landmark 解析 → Joint 位置 → R
 - RigJoint：本 RigDefinition 采用的关节（当前 = CC0 joint 辅助组质心）。
 - GeometryAnchor：几何缩放/根锚点（§4.3）。
 
-**已知限制：** 当前 WP4 解析器把 joint 辅助组质心直接作 RigJoint，**未显式建模 SurfaceLandmark→BoneJointCenter 的解剖偏移**。尤其**肩峰表面位置 ≠ 肩关节中心**（盂肱关节中心在肩峰内下方）。这会影响肩外展旋转中心的解剖准确性，是 M2-B 待完善项（需 PAE 自有偏移模型，不得退回 PENDING 文件）。当前肩外展腋窝拉伸 12.7× 部分与此相关。
+**已知限制：** 当前 WP4 解析器把 joint 辅助组质心直接作 RigJoint，**未显式建模 SurfaceLandmark→BoneJointCenter 的解剖偏移**。尤其**肩峰表面位置 ≠ 肩关节中心**（盂肱关节中心在肩峰内下方）。
+
+**肩偏移研究结论（2026-11-28，见 wp4-host-rig-01/04 号报告）：** 沿肱骨轴近端移 10mm 的偏移已实现为 `buildRig` 可选参数（v2.2），但**固定掩码严格验证表明它是权衡而非明确改善**（中等角度翻面减少，峰值拉伸增大、90° 恶化），先前"减半拉伸"结论系测量掩码假象。**默认不采纳（保持 v2.1 helper 质心）**。肩腋窝变形质量需 M6 几何细化或局部 corrective，单纯移动关节中心已证非解。
 
 ### 4.3 Root Transform（显式数学关系）
 - 几何缩放锚点（WP3-R1：pivot=(rootX, soleY, rootZ)）**不等于** Root Joint。

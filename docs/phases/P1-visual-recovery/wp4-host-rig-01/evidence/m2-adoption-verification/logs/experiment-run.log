@@ -1,0 +1,33 @@
+[adopt] legacy=pae-rig-v2.1 adopted=pae-rig-v2.2 shoulder offset magnitude=0.01000 m (target 0.010)
+[shape] baseline           joints=1 rig=1 bindErr=3.67e-08 offset=0.01000 ok=1
+[shape] broader-shoulder   joints=1 rig=1 bindErr=3.67e-08 offset=0.01000 ok=1
+[shape] broader-ribcage    joints=1 rig=1 bindErr=3.67e-08 offset=0.01000 ok=1
+[shape] narrower-waist     joints=1 rig=1 bindErr=3.67e-08 offset=0.01000 ok=1
+[shape] wider-hip          joints=1 rig=1 bindErr=3.67e-08 offset=0.01000 ok=1
+[shape] taller             joints=1 rig=1 bindErr=3.69e-08 offset=0.01000 ok=1
+[shape] shorter            joints=1 rig=1 bindErr=3.67e-08 offset=0.01000 ok=1
+[shape] combo-athletic     joints=1 rig=1 bindErr=3.67e-08 offset=0.01000 ok=1
+[shape] combo-pear         joints=1 rig=1 bindErr=3.67e-08 offset=0.01000 ok=1
+[pose] bind                       flips 0->0 axillaEdgeMax 1.000->1.000
+[pose] neutral_standing           flips 0->0 axillaEdgeMax 1.000->1.000
+[pose] shoulder_forward_flexion   flips 18->20 axillaEdgeMax 4.474->4.768
+[pose] shoulder_abduction_30      flips 8->2 axillaEdgeMax 5.344->6.115
+[pose] shoulder_abduction_60      flips 24->14 axillaEdgeMax 9.362->10.834
+[pose] shoulder_abduction_90      flips 64->70 axillaEdgeMax 12.745->14.816
+[pose] elbow_0                    flips 0->0 axillaEdgeMax 1.000->1.000
+[pose] elbow_45                   flips 0->0 axillaEdgeMax 1.000->1.000
+[pose] elbow_90                   flips 28->26 axillaEdgeMax 1.000->1.000
+[pose] elbow_120                  flips 3138->3138 axillaEdgeMax 1.000->1.000
+[pose] hip_flexion                flips 19->19 axillaEdgeMax 1.000->1.000
+[pose] hip_abduction              flips 12->12 axillaEdgeMax 1.000->1.000
+[pose] knee_45                    flips 0->0 axillaEdgeMax 1.000->1.000
+[pose] knee_90                    flips 32->32 axillaEdgeMax 1.000->1.000
+[pose] wrist_flexion              flips 16->16 axillaEdgeMax 1.000->1.000
+[pose] wrist_extension            flips 20->20 axillaEdgeMax 1.000->1.000
+[pose] finger_curl                flips 34->34 axillaEdgeMax 1.000->1.000
+[pose] fist                       flips 1056->1056 axillaEdgeMax 1.000->1.000
+[pose] arms_raised                flips 3112->3124 axillaEdgeMax 16.737->19.551
+[pose] one_arm_raised             flips 1556->1562 axillaEdgeMax 16.737->19.551
+[pose] basic_squat                flips 1517->1517 axillaEdgeMax 1.000->1.000
+[pose] asymmetric                 flips 53->56 axillaEdgeMax 12.745->14.816
+[done] M2 adoption verification complete
