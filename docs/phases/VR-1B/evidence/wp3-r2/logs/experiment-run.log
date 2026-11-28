@@ -1,0 +1,28 @@
+[load] body=13380 params=9
+[base] stature              1.665890
+[base] shoulderBreadth      0.371220
+[base] ribcageBreadth       0.270395
+[base] chestDepth           0.197178
+[base] waistBreadth         0.295768
+[base] waistCircumference   0.791092
+[base] hipBreadth           0.360101
+[base] hipCircumference     1.003645
+[solve] ks-shoulder-waist      known        reach=1 rms=0.0045 iters=2 evals=15 flips=0
+[solve] ks-hip-ribcage         known        reach=1 rms=0.0013 iters=3 evals=28 flips=0
+[solve] ks-combo               known        reach=1 rms=0.0022 iters=3 evals=28 flips=0
+[solve] ho-chestdepth          holdout      reach=1 rms=0.0013 iters=3 evals=28 flips=0
+[solve] ho-waist-up            holdout      reach=1 rms=0.0030 iters=2 evals=15 flips=0
+[solve] ho-hip-narrow-shoulder holdout      reach=1 rms=0.0023 iters=3 evals=28 flips=0
+[solve] unreach-waist-half     unreachable  reach=0 rms=0.2765 iters=60 evals=836 flips=0
+[solve] unreach-shoulder-1p8   unreachable  reach=0 rms=0.1280 iters=60 evals=836 flips=0
+[solve] nonadditive-combo      nonadditive  reach=1 rms=0.0022 iters=3 evals=28 flips=0
+[determinism] identical alpha across two solves: 1
+[profile] broad-shoulder     hash=432b0fda594c flips=0
+[profile] broad-ribcage      hash=e50675b84da8 flips=0
+[profile] narrow-waist       hash=8dc0a6df20d6 flips=0
+[profile] wide-hip           hash=912933a39146 flips=0
+[profile] tall               hash=efab37ea4143 flips=0
+[profile] short              hash=4474495ead9a flips=0
+[profile] combo-athletic     hash=e2230f40d10d flips=0
+[profile] combo-pear         hash=ef0072ac7bfc flips=0
+[done] WP3-R2 experiment complete

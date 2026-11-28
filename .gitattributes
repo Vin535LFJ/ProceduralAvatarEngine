@@ -48,3 +48,12 @@ docs/phases/P1-visual-recovery/evidence/vr1b-wp3-host-01/** -text
 # Linux or macOS, and keeps the PNG bytes untouched. Scope is limited to this
 # new folder; no pre-existing file changes its checkout behaviour.
 docs/phases/P1-visual-recovery/wp4-host-rig-01/** -text
+
+# VR-1B master-plan phase plans + WP3-R2 evidence folder (2026-11-28).
+#
+# Same rationale: the folder mixes text (CSV solve-case / profile tables,
+# markdown plans/reports, run logs, saveable profiles) with PNG renders, so
+# `-text` switches end-of-line conversion off in both directions to keep the
+# measured numbers and profile hashes byte-identical across platforms. Scope is
+# limited to this new folder; no pre-existing file changes its checkout behaviour.
+docs/phases/VR-1B/** -text

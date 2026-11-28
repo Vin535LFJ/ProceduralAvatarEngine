@@ -1,0 +1,19 @@
+# ShapeProfile tall
+templateSha: 8e761e6624b8f54536409135d1636da63b32486a90d4897f84e121d144f6fb4c
+shapeTargetHash: 99f179bce0aa850b45d4191a1d0d234c5851f881c057439470ded3bddf729a24
+profileHash: efab37ea4143bec66d326b577ecb00e8b73d4ff20a6827d27020114d4b6914bd
+targetStature: 1.800000
+alpha shoulderWidth: +0.000000
+alpha ribcageWidth: +0.000000
+alpha chestDepth: +0.000000
+alpha waistWidth: +0.000000
+alpha hipWidth: +0.000000
+alpha armShape: +0.000000
+achieved stature: 1.800000
+achieved shoulderBreadth: 0.401105
+achieved ribcageBreadth: 0.292163
+achieved chestDepth: 0.213051
+achieved waistBreadth: 0.319578
+achieved waistCircumference: 0.854778
+achieved hipBreadth: 0.389090
+achieved hipCircumference: 1.084442

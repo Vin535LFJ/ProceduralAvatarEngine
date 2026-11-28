@@ -1,0 +1,17 @@
+﻿[PASS] table_full92_count
+[PASS] table_core20_count
+[PASS] table_unique_ids
+[PASS] table_parents_exist
+[PASS] table_has_root
+[PASS] lbs_bind_recovery
+[PASS] lbs_single_bone_rotation
+[PASS] lbs_unaffected_vertex
+[PASS] lbs_weighted_blend
+[PASS] lbs_normal_rotation
+[PASS] pose_parent_child_inheritance
+[PASS] validate_zero_length
+[PASS] validate_cycle
+[PASS] weight_mass_conservation
+[PASS] diag_cross_side
+[PASS] region_mask_distance
+== wp4 tests: 16 passed, 0 failed ==

@@ -1,0 +1,19 @@
+# ShapeProfile broad-shoulder
+templateSha: 8e761e6624b8f54536409135d1636da63b32486a90d4897f84e121d144f6fb4c
+shapeTargetHash: 99f179bce0aa850b45d4191a1d0d234c5851f881c057439470ded3bddf729a24
+profileHash: 432b0fda594ceade3c52b7cd9ba311c7389cc4fadd858db0d53a63f7020f33e2
+targetStature: 0.000000
+alpha shoulderWidth: +1.000000
+alpha ribcageWidth: +0.000000
+alpha chestDepth: +0.000000
+alpha waistWidth: +0.000000
+alpha hipWidth: +0.000000
+alpha armShape: +0.000000
+achieved stature: 1.665890
+achieved shoulderBreadth: 0.421020
+achieved ribcageBreadth: 0.275171
+achieved chestDepth: 0.197178
+achieved waistBreadth: 0.295768
+achieved waistCircumference: 0.791092
+achieved hipBreadth: 0.360101
+achieved hipCircumference: 1.003645
