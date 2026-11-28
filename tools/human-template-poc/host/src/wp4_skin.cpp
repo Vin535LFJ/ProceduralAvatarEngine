@@ -13,7 +13,14 @@ std::vector<Affine> poseGlobals(const RigV2& rig, const Pose& pose) {
         Affine rl = Affine::identity();
         for (const LocalRotation& r : pose.rotations) {
             if (r.bone != rig.bones[b].name || r.angleDeg == 0.0) continue;
-            const D3 axis = r.axis == 0 ? rig.ax[b] : (r.axis == 1 ? rig.ay[b] : rig.az[b]);
+            // M2-POSE-FRAME-AUDIT-01 fix: rl is RIGHT-multiplied onto restLocal,
+            // so it acts in the bone's LOCAL frame. Its rotation axis must be a
+            // LOCAL unit axis (1,0,0)/(0,1,0)/(0,0,1), NOT rig.ax/ay/az (which are
+            // the REST WORLD axes). Using world axes here made the skin rotate
+            // about R*axis instead of axis (wrong for any non-axis-aligned bone).
+            // With local unit axes, S = T(head)*R*Rot(e_k)*R^-1*T(-head)
+            //   = T(head)*Rot(R*e_k)*T(-head) = rotation about the rest world axis.
+            const D3 axis = r.axis == 0 ? D3(1, 0, 0) : (r.axis == 1 ? D3(0, 1, 0) : D3(0, 0, 1));
             rl = rl * Affine::rotation(axis, r.angleDeg * 3.14159265358979323846 / 180.0);
         }
         local[b] = rig.restLocal[b] * rl;

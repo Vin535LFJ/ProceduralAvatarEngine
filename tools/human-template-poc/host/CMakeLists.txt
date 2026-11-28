@@ -179,6 +179,15 @@ if(PAE_REPO)
   )
   target_include_directories(pae_wp6_finger PRIVATE "${PAE_NATIVE}")
   target_link_libraries(pae_wp6_finger PRIVATE pae_ht)
+
+  # M2-POSE-FRAME-AUDIT-01: 22-pose Before/After regression (legacy world-axis
+  # formula vs fixed local-unit-axis), per-region metrics + images.
+  add_executable(pae_wp4_frame_audit
+    src/wp4_frame_audit_main.cpp
+    ${PAE_WP4_SOURCES}
+  )
+  target_include_directories(pae_wp4_frame_audit PRIVATE "${PAE_NATIVE}")
+  target_link_libraries(pae_wp4_frame_audit PRIVATE pae_ht)
 else()
   message(STATUS "PAE_REPO not set: PNG output and PAE clay cross-check are disabled")
 endif()
