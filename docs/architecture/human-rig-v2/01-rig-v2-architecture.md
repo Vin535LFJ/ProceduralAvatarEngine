@@ -1,9 +1,9 @@
 # Rig V2 Architecture — PAE-Owned Skeletal Definition
 
 Status: `RIG_V2_ARCHITECTURE = READY_FOR_REVIEW`
-Date: 2026-11-28
+Date: 2026-11-28（WP4 轮次创建；MASTER-PLAN-01 复核引用）
 Scope: Host 研究 + 未来 Android 动态路径的骨骼契约。本文件不修改任何生产代码。
-上位文件：`docs/roadmap/PAE-PROCEDURAL-HUMAN-GENERATION-ROADMAP.md`、ADR-014。
+上位文件：[`MASTER-PLAN`](../../roadmap/PAE-PROCEDURAL-HUMAN-GENERATION-MASTER-PLAN.md)（M1–M8 唯一权威）、[`CharacterInstance 契约`](../human-character-instance/01-character-instance-contract.md)、ADR-014。本文件是 M2 Rig 子系统的权威细化，不另立总路线。
 
 ## 1. 六个必须分离的概念
 
@@ -61,6 +61,14 @@ Shape Target 应用 → Full Geometry → Landmark 解析 → Joint 位置 → R
 - 常规关节：`joint-<name>` 组顶点质心（变形后坐标，米制）。
 - 左右对称诊断：`|joint.L + mirror(joint.R)|`（x 取反）应 ≈ 0；报告每对偏差。
 - 检查：无零长骨（|tail−head| > 1e-6 m）、无层级环、语义 ID 唯一、无未解析关节。
+
+**四类 landmark 必须区分（MASTER-PLAN M2-B）：**
+- SurfaceLandmark：体表解剖标志（如肩峰 acromion）。
+- BoneJointCenter：骨关节旋转中心（如盂肱关节中心）。
+- RigJoint：本 RigDefinition 采用的关节（当前 = CC0 joint 辅助组质心）。
+- GeometryAnchor：几何缩放/根锚点（§4.3）。
+
+**已知限制：** 当前 WP4 解析器把 joint 辅助组质心直接作 RigJoint，**未显式建模 SurfaceLandmark→BoneJointCenter 的解剖偏移**。尤其**肩峰表面位置 ≠ 肩关节中心**（盂肱关节中心在肩峰内下方）。这会影响肩外展旋转中心的解剖准确性，是 M2-B 待完善项（需 PAE 自有偏移模型，不得退回 PENDING 文件）。当前肩外展腋窝拉伸 12.7× 部分与此相关。
 
 ### 4.3 Root Transform（显式数学关系）
 - 几何缩放锚点（WP3-R1：pivot=(rootX, soleY, rootZ)）**不等于** Root Joint。

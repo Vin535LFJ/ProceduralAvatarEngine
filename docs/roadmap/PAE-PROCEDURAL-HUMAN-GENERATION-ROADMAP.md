@@ -1,9 +1,14 @@
-# PAE Procedural Human Generation — Master Roadmap
+# PAE Procedural Human Generation — Master Roadmap (SUPERSEDED / 历史快照)
 
-Status: `PAE_MASTER_ROADMAP = READY_FOR_REVIEW`
-Date: 2026-11-28
-Branch: `poc-sm/shape-model-v2` @ `bfcada75583a690b12f1bf0edd0dad246da104ad`（本轮开始时本地与远端 ls-remote 核实一致）
-Authority: 本文件是 PAE 人体生成主开发计划的唯一权威路线图。历史提案 `docs/proposals/anatomy-driven-geometry-redesign/07-poc-roadmap.md` 属 R1/R2 躯干 Patch 时期，已被 ADR-014 与本路线取代，仅存档参考。
+> **已取代（2026-11-28）。** 本文件不再是权威。M1–M8 唯一权威总计划是
+> [`PAE-PROCEDURAL-HUMAN-GENERATION-MASTER-PLAN.md`](PAE-PROCEDURAL-HUMAN-GENERATION-MASTER-PLAN.md)
+> （PAE-HUMAN-GENERATION-MASTER-PLAN-01）。本文件保留为 WP4 轮次的历史快照，
+> 仅供追溯；任何冲突以 MASTER-PLAN 为准。下方原始内容未删改。
+
+Status: `PAE_MASTER_ROADMAP = SUPERSEDED_BY_MASTER_PLAN`
+Date: 2026-11-28（原始）
+Branch: `poc-sm/shape-model-v2` @ `bfcada75583a690b12f1bf0edd0dad246da104ad`（原始快照基线；现 HEAD 已前进）
+Authority: ~~本文件是唯一权威路线图~~ → 权威已移交 MASTER-PLAN。历史提案 `docs/proposals/anatomy-driven-geometry-redesign/07-poc-roadmap.md` 属 R1/R2 时期，仅存档。
 
 最终目标：**自然半写实成人程序化人体生成与实时控制**（Android GLES3，运行时不依赖 Blender / MakeHuman / 在线 AI）。
 
