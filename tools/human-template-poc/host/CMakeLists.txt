@@ -111,6 +111,17 @@ if(PAE_REPO)
   target_link_libraries(pae_wp3_tests PRIVATE pae_ht)
   add_test(NAME pae_wp3_tests COMMAND pae_wp3_tests)
 
+  # VR-1B WP3-R2 (M1): forward model + bounded inverse parameter solver.
+  # The experiment runner is the M1 test vehicle (known-solution recovery,
+  # holdout, unreachable, non-additivity, determinism, mesh quality, profiles).
+  add_executable(pae_wp3_r2_experiment
+    src/wp3_r2_main.cpp
+    src/wp3_r2.cpp
+    src/wp3_measure.cpp
+  )
+  target_include_directories(pae_wp3_r2_experiment PRIVATE "${PAE_NATIVE}")
+  target_link_libraries(pae_wp3_r2_experiment PRIVATE pae_ht)
+
   # WP4-HOST-RIG-01: PAE-owned Rig V2 + joint resolver + weights + CPU LBS.
   # Reuses PAE's topology / self-intersection checkers read-only (pae_evidence
   # pattern); no native/ source is modified, no Android path is touched.
