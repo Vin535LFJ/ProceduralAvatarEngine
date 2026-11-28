@@ -170,6 +170,15 @@ if(PAE_REPO)
   )
   target_include_directories(pae_wp4_adopt PRIVATE "${PAE_NATIVE}")
   target_link_libraries(pae_wp4_adopt PRIVATE pae_ht)
+
+  # M6 finger geometry refinement research: finger topology measurement +
+  # conforming subdivision with weight transfer + fist base-vs-refined study.
+  add_executable(pae_wp6_finger
+    src/wp6_finger_main.cpp
+    ${PAE_WP4_SOURCES}
+  )
+  target_include_directories(pae_wp6_finger PRIVATE "${PAE_NATIVE}")
+  target_link_libraries(pae_wp6_finger PRIVATE pae_ht)
 else()
   message(STATUS "PAE_REPO not set: PNG output and PAE clay cross-check are disabled")
 endif()
