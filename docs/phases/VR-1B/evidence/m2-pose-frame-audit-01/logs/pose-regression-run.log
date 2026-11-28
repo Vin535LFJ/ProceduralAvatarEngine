@@ -1,0 +1,24 @@
+[load] body=13380 rig=92 bindErr=3.675e-08
+[pose] bind                       flips 0->0 selfInt 0->0 edgeP99 1.000->1.000
+[pose] neutral_standing           flips 0->0 selfInt 0->0 edgeP99 1.000->1.000
+[pose] shoulder_forward_flexion   flips 18->32 selfInt 88->46 edgeP99 1.008->1.010
+[pose] shoulder_abduction_30      flips 8->8 selfInt 0->0 edgeP99 1.010->1.010
+[pose] shoulder_abduction_60      flips 24->24 selfInt 22->22 edgeP99 1.027->1.028
+[pose] shoulder_abduction_90      flips 64->62 selfInt 122->126 edgeP99 1.062->1.062
+[pose] elbow_0                    flips 0->0 selfInt 0->0 edgeP99 1.000->1.000
+[pose] elbow_45                   flips 0->0 selfInt 0->0 edgeP99 1.006->1.028
+[pose] elbow_90                   flips 28->26 selfInt 0->0 edgeP99 1.009->1.062
+[pose] elbow_120                  flips 3138->1492 selfInt 0->0 edgeP99 1.018->1.078
+[pose] hip_flexion                flips 19->29 selfInt 24->103 edgeP99 1.000->1.000
+[pose] hip_abduction              flips 12->13 selfInt 1->1 edgeP99 1.000->1.000
+[pose] knee_45                    flips 0->0 selfInt 0->0 edgeP99 1.016->1.043
+[pose] knee_90                    flips 32->30 selfInt 0->0 edgeP99 1.044->1.080
+[pose] wrist_flexion              flips 16->20 selfInt 14->32 edgeP99 1.000->1.000
+[pose] wrist_extension            flips 20->16 selfInt 34->8 edgeP99 1.000->1.000
+[pose] finger_curl                flips 34->70 selfInt 0->318 edgeP99 1.237->1.220
+[pose] fist                       flips 1056->926 selfInt 130->1088 edgeP99 1.538->1.495
+[pose] arms_raised                flips 3112->3124 selfInt 248->248 edgeP99 1.100->1.098
+[pose] one_arm_raised             flips 1556->1562 selfInt 124->124 edgeP99 1.000->1.000
+[pose] basic_squat                flips 1517->1487 selfInt 433->184 edgeP99 1.130->1.165
+[pose] asymmetric                 flips 53->56 selfInt 69->101 edgeP99 1.042->1.066
+[done] 22-pose Before/After complete

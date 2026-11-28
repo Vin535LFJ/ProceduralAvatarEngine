@@ -1,0 +1,31 @@
+﻿[PASS] table_full92_count
+[PASS] table_core20_count
+[PASS] table_unique_ids
+[PASS] table_parents_exist
+[PASS] table_has_root
+[PASS] lbs_bind_recovery
+[PASS] lbs_single_bone_rotation
+[PASS] lbs_unaffected_vertex
+[PASS] lbs_weighted_blend
+[PASS] lbs_normal_rotation
+[PASS] pose_parent_child_inheritance
+[PASS] validate_zero_length
+[PASS] validate_cycle
+[PASS] weight_mass_conservation
+[PASS] diag_cross_side
+[PASS] region_mask_distance
+[FAIL] oblique_local_X err=0.632456 got(-0.168,0.576,0.800) exp(0.000,0.000,1.000)
+[FAIL] oblique_local_X_axis axisErr=0.632456 actual(0.280,-0.960,-0.000) expect(0.800,-0.600,0.000)
+[FAIL] oblique_local_Y err=0.632456 got(0.280,-0.960,0.000) exp(0.800,-0.600,0.000)
+[FAIL] oblique_local_Y_axis axisErr=0.632456 actual(0.960,0.280,-0.000) expect(0.600,0.800,0.000)
+[PASS] oblique_local_Z
+[PASS] oblique_local_Z_axis
+[PASS] oblique_center_fixed
+[PASS] oblique_no_scale
+[PASS] oblique_bind_recovery
+[PASS] oblique_chain_root_length
+[PASS] oblique_chain_root_center
+[PASS] oblique_child_axis_follows_parent
+[FAIL] oblique_child_local_axis_pure relAxis(-0.298,-0.596,0.745) expect(0,0,1)
+[FAIL] oblique_mirror_symmetry L(-0.800,0.600,0.000) R(-0.800,-0.600,0.000)
+== wp4 tests: 24 passed, 6 failed ==
