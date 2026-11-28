@@ -1,0 +1,16 @@
+offset,pose,axilla_flipped,axilla_edgeP99,axilla_edgeMax,axilla_areaRatio,global_flipped,global_edgeP99
+baseline,shoulder_abduction_30,4,3.9409,5.3441,1.0305,8,1.0279
+baseline,shoulder_abduction_60,10,6.7031,9.3622,1.1060,24,1.0475
+baseline,shoulder_abduction_90,18,9.0180,12.7452,1.1853,64,1.0787
+medial-15mm,shoulder_abduction_30,5,2.9720,4.1761,1.0417,11,1.0225
+medial-15mm,shoulder_abduction_60,11,4.9471,7.3078,1.1350,33,1.0433
+medial-15mm,shoulder_abduction_90,12,6.6131,9.9627,1.2339,74,1.0802
+inferior-15mm,shoulder_abduction_30,6,3.1725,4.3224,1.0306,12,1.0141
+inferior-15mm,shoulder_abduction_60,10,5.2216,7.3916,1.1137,26,1.0314
+inferior-15mm,shoulder_abduction_90,18,6.9276,9.9612,1.1958,66,1.0697
+medial-inferior-15mm,shoulder_abduction_30,3,3.4631,4.8343,1.0387,16,1.0133
+medial-inferior-15mm,shoulder_abduction_60,6,5.8636,8.4806,1.1049,36,1.0268
+medial-inferior-15mm,shoulder_abduction_90,9,7.9128,11.5602,1.1628,74,1.0544
+proximal-10mm,shoulder_abduction_30,1,2.4493,2.7174,1.0197,2,1.0173
+proximal-10mm,shoulder_abduction_60,4,4.2693,4.3278,1.0559,14,1.0395
+proximal-10mm,shoulder_abduction_90,17,5.6567,5.8658,1.1150,70,1.0705

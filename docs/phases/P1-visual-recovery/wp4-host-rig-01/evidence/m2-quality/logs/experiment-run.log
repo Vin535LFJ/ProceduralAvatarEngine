@@ -1,0 +1,11 @@
+[load] body=13380 rig=92
+[shoulder] baseline               done
+[shoulder] medial-15mm            done
+[shoulder] inferior-15mm          done
+[shoulder] medial-inferior-15mm   done
+[shoulder] proximal-10mm          done
+[extreme] fist           flips=1056 selfInt=130
+[extreme] elbow_120      flips=3138 selfInt=0
+[extreme] arms_raised    flips=3112 selfInt=248
+[extreme] basic_squat    flips=1517 selfInt=433
+[done] M2 quality improvement experiment complete
