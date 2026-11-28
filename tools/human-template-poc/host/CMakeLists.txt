@@ -161,6 +161,15 @@ if(PAE_REPO)
   )
   target_include_directories(pae_wp4_q2 PRIVATE "${PAE_NATIVE}")
   target_link_libraries(pae_wp4_q2 PRIVATE pae_ht)
+
+  # M2 adoption verification: shoulder proximal offset adopted into RigDefinition
+  # (v2.2); 9-shape joint sync + full-pose regression vs legacy v2.1.
+  add_executable(pae_wp4_adopt
+    src/wp4_adopt_main.cpp
+    ${PAE_WP4_SOURCES}
+  )
+  target_include_directories(pae_wp4_adopt PRIVATE "${PAE_NATIVE}")
+  target_link_libraries(pae_wp4_adopt PRIVATE pae_ht)
 else()
   message(STATUS "PAE_REPO not set: PNG output and PAE clay cross-check are disabled")
 endif()

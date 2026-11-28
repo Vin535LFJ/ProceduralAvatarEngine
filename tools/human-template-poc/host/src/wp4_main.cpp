@@ -192,7 +192,7 @@ int main(int argc, char** argv) {
     wp4::JointSet js0;
     if (!wp4::resolveJoints(ctx.obj, ctx.full, rootVertex, js0)) { say("[FAIL] unresolved joints"); return 1; }
     wp4::RigV2 full0, core0;
-    if (!wp4::buildRig(js0, wp4::Profile::Full92, full0, err) || !wp4::buildRig(js0, wp4::Profile::Core20, core0, err)) {
+    if (!wp4::buildRig(js0, wp4::Profile::Full92, full0, err, false) || !wp4::buildRig(js0, wp4::Profile::Core20, core0, err, false)) {
         say("[FAIL] build rig: " + err); return 1;
     }
     const auto vf = wp4::validateRig(full0), vc = wp4::validateRig(core0);
@@ -308,7 +308,7 @@ int main(int argc, char** argv) {
         wp4::JointSet js;
         const bool jok = wp4::resolveJoints(ctx.obj, full, rootVertex, js);
         wp4::RigV2 rig;
-        const bool rok = wp4::buildRig(js, wp4::Profile::Full92, rig, err);
+        const bool rok = wp4::buildRig(js, wp4::Profile::Full92, rig, err, false);
         const auto sw = wp4::generateWeights(defBody, ctx.topo, rig, wp4::WeightMethod::Region, opt);
         const double be = wp4::bindRecoveryError(body, sw, rig);
         const auto wd = wp4::diagnoseWeights(defBody, ctx.topo, rig, sw);
@@ -338,7 +338,7 @@ int main(int argc, char** argv) {
         const auto body = bodyFromFull(ctx, full);
         ht::PolyMesh defBody = ctx.body; defBody.pos = body;
         wp4::JointSet js; wp4::resolveJoints(ctx.obj, full, rootVertex, js);
-        wp4::RigV2 rig; wp4::buildRig(js, wp4::Profile::Full92, rig, err);
+        wp4::RigV2 rig; wp4::buildRig(js, wp4::Profile::Full92, rig, err, false);
         const auto sw = wp4::generateWeights(defBody, ctx.topo, rig, wp4::WeightMethod::Region, opt);
         const auto regs = ht::labelRegions(defBody, rig.asHtRig());
         const ht::Rig hr = rig.asHtRig();

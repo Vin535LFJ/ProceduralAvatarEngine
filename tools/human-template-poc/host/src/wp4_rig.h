@@ -31,6 +31,19 @@ struct BoneDef {
 // The frozen PAE authored table (Full Deform Profile v1, 92 bones).
 const std::vector<BoneDef>& boneTable();
 constexpr const char* kRigVersion = "pae-rig-v2.1";
+// v2.2 adopts the anatomical shoulder joint center (see below).
+constexpr const char* kRigVersionAnatomical = "pae-rig-v2.2";
+
+// PAE-authored anatomical shoulder offset (metres), STUDIED but NOT adopted by
+// default. Moving the shoulder joint center proximal along the humerus axis is
+// a TRADE-OFF, not a clear improvement: rigorous fixed-mask verification (same
+// skin patch for both rigs) shows fewer face flips at abduction 30/60 deg but
+// HIGHER peak axilla edge stretch at all angles and WORSE flips at 90 deg
+// (edgeMax 12.75x -> 14.82x, flips 64 -> 70). The earlier "halves stretch"
+// result (12.75x -> 5.87x) was a measurement-mask artifact: the axilla mask had
+// moved with the joint center, excluding the stretched inferior skin. Available
+// for study via anatomicalShoulder=true (rig v2.2); default stays v2.1.
+constexpr double kShoulderProximalOffsetM = 0.010;
 
 enum class Profile { Core20, Full92 };
 const char* profileName(Profile p);
@@ -75,8 +88,11 @@ struct RigValidation {
 RigValidation validateRig(const RigV2& rig);
 
 // Build a profile rig from resolved joints. Core keeps only core-flagged bones
-// and re-parents dropped bones to their nearest kept ancestor.
-bool buildRig(const JointSet& js, Profile profile, RigV2& out, std::string& error);
+// and re-parents dropped bones to their nearest kept ancestor. anatomicalShoulder
+// (default false = v2.1 helper-centroid rig) optionally moves the shoulder joint
+// center kShoulderProximalOffsetM proximal along the humerus axis (v2.2, studied
+// but NOT adopted by default — see kShoulderProximalOffsetM note: trade-off).
+bool buildRig(const JointSet& js, Profile profile, RigV2& out, std::string& error, bool anatomicalShoulder = false);
 
 // Deviation of the PAE resolver against the PENDING research reference rig
 // (host research only; the reference is loaded by the caller, never shipped).

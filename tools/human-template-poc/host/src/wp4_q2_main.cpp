@@ -127,7 +127,7 @@ int main(int argc, char** argv) {
     if (!ctx.load(dataDir, repoRoot, err)) { std::printf("load failed: %s\n", err.c_str()); return 1; }
     const int rootV = wp4::resolveRootAnchor(ctx.obj, ctx.full);
     wp4::JointSet js0; wp4::resolveJoints(ctx.obj, ctx.full, rootV, js0);
-    wp4::RigV2 rig0; wp4::buildRig(js0, wp4::Profile::Full92, rig0, err);
+    wp4::RigV2 rig0; wp4::buildRig(js0, wp4::Profile::Full92, rig0, err, /*anatomicalShoulder=*/false);
     const ht::Rig hr0 = rig0.asHtRig();
     const std::vector<ht::Region> regions0 = ht::labelRegions(ctx.body, hr0);
     const auto jregions = wp4::jointRegions(rig0, js0);
@@ -177,7 +177,7 @@ int main(int argc, char** argv) {
     shMd += "| offset | abduction | axilla flips | axilla edgeP99 | axilla edgeMax | axilla areaRatio | global flips |\n|---|---|---|---|---|---|---|\n";
     for (const Off& off : offsets) {
         const wp4::JointSet js = offsetShoulder(js0, off.d);
-        wp4::RigV2 rig; wp4::buildRig(js, wp4::Profile::Full92, rig, err);
+        wp4::RigV2 rig; wp4::buildRig(js, wp4::Profile::Full92, rig, err, /*anatomicalShoulder=*/false);
         const ht::SkinWeights sw = wp4::generateWeights(ctx.body, ctx.topo, rig, wp4::WeightMethod::Region, opt);
         const auto regs = ht::labelRegions(ctx.body, rig.asHtRig());
         const auto jr = wp4::jointRegions(rig, js);

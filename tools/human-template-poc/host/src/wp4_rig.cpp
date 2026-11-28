@@ -190,19 +190,33 @@ static ht::D3 boneFrameZ(const ht::D3& y) {
     return z.normalized();
 }
 
-bool buildRig(const JointSet& js, Profile profile, RigV2& out, std::string& error) {
+bool buildRig(const JointSet& js, Profile profile, RigV2& out, std::string& error, bool anatomicalShoulder) {
     out = RigV2{};
     out.profile = profile;
+    out.version = anatomicalShoulder ? kRigVersionAnatomical : kRigVersion;
     const auto& table = boneTable();
     std::map<std::string, const BoneDef*> byId;
     for (const BoneDef& b : table) byId[b.id] = &b;
+
+    // Local joint positions; adopt the anatomical shoulder center if requested.
+    std::map<std::string, D3> jp = js.group;
+    if (anatomicalShoulder) {
+        for (const char* side : {"l", "r"}) {
+            const std::string sh = std::string("joint-") + side + "-shoulder";
+            const std::string el = std::string("joint-") + side + "-elbow";
+            auto s = jp.find(sh), e = jp.find(el);
+            if (s == jp.end() || e == jp.end()) continue;
+            const D3 axis = (e->second - s->second).normalized();  // shoulder->elbow (distal)
+            s->second = s->second + axis * (-kShoulderProximalOffsetM);  // proximal
+        }
+    }
 
     // Keep set: full = all; core = core-flagged.
     auto kept = [&](const BoneDef& b) { return profile == Profile::Full92 || b.core; };
     auto jointPos = [&](const char* group, bool isRootHead) -> D3 {
         if (isRootHead) return js.rootHead;
-        auto it = js.group.find(group);
-        return it == js.group.end() ? D3{} : it->second;
+        auto it = jp.find(group);
+        return it == jp.end() ? D3{} : it->second;
     };
 
     std::map<std::string, int> index;
